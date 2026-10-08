@@ -106,7 +106,7 @@ UI = {
     "level": L("Level", "Nivel"),
     "calc_title": L("Damage calculator", "Calculadora de daño"),
     "calc_lead": L("Pick a class, a weapon and your training. The numbers use the same formulas as the game server.",
-                   "Elige una clase, un arma y tu entrenamiento. Los números usan las mismas fórmulas que el servidor del juego."),
+                   "Elegí una clase, un arma y tu entrenamiento. Los números usan las mismas fórmulas que el servidor del juego."),
     "class": L("Class", "Clase"),
     "weapon": L("Weapon", "Arma"),
     "skill_level": L("Skill level", "Nivel de habilidad"),
@@ -120,7 +120,7 @@ UI = {
     "next": L("Next", "Siguiente"),
     "chapter": L("Chapter", "Capítulo"),
     "variants_note": L("Every class can use every weapon. Doctrines only pick the kit you start with and how fast you train each weapon family.",
-                       "Toda clase puede usar cualquier arma. La doctrina sólo define con qué equipo empiezas y qué tan rápido entrenas cada familia de armas."),
+                       "Toda clase puede usar cualquier arma. La doctrina sólo define con qué equipo empezás y qué tan rápido entrenás cada familia de armas."),
 }
 
 SLOTS = {
@@ -168,7 +168,7 @@ CLASSES = {
         "motto": L("Machines. Strength. Endurance.", "Máquinas. Fuerza. Resistencia."),
         "role": L("Tank · melee", "Tanque · cuerpo a cuerpo"),
         "power_desc": L("Provoke nearby enemies onto you and take 30% less damage for 4 s. You move slower while braced.",
-                        "Provocas a los enemigos cercanos para que vayan por ti y recibes 30% menos daño durante 4 s. Te mueves más lento mientras resistes."),
+                        "Provocás a los enemigos cercanos para que vayan por vos y recibís 30% menos daño durante 4 s. Te movés más lento mientras resistís."),
         "passive_desc": L("Taking repeated hits grants your team a brief defense boost.", "Recibir golpes seguidos le da a tu equipo un breve aumento de defensa."),
         "variants": {
             "variant.bulwark": L("Tank. Hammers and maces that stagger and control the fight.", "Tanque. Martillos y mazas que desestabilizan y controlan la pelea."),
@@ -197,7 +197,7 @@ CLASSES = {
         "motto": L("Life is a tool too.", "La vida también es una herramienta."),
         "role": L("Support · area control", "Apoyo · control de área"),
         "power_desc": L("Heal yourself and nearby allies over 6 s. As a Sporecaller, Bloom poisons nearby enemies instead.",
-                        "Te curas a ti y a los aliados cercanos durante 6 s. Como Sporecaller, Bloom envenena a los enemigos cercanos."),
+                        "Te curás vos y a los aliados cercanos durante 6 s. Como Sporecaller, Bloom envenena a los enemigos cercanos."),
         "passive_desc": L("As a Warden, Bloom adds a small extra heal.", "Como Warden, Bloom suma una pequeña curación extra."),
         "variants": {
             "variant.warden": L("Sustain. Living weapons for healing and protection.", "Sostén. Armas vivas para curar y proteger."),
@@ -213,7 +213,7 @@ CLASSES = {
         "role": L("Utility · burst", "Utilidad · ráfaga"),
         "power_desc": L("Your next hit within 3 s deals triple damage, and your next Dash is ready at once.", "Tu próximo golpe dentro de 3 s hace triple daño y tu próximo Dash queda listo al instante."),
         "passive_desc": L("As an Operator, you restore nearby allies' energy and shorten cooldowns. As an Infiltrator, you deal more damage right after repositioning.",
-                          "Como Operator, restauras energía de aliados cercanos y acortas recargas. Como Infiltrator, haces más daño justo después de reposicionarte."),
+                          "Como Operator, restaurás energía de aliados cercanos y acortás recargas. Como Infiltrator, hacés más daño justo después de reposicionarte."),
         "variants": {
             "variant.operator": L("Manipulation. Tech weapons for disruption and support.", "Manipulación. Armas tecnológicas para disrupción y apoyo."),
             "variant.infiltrator": L("Elimination. Blades for ambush and mobility.", "Eliminación. Cuchillas para emboscar y moverse."),
@@ -224,7 +224,7 @@ CLASSES = {
 DASH = {
     "name": L("Dash", "Dash"),
     "desc": L("Burst a few metres in the direction you are moving (or facing). Every class has it.",
-              "Te impulsas unos metros en la dirección en la que te mueves (o miras). Todas las clases lo tienen."),
+              "Te impulsás unos metros en la dirección en la que te movés (o mirás). Todas las clases lo tienen."),
 }
 
 # Descripciones de items en español (la inglesa sale de data/items).
@@ -237,8 +237,8 @@ ITEM_ES = {
     "item.armor.leather_suit_jacket": "Chaqueta de trabajo de cuero acolchada, de cuello alto. Liviana, abrigada y suficiente para frenar el cuchillo de un carroñero. Parte del Leather Suit.",
     "item.armor.leather_suit_trousers": "Pantalones de trabajo de cuero reforzado. Parte del Leather Suit.",
     "item.armor.power_frame_boots": "Pies actuadores blindados del exoesqueleto. Reservados para un set futuro.",
-    "item.backpack.provisional_drift_pack": "Una mochila de relevamiento: veinte celdas que viajan con la mochila (si la sueltas, su contenido va con ella) y 15 kg más de capacidad de carga.",
-    "item.battery.provisional_relay_cell": "Una celda compacta que alimenta con una reserva fija al equipo que llevas.",
+    "item.backpack.provisional_drift_pack": "Una mochila de relevamiento: veinte celdas que viajan con la mochila (si la soltás, su contenido va con ella) y 15 kg más de capacidad de carga.",
+    "item.battery.provisional_relay_cell": "Una celda compacta que alimenta con una reserva fija al equipo que llevás.",
     "item.container.gear_crate": "Equipo de campo para el recién llegado: el arma de tu doctrina (y munición si dispara), una linterna, una batería y el taladro del asentamiento. Lo de adentro es sólo tuyo.",
     "item.container.supply_crate": "Cajones de suministros del Outpost: una mochila y ropa de trabajo para cada recién llegado. Lo de adentro es sólo tuyo.",
     "item.currency.lumen_coin": "El mismo sello acuñado en aleación con lumenita; brilla con un azul frío. Vale 100 Metal.",
@@ -256,7 +256,7 @@ ITEM_ES = {
     "item.relic_fragment": "Un fragmento legible del casco exterior de la máquina antigua.",
     "item.scrap_component": "Piezas recuperadas de máquinas rotas. Los carroñeros las llevan encima; las forjas siempre las aceptan.",
     "item.shield.sentinel": "Un escudo redondo remachado para la mano secundaria. Combina con cualquier arma de una mano; las de dos manos no pueden usarlo.",
-    "item.tool.big_daddy_drill": "El taladro de extracción estándar del asentamiento. Va en la ranura de herramienta; mantén F en un punto de perforación para sacar mineral. Otros taladros vendrán después.",
+    "item.tool.big_daddy_drill": "El taladro de extracción estándar del asentamiento. Va en la ranura de herramienta; mantené F en un punto de perforación para sacar mineral. Otros taladros vendrán después.",
     "item.weapon.drift_marksman": "Un rifle de precisión a dos manos que premia la distancia y la puntería.",
     "item.weapon.drift_pathfinder": "Una escopeta de una mano para fuego cercano y disperso.",
     "item.weapon.drift_scout_rifle": "Un rifle bullpup a dos manos para fuego constante y sostenido a media distancia.",
@@ -313,7 +313,7 @@ FACTION = {
     "faction.hollow": {
         "identity": L("Organic + unnatural", "Orgánico + antinatural"),
         "rumour": L("Distorted, crystal-grown things in the deepest regions. The deeper you go, the worse they get.",
-                    "Cosas deformes cubiertas de cristal en las regiones más profundas. Cuanto más bajas, peor."),
+                    "Cosas deformes cubiertas de cristal en las regiones más profundas. Cuanto más bajás, peor."),
     },
 }
 
@@ -326,8 +326,8 @@ MOBS = {
         "rules": L(["Weak alone, dangerous in numbers: pull them one at a time or kill them fast.",
                     "A hurt Crawler calls every Crawler nearby onto you.",
                     "Badly wounded Crawlers run for the nest — and come back."],
-                   ["Débiles solos, peligrosos en grupo: atráelos de a uno o mátalos rápido.",
-                    "Un Crawler herido llama a todos los Crawlers cercanos hacia ti.",
+                   ["Débiles solos, peligrosos en grupo: atraelos de a uno o matalos rápido.",
+                    "Un Crawler herido llama a todos los Crawlers cercanos hacia vos.",
                     "Los Crawlers muy heridos huyen al nido… y vuelven."]),
     },
     "npc.burrowborn_ravager": {
@@ -339,8 +339,8 @@ MOBS = {
                     "Before it slams it rears up and the ground glows red — step out of the ring.",
                     "It will not leave its territory: pull it to the edge and it turns back."],
                    ["Muy peligroso de cerca, muy lento: no te quedes quieto.",
-                    "Antes del golpe se levanta y el suelo brilla en rojo: sal del círculo.",
-                    "No sale de su territorio: llévalo al borde y se da vuelta."]),
+                    "Antes del golpe se levanta y el suelo brilla en rojo: salí del círculo.",
+                    "No sale de su territorio: llevalo al borde y se da vuelta."]),
     },
     "npc.scavenger": {
         "role": L("Raider", "Saqueador"),
@@ -358,6 +358,6 @@ MOBS = {
         "lore": L("Hired muscle that keeps the C-3 ore face for whoever pays. More than twice as tough as a scavenger, and they hit almost as hard.",
                   "Matones a sueldo que cuidan el frente de mineral de C-3 para quien pague. El doble de duros que un carroñero, y pegan casi el doble."),
         "rules": L(["Fight them where you have room to back off.", "They guard the Deep Seal; clear them before you drill."],
-                   ["Pelea donde tengas espacio para retroceder.", "Custodian el Deep Seal: despéjalos antes de perforar."]),
+                   ["Peleá donde tengas espacio para retroceder.", "Custodian el Deep Seal: despejalos antes de perforar."]),
     },
 }

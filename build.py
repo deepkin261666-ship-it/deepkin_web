@@ -187,7 +187,7 @@ def svg(name, cls="ico"):
             f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{SVG_ICONS[name]}</svg>')
 
 
-def radar(c, size=180):
+def radar(c, lang, size=180):
     """Radar de 4 atributos (maximo 20)."""
     order = ["might", "endurance", "precision", "technology"]
     cx = cy = size / 2
@@ -203,7 +203,7 @@ def radar(c, size=180):
     col = class_color(c["id"])
     labels = ""
     pos = [(cx, 12, "middle"), (size - 2, cy + 4, "end"), (cx, size - 4, "middle"), (2, cy + 4, "start")]
-    short = ["MIG", "END", "PRE", "TEC"]
+    short = ["MIG", "END", "PRE", "TEC"] if lang == "en" else ["FUE", "VIG", "PRE", "TEC"]
     for (x, y, anchor), s, a in zip(pos, short, order):
         labels += f'<text x="{x}" y="{y}" text-anchor="{anchor}">{s} {c["attributes"][a]}</text>'
     return (f'<svg class="radar" viewBox="0 0 {size} {size}" role="img" aria-label="attributes">{rings}{axes}'
@@ -265,8 +265,8 @@ def page(lang, slug, title, body, desc=None, extra_head="", body_class=""):
 
 
 def wiki_header(lang, kicker, title, lead, img=None):
-    bg = f' style="--hero:url(../assets/img/{img})"' if img else ""
-    return f"""<section class="phead{' has-img' if img else ''}"{bg}>
+    bg = f'<div class="phead-img" style="background-image:url(../assets/img/{img})"></div>' if img else ""
+    return f"""<section class="phead">{bg}
   <div class="wrap">
     <p class="kicker">{e(kicker)}</p>
     <h1>{e(title)}</h1>
@@ -313,7 +313,7 @@ def page_index(lang):
     <dl class="ccard-stats"><div><dt>{u('hp', lang)}</dt><dd>{dv['health']}</dd></div><div><dt>{u('speed', lang)}</dt><dd>{num(dv['speed'], lang)}</dd></div><div><dt>{u('energy', lang)}</dt><dd>{dv['energy']}</dd></div></dl>
   </div>
 </a>"""
-    wlist = sorted([w for w in WEAPONS if not w.get("planned")], key=lambda w: -base_damage(w))[:8]
+    wlist = sorted([w for w in WEAPONS if not w.get("planned") and "provisional" not in w["id"]], key=lambda w: -base_damage(w))[:8]
     weapons = "".join(
         f'<a class="wthumb reveal" href="arsenal.html#{e(w["id"])}">{icon(w["id"], alt=w["display_name"])}<span>{e(w["display_name"])}</span><b>{base_damage(w)}</b></a>'
         for w in wlist)
@@ -338,13 +338,13 @@ def page_index(lang):
     <p class="kicker hero-kicker">{e(u('early', lang))}</p>
     <h1 class="hero-logo"><img src="../assets/img/deepkin_logo.png" alt="DEEPKIN — What lies below" width="1356" height="559"></h1>
     <p class="hero-tag">{e(u('tagline', lang))}</p>
-    <p class="hero-sub">{'A cooperative underground action RPG. Explore, drill, equip — and decide when to come back.' if lang == 'en' else 'Un RPG de acción cooperativo bajo tierra. Explora, perfora, equípate… y decide cuándo volver.'}</p>
+    <p class="hero-sub">{'A cooperative underground action RPG. Explore, drill, equip — and decide when to come back.' if lang == 'en' else 'Un RPG de acción cooperativo bajo tierra. Explorá, perforá, equipate… y decidí cuándo volver.'}</p>
     <div class="cta">
       <a class="btn btn-solid" href="story.html">{u('read_story', lang)} {svg('arrow')}</a>
       <a class="btn" href="classes.html">{u('meet_classes', lang)}</a>
     </div>
   </div>
-  <p class="hero-hint">{'move your light' if lang == 'en' else 'mueve tu luz'}</p>
+  <p class="hero-hint">{'move your light' if lang == 'en' else 'mové tu luz'}</p>
 </section>
 
 <section class="intro wrap">
@@ -501,7 +501,7 @@ def class_section(c, lang):
       <p>{e(txt['pitch'][lang])}</p>
       <p class="cls-role"><span>{u('role', lang)}</span>{e(txt['role'][lang])}</p>
     </div>
-    <div class="cls-radar">{radar(c)}</div>
+    <div class="cls-radar">{radar(c, lang)}</div>
   </div>
   <div class="cls-grid">
     <div class="panel"><h3>{u('attributes', lang)}</h3>{attrs}</div>
@@ -541,9 +541,9 @@ def page_classes(lang):
     compare = f"""{section_title('compare', 'Four disciplines' if lang == 'en' else 'Cuatro disciplinas', 'Compare' if lang == 'en' else 'Comparar', u('variants_note', lang))}
 <div class="tablewrap"><table class="cmp"><thead><tr><th></th>{thead}</tr></thead><tbody>{tbody}</tbody></table></div>"""
     sections = "".join(class_section(c, lang) for c in CLASSES_DATA)
-    body = wiki_header(lang, "Classes" if lang == "en" else "Clases", "Choose your discipline" if lang == "en" else "Elige tu disciplina",
+    body = wiki_header(lang, "Classes" if lang == "en" else "Clases", "Choose your discipline" if lang == "en" else "Elegí tu disciplina",
                        "Your class sets your body, your power and how fast you learn each weapon. Your gear does the rest." if lang == "en"
-                       else "Tu clase define tu cuerpo, tu poder y qué tan rápido aprendes cada arma. Tu equipo hace el resto.",
+                       else "Tu clase define tu cuerpo, tu poder y qué tan rápido aprendés cada arma. Tu equipo hace el resto.",
                        "shots/class_select_terminal.jpg")
     body += wiki(lang, entries, compare + sections)
     return page(lang, "classes", u("meet_classes", lang), body)
@@ -634,6 +634,7 @@ def page_arsenal(lang):
                      "family": FAMILIES[w["weapon_family"]][lang]} for w in ws],
         "ammo": [{"name": a["display_name"], "mult": a["properties"]["ammo_multiplier"]} for a in ammo],
         "lang": lang,
+        "attrNames": {a: ATTRS[a][lang] for a in ATTRS},
     }
     cls_opts = "".join(f'<option value="{c["id"]}">{e(c["name"])}</option>' for c in CLASSES_DATA)
     w_opts = "".join(f'<option value="{w["id"]}">{e(w["display_name"])}</option>' for w in ws)
@@ -660,13 +661,13 @@ def page_arsenal(lang):
                ("offhand", SLOTS["secondary_weapon"][lang]), ("ammunition", u("ammo", lang)), ("calculator", u("calc_title", lang))]
     content = f"""{section_title('weapons', 'Primary weapons' if lang == 'en' else 'Armas principales', 'Weapons' if lang == 'en' else 'Armas',
                     'Base numbers before class scaling. Open “damage by class” on any card to see what each discipline actually deals.' if lang == 'en'
-                    else 'Números base antes de la escala de clase. Abre «daño por clase» en cualquier ficha para ver cuánto hace cada disciplina.')}
+                    else 'Números base antes de la escala de clase. Abrí «daño por clase» en cualquier ficha para ver cuánto hace cada disciplina.')}
 <div class="filters" data-target="#wgrid">
   <div class="fchips">{chips}</div>
   <label class="fsort">{u('sort_by', lang)} <select data-sort-select>{sorts}</select></label>
 </div>
 <div class="wgrid" id="wgrid">{cards}</div>
-{section_title('compare-table', u('table', lang), 'Side by side' if lang == 'en' else 'Lado a lado', 'Click a column to sort.' if lang == 'en' else 'Haz clic en una columna para ordenar.')}
+{section_title('compare-table', u('table', lang), 'Side by side' if lang == 'en' else 'Lado a lado', 'Click a column to sort.' if lang == 'en' else 'Hacé clic en una columna para ordenar.')}
 {table}
 {section_title('offhand', SLOTS['secondary_weapon'][lang], 'Shields' if lang == 'en' else 'Escudos', 'Off-hand gear pairs with any one-handed weapon. Blocking hits trains Shielding.' if lang == 'en' else 'El equipo de mano secundaria combina con cualquier arma de una mano. Bloquear golpes entrena Escudos.')}
 <div class="ggrid">{off_html}</div>
@@ -675,7 +676,7 @@ def page_arsenal(lang):
 {calc}"""
     body = wiki_header(lang, "Arsenal", "Weapons of the deep" if lang == "en" else "Armas de las profundidades",
                        "Every weapon in the current build, with real numbers. No class locks: carry what fits your fight." if lang == "en"
-                       else "Todas las armas de la versión actual, con números reales. Sin bloqueos de clase: lleva lo que sirva para tu pelea.",
+                       else "Todas las armas de la versión actual, con números reales. Sin bloqueos de clase: llevá lo que sirva para tu pelea.",
                        "shots/phase13_10-armory.jpg")
     body += wiki(lang, entries, content)
     return page(lang, "arsenal", "Arsenal", body)
@@ -743,7 +744,7 @@ def page_gear(lang):
          else "La batería alimenta tu luz y tus habilidades. Nada la recarga durante una expedición.",
          lambda i: i.get("equipment_slot") in ("battery", "backpack")),
         ("tools", "Tools" if lang == "en" else "Herramientas",
-         "The drill goes in the tool slot. Hold F at a drill site." if lang == "en" else "El taladro va en la ranura de herramienta. Mantén F en un punto de perforación.",
+         "The drill goes in the tool slot. Hold F at a drill site." if lang == "en" else "El taladro va en la ranura de herramienta. Mantené F en un punto de perforación.",
          lambda i: i.get("equipment_slot") == "tool_special"),
         ("crates", "Newcomer crates" if lang == "en" else "Cajones de recién llegado",
          "Every new operator takes their first kit from two personal crates in the Outpost." if lang == "en"
@@ -763,11 +764,11 @@ def page_gear(lang):
     slot_html = "".join(f"<li>{e(SLOTS[s][lang])}</li>" for s in slots)
     intro = f"""<div class="panel slots"><h3>{'Your loadout' if lang == 'en' else 'Tu equipo'}</h3>
 <p>{'Ten slots you fill from the inventory (I), plus two modification slots that are coming later. Your class never locks gear: only level and attribute requirements do.' if lang == 'en'
-     else 'Diez ranuras que llenas desde el inventario (I), más dos de modificación que llegan después. Tu clase nunca bloquea equipo: sólo el nivel y los requisitos de atributos.'}</p>
+     else 'Diez ranuras que llenás desde el inventario (I), más dos de modificación que llegan después. Tu clase nunca bloquea equipo: sólo el nivel y los requisitos de atributos.'}</p>
 <ul class="slotlist">{slot_html}</ul></div>"""
     body = wiki_header(lang, "Gear" if lang == "en" else "Equipo", "Armor, light & tools" if lang == "en" else "Armadura, luz y herramientas",
                        "Everything you wear and carry below. Civilization + Weapon + Armor + Battery + Light = Build." if lang == "en"
-                       else "Todo lo que vistes y llevas abajo. Civilización + Arma + Armadura + Batería + Luz = Build.",
+                       else "Todo lo que vestís y llevás abajo. Civilización + Arma + Armadura + Batería + Luz = Build.",
                        "shots/inventory_loadout.jpg")
     body += wiki(lang, [("slots", "Loadout" if lang == "en" else "Equipo")] + entries, f'<div id="slots">{intro}</div>' + content)
     return page(lang, "gear", "Gear" if lang == "en" else "Equipo", body)
@@ -798,7 +799,7 @@ def page_resources(lang):
                   f'<td class="n">{round(m["drill_effectiveness"] * 100)}%</td><td class="effort">{bar(effort, mx)}<b>{num(effort, lang, 0)}</b></td></tr>')
     content = (section_title("ores", "Mining" if lang == "en" else "Minería", "Ores & minerals" if lang == "en" else "Minerales",
                              "Hold F at a deposit to bore it out. Everything you mine weighs something." if lang == "en"
-                             else "Mantén F frente a un depósito para extraerlo. Todo lo que minas pesa algo.")
+                             else "Mantené F frente a un depósito para extraerlo. Todo lo que minás pesa algo.")
                + f'<div class="ggrid">{"".join(rcard(i) for i in ores)}</div>'
                + section_title("finds", "Salvage" if lang == "en" else "Rescate", "Finds & salvage" if lang == "en" else "Hallazgos y chatarra")
                + f'<div class="ggrid">{"".join(rcard(i) for i in loot)}</div>'
@@ -815,7 +816,7 @@ def page_resources(lang):
                ("rock", "Geology" if lang == "en" else "Geología"), ("currency", "Currency" if lang == "en" else "Moneda")]
     body = wiki_header(lang, "Resources" if lang == "en" else "Recursos", "Everything we need comes from below" if lang == "en" else "Todo lo que necesitamos viene de abajo",
                        "Ore, crystal, salvage and coin: what you dig, find and carry home." if lang == "en"
-                       else "Mineral, cristal, chatarra y moneda: lo que excavas, encuentras y llevas a casa.",
+                       else "Mineral, cristal, chatarra y moneda: lo que excavás, encontrás y llevás a casa.",
                        "shots/region_h_deposit_cracked.jpg")
     body += wiki(lang, entries, content)
     return page(lang, "resources", "Resources" if lang == "en" else "Recursos", body)
@@ -826,7 +827,8 @@ def page_bestiary(lang):
     bb = fac["faction.burrowborn"]
     F = FACTION["faction.burrowborn"]
     traits = "".join(f"<li>{e(x)}</li>" for x in F["traits"][lang])
-    hier = " → ".join(f"<span>{e(x)}</span>" for x in bb["hierarchy"].split(" → "))
+    hier_es = {"Swarm": "Enjambre", "Brute": "Bruto", "Alpha": "Alfa"}
+    hier = " → ".join(f"<span>{e(hier_es.get(x, x) if lang == 'es' else x)}</span>" for x in bb["hierarchy"].split(" → "))
     faction_html = f"""{section_title('burrowborn', 'Faction' if lang == 'en' else 'Facción', 'The Burrowborn', F['identity'][lang])}
 <div class="cls-grid"><div class="panel"><p>{e(F['visual'][lang])}</p><ul class="traits">{traits}</ul></div>
 <div class="panel"><dl class="kv kv-col"><div><dt>{'Communication' if lang == 'en' else 'Comunicación'}</dt><dd>{e(F['communication'][lang])}</dd></div>
@@ -887,7 +889,7 @@ def page_bestiary(lang):
                + f'<div class="rumours">{rumours}</div>')
     entries = [("burrowborn", "Burrowborn"), ("humans", "People" if lang == "en" else "Gente"), ("rumours", "Rumours" if lang == "en" else "Rumores")]
     body = wiki_header(lang, "Bestiary" if lang == "en" else "Bestiario", "What hunts below" if lang == "en" else "Lo que caza abajo",
-                       "Know what you are fighting before it knows you are there." if lang == "en" else "Conoce contra qué peleas antes de que sepa que estás ahí.",
+                       "Know what you are fighting before it knows you are there." if lang == "en" else "Conocé contra qué peleás antes de que sepa que estás ahí.",
                        "concept/tile_wilds.jpg")
     body += wiki(lang, entries, content)
     return page(lang, "bestiary", "Bestiary" if lang == "en" else "Bestiario", body)
@@ -935,7 +937,7 @@ def page_world(lang):
                + f'<div class="tiles">{tiles}</div>'
                + section_title("machines", u("planned", lang), "Excavators" if lang == "en" else "Excavadoras",
                                "One day the drill becomes a machine you ride: your mount, your cargo and your way through the hardest rock." if lang == "en"
-                               else "Algún día el taladro será una máquina que manejas: tu montura, tu carga y tu camino a través de la roca más dura.")
+                               else "Algún día el taladro será una máquina que manejás: tu montura, tu carga y tu camino a través de la roca más dura.")
                + f'<div class="machines">{machines}</div>')
     entries = [("route", "Starting region" if lang == "en" else "Región inicial"), ("surface", "Surface" if lang == "en" else "Superficie"),
                ("civilisations", "Cities" if lang == "en" else "Ciudades"), ("regions", "The wider world" if lang == "en" else "El mundo"),
@@ -1001,7 +1003,7 @@ def page_manual(lang):
 
 {section_title('skills', 'Training' if en else 'Entrenamiento', 'Weapon skills' if en else 'Habilidades de arma',
                'Skills belong to weapon families, not classes. Every hit that lands trains the family of the weapon that dealt it.' if en
-               else 'Las habilidades pertenecen a familias de armas, no a clases. Cada golpe que conectas entrena la familia del arma que lo dio.')}
+               else 'Las habilidades pertenecen a familias de armas, no a clases. Cada golpe que conectás entrena la familia del arma que lo dio.')}
 <div class="cls-grid">
   <div class="panel"><ul class="fams">{fam_list}</ul></div>
   <div class="panel">
@@ -1027,7 +1029,7 @@ def page_manual(lang):
 <div class="cls-grid">
   <div class="panel"><p>{'Your battery sets your energy. The lantern drains it every second it is on, and abilities spend it too. There is no recharging on an expedition: when it hits zero, the light goes out.' if en
       else 'Tu batería define tu energía. La linterna la consume cada segundo que está encendida, y las habilidades también gastan. No hay recarga durante una expedición: cuando llega a cero, la luz se apaga.'}</p>
-      <p>{'Toggle the lantern with T. Unequipping the battery empties your energy; equipping it again does not refill it.' if en else 'Enciende o apaga la linterna con T. Quitar la batería vacía tu energía; volver a equiparla no la recarga.'}</p></div>
+      <p>{'Toggle the lantern with T. Unequipping the battery empties your energy; equipping it again does not refill it.' if en else 'Prendé o apagá la linterna con T. Quitar la batería vacía tu energía; volver a equiparla no la recarga.'}</p></div>
   <div class="panel"><p class="eq">{'Simple Lantern: 9 m radius · 0.15/s · ≈ 11 min on Battery Cell I' if en else 'Simple Lantern: radio 9 m · 0,15/s · ≈ 11 min con Battery Cell I'}</p>
       <a class="textlink" href="gear.html#lights">{'Compare lights' if en else 'Comparar luces'} {svg('arrow')}</a></div>
 </div>
@@ -1035,7 +1037,7 @@ def page_manual(lang):
 {section_title('drilling', 'Excavation' if en else 'Excavación', 'Drilling' if en else 'Perforación')}
 <div class="cls-grid">
   <div class="panel"><p>{'Equip the Big Daddy Drill in the tool slot and hold F at a drill site. Ore seams give up resources; sealed walls of basalt open new routes. Some routes only exist once you drill them.' if en
-      else 'Equipa el Big Daddy Drill en la ranura de herramienta y mantén F en un punto de perforación. Las vetas sueltan recursos; los muros sellados de basalto abren rutas nuevas. Algunas rutas sólo existen cuando las perforas.'}</p></div>
+      else 'Equipá el Big Daddy Drill en la ranura de herramienta y mantené F en un punto de perforación. Las vetas sueltan recursos; los muros sellados de basalto abren rutas nuevas. Algunas rutas sólo existen cuando las perforás.'}</p></div>
   <div class="panel"><p>{'Every material has hardness, durability and a drill effectiveness. Soft rock gives way at once; reinforced relic material fights back.' if en
       else 'Cada material tiene dureza, durabilidad y eficacia de perforación. La roca blanda cede enseguida; el material reliquia reforzado se resiste.'}</p>
       <a class="textlink" href="resources.html#rock">{'See the rock table' if en else 'Ver la tabla de rocas'} {svg('arrow')}</a></div>
@@ -1043,7 +1045,7 @@ def page_manual(lang):
 
 {section_title('carry', 'Logistics' if en else 'Logística', 'Carry weight' if en else 'Peso de carga')}
 <div class="panel"><p>{'Everything has weight: what you wear and what you haul. Foundry starts with 80 kg of carry and gains 2.5 per level; Relay starts with 45. A backpack adds 20 cells that travel with it and +15 kg. Drop the pack, and everything in it stays with the pack.' if en
-     else 'Todo pesa: lo que vistes y lo que acarreas. La Forja empieza con 80 kg de carga y suma 2,5 por nivel; La Red empieza con 45. Una mochila suma 20 celdas que viajan con ella y +15 kg. Si sueltas la mochila, todo lo que tiene se queda con ella.'}</p></div>
+     else 'Todo pesa: lo que vestís y lo que acarreás. La Forja empieza con 80 kg de carga y suma 2,5 por nivel; La Red empieza con 45. Una mochila suma 20 celdas que viajan con ella y +15 kg. Si soltás la mochila, todo lo que tiene se queda con ella.'}</p></div>
 """
     entries = [("first", "First descent" if en else "Primer descenso"), ("controls", "Controls" if en else "Controles"),
                ("attributes", "Attributes" if en else "Atributos"), ("combat", "Combat" if en else "Combate"),
@@ -1051,7 +1053,7 @@ def page_manual(lang):
                ("light", "Light" if en else "Luz"), ("drilling", "Drilling" if en else "Perforación"), ("carry", "Carry" if en else "Carga")]
     body = wiki_header(lang, "Field Manual" if en else "Manual de campo", "How the deep works" if en else "Cómo funciona lo profundo",
                        "Controls, numbers and the rules the server plays by. Read it once; it will save your light." if en
-                       else "Controles, números y las reglas con las que juega el servidor. Léelo una vez; te va a ahorrar luz.",
+                       else "Controles, números y las reglas con las que juega el servidor. Leelo una vez; te va a ahorrar luz.",
                        "shots/field_hud.jpg")
     body += wiki(lang, entries, content)
     return page(lang, "manual", "Field Manual" if en else "Manual de campo", body)

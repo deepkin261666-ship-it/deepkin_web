@@ -232,7 +232,7 @@ p { margin: 0 0 1em; }
 
 /* ---------- Page headers ---------- */
 .phead { position: relative; padding: 150px 0 64px; border-bottom: 1px solid var(--line); overflow: hidden; isolation: isolate; }
-.phead.has-img::before { content: ""; position: absolute; inset: 0; z-index: -2; background: var(--hero) center 35% / cover no-repeat; opacity: .38; filter: saturate(.8); }
+.phead-img { position: absolute; inset: 0; z-index: -2; background: center 35% / cover no-repeat; opacity: .45; filter: saturate(.85); }
 .phead::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(to bottom, rgba(11, 13, 12, .6), var(--bg) 92%), linear-gradient(90deg, var(--bg) 0, transparent 70%); }
 .phead h1 { font-size: clamp(44px, 7vw, 92px); text-transform: uppercase; letter-spacing: .03em; max-width: 14ch; }
 .phead .lead { max-width: 640px; font-size: 18px; color: var(--soft); margin: 18px 0 0; }
@@ -560,7 +560,7 @@ kbd { min-width: 44px; text-align: center; font: 600 13px/1 var(--mono); color: 
 .chapnav a:hover { color: var(--text); }
 .story { padding-bottom: 140px; }
 .chapter { padding-top: 110px; }
-.chapter-n { font: 500 12px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin: 0 0 16px; }
+.story .chapter-n { font: 500 12px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; color: var(--amber); margin: 0 0 16px; }
 .chapter h2 { font: 400 clamp(40px, 6vw, 64px)/1 var(--serif); color: var(--text); text-transform: none; letter-spacing: 0; margin-bottom: 48px; }
 .story p { font: 300 21px/1.7 var(--serif); color: #cfc9ba; margin: 0 0 1.1em; }
 .story .beat { color: var(--text); font-weight: 400; }

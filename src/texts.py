@@ -3,7 +3,7 @@ from i18n import L
 
 PILLARS = [
     ("explore", L("Explore", "Explorar"), L("Connected caverns, open surface and sealed ruins. Every route you find is knowledge you keep.",
-                                             "Cavernas conectadas, superficie abierta y ruinas selladas. Cada ruta que encuentras es conocimiento que conservas.")),
+                                             "Cavernas conectadas, superficie abierta y ruinas selladas. Cada ruta que encontrás es conocimiento que conservas.")),
     ("drill", L("Excavate", "Excavar"), L("Drilling is how you discover the world: it opens passages, pulls ore from the rock and reveals what was buried.",
                                            "Perforar es la forma de descubrir el mundo: abre pasajes, saca mineral de la roca y revela lo que estaba enterrado.")),
     ("gear", L("Equip", "Equiparse"), L("Thirteen gear slots, no class locks. Weapon, armor, battery and light are your build.",
@@ -13,11 +13,11 @@ PILLARS = [
 ]
 
 LOOP = [
-    (L("Prepare", "Prepararse"), L("Pick your gear, charge your battery, pack ammunition.", "Elige tu equipo, carga la batería, lleva munición.")),
-    (L("Descend", "Descender"), L("Ride the shaft lift or find a way down from the surface.", "Baja en el elevador del pozo o encuentra un camino desde la superficie.")),
-    (L("Fight & drill", "Pelear y perforar"), L("Clear threats, bore out ore, breach sealed walls.", "Despeja amenazas, extrae mineral, rompe muros sellados.")),
+    (L("Prepare", "Prepararse"), L("Pick your gear, charge your battery, pack ammunition.", "Elegí tu equipo, cargá la batería, llevá munición.")),
+    (L("Descend", "Descender"), L("Ride the shaft lift or find a way down from the surface.", "Bajá en el elevador del pozo o encontrá un camino desde la superficie.")),
+    (L("Fight & drill", "Pelear y perforar"), L("Clear threats, bore out ore, breach sealed walls.", "Despejá amenazas, extrae mineral, rompe muros sellados.")),
     (L("Decide", "Decidir"), L("Your light and your health are finite. Push deeper, or turn back?", "Tu luz y tu vida son finitas. ¿Bajar más o volver?")),
-    (L("Return", "Volver"), L("Bring back what you secured and build your next expedition.", "Trae lo que aseguraste y arma tu próxima expedición.")),
+    (L("Return", "Volver"), L("Bring back what you secured and build your next expedition.", "Traé lo que aseguraste y armá tu próxima expedición.")),
 ]
 
 REGIONS = [
@@ -27,7 +27,7 @@ REGIONS = [
         "lead": L("Where every operator arrives. A small fortified mining settlement built around an old excavation shaft.",
                   "Donde llega todo operador. Un pequeño asentamiento minero fortificado alrededor de un viejo pozo de excavación."),
         "body": L("From the arrival path you already see where you are going: the shaft, ringed with work lights, and the lift gantry right ahead. Workers drill the rock faces, cargo pods shuttle between the yard and the rim, and Old Brannock, the shaft miner, has three things to tell you: “New here?” · “Grab a drill. Grab a weapon.” · “Everything we need comes from below.”",
-                  "Desde el camino de llegada ya ves adónde vas: el pozo, rodeado de luces de trabajo, y la grúa del elevador justo enfrente. Los trabajadores perforan la roca, las cápsulas de carga van y vienen entre el patio y el borde, y el viejo Brannock, minero del pozo, tiene tres cosas para decirte: «¿Eres nuevo?» · «Toma un taladro. Toma un arma.» · «Todo lo que necesitamos viene de abajo.»"),
+                  "Desde el camino de llegada ya ves adónde vas: el pozo, rodeado de luces de trabajo, y la grúa del elevador justo enfrente. Los trabajadores perforan la roca, las cápsulas de carga van y vienen entre el patio y el borde, y el viejo Brannock, minero del pozo, tiene tres cosas para decirte: «¿Nuevo por acá?» · «Agarrá un taladro. Agarrá un arma.» · «Todo lo que necesitamos viene de abajo.»"),
         "points": L(["Newcomer crates with your starter kit", "Shaft lift down to The Threshold (G)", "Two drill sites to try the drill",
                      "Control station, power bay, cargo yard"],
                     ["Cajones para recién llegados con tu equipo inicial", "Elevador del pozo hacia The Threshold (G)",
@@ -49,7 +49,7 @@ REGIONS = [
         "lead": L("A wide, damp cavern around a great stone column: The Keystone. The first real danger, and the first real ore.",
                   "Una caverna amplia y húmeda alrededor de una gran columna de piedra: The Keystone. El primer peligro real, y el primer mineral real."),
         "body": L("Limonite seams and hematite veins wait to be drilled; lumenita crystals glow cold blue near the Keystone. So does the Burrowborn: a Crawler nest guards the way down, and a Ravager holds the wide chamber beside it. When it gets dark, follow the amber lamps back to The Threshold.",
-                  "Vetas de limonita y hematita esperan el taladro; los cristales de lumenita brillan con azul frío cerca de The Keystone. También los Burrowborn: un nido de Crawlers custodia la bajada y un Ravager domina la cámara de al lado. Cuando oscurezca, sigue las lámparas ámbar de vuelta a The Threshold."),
+                  "Vetas de limonita y hematita esperan el taladro; los cristales de lumenita brillan con azul frío cerca de The Keystone. También los Burrowborn: un nido de Crawlers custodia la bajada y un Ravager domina la cámara de al lado. Cuando oscurezca, seguí las lámparas ámbar de vuelta a The Threshold."),
         "points": L(["Crawler nest · respawns every 25–45 s", "Ravager den · respawns every 90–150 s", "Limonite, hematite, lumenita",
                      "Ferrous samples on the ground · Scavengers"],
                     ["Nido de Crawlers · reaparecen cada 25–45 s", "Guarida del Ravager · reaparece cada 90–150 s",
@@ -61,7 +61,7 @@ REGIONS = [
         "lead": L("An active dig. “Authorised personnel.” The ore face is rich, and someone is paying people to keep it.",
                   "Una excavación activa. «Personal autorizado.» El frente de mineral es rico, y alguien le paga a gente para conservarlo."),
         "body": L("Hematite and hard magnetite lodes line the ore face, guarded by Excavation Enforcers. At the far end, a Deep Seal of basalt blocks the way. Drill through it and you find the Deep Survey Shaft, and the question of how far down the old surveys really went.",
-                  "Filones de hematita y magnetita dura recorren el frente, custodiados por Excavation Enforcers. Al fondo, un Deep Seal de basalto bloquea el paso. Perfóralo y encontrarás el Deep Survey Shaft, y la pregunta de hasta dónde llegaron realmente los viejos relevamientos."),
+                  "Filones de hematita y magnetita dura recorren el frente, custodiados por Excavation Enforcers. Al fondo, un Deep Seal de basalto bloquea el paso. Perforalo y vas a encontrar el Deep Survey Shaft, y la pregunta de hasta dónde llegaron realmente los viejos relevamientos."),
         "points": L(["Ore face · magnetite and hematite", "Excavation Enforcers ×2", "Deep Seal · basalt, drill to breach",
                      "Discovery: Deep Survey Shaft"],
                     ["Frente de mineral · magnetita y hematita", "Excavation Enforcers ×2", "Deep Seal · basalto, perforar para abrir",
@@ -119,14 +119,14 @@ CONTROLS = [
 ]
 
 FIRST_STEPS = [
-    (L("Open your crates", "Abre tus cajones"), L("Two newcomer crates wait in the Outpost. The Supply Crate has a backpack, the Leather Suit and a K6-3 helmet; the Gear Crate has your doctrine's weapon (and rounds), a lantern, a battery and the Big Daddy drill. What's inside is yours alone.",
+    (L("Open your crates", "Abrí tus cajones"), L("Two newcomer crates wait in the Outpost. The Supply Crate has a backpack, the Leather Suit and a K6-3 helmet; the Gear Crate has your doctrine's weapon (and rounds), a lantern, a battery and the Big Daddy drill. What's inside is yours alone.",
                                                   "Dos cajones para recién llegados te esperan en el Outpost. El Supply Crate trae una mochila, el Leather Suit y un casco K6-3; el Gear Crate trae el arma de tu doctrina (y munición), una linterna, una batería y el taladro Big Daddy. Lo de adentro es sólo tuyo.")),
-    (L("Equip everything", "Equípate todo"), L("Press I and drag each item onto its slot. Battery first: without it, your lantern and abilities have no energy.",
-                                               "Presiona I y arrastra cada objeto a su ranura. La batería primero: sin ella, tu linterna y tus habilidades no tienen energía.")),
-    (L("Try the drill", "Prueba el taladro"), L("Two drill sites sit by the shaft. Hold F at one and watch the rock give way.",
-                                               "Hay dos puntos de perforación junto al pozo. Mantén F en uno y mira cómo cede la roca.")),
-    (L("Take the lift", "Toma el elevador"), L("Press G at the shaft lift. The Threshold is quiet; The Shallows are not.",
-                                              "Presiona G en el elevador del pozo. The Threshold es tranquila; The Shallows no.")),
-    (L("Watch your battery", "Cuida tu batería"), L("Your lantern drains energy and nothing recharges it out there. Light it when you need to see, turn it off when you don't.",
-                                                   "La linterna consume energía y allá abajo nada la recarga. Enciéndela cuando necesites ver y apágala cuando no.")),
+    (L("Equip everything", "Equipate todo"), L("Press I and drag each item onto its slot. Battery first: without it, your lantern and abilities have no energy.",
+                                               "Presioná I y arrastrá cada objeto a su ranura. La batería primero: sin ella, tu linterna y tus habilidades no tienen energía.")),
+    (L("Try the drill", "Probá el taladro"), L("Two drill sites sit by the shaft. Hold F at one and watch the rock give way.",
+                                               "Hay dos puntos de perforación junto al pozo. Mantené F en uno y mirá cómo cede la roca.")),
+    (L("Take the lift", "Tomá el elevador"), L("Press G at the shaft lift. The Threshold is quiet; The Shallows are not.",
+                                              "Presioná G en el elevador del pozo. The Threshold es tranquila; The Shallows no.")),
+    (L("Watch your battery", "Cuidá tu batería"), L("Your lantern drains energy and nothing recharges it out there. Light it when you need to see, turn it off when you don't.",
+                                                   "La linterna consume energía y allá abajo nada la recarga. Prendela cuando necesites ver y apagala cuando no.")),
 ]

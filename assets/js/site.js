@@ -208,7 +208,7 @@
       el.pow.textContent = c.powerMult > 1 ? Math.round(raw * c.powerMult) : "—";
       el.powL.textContent = c.power + (c.powerMult > 1 ? " ×" + fmt(c.powerMult, 1).replace(/[.,]0$/, "") : "") + " · " + powLabel;
       el.note.textContent = (es ? "Base " : "Base ") + w.base + " × " + (es ? "coef. " : "coef. ") + fmt(coef, 2) + " (" + (w.type === "melee" ? (es ? "cuerpo a cuerpo" : "melee") : (es ? "a distancia" : "ranged")) + ")" +
-        " × " + fmt(statMult(c.attributes[attr]), 3) + " (" + attr + " " + c.attributes[attr] + ")" +
+        " × " + fmt(statMult(c.attributes[attr]), 3) + " (" + (D.attrNames[attr] || attr) + " " + c.attributes[attr] + ")" +
         (w.ammo ? " × " + fmt(ammo, 2) + (es ? " (munición)" : " (ammo)") : "") +
         " × " + fmt(factor, 3) + (es ? " (habilidad y nivel)" : " (skill & level)") + " · " + w.family;
       el.hit.parentNode.style.setProperty("--c", c.color);
