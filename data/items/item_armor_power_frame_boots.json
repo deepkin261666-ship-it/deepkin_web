@@ -1,0 +1,13 @@
+{
+  "id": "item.armor.power_frame_boots",
+  "display_name": "Power Frame Boots",
+  "equipment_slot": "boots",
+  "description": "Armoured actuator feet from the power frame. Kept for a later set.",
+  "visual_id": "visual.armor.power_frame",
+  "properties": {
+    "armor_defense": 3,
+    "resistance_bonus": 0
+  },
+  "weight": 4.0,
+  "planned": true
+}

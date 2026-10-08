@@ -1,0 +1,11 @@
+{
+  "id": "item.tool.big_daddy_drill",
+  "display_name": "Big Daddy Drill",
+  "equipment_slot": "tool_special",
+  "description": "The settlement's standard gathering drill. Worn in the tool slot; hold F at a drill site to bore out ore. Other drills come later.",
+  "visual_id": "visual.tool.big_daddy_drill",
+  "weight": 6.0,
+  "properties": {
+    "drill_power": 1.0
+  }
+}

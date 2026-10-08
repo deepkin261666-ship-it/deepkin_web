@@ -1,0 +1,9 @@
+{
+  "id": "material.ore_hematite",
+  "display_name": "Hematite Vein",
+  "hardness": 1.8,
+  "durability": 40,
+  "drill_effectiveness": 0.85,
+  "visual_id": "ore_hematite",
+  "discovery_category": "discovery.category.geology"
+}

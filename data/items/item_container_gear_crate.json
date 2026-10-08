@@ -1,0 +1,18 @@
+{
+  "id": "item.container.gear_crate",
+  "display_name": "Gear Crate",
+  "description": "Field gear for a newcomer: your doctrine's weapon (and rounds if it shoots), a lantern, a battery cell and the settlement drill. What's inside is yours alone.",
+  "visual_id": "visual.container.gear_crate",
+  "container": {
+    "cells": 8
+  },
+  "fixed": true,
+  "crate_loot": [
+    "$doctrine_weapon",
+    "$doctrine_ammo",
+    "item.light.provisional_verdant_lumen",
+    "item.battery.provisional_relay_cell",
+    "item.tool.big_daddy_drill"
+  ],
+  "weight": 0.0
+}

@@ -1,0 +1,19 @@
+{
+  "id": "item.backpack.provisional_drift_pack",
+  "display_name": "Backpack",
+  "equipment_slot": "backpack",
+  "description": "A survey pack: twenty cells that travel with the pack (drop it and its contents go with it) and 15 kg more carry capacity.",
+  "visual_id": "visual.backpack.field_pack",
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 20,
+    "base_damage": 0,
+    "battery_capacity": 0,
+    "illumination_radius": 0.0,
+    "carry_bonus": 15.0
+  },
+  "container": {
+    "cells": 20
+  },
+  "weight": 1.5
+}

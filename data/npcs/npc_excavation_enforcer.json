@@ -1,0 +1,10 @@
+{
+  "id": "npc.excavation_enforcer",
+  "display_name": "Excavation Enforcer",
+  "max_health": 70,
+  "movement_speed": 2.4,
+  "detection_range": 9.0,
+  "attack_range": 1.7,
+  "attack_damage": 9,
+  "attack_cooldown": 1.1
+}

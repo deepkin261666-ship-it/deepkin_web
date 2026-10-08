@@ -1,0 +1,18 @@
+{
+  "id": "item.weapon.foundry_ironbound_mace",
+  "display_name": "Breaker Mace",
+  "equipment_slot": "primary_weapon",
+  "description": "A one-handed flanged mace. Pairs with a shield; every blow rattles armor and footing.",
+  "visual_id": "visual.weapon.foundry_ironbound_mace",
+  "weapon_type": "melee",
+  "weapon_family": "skill.blunt",
+  "hands": 1,
+  "weight": 3.5,
+  "gear_tier": 1,
+  "properties": {
+    "base_damage": 13,
+    "attack_range": 2.3,
+    "stagger_bonus": 0.1,
+    "attack_interval": 0.95
+  }
+}

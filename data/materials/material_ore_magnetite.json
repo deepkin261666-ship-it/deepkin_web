@@ -1,0 +1,9 @@
+{
+  "id": "material.ore_magnetite",
+  "display_name": "Magnetite Lode",
+  "hardness": 2.6,
+  "durability": 56,
+  "drill_effectiveness": 0.7,
+  "visual_id": "ore_magnetite",
+  "discovery_category": "discovery.category.geology"
+}

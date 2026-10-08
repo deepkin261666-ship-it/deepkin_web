@@ -1,0 +1,235 @@
+{
+ "classes": [
+  {
+   "id": "class.foundry",
+   "name": "FOUNDRY",
+   "civilization": "La Forja",
+   "fantasy": "Heavy industrial vanguard built to hold the line.",
+   "attributes": {
+    "might": 16,
+    "endurance": 16,
+    "precision": 8,
+    "technology": 8
+   },
+   "combat_coefficients": {
+    "melee": 1.2,
+    "ranged": 0.6,
+    "ability": 1.0,
+    "defense": 1.4
+   },
+   "base_armor": 45,
+   "base_resistance": 12,
+   "movement_speed": 4.5,
+   "energy_capacity": 70.0,
+   "ability_id": "ability.bastion",
+   "ability_name": "Bastion",
+   "passive_id": "passive.momentum",
+   "passive_name": "Momentum",
+   "visual_color": "e0902a",
+   "variants": [
+    {
+     "id": "variant.bulwark",
+     "name": "Guardian",
+     "weapon_style": "Tank · hammers & maces · stagger and control",
+     "weapon_id": "item.weapon.foundry_bulwark",
+     "damage": 24
+    },
+    {
+     "id": "variant.breaker",
+     "name": "Barbarian",
+     "weapon_style": "Breaker · swords & axes · damage and criticals",
+     "weapon_id": "item.weapon.foundry_breaker",
+     "damage": 16
+    }
+   ],
+   "carry": {
+    "base": 80.0,
+    "per_level": 2.5
+   },
+   "skill_affinity": {
+    "skill.blunt": 1.5,
+    "skill.edge": 1.5,
+    "skill.shielding": 1.4,
+    "skill.firearms": 0.6
+   },
+   "starter_weapons": [
+    "item.weapon.foundry_ironbound_mace",
+    "item.weapon.foundry_scrapblade",
+    "item.weapon.foundry_bulwark",
+    "item.weapon.foundry_breaker"
+   ]
+  },
+  {
+   "id": "class.drift",
+   "name": "DRIFT",
+   "civilization": "La Deriva",
+   "fantasy": "Fast underground ranger built to scout and select targets.",
+   "attributes": {
+    "might": 8,
+    "endurance": 7,
+    "precision": 16,
+    "technology": 9
+   },
+   "combat_coefficients": {
+    "melee": 0.7,
+    "ranged": 1.3,
+    "ability": 1.0,
+    "defense": 0.8
+   },
+   "base_armor": 8,
+   "base_resistance": 8,
+   "movement_speed": 7.0,
+   "energy_capacity": 110.0,
+   "ability_id": "ability.long_shot",
+   "ability_name": "Long Shot",
+   "passive_id": "passive.trailblazer",
+   "passive_name": "Trailblazer",
+   "visual_color": "3aa8e0",
+   "variants": [
+    {
+     "id": "variant.pathfinder",
+     "name": "Gunner",
+     "weapon_style": "Firearms · shotguns, carbines and rifles · sustained fire",
+     "weapon_id": "item.weapon.drift_pathfinder",
+     "damage": 14
+    },
+    {
+     "id": "variant.marksman",
+     "name": "Hunter",
+     "weapon_style": "Precision · precision rifles (bows later) · weak points",
+     "weapon_id": "item.weapon.drift_marksman",
+     "damage": 30
+    }
+   ],
+   "carry": {
+    "base": 50.0,
+    "per_level": 1.5
+   },
+   "skill_affinity": {
+    "skill.firearms": 1.5,
+    "skill.precision": 1.5,
+    "skill.blades": 0.8,
+    "skill.shielding": 0.6
+   },
+   "starter_weapons": [
+    "item.weapon.drift_pathfinder",
+    "item.weapon.drift_scout_rifle",
+    "item.weapon.drift_marksman"
+   ]
+  },
+  {
+   "id": "class.verdant",
+   "name": "VERDANT",
+   "civilization": "Lo Vivo",
+   "fantasy": "Biological survivalist who sustains allies and shapes space.",
+   "attributes": {
+    "might": 11,
+    "endurance": 11,
+    "precision": 10,
+    "technology": 13
+   },
+   "combat_coefficients": {
+    "melee": 0.7,
+    "ranged": 1.0,
+    "ability": 1.4,
+    "defense": 1.0
+   },
+   "base_armor": 22,
+   "base_resistance": 20,
+   "movement_speed": 5.0,
+   "energy_capacity": 150.0,
+   "ability_id": "ability.bloom",
+   "ability_name": "Bloom",
+   "passive_id": "passive.regrowth",
+   "passive_name": "Regrowth",
+   "visual_color": "5cc25a",
+   "variants": [
+    {
+     "id": "variant.warden",
+     "name": "Warden",
+     "weapon_style": "Sustain · living staffs · healing and protection",
+     "weapon_id": "item.weapon.verdant_warden",
+     "damage": 12
+    },
+    {
+     "id": "variant.sporecaller",
+     "name": "Sporecaller",
+     "weapon_style": "Control · spore projectors · damage over time",
+     "weapon_id": "item.weapon.verdant_sporecaller",
+     "damage": 10
+    }
+   ],
+   "carry": {
+    "base": 60.0,
+    "per_level": 2.0
+   },
+   "skill_affinity": {
+    "skill.vitalism": 1.5,
+    "skill.spores": 1.5,
+    "skill.blunt": 0.7,
+    "skill.shielding": 0.8
+   },
+   "starter_weapons": [
+    "item.weapon.verdant_warden",
+    "item.weapon.verdant_sporecaller"
+   ]
+  },
+  {
+   "id": "class.relay",
+   "name": "RELAY",
+   "civilization": "La Red",
+   "fantasy": "Compact technical operator built to disrupt hostile systems.",
+   "attributes": {
+    "might": 8,
+    "endurance": 5,
+    "precision": 14,
+    "technology": 16
+   },
+   "combat_coefficients": {
+    "melee": 1.15,
+    "ranged": 1.0,
+    "ability": 1.3,
+    "defense": 0.75
+   },
+   "base_armor": 4,
+   "base_resistance": 18,
+   "movement_speed": 6.2,
+   "energy_capacity": 130.0,
+   "ability_id": "ability.overload",
+   "ability_name": "Overload",
+   "passive_id": "passive.relay",
+   "passive_name": "Relay",
+   "visual_color": "9a6be0",
+   "variants": [
+    {
+     "id": "variant.operator",
+     "name": "Operator",
+     "weapon_style": "Manipulation · tech weapons · disruption and support",
+     "weapon_id": "item.weapon.relay_operator",
+     "damage": 12
+    },
+    {
+     "id": "variant.infiltrator",
+     "name": "Infiltrator",
+     "weapon_style": "Elimination · blades · ambush and mobility",
+     "weapon_id": "item.weapon.relay_infiltrator",
+     "damage": 9
+    }
+   ],
+   "carry": {
+    "base": 45.0,
+    "per_level": 1.5
+   },
+   "skill_affinity": {
+    "skill.tech": 1.5,
+    "skill.blades": 1.5,
+    "skill.firearms": 0.8,
+    "skill.shielding": 0.6
+   },
+   "starter_weapons": [
+    "item.weapon.relay_operator",
+    "item.weapon.relay_infiltrator"
+   ]
+  }
+ ]
+}

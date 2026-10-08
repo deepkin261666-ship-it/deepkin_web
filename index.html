@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DEEPKIN — What lies below</title>
+<meta name="description" content="DEEPKIN — a cooperative underground action RPG. Choose your language · Elige tu idioma.">
+<link rel="icon" href="assets/img/deepkin_mark.png">
+<link rel="alternate" hreflang="en" href="en/index.html">
+<link rel="alternate" hreflang="es" href="es/index.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Saira+Condensed:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/site.css">
+<script>
+(function(){
+  var p=null; try{p=localStorage.getItem('deepkin-lang')}catch(e){}
+  if(location.search.indexOf('choose')>-1) return;
+  var l=p||((navigator.language||'en').toLowerCase().indexOf('es')===0?'es':'en');
+  location.replace(l+'/index.html');
+})();
+</script>
+</head>
+<body class="gate">
+<main class="gate-in">
+  <img src="assets/img/deepkin_logo.png" alt="DEEPKIN — What lies below" width="1356" height="559">
+  <div class="cta">
+    <a class="btn btn-solid" href="en/index.html" data-setlang="en">English</a>
+    <a class="btn" href="es/index.html" data-setlang="es">Español</a>
+  </div>
+  <p class="signal">261.6.66</p>
+</main>
+<script src="assets/js/site.js"></script>
+</body>
+</html>

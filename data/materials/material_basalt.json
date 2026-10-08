@@ -1,0 +1,9 @@
+{
+  "id": "material.basalt",
+  "display_name": "Basalt",
+  "hardness": 2.0,
+  "durability": 60,
+  "drill_effectiveness": 0.8,
+  "visual_id": "basalt",
+  "discovery_category": "discovery.category.geology"
+}

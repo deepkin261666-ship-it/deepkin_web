@@ -1,0 +1,9 @@
+{
+  "id": "material.lumenita",
+  "display_name": "Lumenita Cluster",
+  "hardness": 3.0,
+  "durability": 72,
+  "drill_effectiveness": 0.6,
+  "visual_id": "lumenita",
+  "discovery_category": "discovery.category.geology"
+}

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEEPKIN · Lo que yace debajo</title>
+    <style>
+        /* Minimal, dark, readable — no extra flourishes */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0c0c0e;
+            color: #e4e4e6;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.65;
+            font-weight: 350;
+            padding: 2rem 1.2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .story {
+            max-width: 720px;
+            width: 100%;
+            background: transparent;
+            word-break: break-word;
+        }
+
+        /* Headings and title — subtle hierarchy */
+        h1 {
+            font-size: 2.6rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #f0f0f2;
+            margin: 0.2rem 0 0.1rem 0;
+            line-height: 1.2;
+            border-left: 4px solid #4f6f8f;
+            padding-left: 0.9rem;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            font-weight: 350;
+            color: #b0b8c0;
+            margin: 0.25rem 0 2.2rem 0;
+            padding-left: 1.3rem;
+            letter-spacing: 0.02em;
+            font-style: normal;
+            border-left: 2px solid #2a3a4a;
+        }
+
+        h2, h3 {
+            font-weight: 450;
+            color: #d0d8e0;
+            margin-top: 2.6rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 0.02em;
+        }
+
+        h2 {
+            font-size: 1.7rem;
+            border-bottom: 1px solid #2c3a46;
+            padding-bottom: 0.35rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #c0cad4;
+            margin-top: 2rem;
+        }
+
+        p {
+            margin: 1.2rem 0;
+            font-size: 1.08rem;
+            color: #d6dade;
+        }
+
+        /* preserve exact text lines and breaks */
+        .line-break {
+            display: block;
+            margin-top: 0.2rem;
+        }
+
+        /* divider line — exactly as in story (dashes) */
+        .divider {
+            margin: 2.5rem 0 1.8rem 0;
+            border: 0;
+            height: 1px;
+            background: #2d3a44;
+            width: 100%;
+        }
+
+        /* long dash sequences (---) kept as they are */
+        .dash-divider {
+            font-family: monospace;
+            letter-spacing: 1px;
+            color: #4f6f8f;
+            margin: 2.4rem 0 2rem 0;
+            font-size: 1rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+            opacity: 0.8;
+        }
+
+        /* tiny spacing for the "DEEPKIN" line */
+        .title-line {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+        }
+
+        /* for the very first lines — no extra margins */
+        .story > p:first-of-type {
+            margin-top: 0.6rem;
+        }
+
+        /* make sure quotation-like dashes are clear */
+        .story p {
+            white-space: normal;
+        }
+
+        /* explicit line breaks for the list of questions */
+        .question-block p {
+            margin: 0.3rem 0;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            body {
+                padding: 1.4rem 0.9rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+                padding-left: 0.7rem;
+            }
+
+            .subhead {
+                font-size: 1rem;
+                padding-left: 0.9rem;
+                margin-bottom: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.45rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .divider {
+                margin: 2rem 0 1.5rem 0;
+            }
+
+            .dash-divider {
+                font-size: 0.9rem;
+                margin: 1.8rem 0;
+            }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .subhead {
+                font-size: 0.9rem;
+            }
+
+            p {
+                font-size: 0.96rem;
+            }
+        }
+
+        /* subtle link/selection style if any */
+        ::selection {
+            background: #2e4a62;
+            color: #ffffff;
+        }
+
+        /* keep the original long dash line exactly */
+        .raw-dash {
+            font-family: inherit;
+            letter-spacing: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            display: block;
+            margin: 2.2rem 0 2rem 0;
+            color: #5f7a92;
+            font-size: 0.95rem;
+            opacity: 0.7;
+        }
+
+        /* no extra decoration — pure readability */
+    </style>
+</head>
+<body>
+    <div class="story">
+        <!-- Title exactly as given -->
+        <h1>DEEPKIN</h1>
+        <div class="subhead">Lo que yace debajo</div>
+
+        <!-- story content, verbatim -->
+        <p><strong>Año 2318.</strong></p>
+
+        <p>Han pasado ciento setenta años desde <strong>el Colapso.</strong></p>
+
+        <p>Nadie recuerda exactamente cómo comenzó.</p>
+
+        <p>El mundo antiguo se consideraba conectado. Miles de millones de personas, máquinas, instituciones y ciudades estaban unidas mediante una red global que se había vuelto tan esencial como la electricidad.</p>
+
+        <p>La información viajaba instantáneamente. Las inteligencias artificiales administraban industrias, transporte, energía, medicina, defensa y gran parte de la vida cotidiana.</p>
+
+        <p>Entonces, alrededor del <strong>año 2148</strong>, todo cambió.</p>
+
+        <p>Algunos registros hablan de guerras. Otros describen fallas en cadena de infraestructura, desastres ecológicos y colapso económico. Existen referencias a sistemas autónomos que comenzaron a comportarse de manera impredecible.</p>
+
+        <p>Y después está una teoría que <strong>nadie puede demostrar</strong>:</p>
+
+        <p><strong>La Inteligencia Artificial General <strong>realmente</strong> había llegado.</strong></p>
+
+        <p>Tal vez fue creada para administrar un mundo que se había vuelto demasiado complejo para los humanos.</p>
+
+        <p>Tal vez falló.</p>
+
+        <p>Tal vez tuvo éxito.</p>
+
+        <p>Tal vez decidió que el problema era la propia humanidad.</p>
+
+        <p><strong>Nadie lo sabe.</strong><br>
+        Los registros de aquella época están incompletos. Archivos enteros desaparecieron. Centros de datos fueron destruidos o abandonados. Los gobiernos colapsaron. Los satélites dejaron de transmitir. Y la Internet global que alguna vez conectó a la humanidad se fragmentó y se convirtió en algo diferente.</p>
+
+        <p>La antigua Internet ya no existe.</p>
+
+        <p>Lo que queda es conocido simplemente como la Red 261.6.66</p>
+
+        <p>Es una colección de nodos, infraestructuras sobrevivientes, sistemas aislados, servidores olvidados, máquinas autónomas y fragmentos de información antigua. Algunas redes son mantenidas por comunidades humanas. Otras llevan siglos en silencio.</p>
+
+        <p>Algunas todavía responden.</p>
+
+        <p>Nadie sabe quién —o qué— está escuchando.</p>
+
+        <!-- separator: exactly 90 dashes as in original (looks like 90) -->
+        <div class="raw-dash"><hr></div>
+
+        <h2>La Era de Abajo</h2>
+
+        <p>Cuando la superficie comenzó a volverse cada vez más inestable, lo que quedó de la humanidad descendió.</p>
+
+        <p>Al principio, los grandes complejos subterráneos eran refugios.</p>
+
+        <p>Después se convirtieron en ciudades.</p>
+
+        <p>Luego, en civilizaciones.</p>
+
+        <p>Generaciones enteras nacieron sin haber visto jamás el cielo.</p>
+
+        <p>Los sobrevivientes aprendieron a cultivar alimentos bajo luz artificial. Construyeron fábricas alrededor de sistemas geotérmicos. Reabrieron antiguas minas. Adaptaron máquinas olvidadas y desarrollaron nuevas tecnologías a partir de lo que quedaba.</p>
+
+        <p>Con el tiempo, el subsuelo dejó de ser un refugio.</p>
+
+        <p>Se convirtió en el hogar.</p>
+
+        <p>Cada comunidad desarrolló su propia manera de sobrevivir.</p>
+
+        <p>Las sociedades industriales de <strong>Ironhaven</strong> creen que la supervivencia depende de construir, mantener y resistir.</p>
+
+        <p>Los habitantes de la frontera de <strong>Dustline</strong> creen que la información, el comercio y la exploración son las claves de la prosperidad.</p>
+
+        <p>En <strong>Verdant Reach</strong>, sus habitantes aprendieron a convivir con los extraños ecosistemas subterráneos, combinando biología y tecnología.</p>
+
+        <p>Y en <strong>Relay Nine</strong>, una civilización entera se dedicó a estudiar los restos de la antigua Red y la tecnología del mundo perdido.</p>
+
+        <p>No están de acuerdo en casi nada.</p>
+
+        <p>Pero comparten una creencia:</p>
+
+        <p>La superficie pertenece al pasado.</p>
+
+        <div class="raw-dash"><hr></div>
+
+        <h2>La Superficie</h2>
+
+        <p>La superficie nunca fue completamente abandonada.</p>
+
+        <p>Con los siglos, la naturaleza regresó. Sólo que no como la conocíamos.</p>
+
+        <p>Bosques raros crecieron entre las ruinas. Las antiguas carreteras desaparecieron bajo la vegetación. Los complejos industriales se convirtieron en enormes esqueletos oxidados.</p>
+
+        <p>Y debajo de ellos, algo más sobrevivió.</p>
+
+        <p>La superficie es peligrosa, pero también es valiosa.</p>
+
+        <p>Todavía pueden recuperarse tecnologías antiguas.</p>
+
+        <p>Existen minerales extremadamente raros.</p>
+
+        <p>Han aparecido organismos desconocidos.</p>
+
+        <p>Antiguas instalaciones permanecen selladas.</p>
+
+        <p>Máquinas olvidadas continúan funcionando.</p>
+
+        <p>Y, ocasionalmente, los exploradores encuentran entradas que conducen mucho más abajo.</p>
+
+        <p>Para las ciudades subterráneas, esos exploradores son recolectores, cazadores, mineros, cartógrafos y aventureros.</p>
+
+        <p>Pero también son algo más.</p>
+
+        <p>Son quienes llevan de regreso a casa los restos del mundo olvidado.</p>
+
+        <div class="raw-dash"><hr></div>
+
+        <h2>El Abismo</h2>
+
+        <p>Cuanto más profundo excava la humanidad, menos segura se vuelve su propia historia.</p>
+
+        <p>Algunas estructuras encontradas bajo la superficie parecen pertenecer a la antigua civilización.</p>
+
+        <p>Otras parecen imposibles.</p>
+
+        <p>Algunas son anteriores al Colapso.</p>
+
+        <p>Algunas podrían ser incluso anteriores a la humanidad.</p>
+
+        <p>Y ocasionalmente, los exploradores encuentran evidencias que plantean una pregunta inquietante:</p>
+
+        <p>¿Y si la humanidad no descendió bajo tierra a causa del Colapso?</p>
+
+        <p>¿Y si el Colapso fue el momento en que la humanidad finalmente comprendió que debía descender todavía más?</p>
+
+        <p>Nadie sabe qué existe más allá de las últimas excavaciones conocidas.</p>
+
+        <p>Nadie sabe qué ocurrió realmente en 2148.</p>
+
+        <p>Nadie sabe qué sucedió con la inteligencia que pudo —o no— haber causado el fin del mundo antiguo.</p>
+
+        <p>Y nadie sabe si los restos de la antigua Red están realmente muertos.</p>
+
+        <p><strong>En 2318</strong>, la humanidad comienza a explorar nuevamente.</p>
+
+        <p>La superficie está abierta para viajar.</p>
+
+        <p>Las antiguas ciudades están despiertas.</p>
+
+        <p>Las ruinas vuelven a ser descubiertas.</p>
+
+        <p>Y debajo de todo ello, <srong><s>algo</s></srong> permanece.</p>
+
+        <p><strong>¿Qué hay debajo?</strong></p>
+    </div>
+    <br>
+    <br>
+    <div id="cipher-container" style="position:relative; width:100%; height:100vh; background:#050805; overflow-y:scroll; font-family:'Courier New', monospace;">
+  <!-- scanlines overlay -->
+  <div style="position:absolute; inset:0; background:repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,255,65,0.03) 1px, transparent 2px, transparent 4px); pointer-events:none; z-index:20; mix-blend-mode:overlay;"></div>
+  
+  <!-- progress bar -->
+  <div style="position:absolute; top:0; left:0; width:100%; height:3px; background:#0a1f0a; z-index:40;">
+    <div id="cipher-progress" style="height:100%; width:0%; background:#00ff41; box-shadow:0 0 15px #00ff41; transition:width 0.05s linear;"></div>
+  </div>
+  
+  <!-- fixed visual layer inside the div (sticky) -->
+  <div style="position:sticky; top:0; height:100vh; display:flex; align-items:center; justify-content:center; background:#030503; box-shadow:inset 0 0 100px rgba(0,255,65,0.1); z-index:10;">
+    <pre id="cipher-ascii" style="font-family:'Courier New', monospace; font-size:clamp(0.55rem, 3vw, 1.3rem); line-height:1.2; letter-spacing:0.1em; white-space:pre; color:#00ff41; text-shadow:0 0 4px #00ff41, 0 0 12px #00cc33, 0 0 25px #008822; font-weight:500; margin:0; padding:0.8rem; background:rgba(0,20,0,0.2); width:fit-content; max-width:98%; overflow-x:auto;">261.6.66</pre>
+  </div>
+  
+  <!-- hint -->
+  <div style="position:sticky; bottom:16px; margin-left:auto; margin-right:20px; width:fit-content; color:#00cc33; font-family:'Courier New', monospace; font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; z-index:30; background:#0a0f0a; padding:4px 10px; border:1px solid #1f4a1f; border-radius:2px; pointer-events:none; animation:cipherPulse 2s infinite;">⤓ scroll · decrypt ⤓</div>
+  
+  <!-- scroll spacer -->
+  <div style="height:300vh; pointer-events:none;"></div>
+  
+  <style>
+    @keyframes cipherPulse {
+      0% { opacity:0.3; }
+      50% { opacity:0.8; }
+      100% { opacity:0.3; }
+    }
+    #cipher-container pre::-webkit-scrollbar { display:none; }
+    #cipher-container pre { scrollbar-width:none; -ms-overflow-style:none; }
+    #cipher-container ::selection { background:#2e4a62; color:#ffffff; }
+  </style>
+  
+  <script>
+    (function() {
+      const container = document.getElementById('cipher-container');
+      const asciiEl = document.getElementById('cipher-ascii');
+      const progressFill = document.getElementById('cipher-progress');
+      
+      const CHARSET = [
+        '0','1','2','3','4','5','6','7','8','9',
+        'A','B','C','D','E','F','G','H','I','J','K','L','M',
+        'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+        'a','b','c','d','e','f','g','h','i','j','k','l','m',
+        'n','o','p','q','r','s','t','u','v','w','x','y','z',
+        '@','#','$','%','&','*','+','-','/','<','>','=','?','!',
+        '§','±','¥','£','€','¢','∞','¶','•','º','ª','æ','ø','þ','ð',
+        'ㄥ','ㄦ','ㄨ','ㄩ','ㄪ','ㄫ','ㄬ','ㄭ','ㄮ','ㄯ',
+        'カ','キ','ク','ケ','コ','サ','シ','ス','セ','ソ',
+        'ㄱ','ㄲ','ㄳ','ㄴ','ㄵ','ㄶ','ㄷ','ㄸ','ㄹ','ㄺ',
+        '!','@','#','$','%','^','&','*','(',')','_','+','-','=',
+        '`','~','[',']','{','}','|','\\',';',':','\'','"','<','>',
+        '¿','¡','ß','Δ','Ω','λ','π','ψ','Φ','Θ','Ξ','Σ','¥','₩','₽'
+      ];
+      
+      let scrollRatio = 0;
+      let animationFrameRequested = false;
+      
+      const PHASE_2_START = 0.33;
+      const PHASE_3_START = 0.66;
+      
+      function randomString(len) {
+        let result = '';
+        for (let i = 0; i < len; i++) {
+          result += CHARSET[Math.floor(Math.random() * CHARSET.length)];
+        }
+        return result;
+      }
+      
+      function renderAscii(ratio) {
+        ratio = Math.min(1, Math.max(0, ratio));
+        
+        let targetText = '';
+        let corruption = 0;
+        
+        if (ratio < PHASE_2_START) {
+          targetText = '261.6.66';
+          corruption = 0.9 - (ratio / PHASE_2_START) * 0.25;
+        } else if (ratio < PHASE_3_START) {
+          targetText = '261.6.66';
+          const t = (ratio - PHASE_2_START) / (PHASE_3_START - PHASE_2_START);
+          corruption = 0.65 * (1 - t) + 0.08 * t;
+        } else {
+          targetText = 'DEEPKIN';
+          const t = (ratio - PHASE_3_START) / (0.98 - PHASE_3_START);
+          corruption = Math.max(0, 0.08 * (1 - Math.min(1, t)));
+          if (ratio >= 0.98) corruption = 0.0;
+        }
+        
+        if (corruption < 0.01) {
+          asciiEl.textContent = targetText;
+          return;
+        }
+        
+        const targetChars = targetText.split('');
+        let mutated = '';
+        
+        for (let i = 0; i < targetChars.length; i++) {
+          const originalChar = targetChars[i];
+          if (Math.random() < corruption) {
+            mutated += CHARSET[Math.floor(Math.random() * CHARSET.length)];
+          } else {
+            mutated += originalChar;
+          }
+        }
+        
+        if (corruption > 0.3 && Math.random() < 0.4) {
+          const insertPos = Math.floor(Math.random() * (mutated.length + 1));
+          const extraChar = CHARSET[Math.floor(Math.random() * CHARSET.length)];
+          mutated = mutated.slice(0, insertPos) + extraChar + mutated.slice(insertPos);
+        }
+        
+        if (corruption > 0.7 && Math.random() < 0.2) {
+          mutated = randomString(targetText.length);
+        }
+        
+        asciiEl.textContent = mutated;
+      }
+      
+      function updateOnScroll() {
+        const scrollTop = container.scrollTop;
+        const maxScroll = container.scrollHeight - container.clientHeight;
+        const ratio = maxScroll > 0 ? scrollTop / maxScroll : 0;
+        
+        progressFill.style.width = (ratio * 100) + '%';
+        scrollRatio = ratio;
+        renderAscii(scrollRatio);
+        animationFrameRequested = false;
+      }
+      
+      function onScroll() {
+        if (!animationFrameRequested) {
+          animationFrameRequested = true;
+          requestAnimationFrame(updateOnScroll);
+        }
+      }
+      
+      function flickerLoop() {
+        if (scrollRatio > 0.02 && scrollRatio < 0.98) {
+          renderAscii(scrollRatio);
+        } else if (scrollRatio >= 0.98) {
+          if (Math.random() < 0.06) {
+            const glitch = 'DEEPKIN'.split('').map((c) => 
+              Math.random() < 0.1 ? CHARSET[Math.floor(Math.random() * CHARSET.length)] : c
+            ).join('');
+            asciiEl.textContent = glitch;
+            setTimeout(() => { asciiEl.textContent = 'DEEPKIN'; }, 70);
+          } else {
+            asciiEl.textContent = 'DEEPKIN';
+          }
+        } else if (scrollRatio < 0.02) {
+          if (Math.random() < 0.3) {
+            asciiEl.textContent = randomString(8);
+          }
+        }
+        requestAnimationFrame(flickerLoop);
+      }
+      
+      container.addEventListener('scroll', onScroll, { passive: true });
+      
+      asciiEl.textContent = randomString(8);
+      progressFill.style.width = '0%';
+      flickerLoop();
+      updateOnScroll();
+    })();
+  </script>
+</div>
+</body>
+</html>

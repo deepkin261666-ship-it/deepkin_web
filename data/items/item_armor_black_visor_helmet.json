@@ -1,0 +1,13 @@
+{
+  "id": "item.armor.black_visor_helmet",
+  "display_name": "Black Visor Helmet",
+  "equipment_slot": "head",
+  "description": "Sealed black shell with a mirrored visor. Not issued in the Outpost yet.",
+  "visual_id": "visual.armor.black_visor_helmet",
+  "properties": {
+    "armor_defense": 5,
+    "resistance_bonus": 2
+  },
+  "weight": 2.2,
+  "planned": true
+}

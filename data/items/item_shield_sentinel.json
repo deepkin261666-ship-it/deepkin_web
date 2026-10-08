@@ -1,0 +1,15 @@
+{
+  "id": "item.shield.sentinel",
+  "display_name": "Sentinel Shield",
+  "equipment_slot": "secondary_weapon",
+  "description": "A riveted round shield for the off hand. Pairs with any one-handed weapon; two-handed weapons cannot use it.",
+  "visual_id": "visual.shield.sentinel",
+  "weapon_family": "skill.shielding",
+  "hands": 1,
+  "weight": 4.0,
+  "gear_tier": 1,
+  "properties": {
+    "armor_defense": 8,
+    "resistance_bonus": 2
+  }
+}

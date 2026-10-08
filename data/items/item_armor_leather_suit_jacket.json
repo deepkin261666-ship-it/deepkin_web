@@ -1,0 +1,12 @@
+{
+  "id": "item.armor.leather_suit_jacket",
+  "display_name": "Leather Suit Jacket",
+  "equipment_slot": "chest",
+  "description": "Padded leather work jacket with a high collar. Light, warm, and enough to turn a scavenger's knife. Part of the Leather Suit.",
+  "visual_id": "visual.armor.leather_suit",
+  "properties": {
+    "armor_defense": 6,
+    "resistance_bonus": 1
+  },
+  "weight": 3.0
+}

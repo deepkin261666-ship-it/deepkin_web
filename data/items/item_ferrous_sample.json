@@ -1,0 +1,7 @@
+{
+  "id": "item.ferrous_sample",
+  "display_name": "Ferrous Sample",
+  "description": "A dense ore sample recovered from the breach strata.",
+  "visual_id": "visual.resource.ferrous_sample",
+  "properties": {}
+}

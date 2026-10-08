@@ -1,0 +1,18 @@
+{
+  "id": "item.weapon.drift_scout_rifle",
+  "display_name": "Scout Rifle",
+  "equipment_slot": "primary_weapon",
+  "description": "A two-handed bullpup rifle for steady, sustained fire at mid range.",
+  "visual_id": "visual.weapon.drift_scout_rifle",
+  "weapon_type": "ranged",
+  "weapon_family": "skill.firearms",
+  "hands": 2,
+  "ammo_item_id": "item.ammunition.field_round",
+  "weight": 4.0,
+  "gear_tier": 1,
+  "properties": {
+    "base_damage": 11,
+    "attack_range": 11.0,
+    "attack_interval": 0.6
+  }
+}

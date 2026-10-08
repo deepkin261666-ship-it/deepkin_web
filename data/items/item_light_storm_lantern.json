@@ -1,0 +1,18 @@
+{
+  "id": "item.light.storm_lantern",
+  "display_name": "Storm Lantern",
+  "equipment_slot": "light",
+  "description": "A sealed blue-glass lantern that keeps burning in wet tunnels. Not found in the Outpost yet.",
+  "visual_id": "visual.light.storm_lantern",
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 0,
+    "battery_capacity": 0,
+    "illumination_radius": 10.5,
+    "light_energy_per_second": 0.18
+  },
+  "weight": 1.2,
+  "gear_tier": 2,
+  "planned": true
+}

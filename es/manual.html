@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manual de campo · DEEPKIN</title>
+<meta name="description" content="El archivo de campo oficial de DEEPKIN: historia, clases, armas, equipo, criaturas y sistemas de un RPG de acción cooperativo bajo tierra.">
+<meta property="og:title" content="Manual de campo · DEEPKIN">
+<meta property="og:description" content="El archivo de campo oficial de DEEPKIN: historia, clases, armas, equipo, criaturas y sistemas de un RPG de acción cooperativo bajo tierra.">
+<meta property="og:image" content="../assets/img/concept/hero.jpg">
+<meta name="theme-color" content="#0b0d0c">
+<link rel="alternate" hreflang="en" href="../en/manual.html">
+<link rel="icon" href="../assets/img/deepkin_mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+<script>document.documentElement.classList.add("js")</script>
+
+</head>
+<body class="" data-lang="es">
+<a class="skip" href="#main">Saltar al contenido</a>
+<header class="topbar">
+  <a class="brand" href="index.html" aria-label="DEEPKIN"><img src="../assets/img/deepkin_mark.png" alt="" width="22" height="22"><span>DEEPKIN</span></a>
+  <nav class="mainnav" id="mainnav"><a href="index.html">Inicio</a><a href="story.html">Historia</a><a href="classes.html">Clases</a><a href="arsenal.html">Arsenal</a><a href="gear.html">Equipo</a><a href="resources.html">Recursos</a><a href="bestiary.html">Bestiario</a><a href="world.html">Mundo</a><a href="manual.html" aria-current="page">Manual de campo</a></nav>
+  <a class="lang" href="../en/manual.html" hreflang="en" data-setlang="en"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></svg><span>English</span></a>
+  <button class="navtoggle" aria-controls="mainnav" aria-expanded="false" aria-label="Menu"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</header>
+<div class="depth" aria-hidden="true"><span class="depth-line"><span class="depth-fill"></span></span><span class="depth-val">0000 m</span></div>
+<main id="main">
+<section class="phead has-img" style="--hero:url(../assets/img/shots/field_hud.jpg)">
+  <div class="wrap">
+    <p class="kicker">Manual de campo</p>
+    <h1>Cómo funciona lo profundo</h1>
+    <p class="lead">Controles, números y las reglas con las que juega el servidor. Léelo una vez; te va a ahorrar luz.</p>
+  </div>
+</section><div class="wrap wiki"><aside class="toc"><p>En esta página</p><nav><a href="#first">Primer descenso</a><a href="#controls">Controles</a><a href="#attributes">Atributos</a><a href="#combat">Combate</a><a href="#skills">Habilidades</a><a href="#levels">Niveles</a><a href="#light">Luz</a><a href="#drilling">Perforación</a><a href="#carry">Carga</a></nav></aside><div class="wiki-body">
+<header class="sec-head" id="first"><p class="kicker">Recién llegados</p><h2>Tu primer descenso</h2></header>
+<ol class="steps"><li><h3>Abre tus cajones</h3><p>Dos cajones para recién llegados te esperan en el Outpost. El Supply Crate trae una mochila, el Leather Suit y un casco K6-3; el Gear Crate trae el arma de tu doctrina (y munición), una linterna, una batería y el taladro Big Daddy. Lo de adentro es sólo tuyo.</p></li><li><h3>Equípate todo</h3><p>Presiona I y arrastra cada objeto a su ranura. La batería primero: sin ella, tu linterna y tus habilidades no tienen energía.</p></li><li><h3>Prueba el taladro</h3><p>Hay dos puntos de perforación junto al pozo. Mantén F en uno y mira cómo cede la roca.</p></li><li><h3>Toma el elevador</h3><p>Presiona G en el elevador del pozo. The Threshold es tranquila; The Shallows no.</p></li><li><h3>Cuida tu batería</h3><p>La linterna consume energía y allá abajo nada la recarga. Enciéndela cuando necesites ver y apágala cuando no.</p></li></ol>
+
+<header class="sec-head" id="controls"><p class="kicker">Teclado y mouse</p><h2>Controles</h2></header>
+<div class="keys"><div class="kb"><kbd>W A S D</kbd><span>Moverse</span></div><div class="kb"><kbd>RMB</kbd><span>Mantener para apuntar</span></div><div class="kb"><kbd>LMB</kbd><span>Disparar / golpear apuntando</span></div><div class="kb"><kbd>Space</kbd><span>Ataque rápido al enemigo más cercano</span></div><div class="kb"><kbd>Q</kbd><span>Habilidad de movilidad (Dash)</span></div><div class="kb"><kbd>C</kbd><span>Poder de clase</span></div><div class="kb"><kbd>T</kbd><span>Encender / apagar linterna</span></div><div class="kb"><kbd>F</kbd><span>Mantener para perforar</span></div><div class="kb"><kbd>E</kbd><span>Recoger botín</span></div><div class="kb"><kbd>G</kbd><span>Usar pasaje / elevador / interactuar</span></div><div class="kb"><kbd>I</kbd><span>Equipo e inventario</span></div><div class="kb"><kbd>K</kbd><span>Habilidades</span></div><div class="kb"><kbd>1–7</kbd><span>Accesos rápidos</span></div><div class="kb"><kbd>Wheel</kbd><span>Zoom de cámara</span></div></div>
+
+<header class="sec-head" id="attributes"><p class="kicker">Personaje</p><h2>Atributos</h2><p class="sec-lead">Cuatro atributos, definidos por tu clase. El nivel no los infla: crecen tu equipo y tu entrenamiento.</p></header>
+<div class="cls-grid">
+  <div class="panel"><dl class="kv kv-col"><div><dt>Fuerza</dt><dd>Daño cuerpo a cuerpo, desestabilizar y carga.</dd></div><div><dt>Vigor</dt><dd>Vida, aguante y resistencia.</dd></div><div><dt>Precisión</dt><dd>Daño a distancia, puntería y puntos débiles.</dd></div><div><dt>Tecnología</dt><dd>Habilidades más baratas y uso de energía.</dd></div></dl></div>
+  <div class="panel formula">
+    <p class="kicker">Cómo se calcula</p>
+    <p><b>Vida</b> = 76 + 4 × Vigor</p>
+    <p><b>Aguante</b> = 5 × Vigor</p>
+    <p><b>Bono de atributo</b> = +1.5% por punto sobre 10 (−25% … +25%)</p>
+    <p><b>Cuerpo a cuerpo</b> usa Fuerza · <b>A distancia</b> usa Precisión</p>
+    <p><b>Costo de poderes</b> −1.5% por Tecnología sobre 10 (máx. −30%)</p>
+  </div>
+</div>
+
+<header class="sec-head" id="combat"><p class="kicker">Combate</p><h2>Daño y defensa</h2></header>
+<div class="cls-grid">
+  <div class="panel formula">
+    <p class="kicker">Tu golpe</p>
+    <p class="eq">base del arma × coeficiente de clase × bono de atributo × bono de habilidad × munición</p>
+    <p>Cada clase tiene un coeficiente cuerpo a cuerpo, a distancia, de habilidad y de defensa. La Forja golpea a ×1,2 pero dispara a ×0,6; La Deriva, al revés.</p>
+    <a class="textlink" href="arsenal.html#calculator">Calculadora de daño <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+  <div class="panel formula">
+    <p class="kicker">Su golpe</p>
+    <p class="eq">reducción = valor ÷ (valor + 100), máx. 75%</p>
+    <p>La armadura cuenta contra el daño físico y la resistencia contra todo lo demás. 100 de armadura reduce un golpe físico a la mitad.</p>
+    <p>La Forja empieza con 63 de armadura (−39%). La Red empieza con 3.</p>
+  </div>
+</div>
+
+<header class="sec-head" id="skills"><p class="kicker">Entrenamiento</p><h2>Habilidades de arma</h2><p class="sec-lead">Las habilidades pertenecen a familias de armas, no a clases. Cada golpe que conectas entrena la familia del arma que lo dio.</p></header>
+<div class="cls-grid">
+  <div class="panel"><ul class="fams"><li><b>Filo</b><span>Hachas y espadas: cortes rápidos y brutales.</span></li><li><b>Contundente</b><span>Martillos y mazas: golpes pesados que desestabilizan.</span></li><li><b>Cuchillas</b><span>Cuchillos y hojas cortas: golpes rápidos a blancos aislados.</span></li><li><b>Armas de fuego</b><span>Escopetas, carabinas y rifles: fuego sostenido.</span></li><li><b>Precisión</b><span>Rifles de precisión: distancia y puntos débiles.</span></li><li><b>Esporas</b><span>Proyectores de esporas: presión en área cercana.</span></li><li><b>Vitalismo</b><span>Armas vivas que mantienen al equipo en pie.</span></li><li><b>Tecnología</b><span>Tecnología de La Red: disrupción y apoyo.</span></li><li><b>Escudos</b><span>Se entrena bloqueando golpes con un escudo equipado.</span></li></ul></div>
+  <div class="panel">
+    <p>10 XP de habilidad por golpe, 8 por golpe bloqueado con escudo. La afinidad de tu clase lo multiplica (×1,5 en sus especialidades, ×0,5 en las familias que no domina). Cada nivel suma +1% de daño con esa familia, hasta el nivel 100.</p>
+    <div class="tablewrap"><table class="data compact"><thead><tr><th>Nivel</th><th>XP total</th><th>Golpes (×1)</th><th>Daño</th></tr></thead><tbody><tr><td>2</td><td class="n">30</td><td class="n">3</td><td class="n">+1%</td></tr><tr><td>5</td><td class="n">317</td><td class="n">32</td><td class="n">+4%</td></tr><tr><td>10</td><td class="n">1 257</td><td class="n">126</td><td class="n">+9%</td></tr><tr><td>25</td><td class="n">6 660</td><td class="n">666</td><td class="n">+24%</td></tr><tr><td>50</td><td class="n">22 411</td><td class="n">2241</td><td class="n">+49%</td></tr><tr><td>75</td><td class="n">45 166</td><td class="n">4517</td><td class="n">+74%</td></tr><tr><td>100</td><td class="n">74 080</td><td class="n">7408</td><td class="n">+99%</td></tr></tbody></table></div>
+    <p class="note">Escudos: 8% de reducción con escudo, +0,2% por nivel, hasta 40%.</p>
+  </div>
+</div>
+
+<header class="sec-head" id="levels"><p class="kicker">Progresión</p><h2>Niveles y rangos de equipo</h2><p class="sec-lead">El nivel de personaje llega hasta 40. Las criaturas dan XP al caer; cada nivel suma +0,6% a todo tu daño y desbloquea mejores rangos de equipo.</p></header>
+<div class="tiers"><div class="tierc"><b>T1</b><span>Nivel 1+</span></div><div class="tierc"><b>T2</b><span>Nivel 8+</span></div><div class="tierc"><b>T3</b><span>Nivel 15+</span></div><div class="tierc"><b>T4</b><span>Nivel 22+</span></div><div class="tierc"><b>T5</b><span>Nivel 29+</span></div><div class="tierc"><b>T6</b><span>Nivel 36+</span></div></div>
+<div class="cls-grid">
+  <div class="tablewrap"><table class="data compact"><thead><tr><th>Nivel</th><th>XP al siguiente</th><th>Total</th></tr></thead><tbody><tr><td>1</td><td class="n">100</td><td class="n">100</td></tr><tr><td>2</td><td class="n">125</td><td class="n">225</td></tr><tr><td>5</td><td class="n">200</td><td class="n">750</td></tr><tr><td>10</td><td class="n">325</td><td class="n">2 125</td></tr><tr><td>15</td><td class="n">450</td><td class="n">4 125</td></tr><tr><td>20</td><td class="n">575</td><td class="n">6 750</td></tr><tr><td>25</td><td class="n">700</td><td class="n">10 000</td></tr><tr><td>30</td><td class="n">825</td><td class="n">13 875</td></tr><tr><td>35</td><td class="n">950</td><td class="n">18 375</td></tr><tr><td>39</td><td class="n">1 050</td><td class="n">22 425</td></tr></tbody></table></div>
+  <div class="panel"><p class="eq">XP al siguiente nivel = 100 + 25 × (nivel − 1)</p>
+  <p>El nivel 40 requiere 22 425 XP en total. Un Crawler vale 14; un Ravager, 80.</p>
+  <p>El equipo también puede pedir un nivel o atributo mínimo. La clase nunca bloquea un objeto.</p></div>
+</div>
+
+<header class="sec-head" id="light"><p class="kicker">Supervivencia</p><h2>Luz y energía</h2></header>
+<div class="cls-grid">
+  <div class="panel"><p>Tu batería define tu energía. La linterna la consume cada segundo que está encendida, y las habilidades también gastan. No hay recarga durante una expedición: cuando llega a cero, la luz se apaga.</p>
+      <p>Enciende o apaga la linterna con T. Quitar la batería vacía tu energía; volver a equiparla no la recarga.</p></div>
+  <div class="panel"><p class="eq">Simple Lantern: radio 9 m · 0,15/s · ≈ 11 min con Battery Cell I</p>
+      <a class="textlink" href="gear.html#lights">Comparar luces <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+
+<header class="sec-head" id="drilling"><p class="kicker">Excavación</p><h2>Perforación</h2></header>
+<div class="cls-grid">
+  <div class="panel"><p>Equipa el Big Daddy Drill en la ranura de herramienta y mantén F en un punto de perforación. Las vetas sueltan recursos; los muros sellados de basalto abren rutas nuevas. Algunas rutas sólo existen cuando las perforas.</p></div>
+  <div class="panel"><p>Cada material tiene dureza, durabilidad y eficacia de perforación. La roca blanda cede enseguida; el material reliquia reforzado se resiste.</p>
+      <a class="textlink" href="resources.html#rock">Ver la tabla de rocas <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+
+<header class="sec-head" id="carry"><p class="kicker">Logística</p><h2>Peso de carga</h2></header>
+<div class="panel"><p>Todo pesa: lo que vistes y lo que acarreas. La Forja empieza con 80 kg de carga y suma 2,5 por nivel; La Red empieza con 45. Una mochila suma 20 celdas que viajan con ella y +15 kg. Si sueltas la mochila, todo lo que tiene se queda con ella.</p></div>
+</div></div>
+</main>
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-brand"><img src="../assets/img/deepkin_logo.png" alt="DEEPKIN — What lies below" width="220" height="91" loading="lazy"></div>
+    <p>DEEPKIN está en desarrollo activo. Todo lo de este archivo refleja la versión actual y puede cambiar a medida que se prueba el mundo.</p>
+    <nav><a href="index.html">Inicio</a><a href="story.html">Historia</a><a href="classes.html">Clases</a><a href="arsenal.html">Arsenal</a><a href="gear.html">Equipo</a><a href="resources.html">Recursos</a><a href="bestiary.html">Bestiario</a><a href="world.html">Mundo</a><a href="manual.html" aria-current="page">Manual de campo</a></nav>
+    <p class="signal">261.6.66</p>
+  </div>
+</footer>
+<script src="../assets/js/site.js"></script>
+</body>
+</html>

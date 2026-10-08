@@ -1,0 +1,18 @@
+{
+  "id": "item.light.brass_lantern",
+  "display_name": "Brass Lantern",
+  "equipment_slot": "light",
+  "description": "A heavy brass miner's lamp with a wide, warm throw. Not found in the Outpost yet.",
+  "visual_id": "visual.light.brass_lantern",
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 0,
+    "battery_capacity": 0,
+    "illumination_radius": 12.0,
+    "light_energy_per_second": 0.22
+  },
+  "weight": 1.6,
+  "gear_tier": 2,
+  "planned": true
+}

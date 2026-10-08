@@ -1,0 +1,7 @@
+{
+  "id": "item.relic_fragment",
+  "display_name": "Relic Fragment",
+  "description": "A legible fragment from the ancient machine's outer shell.",
+  "visual_id": "visual.resource.relic_fragment",
+  "properties": {}
+}

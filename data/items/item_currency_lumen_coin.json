@@ -1,0 +1,12 @@
+{
+  "id": "item.currency.lumen_coin",
+  "display_name": "Lumen Coin",
+  "description": "The same stamp struck in lumenite-laced alloy; it glows a cold blue. Worth 100 Metal.",
+  "visual_id": "visual.currency.lumen_coin",
+  "properties": {
+    "currency_value": 100,
+    "stack_size": 100
+  },
+  "weight": 0.3,
+  "planned": true
+}

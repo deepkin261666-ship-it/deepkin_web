@@ -1,0 +1,7 @@
+{
+  "id": "item.ore.hematite",
+  "display_name": "Redvein Hematite",
+  "description": "Blood-red banded iron ore. Dense, reliable, and the reason the first expeditions went down at all.",
+  "visual_id": "visual.resource.ore_hematite",
+  "properties": {}
+}

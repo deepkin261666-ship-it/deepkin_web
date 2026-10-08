@@ -1,0 +1,7 @@
+{
+  "id": "item.ore.limonite",
+  "display_name": "Bog Limonite",
+  "description": "Soft ochre iron ore that seeps from wet strata. Crumbles under the drill; the bread-and-butter of every Deepkin forge.",
+  "visual_id": "visual.resource.ore_limonite",
+  "properties": {}
+}

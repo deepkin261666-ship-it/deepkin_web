@@ -1,0 +1,10 @@
+{
+  "id": "item.ammunition.hardened_round",
+  "display_name": "Hardened Round",
+  "description": "A refined, denser round: 25% more damage from any ranged weapon. Rarer than field rounds.",
+  "properties": {
+    "ammo_multiplier": 1.25,
+    "stack_size": 100
+  },
+  "weight": 0.025
+}

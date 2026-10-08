@@ -1,0 +1,15 @@
+{
+  "id": "item.battery.provisional_relay_cell",
+  "display_name": "Battery Cell I",
+  "equipment_slot": "battery",
+  "description": "A compact cell that supplies a fixed reserve to carried equipment.",
+  "visual_id": "visual.battery.cell",
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 0,
+    "battery_capacity": 100,
+    "illumination_radius": 0.0
+  },
+  "weight": 1.0
+}

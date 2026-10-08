@@ -1,0 +1,12 @@
+{
+  "id": "item.armor.combat_helmet_k6",
+  "display_name": "K6-3 Combat Helmet",
+  "equipment_slot": "head",
+  "description": "Standard-issue ballistic helmet with a raised visor. Any operator can wear it.",
+  "visual_id": "visual.armor.combat_helmet",
+  "properties": {
+    "armor_defense": 4,
+    "resistance_bonus": 1
+  },
+  "weight": 2.0
+}

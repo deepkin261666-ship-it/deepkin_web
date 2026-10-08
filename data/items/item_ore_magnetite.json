@@ -1,0 +1,7 @@
+{
+  "id": "item.ore.magnetite",
+  "display_name": "Lodestone Magnetite",
+  "description": "Black, glinting magnetite that pulls at loose tools. Hard to cut, rich in iron, prized by the Foundry.",
+  "visual_id": "visual.resource.ore_magnetite",
+  "properties": {}
+}

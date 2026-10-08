@@ -1,0 +1,12 @@
+{
+  "id": "item.armor.leather_suit_trousers",
+  "display_name": "Leather Suit Trousers",
+  "equipment_slot": "legs",
+  "description": "Reinforced leather work trousers. Part of the Leather Suit.",
+  "visual_id": "visual.armor.leather_suit",
+  "properties": {
+    "armor_defense": 4,
+    "resistance_bonus": 1
+  },
+  "weight": 2.0
+}

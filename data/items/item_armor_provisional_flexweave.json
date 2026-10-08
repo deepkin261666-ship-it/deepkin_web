@@ -1,0 +1,15 @@
+{
+  "id": "item.armor.provisional_flexweave",
+  "display_name": "Provisional Flexweave Shell",
+  "equipment_slot": "chest",
+  "description": "A light placeholder shell for testing open armor replacement without civilization locks.",
+  "visual_id": "visual.armor.weave",
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 0,
+    "battery_capacity": 0,
+    "illumination_radius": 0.0
+  },
+  "retired": true
+}

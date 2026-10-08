@@ -1,0 +1,12 @@
+{
+  "id": "item.armor.leather_boots",
+  "display_name": "Leather Boots",
+  "equipment_slot": "boots",
+  "description": "Steel-toed leather work boots, resoled more times than anyone remembers.",
+  "visual_id": "visual.armor.leather_boots",
+  "properties": {
+    "armor_defense": 2,
+    "resistance_bonus": 0
+  },
+  "weight": 1.5
+}

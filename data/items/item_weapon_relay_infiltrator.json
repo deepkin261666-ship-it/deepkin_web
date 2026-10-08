@@ -1,0 +1,21 @@
+{
+  "id": "item.weapon.relay_infiltrator",
+  "display_name": "Relay Knife",
+  "equipment_slot": "primary_weapon",
+  "description": "A one-handed blade for fast strikes on isolated targets.",
+  "visual_id": "visual.weapon.relay_infiltrator",
+  "weapon_type": "melee",
+  "weapon_family": "skill.blades",
+  "hands": 1,
+  "gear_tier": 1,
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 9,
+    "attack_range": 1.8,
+    "battery_capacity": 0,
+    "illumination_radius": 0.0,
+    "attack_interval": 0.5
+  },
+  "weight": 1.0
+}

@@ -1,0 +1,18 @@
+{
+  "id": "item.light.power_cell_lantern",
+  "display_name": "Power Cell Lantern",
+  "equipment_slot": "light",
+  "description": "A green-glowing cell lantern: the brightest carried light, and the hungriest. Not found in the Outpost yet.",
+  "visual_id": "visual.light.power_cell_lantern",
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 0,
+    "battery_capacity": 0,
+    "illumination_radius": 14.0,
+    "light_energy_per_second": 0.3
+  },
+  "weight": 1.8,
+  "gear_tier": 2,
+  "planned": true
+}

@@ -1,0 +1,9 @@
+{
+  "id": "material.ore_limonite",
+  "display_name": "Limonite Seam",
+  "hardness": 1.2,
+  "durability": 30,
+  "drill_effectiveness": 0.95,
+  "visual_id": "ore_limonite",
+  "discovery_category": "discovery.category.geology"
+}

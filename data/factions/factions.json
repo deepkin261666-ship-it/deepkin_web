@@ -1,0 +1,69 @@
+{
+ "factions": [
+  {
+   "id": "faction.burrowborn",
+   "name": "Burrowborn",
+   "category": "biological",
+   "identity": "Organic + mineral + subterranean",
+   "traits": [
+    "territorial",
+    "pack-minded",
+    "perceives by vibration and heat",
+    "high aggression, low individual intelligence"
+   ],
+   "communication": "Vibration through rock: a hurt Burrowborn calls its kind nearby.",
+   "hierarchy": "Swarm \u2192 Brute \u2192 Alpha \u2192 Deepmaw",
+   "territory": "Nests and tunnels in the Shallows; they rarely chase far from home.",
+   "visual": "Dark wet hide, pale exposed tissue, mineral plates, faint green bioluminescence; eyes are small or absent.",
+   "status": "active"
+  },
+  {
+   "id": "faction.rustbound",
+   "name": "Rustbound",
+   "category": "civilized",
+   "identity": "Industrial + decayed",
+   "traits": [
+    "patrols",
+    "repairs itself",
+    "ranged"
+   ],
+   "communication": "Radio chatter and warning lights.",
+   "hierarchy": "Scout \u2192 Gunner \u2192 Shieldbearer \u2192 Repair Drone \u2192 Heavy Excavator \u2192 Overseer",
+   "territory": "Old mining complexes.",
+   "visual": "Rusted steel, cables, hydraulics, warning stripes, obsolete lamps.",
+   "status": "planned"
+  },
+  {
+   "id": "faction.architects",
+   "name": "The Architects",
+   "category": "ancient",
+   "identity": "Ancient + technological",
+   "traits": [
+    "geometric",
+    "pale energy",
+    "guards structures"
+   ],
+   "communication": "Unknown.",
+   "hierarchy": "Unknown.",
+   "territory": "Pre-human structures deep below.",
+   "visual": "Dark ceramic, stone, impossible symmetry, pale light.",
+   "status": "planned"
+  },
+  {
+   "id": "faction.hollow",
+   "name": "The Hollow",
+   "category": "corrupted",
+   "identity": "Organic + unnatural",
+   "traits": [
+    "distorted",
+    "crystalline growth",
+    "deeper is worse"
+   ],
+   "communication": "Unknown.",
+   "hierarchy": "Unknown.",
+   "territory": "The deepest regions.",
+   "visual": "Pale tissue, crystal, distorted anatomy, almost no technology.",
+   "status": "planned"
+  }
+ ]
+}

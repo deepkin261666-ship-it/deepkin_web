@@ -1,0 +1,12 @@
+{
+  "id": "item.currency.shard",
+  "display_name": "Shard",
+  "description": "A cut crystal shard used for large trades and settlement reserves. Worth 10,000 Metal.",
+  "visual_id": "visual.currency.shard",
+  "properties": {
+    "currency_value": 10000,
+    "stack_size": 100
+  },
+  "weight": 0.3,
+  "planned": true
+}

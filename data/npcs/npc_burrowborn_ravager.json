@@ -1,0 +1,70 @@
+{
+  "id": "npc.burrowborn_ravager",
+  "display_name": "Ravager",
+  "max_health": 190,
+  "movement_speed": 1.8,
+  "detection_range": 8.0,
+  "attack_range": 2.1,
+  "attack_damage": 11,
+  "attack_cooldown": 1.7,
+  "faction": "faction.burrowborn",
+  "species": "Ravager",
+  "role": "brute",
+  "archetype": "brute",
+  "tier": "normal",
+  "threat": 10,
+  "xp": 80,
+  "habitat": "The Shallows \u2014 wide chambers near Crawler nests",
+  "lore": "A Crawler that never stopped growing. Its hide has mineralised into plates; the green glands still glow under them.",
+  "verbs": [
+    "LUMBER",
+    "MAUL",
+    "SLAM",
+    "GUARD"
+  ],
+  "rules": [
+    "Extremely dangerous up close, extremely slow: keep moving.",
+    "Before it slams it rears up and the ground glows red \u2014 step out of the ring.",
+    "It will not leave its territory: pull it to the edge and it turns back."
+  ],
+  "perception": {
+    "aggro_radius": 6.5,
+    "memory_seconds": 4.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      1.8
+    ],
+    "leash_radius": 12.0,
+    "lure": "territorial",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "slam",
+      "name": "Slam",
+      "damage": 26,
+      "windup": 1.0,
+      "radius": 2.4,
+      "reach": 2.0,
+      "cooldown": 7.0,
+      "trigger_range": 3.2,
+      "target": "position"
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/burrowborn/ravager.glb",
+    "size": 2.6,
+    "gait": "lumber",
+    "yaw": 90,
+    "glow": {
+      "color": "7dff8a",
+      "energy": 1.6,
+      "range": 5.0,
+      "height": 1.3
+    }
+  }
+}

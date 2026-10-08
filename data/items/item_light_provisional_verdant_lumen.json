@@ -1,0 +1,16 @@
+{
+  "id": "item.light.provisional_verdant_lumen",
+  "display_name": "Simple Lantern",
+  "equipment_slot": "light",
+  "description": "A carried work lamp tuned for a short, warm pool of underground light.",
+  "visual_id": "visual.light.lumen",
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 0,
+    "battery_capacity": 0,
+    "illumination_radius": 9.0,
+    "light_energy_per_second": 0.15
+  },
+  "weight": 1.0
+}

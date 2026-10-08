@@ -1,0 +1,21 @@
+{
+  "id": "item.weapon.foundry_breaker",
+  "display_name": "Breaker Axe",
+  "equipment_slot": "primary_weapon",
+  "description": "A one-handed excavation axe for fast, brutal close-range damage.",
+  "visual_id": "visual.weapon.foundry_breaker",
+  "weapon_type": "melee",
+  "weapon_family": "skill.edge",
+  "hands": 1,
+  "gear_tier": 1,
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 16,
+    "attack_range": 2.4,
+    "battery_capacity": 0,
+    "illumination_radius": 0.0,
+    "attack_interval": 1.0
+  },
+  "weight": 4.0
+}

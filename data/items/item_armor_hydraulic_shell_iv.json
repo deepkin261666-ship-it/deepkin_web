@@ -1,0 +1,19 @@
+{
+  "id": "item.armor.hydraulic_shell_iv",
+  "display_name": "Hydraulic Load-Bearing Shell IV",
+  "equipment_slot": "chest",
+  "description": "A high-tier industrial shell with reinforced impact and environmental protection.",
+  "visual_id": "visual.armor.hydraulic_shell",
+  "gear_tier": 4,
+  "requirements": {
+    "minimum_level": 22,
+    "minimum_attributes": {
+      "might": 12
+    }
+  },
+  "properties": {
+    "armor_defense": 26,
+    "resistance_bonus": 8
+  },
+  "retired": true
+}

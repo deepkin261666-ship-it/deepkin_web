@@ -1,0 +1,10 @@
+{
+  "id": "npc.scavenger",
+  "display_name": "Scavenger",
+  "max_health": 30,
+  "movement_speed": 2.0,
+  "detection_range": 8.0,
+  "attack_range": 1.5,
+  "attack_damage": 5,
+  "attack_cooldown": 1.0
+}

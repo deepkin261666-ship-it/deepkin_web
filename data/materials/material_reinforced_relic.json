@@ -1,0 +1,9 @@
+{
+  "id": "material.reinforced_relic",
+  "display_name": "Reinforced Relic Material",
+  "hardness": 3.5,
+  "durability": 42,
+  "drill_effectiveness": 0.45,
+  "visual_id": "relic_alloy",
+  "discovery_category": "discovery.category.ancient_technology"
+}

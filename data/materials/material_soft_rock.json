@@ -1,0 +1,9 @@
+{
+  "id": "material.soft_rock",
+  "display_name": "Soft Rock",
+  "hardness": 1.0,
+  "durability": 24,
+  "drill_effectiveness": 1.0,
+  "visual_id": "soft_rock",
+  "discovery_category": "discovery.category.geology"
+}

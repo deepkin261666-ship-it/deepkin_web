@@ -1,0 +1,60 @@
+{
+  "id": "npc.burrowborn_crawler",
+  "display_name": "Crawler",
+  "max_health": 24,
+  "movement_speed": 3.6,
+  "detection_range": 9.0,
+  "attack_range": 1.3,
+  "attack_damage": 4,
+  "attack_cooldown": 0.85,
+  "faction": "faction.burrowborn",
+  "species": "Crawler",
+  "role": "swarm",
+  "archetype": "skirmisher",
+  "tier": "normal",
+  "threat": 2,
+  "xp": 14,
+  "habitat": "The Shallows \u2014 the nest chamber in front of the way down to Excavation C-3",
+  "lore": "Hand-sized at birth, dog-sized at a year. Crawlers feel footsteps through stone long before they see anything.",
+  "verbs": [
+    "SWARM",
+    "SKITTER",
+    "BITE",
+    "CALL",
+    "FLEE"
+  ],
+  "rules": [
+    "Weak alone, dangerous in numbers: pull them one at a time or kill them fast.",
+    "A hurt Crawler calls every Crawler nearby onto you.",
+    "Badly wounded Crawlers run for the nest \u2014 and come back."
+  ],
+  "perception": {
+    "aggro_radius": 6.5,
+    "memory_seconds": 6.0,
+    "call_radius": 9.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      1.2
+    ],
+    "leash_radius": 18.0,
+    "lure": "pack",
+    "retreat_health": 0.3,
+    "retreat_seconds": 3.0
+  },
+  "abilities": [],
+  "visual": {
+    "model": "res://assets/game/mobs/burrowborn/crawler.glb",
+    "size": 1.7,
+    "gait": "skitter",
+    "yaw": 90,
+    "tint": "6b574c",
+    "glow": {
+      "color": "8dff9e",
+      "energy": 0.9,
+      "range": 3.0,
+      "height": 0.5
+    }
+  }
+}

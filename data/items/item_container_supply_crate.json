@@ -1,0 +1,18 @@
+{
+  "id": "item.container.supply_crate",
+  "display_name": "Supply Crate",
+  "description": "Outpost supply crates: a backpack and work clothes for every newcomer. What's inside is yours alone.",
+  "visual_id": "visual.container.supply_crate",
+  "container": {
+    "cells": 8
+  },
+  "fixed": true,
+  "crate_loot": [
+    "item.backpack.provisional_drift_pack",
+    "item.armor.leather_suit_jacket",
+    "item.armor.leather_suit_trousers",
+    "item.armor.leather_boots",
+    "item.armor.combat_helmet_k6"
+  ],
+  "weight": 0.0
+}

@@ -1,0 +1,7 @@
+{
+  "id": "item.mineral.lumenita",
+  "display_name": "Lumenita",
+  "description": "A cold-light crystal that glows on its own and lights the caves it grows in. Rare and brittle; operators pack shards as emergency lamps, and no one has fully explained where the light comes from.",
+  "visual_id": "visual.resource.lumenita",
+  "properties": {}
+}

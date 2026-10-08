@@ -1,0 +1,15 @@
+{
+  "id": "item.armor.provisional_foundry_plate",
+  "display_name": "Provisional Foundry Plate",
+  "equipment_slot": "chest",
+  "description": "A plain industrial shell used to test armor attachment and defense data.",
+  "visual_id": "visual.armor.plate",
+  "properties": {
+    "armor_defense": 0,
+    "capacity_modifier": 0,
+    "base_damage": 0,
+    "battery_capacity": 0,
+    "illumination_radius": 0.0
+  },
+  "retired": true
+}
