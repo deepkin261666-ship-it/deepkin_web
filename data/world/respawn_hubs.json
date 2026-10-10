@@ -1,0 +1,20 @@
+{
+  "$note": "Respawn hubs (2026-10-10, docs/PROGRESSION.md 'Death'). Entering a hub's zone binds the operator to it (saved); after death the operator respawns at their bound hub. default_hub is used for new characters and unknown/unloaded hubs.",
+  "default_hub": "hub.outpost",
+  "hubs": [
+    {
+      "id": "hub.outpost",
+      "name": "The Outpost",
+      "zone_id": "zone.outpost",
+      "position": [-137.13, 0.0, 104.87],
+      "rotation": 0.785
+    },
+    {
+      "id": "hub.dustline",
+      "name": "Dustline",
+      "zone_id": "zone.dustline",
+      "position": [33.59, 0.0, 833.59],
+      "rotation": 0.785
+    }
+  ]
+}

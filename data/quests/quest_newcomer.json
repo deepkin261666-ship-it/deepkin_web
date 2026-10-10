@@ -1,0 +1,79 @@
+{
+  "id": "quest.newcomer_kit",
+  "version": 1,
+  "title": "FRESH BOOTS",
+  "giver": "npc.miner_guide",
+  "offer": {
+    "text": "New here? Fresh boots, clean hands, and nothing on your back. That won't last a minute down the shaft. Want me to walk you through your kit?",
+    "accept": "Show me.",
+    "decline": "Later."
+  },
+  "reward": {
+    "xp": 60
+  },
+  "steps": [
+    {
+      "id": "crates",
+      "objective": "Open the newcomer crates on the pallet",
+      "goal": {"type": "open_container", "targets": ["item.container.supply_crate", "item.container.gear_crate"]},
+      "highlight": {"sign": "NEWCOMER CRATES"},
+      "lines": "Two crates on the pallet by the landing, both yours. Supply's got a pack and work clothes, Gear's got the rest. Click one to open it."
+    },
+    {
+      "id": "backpack",
+      "objective": "Wear the backpack",
+      "goal": {"type": "equip_slot", "slots": ["backpack"]},
+      "highlight": {"sign": "NEWCOMER CRATES"},
+      "lines": "Pack goes on first. Without it you've four pockets; with it, twenty cells and more weight on your back. Double-click it in the crate."
+    },
+    {
+      "id": "armor",
+      "objective": "Put on the Leather Suit and the helmet",
+      "goal": {"type": "equip_slot", "slots": ["chest", "legs", "head"]},
+      "highlight": {"sign": "NEWCOMER CRATES"},
+      "lines": "Now the Leather Suit, jacket and trousers, and the helmet. Armour takes the edge off every hit. Boots too, if you've any sense."
+    },
+    {
+      "id": "battery",
+      "objective": "Fit the battery cell",
+      "goal": {"type": "equip_slot", "slots": ["battery"]},
+      "highlight": {"sign": "NEWCOMER CRATES"},
+      "lines": "Battery cell's in the Gear crate. It's your energy, the blue gauge under your health. Lamps and powers drink from it, and nothing down there tops it up."
+    },
+    {
+      "id": "lantern",
+      "objective": "Hang the lantern and switch it on (T)",
+      "goal": {"type": "light_on"},
+      "highlight": {"sign": "NEWCOMER CRATES"},
+      "lines": "Hang the lantern on, then T to light it. Light costs charge, so kill it when you don't need it. But in the dark, you'll need it."
+    },
+    {
+      "id": "weapon",
+      "objective": "Take up your weapon",
+      "goal": {"type": "equip_slot", "slots": ["primary_weapon"]},
+      "highlight": {"sign": "NEWCOMER CRATES"},
+      "lines": "Your weapon's in there too. Every hit trains its skill, K shows you how far along. C is your trade's own power, Q a quick dash out of trouble."
+    },
+    {
+      "id": "drill",
+      "objective": "Put the drill in your tool slot (hold F to drill)",
+      "goal": {"type": "equip_slot", "slots": ["tool_special"]},
+      "highlight": {"sign": "NEWCOMER CRATES"},
+      "lines": "Last, the drill. Tool slot. Stand at a rock face and hold F. Ore pays, and rock is the only thing down there that doesn't fight back."
+    },
+    {
+      "id": "report",
+      "objective": "Report back to Old Brannock",
+      "goal": {"type": "talk_to", "target": "npc.miner_guide"},
+      "highlight": {"npc": "npc.miner_guide"},
+      "lines": "Well, look at you. Pack, suit, light, weapon, drill. Almost look like you belong here.",
+      "reply": "All kitted out."
+    },
+    {
+      "id": "lift",
+      "objective": "Ride the shaft lift down (G on the car)",
+      "goal": {"type": "enter_zone", "target": "zone.threshold"},
+      "lines": "The lift's the car in the well, up the landing. Walk onto it, press G. The Threshold's first. Stay in the light, and come back up with something."
+    }
+  ]
+}

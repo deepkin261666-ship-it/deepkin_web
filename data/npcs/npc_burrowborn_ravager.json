@@ -14,6 +14,7 @@
   "tier": "normal",
   "threat": 10,
   "xp": 80,
+  "coins": [10, 25],
   "habitat": "The Shallows \u2014 wide chambers near Crawler nests",
   "lore": "A Crawler that never stopped growing. Its hide has mineralised into plates; the green glands still glow under them.",
   "verbs": [

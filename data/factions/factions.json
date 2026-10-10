@@ -18,6 +18,23 @@
    "status": "active"
   },
   {
+   "id": "faction.castoffs",
+   "name": "The Castoffs",
+   "category": "civilized",
+   "identity": "Human + desperate",
+   "traits": [
+    "opportunistic",
+    "gang up on the lone operator",
+    "shout for each other",
+    "no telegraphs, no armour plates: people, not monsters"
+   ],
+   "communication": "Shouting across the camp: hit one and the others nearby come running.",
+   "hierarchy": "Scavenger \u2192 Enforcer \u2192 Boss (planned)",
+   "territory": "Camps and wreck yards outside the Outpost, the old convoy roads and the first open shafts; they never go deep.",
+   "visual": "Long coats, flat caps and balaclavas, patched leather and work denim; dull browns and blacks, no glow, no machinery of their own.",
+   "status": "active"
+  },
+  {
    "id": "faction.rustbound",
    "name": "Rustbound",
    "category": "civilized",
@@ -64,6 +81,23 @@
    "territory": "The deepest regions.",
    "visual": "Pale tissue, crystal, distorted anatomy, almost no technology.",
    "status": "planned"
+  },
+  {
+   "id": "faction.wyrms",
+   "name": "The Wyrms",
+   "category": "biological",
+   "identity": "Reptile + fire + deep stone (PROVISIONAL)",
+   "traits": [
+    "solitary hunters that share one nest",
+    "territorial around the nest, predatory in the galleries",
+    "breathe fire (telegraphed: they rear back first)",
+    "lick their wounds when left alone"
+   ],
+   "communication": "None observed: each wyrm hunts alone; they gather only around the nest.",
+   "hierarchy": "Dragon \u2192 Greater Dragon (provisional labels)",
+   "territory": "The Cinder Deep: ruined galleries of an older people, swallowed by rock, under the cleft off Frontier Road east.",
+   "visual": "Scaled hide in ash browns and soot greys, ember glow in the throat; nests in ash, bone and petrified eggs.",
+   "status": "active"
   }
  ]
 }

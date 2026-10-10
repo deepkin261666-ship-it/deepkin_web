@@ -1,0 +1,10 @@
+{
+  "id": "item.container.operator_remains",
+  "display_name": "Operator Remains",
+  "description": "What a fallen operator left behind: their backpack with everything in it, and anything else they dropped. Anyone can loot it. It crumbles away after a while.",
+  "visual_id": "visual.container.operator_remains",
+  "container": {
+    "cells": 12
+  },
+  "weight": 0.0
+}

@@ -1,0 +1,56 @@
+{
+  "comment": "Ambient talk for The Outpost's people (2026-10-09). Keys are the stable ids on the floor's workers/npcs; E opens one random line per conversation (never the same line twice in a row). Lore stays provisional: see docs/GAME.md and docs/WORLD.md.",
+  "speakers": {
+    "npc.outpost_driller_west": {
+      "name": "HESK  ·  ROCK DRILLER",
+      "lines": [
+        "Basalt here is soft as bread next to what's under the Threshold. Enjoy it.",
+        "Foundry built half this place. Pumps, winch, the lift car. The other half is held up by hope and rivets.",
+        "Shaft goes deeper than anybody's charted. Every shift we drop it another few metres. Every shift something down there notices.",
+        "You hear the hammer stop, you look up. Means a slab came loose or somebody's hurt.",
+        "Ore's what pays. Limonite, hematite, scrap if you're lucky. Nobody pays for courage."
+      ]
+    },
+    "npc.outpost_driller_east": {
+      "name": "TAMSIN  ·  SURVEYOR",
+      "lines": [
+        "Drift folk read rock the way you read a sign. That vein there? Runs north, dips under the shaft. Told you.",
+        "Every map of the deep is wrong by next season. Rock moves. So do the things living in it.",
+        "Somebody swore they saw Lumenita glowing past the Shallows. Blue, like a lamp left on. Nobody's brought any back yet.",
+        "The Threshold's the only floor with honest light. Past it you bring your own.",
+        "I mark the tunnels I come back from. The ones I don't, somebody else can mark."
+      ]
+    },
+    "npc.outpost_signal_west": {
+      "name": "ODA  ·  SIGNAL TECH",
+      "lines": [
+        "Relay keeps the consoles breathing. Half those machines were here before the Outpost was. We just learned which buttons don't bite.",
+        "There's a hum under the floor at night. Not ours. Not the generators. I log it and nobody reads the log.",
+        "The supercomputer in the control station still answers. Doesn't tell us who built it, though.",
+        "Four peoples down here: Foundry forges, Drift wanders, Verdant grows things, Relay talks to machines. The Outpost needs all of us, and we argue about it daily.",
+        "Your battery's a Relay cell. Treat it kindly. There's no charging rig past the lift."
+      ]
+    },
+    "npc.outpost_hauler": {
+      "name": "PELL  ·  CARGO HAULER",
+      "lines": [
+        "Verdant grows the moss and the meal here. Without us you'd be eating rust.",
+        "Burrowborn don't see you. They feel you. Walk soft in the Shallows and you might pass a nest without waking it.",
+        "Hit one Burrowborn and the rock carries it. The rest come running from every tunnel near.",
+        "Cargo pods run day and night, yard to rim. If one stops, the whole Outpost goes hungry by week's end.",
+        "Spores in the deep tunnels aren't all bad. Some heal. Ask before you lick anything."
+      ]
+    },
+    "npc.outpost_gate_guard": {
+      "name": "KORVIN  ·  GATE GUARD",
+      "lines": [
+        "Castoffs out on the convoy roads. Coats, caps, no colours. They're people, not monsters, which makes them worse.",
+        "A Castoff won't fight you fair. You see one, there's three more behind the wreck.",
+        "Nobody gets past this street without the Outpost knowing. Including you, newcomer.",
+        "Surface fell a long time ago. Up there's wind and salt and scavengers. Down here's work. I know which I'd pick.",
+        "Keep your weapon on your back inside the walls. Out there, keep it in your hands.",
+        "Lift's the only way down that the Outpost keeps. The rest are holes somebody else dug."
+      ]
+    }
+  }
+}

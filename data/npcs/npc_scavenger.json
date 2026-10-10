@@ -1,10 +1,55 @@
 {
   "id": "npc.scavenger",
   "display_name": "Scavenger",
+  "faction": "faction.castoffs",
+  "species": "Scavenger",
+  "role": "skirmisher",
+  "archetype": "skirmisher",
+  "tier": "normal",
   "max_health": 30,
   "movement_speed": 2.0,
   "detection_range": 8.0,
   "attack_range": 1.5,
   "attack_damage": 5,
-  "attack_cooldown": 1.0
+  "attack_cooldown": 1.0,
+  "xp": 35,
+  "coins": [2, 6],
+  "threat": 3,
+  "perception": {
+    "aggro_radius": 8.0,
+    "memory_seconds": 3.0,
+    "call_radius": 7.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      1.5
+    ],
+    "leash_radius": 16.0,
+    "lure": "pack"
+  },
+  "verbs": [
+    "LOOT",
+    "SHOUT",
+    "SLASH",
+    "GANG UP"
+  ],
+  "rules": [
+    "Hit one and the camp hears it: scavengers shout for each other and come together.",
+    "They are only people: no armour plates, no telegraphs — a fair fight one on one."
+  ],
+  "habitat": "Camps and wreck yards just outside the Outpost, on the old convoy roads and the first open shafts.",
+  "lore": "Miners who were laid off, deserted or never signed on. They strip what the Outpost throws away and whatever an operator drops.",
+  "visual": {
+    "model": "res://assets/game/mobs/castoffs/scavenger.glb",
+    "size": 1.86,
+    "fit": "height",
+    "yaw": 180,
+    "rig": "humanoid",
+    "weapon": {
+      "item": "item.weapon.foundry_scrapblade",
+      "length": 0.75
+    },
+    "attack": "melee"
+  }
 }

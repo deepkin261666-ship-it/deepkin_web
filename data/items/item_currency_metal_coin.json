@@ -1,12 +1,11 @@
 {
   "id": "item.currency.metal_coin",
   "display_name": "Metal Coin",
-  "description": "Stamped scrap-metal coin with a square hole: the base unit of DEEPKIN money. Value 1 Metal.",
+  "description": "Stamped scrap-metal coin with a square hole: the base unit of DEEPKIN money. Value 1 Metal. Creatures and scavengers drop a few; nothing sells for them yet.",
   "visual_id": "visual.currency.metal_coin",
   "properties": {
     "currency_value": 1,
     "stack_size": 100
   },
-  "weight": 0.3,
-  "planned": true
+  "weight": 0.01
 }

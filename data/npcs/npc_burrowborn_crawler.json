@@ -14,6 +14,7 @@
   "tier": "normal",
   "threat": 2,
   "xp": 14,
+  "coins": [1, 3],
   "habitat": "The Shallows \u2014 the nest chamber in front of the way down to Excavation C-3",
   "lore": "Hand-sized at birth, dog-sized at a year. Crawlers feel footsteps through stone long before they see anything.",
   "verbs": [

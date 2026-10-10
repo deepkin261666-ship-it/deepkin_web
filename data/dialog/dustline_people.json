@@ -1,0 +1,180 @@
+{
+  "comment": "Ambient talk for Dustline and Frontier Road east (2026-10-09). Keys are the stable ids on the floors' workers (tools/author_dustline.py); E opens one random line per conversation. Dustline's voice: everything has a price, nobody is what they seem. Services (trade, repair, contracts, lodging) are not implemented yet: lines point at them in-world without promising mechanics. Lore stays provisional: docs/design/DUSTLINE.md.",
+  "speakers": {
+    "npc.dustline_gate_guard": {
+      "name": "VOSS  ·  GATE GUARD",
+      "lines": [
+        "Walk in slow, hands where I can see them. Dustline's open to anyone who can pay for the privilege.",
+        "Entry's free today. Leaving costs what you owe. Remember that.",
+        "Market's straight down Gate Road. If you get lost, look for the tower — the Exchange always knows where you are.",
+        "We don't care who you were before the road. We care what you're carrying.",
+        "Raiders watch the last stretch of Frontier Road. If you made it this far, they let you. Ask yourself why."
+      ]
+    },
+    "npc.dustline_inspector": {
+      "name": "MARGO  ·  CARGO INSPECTOR",
+      "lines": [
+        "Everything that comes through gets weighed. Everything that's weighed gets taxed.",
+        "Declare it or lose it. Your choice, but only one of those is cheap.",
+        "Ore, scrap, relics, people. Don't look at me like that — I only write down what the scale says.",
+        "That caravan's been 'about to leave' for three days. Somebody's waiting on a better price.",
+        "Smuggling's a crime here. Getting caught smuggling is the expensive part."
+      ]
+    },
+    "npc.dustline_caravan_master": {
+      "name": "OLD TALLOW  ·  CARAVAN MASTER",
+      "lines": [
+        "Saltpan, the Scarp, back down to the Outpost. That's the only route I'd sell you a seat on today.",
+        "The Floodlands road washed out. East Gate stays shut until somebody pays to dig it clear.",
+        "Escorts earn more than haulers and die more often. The board in the market has both kinds of work.",
+        "A caravan is a promise with wheels. Most of them break somewhere between here and the shaft.",
+        "Every map on that board is wrong somewhere. Mine are wrong in fewer places. That's why they cost more."
+      ]
+    },
+    "npc.dustline_caravaneer": {
+      "name": "PIKE  ·  CARAVANEER",
+      "lines": [
+        "Load, unload, load again. Tallow says we leave at dawn. He said that yesterday too.",
+        "You want a lift? Find your own wheels or pay for a seat. Nobody rides free in Dustline.",
+        "Heard the Sump's crawling again. We'll take the long way. Long way's still alive.",
+        "This crate is heavier than it says on the manifest. I don't ask. You shouldn't either."
+      ]
+    },
+    "npc.dustline_trader_food": {
+      "name": "AUNTIE RHEA  ·  FOOD & WATER",
+      "lines": [
+        "Water's clean, mostly. Rations are dry, always. Price depends on how thirsty you look.",
+        "Shelves fill up when the caravans come in. Come back with coin and I'll have something worth it.",
+        "You came up from the Outpost? Then you've never eaten anything that grew in daylight. Neither have I.",
+        "Haggle all you like, dear. I've been doing this longer than you've been breathing dust.",
+        "Everything has a price. Bread just happens to be one most people can afford."
+      ]
+    },
+    "npc.dustline_trader_ammo": {
+      "name": "CASSO  ·  AMMUNITION",
+      "lines": [
+        "Rounds, cells, charges. I don't sell guns — guns are opinions. I sell the arguments.",
+        "Stock's thin till the next haul. Whatever you're shooting at, shoot it less.",
+        "Count your shots on Frontier Road. Scavengers count theirs.",
+        "No credit. Credit is a bullet you hand back to someone who might not return it.",
+        "If you see a crate marked with a red stripe on the road, it's mine. Bring it back and we'll talk price."
+      ]
+    },
+    "npc.dustline_trader_meds": {
+      "name": "DOC IVES  ·  MEDICAL",
+      "lines": [
+        "Stims, gauze, filters for your lungs. Dust out here gets in deeper than any blade.",
+        "I patch anyone who pays. Who they were fighting is none of my business.",
+        "Supplies are short. If you find sealed medical crates below, I pay better than the Exchange.",
+        "Don't tell me where it hurts. Tell me what you can spend.",
+        "Half of what's sold as medicine in this town is chalk. Mine's only a quarter chalk."
+      ]
+    },
+    "npc.dustline_trader_general": {
+      "name": "SAM  ·  BUYS ANYTHING",
+      "lines": [
+        "I buy what you dragged up and sell it to the next fool who needs it. Margins are the whole religion.",
+        "Bring me salvage, relics, ore — I'll name a number. You'll hate it. You'll take it.",
+        "Scrap goes to Nell down the Row; she pays by weight. I pay by how badly someone else wants it.",
+        "Everybody in Dustline is a trader. Some of us just admit it.",
+        "Prices change when the caravans arrive. Sell before they do."
+      ]
+    },
+    "npc.dustline_board_keeper": {
+      "name": "LISTER  ·  CONTRACT BOARD",
+      "lines": [
+        "Hauls, bounties, escorts. Read the board, pick a paper, don't come back empty-handed.",
+        "No contracts posted for newcomers yet. The Exchange decides who's worth paying.",
+        "Somebody wants a crate brought back from the Saltpan convoy. Somebody else wants it to stay lost.",
+        "Bounty on the raiders by the salt works. Pays in coin, not in thanks.",
+        "I don't write the jobs. I just pin them up and take a cut. Everyone takes a cut."
+      ]
+    },
+    "npc.dustline_exchange_clerk": {
+      "name": "MS. ORREL  ·  EXCHANGE CLERK",
+      "lines": [
+        "The terminal stores what you can't carry. Same depot as the Outpost booth — the network is the network.",
+        "Coin exchange opens when the vaults are counted. They are always being counted.",
+        "The Exchange doesn't take sides. It takes deposits.",
+        "Your goods are safe with us. Your reasons are your own problem.",
+        "Look up. The lantern on the tower never goes out. That's the only promise we make for free."
+      ]
+    },
+    "npc.dustline_smith": {
+      "name": "BRACK  ·  SMITH",
+      "lines": [
+        "Forge isn't taking repair jobs yet — I'm rebuilding the press. Come back when the sparks are steady.",
+        "Bring me scrap and I'll make it something. Bring me coin and I'll make it something good.",
+        "That drill of yours is held together by luck. Luck's the one alloy I can't weld.",
+        "Crafting bench'll be open soon. Until then, keep your gear oiled and your edges dry.",
+        "Everything breaks out here. My trade is making it break later."
+      ]
+    },
+    "npc.dustline_scrap_buyer": {
+      "name": "NELL  ·  SCRAP BUYER",
+      "lines": [
+        "Scrap by the kilo, any condition. Rust weighs the same as steel, which is why I love it.",
+        "Scales are honest. Mostly. Bring more and they get friendlier.",
+        "The convoy on the Saltpan is picked half clean. Half isn't all.",
+        "I'll take components, plating, cable, anything with a bolt in it. Not bodies. Not anymore.",
+        "That crane over there pulled half this city out of the dirt. Now it pulls the other half apart."
+      ]
+    },
+    "npc.dustline_east_guard": {
+      "name": "EAST GATE GUARD",
+      "lines": [
+        "Gate's shut. Floodlands road washed out and nobody's paid to clear it.",
+        "Past this gate it's water, mud and things that like both. Be glad it's closed.",
+        "When it opens, it'll cost you. Everything opens for a price.",
+        "Caravans bound east wait in the Yard. They've been waiting a while."
+      ]
+    },
+    "npc.dustline_warren_watch": {
+      "name": "WARREN WATCH",
+      "lines": [
+        "Warrens are closed. Exchange orders. Don't ask me which order, there are a lot of them.",
+        "Cheap rooms, cheaper questions, people who left the light behind. Not today.",
+        "You hear the music down there? Neither do I. Move along.",
+        "When the stair opens you'll find beds, a fence or two, and rumours worth more than they cost.",
+        "Everything has a price. Down there, sometimes it's you."
+      ]
+    },
+    "npc.dustline_townsfolk_a": {
+      "name": "DUST-EATER",
+      "lines": [
+        "First time in the city? You can tell by how often you look up.",
+        "The tower lamp's how you find your way home. Nobody here has a home, but it works anyway.",
+        "Don't trust anyone selling maps of the Deep. Trust the ones selling rope.",
+        "I sold my boots last winter. Bought them back in spring. Same boots, twice the price."
+      ]
+    },
+    "npc.dustline_townsfolk_b": {
+      "name": "PORTER",
+      "lines": [
+        "Can't stop, crate's due at the Exchange. Everything's due at the Exchange.",
+        "Pay's bad, back's worse, but the market never runs out of things to carry.",
+        "You want something moved, I'm cheap. You want it moved quietly, I'm not.",
+        "Watch your pockets near the stalls. Not everyone sells with their hands out front."
+      ]
+    },
+    "npc.frontier_waystation_keeper": {
+      "name": "HARL  ·  WAYSTATION",
+      "lines": [
+        "Water's free at my fire. Shade too. News costs extra.",
+        "Dustline's past the wrecks, straight on. You'll see the wall before you see the city.",
+        "Scavengers took the old convoy by the pylons. Go around, or go through quick.",
+        "Caravans stop here to wait out the heat. Some never get going again.",
+        "The relay pylons still hum at night. Nobody knows who's listening."
+      ]
+    },
+    "npc.frontier_caravan_guard": {
+      "name": "CARAVAN GUARD",
+      "lines": [
+        "Keep walking, friend. This load's spoken for.",
+        "We hold the road till dawn, then roll for Dustline. Want to tag along? Bring a rifle.",
+        "Castoffs hit the wrecks east of here yesterday. Three of them, maybe more.",
+        "Out here, everything's a trade. Even safe passage."
+      ]
+    }
+  }
+}

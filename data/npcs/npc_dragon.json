@@ -1,0 +1,173 @@
+{
+  "id": "npc.dragon",
+  "display_name": "Dragon",
+  "max_health": 280,
+  "movement_speed": 3.4,
+  "detection_range": 12.0,
+  "attack_range": 2.4,
+  "attack_damage": 6,
+  "attack_cooldown": 1.5,
+  "faction": "faction.wyrms",
+  "species": "Dragon",
+  "role": "skirmisher",
+  "archetype": "predator",
+  "tier": "normal",
+  "threat": 8,
+  "xp": 220,
+  "coins": [
+    12,
+    30
+  ],
+  "body_radius": 0.7,
+  "habitat": "The Cinder Deep \u2014 the ruined galleries off Frontier Road east, hunting in the ash hall and the bridge gallery",
+  "lore": "PROVISIONAL. A low, long-tailed wyrm that walks on its wing-arms. It ranges the galleries around the nest and hunts anything that comes down the cleft.",
+  "verbs": [
+    "PROWL",
+    "BITE",
+    "SPIT",
+    "SCORCH",
+    "RETREAT",
+    "LICK WOUNDS"
+  ],
+  "rules": [
+    "It hunts: once it has your scent it follows you far beyond its gallery.",
+    "Close in it bites; step away from it and it spits fire along the ground \u2014 the line glows before it does.",
+    "Its scorching breath fans out in front of it: get behind it or behind stone. Then it backs off to spit again.",
+    "Leave it alone and it stops to lick its wounds: keep hitting it and the healing never comes."
+  ],
+  "perception": {
+    "aggro_radius": 9.0,
+    "memory_seconds": 6.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      2.2
+    ],
+    "leash_radius": 20.0,
+    "lure": "predator",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "heal",
+      "name": "Lick Wounds",
+      "shape": "heal",
+      "heal": 0.06,
+      "windup": 1.8,
+      "cooldown": 22.0,
+      "below_health": 0.6,
+      "quiet_seconds": 4.0,
+      "min_range": 6.0,
+      "interruptible": true,
+      "recovery": 0.3
+    },
+    {
+      "id": "fire_wave",
+      "name": "Scorching Breath",
+      "shape": "cone",
+      "damage": 20,
+      "damage_type": "fire",
+      "windup": 1.25,
+      "radius": 6.0,
+      "half_angle": 30.0,
+      "cooldown": 12.0,
+      "trigger_range": 4.5,
+      "recovery": 0.9,
+      "retreat": 1.6
+    },
+    {
+      "id": "bite",
+      "name": "Bite",
+      "shape": "bite",
+      "damage": 14,
+      "windup": 0.5,
+      "reach": 2.6,
+      "half_angle": 55.0,
+      "cooldown": 3.6,
+      "trigger_range": 2.4,
+      "recovery": 0.35
+    },
+    {
+      "id": "fire_bolt",
+      "name": "Fire Spit",
+      "shape": "line",
+      "damage": 13,
+      "damage_type": "fire",
+      "windup": 0.75,
+      "range": 11.0,
+      "width": 1.0,
+      "cooldown": 4.5,
+      "min_range": 4.0,
+      "trigger_range": 11.0,
+      "los": true,
+      "recovery": 0.5
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.mineral.lumenita",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.5
+    },
+    {
+      "item": "item.ore.magnetite",
+      "quantity": [
+        1,
+        3
+      ],
+      "chance": 0.35
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.25
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/dragons/dragon.glb",
+    "rig": "animated",
+    "size": 7.2,
+    "yaw": 180,
+    "gait": "prowl",
+    "tint": "ffe8d0",
+    "clips": {
+      "walk": {
+        "animation": "Walk",
+        "speed": 1.2
+      },
+      "idle": {
+        "animation": "Walk",
+        "speed": 0.12
+      },
+      "rear": {
+        "animation": "PoseLib",
+        "from": 0.0,
+        "to": 0.04,
+        "hold": true
+      }
+    },
+    "glow": {
+      "color": "ff7a2e",
+      "energy": 1.1,
+      "range": 4.0,
+      "height": 0.8
+    },
+    "mouth": [
+      0.0,
+      0.7,
+      -2.4
+    ],
+    "roughness": 0.7,
+    "metallic": 0.0,
+    "albedo_boost": 2.2
+  }
+}

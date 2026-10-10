@@ -1,0 +1,194 @@
+{
+  "id": "npc.greater_dragon",
+  "display_name": "Greater Dragon",
+  "max_health": 560,
+  "movement_speed": 2.4,
+  "detection_range": 13.0,
+  "attack_range": 3.2,
+  "attack_damage": 10,
+  "attack_cooldown": 1.8,
+  "faction": "faction.wyrms",
+  "species": "Greater Dragon",
+  "role": "brute",
+  "archetype": "territorial",
+  "tier": "normal",
+  "threat": 18,
+  "xp": 520,
+  "coins": [
+    35,
+    80
+  ],
+  "body_radius": 1.1,
+  "habitat": "The Cinder Deep \u2014 the nest under the old aqueduct, beside the petrified egg",
+  "lore": "PROVISIONAL. The heavy four-legged wyrm that keeps the nest. It does not chase; it holds its ground and burns everything in front of it.",
+  "verbs": [
+    "GUARD",
+    "MAUL",
+    "BREATHE",
+    "SCORCH",
+    "HOLD",
+    "LICK WOUNDS"
+  ],
+  "rules": [
+    "It guards the nest and will not follow you far: pull it to the edge of its ground and it turns back.",
+    "Its breath covers a wide fan in front of it and hits hard: when it rears back, get to its flank or behind a pillar.",
+    "From range it hurls a heavy fire bolt along a glowing line \u2014 step off the line.",
+    "Slow, tough and patient: it heals if you give it room, so keep a steady pressure on it."
+  ],
+  "perception": {
+    "aggro_radius": 8.0,
+    "memory_seconds": 4.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      3.0
+    ],
+    "leash_radius": 14.0,
+    "lure": "territorial",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "heal",
+      "name": "Lick Wounds",
+      "shape": "heal",
+      "heal": 0.08,
+      "windup": 2.4,
+      "cooldown": 26.0,
+      "below_health": 0.55,
+      "quiet_seconds": 5.0,
+      "min_range": 7.0,
+      "interruptible": true,
+      "recovery": 0.4
+    },
+    {
+      "id": "fire_wave",
+      "name": "Firestorm Breath",
+      "shape": "cone",
+      "damage": 30,
+      "damage_type": "fire",
+      "windup": 1.7,
+      "radius": 8.5,
+      "half_angle": 48.0,
+      "cooldown": 13.0,
+      "trigger_range": 7.0,
+      "recovery": 1.4
+    },
+    {
+      "id": "bite",
+      "name": "Crushing Bite",
+      "shape": "bite",
+      "damage": 22,
+      "windup": 0.7,
+      "reach": 3.4,
+      "half_angle": 60.0,
+      "cooldown": 3.8,
+      "trigger_range": 3.2,
+      "recovery": 0.5
+    },
+    {
+      "id": "fire_bolt",
+      "name": "Fire Bolt",
+      "shape": "line",
+      "damage": 18,
+      "damage_type": "fire",
+      "windup": 1.05,
+      "range": 14.0,
+      "width": 1.6,
+      "cooldown": 6.0,
+      "min_range": 5.0,
+      "trigger_range": 14.0,
+      "los": true,
+      "recovery": 0.7
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.mineral.lumenita",
+      "quantity": [
+        2,
+        3
+      ],
+      "chance": 0.8
+    },
+    {
+      "item": "item.relic_fragment",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.2
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.4
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/dragons/greater_dragon.glb",
+    "rig": "animated",
+    "size": 5.6,
+    "fit": "height",
+    "yaw": 163,
+    "gait": "stride",
+    "clips": {
+      "idle": {
+        "animation": "Take 001",
+        "from": 0.35,
+        "to": 2.4
+      },
+      "walk": {
+        "animation": "Take 001",
+        "from": 2.42,
+        "to": 7.25,
+        "speed": 1.0
+      },
+      "bite": {
+        "animation": "Take 001",
+        "from": 7.33,
+        "to": 8.17
+      },
+      "lunge": {
+        "animation": "Take 001",
+        "from": 8.17,
+        "to": 9.33
+      },
+      "roar": {
+        "animation": "Take 001",
+        "from": 12.0,
+        "to": 13.0
+      },
+      "breath": {
+        "animation": "Take 001",
+        "from": 13.33,
+        "to": 16.58
+      },
+      "death": {
+        "animation": "Take 001",
+        "from": 47.75,
+        "to": 50.1,
+        "hold": true
+      }
+    },
+    "glow": {
+      "color": "ff8a3a",
+      "energy": 0.9,
+      "range": 4.5,
+      "height": 1.2
+    },
+    "mouth": [
+      0.0,
+      2.2,
+      -4.4
+    ],
+    "roughness": 0.7,
+    "metallic": 0.0
+  }
+}

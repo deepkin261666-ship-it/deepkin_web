@@ -1,0 +1,6550 @@
+{
+ "region_id": "region.starting_region",
+ "start_zone": "zone.outpost",
+ "spawn_points": [
+  {
+   "spawn_id": "spawn.outpost_a",
+   "position": [
+    -137.13,
+    0.0,
+    104.87
+   ],
+   "rotation": 0.785
+  },
+  {
+   "spawn_id": "spawn.outpost_b",
+   "position": [
+    -137.7,
+    0.0,
+    106.28
+   ],
+   "rotation": 0.785
+  },
+  {
+   "spawn_id": "spawn.outpost_c",
+   "position": [
+    -135.72,
+    0.0,
+    104.3
+   ],
+   "rotation": 0.785
+  },
+  {
+   "spawn_id": "spawn.outpost_d",
+   "position": [
+    -136.28,
+    0.0,
+    105.72
+   ],
+   "rotation": 0.785
+  }
+ ],
+ "floors": [
+  {
+   "zone_id": "zone.outpost",
+   "name": "The Outpost",
+   "anchor": [
+    -150.0,
+    0.0,
+    100.0
+   ],
+   "bounds": [
+    -46.0,
+    46.0,
+    -36.0,
+    30.0
+   ],
+   "arrival": [
+    -137.13,
+    0.0,
+    104.87
+   ],
+   "cavern": {
+    "seed": 211,
+    "material": "res://assets/game/materials/geology/geology_shallows.tres",
+    "wall_height": 9.0,
+    "near_wall_height": 1.6,
+    "chambers": [
+     {
+      "center": [
+       0.0,
+       -6.0
+      ],
+      "radius": [
+       38.0,
+       26.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       30.0,
+       -21.0
+      ],
+      "radius": [
+       12.0,
+       9.0
+      ],
+      "rotation": -20
+     },
+     {
+      "center": [
+       -29.0,
+       -21.0
+      ],
+      "radius": [
+       11.0,
+       8.5
+      ],
+      "rotation": 15
+     },
+     {
+      "center": [
+       17.68,
+       9.68
+      ],
+      "radius": [
+       16.0,
+       9.0
+      ],
+      "rotation": -45
+     },
+     {
+      "center": [
+       -30.0,
+       8.0
+      ],
+      "radius": [
+       9.0,
+       8.0
+      ],
+      "rotation": 30
+     }
+    ],
+    "passages": [],
+    "wet": [
+     {
+      "center": [
+       -6.0,
+       -24.0
+      ],
+      "radius": [
+       3.0,
+       2.0
+      ],
+      "rotation": 10
+     }
+    ],
+    "holes": [
+     {
+      "center": [
+       8.63,
+       0.63
+      ],
+      "size": [
+       5.680000000000001,
+       6.33
+      ],
+      "rotation": 45
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        19.8,
+        11.8
+       ],
+       [
+        14.85,
+        6.85
+       ],
+       [
+        11.03,
+        3.03
+       ]
+      ],
+      "width": 3.4
+     },
+     {
+      "points": [
+       [
+        13.15,
+        5.15
+       ],
+       [
+        15.56,
+        2.47
+       ]
+      ],
+      "width": 2.0
+     },
+     {
+      "points": [
+       [
+        0.0,
+        6.0
+       ],
+       [
+        -12.0,
+        3.0
+       ],
+       [
+        -21.0,
+        0.0
+       ]
+      ],
+      "width": 2.2
+     },
+     {
+      "points": [
+       [
+        0.0,
+        6.0
+       ],
+       [
+        14.0,
+        2.0
+       ],
+       [
+        26.0,
+        -14.0
+       ],
+       [
+        30.0,
+        -20.0
+       ]
+      ],
+      "width": 2.4
+     }
+    ],
+    "props": [
+     {
+      "type": "column",
+      "name": "outpost_column_w",
+      "position": [
+       -20.0,
+       -16.0
+      ],
+      "height": 9.0,
+      "radius": 1.6,
+      "seed": 41
+     },
+     {
+      "type": "column",
+      "name": "outpost_column_e",
+      "position": [
+       20.0,
+       -17.0
+      ],
+      "height": 9.0,
+      "radius": 1.5,
+      "seed": 42
+     },
+     {
+      "type": "column",
+      "name": "outpost_column_s",
+      "position": [
+       -17.0,
+       8.0
+      ],
+      "height": 8.0,
+      "radius": 1.2,
+      "seed": 43
+     },
+     {
+      "type": "boulder",
+      "position": [
+       22.0,
+       12.0
+      ],
+      "size": [
+       2.6,
+       1.4,
+       2.0
+      ],
+      "seed": 44
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -1.84,
+       2.44
+      ],
+      "size": [
+       1.6,
+       0.9,
+       1.3
+      ],
+      "seed": 60
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -6.81,
+       0.12
+      ],
+      "size": [
+       1.9000000000000001,
+       1.1,
+       1.3
+      ],
+      "seed": 61
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -9.96,
+       -4.37
+      ],
+      "size": [
+       2.2,
+       0.9,
+       1.3
+      ],
+      "seed": 62
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -10.44,
+       -9.84
+      ],
+      "size": [
+       1.6,
+       1.1,
+       1.3
+      ],
+      "seed": 63
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -8.68,
+       -14.08
+      ],
+      "size": [
+       1.9000000000000001,
+       0.9,
+       1.3
+      ],
+      "seed": 64
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -3.63,
+       -17.96
+      ],
+      "size": [
+       2.2,
+       1.1,
+       1.3
+      ],
+      "seed": 65
+     },
+     {
+      "type": "boulder",
+      "position": [
+       1.84,
+       -18.44
+      ],
+      "size": [
+       1.6,
+       0.9,
+       1.3
+      ],
+      "seed": 66
+     },
+     {
+      "type": "boulder",
+      "position": [
+       5.3,
+       -17.18
+      ],
+      "size": [
+       1.9000000000000001,
+       1.1,
+       1.3
+      ],
+      "seed": 67
+     },
+     {
+      "type": "boulder",
+      "position": [
+       9.18,
+       -13.3
+      ],
+      "size": [
+       2.2,
+       0.9,
+       1.3
+      ],
+      "seed": 68
+     },
+     {
+      "type": "boulder",
+      "position": [
+       10.6,
+       -8.0
+      ],
+      "size": [
+       1.6,
+       1.1,
+       1.3
+      ],
+      "seed": 69
+     },
+     {
+      "type": "boulder",
+      "position": [
+       10.24,
+       -5.26
+      ],
+      "size": [
+       1.9000000000000001,
+       0.9,
+       1.3
+      ],
+      "seed": 70
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -24.0,
+       15.0
+      ],
+      "size": [
+       2.0,
+       1.2,
+       1.6
+      ],
+      "seed": 45
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "name": "outpost_newcomer_pallet",
+     "position": [
+      16.55,
+      0.08,
+      1.48
+     ],
+     "size": [
+      4.6,
+      0.16,
+      1.9
+     ],
+     "material": "rusted_grid",
+     "solid": false
+    }
+   ],
+   "lights": [
+    {
+     "position": [
+      10.32,
+      4.0,
+      2.32
+     ],
+     "color": "ffcf7a",
+     "energy": 3.0,
+     "range": 10.0,
+     "shadow": true,
+     "fixture": false
+    },
+    {
+     "position": [
+      16.55,
+      3.2,
+      1.48
+     ],
+     "color": "ffd9a0",
+     "energy": 3.0,
+     "range": 6.5,
+     "shadow": false,
+     "fixture": false
+    },
+    {
+     "position": [
+      13.86,
+      3.0,
+      9.25
+     ],
+     "color": "f2b872",
+     "energy": 2.6,
+     "range": 11.0,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      -21.0,
+      3.0,
+      0.0
+     ],
+     "color": "6fd3e8",
+     "energy": 2.2,
+     "range": 10.0,
+     "shadow": false,
+     "fixture": false
+    },
+    {
+     "position": [
+      29.0,
+      4.0,
+      -20.0
+     ],
+     "color": "f2b872",
+     "energy": 2.4,
+     "range": 12.0,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      -29.0,
+      3.0,
+      -21.0
+     ],
+     "color": "ff8a4a",
+     "energy": 2.0,
+     "range": 10.0,
+     "shadow": false,
+     "fixture": false
+    },
+    {
+     "position": [
+      6.36,
+      2.4,
+      15.33
+     ],
+     "color": "7ad7ff",
+     "energy": 1.6,
+     "range": 7.0,
+     "shadow": false,
+     "fixture": false
+    },
+    {
+     "position": [
+      0.0,
+      5.0,
+      -20.0
+     ],
+     "color": "ffb35c",
+     "energy": 2.0,
+     "range": 12.0,
+     "shadow": false,
+     "fixture": false
+    }
+   ],
+   "signs": [
+    {
+     "position": [
+      15.27,
+      0.4,
+      7.27
+     ],
+     "text": "THE OUTPOST\nwhat we need comes from below"
+    },
+    {
+     "position": [
+      17.54,
+      0.35,
+      2.47
+     ],
+     "text": "NEWCOMER CRATES\nclick to open"
+    },
+    {
+     "position": [
+      -21.0,
+      2.6,
+      1.0
+     ],
+     "text": "CONTROL"
+    },
+    {
+     "position": [
+      29.0,
+      3.0,
+      -15.0
+     ],
+     "text": "CARGO YARD"
+    },
+    {
+     "position": [
+      -29.0,
+      3.0,
+      -16.0
+     ],
+     "text": "POWER"
+    }
+   ],
+   "shaft": {
+    "center": [
+     0.0,
+     -8.0
+    ],
+    "radius": 9.0,
+    "rings": 7,
+    "light_color": "ffb35c"
+   },
+   "elevator": {
+    "position": [
+     8.63,
+     0.63
+    ],
+    "rotation": 45,
+    "size": [
+     2.68,
+     3.33
+    ],
+    "model": "outpost/elevator_car",
+    "model_scale": 0.7,
+    "deck": -2.6,
+    "well": {
+     "size": [
+      5.680000000000001,
+      6.33
+     ],
+     "offset": 0.0,
+     "depth": 14.0,
+     "gangway": 1.4,
+     "ledges": 3,
+     "ledge": 0.4,
+     "ledge_drop": 0.6
+    }
+   },
+   "cables": [
+    {
+     "position": [
+      -6,
+      -14
+     ],
+     "bottom": 7.0,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      5,
+      -16
+     ],
+     "bottom": 9.0,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      -3,
+      -2
+     ],
+     "bottom": 6.0,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      14,
+      -12
+     ],
+     "bottom": 8.0,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      -14,
+      -6
+     ],
+     "bottom": 10.0,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      18,
+      -24
+     ],
+     "bottom": 6.5,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      -22,
+      -18
+     ],
+     "bottom": 8.0,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      8,
+      8
+     ],
+     "bottom": 7.5,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      -8,
+      6
+     ],
+     "bottom": 9.5,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      24,
+      -6
+     ],
+     "bottom": 11.0,
+     "top": 40.0,
+     "lamp": true
+    },
+    {
+     "position": [
+      -2,
+      -20
+     ],
+     "bottom": 5.0,
+     "top": 40.0
+    },
+    {
+     "position": [
+      2,
+      -20
+     ],
+     "bottom": 5.0,
+     "top": 40.0
+    },
+    {
+     "position": [
+      10,
+      -22
+     ],
+     "bottom": 5.0,
+     "top": 40.0
+    },
+    {
+     "position": [
+      -10,
+      -21
+     ],
+     "bottom": 5.0,
+     "top": 40.0
+    }
+   ],
+   "pipes": [
+    {
+     "from": [
+      -38.0,
+      1.4,
+      -8.0
+     ],
+     "to": [
+      -24.0,
+      1.4,
+      -27.0
+     ]
+    },
+    {
+     "from": [
+      -24.0,
+      1.4,
+      -27.0
+     ],
+     "to": [
+      -6.0,
+      1.4,
+      -30.0
+     ]
+    },
+    {
+     "from": [
+      6.0,
+      1.6,
+      -30.0
+     ],
+     "to": [
+      24.0,
+      1.6,
+      -28.0
+     ]
+    },
+    {
+     "from": [
+      12.0,
+      0.0,
+      -24.0
+     ],
+     "to": [
+      12.0,
+      30.0,
+      -24.0
+     ],
+     "radius": 0.35
+    },
+    {
+     "from": [
+      -12.0,
+      0.0,
+      -24.0
+     ],
+     "to": [
+      -12.0,
+      30.0,
+      -24.0
+     ],
+     "radius": 0.3
+    },
+    {
+     "from": [
+      34.0,
+      1.2,
+      -8.0
+     ],
+     "to": [
+      34.0,
+      1.2,
+      10.0
+     ],
+     "color": "6a4b35"
+    }
+   ],
+   "cargo_routes": [
+    {
+     "points": [
+      [
+       29.0,
+       -21.0
+      ],
+      [
+       18.0,
+       -16.0
+      ],
+      [
+       9.0,
+       -12.0
+      ]
+     ],
+     "model": "outpost/cargo_pod",
+     "count": 2,
+     "speed": 1.6,
+     "hover": 3.4,
+     "scale": 0.55
+    }
+   ],
+   "workers": [
+    {
+     "id": "npc.outpost_driller_west",
+     "position": [
+      -30.5,
+      -12.0
+     ],
+     "rotation": 200,
+     "pose": "drill",
+     "class": "class.foundry"
+    },
+    {
+     "id": "npc.outpost_driller_east",
+     "position": [
+      31.0,
+      -11.5
+     ],
+     "rotation": 150,
+     "pose": "drill",
+     "class": "class.drift"
+    },
+    {
+     "id": "npc.outpost_signal_west",
+     "position": [
+      -22.5,
+      -1.5
+     ],
+     "rotation": 90,
+     "pose": "idle",
+     "class": "class.relay"
+    },
+    {
+     "id": "npc.outpost_hauler",
+     "position": [
+      27.0,
+      -16.0
+     ],
+     "rotation": 220,
+     "pose": "carry",
+     "class": "class.verdant"
+    },
+    {
+     "id": "npc.outpost_gate_guard",
+     "position": [
+      9.33,
+      -4.04
+     ],
+     "rotation": 135,
+     "pose": "idle",
+     "class": "class.foundry"
+    }
+   ],
+   "npcs": [
+    {
+     "id": "npc.miner_guide",
+     "name": "OLD BRANNOCK  ·  SHAFT MINER",
+     "position": [
+      5.66,
+      5.01
+     ],
+     "rotation": -150,
+     "dialog": {
+      "start": "hello",
+      "nodes": {
+       "hello": {
+        "text": "New here? Didn't think so. Fresh boots, clean hands.",
+        "options": [
+         [
+          "What is this place?",
+          "outpost"
+         ],
+         [
+          "What do I do first?",
+          "first"
+         ],
+         [
+          "What's down there?",
+          "below"
+         ],
+         [
+          "Later.",
+          ""
+         ]
+        ]
+       },
+       "outpost": {
+        "text": "The Outpost. We dig, we trade, we keep the lights on. Everything we need comes from below.",
+        "options": [
+         [
+          "What do I do first?",
+          "first"
+         ],
+         [
+          "Later.",
+          ""
+         ]
+        ]
+       },
+       "first": {
+        "text": "Grab a drill. Grab a weapon. The crates on the pallet by the landing hold kit for newcomers — it's yours. Then take the lift down.",
+        "options": [
+         [
+          "What's down there?",
+          "below"
+         ],
+         [
+          "Thanks.",
+          ""
+         ]
+        ]
+       },
+       "below": {
+        "text": "The Threshold first. Past that... ore, scavengers, and things that dig back. Stay in the light.",
+        "options": [
+         [
+          "I'll go.",
+          ""
+         ]
+        ]
+       }
+      }
+     }
+    }
+   ],
+   "prop_models": [
+    {
+     "model": "outpost/base_machine",
+     "position": [
+      0,
+      0.0,
+      -20.5
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/core_ring",
+     "position": [
+      9.5,
+      0.0,
+      -15.5
+     ],
+     "rotation": 35,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/excavator_arm",
+     "position": [
+      12.5,
+      0.0,
+      -5.0
+     ],
+     "rotation": 200,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/drill_cone",
+     "position": [
+      -12.5,
+      0.0,
+      -3.5
+     ],
+     "rotation": 70,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/drill_head",
+     "position": [
+      -13.5,
+      0.0,
+      -12.5
+     ],
+     "rotation": 20,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/pylon",
+     "position": [
+      -12.0,
+      0.0,
+      -19.0
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/pylon",
+     "position": [
+      14.0,
+      0.0,
+      -19.5
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/shaft_rock",
+     "position": [
+      0,
+      0.0,
+      -31
+     ],
+     "rotation": 0,
+     "scale": 1.6,
+     "solid": false
+    },
+    {
+     "model": "outpost/supercomputer",
+     "position": [
+      -23,
+      0.0,
+      -7
+     ],
+     "rotation": 90,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/console",
+     "position": [
+      -26.5,
+      0.0,
+      1
+     ],
+     "rotation": 90,
+     "scale": 0.9,
+     "solid": true
+    },
+    {
+     "model": "outpost/monitor_bay",
+     "position": [
+      -21,
+      0.0,
+      5
+     ],
+     "rotation": 120,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/desk_props",
+     "position": [
+      -19.5,
+      0.0,
+      -1.5
+     ],
+     "rotation": 90,
+     "scale": 0.9,
+     "solid": false
+    },
+    {
+     "model": "outpost/generator",
+     "position": [
+      -30,
+      0.0,
+      -21
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/generator",
+     "position": [
+      -26,
+      0.0,
+      -25
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/generator",
+     "position": [
+      -33,
+      0.0,
+      -26
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/cargo_pod",
+     "position": [
+      29,
+      0.0,
+      -19
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/cargo_pod",
+     "position": [
+      33,
+      0.0,
+      -23
+     ],
+     "rotation": 15,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/cargo_pod",
+     "position": [
+      26,
+      0.0,
+      -25
+     ],
+     "rotation": -10,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/crossing_sign",
+     "position": [
+      15.5,
+      0.0,
+      -11
+     ],
+     "rotation": 210,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "outpost/guardhouse",
+     "position": [
+      22.98,
+      0.0,
+      4.37
+     ],
+     "rotation": -45,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/guardhouse",
+     "position": [
+      12.37,
+      0.0,
+      14.98
+     ],
+     "rotation": -45,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/vending",
+     "position": [
+      6.36,
+      0.0,
+      16.04
+     ],
+     "rotation": 45,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/old_computer",
+     "position": [
+      8.77,
+      0.0,
+      16.04
+     ],
+     "rotation": -45,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "outpost/radio",
+     "position": [
+      22.34,
+      0.0,
+      2.18
+     ],
+     "rotation": 155,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "outpost/cave_mouth",
+     "position": [
+      -35,
+      0.0,
+      12
+     ],
+     "rotation": 60,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "outpost/shaft_rock",
+     "position": [
+      3.39,
+      0.0,
+      6.28
+     ],
+     "rotation": -20,
+     "scale": 0.32,
+     "solid": true
+    },
+    {
+     "model": "outpost/lightpost",
+     "position": [
+      8.56,
+      0.0,
+      6.07
+     ],
+     "rotation": -45,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/lightpost",
+     "position": [
+      14.07,
+      0.0,
+      0.56
+     ],
+     "rotation": 135,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/lightpost",
+     "position": [
+      10.25,
+      0.0,
+      10.03
+     ],
+     "rotation": -45,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/lightpost",
+     "position": [
+      19.52,
+      0.0,
+      2.18
+     ],
+     "rotation": 135,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/lightpost",
+     "position": [
+      -16,
+      0.0,
+      -1
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/lightpost",
+     "position": [
+      16,
+      0.0,
+      -14
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    }
+   ],
+   "drill_sites": [
+    {
+     "entity_id": 140,
+     "content_id": "material.ore_limonite",
+     "position": [
+      -183.0,
+      0.9,
+      89.0
+     ],
+     "size": [
+      2.4,
+      1.8,
+      1.4
+     ],
+     "rotation": 0.4,
+     "yield": {
+      "item_id": "item.ore.limonite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 141,
+     "content_id": "material.ore_hematite",
+     "position": [
+      -116.5,
+      0.9,
+      90.0
+     ],
+     "size": [
+      2.4,
+      1.8,
+      1.4
+     ],
+     "rotation": -0.6,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ],
+   "computers": [
+    {
+     "id": "computer.outpost.landing_booth",
+     "position": [
+      8.84,
+      12.15
+     ],
+     "rotation": 45
+    }
+   ],
+   "set": "res://data/world/sets/outpost.json"
+  },
+  {
+   "zone_id": "zone.threshold",
+   "name": "The Threshold",
+   "anchor": [
+    0.0,
+    0.0,
+    100.0
+   ],
+   "bounds": [
+    -16.0,
+    16.0,
+    -12.0,
+    12.0
+   ],
+   "arrival": [
+    -5.0,
+    0.0,
+    102.0
+   ],
+   "cavern": {
+    "seed": 7,
+    "material": "res://assets/game/materials/geology/geology_threshold.tres",
+    "wall_height": 4.4,
+    "near_wall_height": 1.1,
+    "chambers": [
+     {
+      "center": [
+       -2.0,
+       0.0
+      ],
+      "radius": [
+       10.0,
+       6.5
+      ],
+      "rotation": 10
+     },
+     {
+      "center": [
+       -11.0,
+       3.2
+      ],
+      "radius": [
+       3.6,
+       3.2
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        6.0,
+        -0.8
+       ],
+       [
+        14.2,
+        -2.0
+       ]
+      ],
+      "width": 3.6
+     },
+     {
+      "name": "portal_0",
+      "points": [
+       [
+        12.28,
+        -2.82
+       ],
+       [
+        10.87,
+        -4.23
+       ]
+      ],
+      "width": 4.78
+     },
+     {
+      "name": "portal_1",
+      "points": [
+       [
+        -13.11,
+        3.69
+       ],
+       [
+        -15.09,
+        1.71
+       ]
+      ],
+      "width": 4.2
+     },
+     {
+      "name": "portal_2",
+      "points": [
+       [
+        -6.64,
+        -5.04
+       ],
+       [
+        -10.84,
+        -9.24
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [
+     {
+      "center": [
+       3.0,
+       4.6
+      ],
+      "radius": [
+       2.2,
+       1.4
+      ],
+      "rotation": 15
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        -9.5,
+        3.0
+       ],
+       [
+        -5.0,
+        1.5
+       ],
+       [
+        0.0,
+        -0.5
+       ],
+       [
+        6.0,
+        -0.8
+       ],
+       [
+        14.0,
+        -2.0
+       ]
+      ],
+      "width": 2.4
+     }
+    ],
+    "props": [
+     {
+      "type": "boulder",
+      "position": [
+       -8.8,
+       -3.9
+      ],
+      "size": [
+       1.8,
+       1.1,
+       1.5
+      ],
+      "seed": 21
+     },
+     {
+      "type": "boulder",
+      "position": [
+       4.6,
+       -4.9
+      ],
+      "size": [
+       1.5,
+       0.9,
+       1.3
+      ],
+      "seed": 22
+     },
+     {
+      "type": "boulder",
+      "position": [
+       7.8,
+       3.6
+      ],
+      "size": [
+       1.2,
+       0.8,
+       1.0
+      ],
+      "seed": 23
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -13.2,
+       5.1
+      ],
+      "height": 1.8,
+      "radius": 0.42,
+      "seed": 24,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       1.6,
+       5.6
+      ],
+      "height": 1.2,
+      "radius": 0.3,
+      "seed": 25,
+      "solid": false
+     },
+     {
+      "type": "model",
+      "model": "portable_generator",
+      "position": [
+       4.8,
+       4.0
+      ],
+      "yaw": 20.0,
+      "scale": 1.0,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "tool_cart",
+      "position": [
+       -7.0,
+       -3.4
+      ],
+      "yaw": 15.0,
+      "scale": 1.0,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "vintage_radio_transceiver",
+      "position": [
+       -4.6,
+       -4.9
+      ],
+      "yaw": 180.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 0.8
+     },
+     {
+      "type": "model",
+      "model": "can_rusted",
+      "position": [
+       -1.4,
+       -4.75
+      ],
+      "yaw": 0.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 1.1
+     },
+     {
+      "type": "model",
+      "model": "can_rusted",
+      "position": [
+       -1.75,
+       -4.9
+      ],
+      "yaw": 40.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 1.1
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "name": "threshold_supply_rack",
+     "position": [
+      -2.5,
+      0.55,
+      -4.8
+     ],
+     "size": [
+      3.4,
+      1.1,
+      0.8
+     ],
+     "material": "rusted_grid",
+     "solid": true
+    },
+    {
+     "name": "threshold_supply_crate_a",
+     "position": [
+      -4.6,
+      0.4,
+      -4.9
+     ],
+     "size": [
+      0.9,
+      0.8,
+      0.9
+     ],
+     "material": "neutral",
+     "solid": true
+    },
+    {
+     "name": "threshold_bunk_frame",
+     "position": [
+      -9.8,
+      0.45,
+      -1.4
+     ],
+     "size": [
+      2.2,
+      0.9,
+      1.0
+     ],
+     "material": "neutral",
+     "solid": true
+    },
+    {
+     "name": "threshold_cable_spool",
+     "position": [
+      6.4,
+      0.45,
+      3.4
+     ],
+     "size": [
+      1.0,
+      0.9,
+      1.0
+     ],
+     "material": "cable_insulation",
+     "solid": true
+    }
+   ],
+   "lights": [
+    {
+     "position": [
+      -7.0,
+      3.0,
+      0.2
+     ],
+     "color": "f2b872",
+     "energy": 3.4,
+     "range": 11.0,
+     "shadow": true,
+     "fixture": true
+    },
+    {
+     "position": [
+      2.5,
+      3.0,
+      -2.6
+     ],
+     "color": "f2b872",
+     "energy": 3.0,
+     "range": 10.0,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      11.5,
+      3.0,
+      0.2
+     ],
+     "color": "f2b872",
+     "energy": 2.6,
+     "range": 9.0,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      3.0,
+      1.2,
+      4.6
+     ],
+     "color": "5fb8b0",
+     "energy": 1.5,
+     "range": 6.5,
+     "shadow": false,
+     "fixture": false
+    }
+   ],
+   "signs": [
+    {
+     "position": [
+      -5.8,
+      1.9,
+      3.2
+     ],
+     "text": "MOVE\nW A S D"
+    },
+    {
+     "position": [
+      0.4,
+      1.9,
+      1.4
+     ],
+     "text": "LOADOUT  I\ndrag gear onto a slot to equip\nLANTERN  T  ·  DASH  Q"
+    },
+    {
+     "position": [
+      -12.4,
+      1.9,
+      4.4
+     ],
+     "text": "LIFT  ·  G\nback up to the Outpost"
+    }
+   ],
+   "drill_sites": [],
+   "set": "res://data/world/sets/threshold.json"
+  },
+  {
+   "zone_id": "zone.shallows",
+   "name": "The Shallows",
+   "anchor": [
+    60.0,
+    0.0,
+    100.0
+   ],
+   "bounds": [
+    -26.0,
+    26.0,
+    -18.0,
+    18.0
+   ],
+   "arrival": [
+    41.0,
+    0.0,
+    102.4
+   ],
+   "cavern": {
+    "seed": 19,
+    "material": "res://assets/game/materials/geology/geology_shallows.tres",
+    "wall_height": 4.8,
+    "near_wall_height": 1.1,
+    "chambers": [
+     {
+      "center": [
+       -17.0,
+       2.0
+      ],
+      "radius": [
+       5.6,
+       4.6
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       3.0,
+       -3.0
+      ],
+      "radius": [
+       11.0,
+       8.0
+      ],
+      "rotation": -15
+     },
+     {
+      "center": [
+       -2.0,
+       10.0
+      ],
+      "radius": [
+       5.0,
+       3.4
+      ],
+      "rotation": 8
+     },
+     {
+      "center": [
+       20.0,
+       -10.0
+      ],
+      "radius": [
+       4.2,
+       4.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -13.0,
+        2.0
+       ],
+       [
+        -9.0,
+        -0.5
+       ],
+       [
+        -5.0,
+        -3.0
+       ]
+      ],
+      "width": 3.6
+     },
+     {
+      "points": [
+       [
+        11.0,
+        -5.5
+       ],
+       [
+        16.0,
+        -8.0
+       ],
+       [
+        19.0,
+        -10.0
+       ]
+      ],
+      "width": 3.4
+     },
+     {
+      "points": [
+       [
+        -2.0,
+        7.5
+       ],
+       [
+        -1.0,
+        3.5
+       ],
+       [
+        0.0,
+        -1.0
+       ]
+      ],
+      "width": 3.0
+     },
+     {
+      "name": "portal_0",
+      "points": [
+       [
+        -22.32,
+        1.28
+       ],
+       [
+        -23.73,
+        -0.13
+       ]
+      ],
+      "width": 4.78
+     },
+     {
+      "name": "portal_1",
+      "points": [
+       [
+        21.48,
+        -11.32
+       ],
+       [
+        20.07,
+        -12.73
+       ]
+      ],
+      "width": 4.78
+     }
+    ],
+    "wet": [
+     {
+      "center": [
+       9.0,
+       -6.0
+      ],
+      "radius": [
+       3.8,
+       2.6
+      ],
+      "rotation": 20
+     },
+     {
+      "center": [
+       -17.0,
+       5.5
+      ],
+      "radius": [
+       1.8,
+       1.2
+      ],
+      "rotation": 0
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        -19.0,
+        2.4
+       ],
+       [
+        -13.0,
+        2.0
+       ],
+       [
+        -5.0,
+        -3.0
+       ],
+       [
+        3.0,
+        -4.5
+       ],
+       [
+        11.0,
+        -5.5
+       ],
+       [
+        19.0,
+        -10.0
+       ]
+      ],
+      "width": 2.2
+     }
+    ],
+    "props": [
+     {
+      "type": "column",
+      "name": "keystone_column",
+      "position": [
+       3.0,
+       -2.4
+      ],
+      "height": 5.2,
+      "radius": 1.0,
+      "seed": 31
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -3.8,
+       -7.6
+      ],
+      "size": [
+       2.2,
+       1.3,
+       1.8
+      ],
+      "seed": 32
+     },
+     {
+      "type": "boulder",
+      "position": [
+       11.8,
+       0.4
+      ],
+      "size": [
+       1.6,
+       1.0,
+       1.4
+      ],
+      "seed": 33
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -18.5,
+       6.4
+      ],
+      "size": [
+       1.4,
+       0.9,
+       1.2
+      ],
+      "seed": 34
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       6.4,
+       0.8
+      ],
+      "height": 1.5,
+      "radius": 0.36,
+      "seed": 35,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       7.1,
+       1.4
+      ],
+      "height": 2.2,
+      "radius": 0.46,
+      "seed": 36,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -6.4,
+       11.4
+      ],
+      "height": 1.6,
+      "radius": 0.4,
+      "seed": 37,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       14.0,
+       -9.0
+      ],
+      "height": 1.3,
+      "radius": 0.3,
+      "seed": 38,
+      "solid": false
+     },
+     {
+      "type": "model",
+      "model": "boulder_01",
+      "position": [
+       -6.8,
+       -7.6
+      ],
+      "yaw": 40.0,
+      "scale": 1.0,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "namaqualand_boulder_05",
+      "position": [
+       7.6,
+       -10.4
+      ],
+      "yaw": 30.0,
+      "scale": 1.0,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "moon_rock_03",
+      "position": [
+       20.0,
+       -13.0
+      ],
+      "yaw": 0.0,
+      "scale": 14.0,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "lumenita_cluster",
+      "position": [
+       2.6,
+       10.2
+      ],
+      "yaw": 200.0,
+      "scale": 0.55,
+      "solid": false
+     },
+     {
+      "type": "model",
+      "model": "lumenita_shard",
+      "position": [
+       2.0,
+       11.3
+      ],
+      "yaw": 30.0,
+      "scale": 0.22,
+      "solid": false,
+      "light": false
+     },
+     {
+      "type": "model",
+      "model": "lumenita_shard",
+      "position": [
+       -3.2,
+       12.0
+      ],
+      "yaw": 110.0,
+      "scale": 0.16,
+      "solid": false,
+      "light": false
+     },
+     {
+      "type": "model",
+      "model": "lumenita_cluster",
+      "position": [
+       11.8,
+       -4.0
+      ],
+      "yaw": 70.0,
+      "scale": 0.35,
+      "solid": false
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "name": "shallows_survey_marker",
+     "position": [
+      -14.5,
+      0.7,
+      5.2
+     ],
+     "size": [
+      0.3,
+      1.4,
+      0.3
+     ],
+     "material": "warning_panel",
+     "solid": true
+    }
+   ],
+   "lights": [
+    {
+     "position": [
+      -18.5,
+      3.0,
+      4.2
+     ],
+     "color": "f2b872",
+     "energy": 3.0,
+     "range": 10.0,
+     "shadow": true,
+     "fixture": true
+    },
+    {
+     "position": [
+      -6.5,
+      3.0,
+      -1.2
+     ],
+     "color": "f2b872",
+     "energy": 2.4,
+     "range": 9.0,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      3.0,
+      4.8,
+      -2.4
+     ],
+     "color": "5fb8b0",
+     "energy": 2.2,
+     "range": 9.0,
+     "shadow": true,
+     "fixture": false
+    },
+    {
+     "position": [
+      9.0,
+      1.0,
+      -6.0
+     ],
+     "color": "5fb8b0",
+     "energy": 1.6,
+     "range": 6.5,
+     "shadow": false,
+     "fixture": false
+    },
+    {
+     "position": [
+      16.5,
+      3.0,
+      -7.0
+     ],
+     "color": "f2b872",
+     "energy": 2.6,
+     "range": 9.0,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      -2.0,
+      2.4,
+      9.5
+     ],
+     "color": "5fb8b0",
+     "energy": 1.2,
+     "range": 7.0,
+     "shadow": false,
+     "fixture": false
+    }
+   ],
+   "signs": [
+    {
+     "position": [
+      -8.4,
+      1.9,
+      1.7
+     ],
+     "text": "RETURN  ·  follow the amber lamps\nback to The Threshold"
+    },
+    {
+     "position": [
+      -1.0,
+      2.0,
+      10.6
+     ],
+     "text": "DRILL  F  (hold)\nore seam · ferrous samples"
+    },
+    {
+     "position": [
+      8.6,
+      2.0,
+      -3.0
+     ],
+     "text": "SCAVENGERS\nhold RMB to aim  ·  LMB to fire"
+    },
+    {
+     "position": [
+      3.0,
+      5.9,
+      -2.4
+     ],
+     "text": "THE KEYSTONE"
+    }
+   ],
+   "drill_sites": [
+    {
+     "entity_id": 90,
+     "content_id": "material.ore_limonite",
+     "position": [
+      59.0,
+      1.2,
+      113.7
+     ],
+     "size": [
+      3.0,
+      2.4,
+      0.8
+     ],
+     "rotation": 0.0,
+     "yield": {
+      "item_id": "item.ferrous_sample",
+      "quantity": 3,
+      "offset": [
+       0.0,
+       -1.4
+      ]
+     }
+    },
+    {
+     "entity_id": 95,
+     "content_id": "material.ore_limonite",
+     "position": [
+      42.980000000000004,
+      0.65,
+      97.12
+     ],
+     "size": [
+      1.8,
+      1.3,
+      1.0
+     ],
+     "rotation": 2.955,
+     "yield": {
+      "item_id": "item.ore.limonite",
+      "quantity": 2,
+      "offset": [
+       -0.26,
+       1.38
+      ]
+     }
+    },
+    {
+     "entity_id": 96,
+     "content_id": "material.ore_limonite",
+     "position": [
+      43.5,
+      0.6,
+      106.8
+     ],
+     "size": [
+      1.6,
+      1.2,
+      1.0
+     ],
+     "rotation": -0.191,
+     "yield": {
+      "item_id": "item.ore.limonite",
+      "quantity": 2,
+      "offset": [
+       0.27,
+       -1.37
+      ]
+     }
+    },
+    {
+     "entity_id": 97,
+     "content_id": "material.ore_hematite",
+     "position": [
+      64.13,
+      0.8,
+      88.71000000000001
+     ],
+     "size": [
+      2.2,
+      1.6,
+      1.1
+     ],
+     "rotation": 2.716,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       -0.58,
+       1.28
+      ]
+     }
+    },
+    {
+     "entity_id": 98,
+     "content_id": "material.lumenita",
+     "position": [
+      65.4,
+      0.75,
+      101.9
+     ],
+     "size": [
+      1.6,
+      1.5,
+      1.2
+     ],
+     "rotation": 3.1416,
+     "yield": {
+      "item_id": "item.mineral.lumenita",
+      "quantity": 1,
+      "offset": [
+       0.0,
+       1.4
+      ]
+     }
+    },
+    {
+     "entity_id": 99,
+     "content_id": "material.lumenita",
+     "position": [
+      53.01,
+      0.7,
+      109.42
+     ],
+     "size": [
+      1.6,
+      1.4,
+      1.0
+     ],
+     "rotation": -1.964,
+     "yield": {
+      "item_id": "item.mineral.lumenita",
+      "quantity": 1,
+      "offset": [
+       1.29,
+       0.54
+      ]
+     }
+    }
+   ],
+   "set": "res://data/world/sets/shallows.json"
+  },
+  {
+   "zone_id": "zone.excavation_c3",
+   "name": "Excavation C-3",
+   "anchor": [
+    120.0,
+    0.0,
+    100.0
+   ],
+   "bounds": [
+    -26.0,
+    26.0,
+    -18.0,
+    18.0
+   ],
+   "arrival": [
+    100.0,
+    0.0,
+    100.0
+   ],
+   "cavern": {
+    "seed": 41,
+    "material": "res://assets/game/materials/geology/geology_c3.tres",
+    "wall_height": 5.0,
+    "near_wall_height": 1.1,
+    "chambers": [
+     {
+      "center": [
+       -4.0,
+       0.0
+      ],
+      "radius": [
+       12.0,
+       8.5
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       14.0,
+       -2.0
+      ],
+      "radius": [
+       6.0,
+       6.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -24.0,
+        0.0
+       ],
+       [
+        -16.0,
+        0.0
+       ]
+      ],
+      "width": 3.6
+     },
+     {
+      "points": [
+       [
+        16.0,
+        -3.0
+       ],
+       [
+        23.0,
+        -3.0
+       ]
+      ],
+      "width": 3.4
+     },
+     {
+      "name": "portal_0",
+      "points": [
+       [
+        -23.32,
+        -0.92
+       ],
+       [
+        -24.73,
+        -2.33
+       ]
+      ],
+      "width": 4.78
+     }
+    ],
+    "wet": [
+     {
+      "center": [
+       -8.0,
+       6.0
+      ],
+      "radius": [
+       2.4,
+       1.5
+      ],
+      "rotation": 0
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        -24.0,
+        0.0
+       ],
+       [
+        -14.0,
+        0.0
+       ],
+       [
+        -4.0,
+        -0.5
+       ],
+       [
+        8.0,
+        -1.5
+       ],
+       [
+        16.0,
+        -3.0
+       ],
+       [
+        23.0,
+        -3.0
+       ]
+      ],
+      "width": 3.4
+     },
+     {
+      "points": [
+       [
+        -4.0,
+        -0.5
+       ],
+       [
+        -4.0,
+        5.0
+       ]
+      ],
+      "width": 3.0
+     }
+    ],
+    "props": [
+     {
+      "type": "boulder",
+      "position": [
+       -12.5,
+       6.2
+      ],
+      "size": [
+       2.0,
+       1.2,
+       1.7
+      ],
+      "seed": 51
+     },
+     {
+      "type": "boulder",
+      "position": [
+       6.5,
+       6.0
+      ],
+      "size": [
+       1.6,
+       1.0,
+       1.4
+      ],
+      "seed": 52
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -9.5,
+       -6.4
+      ],
+      "size": [
+       1.7,
+       1.0,
+       1.4
+      ],
+      "seed": 53
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -7.0,
+       7.2
+      ],
+      "height": 1.4,
+      "radius": 0.36,
+      "seed": 54,
+      "solid": false
+     },
+     {
+      "type": "model",
+      "model": "old_military_compressor",
+      "position": [
+       -9.2,
+       6.0
+      ],
+      "yaw": 0.0,
+      "scale": 1.0,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "power_box_01",
+      "position": [
+       -1.6,
+       -4.2
+      ],
+      "yaw": 0.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 1.0
+     },
+     {
+      "type": "model",
+      "model": "security_camera_01",
+      "position": [
+       4.4,
+       -4.25
+      ],
+      "yaw": 200.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 3.3
+     },
+     {
+      "type": "model",
+      "model": "industrial_pipe_lamp",
+      "position": [
+       9.0,
+       2.2
+      ],
+      "yaw": 0.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 1.0
+     },
+     {
+      "type": "model",
+      "model": "industrial_pipe_lamp",
+      "position": [
+       11.0,
+       2.2
+      ],
+      "yaw": 180.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 1.0
+     },
+     {
+      "type": "model",
+      "model": "rusted_wheel_rim_01",
+      "position": [
+       -0.4,
+       -6.2
+      ],
+      "yaw": 70.0,
+      "scale": 1.0,
+      "solid": false
+     },
+     {
+      "type": "model",
+      "model": "rusted_wheel_rim_01",
+      "position": [
+       -0.9,
+       -6.0
+      ],
+      "yaw": 95.0,
+      "scale": 1.0,
+      "solid": false
+     },
+     {
+      "type": "model",
+      "model": "tool_cart",
+      "position": [
+       -5.4,
+       -5.4
+      ],
+      "yaw": 5.0,
+      "scale": 1.0,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "excavation_bucket",
+      "position": [
+       18.6,
+       -0.4
+      ],
+      "yaw": -70.0,
+      "scale": 1.0,
+      "solid": true,
+      "pitch": -90.0
+     },
+     {
+      "type": "model",
+      "model": "lumenita_cluster",
+      "position": [
+       19.0,
+       -6.0
+      ],
+      "yaw": 150.0,
+      "scale": 0.6,
+      "solid": false
+     },
+     {
+      "type": "model",
+      "model": "lumenita_shard",
+      "position": [
+       22.6,
+       -1.2
+      ],
+      "yaw": 10.0,
+      "scale": 0.2,
+      "solid": false,
+      "light": false
+     }
+    ]
+   },
+   "pieces": [
+    {
+     "name": "c3_gantry_post_west",
+     "position": [
+      -1.6,
+      2.1,
+      -4.6
+     ],
+     "size": [
+      0.4,
+      4.2,
+      0.4
+     ],
+     "material": "hydraulic_steel",
+     "solid": true
+    },
+    {
+     "name": "c3_gantry_post_east",
+     "position": [
+      4.4,
+      2.1,
+      -4.6
+     ],
+     "size": [
+      0.4,
+      4.2,
+      0.4
+     ],
+     "material": "hydraulic_steel",
+     "solid": true
+    },
+    {
+     "name": "c3_gantry_beam",
+     "position": [
+      1.4,
+      4.2,
+      -4.6
+     ],
+     "size": [
+      6.6,
+      0.4,
+      0.5
+     ],
+     "material": "steel_plate",
+     "solid": false
+    },
+    {
+     "name": "c3_ore_hopper",
+     "position": [
+      1.4,
+      0.9,
+      -5.4
+     ],
+     "size": [
+      3.0,
+      1.8,
+      1.4
+     ],
+     "material": "rusted_shutter",
+     "solid": true
+    },
+    {
+     "name": "c3_rig_base",
+     "position": [
+      -8.0,
+      0.35,
+      -2.5
+     ],
+     "size": [
+      3.4,
+      0.7,
+      2.6
+     ],
+     "material": "industrial_floor",
+     "solid": true
+    },
+    {
+     "name": "c3_rig_mast",
+     "position": [
+      -8.0,
+      2.2,
+      -2.5
+     ],
+     "size": [
+      0.7,
+      3.0,
+      0.7
+     ],
+     "material": "hydraulic_steel",
+     "solid": true
+    },
+    {
+     "name": "c3_warning_barrier",
+     "position": [
+      10.0,
+      0.5,
+      2.2
+     ],
+     "size": [
+      3.0,
+      1.0,
+      0.3
+     ],
+     "material": "warning_panel",
+     "solid": true
+    },
+    {
+     "name": "c3_pipe_run",
+     "position": [
+      -10.0,
+      0.3,
+      4.4
+     ],
+     "size": [
+      5.0,
+      0.4,
+      0.4
+     ],
+     "material": "cable_insulation",
+     "solid": true
+    },
+    {
+     "name": "c3_supply_crate_a",
+     "position": [
+      -13.0,
+      0.5,
+      -3.2
+     ],
+     "size": [
+      1.0,
+      1.0,
+      1.0
+     ],
+     "material": "neutral",
+     "solid": true
+    },
+    {
+     "name": "c3_supply_crate_b",
+     "position": [
+      -13.0,
+      1.45,
+      -3.2
+     ],
+     "size": [
+      0.8,
+      0.9,
+      0.8
+     ],
+     "material": "rusted_grid",
+     "solid": true
+    }
+   ],
+   "lights": [
+    {
+     "position": [
+      -14.5,
+      3.0,
+      2.8
+     ],
+     "color": "f2b872",
+     "energy": 2.8,
+     "range": 10.0,
+     "shadow": true,
+     "fixture": true
+    },
+    {
+     "position": [
+      1.4,
+      3.6,
+      -1.6
+     ],
+     "color": "f0a85a",
+     "energy": 3.6,
+     "range": 12.0,
+     "shadow": true,
+     "fixture": true
+    },
+    {
+     "position": [
+      -8.0,
+      3.4,
+      0.5
+     ],
+     "color": "f0a85a",
+     "energy": 2.2,
+     "range": 8.0,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      9.5,
+      3.0,
+      4.2
+     ],
+     "color": "d6724a",
+     "energy": 1.8,
+     "range": 7.5,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      14.0,
+      2.4,
+      3.0
+     ],
+     "color": "5fb8b0",
+     "energy": 1.2,
+     "range": 8.0,
+     "shadow": false,
+     "fixture": false
+    },
+    {
+     "position": [
+      1.6,
+      2.6,
+      5.2
+     ],
+     "color": "f0a85a",
+     "energy": 1.6,
+     "range": 6.5,
+     "shadow": false,
+     "fixture": true
+    },
+    {
+     "position": [
+      -4.4,
+      2.6,
+      -6.8
+     ],
+     "color": "f0a85a",
+     "energy": 1.6,
+     "range": 6.5,
+     "shadow": false,
+     "fixture": true
+    }
+   ],
+   "signs": [
+    {
+     "position": [
+      -18.0,
+      2.4,
+      2.2
+     ],
+     "text": "EXCAVATION C-3\nauthorised personnel"
+    },
+    {
+     "position": [
+      -4.0,
+      2.2,
+      6.4
+     ],
+     "text": "ORE FACE\nDRILL  F  (hold)"
+    },
+    {
+     "position": [
+      12.5,
+      2.4,
+      -6.6
+     ],
+     "text": "DEEP SEAL\nbasalt · drill to breach"
+    }
+   ],
+   "drill_sites": [
+    {
+     "entity_id": 91,
+     "content_id": "material.ore_magnetite",
+     "position": [
+      116.0,
+      1.5,
+      108.9
+     ],
+     "size": [
+      3.0,
+      3.0,
+      0.8
+     ],
+     "rotation": 0.0,
+     "yield": {
+      "item_id": "item.ferrous_sample",
+      "quantity": 4,
+      "offset": [
+       0.0,
+       -1.3
+      ]
+     }
+    },
+    {
+     "entity_id": 92,
+     "content_id": "material.basalt",
+     "position": [
+      144.1,
+      1.6,
+      97.0
+     ],
+     "size": [
+      3.4,
+      3.2,
+      0.8
+     ],
+     "rotation": 1.570796,
+     "reveal_discovery_id": "discovery.c3_deep_survey_shaft"
+    },
+    {
+     "entity_id": 100,
+     "content_id": "material.ore_magnetite",
+     "position": [
+      123.43,
+      0.85,
+      106.35
+     ],
+     "size": [
+      2.2,
+      1.7,
+      1.1
+     ],
+     "rotation": 0.428,
+     "yield": {
+      "item_id": "item.ore.magnetite",
+      "quantity": 2,
+      "offset": [
+       -0.58,
+       -1.27
+      ]
+     }
+    },
+    {
+     "entity_id": 101,
+     "content_id": "material.ore_magnetite",
+     "position": [
+      114.14,
+      0.8,
+      92.01
+     ],
+     "size": [
+      2.0,
+      1.6,
+      1.1
+     ],
+     "rotation": 2.794,
+     "yield": {
+      "item_id": "item.ore.magnetite",
+      "quantity": 2,
+      "offset": [
+       -0.48,
+       1.32
+      ]
+     }
+    },
+    {
+     "entity_id": 102,
+     "content_id": "material.ore_hematite",
+     "position": [
+      107.48,
+      0.75,
+      93.97
+     ],
+     "size": [
+      1.8,
+      1.5,
+      1.0
+     ],
+     "rotation": -2.447,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.9,
+       1.08
+      ]
+     }
+    },
+    {
+     "entity_id": 103,
+     "content_id": "material.lumenita",
+     "position": [
+      135.53,
+      0.75,
+      103.62
+     ],
+     "size": [
+      1.6,
+      1.5,
+      1.0
+     ],
+     "rotation": 0.203,
+     "yield": {
+      "item_id": "item.mineral.lumenita",
+      "quantity": 1,
+      "offset": [
+       -0.28,
+       -1.37
+      ]
+     }
+    }
+   ],
+   "set": "res://data/world/sets/excavation_c3.json"
+  },
+  {
+   "zone_id": "zone.surface_scarp",
+   "name": "The Scarp",
+   "anchor": [
+    0.0,
+    0.0,
+    220.0
+   ],
+   "bounds": [
+    -48.0,
+    48.0,
+    -48.0,
+    48.0
+   ],
+   "arrival": [
+    0.0,
+    0.0,
+    223.0
+   ],
+   "surface": true,
+   "cavern": {
+    "seed": 101,
+    "cell": 0.5,
+    "material": "res://assets/game/materials/geology/geology_surface.tres",
+    "wall_height": 7.5,
+    "near_wall_height": 2.4,
+    "smooth": 4.0,
+    "warp": 2.2,
+    "chambers": [
+     {
+      "center": [
+       0.0,
+       0.0
+      ],
+      "radius": [
+       36.0,
+       32.0
+      ],
+      "rotation": 12
+     },
+     {
+      "center": [
+       26.0,
+       -26.0
+      ],
+      "radius": [
+       13.0,
+       10.0
+      ],
+      "rotation": -30
+     },
+     {
+      "center": [
+       -28.0,
+       24.0
+      ],
+      "radius": [
+       13.0,
+       11.0
+      ],
+      "rotation": 20
+     },
+     {
+      "center": [
+       -30.0,
+       -22.0
+      ],
+      "radius": [
+       9.0,
+       8.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        18.0,
+        -16.0
+       ],
+       [
+        26.0,
+        -26.0
+       ],
+       [
+        40.0,
+        -40.0
+       ]
+      ],
+      "width": 7.0
+     },
+     {
+      "points": [
+       [
+        -18.0,
+        14.0
+       ],
+       [
+        -28.0,
+        24.0
+       ],
+       [
+        -40.0,
+        38.0
+       ]
+      ],
+      "width": 7.0
+     },
+     {
+      "name": "portal_0",
+      "points": [
+       [
+        -37.13,
+        32.87
+       ],
+       [
+        -38.55,
+        31.45
+       ]
+      ],
+      "width": 5.88
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        0.0,
+        3.0
+       ],
+       [
+        6.0,
+        -4.0
+       ],
+       [
+        12.0,
+        -11.0
+       ],
+       [
+        26.0,
+        -26.0
+       ],
+       [
+        40.0,
+        -40.0
+       ]
+      ],
+      "width": 3.0
+     },
+     {
+      "points": [
+       [
+        0.0,
+        3.0
+       ],
+       [
+        -6.0,
+        6.0
+       ],
+       [
+        -10.0,
+        8.0
+       ],
+       [
+        -18.0,
+        14.0
+       ],
+       [
+        -28.0,
+        24.0
+       ],
+       [
+        -40.0,
+        38.0
+       ]
+      ],
+      "width": 3.0
+     },
+     {
+      "points": [
+       [
+        -2.0,
+        -2.0
+       ],
+       [
+        -14.0,
+        -12.0
+       ],
+       [
+        -30.0,
+        -22.0
+       ]
+      ],
+      "width": 2.2
+     }
+    ],
+    "props": [
+     {
+      "type": "boulder",
+      "position": [
+       -20.0,
+       -10.0
+      ],
+      "size": [
+       3.4,
+       2.2,
+       2.8
+      ],
+      "seed": 201
+     },
+     {
+      "type": "boulder",
+      "position": [
+       22.0,
+       10.0
+      ],
+      "size": [
+       2.8,
+       1.8,
+       2.6
+      ],
+      "seed": 202
+     },
+     {
+      "type": "column",
+      "name": "scarp_hoodoo",
+      "position": [
+       -6.0,
+       -24.0
+      ],
+      "height": 6.5,
+      "radius": 1.6,
+      "seed": 203
+     },
+     {
+      "type": "column",
+      "name": "scarp_hoodoo_b",
+      "position": [
+       30.0,
+       14.0
+      ],
+      "height": 5.0,
+      "radius": 1.3,
+      "seed": 204
+     },
+     {
+      "type": "boulder",
+      "position": [
+       8.0,
+       22.0
+      ],
+      "size": [
+       2.4,
+       1.4,
+       2.0
+      ],
+      "seed": 205
+     }
+    ],
+    "holes": [
+     {
+      "name": "lift_scarp",
+      "center": [
+       -2.34,
+       -0.94
+      ],
+      "size": [
+       5.68,
+       6.33
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [
+    {
+     "position": [
+      -10.0,
+      1.4,
+      8.0
+     ],
+     "color": "ff9a4a",
+     "energy": 2.2,
+     "range": 7.0,
+     "shadow": false,
+     "fixture": false
+    }
+   ],
+   "signs": [
+    {
+     "position": [
+      0.0,
+      2.6,
+      -5.0
+     ],
+     "text": "THE SCARP\nopen sky · edges lead on"
+    },
+    {
+     "position": [
+      -10.0,
+      2.0,
+      6.0
+     ],
+     "text": "SCAVENGER CAMP"
+    }
+   ],
+   "drill_sites": [
+    {
+     "entity_id": 124,
+     "content_id": "material.ore_limonite",
+     "position": [
+      -20.0,
+      0.9,
+      213.4
+     ],
+     "size": [
+      2.4,
+      1.8,
+      1.4
+     ],
+     "rotation": 0.6,
+     "yield": {
+      "item_id": "item.ore.limonite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ],
+   "prop_models": [
+    {
+     "model": "covered_car",
+     "position": [
+      12.0,
+      0.0,
+      -9.0
+     ],
+     "rotation": 25,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "covered_car",
+     "position": [
+      16.5,
+      0.0,
+      -13.5
+     ],
+     "rotation": 200,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "old_tyre",
+     "position": [
+      10.2,
+      0.0,
+      -6.4
+     ],
+     "rotation": 230.19364744483815,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "old_tyre",
+     "position": [
+      14.0,
+      0.0,
+      -6.0
+     ],
+     "rotation": 9.003871880160098,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "old_tyre",
+     "position": [
+      18.6,
+      0.0,
+      -10.0
+     ],
+     "rotation": 99.01055461288293,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "concrete_road_barrier_02",
+     "position": [
+      7.0,
+      0.0,
+      -12.0
+     ],
+     "rotation": 90,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "concrete_road_barrier_02",
+     "position": [
+      7.0,
+      0.0,
+      -14.0
+     ],
+     "rotation": 90,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "concrete_road_barrier_02",
+     "position": [
+      21.0,
+      0.0,
+      -4.0
+     ],
+     "rotation": 10,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "stone_fire_pit",
+     "position": [
+      -10.0,
+      0.0,
+      8.0
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "barrel_stove",
+     "position": [
+      -8.2,
+      0.0,
+      10.4
+     ],
+     "rotation": 80.3558657335762,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "barrel_01",
+     "position": [
+      -12.6,
+      0.0,
+      10.8
+     ],
+     "rotation": 265.1296370990445,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "barrel_03",
+     "position": [
+      -13.4,
+      0.0,
+      9.6
+     ],
+     "rotation": 243.61181547224808,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "propane_tank",
+     "position": [
+      -7.4,
+      0.0,
+      6.2
+     ],
+     "rotation": 321.18464437374433,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "industrial_pastic_container",
+     "position": [
+      -12.0,
+      0.0,
+      5.6
+     ],
+     "rotation": 31.297979746589814,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      -22,
+      0.0,
+      -14
+     ],
+     "rotation": 151.89185508669735,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      -30,
+      0.0,
+      4
+     ],
+     "rotation": 10.726998997705323,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      24,
+      0.0,
+      18
+     ],
+     "rotation": 78.7096709292972,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      30,
+      0.0,
+      -22
+     ],
+     "rotation": 181.92790371721046,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      -6,
+      0.0,
+      26
+     ],
+     "rotation": 9.552949086190905,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      6,
+      0.0,
+      -28
+     ],
+     "rotation": 71.58155424719345,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      -18,
+      0.0,
+      -24
+     ],
+     "rotation": 233.95839760062836,
+     "scale": 1.2,
+     "solid": true
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      26,
+      0.0,
+      6
+     ],
+     "rotation": 196.17893301715802,
+     "scale": 1.2,
+     "solid": true
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      -26,
+      0.0,
+      18
+     ],
+     "rotation": 79.35862393465081,
+     "scale": 1.2,
+     "solid": true
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      2,
+      0.0,
+      20
+     ],
+     "rotation": 212.13564619532713,
+     "scale": 1.2,
+     "solid": true
+    },
+    {
+     "model": "moon_rock_02",
+     "position": [
+      -4,
+      0.0,
+      -16
+     ],
+     "rotation": 291.39496440401757,
+     "scale": 6.0,
+     "solid": true
+    },
+    {
+     "model": "rock_07",
+     "position": [
+      19,
+      0.0,
+      12
+     ],
+     "rotation": 2.339553484101966,
+     "scale": 5.0,
+     "solid": true
+    },
+    {
+     "model": "moon_rock_03",
+     "position": [
+      -24,
+      0.0,
+      -6
+     ],
+     "rotation": 290.0949306598108,
+     "scale": 12.0,
+     "solid": true
+    },
+    {
+     "model": "moon_rock_02",
+     "position": [
+      -16,
+      0.0,
+      22
+     ],
+     "rotation": 251.33018219576167,
+     "scale": 6.0,
+     "solid": true
+    },
+    {
+     "model": "rock_07",
+     "position": [
+      28,
+      0.0,
+      -10
+     ],
+     "rotation": 122.49018594647707,
+     "scale": 5.0,
+     "solid": true
+    },
+    {
+     "model": "moon_rock_03",
+     "position": [
+      -32,
+      0.0,
+      -18
+     ],
+     "rotation": 55.97261993224136,
+     "scale": 12.0,
+     "solid": true
+    },
+    {
+     "model": "moon_rock_02",
+     "position": [
+      10,
+      0.0,
+      24
+     ],
+     "rotation": 344.5967059944412,
+     "scale": 6.0,
+     "solid": true
+    },
+    {
+     "model": "rock_07",
+     "position": [
+      34,
+      0.0,
+      8
+     ],
+     "rotation": 121.17403624054563,
+     "scale": 5.0,
+     "solid": true
+    }
+   ],
+   "set": "res://data/world/sets/surface_scarp.json",
+   "elevator": {
+    "position": [
+     -2.34,
+     -0.94
+    ],
+    "rotation": 45,
+    "size": [
+     2.68,
+     3.33
+    ],
+    "model": "outpost/elevator_car",
+    "model_scale": 0.7,
+    "deck": -2.6,
+    "well": {
+     "size": [
+      5.68,
+      6.33
+     ],
+     "offset": 0.0,
+     "depth": 16.0,
+     "gangway": 1.4,
+     "ledges": 3,
+     "ledge": 0.4,
+     "ledge_drop": 0.6
+    }
+   }
+  },
+  {
+   "zone_id": "zone.surface_saltpan",
+   "name": "The Saltpan",
+   "anchor": [
+    0.0,
+    0.0,
+    340.0
+   ],
+   "bounds": [
+    -48.0,
+    48.0,
+    -48.0,
+    48.0
+   ],
+   "arrival": [
+    -37.0,
+    0.0,
+    335.0
+   ],
+   "surface": true,
+   "cavern": {
+    "seed": 211,
+    "cell": 0.5,
+    "material": "res://assets/game/materials/geology/geology_saltpan.tres",
+    "wall_height": 6.0,
+    "near_wall_height": 2.0,
+    "smooth": 4.0,
+    "warp": 2.6,
+    "chambers": [
+     {
+      "center": [
+       0.0,
+       0.0
+      ],
+      "radius": [
+       38.0,
+       28.0
+      ],
+      "rotation": -8
+     },
+     {
+      "center": [
+       -20.0,
+       -28.0
+      ],
+      "radius": [
+       14.0,
+       9.0
+      ],
+      "rotation": 15
+     },
+     {
+      "center": [
+       30.0,
+       18.0
+      ],
+      "radius": [
+       12.0,
+       10.0
+      ],
+      "rotation": -20
+     },
+     {
+      "center": [
+       21.0,
+       -27.0
+      ],
+      "radius": [
+       15.0,
+       12.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -46.0,
+        -6.0
+       ],
+       [
+        -36.0,
+        -5.0
+       ],
+       [
+        -28.0,
+        -3.0
+       ]
+      ],
+      "width": 7.0
+     },
+     {
+      "points": [
+       [
+        2.0,
+        46.0
+       ],
+       [
+        1.0,
+        36.0
+       ],
+       [
+        0.0,
+        24.0
+       ]
+      ],
+      "width": 7.0
+     },
+     {
+      "name": "east_road",
+      "points": [
+       [
+        26.0,
+        0.0
+       ],
+       [
+        36.0,
+        -3.0
+       ],
+       [
+        47.5,
+        -4.0
+       ]
+      ],
+      "width": 7.5
+     },
+     {
+      "name": "portal_0",
+      "points": [
+       [
+        0.87,
+        40.87
+       ],
+       [
+        -0.55,
+        39.45
+       ]
+      ],
+      "width": 5.88
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -46.0,
+        -6.0
+       ],
+       [
+        -28.0,
+        -1.0
+       ],
+       [
+        -10.0,
+        2.0
+       ],
+       [
+        10.0,
+        0.0
+       ],
+       [
+        26.0,
+        6.0
+       ],
+       [
+        30.0,
+        16.0
+       ]
+      ],
+      "width": 4.0
+     },
+     {
+      "points": [
+       [
+        2.0,
+        46.0
+       ],
+       [
+        1.0,
+        30.0
+       ],
+       [
+        -2.0,
+        14.0
+       ],
+       [
+        -6.0,
+        3.0
+       ]
+      ],
+      "width": 3.0
+     },
+     {
+      "name": "east_road",
+      "points": [
+       [
+        14.0,
+        1.0
+       ],
+       [
+        26.0,
+        0.5
+       ],
+       [
+        36.0,
+        -2.6
+       ],
+       [
+        47.5,
+        -4.0
+       ]
+      ],
+      "width": 3.6
+     }
+    ],
+    "props": [
+     {
+      "type": "column",
+      "name": "saltpan_hoodoo",
+      "position": [
+       -24.0,
+       -26.0
+      ],
+      "height": 7.0,
+      "radius": 1.8,
+      "seed": 301
+     },
+     {
+      "type": "column",
+      "name": "saltpan_hoodoo_b",
+      "position": [
+       20.0,
+       -26.0
+      ],
+      "height": 5.5,
+      "radius": 1.4,
+      "seed": 302
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -2.0,
+       -14.0
+      ],
+      "size": [
+       3.0,
+       1.8,
+       2.6
+      ],
+      "seed": 303
+     },
+     {
+      "type": "boulder",
+      "position": [
+       34.0,
+       2.0
+      ],
+      "size": [
+       2.6,
+       1.6,
+       2.2
+      ],
+      "seed": 304
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [
+    {
+     "position": [
+      28.0,
+      1.4,
+      22.0
+     ],
+     "color": "ff9a4a",
+     "energy": 2.0,
+     "range": 7.0,
+     "shadow": false,
+     "fixture": false
+    },
+    {
+     "position": [
+      23.0,
+      3.2,
+      -26.0
+     ],
+     "color": "ffcf7a",
+     "energy": 2.2,
+     "range": 10.0,
+     "shadow": false,
+     "fixture": false,
+     "tag": "dig"
+    }
+   ],
+   "signs": [
+    {
+     "position": [
+      -30.0,
+      2.6,
+      -1.0
+     ],
+     "text": "THE SALTPAN\nthe convoy never reached the shaft"
+    },
+    {
+     "position": [
+      27.0,
+      2.4,
+      13.0
+     ],
+     "text": "SALT WORKS"
+    },
+    {
+     "position": [
+      17.0,
+      2.8,
+      -19.0
+     ],
+     "text": "SURFACE DIG  C-7\nmagnetite seam · drill it"
+    },
+    {
+     "position": [
+      37.5,
+      2.6,
+      -8.6
+     ],
+     "text": "EAST · FRONTIER ROAD\nto Dustline"
+    }
+   ],
+   "drill_sites": [
+    {
+     "entity_id": 134,
+     "content_id": "material.ore_magnetite",
+     "position": [
+      18.0,
+      1.0,
+      312.6
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.2,
+     "yield": {
+      "item_id": "item.ore.magnetite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ],
+   "prop_models": [
+    {
+     "model": "covered_car",
+     "position": [
+      -22,
+      0.0,
+      -2
+     ],
+     "rotation": 80,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "old_tyre",
+     "position": [
+      -19.4,
+      0.0,
+      0.0
+     ],
+     "rotation": 116.6,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "covered_car",
+     "position": [
+      -12,
+      0.0,
+      1
+     ],
+     "rotation": 95,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "old_tyre",
+     "position": [
+      -9.4,
+      0.0,
+      3.0
+     ],
+     "rotation": 54.3,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "covered_car",
+     "position": [
+      4,
+      0.0,
+      -1
+     ],
+     "rotation": 70,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "old_tyre",
+     "position": [
+      6.6,
+      0.0,
+      1.0
+     ],
+     "rotation": 234.3,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "covered_car",
+     "position": [
+      16,
+      0.0,
+      3
+     ],
+     "rotation": 110,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "old_tyre",
+     "position": [
+      18.6,
+      0.0,
+      5.0
+     ],
+     "rotation": 26.1,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "concrete_road_barrier_02",
+     "position": [
+      -28,
+      0.0,
+      4
+     ],
+     "rotation": 192.9,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "concrete_road_barrier_02",
+     "position": [
+      -6,
+      0.0,
+      6
+     ],
+     "rotation": 131.6,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "concrete_road_barrier_02",
+     "position": [
+      10,
+      0.0,
+      -6
+     ],
+     "rotation": 20.9,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "concrete_road_barrier_02",
+     "position": [
+      24,
+      0.0,
+      8
+     ],
+     "rotation": 182.7,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "barrel_01",
+     "position": [
+      26,
+      0.0,
+      16
+     ],
+     "rotation": 30.9,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "barrel_03",
+     "position": [
+      27.4,
+      0.0,
+      17.2
+     ],
+     "rotation": 25.1,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "barrel_01",
+     "position": [
+      28.6,
+      0.0,
+      15.4
+     ],
+     "rotation": 198.4,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "barrel_01",
+     "position": [
+      25,
+      0.0,
+      18.6
+     ],
+     "rotation": 297.7,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "industrial_pastic_container",
+     "position": [
+      30,
+      0.0,
+      19
+     ],
+     "rotation": 44.6,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "propane_tank",
+     "position": [
+      23.6,
+      0.0,
+      14.2
+     ],
+     "rotation": 80.4,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "barrel_stove",
+     "position": [
+      31.4,
+      0.0,
+      15.6
+     ],
+     "rotation": 225.9,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "stone_fire_pit",
+     "position": [
+      28,
+      0.0,
+      22
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      -18,
+      0.0,
+      -28
+     ],
+     "rotation": 341.2,
+     "scale": 1.3,
+     "solid": true
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      -26,
+      0.0,
+      -22
+     ],
+     "rotation": 207.8,
+     "scale": 1.3,
+     "solid": true
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      12,
+      0.0,
+      24
+     ],
+     "rotation": 142.8,
+     "scale": 1.3,
+     "solid": true
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      -32,
+      0.0,
+      16
+     ],
+     "rotation": 351.5,
+     "scale": 1.3,
+     "solid": true
+    },
+    {
+     "model": "dead_quiver_trunk",
+     "position": [
+      34,
+      0.0,
+      -16
+     ],
+     "rotation": 16.8,
+     "scale": 1.3,
+     "solid": true
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      -8,
+      0.0,
+      -20
+     ],
+     "rotation": 309.0,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      18,
+      0.0,
+      -22
+     ],
+     "rotation": 104.3,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "dead_tree_trunk",
+     "position": [
+      -30,
+      0.0,
+      -6
+     ],
+     "rotation": 51.9,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "moon_rock_02",
+     "position": [
+      6,
+      0.0,
+      18
+     ],
+     "rotation": 42.4,
+     "scale": 7.0,
+     "solid": true
+    },
+    {
+     "model": "rock_07",
+     "position": [
+      -16,
+      0.0,
+      20
+     ],
+     "rotation": 111.1,
+     "scale": 6.0,
+     "solid": true
+    },
+    {
+     "model": "moon_rock_03",
+     "position": [
+      30,
+      0.0,
+      -4
+     ],
+     "rotation": 293.8,
+     "scale": 14.0,
+     "solid": true
+    },
+    {
+     "model": "moon_rock_02",
+     "position": [
+      -36,
+      0.0,
+      -14
+     ],
+     "rotation": 65.1,
+     "scale": 7.0,
+     "solid": true
+    },
+    {
+     "model": "rock_07",
+     "position": [
+      14,
+      0.0,
+      -30
+     ],
+     "rotation": 209.4,
+     "scale": 6.0,
+     "solid": true
+    },
+    {
+     "model": "moon_rock_03",
+     "position": [
+      -4,
+      0.0,
+      -34
+     ],
+     "rotation": 230.0,
+     "scale": 14.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/excavator_arm",
+     "position": [
+      28.0,
+      0.0,
+      -27.0
+     ],
+     "rotation": 180,
+     "scale": 0.85,
+     "solid": true
+    },
+    {
+     "model": "outpost/drill_cone",
+     "position": [
+      12.5,
+      0.0,
+      -31
+     ],
+     "rotation": 40,
+     "scale": 0.8,
+     "solid": true
+    },
+    {
+     "model": "outpost/generator",
+     "position": [
+      14,
+      0.0,
+      -17
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/pylon",
+     "position": [
+      17.0,
+      0.0,
+      -36.0
+     ],
+     "rotation": 0,
+     "scale": 0.9,
+     "solid": true
+    },
+    {
+     "model": "outpost/cargo_pod",
+     "position": [
+      8,
+      0.0,
+      -22
+     ],
+     "rotation": 10,
+     "scale": 0.9,
+     "solid": true
+    },
+    {
+     "model": "outpost/cargo_pod",
+     "position": [
+      10.5,
+      0.0,
+      -19
+     ],
+     "rotation": -20,
+     "scale": 0.9,
+     "solid": true
+    },
+    {
+     "model": "outpost/crossing_sign",
+     "position": [
+      12,
+      0.0,
+      -14
+     ],
+     "rotation": 160,
+     "scale": 1.0,
+     "solid": false
+    },
+    {
+     "model": "outpost/lightpost",
+     "position": [
+      16,
+      0.0,
+      -21
+     ],
+     "rotation": 0,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/lightpost",
+     "position": [
+      28,
+      0.0,
+      -37
+     ],
+     "rotation": 180,
+     "scale": 1.0,
+     "solid": true
+    },
+    {
+     "model": "outpost/base_machine",
+     "position": [
+      21,
+      0.0,
+      -37
+     ],
+     "rotation": 0,
+     "scale": 0.7,
+     "solid": true
+    }
+   ],
+   "shaft": {
+    "center": [
+     24.0,
+     -30.0
+    ],
+    "radius": 3.6,
+    "rings": 4,
+    "light_color": "ffcf7a"
+   },
+   "set": "res://data/world/sets/surface_saltpan.json"
+  },
+  {
+   "zone_id": "zone.frontier_road_east",
+   "name": "Frontier Road",
+   "anchor": [
+    0.0,
+    0.0,
+    560.0
+   ],
+   "bounds": [
+    -91,
+    80,
+    -92,
+    78
+   ],
+   "arrival": [
+    -45.96,
+    0.0,
+    607.38
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "ffbf86",
+    "sun_energy": 0.8,
+    "sun_pitch": -32.0,
+    "sun_yaw": -25.0,
+    "fog_color": "b9946a",
+    "fog_density": 0.0045,
+    "ambient_energy": 0.28,
+    "sky_top": "5c6f80",
+    "sky_horizon": "cfa274",
+    "exposure": 0.8
+   },
+   "set": "res://data/world/sets/frontier_road_east.json",
+   "cavern": {
+    "seed": 515,
+    "cell": 0.9,
+    "material": "res://assets/game/materials/dustline/geology_frontier_road.tres",
+    "wall_height": 8.0,
+    "near_wall_height": 2.4,
+    "smooth": 4.0,
+    "warp": 2.6,
+    "chambers": [
+     {
+      "center": [
+       -28.28,
+       28.28
+      ],
+      "radius": [
+       26.0,
+       15.0
+      ],
+      "rotation": 45
+     },
+     {
+      "center": [
+       2.12,
+       -4.95
+      ],
+      "radius": [
+       24.0,
+       17.0
+      ],
+      "rotation": 45
+     },
+     {
+      "center": [
+       28.99,
+       -27.58
+      ],
+      "radius": [
+       22.0,
+       16.0
+      ],
+      "rotation": 45
+     },
+     {
+      "center": [
+       28.28,
+       -56.57
+      ],
+      "radius": [
+       24.0,
+       22.0
+      ],
+      "rotation": 45
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -57.28,
+        58.69
+       ],
+       [
+        -42.43,
+        42.43
+       ],
+       [
+        -26.16,
+        30.41
+       ],
+       [
+        -10.61,
+        10.61
+       ],
+       [
+        5.66,
+        -8.49
+       ],
+       [
+        26.16,
+        -23.33
+       ],
+       [
+        36.77,
+        -42.43
+       ],
+       [
+        28.28,
+        -56.57
+       ],
+       [
+        8.49,
+        -76.37
+       ]
+      ],
+      "width": 15.0
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -57.28,
+        58.69
+       ],
+       [
+        -42.07,
+        42.78
+       ],
+       [
+        -26.52,
+        30.05
+       ],
+       [
+        -13.44,
+        14.85
+       ],
+       [
+        -0.35,
+        -0.35
+       ],
+       [
+        14.5,
+        -13.79
+       ],
+       [
+        29.34,
+        -27.22
+       ],
+       [
+        36.06,
+        -40.31
+       ],
+       [
+        32.17,
+        -51.97
+       ],
+       [
+        18.38,
+        -66.47
+       ]
+      ],
+      "width": 5.0
+     }
+    ],
+    "props": [
+     {
+      "type": "column",
+      "name": "frontier_hoodoo_a",
+      "position": [
+       -25.46,
+       2.83
+      ],
+      "height": 7.5,
+      "radius": 1.8,
+      "seed": 511
+     },
+     {
+      "type": "column",
+      "name": "frontier_hoodoo_b",
+      "position": [
+       26.16,
+       -4.95
+      ],
+      "height": 6.0,
+      "radius": 1.5,
+      "seed": 512
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -31.11,
+       46.67
+      ],
+      "size": [
+       3.2,
+       1.8,
+       2.6
+      ],
+      "seed": 513
+     },
+     {
+      "type": "boulder",
+      "position": [
+       0.0,
+       -21.21
+      ],
+      "size": [
+       2.8,
+       1.6,
+       2.2
+      ],
+      "seed": 514
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [],
+   "workers": [
+    {
+     "id": "npc.frontier_waystation_keeper",
+     "position": [
+      2.83,
+      -5.66
+     ],
+     "rotation": -90.2,
+     "pose": "idle",
+     "class": "class.drift"
+    },
+    {
+     "id": "npc.frontier_caravan_guard",
+     "position": [
+      -6.36,
+      2.83
+     ],
+     "rotation": 141.1,
+     "pose": "idle",
+     "class": "class.foundry"
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.dustline",
+   "name": "Dustline",
+   "anchor": [
+    0.0,
+    0.0,
+    800.0
+   ],
+   "bounds": [
+    -74,
+    94,
+    -83,
+    85
+   ],
+   "arrival": [
+    33.59,
+    0.0,
+    833.59
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "ffb070",
+    "sun_energy": 0.78,
+    "sun_pitch": -34.0,
+    "sun_yaw": -20.0,
+    "fog_color": "a88e72",
+    "fog_density": 0.003,
+    "ambient_energy": 0.3,
+    "sky_top": "4a5a6a",
+    "sky_horizon": "b98d62",
+    "exposure": 0.8
+   },
+   "set": "res://data/world/sets/dustline.json",
+   "cavern": {
+    "seed": 77,
+    "cell": 1.0,
+    "material": "res://assets/game/materials/dustline/geology_dustline.tres",
+    "wall_height": 7.0,
+    "near_wall_height": 2.0,
+    "smooth": 4.0,
+    "warp": 2.0,
+    "chambers": [
+     {
+      "center": [
+       0.0,
+       0.0
+      ],
+      "radius": [
+       4.0,
+       4.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -69.3,
+        12.73
+       ],
+       [
+        21.21,
+        -77.78
+       ]
+      ],
+      "width": 26.0
+     },
+     {
+      "points": [
+       [
+        -56.57,
+        25.46
+       ],
+       [
+        33.94,
+        -65.05
+       ]
+      ],
+      "width": 26.0
+     },
+     {
+      "points": [
+       [
+        -43.84,
+        38.18
+       ],
+       [
+        46.67,
+        -52.33
+       ]
+      ],
+      "width": 26.0
+     },
+     {
+      "points": [
+       [
+        -31.11,
+        50.91
+       ],
+       [
+        59.4,
+        -39.6
+       ]
+      ],
+      "width": 26.0
+     },
+     {
+      "points": [
+       [
+        -18.38,
+        63.64
+       ],
+       [
+        72.12,
+        -26.87
+       ]
+      ],
+      "width": 26.0
+     },
+     {
+      "points": [
+       [
+        -7.07,
+        74.95
+       ],
+       [
+        83.44,
+        -15.56
+       ]
+      ],
+      "width": 26.0
+     },
+     {
+      "points": [
+       [
+        25.46,
+        25.46
+       ],
+       [
+        48.08,
+        48.08
+       ]
+      ],
+      "width": 22.0
+     }
+    ],
+    "wet": [],
+    "holes": [
+     {
+      "center": [
+       20.51,
+       6.36
+      ],
+      "size": [
+       4.0,
+       6.0
+      ],
+      "rotation": 45
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        48.08,
+        48.08
+       ],
+       [
+        29.7,
+        29.7
+       ],
+       [
+        19.09,
+        17.68
+       ],
+       [
+        6.72,
+        6.01
+       ]
+      ],
+      "width": 6.5
+     },
+     {
+      "points": [
+       [
+        -7.78,
+        9.19
+       ],
+       [
+        9.19,
+        -7.78
+       ]
+      ],
+      "width": 14.0
+     },
+     {
+      "points": [
+       [
+        -10.61,
+        -2.12
+       ],
+       [
+        -2.12,
+        -10.61
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "points": [
+       [
+        10.96,
+        -6.01
+       ],
+       [
+        22.27,
+        -17.32
+       ],
+       [
+        38.18,
+        -24.04
+       ],
+       [
+        51.27,
+        -33.59
+       ]
+      ],
+      "width": 5.5
+     },
+     {
+      "points": [
+       [
+        -7.07,
+        43.84
+       ],
+       [
+        12.73,
+        24.04
+       ]
+      ],
+      "width": 14.0
+     },
+     {
+      "points": [
+       [
+        16.26,
+        9.19
+       ],
+       [
+        19.09,
+        6.36
+       ]
+      ],
+      "width": 3.0
+     }
+    ],
+    "props": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [],
+   "workers": [
+    {
+     "id": "npc.dustline_gate_guard",
+     "position": [
+      28.71,
+      34.37
+     ],
+     "rotation": -85.3,
+     "pose": "idle",
+     "class": "class.foundry"
+    },
+    {
+     "id": "npc.dustline_inspector",
+     "position": [
+      27.01,
+      21.92
+     ],
+     "rotation": 158.2,
+     "pose": "idle",
+     "class": "class.relay"
+    },
+    {
+     "id": "npc.dustline_caravan_master",
+     "position": [
+      16.4,
+      28.28
+     ],
+     "rotation": -89.1,
+     "pose": "idle",
+     "class": "class.drift"
+    },
+    {
+     "id": "npc.dustline_caravaneer",
+     "position": [
+      39.39,
+      31.04
+     ],
+     "rotation": -49.2,
+     "pose": "carry",
+     "class": "class.verdant"
+    },
+    {
+     "id": "npc.dustline_trader_food",
+     "position": [
+      -10.11,
+      4.03
+     ],
+     "rotation": -90.2,
+     "pose": "idle",
+     "class": "class.verdant",
+     "model": "characters/dustline/old_man",
+     "height": 1.7
+    },
+    {
+     "id": "npc.dustline_trader_ammo",
+     "position": [
+      3.75,
+      -9.83
+     ],
+     "rotation": -90.8,
+     "pose": "idle",
+     "class": "class.foundry"
+    },
+    {
+     "id": "npc.dustline_trader_meds",
+     "position": [
+      -7.71,
+      8.56
+     ],
+     "rotation": -47.0,
+     "pose": "idle",
+     "class": "class.relay",
+     "model": "characters/dustline/street_medic",
+     "height": 1.74
+    },
+    {
+     "id": "npc.dustline_trader_general",
+     "position": [
+      7.99,
+      -8.56
+     ],
+     "rotation": 141.9,
+     "pose": "idle",
+     "class": "class.drift",
+     "model": "characters/dustline/ps2_drifter",
+     "height": 1.78
+    },
+    {
+     "id": "npc.dustline_board_keeper",
+     "position": [
+      -6.15,
+      4.74
+     ],
+     "rotation": -90.2,
+     "pose": "idle",
+     "class": "class.relay",
+     "model": "characters/dustline/old_man",
+     "height": 1.68
+    },
+    {
+     "id": "npc.dustline_exchange_clerk",
+     "position": [
+      -6.43,
+      -4.45
+     ],
+     "rotation": -90.5,
+     "pose": "idle",
+     "class": "class.relay"
+    },
+    {
+     "id": "npc.dustline_smith",
+     "position": [
+      18.24,
+      -18.95
+     ],
+     "rotation": 44.6,
+     "pose": "drill",
+     "class": "class.foundry"
+    },
+    {
+     "id": "npc.dustline_scrap_buyer",
+     "position": [
+      17.82,
+      -8.49
+     ],
+     "rotation": -90.7,
+     "pose": "idle",
+     "class": "class.drift",
+     "model": "characters/dustline/street_medic",
+     "height": 1.7
+    },
+    {
+     "id": "npc.dustline_east_guard",
+     "position": [
+      49.57,
+      -31.89
+     ],
+     "rotation": 132.9,
+     "pose": "idle",
+     "class": "class.foundry"
+    },
+    {
+     "id": "npc.dustline_warren_watch",
+     "position": [
+      23.76,
+      3.96
+     ],
+     "rotation": -90.2,
+     "pose": "idle",
+     "class": "class.foundry"
+    },
+    {
+     "id": "npc.dustline_townsfolk_a",
+     "position": [
+      2.12,
+      4.95
+     ],
+     "rotation": 70.9,
+     "pose": "idle",
+     "class": "class.verdant",
+     "model": "characters/dustline/ps2_drifter",
+     "height": 1.74
+    },
+    {
+     "id": "npc.dustline_townsfolk_b",
+     "position": [
+      18.24,
+      12.87
+     ],
+     "rotation": 54.9,
+     "pose": "carry",
+     "class": "class.drift"
+    }
+   ],
+   "computers": [
+    {
+     "id": "computer.dustline.exchange_depot",
+     "position": [
+      -8.2,
+      -2.55
+     ],
+     "rotation": 45
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.dragon_lair",
+   "name": "The Cinder Deep",
+   "anchor": [
+    300.0,
+    0.0,
+    560.0
+   ],
+   "bounds": [
+    -58,
+    58,
+    -58,
+    58
+   ],
+   "arrival": [
+    294.7,
+    0.0,
+    601.37
+   ],
+   "set": "res://data/world/sets/dragon_lair.json",
+   "cavern": {
+    "seed": 1010,
+    "material": "res://assets/game/materials/geology/geology_cinder_deep.tres",
+    "cell": 0.5,
+    "wall_height": 7.5,
+    "near_wall_height": 1.6,
+    "smooth": 3.0,
+    "warp": 1.6,
+    "chambers": [
+     {
+      "center": [
+       -6.01,
+       40.66
+      ],
+      "radius": [
+       8.0,
+       6.0
+      ],
+      "rotation": 55.0
+     },
+     {
+      "center": [
+       1.41,
+       1.41
+      ],
+      "radius": [
+       23.0,
+       14.5
+      ],
+      "rotation": 41.0
+     },
+     {
+      "center": [
+       -26.16,
+       12.02
+      ],
+      "radius": [
+       9.5,
+       7.5
+      ],
+      "rotation": 60.0
+     },
+     {
+      "center": [
+       17.68,
+       -26.16
+      ],
+      "radius": [
+       13.0,
+       10.5
+      ],
+      "rotation": 35.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -6.01,
+        40.66
+       ],
+       [
+        -4.95,
+        31.82
+       ],
+       [
+        -4.24,
+        25.46
+       ],
+       [
+        -3.18,
+        18.03
+       ]
+      ],
+      "width": 6.5
+     },
+     {
+      "points": [
+       [
+        -4.95,
+        41.72
+       ],
+       [
+        -6.36,
+        47.38
+       ],
+       [
+        -7.07,
+        50.91
+       ]
+      ],
+      "width": 4.2
+     },
+     {
+      "points": [
+       [
+        -13.44,
+        7.78
+       ],
+       [
+        -20.51,
+        9.19
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "points": [
+       [
+        11.31,
+        -12.73
+       ],
+       [
+        13.08,
+        -18.03
+       ]
+      ],
+      "width": 8.0
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -5.66,
+        41.01
+       ],
+       [
+        -4.95,
+        31.82
+       ],
+       [
+        -4.24,
+        25.46
+       ],
+       [
+        -2.83,
+        14.14
+       ],
+       [
+        1.41,
+        1.41
+       ],
+       [
+        9.19,
+        -10.61
+       ],
+       [
+        14.14,
+        -19.8
+       ],
+       [
+        17.68,
+        -26.16
+       ]
+      ],
+      "width": 3.2
+     }
+    ],
+    "props": [
+     {
+      "type": "column",
+      "name": "hall_spine",
+      "position": [
+       -6.36,
+       2.12
+      ],
+      "height": 7.0,
+      "radius": 1.5,
+      "seed": 1011
+     },
+     {
+      "type": "column",
+      "name": "nest_spine",
+      "position": [
+       19.45,
+       -15.2
+      ],
+      "height": 6.5,
+      "radius": 1.2,
+      "seed": 1012
+     },
+     {
+      "type": "boulder",
+      "position": [
+       13.08,
+       -2.47
+      ],
+      "size": [
+       2.6,
+       1.6,
+       2.2
+      ],
+      "seed": 1013
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -1.06,
+       14.5
+      ],
+      "size": [
+       2.0,
+       1.3,
+       1.8
+      ],
+      "seed": 1014
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -24.75,
+       17.68
+      ],
+      "size": [
+       2.2,
+       1.4,
+       1.9
+      ],
+      "seed": 1015
+     },
+     {
+      "type": "boulder",
+      "position": [
+       24.75,
+       -26.16
+      ],
+      "size": [
+       1.8,
+       1.1,
+       1.6
+      ],
+      "seed": 1016
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -6.72,
+       17.32
+      ],
+      "height": 2.2,
+      "radius": 0.5,
+      "seed": 1017,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       20.51,
+       -6.36
+      ],
+      "height": 1.8,
+      "radius": 0.45,
+      "seed": 1018,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -10.61,
+       40.31
+      ],
+      "height": 1.6,
+      "radius": 0.4,
+      "seed": 1019,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       19.8,
+       -36.77
+      ],
+      "height": 2.4,
+      "radius": 0.55,
+      "seed": 1020,
+      "solid": false
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": []
+  }
+ ],
+ "transitions": [
+  {
+   "entity_id": 50,
+   "from_zone": "zone.threshold",
+   "position": [
+    13.2,
+    0.0,
+    98.1
+   ],
+   "to_zone": "zone.shallows",
+   "arrival": [
+    41.0,
+    0.0,
+    102.4
+   ],
+   "label": "THE SHALLOWS",
+   "presentation": "metro",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 51,
+   "from_zone": "zone.shallows",
+   "position": [
+    38.6,
+    0.0,
+    102.2
+   ],
+   "to_zone": "zone.threshold",
+   "arrival": [
+    10.8,
+    0.0,
+    98.4
+   ],
+   "label": "RETURN · THE THRESHOLD",
+   "presentation": "metro",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 52,
+   "from_zone": "zone.shallows",
+   "position": [
+    82.4,
+    0.0,
+    89.6
+   ],
+   "to_zone": "zone.excavation_c3",
+   "arrival": [
+    100.0,
+    0.0,
+    100.0
+   ],
+   "label": "EXCAVATION C-3",
+   "presentation": "metro",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 53,
+   "from_zone": "zone.excavation_c3",
+   "position": [
+    97.6,
+    0.0,
+    100.0
+   ],
+   "to_zone": "zone.shallows",
+   "arrival": [
+    78.8,
+    0.0,
+    90.4
+   ],
+   "label": "RETURN · THE SHALLOWS",
+   "presentation": "metro",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 54,
+   "from_zone": "zone.threshold",
+   "position": [
+    -12.4,
+    0.0,
+    104.4
+   ],
+   "to_zone": "zone.outpost",
+   "arrival": [
+    -138.26,
+    0.0,
+    103.74
+   ],
+   "label": "LIFT · THE OUTPOST",
+   "arrival_rotation": 3.927,
+   "presentation": "lift",
+   "label_offset": [
+    -1.4,
+    2.6,
+    -1.4
+   ]
+  },
+  {
+   "entity_id": 55,
+   "from_zone": "zone.prototype_outpost",
+   "position": [
+    -9.0,
+    0.0,
+    -4.0
+   ],
+   "to_zone": "zone.threshold",
+   "arrival": [
+    -10.4,
+    0.0,
+    103.4
+   ],
+   "label": "THE THRESHOLD"
+  },
+  {
+   "entity_id": 120,
+   "from_zone": "zone.threshold",
+   "position": [
+    -6.0,
+    0.0,
+    95.6
+   ],
+   "to_zone": "zone.surface_scarp",
+   "arrival": [
+    0.0,
+    0.0,
+    223.6
+   ],
+   "label": "SURFACE · THE SCARP",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 121,
+   "from_zone": "zone.surface_scarp",
+   "position": [
+    0.0,
+    0.0,
+    221.4
+   ],
+   "to_zone": "zone.threshold",
+   "arrival": [
+    -6.0,
+    0.0,
+    97.4
+   ],
+   "label": "DESCEND · THE THRESHOLD",
+   "presentation": "lift",
+   "label_offset": [
+    -2.34,
+    1.8,
+    -2.34
+   ]
+  },
+  {
+   "entity_id": 125,
+   "from_zone": "zone.surface_scarp",
+   "position": [
+    36.0,
+    0.0,
+    184.0
+   ],
+   "to_zone": "zone.surface_saltpan",
+   "arrival": [
+    -37.0,
+    0.0,
+    335.0
+   ],
+   "label": "NE CANYON · THE SALTPAN"
+  },
+  {
+   "entity_id": 126,
+   "from_zone": "zone.surface_saltpan",
+   "position": [
+    -42.0,
+    0.0,
+    334.0
+   ],
+   "to_zone": "zone.surface_scarp",
+   "arrival": [
+    32.0,
+    0.0,
+    188.0
+   ],
+   "label": "WEST CANYON · THE SCARP"
+  },
+  {
+   "entity_id": 127,
+   "from_zone": "zone.surface_scarp",
+   "position": [
+    -36.0,
+    0.0,
+    254.0
+   ],
+   "to_zone": "zone.surface_saltpan",
+   "arrival": [
+    1.0,
+    0.0,
+    377.0
+   ],
+   "label": "SW CANYON · THE SALTPAN",
+   "presentation": "metro",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 128,
+   "from_zone": "zone.surface_saltpan",
+   "position": [
+    2.0,
+    0.0,
+    382.0
+   ],
+   "to_zone": "zone.surface_scarp",
+   "arrival": [
+    -32.0,
+    0.0,
+    250.0
+   ],
+   "label": "SOUTH CANYON · THE SCARP",
+   "presentation": "metro",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 142,
+   "from_zone": "zone.outpost",
+   "position": [
+    -139.03,
+    0.0,
+    102.97
+   ],
+   "to_zone": "zone.threshold",
+   "arrival": [
+    -10.4,
+    0.0,
+    103.4
+   ],
+   "label": "SHAFT LIFT · DESCEND TO THE THRESHOLD",
+   "presentation": "lift",
+   "label_offset": [
+    -2.34,
+    1.8,
+    -2.34
+   ]
+  },
+  {
+   "entity_id": 230,
+   "from_zone": "zone.frontier_road_east",
+   "position": [
+    -6.0,
+    0.0,
+    536.4
+   ],
+   "to_zone": "zone.dragon_lair",
+   "arrival": [
+    294.7,
+    0.0,
+    601.37
+   ],
+   "arrival_rotation": -0.066,
+   "label": "THE CINDER DEEP · DRAGON LAIR"
+  },
+  {
+   "entity_id": 231,
+   "from_zone": "zone.dragon_lair",
+   "position": [
+    292.93,
+    0.0,
+    610.91
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    -6.0,
+    0.0,
+    539.6
+   ],
+   "arrival_rotation": 0.0,
+   "label": "CLIMB OUT · FRONTIER ROAD",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 160,
+   "from_zone": "zone.surface_saltpan",
+   "position": [
+    45.0,
+    0.0,
+    336.0
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    -45.96,
+    0.0,
+    607.38
+   ],
+   "arrival_rotation": -0.785,
+   "label": "EAST · FRONTIER ROAD"
+  },
+  {
+   "entity_id": 161,
+   "from_zone": "zone.frontier_road_east",
+   "position": [
+    -49.85,
+    0.0,
+    611.27
+   ],
+   "to_zone": "zone.surface_saltpan",
+   "arrival": [
+    41.0,
+    0.0,
+    336.6
+   ],
+   "arrival_rotation": 1.571,
+   "label": "WEST · THE SALTPAN",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 162,
+   "from_zone": "zone.frontier_road_east",
+   "position": [
+    19.8,
+    0.0,
+    494.95
+   ],
+   "to_zone": "zone.dustline",
+   "arrival": [
+    33.59,
+    0.0,
+    833.59
+   ],
+   "arrival_rotation": 0.785,
+   "label": "DUSTLINE GATE",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 163,
+   "from_zone": "zone.dustline",
+   "position": [
+    37.83,
+    0.0,
+    837.83
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    23.69,
+    0.0,
+    498.84
+   ],
+   "arrival_rotation": -2.431,
+   "label": "FRONTIER ROAD · WEST",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  }
+ ],
+ "entities": [
+  {
+   "entity_id": 60,
+   "entity_type": 4,
+   "content_id": "item.ferrous_sample",
+   "zone_id": "zone.shallows",
+   "position": [
+    66.0,
+    0.0,
+    91.6
+   ],
+   "quantity": 1
+  },
+  {
+   "entity_id": 61,
+   "entity_type": 4,
+   "content_id": "item.ferrous_sample",
+   "zone_id": "zone.shallows",
+   "position": [
+    55.4,
+    0.0,
+    94.6
+   ],
+   "quantity": 1
+  },
+  {
+   "entity_id": 62,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.shallows",
+   "position": [
+    70.0,
+    0.0,
+    98.4
+   ]
+  },
+  {
+   "entity_id": 63,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.shallows",
+   "position": [
+    71.6,
+    0.0,
+    92.4
+   ]
+  },
+  {
+   "entity_id": 64,
+   "entity_type": 2,
+   "content_id": "npc.excavation_enforcer",
+   "zone_id": "zone.excavation_c3",
+   "position": [
+    126.0,
+    0.0,
+    102.4
+   ]
+  },
+  {
+   "entity_id": 65,
+   "entity_type": 2,
+   "content_id": "npc.excavation_enforcer",
+   "zone_id": "zone.excavation_c3",
+   "position": [
+    132.0,
+    0.0,
+    96.0
+   ]
+  },
+  {
+   "entity_id": 66,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.excavation_c3",
+   "position": [
+    111.0,
+    0.0,
+    94.5
+   ]
+  },
+  {
+   "entity_id": 122,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.surface_scarp",
+   "position": [
+    -9.0,
+    0.0,
+    229.0
+   ]
+  },
+  {
+   "entity_id": 123,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.surface_scarp",
+   "position": [
+    14.0,
+    0.0,
+    213.0
+   ]
+  },
+  {
+   "entity_id": 129,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.surface_saltpan",
+   "position": [
+    -14.0,
+    0.0,
+    344.0
+   ]
+  },
+  {
+   "entity_id": 130,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.surface_saltpan",
+   "position": [
+    6.0,
+    0.0,
+    336.0
+   ]
+  },
+  {
+   "entity_id": 131,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.surface_saltpan",
+   "position": [
+    25.0,
+    0.0,
+    354.0
+   ]
+  },
+  {
+   "entity_id": 132,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.surface_saltpan",
+   "position": [
+    -11.0,
+    0.0,
+    343.4
+   ],
+   "quantity": 3
+  },
+  {
+   "entity_id": 133,
+   "entity_type": 4,
+   "content_id": "item.relic_fragment",
+   "zone_id": "zone.surface_saltpan",
+   "position": [
+    29.0,
+    0.0,
+    361.0
+   ],
+   "quantity": 1
+  },
+  {
+   "entity_id": 146,
+   "entity_type": 4,
+   "content_id": "item.container.supply_crate",
+   "zone_id": "zone.outpost",
+   "position": [
+    -134.29999999999998,
+    0.16,
+    101.48
+   ],
+   "quantity": 1
+  },
+  {
+   "entity_id": 147,
+   "entity_type": 4,
+   "content_id": "item.container.gear_crate",
+   "zone_id": "zone.outpost",
+   "position": [
+    -132.1,
+    0.16,
+    101.48
+   ],
+   "quantity": 1
+  },
+  {
+   "entity_id": 164,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    21.21,
+    0.0,
+    537.37
+   ]
+  },
+  {
+   "entity_id": 165,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    29.34,
+    0.0,
+    537.02
+   ]
+  },
+  {
+   "entity_id": 166,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    27.22,
+    0.0,
+    529.24
+   ]
+  },
+  {
+   "entity_id": 168,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    -24.4,
+    0.0,
+    588.64
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 169,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    27.93,
+    0.0,
+    540.55
+   ],
+   "quantity": 3
+  }
+ ],
+ "hazards": [],
+ "discoveries": [
+  {
+   "entity_id": 94,
+   "content_id": "discovery.c3_deep_survey_shaft",
+   "zone_id": "zone.excavation_c3",
+   "position": [
+    141.4,
+    0.0,
+    97.0
+   ],
+   "spawn_on_start": false
+  }
+ ],
+ "spawn_groups": [
+  {
+   "id": "spawn.shallows_crawler_nest",
+   "zone_id": "zone.shallows",
+   "center": [
+    78.0,
+    91.6
+   ],
+   "radius": 1.3,
+   "members": [
+    {
+     "content_id": "npc.burrowborn_crawler",
+     "count": 4
+    }
+   ],
+   "threat_budget": 10,
+   "respawn_seconds": [
+    25.0,
+    45.0
+   ],
+   "safe_radius": 9.0
+  },
+  {
+   "id": "spawn.shallows_ravager_den",
+   "zone_id": "zone.shallows",
+   "center": [
+    56.0,
+    92.0
+   ],
+   "radius": 0.0,
+   "members": [
+    {
+     "content_id": "npc.burrowborn_ravager",
+     "count": 1
+    }
+   ],
+   "threat_budget": 10,
+   "respawn_seconds": [
+    90.0,
+    150.0
+   ],
+   "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.cinder_hall",
+   "zone_id": "zone.dragon_lair",
+   "center": [
+    301.41,
+    567.07
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     301.41,
+     567.07
+    ],
+    [
+     302.83,
+     550.1
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.dragon",
+     "count": 2
+    }
+   ],
+   "threat_budget": 16,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.cinder_gallery",
+   "zone_id": "zone.dragon_lair",
+   "center": [
+    274.54,
+    572.73
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     274.54,
+     572.73
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.dragon",
+     "count": 1
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.cinder_nest_mouth",
+   "zone_id": "zone.dragon_lair",
+   "center": [
+    313.08,
+    544.09
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     313.08,
+     544.09
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.dragon",
+     "count": 1
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    70.0,
+    100.0
+   ],
+   "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.cinder_nest",
+   "zone_id": "zone.dragon_lair",
+   "center": [
+    317.68,
+    535.25
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     317.68,
+     535.25
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.greater_dragon",
+     "count": 1
+    }
+   ],
+   "threat_budget": 18,
+   "respawn_seconds": [
+    150.0,
+    210.0
+   ],
+   "safe_radius": 14.0
+  }
+ ]
+}

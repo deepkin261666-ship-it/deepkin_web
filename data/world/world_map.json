@@ -2,7 +2,7 @@
   "$schema_note": "DEEPKIN world graph — single source of truth for the game and the web wiki. See docs/design/WORLD_MAP.md.",
   "version": 1,
   "status": "provisional",
-  "updated": "2026-10-09",
+  "updated": "2026-10-10",
   "image": {
     "file": "docs/design/world_map_prototype.jpg",
     "width": 1312,
@@ -343,6 +343,8 @@
       "kind": "outpost",
       "biome": "plains",
       "layer": "underground",
+      "depth_m": 60,
+      "level": -1,
       "tier": 1,
       "danger": "safe",
       "status": "playable",
@@ -418,6 +420,8 @@
       "kind": "route",
       "biome": "caves",
       "layer": "underground",
+      "depth_m": 120,
+      "level": -1,
       "tier": 1,
       "danger": "low",
       "status": "playable",
@@ -455,6 +459,8 @@
       "kind": "wild",
       "biome": "wetlands",
       "layer": "underground",
+      "depth_m": 120,
+      "level": -1,
       "tier": 1,
       "danger": "low",
       "status": "playable",
@@ -522,6 +528,9 @@
       "kind": "dungeon",
       "biome": "caves",
       "layer": "underground",
+      "depth_m": 140,
+      "level": -1,
+      "level_label": "FLOOR 1",
       "tier": 2,
       "danger": "medium",
       "status": "playable",
@@ -625,6 +634,9 @@
       "kind": "dungeon",
       "biome": "caves",
       "layer": "underground",
+      "depth_m": 340,
+      "level": -2,
+      "level_label": "FLOOR 2",
       "tier": 3,
       "danger": "high",
       "status": "planned",
@@ -653,6 +665,9 @@
       "kind": "dungeon",
       "biome": "anomaly",
       "layer": "underground",
+      "depth_m": 520,
+      "level": -3,
+      "level_label": "FLOOR 3",
       "tier": 4,
       "danger": "high",
       "status": "planned",
@@ -681,6 +696,8 @@
       "kind": "wild",
       "biome": "desert",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 1,
       "danger": "low",
       "status": "playable",
@@ -749,6 +766,8 @@
       "kind": "route",
       "biome": "desert",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 1,
       "danger": "low",
       "status": "playable",
@@ -823,6 +842,8 @@
       "kind": "route",
       "biome": "plains",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 2,
       "danger": "medium",
       "status": "playable",
@@ -876,7 +897,8 @@
       "connections": [
         "conn.saltpan_frontier_east",
         "conn.frontier_east_dustline",
-        "conn.sump_frontier_east"
+        "conn.sump_frontier_east",
+        "conn.frontier_east_dragon_lair"
       ],
       "game": {
         "file": "data/starting_region.json",
@@ -889,6 +911,8 @@
       "kind": "city",
       "biome": "desert",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 2,
       "danger": "safe",
       "status": "playable",
@@ -975,6 +999,8 @@
       "kind": "wild",
       "biome": "wetlands",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 2,
       "danger": "medium",
       "status": "planned",
@@ -1050,6 +1076,8 @@
       "kind": "city",
       "biome": "forest",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 3,
       "danger": "safe",
       "status": "planned",
@@ -1117,6 +1145,8 @@
       "kind": "city",
       "biome": "caves",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 3,
       "danger": "safe",
       "status": "planned",
@@ -1179,6 +1209,8 @@
       "kind": "city",
       "biome": "desert",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 3,
       "danger": "safe",
       "status": "planned",
@@ -1237,6 +1269,8 @@
       "kind": "wild",
       "biome": "snow",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 5,
       "danger": "high",
       "status": "planned",
@@ -1313,6 +1347,8 @@
       "kind": "wild",
       "biome": "snow",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 5,
       "danger": "high",
       "status": "planned",
@@ -1398,6 +1434,8 @@
       "kind": "wild",
       "biome": "desert",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 4,
       "danger": "high",
       "status": "planned",
@@ -1467,6 +1505,8 @@
       "kind": "wild",
       "biome": "desert",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 3,
       "danger": "medium",
       "status": "planned",
@@ -1544,6 +1584,8 @@
       "kind": "dungeon",
       "biome": "caves",
       "layer": "underground",
+      "depth_m": 80,
+      "level": -1,
       "tier": 3,
       "danger": "medium",
       "status": "planned",
@@ -1610,6 +1652,8 @@
       "kind": "wild",
       "biome": "mountains",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 3,
       "danger": "medium",
       "status": "planned",
@@ -1680,6 +1724,8 @@
       "kind": "dungeon",
       "biome": "anomaly",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 4,
       "danger": "high",
       "status": "planned",
@@ -1750,6 +1796,8 @@
       "kind": "dungeon",
       "biome": "anomaly",
       "layer": "underground",
+      "depth_m": 600,
+      "level": -3,
       "tier": 6,
       "danger": "deadly",
       "status": "planned",
@@ -1823,6 +1871,8 @@
       "kind": "dungeon",
       "biome": "caves",
       "layer": "underground",
+      "depth_m": 220,
+      "level": -2,
       "tier": 3,
       "danger": "medium",
       "status": "planned",
@@ -1897,6 +1947,8 @@
       "kind": "wild",
       "biome": "wetlands",
       "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
       "tier": 3,
       "danger": "medium",
       "status": "planned",
@@ -1970,6 +2022,46 @@
       "label": [
         0.7843,
         0.5768
+      ]
+    },
+    {
+      "id": "zone.dragon_lair",
+      "name": "The Cinder Deep",
+      "kind": "wild",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 90,
+      "level": -1,
+      "tier": 3,
+      "danger": "high",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.frontier_road_east",
+        "depth": 1,
+        "marker": [
+          0.5975,
+          0.6395
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. A dragon hunting ground under a cleft off Frontier Road east: galleries of an older people swallowed by basalt, four Dragons on the hunt and a Greater Dragon on its nest. Come in, hunt, take the loot and climb out; they are back a minute or two later.",
+        "es": "PROVISIONAL. Un coto de caza de dragones bajo una grieta del Frontier Road este: galerías de un pueblo antiguo tragadas por el basalto, cuatro Dragones cazando y un Gran Dragón en su nido. Entrás, cazás, juntás el botín y salís; vuelven a aparecer un minuto o dos después."
+      },
+      "subtitle": {
+        "en": "Dragon lair · hunting ground",
+        "es": "Guarida de dragones · coto de caza"
+      },
+      "size_m": [
+        96,
+        70
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.dragon_lair"
+      },
+      "connections": [
+        "conn.frontier_east_dragon_lair"
       ]
     }
   ],
@@ -2694,6 +2786,27 @@
           "exit": "WEST · THE ABYSS",
           "edge": "W",
           "edge_fixed": true
+        }
+      ]
+    },
+    {
+      "id": "conn.frontier_east_dragon_lair",
+      "kind": "tunnel",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.frontier_road_east",
+          "exit": "THE CINDER DEEP · DRAGON LAIR",
+          "edge": "CLEFT",
+          "edge_fixed": true,
+          "transition": 230
+        },
+        {
+          "zone": "zone.dragon_lair",
+          "exit": "CLIMB OUT · FRONTIER ROAD",
+          "edge": "CLIMB",
+          "edge_fixed": true,
+          "transition": 231
         }
       ]
     }

@@ -1,0 +1,10 @@
+{
+ "CELLS": 40,
+ "COIN_ITEM_ID": "item.currency.metal_coin",
+ "NETWORK_ADDRESS": "261.6.66",
+ "POUCH_CELLS": 4,
+ "REACH": 2.5,
+ "SCRAP_COMPONENT_ID": "item.scrap_component",
+ "STARTER_AMMUNITION_CRATE_QUANTITY": 100,
+ "STARTER_AMMUNITION_ID": "item.ammunition.field_round"
+}

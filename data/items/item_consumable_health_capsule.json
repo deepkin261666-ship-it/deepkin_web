@@ -1,0 +1,12 @@
+{
+  "id": "item.consumable.health_capsule",
+  "display_name": "Health Capsule",
+  "description": "A sealed relay cell refilled with coagulant and stimulant gel. Crack it against the skin to restore 40 health. One use; the body needs a few seconds before the next one takes.",
+  "visual_id": "visual.consumable.health_capsule",
+  "properties": {
+    "heal_amount": 40,
+    "use_cooldown": 5.0,
+    "stack_size": 10
+  },
+  "weight": 0.2
+}

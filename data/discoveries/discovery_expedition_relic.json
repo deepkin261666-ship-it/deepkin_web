@@ -1,0 +1,6 @@
+{
+  "id": "discovery.expedition_relic",
+  "display_name": "Deep Stratum Relay",
+  "category": "discovery.category.ancient_technology",
+  "visual_id": "ancient_machine"
+}

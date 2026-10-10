@@ -1,0 +1,6 @@
+{
+  "id": "discovery.relay_cache",
+  "display_name": "Relay Cache",
+  "category": "discovery.signal",
+  "visual_id": "relay_cache"
+}

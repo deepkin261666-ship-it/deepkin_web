@@ -1,0 +1,18 @@
+{
+  "comment": "Top-centre field banner per zone (2026-10-10): title / subtitle / objective, read by client/zone_banner.gd. A zone without an entry falls back to its floor name; the dev fixture title is only for zone.prototype_outpost.",
+  "zones": {
+    "zone.outpost": {"title": "THE OUTPOST", "subtitle": "SETTLEMENT", "objective": "THE SHAFT LIFT GOES DOWN · WHAT LIES BELOW"},
+    "zone.threshold": {"title": "THE THRESHOLD", "subtitle": "SHELTER", "objective": "EAST TO THE SHALLOWS · LIFT BACK UP"},
+    "zone.shallows": {"title": "THE SHALLOWS", "subtitle": "CAVERN", "objective": "GATHER ORE · CLEAR THE SCAVENGERS"},
+    "zone.excavation_c3": {"title": "EXCAVATION C-3", "subtitle": "INDUSTRIAL", "objective": "BREAK THE SURVEY FACE · BEWARE ENFORCERS"},
+    "zone.surface_scarp": {"title": "THE SCARP", "subtitle": "SURFACE", "objective": "OPEN SKY · SCAVENGER CAMP · SHAFT DOWN"},
+    "zone.surface_saltpan": {"title": "THE SALTPAN", "subtitle": "SURFACE", "objective": "SEARCH THE CONVOY · SALT WORKS EAST"},
+    "zone.frontier_road_east": {"title": "FRONTIER ROAD", "subtitle": "EAST", "objective": "FOLLOW THE ROAD NORTH TO DUSTLINE · MIND THE WRECKS"},
+    "zone.dustline": {"title": "DUSTLINE", "subtitle": "CITY · SAFE", "objective": "MARKET · EXCHANGE · SCRAPPER'S ROW"},
+    "zone.dragon_lair": {"title": "THE CINDER DEEP", "subtitle": "DRAGON LAIR", "objective": "HUNT PAST THE GATE · CLIMB OUT BY THE LADDER"},
+    "zone.expedition_breach": {"title": "THE BREACH", "subtitle": "FLOOR 1 / 3", "objective": "DRILL THROUGH BASALT"},
+    "zone.expedition_stratum": {"title": "THE DARK STRATUM", "subtitle": "FLOOR 2 / 3", "objective": "TRACE THE LOWER PASSAGE"},
+    "zone.expedition_relic_chamber": {"title": "THE RELIC CHAMBER", "subtitle": "FLOOR 3 / 3", "objective": "SECURE THE DISCOVERY · RETURN"},
+    "zone.prototype_outpost": {"title": "PROTOTYPE OUTPOST", "subtitle": "SAFE ENTRY", "objective": "PREPARE FOR DESCENT", "fixture": true}
+  }
+}
