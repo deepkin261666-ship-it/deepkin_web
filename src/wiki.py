@@ -11,10 +11,11 @@ import re
 
 import gdconst as G
 import slugs as S
+import texts as TX
 import worldmap as WM
 from i18n import ATTRS, CLASSES as CLASS_TXT, FACTION as FACTION_TXT, FAMILIES, FAMILY_DESC, ITEM_EN_FALLBACK, ITEM_ES, SLOTS, L
 from i18n import MOBS as MOB_TXT
-from wiki_i18n import (ABILITY_SHAPE, CATS, FACTION_ES, LURE, MOB_ES, POSE, QUEST_ES, ROLES, SERVICE_STALL, SIGN_DISTRICT, W)
+from wiki_i18n import (ABILITY_SHAPE, BILLBOARDS, CATS, FACTION_ES, LURE, MOB_ES, MOB_SHOTS, OWN_SERVICE, POSE, QUEST_ES, ROLES, SERVICE_STALL, SIGN_DISTRICT, W)
 
 
 def role_name(r, lang):
@@ -70,6 +71,13 @@ for _zid, _fl in FLOORS.items():
         SETS[_zid] = jload("world/sets/" + os.path.basename(_fl["set"]))
 
 ICON_DIR = os.path.join(ROOT, "assets", "img", "icons")
+# Retratos de criaturas renderizados del juego (2026-10-10): assets/img/mobs/<npc id>.webp, 320 px; mandan sobre el icono.
+MOB_ART_DIR = os.path.join(ROOT, "assets", "img", "mobs")
+
+
+def mob_art(content_id):
+    """Ruta relativa a assets/img/ del retrato de una criatura, o None."""
+    return f"mobs/{content_id}.webp" if os.path.exists(os.path.join(MOB_ART_DIR, content_id + ".webp")) else None
 
 
 def has_icon(content_id):
@@ -120,6 +128,7 @@ for _sid, _sp in SPEAKERS.items():
     p = PEOPLE.setdefault(_sid, {"id": _sid, "zone": None, "pos": None, "class": None, "pose": None, "kind": "speaker"})
     p["raw_name"] = _sp.get("name", p.get("raw_name", ""))
     p["lines"] = _sp.get("lines", [])
+    p["own_services"] = _sp.get("services", [])
 for _pid, _p in PEOPLE.items():
     _p["name"], _p["role"] = split_name(_p.get("raw_name") or _pid.split(".")[-1].replace("_", " ").upper())
     if not _p.get("lines") and not _p.get("dialog"):
@@ -135,6 +144,10 @@ def person_place(p):
     x, z = p["pos"]
     best = None
     for sx, sz, text, sub in zone_signs(p["zone"]):
+        # Carteles publicitarios no ubican a nadie (2026-10-10): el de The Exchange junto a la puerta mandaba a Rask
+        # (Caravan Yard) al distrito del Exchange.
+        if (text, sub) in BILLBOARDS:
+            continue
         d = math.hypot(sx - x, sz - z)
         if best is None or d < best[0]:
             best = (d, text, sub)
@@ -363,6 +376,9 @@ def lk(cid, lang=None, label=None, here="wiki/"):
 
 
 def img(cid, cls="wk-icon", size=160):
+    art = mob_art(cid)
+    if art:
+        return f'<img class="{cls}" src="../../assets/img/{art}" alt="" width="{size}" height="{size}" loading="lazy">'
     if has_icon(cid):
         return f'<img class="{cls}" src="../../assets/img/icons/{cid}.png" alt="" width="{size}" height="{size}" loading="lazy">'
     en = REG.get(cid)
@@ -833,6 +849,12 @@ def mob_page(m, lang):
         a, b = mov["preferred_range"]
         beh.append(t("b_range", lang, a=n(a, lang), b=n(b, lang)))
     verbs = " ".join(f"<span>{e(v)}</span>" for v in m.get("verbs", []))
+    shots = MOB_SHOTS.get(mid, [])
+    if shots:
+        figs = "".join(f'<figure><a href="../../assets/img/{b}.webp"><img src="../../assets/img/{b}_800.webp" srcset="../../assets/img/{b}_800.webp 800w, ../../assets/img/{b}.webp 1600w" '
+                       f'sizes="(max-width: 720px) 100vw, 50vw" alt="{e(c[lang])}" width="800" height="450" loading="lazy" decoding="async"></a><figcaption>{e(c[lang])}</figcaption></figure>'
+                       for b, c in shots)
+        body += sec("in-game", t("in_game_shots", lang), f'<div class="wyrm-shots">{figs}</div>')
     body += sec("behaviour", t("behaviour", lang), (f'<p class="verbs wk-verbs">{verbs}</p>' if verbs else "") + ul([e(x) for x in beh]))
     ab_rows, tips = ability_rows(m, lang)
     basic = [f'<b>{e(t("basic_attack", lang))}</b>', e(t("melee", lang)), n(m["attack_damage"], lang), e(t("dt_physical", lang)), "—",
@@ -1015,6 +1037,11 @@ def person_page(p, lang):
         body += sec("quests", t("quests", lang), q_html)
     # Servicios
     svc = list(services)
+    # Servicios propios del dialogo (2026-10-10, Rask: "weapons (coming soon)").
+    for own in p.get("own_services", []):
+        key = own.replace("(coming soon)", "").strip()
+        label = OWN_SERVICE.get(key, {}).get(lang, key.capitalize())
+        svc.append(f'{e(label)} <span class="tag tag-soon">{e(t("soon", lang))}</span>' if "coming soon" in own else e(label))
     if p.get("zone") == city.get("zone") and district and district.startswith("district."):
         d = next(x for x in city["districts"] if x["id"] == district)
         svc += [f'{e(WM.SERVICES[s][lang] if s in WM.SERVICES else s)} <span class="tag tag-soon">{e(t("soon", lang))}</span>' for s in d["services"]
@@ -1062,6 +1089,11 @@ def people_index(lang):
 # =================================================================================================================
 # Zonas
 # =================================================================================================================
+ZONE_OF_REGION = {"outpost": "zone.outpost", "threshold": "zone.threshold", "shallows": "zone.shallows", "c3": "zone.excavation_c3",
+                  "scarp": "zone.surface_scarp", "saltpan": "zone.surface_saltpan", "frontier": "zone.frontier_road_east",
+                  "dustline": "zone.dustline", "cinder": "zone.dragon_lair"}
+
+
 def zone_page(z, lang):
     zid = z["id"]
     url = S.zone(zid)
@@ -1094,6 +1126,14 @@ def zone_page(z, lang):
                   f'<p class="ib-map">{map_link(lang, zone_id=zid)}</p>')
     body = sec("overview", t("overview", lang), f'<p class="wk-lead2">{L_(z["summary"][lang])}</p>'
                + (f'<p class="wk-note">{e(t("zone_planned", lang))}</p>' if z["status"] == "planned" else ""))
+    # Capturas actuales de la zona (2026-10-10): las mismas de la pagina Mundo, con su epigrafe.
+    zshots = [(x["img"], x["cap"]) for x in TX.REGIONS + TX.SURFACE + TX.EAST if x.get("zone", ZONE_OF_REGION.get(x["id"])) == zid]
+    zshots += [m for x in TX.REGIONS + TX.SURFACE + TX.EAST if x.get("zone", ZONE_OF_REGION.get(x["id"])) == zid for m in x.get("more", [])]
+    if zshots:
+        figs = "".join(f'<figure><a href="../../assets/img/{b}.webp"><img src="../../assets/img/{b}_800.webp" srcset="../../assets/img/{b}_800.webp 800w, ../../assets/img/{b}.webp 1600w" '
+                       f'sizes="(max-width: 720px) 100vw, 50vw" alt="{e(c[lang])}" width="800" height="450" loading="lazy" decoding="async"></a><figcaption>{e(c[lang])}</figcaption></figure>'
+                       for b, c in zshots)
+        body += f'<div class="wyrm-shots">{figs}</div>'
     # Primer viaje
     for r in WORLD.get("routes", []):
         for i, st in enumerate(r.get("steps", [])):
@@ -1572,7 +1612,7 @@ def search_index(lang):
             sub = t("zone", lang) + " · " + WM.STATUS[ZONES[en.id]["status"]][lang]
         else:
             sub = t(en.kind, lang)
-        out.append({"n": en.name, "s": sub, "u": en.url, "k": en.kind, "i": ("../assets/img/icons/" + en.id + ".png") if has_icon(en.id) else ""})
+        out.append({"n": en.name, "s": sub, "u": en.url, "k": en.kind, "i": ("../assets/img/" + mob_art(en.id)) if mob_art(en.id) else (("../assets/img/icons/" + en.id + ".png") if has_icon(en.id) else "")})
     for k, v in MECH.items():
         out.append({"n": t(v, lang), "s": t("mechanics", lang), "u": f"wiki/{k}.html", "k": "mech", "i": ""})
     for f in FAMILIES:

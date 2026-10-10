@@ -224,7 +224,7 @@ p { margin: 0 0 1em; }
 
 .gallery { columns: 3 320px; column-gap: 12px; }
 .gallery figure { margin: 0 0 12px; break-inside: avoid; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); }
-.gallery img { width: 100%; transition: transform .8s var(--ease); }
+.gallery img { width: 100%; height: auto; display: block; transition: transform .8s var(--ease); }
 .gallery figure:hover img { transform: scale(1.04); }
 
 .closing { text-align: center; padding: clamp(90px, 14vw, 180px) 0; background: radial-gradient(600px 300px at 50% 60%, rgba(211, 154, 75, .09), transparent 70%); }
@@ -498,6 +498,27 @@ select { font: 500 14px/1 var(--sans); color: var(--text); background: var(--pan
 .points li::before { content: ""; position: absolute; left: 0; top: .55em; width: 6px; height: 6px; background: var(--amber); transform: rotate(45deg); }
 @media (max-width: 860px) { .region { grid-template-columns: 1fr; } .region:nth-child(even) figure { order: 0; } .region figure { min-height: 0; aspect-ratio: 16 / 9; } }
 .region-wide { grid-template-columns: 1.4fr 1fr; }
+/* Capturas del juego en las regiones (2026-10-10): epigrafe sobre la imagen y tira de capturas extra. */
+.region figure { position: relative; }
+.region figure picture { display: block; height: 100%; }
+.region > figure > figcaption { position: absolute; inset: auto 0 0; padding: 36px 16px 12px; background: linear-gradient(transparent, rgba(5, 6, 6, .88)); font-size: 13px; line-height: 1.4; color: var(--soft); }
+.region-shots { grid-column: 1 / -1; order: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; padding: 0 18px 18px; }
+.region .region-shots figure { margin: 0; min-height: 0; aspect-ratio: auto; order: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--bg); }
+.region .region-shots img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .8s var(--ease); }
+.region-shots a:hover img { transform: scale(1.04); }
+.region-shots figcaption { padding: 8px 10px 10px; font-size: 13px; line-height: 1.4; color: var(--muted); }
+/* Wyrms en el bestiario y figuras en el wiki (2026-10-10) */
+.wyrm-shots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 0 0 18px; }
+.wyrm-shots figure { margin: 0; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; background: var(--panel); }
+.wyrm-shots img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.wyrm-shots figcaption { padding: 10px 12px 12px; font-size: 13px; line-height: 1.4; color: var(--muted); }
+@media (max-width: 680px) { .wyrm-shots { grid-template-columns: 1fr; } .region-shots { padding: 0 12px 12px; } }
+@media (max-width: 860px) {
+  .region, .region-wide { grid-template-columns: 1fr; }
+  .region > figure { aspect-ratio: auto; order: 0 !important; }
+  .region > figure picture, .region > figure img { height: auto; aspect-ratio: 16 / 9; }
+  .region > figure > figcaption { position: static; padding: 10px 16px 0; background: none; color: var(--muted); }
+}
 .cities { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 28px 0; }
 .city { display: flex; flex-direction: column; gap: 6px; padding: 20px 22px; background: linear-gradient(135deg, color-mix(in srgb, var(--c) 10%, var(--panel)), var(--panel)); border: 1px solid var(--line); border-left: 2px solid var(--c); border-radius: var(--radius); color: var(--soft); transition: transform .3s var(--ease), border-color .3s; }
 .city:hover { transform: translateY(-2px); color: var(--soft); }

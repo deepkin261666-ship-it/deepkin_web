@@ -19,7 +19,7 @@ POSE = {"drill": L("Drilling", "Perforando"), "idle": L("Standing", "De pie"), "
 
 # Carteles de Dustline -> distrito (world_map.json "dustline"). Clasificacion de presentacion, no numeros.
 SIGN_DISTRICT = {
-    "FOOD & WATER": "district.central_market", "AMMUNITION": "district.central_market", "MEDICAL": "district.central_market",
+    "FOOD & WATER": "district.central_market", "FOOD · WATER": "district.central_market", "AMMUNITION": "district.central_market", "MEDICAL": "district.central_market",
     "TRADER": "district.central_market", "CONTRACTS": "district.central_market", "CENTRAL MARKET": "district.central_market",
     "^  EXCHANGE · DEPOT": "district.central_market",
     "THE EXCHANGE": "district.the_exchange", "DEPOT": "district.the_exchange",
@@ -29,9 +29,32 @@ SIGN_DISTRICT = {
     "DUSTLINE": "gate.dustline_main", "CARGO INSPECTION": "gate.dustline_main", "FRONTIER ROAD": "gate.dustline_main",
     "EAST GATE · CLOSED": "exit.dustline_frontier",
 }
+# Capturas del juego por criatura (2026-10-10, assets/img/shots/*.webp + _800): bestiario y paginas del wiki.
+MOB_SHOTS = {
+    "npc.dragon": [
+        ("shots/wyrm_dragon_idle", L("A Dragon at the nest mouth, an operator for scale; the Greater Dragon watches from the nest.",
+                                     "Un Dragón en la boca del nido, con un operador para la escala; el Gran Dragón mira desde el nido.")),
+        ("shots/wyrm_dragon_wave", L("Scorching breath: the fan lights up in front of it before the fire comes. Get behind it or behind stone.",
+                                     "Aliento abrasador: el abanico se enciende frente a él antes del fuego. Ponete detrás de él o detrás de la piedra.")),
+    ],
+    "npc.greater_dragon": [
+        ("shots/wyrm_greater_idle", L("The Greater Dragon on its nest under the old aqueduct, beside the petrified egg.",
+                                      "El Gran Dragón en su nido bajo el viejo acueducto, junto al huevo petrificado.")),
+        ("shots/wyrm_greater_wave", L("Fire wave telegraph: it rears back and a wide fan glows on the ground. The pillar on the left is cover.",
+                                      "Aviso de la ola de fuego: se echa hacia atrás y un abanico amplio brilla en el suelo. El pilar de la izquierda sirve de cobertura.")),
+    ],
+    "npc.burrowborn_ravager": [
+        ("shots/world_shallows_ravager", L("At the end of the Shallows, in front of the metro to C-3: the red lane of its charge.",
+                                           "Al final de The Shallows, frente al metro a C-3: el carril rojo de su embestida.")),
+    ],
+}
+# Carteles que publicitan otro lugar: no sirven para ubicar a la gente (texto, subtitulo).
+BILLBOARDS = {("THE EXCHANGE", "your goods are safe with us")}
+# Servicios declarados en el dialogo de una persona (data/dialog/*.json "services").
+OWN_SERVICE = {"weapons": L("Weapons", "Armas")}
 # Puesto junto al que esta la persona -> servicio (todos planeados: el comercio no existe todavia).
 SERVICE_STALL = {
-    "FOOD & WATER": L("Food & water stall", "Puesto de comida y agua"), "AMMUNITION": L("Ammunition stall", "Puesto de munición"),
+    "FOOD & WATER": L("Food & water stall", "Puesto de comida y agua"), "FOOD · WATER": L("Food & water stall", "Puesto de comida y agua"), "AMMUNITION": L("Ammunition stall", "Puesto de munición"),
     "MEDICAL": L("Medical stall", "Puesto médico"), "TRADER": L("General trader", "Comerciante general"),
     "CONTRACTS": L("Contract board", "Tablero de contratos"), "SCRAP BOUGHT": L("Scrap buying", "Compra de chatarra"),
     "REPAIR · CRAFT": L("Repair & crafting forge", "Forja de reparación y fabricación"), "WAYSTATION": L("Waystation: water, shade, news", "Parador: agua, sombra, noticias"),
@@ -48,6 +71,10 @@ ABILITY_SHAPE = {
     "line": {"name": L("Line", "Línea"),
              "tip": L("A glowing strip {width} m wide, from {min} to {range} m. It flies along the locked facing, hits the first operator on the line and stops at the first wall: step off the strip.",
                       "Una franja brillante de {width} m de ancho, de {min} a {range} m. Vuela en la dirección fijada, golpea al primer operador de la línea y se frena en la primera pared: salí de la franja.")},
+    # Embestida del Ravager (2026-10-10): misma franja que "line", pero la criatura misma recorre la linea.
+    "charge": {"name": L("Charge", "Embestida"),
+               "tip": L("A red lane {width} m wide lights up in front of it when you are {min}–{range} m away. It throws its weight along the locked facing, stops at the first wall or the first operator in the lane, and that operator takes the hit: step off the lane sideways.",
+                        "Cuando estás a {min}–{range} m se enciende un carril rojo de {width} m de ancho frente a él. Se lanza en la dirección fijada, se frena en la primera pared o en el primer operador del carril, y ése recibe el golpe: salí del carril hacia un costado.")},
     "bite": {"name": L("Bite", "Mordida"),
              "tip": L("{reach} m reach in a {arc}° arc in front of it. It only lands if you are still inside when the wind-up ends: step out or behind it.",
                       "{reach} m de alcance en un arco de {arc}° al frente. Sólo conecta si seguís adentro cuando termina la carga: salí o ponete detrás.")},
@@ -73,6 +100,15 @@ MOB_ES = {
         "habitat": "Campamentos y desarmaderos justo afuera del Outpost, en las viejas rutas de convoyes y los primeros pozos abiertos.",
         "rules": ["Golpeá a uno y el campamento se entera: los carroñeros se llaman a gritos y vienen juntos.",
                   "Son sólo gente: sin placas de armadura ni ataques anunciados. Uno contra uno, es una pelea justa."],
+    },
+    # Ravager v2 (2026-10-10): embestida + barrido, ahora espera al final de The Shallows.
+    "npc.burrowborn_ravager": {
+        "lore": "Un Crawler que nunca dejó de crecer. Su piel se mineralizó en placas; las glándulas verdes todavía brillan debajo.",
+        "habitat": "The Shallows: la cámara este, al final de la caverna, custodiando la bajada a Excavation C-3.",
+        "rules": ["El final de The Shallows es suyo: espera en la cámara este, frente a la bajada a C-3.",
+                  "Si mantenés distancia, embiste: se enciende un carril rojo frente a él; salí del carril.",
+                  "De cerca barre con las garras en un arco amplio, y antes del golpe se levanta mientras el suelo brilla en rojo: salí del círculo.",
+                  "No sale de su territorio: llevalo al borde y se da vuelta."],
     },
     "npc.dragon": {
         "lore": "Un wyrm bajo, de cola larga, que camina sobre sus brazos-ala. Recorre las galerías alrededor del nido y caza todo lo que baja por la grieta.",
@@ -131,6 +167,7 @@ QUEST_ES = {
 
 W = {
     # navegacion y generales
+    "in_game_shots": L("In the game", "En el juego"),
     "home": L("Home", "Inicio"), "see_also": L("See also", "Ver también"), "contents": L("Contents", "Contenido"),
     "soon": L("Coming soon", "Próximamente"), "in_game": L("In game", "En el juego"), "prototype": L("Prototype", "Prototipo"),
     "works": L("Works today", "Funciona hoy"), "yes": L("Yes", "Sí"), "no": L("No", "No"), "page": L("Page", "Página"),

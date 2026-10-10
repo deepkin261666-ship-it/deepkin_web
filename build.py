@@ -25,7 +25,7 @@ import gdconst as GD  # noqa: E402
 import slugs as SL  # noqa: E402
 import texts as TX  # noqa: E402
 import worldmap as WM  # noqa: E402
-from wiki_i18n import MOB_ES  # noqa: E402
+from wiki_i18n import MOB_ES, MOB_SHOTS  # noqa: E402
 
 LANGS = ("en", "es")
 GAME_REPO = os.path.join(os.path.dirname(ROOT), "deepkin")
@@ -168,6 +168,22 @@ def item_desc(item, lang):
 def icon(item_id, cls="icon", alt=""):
     path = f"../assets/img/icons/{item_id}.png"
     return f'<img class="{cls}" src="{path}" alt="{e(alt)}" loading="lazy" width="160" height="160">'
+
+
+def shot(base, alt="", cls="", eager=False):
+    """Captura del juego en webp (2026-10-10): base sin extension, con variante _800 para pantallas chicas."""
+    c = f' class="{cls}"' if cls else ""
+    return (f'<picture><source media="(max-width: 720px)" srcset="../assets/img/{base}_800.webp" type="image/webp">'
+            f'<img{c} src="../assets/img/{base}.webp" alt="{e(alt)}" width="1600" height="900"{"" if eager else " loading=" + chr(34) + "lazy" + chr(34)} decoding="async"></picture>')
+
+
+def shot_strip(more, lang):
+    """Tira de capturas extra de una region (miniaturas de 800 px con epigrafe)."""
+    if not more:
+        return ""
+    figs = "".join(f'<figure><a href="../assets/img/{b}.webp"><img src="../assets/img/{b}_800.webp" alt="{e(c[lang])}" width="800" height="450" loading="lazy" decoding="async"></a>'
+                   f'<figcaption>{e(c[lang])}</figcaption></figure>' for b, c in more)
+    return f'<div class="region-shots">{figs}</div>'
 
 
 def status_tag(item, lang):
@@ -360,9 +376,11 @@ def page_index(lang):
     route = ""
     for r in TX.REGIONS:
         route += f'<li><a href="world.html#{r["id"]}"><span class="route-n">{r["depth"]}</span><span class="route-name">{e(r["name"])}</span><span class="route-kind">{e(r["kind"][lang])}</span></a></li>'
-    gallery_imgs = ["shots/surface_scarp.jpg", "shots/region_b_shallows_keystone.jpg", "shots/class_select_terminal.jpg",
-                    "shots/surface_saltpan.jpg", "shots/skill_tree.jpg", "shots/phase13-outpost.jpg"]
-    gallery = "".join(f'<figure class="reveal"><img src="../assets/img/{g}" alt="" loading="lazy"></figure>' for g in gallery_imgs)
+    # Galeria (2026-10-10): capturas actuales del mundo en webp; las de interfaz siguen siendo las jpg de la UI.
+    gallery_imgs = ["shots/world_scarp", "shots/world_shallows", "shots/class_select_terminal.jpg",
+                    "shots/world_dustline_gate", "shots/skill_tree.jpg", "shots/world_outpost"]
+    gallery = "".join(f'<figure class="reveal"><img src="../assets/img/{g}" alt="" loading="lazy"></figure>' if g.endswith(".jpg")
+                      else f'<figure class="reveal">{shot(g)}</figure>' for g in gallery_imgs)
     crawler = next(n for n in NPCS if n["id"] == "npc.burrowborn_crawler")
     ravager = next(n for n in NPCS if n["id"] == "npc.burrowborn_ravager")
     mobs = ""
@@ -858,7 +876,7 @@ def page_resources(lang):
     body = wiki_header(lang, "Resources" if lang == "en" else "Recursos", "Everything we need comes from below" if lang == "en" else "Todo lo que necesitamos viene de abajo",
                        "Ore, crystal, salvage and coin: what you dig, find and carry home." if lang == "en"
                        else "Mineral, cristal, chatarra y moneda: lo que excavás, encontrás y llevás a casa.",
-                       "shots/region_h_deposit_cracked.jpg")
+                       "shots/world_c3.webp")
     body += wiki(lang, entries, content)
     return page(lang, "resources", "Resources" if lang == "en" else "Recursos", body)
 
@@ -893,6 +911,8 @@ def page_bestiary(lang):
                 bits.append(f'{"radius" if lang == "en" else "radio"} {num(a["radius"], lang)} m')
             if a.get("range"):
                 bits.append(f'{num(a.get("min_range", 0), lang)}–{num(a["range"], lang)} m')
+            if a.get("width"):
+                bits.append(f'{"width" if lang == "en" else "ancho"} {num(a["width"], lang)} m')
             if a.get("half_angle") and a.get("shape") == "cone":
                 bits.append(f'{num(a["half_angle"] * 2, lang)}°')
             bits.append(f'{"wind-up" if lang == "en" else "carga"} {num(a["windup"], lang)} s')
@@ -901,7 +921,24 @@ def page_bestiary(lang):
                      f'<p>{" · ".join(bits)}</p></div>')
         faction = fac[n["faction"]]["name"] if n.get("faction") in fac else M.get("faction", L("", ""))[lang]
         has_icon = os.path.exists(os.path.join(ROOT, "assets/img/icons", n["id"] + ".png"))
-        art = icon(n["id"], "mob-img", n["display_name"]) if has_icon else f'<span class="mob-img mob-ph">{e(n["display_name"][0])}</span>'
+        # Retrato renderizado del juego (assets/img/mobs, 2026-10-10) antes que el icono viejo de 160 px.
+        if os.path.exists(os.path.join(ROOT, "assets/img/mobs", n["id"] + ".webp")):
+            art = f'<img class="mob-img" src="../assets/img/mobs/{e(n["id"])}.webp" alt="{e(n["display_name"])}" loading="lazy" width="320" height="320">'
+        elif has_icon:
+            art = icon(n["id"], "mob-img", n["display_name"])
+        else:
+            art = f'<span class="mob-img mob-ph">{e(n["display_name"][0])}</span>'
+        # Botin completo en la ficha (2026-10-10): chatarra + monedas + tabla "loot" del juego, cada item enlazado al wiki.
+        def item_name(iid):
+            return ITEMS[iid]["display_name"] if iid in ITEMS else iid
+        drops = [f'<a href="{SL.item("item.scrap_component")}">Scrap Component</a> 100%']
+        if n.get("coins"):
+            drops.append(f'<a href="wiki/currency.html">{"Metal Coins" if lang == "en" else "Monedas de metal"}</a> {n["coins"][0]}–{n["coins"][1]}')
+        for x in n.get("loot", []):
+            q = x.get("quantity", [1, 1])
+            qty = f" ×{q[0]}" if q[0] == q[1] and q[0] > 1 else (f" ×{q[0]}–{q[1]}" if q[0] != q[1] else "")
+            drops.append(f'<a href="{SL.item(x["item"])}">{e(item_name(x["item"]))}</a>{qty} {num(round(x.get("chance", 1) * 100), lang)}%')
+        drops_html = f'<p class="found"><span>{"Drops" if lang == "en" else "Botín"}</span>{" · ".join(drops)}</p>'
         threat = n.get("threat")
         threat_html = f'<div><dt>{u("threat", lang)}</dt><dd>{"◆" * min(5, max(1, round(threat / 2)))}<small>{threat}</small></dd></div>' if threat else ""
         xp_html = f'<div><dt>{u("xp", lang)}</dt><dd>{n["xp"]}</dd></div>' if n.get("xp") else ""
@@ -922,6 +959,7 @@ def page_bestiary(lang):
     {abil}
     <div class="mob-how"><p class="kicker">{u('how_to_fight', lang)}</p><ul>{rules}</ul></div>
     <p class="found"><span>{u('habitat', lang)}</span>{e(M['habitat'][lang])}</p>
+    {drops_html}
   </div>
 </article>"""
 
@@ -930,6 +968,11 @@ def page_bestiary(lang):
     burrow = "".join(mob(by_id[i]) for i in order[:2] if i in by_id)
     human = "".join(mob(by_id[i]) for i in order[2:4] if i in by_id)
     wyrms = "".join(mob(by_id[i]) for i in order[4:] if i in by_id and i in MOBS)
+    # Capturas de los dragones en The Cinder Deep (2026-10-10): reposo y aviso de la ola de fuego.
+    wyrm_shots = '<div class="wyrm-shots">' + "".join(
+        f'<figure><a href="../assets/img/{b}.webp"><img src="../assets/img/{b}_800.webp" srcset="../assets/img/{b}_800.webp 800w, ../assets/img/{b}.webp 1600w" '
+        f'sizes="(max-width: 680px) 100vw, 50vw" alt="{e(c[lang])}" width="800" height="450" loading="lazy" decoding="async"></a><figcaption>{e(c[lang])}</figcaption></figure>'
+        for mid in ("npc.dragon", "npc.greater_dragon") for b, c in MOB_SHOTS.get(mid, [])) + "</div>"
     rumours = ""
     for fid in ("faction.rustbound", "faction.architects", "faction.hollow"):
         f = fac[fid]
@@ -941,6 +984,7 @@ def page_bestiary(lang):
                + f'<div class="mobs">{human}</div>'
                + section_title("wyrms", "Faction" if lang == "en" else "Facción", "The Wyrms",
                                "Below Frontier Road east, something keeps a nest." if lang == "en" else "Bajo Frontier Road este, algo cuida un nido.")
+               + wyrm_shots
                + f'<div class="mobs">{wyrms}</div>'
                + section_title("rumours", "Field reports" if lang == "en" else "Informes de campo", "Rumours from below" if lang == "en" else "Rumores de abajo",
                                "Operators come back with stories. Some of them are true." if lang == "en" else "Los operadores vuelven con historias. Algunas son ciertas.")
@@ -959,7 +1003,7 @@ def page_world(lang):
     for r in TX.REGIONS:
         pts = "".join(f"<li>{e(p)}</li>" for p in r["points"][lang])
         route += f"""<article class="region" id="{r['id']}">
-  <figure><img src="../assets/img/{r['img']}" alt="{e(r['name'])}" loading="lazy"></figure>
+  <figure>{shot(r['img'], r['cap'][lang])}<figcaption>{e(r['cap'][lang])}</figcaption></figure>
   <div class="region-body">
     <p class="kicker"><span class="stratum">{r['depth']}</span>{e(r['kind'][lang])}</p>
     <h3>{e(r['name'])}</h3>
@@ -967,12 +1011,21 @@ def page_world(lang):
     <p>{e(r['body'][lang])}</p>
     <ul class="points">{pts}</ul>
   </div>
+  {shot_strip(r.get('more'), lang)}
 </article>"""
     surface = ""
     for r in TX.SURFACE:
         surface += f"""<article class="region region-wide" id="{r['id']}">
-  <figure><img src="../assets/img/{r['img']}" alt="{e(r['name'])}" loading="lazy"></figure>
+  <figure>{shot(r['img'], r['cap'][lang])}<figcaption>{e(r['cap'][lang])}</figcaption></figure>
   <div class="region-body"><p class="kicker">{e(r['kind'][lang])}</p><h3>{e(r['name'])}</h3><p class="region-lead">{e(r['lead'][lang])}</p><p>{e(r['body'][lang])}</p></div>
+</article>"""
+    # El camino al este (2026-10-10): Frontier Road, Dustline y The Cinder Deep, con capturas actuales.
+    east = ""
+    for r in TX.EAST:
+        east += f"""<article class="region region-wide" id="{r['id']}">
+  <figure>{shot(r['img'], r['cap'][lang])}<figcaption>{e(r['cap'][lang])}</figcaption></figure>
+  <div class="region-body"><p class="kicker">{e(r['kind'][lang])}</p><h3>{e(r['name'])}</h3><p class="region-lead">{e(r['lead'][lang])}</p><p>{e(r['body'][lang])}</p></div>
+  {shot_strip(r.get('more'), lang)}
 </article>"""
     tiles = "".join(f'<figure class="tile"><img src="../assets/img/concept/{img}.jpg" alt="" loading="lazy"><figcaption><b>{e(n[lang])}</b><span>{e(d[lang])}</span></figcaption></figure>'
                     for img, n, d in TX.CONCEPT_REGIONS)
@@ -990,6 +1043,10 @@ def page_world(lang):
                                "The surface was never completely abandoned. A shaft on The Scarp drops straight to The Threshold." if lang == "en"
                                else "La superficie nunca fue completamente abandonada. Un pozo en The Scarp baja directo a The Threshold.")
                + f'<div class="regions">{surface}</div>'
+               + section_title("east", "Frontier Road" if lang == "en" else "Frontier Road", "The road east" if lang == "en" else "El camino al este",
+                               "From The Saltpan the old road runs east to Dustline. A cleft on the way drops into The Cinder Deep." if lang == "en"
+                               else "Desde The Saltpan la vieja ruta sigue al este hasta Dustline. Una grieta en el camino baja a The Cinder Deep.")
+               + f'<div class="regions">{east}</div>'
                + section_title("civilisations", "Beyond the region" if lang == "en" else "Más allá de la región", "The four cities" if lang == "en" else "Las cuatro ciudades",
                                "Home of each civilisation. You will hear of them long before you reach them." if lang == "en" else "El hogar de cada civilización. Vas a oír de ellas mucho antes de llegar.")
                + f'<div class="cities">{cities}</div>'
@@ -1001,6 +1058,7 @@ def page_world(lang):
                + f'<div class="machines">{machines}</div>')
     entries = [("map", "World map" if lang == "en" else "Mapa del mundo"),
                ("route", "Starting region" if lang == "en" else "Región inicial"), ("surface", "Surface" if lang == "en" else "Superficie"),
+               ("east", "The road east" if lang == "en" else "El camino al este"),
                ("civilisations", "Cities" if lang == "en" else "Ciudades"), ("regions", "The wider world" if lang == "en" else "El mundo"),
                ("machines", "Excavators" if lang == "en" else "Excavadoras")]
     body = wiki_header(lang, "World" if lang == "en" else "Mundo", "Every layer hides a history" if lang == "en" else "Cada estrato esconde una historia",
