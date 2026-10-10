@@ -2293,20 +2293,22 @@
     },
     {
       "id": "conn.outpost_scarp",
-      "kind": "tunnel",
-      "status": "planned",
+      "kind": "shaft",
+      "status": "playable",
       "ends": [
         {
           "zone": "zone.outpost",
-          "exit": "ADIT · THE SCARP",
+          "exit": "ADIT · UP TO THE SCARP",
           "edge": "E",
-          "edge_fixed": true
+          "edge_fixed": true,
+          "transition": 242
         },
         {
           "zone": "zone.surface_scarp",
-          "exit": "ADIT · THE OUTPOST",
+          "exit": "ADIT · DOWN TO THE OUTPOST",
           "edge": "W",
-          "edge_fixed": true
+          "edge_fixed": true,
+          "transition": 243
         }
       ],
       "exit_at": [
@@ -2317,19 +2319,21 @@
     {
       "id": "conn.threshold_c3",
       "kind": "shaft",
-      "status": "planned",
+      "status": "playable",
       "ends": [
         {
           "zone": "zone.threshold",
-          "exit": "DEEP SHAFT · C-3",
+          "exit": "DEEP SHAFT · EXCAVATION C-3",
           "edge": "S",
-          "edge_fixed": true
+          "edge_fixed": true,
+          "transition": 240
         },
         {
           "zone": "zone.excavation_c3",
-          "exit": "SHAFT · THE THRESHOLD",
+          "exit": "LIFT · THE THRESHOLD",
           "edge": "UP",
-          "edge_fixed": true
+          "edge_fixed": true,
+          "transition": 241
         }
       ]
     },
@@ -2791,19 +2795,19 @@
     },
     {
       "id": "conn.frontier_east_dragon_lair",
-      "kind": "tunnel",
+      "kind": "shaft",
       "status": "playable",
       "ends": [
         {
           "zone": "zone.frontier_road_east",
-          "exit": "THE CINDER DEEP · DRAGON LAIR",
+          "exit": "STAIRS DOWN · THE CINDER DEEP",
           "edge": "CLEFT",
           "edge_fixed": true,
           "transition": 230
         },
         {
           "zone": "zone.dragon_lair",
-          "exit": "CLIMB OUT · FRONTIER ROAD",
+          "exit": "STAIRS UP · FRONTIER ROAD",
           "edge": "CLIMB",
           "edge_fixed": true,
           "transition": 231
