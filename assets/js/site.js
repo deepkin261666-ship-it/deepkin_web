@@ -15,11 +15,23 @@
   // Menu movil.
   var toggle = $(".navtoggle"), nav = $("#mainnav");
   if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("open");
+    // Menu a pantalla completa: bloquea el scroll de fondo, cierra con Esc,
+    // con un enlace o al volver a ancho de escritorio (2026-10-09).
+    var setNav = function (open) {
+      nav.classList.toggle("open", open);
+      doc.classList.toggle("nav-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    };
+    toggle.addEventListener("click", function () { setNav(!nav.classList.contains("open")); });
+    $$("a", nav).forEach(function (a) { a.addEventListener("click", function () { setNav(false); }); });
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && nav.classList.contains("open")) { setNav(false); toggle.focus(); }
     });
-    $$("a", nav).forEach(function (a) { a.addEventListener("click", function () { nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); }); });
+    if (window.matchMedia) {
+      var wide = window.matchMedia("(min-width: 1101px)");
+      var onWide = function () { if (wide.matches) setNav(false); };
+      if (wide.addEventListener) wide.addEventListener("change", onWide); else if (wide.addListener) wide.addListener(onWide);
+    }
   }
 
   // Aparicion al hacer scroll.
@@ -57,7 +69,18 @@
       ty = ((ev.clientY - r.top) / r.height) * 100;
       idle = false;
     });
-    hero.addEventListener("pointerleave", function () { idle = true; });
+    hero.addEventListener("pointerleave", function (ev) { if (ev.pointerType === "mouse") idle = true; });
+    // En tactil no hay "hover": tocar el hero lleva la luz ahi y despues vuelve a derivar (2026-10-09).
+    var idleTimer;
+    hero.addEventListener("pointerdown", function (ev) {
+      if (ev.pointerType === "mouse") return;
+      var r = hero.getBoundingClientRect();
+      tx = ((ev.clientX - r.left) / r.width) * 100;
+      ty = ((ev.clientY - r.top) / r.height) * 100;
+      idle = false;
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(function () { idle = true; }, 2600);
+    });
     var running = true;
     if ("IntersectionObserver" in window) {
       new IntersectionObserver(function (en) { running = en[0].isIntersecting; if (running) requestAnimationFrame(tick); }).observe(hero);
