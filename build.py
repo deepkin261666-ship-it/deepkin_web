@@ -21,6 +21,7 @@ from i18n import (ATTR_DESC, ATTRS, CLASSES, DASH, FACTION, FAMILIES, FAMILY_DES
                   ITEM_ES, MATERIAL_NAMES_ES, MOBS, NAV, SLOTS, UI, L)
 from story import STORY  # noqa: E402
 import texts as TX  # noqa: E402
+import worldmap as WM  # noqa: E402
 
 LANGS = ("en", "es")
 GAME_REPO = os.path.join(os.path.dirname(ROOT), "deepkin")
@@ -107,7 +108,7 @@ STARTER_OF = {}
 for _c in CLASSES_DATA:
     for _w in _c["starter_weapons"]:
         STARTER_OF.setdefault(_w, []).append(_c["id"])
-DOCTRINE_OF = {v["weapon_id"]: (c["id"], v) for c in CLASSES_DATA for v in c["variants"]}
+STARTING_OF = {v["weapon_id"]: c["id"] for c in CLASSES_DATA for v in c["variants"]}
 
 
 # --- Helpers de HTML ---------------------------------------------------------
@@ -178,6 +179,7 @@ SVG_ICONS = {
     "crew": '<circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2.5 20c.8-3 3-5 5.5-5s4.7 2 5.5 5M10.5 20c.8-3 3-5 5.5-5s4.7 2 5.5 5"/>',
     "arrow": '<path d="M5 12h14M13 6l6 6-6 6"/>',
     "menu": '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    "close": '<path d="M6 6l12 12M18 6 6 18"/>',
     "globe": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/>',
 }
 
@@ -222,7 +224,7 @@ def page(lang, slug, title, body, desc=None, extra_head="", body_class=""):
 <html lang="{lang}">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{e(full_title)}</title>
 <meta name="description" content="{e(desc or u('site_desc', lang))}">
 <meta property="og:title" content="{e(full_title)}">
@@ -242,9 +244,9 @@ def page(lang, slug, title, body, desc=None, extra_head="", body_class=""):
 <a class="skip" href="#main">{'Skip to content' if lang == 'en' else 'Saltar al contenido'}</a>
 <header class="topbar">
   <a class="brand" href="index.html" aria-label="DEEPKIN"><img src="../assets/img/deepkin_mark.png" alt="" width="22" height="22"><span>DEEPKIN</span></a>
-  <nav class="mainnav" id="mainnav">{nav}</nav>
+  <nav class="mainnav" id="mainnav">{nav}<a class="navlang" href="../{other}/{slug}.html" hreflang="{other}" data-setlang="{other}">{svg('globe')}<span>{u('switch_lang', lang)}</span></a></nav>
   <a class="lang" href="../{other}/{slug}.html" hreflang="{other}" data-setlang="{other}">{svg('globe')}<span>{u('switch_lang', lang)}</span></a>
-  <button class="navtoggle" aria-controls="mainnav" aria-expanded="false" aria-label="Menu">{svg('menu')}</button>
+  <button class="navtoggle" aria-controls="mainnav" aria-expanded="false" aria-label="{'Menu' if lang == 'en' else 'Menú'}">{svg('menu', 'ico ico-open')}{svg('close', 'ico ico-close')}</button>
 </header>
 <div class="depth" aria-hidden="true"><span class="depth-line"><span class="depth-fill"></span></span><span class="depth-val">0000 m</span></div>
 <main id="main">
@@ -479,7 +481,7 @@ def class_section(c, lang):
         w = ITEMS[v["weapon_id"]]
         variants += f"""<div class="variant">
   <a href="arsenal.html#{e(w['id'])}" class="variant-w">{icon(w['id'], alt=w['display_name'])}</a>
-  <div><p class="kicker">{u('doctrine', lang)}</p><h4>{e(v['name'])}</h4><p>{e(txt['variants'][v['id']][lang])}</p>
+  <div><p class="kicker">{u('starting_weapon', lang)} · {e(FAMILIES[w['weapon_family']][lang])}</p><h4>{e(w['display_name'])}</h4><p>{e(FAMILY_DESC[w['weapon_family']][lang])}</p>
   <p class="variant-meta"><a href="arsenal.html#{e(w['id'])}">{e(w['display_name'])}</a> · {class_damage(c, w)} {u('damage', lang).lower()}</p></div>
 </div>"""
     aff = ""
@@ -514,7 +516,7 @@ def class_section(c, lang):
       <p class="skill-meta">{u('cooldown', lang)} {DASH_COOLDOWN} s · {DASH_COST} {u('energy', lang).lower()}</p></div>
     <div class="panel skill"><p class="key key-p">P</p><p class="kicker">{u('passive', lang)}</p><h4>{e(c['passive_name'])}</h4><p>{e(txt['passive_desc'][lang])}</p></div>
   </div>
-  <h3 class="sub">{u('doctrines', lang)}</h3>
+  <h3 class="sub">{u('starting_weapons', lang)}</h3>
   <div class="variants">{variants}</div>
   <div class="cls-grid">
     <div class="panel"><h3>{u('skill_affinity', lang)}</h3><ul class="affs">{aff}</ul></div>
@@ -562,9 +564,8 @@ def weapon_card(w, lang):
         d = class_damage(c, w)
         by_class += f'<li style="--c:{class_color(c["id"])}"><span>{e(c["name"])}</span>{bar(d, mx * 1.05, class_color(c["id"]))}<b>{d}</b></li>'
     doctrine = ""
-    if w["id"] in DOCTRINE_OF:
-        cid, v = DOCTRINE_OF[w["id"]]
-        doctrine = f'<p class="wc-doc">{class_chip(cid, lang)} {u("doctrine", lang)} · {e(v["name"])}</p>'
+    if w["id"] in STARTING_OF:
+        doctrine = f'<p class="wc-doc">{class_chip(STARTING_OF[w["id"]], lang)} {u("starting_weapon", lang)}</p>'
     ammo = u("field_round", lang) if w.get("ammo_item_id") else u("none", lang)
     hands = u("two_hand", lang) if w.get("hands") == 2 else u("one_hand", lang)
     dtype = w.get("damage_type")
@@ -607,7 +608,7 @@ def page_arsenal(lang):
     for w in ws:
         p = w.get("properties", {})
         itv = p.get("attack_interval", 1)
-        rows += (f'<tr data-type="{w.get("weapon_type")}" data-family="{e(w.get("weapon_family", ""))}"><td class="tn">{icon(w["id"], "ticon", w["display_name"])}<a href="#{e(w["id"])}">{e(w["display_name"])}</a></td>'
+        rows += (f'<tr data-type="{w.get("weapon_type")}" data-family="{e(w.get("weapon_family", ""))}"><td class="tn"><span class="tn-in">{icon(w["id"], "ticon", w["display_name"])}<a href="#{e(w["id"])}">{e(w["display_name"])}</a></span></td>'
                  f'<td>{e(u(w.get("weapon_type", "melee"), lang))}</td><td>{e(FAMILIES[w["weapon_family"]][lang])}</td>'
                  f'<td class="n">{base_damage(w)}</td><td class="n">{num(base_damage(w) / itv, lang, 1)}</td><td class="n">{num(p.get("attack_range", 0), lang)}</td>'
                  f'<td class="n">{num(itv, lang)}</td><td>{w.get("hands", 1)}</td><td class="n">{num(w.get("weight", 0), lang)}</td></tr>')
@@ -667,7 +668,7 @@ def page_arsenal(lang):
   <label class="fsort">{u('sort_by', lang)} <select data-sort-select>{sorts}</select></label>
 </div>
 <div class="wgrid" id="wgrid">{cards}</div>
-{section_title('compare-table', u('table', lang), 'Side by side' if lang == 'en' else 'Lado a lado', 'Click a column to sort.' if lang == 'en' else 'Hacé clic en una columna para ordenar.')}
+{section_title('compare-table', u('table', lang), 'Side by side' if lang == 'en' else 'Lado a lado', 'Tap or click a column to sort.' if lang == 'en' else 'Tocá o hacé clic en una columna para ordenar.')}
 {table}
 {section_title('offhand', SLOTS['secondary_weapon'][lang], 'Shields' if lang == 'en' else 'Escudos', 'Off-hand gear pairs with any one-handed weapon. Blocking hits trains Shielding.' if lang == 'en' else 'El equipo de mano secundaria combina con cualquier arma de una mano. Bloquear golpes entrena Escudos.')}
 <div class="ggrid">{off_html}</div>
@@ -719,7 +720,7 @@ def gear_card(i, lang):
         lis = ""
         for cid in i["crate_loot"]:
             if cid.startswith("$"):
-                label = ("Your doctrine's weapon" if lang == "en" else "El arma de tu doctrina") if cid == "$doctrine_weapon" else (
+                label = ("Your starting weapon" if lang == "en" else "Tu arma inicial") if cid == "$starting_weapon" else (
                     "Ammunition (if it shoots)" if lang == "en" else "Munición (si dispara)")
                 lis += f'<li class="mini"><span class="mini-ph">?</span><span>{e(label)}</span></li>'
             elif cid in ITEMS:
@@ -923,7 +924,8 @@ def page_world(lang):
                    f'<span class="city-civ">{e(CLASS_BY_ID[cid]["name"])} · {e(CLASSES[cid]["title"][lang])}</span><span class="city-line">{e(line)}</span></a>')
     machines = "".join(f'<figure class="machine" style="--c:{class_color(cid)}"><img src="../assets/img/concept/{img}.jpg" alt="{n}" loading="lazy"><figcaption><b>{n}</b><span>{e(CLASS_BY_ID[cid]["name"])} · {e(d[lang])}</span></figcaption></figure>'
                        for img, n, cid, d in TX.MACHINES)
-    content = (section_title("route", "The way down" if lang == "en" else "El camino hacia abajo", "The starting region" if lang == "en" else "La región inicial",
+    content = (WM.section(lang, section_title)
+               + section_title("route", "The way down" if lang == "en" else "El camino hacia abajo", "The starting region" if lang == "en" else "La región inicial",
                              "The Outpost → shaft lift → The Threshold → The Shallows → Excavation C-3.")
                + f'<div class="regions">{route}</div>'
                + section_title("surface", "Open sky" if lang == "en" else "Cielo abierto", "The surface" if lang == "en" else "La superficie",
@@ -939,7 +941,8 @@ def page_world(lang):
                                "One day the drill becomes a machine you ride: your mount, your cargo and your way through the hardest rock." if lang == "en"
                                else "Algún día el taladro será una máquina que manejás: tu montura, tu carga y tu camino a través de la roca más dura.")
                + f'<div class="machines">{machines}</div>')
-    entries = [("route", "Starting region" if lang == "en" else "Región inicial"), ("surface", "Surface" if lang == "en" else "Superficie"),
+    entries = [("map", "World map" if lang == "en" else "Mapa del mundo"),
+               ("route", "Starting region" if lang == "en" else "Región inicial"), ("surface", "Surface" if lang == "en" else "Superficie"),
                ("civilisations", "Cities" if lang == "en" else "Ciudades"), ("regions", "The wider world" if lang == "en" else "El mundo"),
                ("machines", "Excavators" if lang == "en" else "Excavadoras")]
     body = wiki_header(lang, "World" if lang == "en" else "Mundo", "Every layer hides a history" if lang == "en" else "Cada estrato esconde una historia",
@@ -947,7 +950,8 @@ def page_world(lang):
                        else "La profundidad no es el único peligro. Un túnel inundado poco profundo puede ser peor que una caverna profunda y seca.",
                        "concept/city.jpg")
     body += wiki(lang, entries, content)
-    return page(lang, "world", "World" if lang == "en" else "Mundo", body)
+    head = '<link rel="stylesheet" href="../assets/css/worldmap.css">\n<script defer src="../assets/js/worldmap.js"></script>'
+    return page(lang, "world", "World" if lang == "en" else "Mundo", body, extra_head=head)
 
 
 def page_manual(lang):
@@ -1064,7 +1068,7 @@ def root_index():
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>DEEPKIN — What lies below</title>
 <meta name="description" content="DEEPKIN — a cooperative underground action RPG. Choose your language · Elige tu idioma.">
 <link rel="icon" href="assets/img/deepkin_mark.png">
