@@ -72,8 +72,8 @@ UI = {
     "field_round": L("Field Round", "Field Round"),
     "hardened_round": L("Hardened Round", "Hardened Round"),
     "starter": L("Starter weapon", "Arma inicial"),
-    "doctrine": L("Doctrine", "Doctrina"),
-    "doctrines": L("Doctrines", "Doctrinas"),
+    "starting_weapon": L("Starting weapon", "Arma inicial"),
+    "starting_weapons": L("Starting weapon", "Arma inicial"),
     "power": L("Class power", "Poder de clase"),
     "mobility": L("Mobility", "Movilidad"),
     "passive": L("Passive", "Pasiva"),
@@ -119,8 +119,8 @@ UI = {
     "prev": L("Previous", "Anterior"),
     "next": L("Next", "Siguiente"),
     "chapter": L("Chapter", "Capítulo"),
-    "variants_note": L("Every class can use every weapon. Doctrines only pick the kit you start with and how fast you train each weapon family.",
-                       "Toda clase puede usar cualquier arma. La doctrina sólo define con qué equipo empezás y qué tan rápido entrenás cada familia de armas."),
+    "variants_note": L("Every class can use every weapon. You only pick the weapon you start with; your class sets how fast you train each skill.",
+                       "Toda clase puede usar cualquier arma. Sólo elegís con qué arma empezás; tu clase define qué tan rápido entrenás cada habilidad."),
 }
 
 SLOTS = {
@@ -131,21 +131,21 @@ SLOTS = {
 }
 
 FAMILIES = {
-    "skill.edge": L("Edge", "Filo"), "skill.blunt": L("Blunt", "Contundente"), "skill.blades": L("Blades", "Cuchillas"),
+    "skill.edge": L("Blades", "Hojas"), "skill.blunt": L("Blunt", "Contundente"), "skill.blades": L("Short Blades", "Hojas cortas"),
     "skill.firearms": L("Firearms", "Armas de fuego"), "skill.precision": L("Precision", "Precisión"),
     "skill.spores": L("Spores", "Esporas"), "skill.vitalism": L("Vitalism", "Vitalismo"), "skill.tech": L("Tech", "Tecnología"),
     "skill.shielding": L("Shielding", "Escudos"),
 }
 FAMILY_DESC = {
-    "skill.edge": L("Axes and swords: fast, brutal cuts.", "Hachas y espadas: cortes rápidos y brutales."),
-    "skill.blunt": L("Hammers and maces: heavy blows that stagger.", "Martillos y mazas: golpes pesados que desestabilizan."),
-    "skill.blades": L("Knives and short blades: quick strikes on isolated targets.", "Cuchillos y hojas cortas: golpes rápidos a blancos aislados."),
-    "skill.firearms": L("Shotguns, carbines and rifles: sustained fire.", "Escopetas, carabinas y rifles: fuego sostenido."),
-    "skill.precision": L("Precision rifles: distance and weak points.", "Rifles de precisión: distancia y puntos débiles."),
-    "skill.spores": L("Spore projectors: close-area pressure.", "Proyectores de esporas: presión en área cercana."),
-    "skill.vitalism": L("Living weapons that keep the team standing.", "Armas vivas que mantienen al equipo en pie."),
-    "skill.tech": L("Relay tech: disruption and support.", "Tecnología de La Red: disrupción y apoyo."),
-    "skill.shielding": L("Trained by blocking hits with a shield equipped.", "Se entrena bloqueando golpes con un escudo equipado."),
+    "skill.edge": L("Swords and axes. Chained hits build Heat: +2, +4, +6 damage within 3 s.", "Espadas y hachas. Los golpes encadenados acumulan Calor: +2, +4, +6 de daño en 3 s."),
+    "skill.blunt": L("Hammers and maces. Slow, heavy blows. Later: staggering and breaking armour and rock.", "Martillos y mazas. Golpes lentos y pesados. Más adelante: desestabilizar y romper armadura y roca."),
+    "skill.blades": L("Knives and daggers. Ambush: +4 damage after moving 2 m since your last hit. Later: silent takedowns.", "Cuchillos y dagas. Emboscada: +4 de daño si te moviste 2 m desde tu último golpe. Más adelante: eliminaciones silenciosas."),
+    "skill.firearms": L("Shotguns, carbines and rifles. Steady fire at mid range.", "Escopetas, carabinas y rifles. Fuego sostenido a media distancia."),
+    "skill.precision": L("Precision rifles. +3 damage on targets 6 m or more away. Later: weak points.", "Rifles de precisión. +3 de daño a blancos a 6 m o más. Más adelante: puntos débiles."),
+    "skill.spores": L("Spore projectors. With one in hand, Bloom poisons enemies instead of healing.", "Proyectores de esporas. Con uno en la mano, Bloom envenena en vez de curar."),
+    "skill.vitalism": L("Living weapons that grow with their bearer. Later: stronger healing.", "Armas vivas que crecen con quien las lleva. Más adelante: curación más fuerte."),
+    "skill.tech": L("Energy weapons and field electronics. Later: hacking terminals, doors, turrets and drones.", "Armas de energía y electrónica de campo. Más adelante: hackear terminales, puertas, torretas y drones."),
+    "skill.shielding": L("Trained by taking hits with a shield up: 8% less damage, up to 40%. Later: active block and parry.", "Se entrena recibiendo golpes con un escudo: 8% menos daño, hasta 40%. Más adelante: bloqueo activo y parada."),
 }
 
 ATTRS = {
@@ -169,11 +169,7 @@ CLASSES = {
         "role": L("Tank · melee", "Tanque · cuerpo a cuerpo"),
         "power_desc": L("Provoke nearby enemies onto you and take 30% less damage for 4 s. You move slower while braced.",
                         "Provocás a los enemigos cercanos para que vayan por vos y recibís 30% menos daño durante 4 s. Te movés más lento mientras resistís."),
-        "passive_desc": L("Taking repeated hits grants your team a brief defense boost.", "Recibir golpes seguidos le da a tu equipo un breve aumento de defensa."),
-        "variants": {
-            "variant.bulwark": L("Tank. Hammers and maces that stagger and control the fight.", "Tanque. Martillos y mazas que desestabilizan y controlan la pelea."),
-            "variant.breaker": L("Breaker. Swords and axes for raw damage, with capped Heat damage on hits.", "Rompedor. Espadas y hachas para daño puro, con daño de Calor limitado al golpear."),
-        },
+        "passive_desc": L("Every third hit you take braces you (35% less damage) and allies within 5 m (20% less) for 2 s.", "Cada tercer golpe que recibís te refuerza (35% menos daño) y a los aliados a 5 m (20% menos) durante 2 s."),
     },
     "class.drift": {
         "title": L("The Drift", "La Deriva"),
@@ -183,11 +179,7 @@ CLASSES = {
         "motto": L("They find. They mark. They open the way.", "Descubren. Señalan. Abren caminos."),
         "role": L("Scout · ranged", "Explorador · a distancia"),
         "power_desc": L("Your next shot within 4 s deals ×2.5 damage with 50% more range.", "Tu próximo disparo dentro de 4 s hace ×2,5 de daño con 50% más de alcance."),
-        "passive_desc": L("Hitting a target you recently engaged adds follow-up damage.", "Golpear a un blanco que atacaste hace poco suma daño adicional."),
-        "variants": {
-            "variant.pathfinder": L("Firearms. Shotguns, carbines and rifles for sustained fire.", "Armas de fuego. Escopetas, carabinas y rifles para fuego sostenido."),
-            "variant.marksman": L("Precision. Long rifles that reward distance and weak points.", "Precisión. Rifles largos que premian la distancia y los puntos débiles."),
-        },
+        "passive_desc": L("Hitting a target you hit in the last 4 s adds +2 damage.", "Golpear a un blanco que golpeaste en los últimos 4 s suma +2 de daño."),
     },
     "class.verdant": {
         "title": L("The Living", "Lo Vivo"),
@@ -196,13 +188,9 @@ CLASSES = {
                    "Los operadores de Lo Vivo aprendieron a convivir con los extraños ecosistemas de abajo. Sus armas se cultivan, no se forjan. Tienen la mayor reserva de energía y las habilidades más fuertes, y mantienen vivos a todos los demás."),
         "motto": L("Life is a tool too.", "La vida también es una herramienta."),
         "role": L("Support · area control", "Apoyo · control de área"),
-        "power_desc": L("Heal yourself and nearby allies over 6 s. As a Sporecaller, Bloom poisons nearby enemies instead.",
-                        "Te curás vos y a los aliados cercanos durante 6 s. Como Sporecaller, Bloom envenena a los enemigos cercanos."),
-        "passive_desc": L("As a Warden, Bloom adds a small extra heal.", "Como Warden, Bloom suma una pequeña curación extra."),
-        "variants": {
-            "variant.warden": L("Sustain. Living weapons for healing and protection.", "Sostén. Armas vivas para curar y proteger."),
-            "variant.sporecaller": L("Control. Spore projectors and damage over time.", "Control. Proyectores de esporas y daño en el tiempo."),
-        },
+        "power_desc": L("Heal yourself and nearby allies over 6 s. With a Spores weapon in hand, Bloom poisons nearby enemies instead.",
+                        "Te curás vos y a los aliados cercanos durante 6 s. Con un arma de Esporas en la mano, Bloom envenena a los enemigos cercanos."),
+        "passive_desc": L("Out of combat you regenerate 2 health every 2 s.", "Fuera de combate regenerás 2 de vida cada 2 s."),
     },
     "class.relay": {
         "title": L("The Network", "La Red"),
@@ -212,12 +200,7 @@ CLASSES = {
         "motto": L("Technology is a weapon too.", "La tecnología también es un arma."),
         "role": L("Utility · burst", "Utilidad · ráfaga"),
         "power_desc": L("Your next hit within 3 s deals triple damage, and your next Dash is ready at once.", "Tu próximo golpe dentro de 3 s hace triple daño y tu próximo Dash queda listo al instante."),
-        "passive_desc": L("As an Operator, you restore nearby allies' energy and shorten cooldowns. As an Infiltrator, you deal more damage right after repositioning.",
-                          "Como Operator, restaurás energía de aliados cercanos y acortás recargas. Como Infiltrator, hacés más daño justo después de reposicionarte."),
-        "variants": {
-            "variant.operator": L("Manipulation. Tech weapons for disruption and support.", "Manipulación. Armas tecnológicas para disrupción y apoyo."),
-            "variant.infiltrator": L("Elimination. Blades for ambush and mobility.", "Eliminación. Cuchillas para emboscar y moverse."),
-        },
+        "passive_desc": L("Overload also gives allies within 8 m +5 energy and takes 2 s off their Dash.", "Overload también les da +5 de energía a los aliados a 8 m y les descuenta 2 s del Dash."),
     },
 }
 
@@ -239,7 +222,7 @@ ITEM_ES = {
     "item.armor.power_frame_boots": "Pies actuadores blindados del exoesqueleto. Reservados para un set futuro.",
     "item.backpack.provisional_drift_pack": "Una mochila de relevamiento: veinte celdas que viajan con la mochila (si la soltás, su contenido va con ella) y 15 kg más de capacidad de carga.",
     "item.battery.provisional_relay_cell": "Una celda compacta que alimenta con una reserva fija al equipo que llevás.",
-    "item.container.gear_crate": "Equipo de campo para el recién llegado: el arma de tu doctrina (y munición si dispara), una linterna, una batería y el taladro del asentamiento. Lo de adentro es sólo tuyo.",
+    "item.container.gear_crate": "Equipo de campo para el recién llegado: tu arma inicial (y munición si dispara), una linterna, una batería y el taladro del asentamiento. Lo de adentro es sólo tuyo.",
     "item.container.supply_crate": "Cajones de suministros del Outpost: una mochila y ropa de trabajo para cada recién llegado. Lo de adentro es sólo tuyo.",
     "item.currency.lumen_coin": "El mismo sello acuñado en aleación con lumenita; brilla con un azul frío. Vale 100 Metal.",
     "item.currency.metal_coin": "Moneda de chatarra estampada con un agujero cuadrado: la unidad base del dinero de DEEPKIN. Vale 1 Metal.",

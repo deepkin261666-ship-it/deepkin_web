@@ -1,0 +1,3399 @@
+{
+  "$schema_note": "DEEPKIN world graph — single source of truth for the game and the web wiki. See docs/design/WORLD_MAP.md.",
+  "version": 1,
+  "status": "provisional",
+  "updated": "2026-10-09",
+  "image": {
+    "file": "docs/design/world_map_prototype.jpg",
+    "width": 1312,
+    "height": 1199,
+    "note": "Coordinates are normalized 0..1 over the prototype map art (x east, y south)."
+  },
+  "start_zone": "zone.outpost",
+  "enums": {
+    "kind": [
+      "city",
+      "settlement",
+      "outpost",
+      "wild",
+      "dungeon",
+      "route"
+    ],
+    "biome": [
+      "mountains",
+      "forest",
+      "plains",
+      "desert",
+      "wetlands",
+      "snow",
+      "caves",
+      "anomaly"
+    ],
+    "danger": [
+      "safe",
+      "low",
+      "medium",
+      "high",
+      "deadly"
+    ],
+    "status": [
+      "playable",
+      "planned"
+    ],
+    "layer": [
+      "surface",
+      "underground"
+    ],
+    "connection_kind": [
+      "road",
+      "shaft",
+      "tunnel",
+      "lift"
+    ]
+  },
+  "regions": [
+    {
+      "id": "region.starting_region",
+      "name": {
+        "en": "The shaft country",
+        "es": "El país del pozo"
+      }
+    },
+    {
+      "id": "region.frontier",
+      "name": {
+        "en": "The Frontier",
+        "es": "La Frontera"
+      }
+    },
+    {
+      "id": "region.verdant",
+      "name": {
+        "en": "Verdant lands",
+        "es": "Tierras de Lo Vivo"
+      }
+    },
+    {
+      "id": "region.relay",
+      "name": {
+        "en": "Relay network",
+        "es": "La red de relés"
+      }
+    },
+    {
+      "id": "region.foundry",
+      "name": {
+        "en": "Foundry lands",
+        "es": "Tierras de La Forja"
+      }
+    },
+    {
+      "id": "region.north",
+      "name": {
+        "en": "The north",
+        "es": "El norte"
+      }
+    },
+    {
+      "id": "region.west",
+      "name": {
+        "en": "The west",
+        "es": "El oeste"
+      }
+    },
+    {
+      "id": "region.forgotten_works",
+      "name": {
+        "en": "Forgotten Works",
+        "es": "Obras Olvidadas"
+      }
+    },
+    {
+      "id": "region.abyss",
+      "name": {
+        "en": "The Abyss",
+        "es": "El Abismo"
+      }
+    }
+  ],
+  "continent": {
+    "outline": [
+      [
+        0.0305,
+        0.2502
+      ],
+      [
+        0.0534,
+        0.2185
+      ],
+      [
+        0.1143,
+        0.1668
+      ],
+      [
+        0.1357,
+        0.1268
+      ],
+      [
+        0.1905,
+        0.0984
+      ],
+      [
+        0.2515,
+        0.0784
+      ],
+      [
+        0.3201,
+        0.0617
+      ],
+      [
+        0.3963,
+        0.045
+      ],
+      [
+        0.4573,
+        0.0367
+      ],
+      [
+        0.503,
+        0.0317
+      ],
+      [
+        0.5335,
+        0.02
+      ],
+      [
+        0.5869,
+        0.0284
+      ],
+      [
+        0.6555,
+        0.045
+      ],
+      [
+        0.7012,
+        0.0317
+      ],
+      [
+        0.7622,
+        0.0484
+      ],
+      [
+        0.8095,
+        0.0717
+      ],
+      [
+        0.8323,
+        0.1251
+      ],
+      [
+        0.8338,
+        0.2185
+      ],
+      [
+        0.7957,
+        0.2752
+      ],
+      [
+        0.8018,
+        0.3503
+      ],
+      [
+        0.8247,
+        0.402
+      ],
+      [
+        0.8338,
+        0.4637
+      ],
+      [
+        0.8841,
+        0.4804
+      ],
+      [
+        0.9116,
+        0.4937
+      ],
+      [
+        0.8933,
+        0.5688
+      ],
+      [
+        0.8552,
+        0.6188
+      ],
+      [
+        0.8095,
+        0.6355
+      ],
+      [
+        0.8018,
+        0.6939
+      ],
+      [
+        0.7637,
+        0.7423
+      ],
+      [
+        0.7027,
+        0.7807
+      ],
+      [
+        0.6555,
+        0.7656
+      ],
+      [
+        0.596,
+        0.769
+      ],
+      [
+        0.5655,
+        0.794
+      ],
+      [
+        0.5351,
+        0.8207
+      ],
+      [
+        0.5259,
+        0.8757
+      ],
+      [
+        0.4954,
+        0.9108
+      ],
+      [
+        0.4573,
+        0.9358
+      ],
+      [
+        0.4284,
+        0.9775
+      ],
+      [
+        0.3872,
+        0.9691
+      ],
+      [
+        0.3582,
+        0.9274
+      ],
+      [
+        0.3277,
+        0.9024
+      ],
+      [
+        0.282,
+        0.8874
+      ],
+      [
+        0.2287,
+        0.8857
+      ],
+      [
+        0.1829,
+        0.8691
+      ],
+      [
+        0.1448,
+        0.819
+      ],
+      [
+        0.128,
+        0.7523
+      ],
+      [
+        0.1524,
+        0.7173
+      ],
+      [
+        0.1951,
+        0.6856
+      ],
+      [
+        0.1814,
+        0.6355
+      ],
+      [
+        0.1143,
+        0.5855
+      ],
+      [
+        0.0473,
+        0.5354
+      ],
+      [
+        0.0305,
+        0.4837
+      ],
+      [
+        0.0412,
+        0.417
+      ],
+      [
+        0.0335,
+        0.3336
+      ]
+    ]
+  },
+  "zones": [
+    {
+      "id": "zone.outpost",
+      "name": "The Outpost",
+      "kind": "outpost",
+      "biome": "plains",
+      "layer": "underground",
+      "tier": 1,
+      "danger": "safe",
+      "status": "playable",
+      "region": "region.starting_region",
+      "cell": {
+        "seed": [
+          0.42,
+          0.5463
+        ],
+        "weight": 0.0006,
+        "polygon": [
+          [
+            0.3025,
+            0.5581
+          ],
+          [
+            0.3017,
+            0.5303
+          ],
+          [
+            0.3267,
+            0.5059
+          ],
+          [
+            0.4905,
+            0.4958
+          ],
+          [
+            0.4905,
+            0.5203
+          ],
+          [
+            0.3843,
+            0.6733
+          ]
+        ]
+      },
+      "marker": [
+        0.4192,
+        0.5438
+      ],
+      "summary": {
+        "en": "Where every operator arrives: a fortified mining settlement dug in around an old excavation shaft. The lift on the shaft is the way on.",
+        "es": "Donde llega todo operador: un asentamiento minero fortificado, cavado alrededor de un viejo pozo de excavación. El elevador del pozo es el camino."
+      },
+      "subtitle": {
+        "en": "Your first step",
+        "es": "Tu primer paso"
+      },
+      "start": true,
+      "size_m": [
+        92,
+        66
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.outpost"
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.outpost_threshold",
+        "conn.outpost_scarp",
+        "conn.outpost_ruins"
+      ],
+      "label": [
+        0.391,
+        0.562
+      ]
+    },
+    {
+      "id": "zone.threshold",
+      "name": "The Threshold",
+      "kind": "route",
+      "biome": "caves",
+      "layer": "underground",
+      "tier": 1,
+      "danger": "low",
+      "status": "playable",
+      "region": "region.starting_region",
+      "stack": {
+        "parent": "zone.outpost",
+        "depth": 1,
+        "marker": [
+          0.4184,
+          0.6188
+        ]
+      },
+      "summary": {
+        "en": "The first cavern under the lift: lit, quiet, painted with instructions. Every way out of the Outpost passes through here.",
+        "es": "La primera caverna bajo el elevador: iluminada, tranquila, con instrucciones pintadas. Toda salida del Outpost pasa por acá."
+      },
+      "size_m": [
+        32,
+        24
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.threshold"
+      },
+      "connections": [
+        "conn.outpost_threshold",
+        "conn.threshold_shallows",
+        "conn.threshold_scarp",
+        "conn.threshold_c3"
+      ]
+    },
+    {
+      "id": "zone.shallows",
+      "name": "The Shallows",
+      "kind": "wild",
+      "biome": "wetlands",
+      "layer": "underground",
+      "tier": 1,
+      "danger": "low",
+      "status": "playable",
+      "region": "region.starting_region",
+      "cell": {
+        "seed": [
+          0.4154,
+          0.457
+        ],
+        "weight": 0.0004,
+        "polygon": [
+          [
+            0.4163,
+            0.2896
+          ],
+          [
+            0.5089,
+            0.46
+          ],
+          [
+            0.4905,
+            0.4958
+          ],
+          [
+            0.3267,
+            0.5059
+          ]
+        ]
+      },
+      "marker": [
+        0.4123,
+        0.4579
+      ],
+      "summary": {
+        "en": "A wide, damp cavern around the Keystone column. First ore, first Burrowborn nest, first Ravager.",
+        "es": "Una caverna amplia y húmeda alrededor de la columna Keystone. Primer mineral, primer nido Burrowborn, primer Ravager."
+      },
+      "subtitle": {
+        "en": "Surface exploration",
+        "es": "Exploración"
+      },
+      "size_m": [
+        52,
+        36
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.shallows"
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.threshold_shallows",
+        "conn.shallows_c3",
+        "conn.shallows_verdant",
+        "conn.old_metro_shallows"
+      ],
+      "label": [
+        0.4207,
+        0.4281
+      ]
+    },
+    {
+      "id": "zone.excavation_c3",
+      "name": "Excavation C-3",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "tier": 2,
+      "danger": "medium",
+      "status": "playable",
+      "region": "region.starting_region",
+      "cell": {
+        "seed": [
+          0.3925,
+          0.8257
+        ],
+        "weight": 0.0006,
+        "polygon": [
+          [
+            0.5392,
+            0.8171
+          ],
+          [
+            0.5351,
+            0.8207
+          ],
+          [
+            0.5259,
+            0.8757
+          ],
+          [
+            0.4954,
+            0.9108
+          ],
+          [
+            0.4573,
+            0.9358
+          ],
+          [
+            0.4284,
+            0.9775
+          ],
+          [
+            0.3872,
+            0.9691
+          ],
+          [
+            0.3582,
+            0.9274
+          ],
+          [
+            0.3277,
+            0.9024
+          ],
+          [
+            0.3195,
+            0.8997
+          ],
+          [
+            0.3195,
+            0.7614
+          ],
+          [
+            0.3889,
+            0.6877
+          ],
+          [
+            0.4243,
+            0.7039
+          ]
+        ]
+      },
+      "marker": [
+        0.3887,
+        0.834
+      ],
+      "summary": {
+        "en": "An active, guarded dig at the bottom of the shaft. Floor one is open; the Deep Seal at its end leads to floors two and three.",
+        "es": "Una excavación activa y custodiada al fondo del pozo. El piso uno está abierto; el Deep Seal del final lleva a los pisos dos y tres."
+      },
+      "subtitle": {
+        "en": "3 floors",
+        "es": "3 pisos"
+      },
+      "floors": 3,
+      "size_m": [
+        52,
+        36
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.excavation_c3"
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.shallows_c3",
+        "conn.threshold_c3",
+        "conn.c3_f2"
+      ],
+      "label": [
+        0.416,
+        0.834
+      ]
+    },
+    {
+      "id": "zone.excavation_c3_f2",
+      "name": "C-3 · Floor 2",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "tier": 3,
+      "danger": "high",
+      "status": "planned",
+      "region": "region.starting_region",
+      "stack": {
+        "parent": "zone.excavation_c3",
+        "depth": 2,
+        "marker": [
+          0.4101,
+          0.8882
+        ]
+      },
+      "summary": {
+        "en": "Below the Deep Seal: narrower, darker, hot vents. Candidate content: the Phase 11 Dark Stratum.",
+        "es": "Debajo del Deep Seal: más angosto, más oscuro, con respiraderos calientes. Contenido candidato: el Dark Stratum de la Fase 11."
+      },
+      "candidate_content": "zone.expedition_stratum",
+      "connections": [
+        "conn.c3_f2",
+        "conn.c3_f2_f3"
+      ]
+    },
+    {
+      "id": "zone.excavation_c3_f3",
+      "name": "C-3 · Floor 3",
+      "kind": "dungeon",
+      "biome": "anomaly",
+      "layer": "underground",
+      "tier": 4,
+      "danger": "high",
+      "status": "planned",
+      "region": "region.starting_region",
+      "stack": {
+        "parent": "zone.excavation_c3",
+        "depth": 3,
+        "marker": [
+          0.404,
+          0.9508
+        ]
+      },
+      "summary": {
+        "en": "The bottom of the old survey: a relic chamber and the first boss of the region. Candidate content: the Phase 11 Relic Chamber.",
+        "es": "El fondo del viejo relevamiento: una cámara de reliquias y el primer jefe de la región. Contenido candidato: la Relic Chamber de la Fase 11."
+      },
+      "candidate_content": "zone.expedition_relic_chamber",
+      "connections": [
+        "conn.c3_f2_f3",
+        "conn.abyss_c3_f3"
+      ]
+    },
+    {
+      "id": "zone.surface_scarp",
+      "name": "The Scarp",
+      "kind": "wild",
+      "biome": "desert",
+      "layer": "surface",
+      "tier": 1,
+      "danger": "low",
+      "status": "playable",
+      "region": "region.starting_region",
+      "cell": {
+        "seed": [
+          0.4802,
+          0.5963
+        ],
+        "weight": 0.0,
+        "polygon": [
+          [
+            0.5327,
+            0.6013
+          ],
+          [
+            0.4243,
+            0.7039
+          ],
+          [
+            0.3889,
+            0.6877
+          ],
+          [
+            0.3843,
+            0.6733
+          ],
+          [
+            0.4905,
+            0.5203
+          ]
+        ]
+      },
+      "label": [
+        0.4787,
+        0.6188
+      ],
+      "marker": [
+        0.4802,
+        0.5963
+      ],
+      "summary": {
+        "en": "Open sky over the Outpost: a basin of cracked mud and hoodoos with a scavenger camp. The shaft in its crater drops to The Threshold.",
+        "es": "Cielo abierto sobre el Outpost: una cuenca de barro agrietado y columnas de roca con un campamento de carroñeros. El pozo de su cráter baja a The Threshold."
+      },
+      "size_m": [
+        96,
+        96
+      ],
+      "journey_step": 1,
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.surface_scarp"
+      },
+      "connections": [
+        "conn.threshold_scarp",
+        "conn.scarp_saltpan_ne",
+        "conn.scarp_saltpan_sw",
+        "conn.scarp_sump",
+        "conn.outpost_scarp"
+      ]
+    },
+    {
+      "id": "zone.surface_saltpan",
+      "name": "The Saltpan",
+      "kind": "route",
+      "biome": "desert",
+      "layer": "surface",
+      "tier": 1,
+      "danger": "low",
+      "status": "playable",
+      "region": "region.frontier",
+      "cell": {
+        "seed": [
+          0.5297,
+          0.6589
+        ],
+        "weight": 0.0,
+        "polygon": [
+          [
+            0.5558,
+            0.8025
+          ],
+          [
+            0.5392,
+            0.8171
+          ],
+          [
+            0.4243,
+            0.7039
+          ],
+          [
+            0.5327,
+            0.6013
+          ],
+          [
+            0.5489,
+            0.6065
+          ],
+          [
+            0.5717,
+            0.728
+          ]
+        ]
+      },
+      "label": [
+        0.5259,
+        0.6739
+      ],
+      "marker": [
+        0.5297,
+        0.6589
+      ],
+      "summary": {
+        "en": "Frontier Road, west half. A salt flat where a convoy died on the old road; salvage, a salt-works ruin and the first raiders.",
+        "es": "Frontier Road, mitad oeste. Un salar donde murió un convoy en la vieja ruta; chatarra, las ruinas de una salinera y los primeros saqueadores."
+      },
+      "subtitle": {
+        "en": "Frontier Road · west",
+        "es": "Frontier Road · oeste"
+      },
+      "size_m": [
+        96,
+        96
+      ],
+      "journey_step": 2,
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.surface_saltpan"
+      },
+      "connections": [
+        "conn.scarp_saltpan_ne",
+        "conn.scarp_saltpan_sw",
+        "conn.saltpan_frontier_east"
+      ]
+    },
+    {
+      "id": "zone.frontier_road_east",
+      "name": "Frontier Road",
+      "kind": "route",
+      "biome": "plains",
+      "layer": "surface",
+      "tier": 2,
+      "danger": "medium",
+      "status": "playable",
+      "region": "region.frontier",
+      "cell": {
+        "seed": [
+          0.5854,
+          0.6464
+        ],
+        "weight": 0.0,
+        "polygon": [
+          [
+            0.6492,
+            0.5839
+          ],
+          [
+            0.5717,
+            0.728
+          ],
+          [
+            0.5489,
+            0.6065
+          ],
+          [
+            0.6468,
+            0.577
+          ]
+        ]
+      },
+      "label": [
+        0.5869,
+        0.6272
+      ],
+      "marker": [
+        0.5854,
+        0.6464
+      ],
+      "summary": {
+        "en": "The east half of the road: a long dry valley with relay pylons and wrecks. Dustline's walls come into view at the end; raiders know that too.",
+        "es": "La mitad este de la ruta: un valle seco y largo con torres de relé y chatarra. Al final aparecen los muros de Dustline; los saqueadores también lo saben."
+      },
+      "subtitle": {
+        "en": "East half · Dustline Gate",
+        "es": "Mitad este · Puerta de Dustline"
+      },
+      "size_m": [
+        162,
+        78
+      ],
+      "journey_step": 3,
+      "connections": [
+        "conn.saltpan_frontier_east",
+        "conn.frontier_east_dustline",
+        "conn.sump_frontier_east"
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.frontier_road_east"
+      }
+    },
+    {
+      "id": "zone.dustline",
+      "name": "Dustline",
+      "kind": "city",
+      "biome": "desert",
+      "layer": "surface",
+      "tier": 2,
+      "danger": "safe",
+      "status": "playable",
+      "region": "region.frontier",
+      "cell": {
+        "seed": [
+          0.654,
+          0.6906
+        ],
+        "weight": 0.0022,
+        "polygon": [
+          [
+            0.7856,
+            0.7144
+          ],
+          [
+            0.7637,
+            0.7423
+          ],
+          [
+            0.7027,
+            0.7807
+          ],
+          [
+            0.6555,
+            0.7656
+          ],
+          [
+            0.596,
+            0.769
+          ],
+          [
+            0.5655,
+            0.794
+          ],
+          [
+            0.5558,
+            0.8025
+          ],
+          [
+            0.5717,
+            0.728
+          ],
+          [
+            0.6492,
+            0.5839
+          ]
+        ]
+      },
+      "marker": [
+        0.6311,
+        0.6797
+      ],
+      "summary": {
+        "en": "The trading city. Neutral ground where every civilisation buys, sells and hires: market, caravans, workshops, the Exchange and the Warrens.",
+        "es": "La ciudad del comercio. Terreno neutral donde todas las civilizaciones compran, venden y contratan: mercado, caravanas, talleres, el Exchange y los Warrens."
+      },
+      "subtitle": {
+        "en": "The Trading City",
+        "es": "La ciudad del comercio"
+      },
+      "size_m": [
+        124,
+        112
+      ],
+      "journey_step": 4,
+      "art_icon": true,
+      "connections": [
+        "conn.frontier_east_dustline",
+        "conn.dustline_floodlands"
+      ],
+      "label": [
+        0.6669,
+        0.7035
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.dustline"
+      }
+    },
+    {
+      "id": "zone.the_sump",
+      "name": "The Sump",
+      "kind": "wild",
+      "biome": "wetlands",
+      "layer": "surface",
+      "tier": 2,
+      "danger": "medium",
+      "status": "planned",
+      "region": "region.frontier",
+      "cell": {
+        "seed": [
+          0.5602,
+          0.5463
+        ],
+        "weight": 0.0005,
+        "polygon": [
+          [
+            0.6468,
+            0.577
+          ],
+          [
+            0.5489,
+            0.6065
+          ],
+          [
+            0.5327,
+            0.6013
+          ],
+          [
+            0.4905,
+            0.5203
+          ],
+          [
+            0.4905,
+            0.4958
+          ],
+          [
+            0.5089,
+            0.46
+          ],
+          [
+            0.6121,
+            0.4626
+          ],
+          [
+            0.6517,
+            0.5492
+          ]
+        ]
+      },
+      "marker": [
+        0.5526,
+        0.5321
+      ],
+      "summary": {
+        "en": "Hunting grounds in a drained reservoir east of the Outpost. Its edge runs along Frontier Road: a detour for hides, meat and bounties.",
+        "es": "Coto de caza en un embalse drenado al este del Outpost. Su borde corre junto a Frontier Road: un desvío por cueros, carne y recompensas."
+      },
+      "subtitle": {
+        "en": "Hunting area",
+        "es": "Zona de caza"
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.scarp_sump",
+        "conn.sump_frontier_east",
+        "conn.sump_fungal",
+        "conn.sump_verdant"
+      ],
+      "label": [
+        0.5683,
+        0.5286
+      ]
+    },
+    {
+      "id": "zone.verdant_reach",
+      "name": "Verdant Reach",
+      "kind": "city",
+      "biome": "forest",
+      "layer": "surface",
+      "tier": 3,
+      "danger": "safe",
+      "status": "planned",
+      "region": "region.verdant",
+      "cell": {
+        "seed": [
+          0.564,
+          0.3603
+        ],
+        "weight": 0.003,
+        "polygon": [
+          [
+            0.6121,
+            0.4626
+          ],
+          [
+            0.5089,
+            0.46
+          ],
+          [
+            0.4163,
+            0.2896
+          ],
+          [
+            0.4158,
+            0.2859
+          ],
+          [
+            0.5154,
+            0.2336
+          ],
+          [
+            0.6871,
+            0.3441
+          ]
+        ]
+      },
+      "marker": [
+        0.5602,
+        0.3628
+      ],
+      "summary": {
+        "en": "The Living City, home of the Verdant. Gardens grown over old reservoirs; medicine, seeds and symbiotes.",
+        "es": "La ciudad viva, hogar de Lo Vivo. Jardines crecidos sobre viejos embalses; medicina, semillas y simbiontes."
+      },
+      "subtitle": {
+        "en": "The Living City",
+        "es": "La ciudad viva"
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.sump_verdant",
+        "conn.verdant_fungal",
+        "conn.shallows_verdant",
+        "conn.verdant_relay"
+      ],
+      "label": [
+        0.5484,
+        0.3528
+      ]
+    },
+    {
+      "id": "zone.relay_nine",
+      "name": "Relay Nine",
+      "kind": "city",
+      "biome": "caves",
+      "layer": "surface",
+      "tier": 3,
+      "danger": "safe",
+      "status": "planned",
+      "region": "region.relay",
+      "cell": {
+        "seed": [
+          0.6402,
+          0.2185
+        ],
+        "weight": 0.003,
+        "polygon": [
+          [
+            0.6083,
+            0.0336
+          ],
+          [
+            0.6369,
+            0.0405
+          ],
+          [
+            0.7599,
+            0.3213
+          ],
+          [
+            0.6871,
+            0.3441
+          ],
+          [
+            0.5154,
+            0.2336
+          ]
+        ]
+      },
+      "marker": [
+        0.6326,
+        0.221
+      ],
+      "summary": {
+        "en": "The Network: home of the Relay, a city wired into an ancient relay station that still answers.",
+        "es": "La red: hogar de La Red, una ciudad conectada a una antigua estación de relé que todavía responde."
+      },
+      "subtitle": {
+        "en": "The Network",
+        "es": "La red"
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.verdant_relay",
+        "conn.relay_glasslands",
+        "conn.relay_pale"
+      ],
+      "label": [
+        0.6358,
+        0.2063
+      ]
+    },
+    {
+      "id": "zone.ironhaven",
+      "name": "Ironhaven",
+      "kind": "city",
+      "biome": "desert",
+      "layer": "surface",
+      "tier": 3,
+      "danger": "safe",
+      "status": "planned",
+      "region": "region.foundry",
+      "cell": {
+        "seed": [
+          0.2325,
+          0.2627
+        ],
+        "weight": 0.003,
+        "polygon": [
+          [
+            0.3224,
+            0.1441
+          ],
+          [
+            0.39,
+            0.2688
+          ],
+          [
+            0.1891,
+            0.3887
+          ],
+          [
+            0.1222,
+            0.2491
+          ]
+        ]
+      },
+      "marker": [
+        0.2287,
+        0.2569
+      ],
+      "summary": {
+        "en": "The Forge City, home of the Foundry. Furnaces, rail yards and the heaviest machines in the world.",
+        "es": "La ciudad forja, hogar de La Forja. Hornos, playas ferroviarias y las máquinas más pesadas del mundo."
+      },
+      "subtitle": {
+        "en": "The Forge City",
+        "es": "La ciudad forja"
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.ash_ironhaven",
+        "conn.ironhaven_rustbelt",
+        "conn.ironhaven_old_metro"
+      ],
+      "label": [
+        0.2547,
+        0.2639
+      ]
+    },
+    {
+      "id": "zone.the_glasslands",
+      "name": "The Glasslands",
+      "kind": "wild",
+      "biome": "snow",
+      "layer": "surface",
+      "tier": 5,
+      "danger": "high",
+      "status": "planned",
+      "region": "region.relay",
+      "cell": {
+        "seed": [
+          0.7546,
+          0.1585
+        ],
+        "weight": 0.002,
+        "polygon": [
+          [
+            0.6369,
+            0.0405
+          ],
+          [
+            0.6555,
+            0.045
+          ],
+          [
+            0.7012,
+            0.0317
+          ],
+          [
+            0.7622,
+            0.0484
+          ],
+          [
+            0.8095,
+            0.0717
+          ],
+          [
+            0.8323,
+            0.1251
+          ],
+          [
+            0.8338,
+            0.2185
+          ],
+          [
+            0.7957,
+            0.2752
+          ],
+          [
+            0.8001,
+            0.329
+          ],
+          [
+            0.7599,
+            0.3213
+          ]
+        ]
+      },
+      "marker": [
+        0.747,
+        0.1501
+      ],
+      "summary": {
+        "en": "Fused crystal plains north-east of Relay Nine. Light bends, signals echo, and nothing grows.",
+        "es": "Llanuras de cristal fundido al noreste de Relay Nine. La luz se dobla, las señales hacen eco y nada crece."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.relay_glasslands"
+      ],
+      "label": [
+        0.753,
+        0.1568
+      ]
+    },
+    {
+      "id": "zone.the_pale",
+      "name": "The Pale",
+      "kind": "wild",
+      "biome": "snow",
+      "layer": "surface",
+      "tier": 5,
+      "danger": "high",
+      "status": "planned",
+      "region": "region.north",
+      "cell": {
+        "seed": [
+          0.4573,
+          0.1168
+        ],
+        "weight": 0.002,
+        "polygon": [
+          [
+            0.3099,
+            0.0642
+          ],
+          [
+            0.3201,
+            0.0617
+          ],
+          [
+            0.3963,
+            0.045
+          ],
+          [
+            0.4573,
+            0.0367
+          ],
+          [
+            0.503,
+            0.0317
+          ],
+          [
+            0.5335,
+            0.02
+          ],
+          [
+            0.5869,
+            0.0284
+          ],
+          [
+            0.6083,
+            0.0336
+          ],
+          [
+            0.5154,
+            0.2336
+          ],
+          [
+            0.4158,
+            0.2859
+          ],
+          [
+            0.39,
+            0.2688
+          ],
+          [
+            0.3224,
+            0.1441
+          ]
+        ]
+      },
+      "marker": [
+        0.4588,
+        0.1209
+      ],
+      "summary": {
+        "en": "The frozen north: snowfields over collapsed peaks. Cold drains batteries faster than any creature.",
+        "es": "El norte helado: campos de nieve sobre picos derrumbados. El frío vacía baterías más rápido que cualquier criatura."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.relay_pale",
+        "conn.pale_ash"
+      ],
+      "label": [
+        0.4504,
+        0.1354
+      ]
+    },
+    {
+      "id": "zone.ash_wastes",
+      "name": "Ash Wastes",
+      "kind": "wild",
+      "biome": "desert",
+      "layer": "surface",
+      "tier": 4,
+      "danger": "high",
+      "status": "planned",
+      "region": "region.foundry",
+      "cell": {
+        "seed": [
+          0.1905,
+          0.1668
+        ],
+        "weight": 0.001,
+        "polygon": [
+          [
+            0.0655,
+            0.2082
+          ],
+          [
+            0.1143,
+            0.1668
+          ],
+          [
+            0.1357,
+            0.1268
+          ],
+          [
+            0.1905,
+            0.0984
+          ],
+          [
+            0.2515,
+            0.0784
+          ],
+          [
+            0.3099,
+            0.0642
+          ],
+          [
+            0.3224,
+            0.1441
+          ],
+          [
+            0.1222,
+            0.2491
+          ]
+        ]
+      },
+      "marker": [
+        0.1905,
+        0.171
+      ],
+      "summary": {
+        "en": "Burnt ground downwind of Ironhaven's furnaces. Slag fields, ash storms and scavenger clans.",
+        "es": "Tierra quemada a sotavento de los hornos de Ironhaven. Campos de escoria, tormentas de ceniza y clanes carroñeros."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.pale_ash",
+        "conn.ash_ironhaven"
+      ],
+      "label": [
+        0.2025,
+        0.1541
+      ]
+    },
+    {
+      "id": "zone.rustbelt",
+      "name": "Rustbelt",
+      "kind": "wild",
+      "biome": "desert",
+      "layer": "surface",
+      "tier": 3,
+      "danger": "medium",
+      "status": "planned",
+      "region": "region.foundry",
+      "cell": {
+        "seed": [
+          0.08,
+          0.3503
+        ],
+        "weight": 0.001,
+        "polygon": [
+          [
+            0.0305,
+            0.2502
+          ],
+          [
+            0.0534,
+            0.2185
+          ],
+          [
+            0.0655,
+            0.2082
+          ],
+          [
+            0.1222,
+            0.2491
+          ],
+          [
+            0.1891,
+            0.3887
+          ],
+          [
+            0.183,
+            0.4214
+          ],
+          [
+            0.0386,
+            0.5085
+          ],
+          [
+            0.0305,
+            0.4837
+          ],
+          [
+            0.0412,
+            0.417
+          ],
+          [
+            0.0335,
+            0.3336
+          ]
+        ]
+      },
+      "marker": [
+        0.0701,
+        0.3053
+      ],
+      "summary": {
+        "en": "Abandoned industry on the western margin: rusted works, rail spurs and Rustbound machines.",
+        "es": "Industria abandonada en el margen oeste: fábricas oxidadas, ramales de tren y máquinas Rustbound."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.ironhaven_rustbelt",
+        "conn.rustbelt_crags"
+      ],
+      "label": [
+        0.0947,
+        0.3591
+      ]
+    },
+    {
+      "id": "zone.old_metro",
+      "name": "Old Metro",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "tier": 3,
+      "danger": "medium",
+      "status": "planned",
+      "region": "region.forgotten_works",
+      "cell": {
+        "seed": [
+          0.3011,
+          0.4003
+        ],
+        "weight": 0.0005,
+        "polygon": [
+          [
+            0.4158,
+            0.2859
+          ],
+          [
+            0.4163,
+            0.2896
+          ],
+          [
+            0.3267,
+            0.5059
+          ],
+          [
+            0.3017,
+            0.5303
+          ],
+          [
+            0.183,
+            0.4214
+          ],
+          [
+            0.1891,
+            0.3887
+          ],
+          [
+            0.39,
+            0.2688
+          ]
+        ]
+      },
+      "marker": [
+        0.2919,
+        0.4053
+      ],
+      "summary": {
+        "en": "A pre-collapse transit network under the west. Platforms, flooded tunnels and the Castoffs who live there.",
+        "es": "Una red de transporte de antes del colapso bajo el oeste. Andenes, túneles inundados y los Castoffs que viven ahí."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.ironhaven_old_metro",
+        "conn.old_metro_shallows",
+        "conn.crags_old_metro"
+      ],
+      "label": [
+        0.3027,
+        0.3973
+      ]
+    },
+    {
+      "id": "zone.the_crags",
+      "name": "The Crags",
+      "kind": "wild",
+      "biome": "mountains",
+      "layer": "surface",
+      "tier": 3,
+      "danger": "medium",
+      "status": "planned",
+      "region": "region.west",
+      "cell": {
+        "seed": [
+          0.1829,
+          0.5546
+        ],
+        "weight": 0.001,
+        "polygon": [
+          [
+            0.3017,
+            0.5303
+          ],
+          [
+            0.3025,
+            0.5581
+          ],
+          [
+            0.1849,
+            0.6482
+          ],
+          [
+            0.1814,
+            0.6355
+          ],
+          [
+            0.1143,
+            0.5855
+          ],
+          [
+            0.0473,
+            0.5354
+          ],
+          [
+            0.0386,
+            0.5085
+          ],
+          [
+            0.183,
+            0.4214
+          ]
+        ]
+      },
+      "marker": [
+        0.1905,
+        0.5563
+      ],
+      "summary": {
+        "en": "Broken uplands west of the Outpost. Climbing routes, nests on ledges, and a cave entrance nobody maps the same way twice.",
+        "es": "Tierras altas quebradas al oeste del Outpost. Rutas de escalada, nidos en las cornisas y una entrada a cuevas que nadie dibuja igual dos veces."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.rustbelt_crags",
+        "conn.crags_old_metro",
+        "conn.crags_ruins"
+      ],
+      "label": [
+        0.1766,
+        0.5317
+      ]
+    },
+    {
+      "id": "zone.ancient_ruins",
+      "name": "Ancient Ruins",
+      "kind": "dungeon",
+      "biome": "anomaly",
+      "layer": "surface",
+      "tier": 4,
+      "danger": "high",
+      "status": "planned",
+      "region": "region.forgotten_works",
+      "cell": {
+        "seed": [
+          0.263,
+          0.6797
+        ],
+        "weight": 0.0006,
+        "polygon": [
+          [
+            0.3025,
+            0.5581
+          ],
+          [
+            0.3843,
+            0.6733
+          ],
+          [
+            0.3889,
+            0.6877
+          ],
+          [
+            0.3195,
+            0.7614
+          ],
+          [
+            0.1411,
+            0.7335
+          ],
+          [
+            0.1524,
+            0.7173
+          ],
+          [
+            0.1951,
+            0.6856
+          ],
+          [
+            0.1849,
+            0.6482
+          ]
+        ]
+      },
+      "marker": [
+        0.2515,
+        0.6772
+      ],
+      "summary": {
+        "en": "Structures older than every civilisation, half swallowed by the purple waste. Architects' machines still guard them.",
+        "es": "Estructuras más viejas que cualquier civilización, medio tragadas por el páramo violeta. Las máquinas de los Arquitectos todavía las custodian."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.crags_ruins",
+        "conn.outpost_ruins",
+        "conn.ruins_abyss"
+      ],
+      "label": [
+        0.2766,
+        0.6754
+      ]
+    },
+    {
+      "id": "zone.the_abyss",
+      "name": "The Abyss",
+      "kind": "dungeon",
+      "biome": "anomaly",
+      "layer": "underground",
+      "tier": 6,
+      "danger": "deadly",
+      "status": "planned",
+      "region": "region.abyss",
+      "cell": {
+        "seed": [
+          0.2439,
+          0.8257
+        ],
+        "weight": 0.001,
+        "polygon": [
+          [
+            0.3195,
+            0.8997
+          ],
+          [
+            0.282,
+            0.8874
+          ],
+          [
+            0.2287,
+            0.8857
+          ],
+          [
+            0.1829,
+            0.8691
+          ],
+          [
+            0.1448,
+            0.819
+          ],
+          [
+            0.128,
+            0.7523
+          ],
+          [
+            0.1411,
+            0.7335
+          ],
+          [
+            0.3195,
+            0.7614
+          ]
+        ]
+      },
+      "marker": [
+        0.2515,
+        0.844
+      ],
+      "summary": {
+        "en": "Unknown. Extreme strata, exceptional resources, and whatever is waiting at the bottom.",
+        "es": "Desconocido. Estratos extremos, recursos excepcionales y lo que sea que espera en el fondo."
+      },
+      "subtitle": {
+        "en": "Unknown",
+        "es": "Desconocido"
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.ruins_abyss",
+        "conn.abyss_c3_f3"
+      ],
+      "label": [
+        0.2326,
+        0.8118
+      ]
+    },
+    {
+      "id": "zone.fungal_depths",
+      "name": "Fungal Depths",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "tier": 3,
+      "danger": "medium",
+      "status": "planned",
+      "region": "region.verdant",
+      "cell": {
+        "seed": [
+          0.705,
+          0.4671
+        ],
+        "weight": 0.0006,
+        "polygon": [
+          [
+            0.8001,
+            0.329
+          ],
+          [
+            0.8018,
+            0.3503
+          ],
+          [
+            0.8247,
+            0.402
+          ],
+          [
+            0.8338,
+            0.4637
+          ],
+          [
+            0.8651,
+            0.4741
+          ],
+          [
+            0.6517,
+            0.5492
+          ],
+          [
+            0.6121,
+            0.4626
+          ],
+          [
+            0.6871,
+            0.3441
+          ],
+          [
+            0.7599,
+            0.3213
+          ]
+        ]
+      },
+      "marker": [
+        0.6997,
+        0.4712
+      ],
+      "summary": {
+        "en": "A cave entrance into a fungal forest east of Verdant Reach. Spores, glowcaps and things that farm them.",
+        "es": "Una entrada a un bosque de hongos al este de Verdant Reach. Esporas, hongos luminosos y cosas que los cultivan."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.sump_fungal",
+        "conn.fungal_floodlands",
+        "conn.verdant_fungal"
+      ],
+      "label": [
+        0.7287,
+        0.4354
+      ]
+    },
+    {
+      "id": "zone.floodlands",
+      "name": "Floodlands",
+      "kind": "wild",
+      "biome": "wetlands",
+      "layer": "surface",
+      "tier": 3,
+      "danger": "medium",
+      "status": "planned",
+      "region": "region.frontier",
+      "cell": {
+        "seed": [
+          0.7393,
+          0.5838
+        ],
+        "weight": 0.0008,
+        "polygon": [
+          [
+            0.8651,
+            0.4741
+          ],
+          [
+            0.8841,
+            0.4804
+          ],
+          [
+            0.9116,
+            0.4937
+          ],
+          [
+            0.8933,
+            0.5688
+          ],
+          [
+            0.8552,
+            0.6188
+          ],
+          [
+            0.8095,
+            0.6355
+          ],
+          [
+            0.8018,
+            0.6939
+          ],
+          [
+            0.7856,
+            0.7144
+          ],
+          [
+            0.6492,
+            0.5839
+          ],
+          [
+            0.6468,
+            0.577
+          ],
+          [
+            0.6517,
+            0.5492
+          ]
+        ]
+      },
+      "marker": [
+        0.7241,
+        0.5863
+      ],
+      "summary": {
+        "en": "The drowned east, beyond Dustline's frontier gate. Stilt villages, tide channels and shallow water that hides deep holes.",
+        "es": "El este ahogado, más allá de la puerta de la frontera de Dustline. Pueblos sobre pilotes, canales de marea y agua baja que esconde pozos hondos."
+      },
+      "art_icon": true,
+      "connections": [
+        "conn.dustline_floodlands",
+        "conn.fungal_floodlands"
+      ],
+      "label": [
+        0.7843,
+        0.5768
+      ]
+    }
+  ],
+  "connections": [
+    {
+      "id": "conn.outpost_threshold",
+      "kind": "lift",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.outpost",
+          "exit": "SHAFT LIFT · DESCEND TO THE THRESHOLD",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 142
+        },
+        {
+          "zone": "zone.threshold",
+          "exit": "LIFT · THE OUTPOST",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 54
+        }
+      ]
+    },
+    {
+      "id": "conn.threshold_shallows",
+      "kind": "tunnel",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.threshold",
+          "exit": "THE SHALLOWS",
+          "edge": "E",
+          "edge_fixed": true,
+          "transition": 50
+        },
+        {
+          "zone": "zone.shallows",
+          "exit": "RETURN · THE THRESHOLD",
+          "edge": "W",
+          "edge_fixed": true,
+          "transition": 51
+        }
+      ]
+    },
+    {
+      "id": "conn.shallows_c3",
+      "kind": "tunnel",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.shallows",
+          "exit": "EXCAVATION C-3",
+          "edge": "E",
+          "edge_fixed": true,
+          "transition": 52
+        },
+        {
+          "zone": "zone.excavation_c3",
+          "exit": "RETURN · THE SHALLOWS",
+          "edge": "W",
+          "edge_fixed": true,
+          "transition": 53
+        }
+      ]
+    },
+    {
+      "id": "conn.threshold_scarp",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.threshold",
+          "exit": "SURFACE · THE SCARP",
+          "edge": "N",
+          "edge_fixed": true,
+          "transition": 120
+        },
+        {
+          "zone": "zone.surface_scarp",
+          "exit": "DESCEND · THE THRESHOLD",
+          "edge": "CRATER",
+          "edge_fixed": true,
+          "transition": 121
+        }
+      ]
+    },
+    {
+      "id": "conn.scarp_saltpan_ne",
+      "kind": "road",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.surface_scarp",
+          "exit": "NE CANYON · THE SALTPAN",
+          "edge": "NE",
+          "edge_fixed": true,
+          "transition": 125
+        },
+        {
+          "zone": "zone.surface_saltpan",
+          "exit": "WEST CANYON · THE SCARP",
+          "edge": "W",
+          "edge_fixed": true,
+          "transition": 126
+        }
+      ],
+      "route": "route.frontier_road",
+      "exit_at": [
+        0.4966,
+        0.6355
+      ]
+    },
+    {
+      "id": "conn.scarp_saltpan_sw",
+      "kind": "road",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.surface_scarp",
+          "exit": "SW CANYON · THE SALTPAN",
+          "edge": "SW",
+          "edge_fixed": true,
+          "transition": 127
+        },
+        {
+          "zone": "zone.surface_saltpan",
+          "exit": "SOUTH CANYON · THE SCARP",
+          "edge": "S",
+          "edge_fixed": true,
+          "transition": 128
+        }
+      ],
+      "exit_at": [
+        0.4605,
+        0.6697
+      ]
+    },
+    {
+      "id": "conn.saltpan_frontier_east",
+      "kind": "road",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.surface_saltpan",
+          "exit": "EAST · FRONTIER ROAD",
+          "edge": "E",
+          "transition": 160
+        },
+        {
+          "zone": "zone.frontier_road_east",
+          "exit": "WEST · THE SALTPAN",
+          "edge": "SW",
+          "transition": 161
+        }
+      ],
+      "route": "route.frontier_road",
+      "exit_at": [
+        0.5603,
+        0.6673
+      ]
+    },
+    {
+      "id": "conn.frontier_east_dustline",
+      "kind": "road",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.frontier_road_east",
+          "exit": "DUSTLINE GATE",
+          "edge": "E",
+          "transition": 162
+        },
+        {
+          "zone": "zone.dustline",
+          "exit": "FRONTIER ROAD · WEST",
+          "edge": "NW",
+          "transition": 163
+        }
+      ],
+      "route": "route.frontier_road",
+      "exit_at": [
+        0.6104,
+        0.656
+      ]
+    },
+    {
+      "id": "conn.scarp_sump",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.surface_scarp",
+          "exit": "EAST TRAIL · THE SUMP",
+          "edge": "NE"
+        },
+        {
+          "zone": "zone.the_sump",
+          "exit": "WEST TRAIL · THE SCARP",
+          "edge": "SW"
+        }
+      ],
+      "exit_at": [
+        0.5116,
+        0.5608
+      ]
+    },
+    {
+      "id": "conn.sump_frontier_east",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.the_sump",
+          "exit": "SOUTH · FRONTIER ROAD",
+          "edge": "SE"
+        },
+        {
+          "zone": "zone.frontier_road_east",
+          "exit": "NORTH · SUMP EDGE",
+          "edge": "N"
+        }
+      ],
+      "exit_at": [
+        0.5979,
+        0.5918
+      ]
+    },
+    {
+      "id": "conn.outpost_scarp",
+      "kind": "tunnel",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.outpost",
+          "exit": "ADIT · THE SCARP",
+          "edge": "E",
+          "edge_fixed": true
+        },
+        {
+          "zone": "zone.surface_scarp",
+          "exit": "ADIT · THE OUTPOST",
+          "edge": "W",
+          "edge_fixed": true
+        }
+      ],
+      "exit_at": [
+        0.4374,
+        0.5968
+      ]
+    },
+    {
+      "id": "conn.threshold_c3",
+      "kind": "shaft",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.threshold",
+          "exit": "DEEP SHAFT · C-3",
+          "edge": "S",
+          "edge_fixed": true
+        },
+        {
+          "zone": "zone.excavation_c3",
+          "exit": "SHAFT · THE THRESHOLD",
+          "edge": "UP",
+          "edge_fixed": true
+        }
+      ]
+    },
+    {
+      "id": "conn.c3_f2",
+      "kind": "shaft",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.excavation_c3",
+          "exit": "DEEP SEAL",
+          "edge": "DOWN",
+          "edge_fixed": true
+        },
+        {
+          "zone": "zone.excavation_c3_f2",
+          "exit": "UP · FLOOR 1",
+          "edge": "UP",
+          "edge_fixed": true
+        }
+      ]
+    },
+    {
+      "id": "conn.c3_f2_f3",
+      "kind": "shaft",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.excavation_c3_f2",
+          "exit": "DOWN · FLOOR 3",
+          "edge": "DOWN",
+          "edge_fixed": true
+        },
+        {
+          "zone": "zone.excavation_c3_f3",
+          "exit": "UP · FLOOR 2",
+          "edge": "UP",
+          "edge_fixed": true
+        }
+      ]
+    },
+    {
+      "id": "conn.dustline_floodlands",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.dustline",
+          "exit": "FRONTIER EXIT · EAST",
+          "edge": "E"
+        },
+        {
+          "zone": "zone.floodlands",
+          "exit": "WEST · DUSTLINE",
+          "edge": "S"
+        }
+      ],
+      "exit_at": [
+        0.7174,
+        0.6492
+      ]
+    },
+    {
+      "id": "conn.sump_fungal",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.the_sump",
+          "exit": "NE · FUNGAL DEPTHS",
+          "edge": "E"
+        },
+        {
+          "zone": "zone.fungal_depths",
+          "exit": "SW · THE SUMP",
+          "edge": "SW"
+        }
+      ],
+      "exit_at": [
+        0.6319,
+        0.5059
+      ]
+    },
+    {
+      "id": "conn.sump_verdant",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.the_sump",
+          "exit": "NORTH · VERDANT REACH",
+          "edge": "N"
+        },
+        {
+          "zone": "zone.verdant_reach",
+          "exit": "SOUTH · THE SUMP",
+          "edge": "S"
+        }
+      ],
+      "exit_at": [
+        0.5605,
+        0.4613
+      ]
+    },
+    {
+      "id": "conn.fungal_floodlands",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.fungal_depths",
+          "exit": "SOUTH · FLOODLANDS",
+          "edge": "SE"
+        },
+        {
+          "zone": "zone.floodlands",
+          "exit": "NORTH · FUNGAL DEPTHS",
+          "edge": "NE"
+        }
+      ],
+      "exit_at": [
+        0.7584,
+        0.5117
+      ]
+    },
+    {
+      "id": "conn.verdant_fungal",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.verdant_reach",
+          "exit": "EAST · FUNGAL DEPTHS",
+          "edge": "E"
+        },
+        {
+          "zone": "zone.fungal_depths",
+          "exit": "NORTH · VERDANT REACH",
+          "edge": "NW"
+        }
+      ],
+      "exit_at": [
+        0.6496,
+        0.4033
+      ]
+    },
+    {
+      "id": "conn.shallows_verdant",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.shallows",
+          "exit": "NE · VERDANT REACH",
+          "edge": "NE"
+        },
+        {
+          "zone": "zone.verdant_reach",
+          "exit": "SW · THE SHALLOWS",
+          "edge": "W"
+        }
+      ],
+      "exit_at": [
+        0.4626,
+        0.3748
+      ]
+    },
+    {
+      "id": "conn.verdant_relay",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.verdant_reach",
+          "exit": "NORTH · RELAY NINE",
+          "edge": "NE"
+        },
+        {
+          "zone": "zone.relay_nine",
+          "exit": "SOUTH · VERDANT REACH",
+          "edge": "SW"
+        }
+      ],
+      "exit_at": [
+        0.6012,
+        0.2888
+      ]
+    },
+    {
+      "id": "conn.relay_glasslands",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.relay_nine",
+          "exit": "EAST · THE GLASSLANDS",
+          "edge": "NE"
+        },
+        {
+          "zone": "zone.the_glasslands",
+          "exit": "WEST · RELAY NINE",
+          "edge": "SW"
+        }
+      ],
+      "exit_at": [
+        0.6984,
+        0.1809
+      ]
+    },
+    {
+      "id": "conn.relay_pale",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.relay_nine",
+          "exit": "WEST · THE PALE",
+          "edge": "NW"
+        },
+        {
+          "zone": "zone.the_pale",
+          "exit": "EAST · RELAY NINE",
+          "edge": "E"
+        }
+      ],
+      "exit_at": [
+        0.5618,
+        0.1336
+      ]
+    },
+    {
+      "id": "conn.pale_ash",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.the_pale",
+          "exit": "WEST · ASH WASTES",
+          "edge": "W"
+        },
+        {
+          "zone": "zone.ash_wastes",
+          "exit": "EAST · THE PALE",
+          "edge": "NE"
+        }
+      ],
+      "exit_at": [
+        0.3161,
+        0.1042
+      ]
+    },
+    {
+      "id": "conn.ash_ironhaven",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.ash_wastes",
+          "exit": "SOUTH · IRONHAVEN",
+          "edge": "SE"
+        },
+        {
+          "zone": "zone.ironhaven",
+          "exit": "NORTH · ASH WASTES",
+          "edge": "N"
+        }
+      ],
+      "exit_at": [
+        0.2223,
+        0.1966
+      ]
+    },
+    {
+      "id": "conn.ironhaven_rustbelt",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.ironhaven",
+          "exit": "WEST · RUSTBELT",
+          "edge": "SW"
+        },
+        {
+          "zone": "zone.rustbelt",
+          "exit": "EAST · IRONHAVEN",
+          "edge": "E"
+        }
+      ],
+      "exit_at": [
+        0.1557,
+        0.3189
+      ]
+    },
+    {
+      "id": "conn.ironhaven_old_metro",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.ironhaven",
+          "exit": "SOUTH · OLD METRO",
+          "edge": "SE"
+        },
+        {
+          "zone": "zone.old_metro",
+          "exit": "NORTH · IRONHAVEN",
+          "edge": "N"
+        }
+      ],
+      "exit_at": [
+        0.2896,
+        0.3288
+      ]
+    },
+    {
+      "id": "conn.old_metro_shallows",
+      "kind": "tunnel",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.old_metro",
+          "exit": "EAST LINE · THE SHALLOWS",
+          "edge": "E"
+        },
+        {
+          "zone": "zone.shallows",
+          "exit": "WEST · OLD METRO",
+          "edge": "NW"
+        }
+      ],
+      "exit_at": [
+        0.3715,
+        0.3978
+      ]
+    },
+    {
+      "id": "conn.rustbelt_crags",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.rustbelt",
+          "exit": "SOUTH · THE CRAGS",
+          "edge": "S"
+        },
+        {
+          "zone": "zone.the_crags",
+          "exit": "NORTH · RUSTBELT",
+          "edge": "NW"
+        }
+      ],
+      "exit_at": [
+        0.1108,
+        0.4649
+      ]
+    },
+    {
+      "id": "conn.crags_old_metro",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.the_crags",
+          "exit": "NE · OLD METRO",
+          "edge": "NE"
+        },
+        {
+          "zone": "zone.old_metro",
+          "exit": "SW · THE CRAGS",
+          "edge": "SW"
+        }
+      ],
+      "exit_at": [
+        0.2423,
+        0.4758
+      ]
+    },
+    {
+      "id": "conn.crags_ruins",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.the_crags",
+          "exit": "SOUTH · ANCIENT RUINS",
+          "edge": "SE"
+        },
+        {
+          "zone": "zone.ancient_ruins",
+          "exit": "NW · THE CRAGS",
+          "edge": "N"
+        }
+      ],
+      "exit_at": [
+        0.2437,
+        0.6032
+      ]
+    },
+    {
+      "id": "conn.outpost_ruins",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.outpost",
+          "exit": "SW ROAD · ANCIENT RUINS",
+          "edge": "SW"
+        },
+        {
+          "zone": "zone.ancient_ruins",
+          "exit": "NE · THE OUTPOST",
+          "edge": "NE"
+        }
+      ],
+      "exit_at": [
+        0.3434,
+        0.6157
+      ]
+    },
+    {
+      "id": "conn.ruins_abyss",
+      "kind": "tunnel",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.ancient_ruins",
+          "exit": "DOWN · THE ABYSS",
+          "edge": "S"
+        },
+        {
+          "zone": "zone.the_abyss",
+          "exit": "UP · ANCIENT RUINS",
+          "edge": "N"
+        }
+      ],
+      "exit_at": [
+        0.2303,
+        0.7474
+      ]
+    },
+    {
+      "id": "conn.abyss_c3_f3",
+      "kind": "tunnel",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.the_abyss",
+          "exit": "EAST · C-3 DEEP WORKINGS",
+          "edge": "E",
+          "edge_fixed": true
+        },
+        {
+          "zone": "zone.excavation_c3_f3",
+          "exit": "WEST · THE ABYSS",
+          "edge": "W",
+          "edge_fixed": true
+        }
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "id": "route.first_journey",
+      "name": {
+        "en": "Your first journey",
+        "es": "Tu primer viaje"
+      },
+      "summary": {
+        "en": "From the Outpost to Dustline: down the lift, up onto open sky, and along Frontier Road to the first city.",
+        "es": "Del Outpost a Dustline: bajar en el elevador, subir al cielo abierto y seguir Frontier Road hasta la primera ciudad."
+      },
+      "zones": [
+        "zone.outpost",
+        "zone.threshold",
+        "zone.surface_scarp",
+        "zone.surface_saltpan",
+        "zone.frontier_road_east",
+        "zone.dustline"
+      ],
+      "connections": [
+        "conn.outpost_threshold",
+        "conn.threshold_scarp",
+        "conn.scarp_saltpan_ne",
+        "conn.saltpan_frontier_east",
+        "conn.frontier_east_dustline"
+      ],
+      "target_minutes": {
+        "first_time": [
+          8,
+          12
+        ],
+        "repeat": [
+          3,
+          5
+        ]
+      },
+      "steps": [
+        {
+          "zone": "zone.outpost",
+          "text": {
+            "en": "Open the newcomer crates, hear Old Brannock out, and ride the shaft lift down.",
+            "es": "Abrí los cajones de recién llegado, escuchá al viejo Brannock y bajá en el elevador del pozo."
+          }
+        },
+        {
+          "zone": "zone.threshold",
+          "text": {
+            "en": "Painted signs teach movement, loadout, lantern and dash. The passage on the north wall climbs to open sky.",
+            "es": "Los carteles pintados enseñan movimiento, inventario, linterna y dash. El pasaje de la pared norte sube al cielo abierto."
+          }
+        },
+        {
+          "zone": "zone.surface_scarp",
+          "text": {
+            "en": "First daylight. Scavengers hold the camp; the old road leaves through the north-east canyon.",
+            "es": "La primera luz del día. Los carroñeros ocupan el campamento; la vieja ruta sale por el cañón del noreste."
+          }
+        },
+        {
+          "zone": "zone.surface_saltpan",
+          "text": {
+            "en": "Frontier Road begins at the wrecked convoy: salvage it, drill the magnetite seam, and clear the raiders at the salt works.",
+            "es": "Frontier Road empieza en el convoy destruido: rescatá lo que sirva, perforá la veta de magnetita y despejá a los saqueadores de la salinera."
+          }
+        },
+        {
+          "zone": "zone.frontier_road_east",
+          "text": {
+            "en": "A long dry valley with Dustline on the horizon. The Sump's edge to the north is an optional hunting detour.",
+            "es": "Un valle seco y largo con Dustline en el horizonte. El borde de The Sump, al norte, es un desvío de caza opcional."
+          }
+        },
+        {
+          "zone": "zone.dustline",
+          "text": {
+            "en": "Through the Frontier Gate, where guards inspect your cargo, into the market under the Exchange tower.",
+            "es": "Cruzá la Puerta de la Frontera, donde los guardias revisan tu carga, y entrá al mercado bajo la torre del Exchange."
+          }
+        }
+      ]
+    },
+    {
+      "id": "route.frontier_road",
+      "name": {
+        "en": "Frontier Road",
+        "es": "Frontier Road"
+      },
+      "summary": {
+        "en": "The old convoy road from the shaft country to Dustline.",
+        "es": "La vieja ruta de convoyes del país del pozo a Dustline."
+      },
+      "zones": [
+        "zone.surface_scarp",
+        "zone.surface_saltpan",
+        "zone.frontier_road_east",
+        "zone.dustline"
+      ],
+      "connections": [
+        "conn.scarp_saltpan_ne",
+        "conn.saltpan_frontier_east",
+        "conn.frontier_east_dustline"
+      ]
+    }
+  ],
+  "dustline": {
+    "zone": "zone.dustline",
+    "size_m": [
+      160,
+      120
+    ],
+    "plan": {
+      "aspect": [
+        16,
+        11
+      ],
+      "note": "Local 0..1 coordinates, x east, y south. Stylised plan, not to final scale. The built v1 (2026-10-09, data/world/sets/dustline.json) keeps this topology but turns the Frontier Gate to face the isometric camera: the road arrives from the south, Gate Road runs north to the market, the Caravan Yard is left of it and the Lower Warrens' stair right of it (docs/design/DUSTLINE.md)."
+    },
+    "palette": {
+      "oxidized_metal": "#8a5a3c",
+      "charcoal": "#24221f",
+      "dusty_beige": "#b9a688",
+      "dirty_concrete": "#77746c",
+      "amber_light": "#d39a4b",
+      "faded_sign": "#9c8f6e"
+    },
+    "wall": [
+      [
+        0.08,
+        0.3
+      ],
+      [
+        0.2,
+        0.12
+      ],
+      [
+        0.4,
+        0.05
+      ],
+      [
+        0.66,
+        0.06
+      ],
+      [
+        0.86,
+        0.16
+      ],
+      [
+        0.95,
+        0.38
+      ],
+      [
+        0.95,
+        0.7
+      ],
+      [
+        0.84,
+        0.9
+      ],
+      [
+        0.6,
+        0.96
+      ],
+      [
+        0.3,
+        0.95
+      ],
+      [
+        0.12,
+        0.84
+      ],
+      [
+        0.06,
+        0.62
+      ]
+    ],
+    "streets": [
+      {
+        "id": "street.gate_road",
+        "name": {
+          "en": "Gate Road",
+          "es": "Calle de la Puerta"
+        },
+        "points": [
+          [
+            0.0,
+            0.52
+          ],
+          [
+            0.07,
+            0.52
+          ],
+          [
+            0.22,
+            0.5
+          ],
+          [
+            0.38,
+            0.48
+          ]
+        ]
+      },
+      {
+        "id": "street.long_street",
+        "name": {
+          "en": "Long Street",
+          "es": "Calle Larga"
+        },
+        "points": [
+          [
+            0.58,
+            0.5
+          ],
+          [
+            0.74,
+            0.6
+          ],
+          [
+            0.88,
+            0.62
+          ],
+          [
+            0.97,
+            0.62
+          ],
+          [
+            1.0,
+            0.62
+          ]
+        ]
+      },
+      {
+        "id": "street.exchange_steps",
+        "name": {
+          "en": "Exchange Steps",
+          "es": "Escalinata del Exchange"
+        },
+        "points": [
+          [
+            0.5,
+            0.38
+          ],
+          [
+            0.52,
+            0.27
+          ]
+        ]
+      },
+      {
+        "id": "street.warren_stairs",
+        "name": {
+          "en": "Warren Stairs",
+          "es": "Escaleras de los Warrens"
+        },
+        "points": [
+          [
+            0.52,
+            0.6
+          ],
+          [
+            0.56,
+            0.72
+          ]
+        ]
+      },
+      {
+        "id": "street.yard_lane",
+        "name": {
+          "en": "Yard Lane",
+          "es": "Pasaje del Patio"
+        },
+        "points": [
+          [
+            0.22,
+            0.5
+          ],
+          [
+            0.24,
+            0.62
+          ]
+        ]
+      },
+      {
+        "id": "street.row_lane",
+        "name": {
+          "en": "Row Lane",
+          "es": "Pasaje del Row"
+        },
+        "points": [
+          [
+            0.6,
+            0.44
+          ],
+          [
+            0.7,
+            0.36
+          ]
+        ]
+      }
+    ],
+    "districts": [
+      {
+        "id": "district.central_market",
+        "number": "01",
+        "name": {
+          "en": "Central Market",
+          "es": "Mercado Central"
+        },
+        "polygon": [
+          [
+            0.38,
+            0.38
+          ],
+          [
+            0.5,
+            0.33
+          ],
+          [
+            0.61,
+            0.38
+          ],
+          [
+            0.63,
+            0.52
+          ],
+          [
+            0.55,
+            0.61
+          ],
+          [
+            0.42,
+            0.61
+          ],
+          [
+            0.36,
+            0.52
+          ]
+        ],
+        "label": [
+          0.495,
+          0.47
+        ],
+        "purpose": {
+          "en": "The heart of Dustline. Stalls under tarps, the notice and contract board, food, ammunition and medical consumables.",
+          "es": "El corazón de Dustline. Puestos bajo lonas, el tablero de avisos y contratos, comida, munición y consumibles médicos."
+        },
+        "services": [
+          "service.vendor_consumables",
+          "service.contract_board",
+          "service.notice_board"
+        ],
+        "landmarks": [
+          "landmark.contract_board"
+        ]
+      },
+      {
+        "id": "district.caravan_yard",
+        "number": "02",
+        "name": {
+          "en": "Caravan Yard",
+          "es": "Patio de Caravanas"
+        },
+        "polygon": [
+          [
+            0.1,
+            0.58
+          ],
+          [
+            0.36,
+            0.56
+          ],
+          [
+            0.4,
+            0.66
+          ],
+          [
+            0.36,
+            0.86
+          ],
+          [
+            0.16,
+            0.84
+          ],
+          [
+            0.08,
+            0.68
+          ]
+        ],
+        "label": [
+          0.24,
+          0.72
+        ],
+        "purpose": {
+          "en": "Cargo platforms and the convoy that never quite leaves. Departures, route maps and escort work toward the frontier.",
+          "es": "Plataformas de carga y el convoy que nunca termina de salir. Salidas, mapas de rutas y trabajos de escolta hacia la frontera."
+        },
+        "services": [
+          "service.caravan_departures",
+          "service.route_maps"
+        ],
+        "landmarks": [
+          "landmark.caravan"
+        ]
+      },
+      {
+        "id": "district.scrappers_row",
+        "number": "03",
+        "name": {
+          "en": "Scrapper's Row",
+          "es": "Scrapper's Row"
+        },
+        "polygon": [
+          [
+            0.64,
+            0.26
+          ],
+          [
+            0.84,
+            0.2
+          ],
+          [
+            0.93,
+            0.38
+          ],
+          [
+            0.92,
+            0.56
+          ],
+          [
+            0.74,
+            0.55
+          ],
+          [
+            0.64,
+            0.46
+          ]
+        ],
+        "label": [
+          0.79,
+          0.38
+        ],
+        "purpose": {
+          "en": "A street of open workshops: repair benches, the crafting station, and buyers for whatever you dragged back from below.",
+          "es": "Una calle de talleres abiertos: bancos de reparación, la estación de fabricación y compradores para lo que arrastraste desde abajo."
+        },
+        "services": [
+          "service.repair",
+          "service.crafting_station",
+          "service.salvage_buyer"
+        ],
+        "landmarks": [
+          "landmark.scrap_crane"
+        ]
+      },
+      {
+        "id": "district.the_exchange",
+        "number": "04",
+        "name": {
+          "en": "The Exchange",
+          "es": "The Exchange"
+        },
+        "polygon": [
+          [
+            0.36,
+            0.3
+          ],
+          [
+            0.4,
+            0.1
+          ],
+          [
+            0.62,
+            0.1
+          ],
+          [
+            0.66,
+            0.24
+          ],
+          [
+            0.61,
+            0.33
+          ],
+          [
+            0.5,
+            0.3
+          ]
+        ],
+        "label": [
+          0.51,
+          0.19
+        ],
+        "purpose": {
+          "en": "Bank, currency exchange and secure storage: the depot computer keeps what you cannot carry. Its tower is visible from the whole market.",
+          "es": "Banco, cambio de moneda y depósito seguro: la computadora del depósito guarda lo que no podés cargar. Su torre se ve desde todo el mercado."
+        },
+        "services": [
+          "service.currency_exchange",
+          "service.depot"
+        ],
+        "landmarks": [
+          "landmark.exchange_tower"
+        ]
+      },
+      {
+        "id": "district.lower_warrens",
+        "number": "05",
+        "name": {
+          "en": "The Lower Warrens",
+          "es": "The Lower Warrens"
+        },
+        "polygon": [
+          [
+            0.42,
+            0.66
+          ],
+          [
+            0.56,
+            0.66
+          ],
+          [
+            0.72,
+            0.66
+          ],
+          [
+            0.84,
+            0.7
+          ],
+          [
+            0.8,
+            0.86
+          ],
+          [
+            0.6,
+            0.92
+          ],
+          [
+            0.42,
+            0.88
+          ]
+        ],
+        "label": [
+          0.62,
+          0.79
+        ],
+        "purpose": {
+          "en": "Sunk below street level: cheap rooms to sleep and respawn, informal traders who ask no questions, and rumours worth following.",
+          "es": "Hundidos bajo el nivel de la calle: cuartos baratos para dormir y reaparecer, comerciantes informales que no preguntan y rumores que vale la pena seguir."
+        },
+        "services": [
+          "service.lodging",
+          "service.fence",
+          "service.rumours"
+        ],
+        "landmarks": [
+          "landmark.warren_stair"
+        ]
+      }
+    ],
+    "entrances": [
+      {
+        "id": "gate.dustline_main",
+        "kind": "main_gate",
+        "name": {
+          "en": "Frontier Gate",
+          "es": "Puerta de la Frontera"
+        },
+        "position": [
+          0.07,
+          0.52
+        ],
+        "connection": "conn.frontier_east_dustline",
+        "purpose": {
+          "en": "The only way in from Frontier Road. Guards inspect cargo under floodlights; a caravan is always getting ready to leave.",
+          "es": "La única entrada desde Frontier Road. Los guardias revisan la carga bajo reflectores; siempre hay una caravana preparándose para salir."
+        }
+      },
+      {
+        "id": "exit.dustline_frontier",
+        "kind": "exit",
+        "name": {
+          "en": "East Gate",
+          "es": "Puerta Este"
+        },
+        "position": [
+          0.95,
+          0.62
+        ],
+        "connection": "conn.dustline_floodlands",
+        "purpose": {
+          "en": "Out toward the frontier: the Floodlands and everything nobody has mapped yet.",
+          "es": "Hacia la frontera: los Floodlands y todo lo que nadie mapeó todavía."
+        }
+      }
+    ],
+    "landmarks": [
+      {
+        "id": "landmark.exchange_tower",
+        "district": "district.the_exchange",
+        "position": [
+          0.51,
+          0.15
+        ],
+        "name": {
+          "en": "Exchange Tower",
+          "es": "Torre del Exchange"
+        },
+        "note": {
+          "en": "Tall, lit amber at the top; the city's orientation point. Seen from the market and the gate.",
+          "es": "Alta, con luz ámbar arriba; el punto de orientación de la ciudad. Se ve desde el mercado y la puerta."
+        }
+      },
+      {
+        "id": "landmark.contract_board",
+        "district": "district.central_market",
+        "position": [
+          0.47,
+          0.42
+        ],
+        "name": {
+          "en": "Contract Board",
+          "es": "Tablero de contratos"
+        },
+        "note": {
+          "en": "Bounties, hauls and escort jobs.",
+          "es": "Recompensas, cargas y escoltas."
+        }
+      },
+      {
+        "id": "landmark.caravan",
+        "district": "district.caravan_yard",
+        "position": [
+          0.21,
+          0.66
+        ],
+        "name": {
+          "en": "The Departing Caravan",
+          "es": "La caravana que parte"
+        },
+        "note": {
+          "en": "A static convoy vehicle, loaded and waiting.",
+          "es": "Un vehículo de convoy fijo, cargado y esperando."
+        }
+      },
+      {
+        "id": "landmark.gate_inspection",
+        "district": "gate.dustline_main",
+        "position": [
+          0.12,
+          0.47
+        ],
+        "name": {
+          "en": "Cargo Inspection",
+          "es": "Inspección de carga"
+        },
+        "note": {
+          "en": "Guards, a weigh bridge and a barrier arm.",
+          "es": "Guardias, una báscula y una barrera."
+        }
+      },
+      {
+        "id": "landmark.scrap_crane",
+        "district": "district.scrappers_row",
+        "position": [
+          0.86,
+          0.3
+        ],
+        "name": {
+          "en": "Scrap Crane",
+          "es": "Grúa de chatarra"
+        },
+        "note": {
+          "en": "Rust-red gantry over the workshops.",
+          "es": "Pórtico rojo óxido sobre los talleres."
+        }
+      },
+      {
+        "id": "landmark.warren_stair",
+        "district": "district.lower_warrens",
+        "position": [
+          0.55,
+          0.7
+        ],
+        "name": {
+          "en": "Warren Stair",
+          "es": "Escalera de los Warrens"
+        },
+        "note": {
+          "en": "Concrete steps down from the market into the Warrens.",
+          "es": "Escalones de hormigón que bajan del mercado a los Warrens."
+        }
+      }
+    ]
+  },
+  "dev_zones": [
+    "zone.prototype_outpost",
+    "zone.expedition_breach",
+    "zone.expedition_stratum",
+    "zone.expedition_relic_chamber"
+  ]
+}

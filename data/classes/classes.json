@@ -25,21 +25,16 @@
    "ability_name": "Bastion",
    "passive_id": "passive.momentum",
    "passive_name": "Momentum",
+   "passive_description": "Every third hit you take braces you (35% less damage) and allies within 5 m (20% less) for 2 s.",
    "visual_color": "e0902a",
    "variants": [
     {
      "id": "variant.bulwark",
-     "name": "Guardian",
-     "weapon_style": "Tank · hammers & maces · stagger and control",
-     "weapon_id": "item.weapon.foundry_bulwark",
-     "damage": 24
+     "weapon_id": "item.weapon.foundry_bulwark"
     },
     {
      "id": "variant.breaker",
-     "name": "Barbarian",
-     "weapon_style": "Breaker · swords & axes · damage and criticals",
-     "weapon_id": "item.weapon.foundry_breaker",
-     "damage": 16
+     "weapon_id": "item.weapon.foundry_breaker"
     }
    ],
    "carry": {
@@ -84,21 +79,16 @@
    "ability_name": "Long Shot",
    "passive_id": "passive.trailblazer",
    "passive_name": "Trailblazer",
+   "passive_description": "Hitting a target you hit in the last 4 s adds +2 damage.",
    "visual_color": "3aa8e0",
    "variants": [
     {
      "id": "variant.pathfinder",
-     "name": "Gunner",
-     "weapon_style": "Firearms · shotguns, carbines and rifles · sustained fire",
-     "weapon_id": "item.weapon.drift_pathfinder",
-     "damage": 14
+     "weapon_id": "item.weapon.drift_pathfinder"
     },
     {
      "id": "variant.marksman",
-     "name": "Hunter",
-     "weapon_style": "Precision · precision rifles (bows later) · weak points",
-     "weapon_id": "item.weapon.drift_marksman",
-     "damage": 30
+     "weapon_id": "item.weapon.drift_marksman"
     }
    ],
    "carry": {
@@ -142,21 +132,16 @@
    "ability_name": "Bloom",
    "passive_id": "passive.regrowth",
    "passive_name": "Regrowth",
+   "passive_description": "Out of combat you regenerate 2 health every 2 s.",
    "visual_color": "5cc25a",
    "variants": [
     {
      "id": "variant.warden",
-     "name": "Warden",
-     "weapon_style": "Sustain · living staffs · healing and protection",
-     "weapon_id": "item.weapon.verdant_warden",
-     "damage": 12
+     "weapon_id": "item.weapon.verdant_warden"
     },
     {
      "id": "variant.sporecaller",
-     "name": "Sporecaller",
-     "weapon_style": "Control · spore projectors · damage over time",
-     "weapon_id": "item.weapon.verdant_sporecaller",
-     "damage": 10
+     "weapon_id": "item.weapon.verdant_sporecaller"
     }
    ],
    "carry": {
@@ -199,21 +184,16 @@
    "ability_name": "Overload",
    "passive_id": "passive.relay",
    "passive_name": "Relay",
+   "passive_description": "Overload also gives allies within 8 m +5 energy and takes 2 s off their Dash.",
    "visual_color": "9a6be0",
    "variants": [
     {
      "id": "variant.operator",
-     "name": "Operator",
-     "weapon_style": "Manipulation · tech weapons · disruption and support",
-     "weapon_id": "item.weapon.relay_operator",
-     "damage": 12
+     "weapon_id": "item.weapon.relay_operator"
     },
     {
      "id": "variant.infiltrator",
-     "name": "Infiltrator",
-     "weapon_style": "Elimination · blades · ambush and mobility",
-     "weapon_id": "item.weapon.relay_infiltrator",
-     "damage": 9
+     "weapon_id": "item.weapon.relay_infiltrator"
     }
    ],
    "carry": {

@@ -119,8 +119,8 @@ CONTROLS = [
 ]
 
 FIRST_STEPS = [
-    (L("Open your crates", "Abrí tus cajones"), L("Two newcomer crates wait in the Outpost. The Supply Crate has a backpack, the Leather Suit and a K6-3 helmet; the Gear Crate has your doctrine's weapon (and rounds), a lantern, a battery and the Big Daddy drill. What's inside is yours alone.",
-                                                  "Dos cajones para recién llegados te esperan en el Outpost. El Supply Crate trae una mochila, el Leather Suit y un casco K6-3; el Gear Crate trae el arma de tu doctrina (y munición), una linterna, una batería y el taladro Big Daddy. Lo de adentro es sólo tuyo.")),
+    (L("Open your crates", "Abrí tus cajones"), L("Two newcomer crates wait in the Outpost. The Supply Crate has a backpack, the Leather Suit and a K6-3 helmet; the Gear Crate has your starting weapon (and rounds), a lantern, a battery and the Big Daddy drill. What's inside is yours alone.",
+                                                  "Dos cajones para recién llegados te esperan en el Outpost. El Supply Crate trae una mochila, el Leather Suit y un casco K6-3; el Gear Crate trae tu arma inicial (y munición), una linterna, una batería y el taladro Big Daddy. Lo de adentro es sólo tuyo.")),
     (L("Equip everything", "Equipate todo"), L("Press I and drag each item onto its slot. Battery first: without it, your lantern and abilities have no energy.",
                                                "Presioná I y arrastrá cada objeto a su ranura. La batería primero: sin ella, tu linterna y tus habilidades no tienen energía.")),
     (L("Try the drill", "Probá el taladro"), L("Two drill sites sit by the shaft. Hold F at one and watch the rock give way.",
