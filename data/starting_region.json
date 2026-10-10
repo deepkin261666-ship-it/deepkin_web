@@ -121,7 +121,22 @@
       "rotation": 30
      }
     ],
-    "passages": [],
+    "passages": [
+     {
+      "name": "deep_scarp_adit",
+      "points": [
+       [
+        -33.0,
+        -1.0
+       ],
+       [
+        -37.35,
+        -5.35
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
     "wet": [
      {
       "center": [
@@ -545,7 +560,8 @@
       0.4,
       7.27
      ],
-     "text": "THE OUTPOST\nwhat we need comes from below"
+     "text": "THE OUTPOST\nwhat we need comes from below",
+     "lettered": true
     },
     {
      "position": [
@@ -561,7 +577,8 @@
       2.6,
       1.0
      ],
-     "text": "CONTROL"
+     "text": "CONTROL",
+     "lettered": true
     },
     {
      "position": [
@@ -569,7 +586,8 @@
       3.0,
       -15.0
      ],
-     "text": "CARGO YARD"
+     "text": "CARGO YARD",
+     "lettered": true
     },
     {
      "position": [
@@ -577,7 +595,8 @@
       3.0,
       -16.0
      ],
-     "text": "POWER"
+     "text": "POWER",
+     "lettered": true
     }
    ],
    "shaft": {
@@ -990,7 +1009,7 @@
      "model": "outpost/excavator_arm",
      "position": [
       12.5,
-      0.0,
+      2.581,
       -5.0
      ],
      "rotation": 200,
@@ -1001,7 +1020,7 @@
      "model": "outpost/drill_cone",
      "position": [
       -12.5,
-      0.0,
+      1.288,
       -3.5
      ],
      "rotation": 70,
@@ -1012,7 +1031,7 @@
      "model": "outpost/drill_head",
      "position": [
       -13.5,
-      0.0,
+      0.947,
       -12.5
      ],
      "rotation": 20,
@@ -1375,7 +1394,8 @@
      "rotation": 45
     }
    ],
-   "set": "res://data/world/sets/outpost.json"
+   "set": "res://data/world/sets/outpost.json",
+   "links": "res://data/world/sets/links_outpost.json"
   },
   {
    "zone_id": "zone.threshold",
@@ -1642,6 +1662,20 @@
       "solid": false,
       "y": 1.1
      }
+    ],
+    "holes": [
+     {
+      "name": "deep_c3_shaft",
+      "center": [
+       -2.0,
+       3.5
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
     ]
    },
    "pieces": [
@@ -1783,7 +1817,8 @@
     }
    ],
    "drill_sites": [],
-   "set": "res://data/world/sets/threshold.json"
+   "set": "res://data/world/sets/threshold.json",
+   "links": "res://data/world/sets/links_threshold.json"
   },
   {
    "zone_id": "zone.shallows",
@@ -2289,7 +2324,8 @@
       5.9,
       -2.4
      ],
-     "text": "THE KEYSTONE"
+     "text": "THE KEYSTONE",
+     "lettered": true
     }
    ],
    "drill_sites": [
@@ -3006,7 +3042,8 @@
       2.4,
       2.2
      ],
-     "text": "EXCAVATION C-3\nauthorised personnel"
+     "text": "EXCAVATION C-3\nauthorised personnel",
+     "lettered": true
     },
     {
      "position": [
@@ -3022,7 +3059,8 @@
       2.4,
       -6.6
      ],
-     "text": "DEEP SEAL\nbasalt · drill to breach"
+     "text": "DEEP SEAL\nbasalt · drill to breach",
+     "lettered": true
     }
    ],
    "drill_sites": [
@@ -3158,7 +3196,8 @@
      }
     }
    ],
-   "set": "res://data/world/sets/excavation_c3.json"
+   "set": "res://data/world/sets/excavation_c3.json",
+   "links": "res://data/world/sets/links_excavation_c3.json"
   },
   {
    "zone_id": "zone.surface_scarp",
@@ -3423,6 +3462,18 @@
     ],
     "holes": [
      {
+      "name": "deep_outpost_adit",
+      "center": [
+       -28.0,
+       10.0
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     },
+     {
       "name": "lift_scarp",
       "center": [
        -2.34,
@@ -3454,11 +3505,12 @@
    "signs": [
     {
      "position": [
-      0.0,
+      5.0,
       2.6,
-      -5.0
+      7.0
      ],
-     "text": "THE SCARP\nopen sky · edges lead on"
+     "text": "THE SCARP\nopen sky · edges lead on",
+     "lettered": true
     },
     {
      "position": [
@@ -3466,7 +3518,8 @@
       2.0,
       6.0
      ],
-     "text": "SCAVENGER CAMP"
+     "text": "SCAVENGER CAMP",
+     "lettered": true
     }
    ],
    "drill_sites": [
@@ -3874,7 +3927,8 @@
      "ledge": 0.4,
      "ledge_drop": 0.6
     }
-   }
+   },
+   "links": "res://data/world/sets/links_surface_scarp.json"
   },
   {
    "zone_id": "zone.surface_saltpan",
@@ -4002,20 +4056,6 @@
        ]
       ],
       "width": 7.5
-     },
-     {
-      "name": "portal_0",
-      "points": [
-       [
-        0.87,
-        40.87
-       ],
-       [
-        -0.55,
-        39.45
-       ]
-      ],
-      "width": 5.88
      }
     ],
     "wet": [],
@@ -4179,7 +4219,8 @@
       2.6,
       -1.0
      ],
-     "text": "THE SALTPAN\nthe convoy never reached the shaft"
+     "text": "THE SALTPAN\nthe convoy never reached the shaft",
+     "lettered": true
     },
     {
      "position": [
@@ -4187,7 +4228,8 @@
       2.4,
       13.0
      ],
-     "text": "SALT WORKS"
+     "text": "SALT WORKS",
+     "lettered": true
     },
     {
      "position": [
@@ -4195,7 +4237,8 @@
       2.8,
       -19.0
      ],
-     "text": "SURFACE DIG  C-7\nmagnetite seam · drill it"
+     "text": "SURFACE DIG  C-7\nmagnetite seam · drill it",
+     "lettered": true
     },
     {
      "position": [
@@ -4203,7 +4246,8 @@
       2.6,
       -8.6
      ],
-     "text": "EAST · FRONTIER ROAD\nto Dustline"
+     "text": "EAST · FRONTIER ROAD\nto Dustline",
+     "lettered": true
     }
    ],
    "drill_sites": [
@@ -4610,7 +4654,7 @@
      "model": "outpost/excavator_arm",
      "position": [
       28.0,
-      0.0,
+      2.194,
       -27.0
      ],
      "rotation": 180,
@@ -4621,7 +4665,7 @@
      "model": "outpost/drill_cone",
      "position": [
       12.5,
-      0.0,
+      1.03,
       -31
      ],
      "rotation": 40,
@@ -4955,6 +4999,20 @@
       ],
       "seed": 514
      }
+    ],
+    "holes": [
+     {
+      "name": "deep_cinder_deep",
+      "center": [
+       -12.0,
+       -15.0
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
     ]
    },
    "pieces": [],
@@ -4982,7 +5040,8 @@
      "pose": "idle",
      "class": "class.foundry"
     }
-   ]
+   ],
+   "links": "res://data/world/sets/links_frontier_road_east.json"
   },
   {
    "zone_id": "zone.dustline",
@@ -5419,6 +5478,18 @@
      "rotation": 54.9,
      "pose": "carry",
      "class": "class.drift"
+    },
+    {
+     "id": "npc.dustline_weapons_merchant",
+     "position": [
+      4.53,
+      40.16
+     ],
+     "rotation": -88.6,
+     "pose": "idle",
+     "class": "class.drift",
+     "model": "-",
+     "tag_height": 1.75
     }
    ],
    "computers": [
@@ -5447,9 +5518,9 @@
     58
    ],
    "arrival": [
-    294.7,
+    291.37,
     0.0,
-    601.37
+    602.28
    ],
    "set": "res://data/world/sets/dragon_lair.json",
    "cavern": {
@@ -5531,16 +5602,12 @@
      {
       "points": [
        [
-        -4.95,
-        41.72
+        -11.31,
+        41.01
        ],
        [
-        -6.36,
-        47.38
-       ],
-       [
-        -7.07,
-        50.91
+        -15.66,
+        36.66
        ]
       ],
       "width": 4.2
@@ -5979,13 +6046,7 @@
     0.0,
     250.0
    ],
-   "label": "SOUTH CANYON · THE SCARP",
-   "presentation": "metro",
-   "label_offset": [
-    0.0,
-    3.0,
-    0.0
-   ]
+   "label": "SOUTH CANYON · THE SCARP"
   },
   {
    "entity_id": 142,
@@ -6013,39 +6074,137 @@
    "entity_id": 230,
    "from_zone": "zone.frontier_road_east",
    "position": [
-    -6.0,
+    -9.95,
     0.0,
-    536.4
+    547.05
    ],
    "to_zone": "zone.dragon_lair",
    "arrival": [
-    294.7,
+    291.37,
     0.0,
-    601.37
+    602.28
    ],
-   "arrival_rotation": -0.066,
-   "label": "THE CINDER DEEP · DRAGON LAIR"
+   "arrival_rotation": -0.255,
+   "label": "STAIRS DOWN · THE CINDER DEEP",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
   },
   {
    "entity_id": 231,
    "from_zone": "zone.dragon_lair",
    "position": [
-    292.93,
+    289.32,
     0.0,
-    610.91
+    601.65
    ],
    "to_zone": "zone.frontier_road_east",
    "arrival": [
-    -6.0,
+    -8.89,
     0.0,
-    539.6
+    548.11
    ],
-   "arrival_rotation": 0.0,
-   "label": "CLIMB OUT · FRONTIER ROAD",
-   "presentation": "gate",
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · FRONTIER ROAD",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 240,
+   "from_zone": "zone.threshold",
+   "position": [
+    0.05,
+    0.0,
+    105.55
+   ],
+   "to_zone": "zone.excavation_c3",
+   "arrival": [
+    113.26,
+    0.0,
+    104.76
+   ],
+   "arrival_rotation": -2.356,
+   "label": "DEEP SHAFT · EXCAVATION C-3",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 241,
+   "from_zone": "zone.excavation_c3",
+   "position": [
+    112.41,
+    0.0,
+    103.91
+   ],
+   "to_zone": "zone.threshold",
+   "arrival": [
+    1.53,
+    0.0,
+    104.77
+   ],
+   "arrival_rotation": -2.356,
+   "label": "LIFT · THE THRESHOLD",
+   "presentation": "lift",
    "label_offset": [
     0.0,
     3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 242,
+   "from_zone": "zone.outpost",
+   "position": [
+    -182.36,
+    0.0,
+    99.64
+   ],
+   "to_zone": "zone.surface_scarp",
+   "arrival": [
+    -24.47,
+    0.0,
+    231.27
+   ],
+   "arrival_rotation": -2.356,
+   "label": "ADIT · UP TO THE SCARP",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 243,
+   "from_zone": "zone.surface_scarp",
+   "position": [
+    -25.95,
+    0.0,
+    232.05
+   ],
+   "to_zone": "zone.outpost",
+   "arrival": [
+    -181.37,
+    0.0,
+    100.63
+   ],
+   "arrival_rotation": -2.356,
+   "label": "ADIT · DOWN TO THE OUTPOST",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
     0.0
    ]
   },
@@ -6396,8 +6555,8 @@
    "id": "spawn.shallows_crawler_nest",
    "zone_id": "zone.shallows",
    "center": [
-    78.0,
-    91.6
+    59.0,
+    102.0
    ],
    "radius": 1.3,
    "members": [
@@ -6417,8 +6576,8 @@
    "id": "spawn.shallows_ravager_den",
    "zone_id": "zone.shallows",
    "center": [
-    56.0,
-    92.0
+    77.0,
+    90.5
    ],
    "radius": 0.0,
    "members": [

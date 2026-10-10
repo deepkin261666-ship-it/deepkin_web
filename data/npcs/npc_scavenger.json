@@ -13,7 +13,10 @@
   "attack_damage": 5,
   "attack_cooldown": 1.0,
   "xp": 35,
-  "coins": [2, 6],
+  "coins": [
+    2,
+    6
+  ],
   "threat": 3,
   "perception": {
     "aggro_radius": 8.0,
@@ -36,7 +39,7 @@
   ],
   "rules": [
     "Hit one and the camp hears it: scavengers shout for each other and come together.",
-    "They are only people: no armour plates, no telegraphs — a fair fight one on one."
+    "They are only people: no armour plates, no telegraphs \u2014 a fair fight one on one."
   ],
   "habitat": "Camps and wreck yards just outside the Outpost, on the old convoy roads and the first open shafts.",
   "lore": "Miners who were laid off, deserted or never signed on. They strip what the Outpost throws away and whatever an operator drops.",
@@ -51,5 +54,39 @@
       "length": 0.75
     },
     "attack": "melee"
-  }
+  },
+  "loot": [
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        5,
+        15
+      ],
+      "chance": 0.4
+    },
+    {
+      "item": "item.scrap_component",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.1
+    },
+    {
+      "item": "item.battery.provisional_relay_cell",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.04
+    }
+  ]
 }

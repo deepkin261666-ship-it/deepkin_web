@@ -8,5 +8,42 @@
   "attack_damage": 9,
   "attack_cooldown": 1.1,
   "xp": 60,
-  "coins": [5, 12]
+  "coins": [
+    5,
+    12
+  ],
+  "loot": [
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        10,
+        20
+      ],
+      "chance": 0.5
+    },
+    {
+      "item": "item.ammunition.hardened_round",
+      "quantity": [
+        3,
+        8
+      ],
+      "chance": 0.2
+    },
+    {
+      "item": "item.battery.provisional_relay_cell",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.12
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.2
+    }
+  ]
 }

@@ -175,6 +175,19 @@
         "Castoffs hit the wrecks east of here yesterday. Three of them, maybe more.",
         "Out here, everything's a trade. Even safe passage."
       ]
+    },
+    "npc.dustline_weapons_merchant": {
+      "name": "RASK  ·  WEAPONS MERCHANT",
+      "services": [
+        "weapons (coming soon)"
+      ],
+      "lines": [
+        "Rifles, blades, a launcher if you ask nicely. Not today, though. Today I'm only showing.",
+        "Stock's still on the road behind me. When it lands, you'll want to be first in line — and carrying coin.",
+        "Everything in this car shoots, cuts or burns. Everything has a price. Mine's just higher.",
+        "Don't touch the railgun. You can't afford to look at it twice.",
+        "Come back when the Exchange lets me open the back of this thing. Weapons, soon. Talk is free."
+      ]
     }
   }
 }
