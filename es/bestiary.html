@@ -18,11 +18,12 @@
 <script>document.documentElement.classList.add("js")</script>
 
 </head>
-<body class="" data-lang="es">
+<body class="" data-lang="es" data-root="">
 <a class="skip" href="#main">Saltar al contenido</a>
 <header class="topbar">
   <a class="brand" href="index.html" aria-label="DEEPKIN"><img src="../assets/img/deepkin_mark.png" alt="" width="22" height="22"><span>DEEPKIN</span></a>
-  <nav class="mainnav" id="mainnav"><a href="index.html">Inicio</a><a href="story.html">Historia</a><a href="classes.html">Clases</a><a href="arsenal.html">Arsenal</a><a href="gear.html">Equipo</a><a href="resources.html">Recursos</a><a href="bestiary.html" aria-current="page">Bestiario</a><a href="world.html">Mundo</a><a href="manual.html">Manual de campo</a><a class="navlang" href="../en/bestiary.html" hreflang="en" data-setlang="en"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></svg><span>English</span></a></nav>
+  <nav class="mainnav" id="mainnav"><a href="index.html">Inicio</a><a href="story.html">Historia</a><a href="classes.html">Clases</a><a href="arsenal.html">Arsenal</a><a href="gear.html">Equipo</a><a href="resources.html">Recursos</a><a href="bestiary.html" aria-current="page">Bestiario</a><a href="world.html">Mundo</a><a href="manual.html">Manual de campo</a><a href="wiki/index.html">Wiki</a><a class="navlang" href="../en/bestiary.html" hreflang="en" data-setlang="en"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></svg><span>English</span></a></nav>
+  <button class="searchbtn" type="button" data-search-open aria-label="Buscar"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg><span>Buscar</span><kbd>/</kbd></button>
   <a class="lang" href="../en/bestiary.html" hreflang="en" data-setlang="en"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/></svg><span>English</span></a>
   <button class="navtoggle" aria-controls="mainnav" aria-expanded="false" aria-label="Menú"><svg class="ico ico-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg><svg class="ico ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
 </header>
@@ -34,7 +35,7 @@
     <h1>Lo que caza abajo</h1>
     <p class="lead">Conocé contra qué peleás antes de que sepa que estás ahí.</p>
   </div>
-</section><div class="wrap wiki"><aside class="toc"><p>En esta página</p><nav><a href="#burrowborn">Burrowborn</a><a href="#humans">Gente</a><a href="#rumours">Rumores</a></nav></aside><div class="wiki-body"><header class="sec-head" id="burrowborn"><p class="kicker">Facción</p><h2>The Burrowborn</h2><p class="sec-lead">Orgánico + mineral + subterráneo</p></header>
+</section><div class="wrap wiki"><aside class="toc"><p>En esta página</p><nav><a href="#burrowborn">Burrowborn</a><a href="#humans">Gente</a><a href="#wyrms">Wyrms</a><a href="#rumours">Rumores</a></nav></aside><div class="wiki-body"><header class="sec-head" id="burrowborn"><p class="kicker">Facción</p><h2>The Burrowborn</h2><p class="sec-lead">Orgánico + mineral + subterráneo</p></header>
 <div class="cls-grid"><div class="panel"><p>Piel oscura y húmeda, tejido pálido expuesto, placas minerales y un leve brillo verde. Ojos pequeños o ausentes.</p><ul class="traits"><li>Territoriales</li><li>Instinto de manada</li><li>Perciben vibración y calor</li><li>Agresivos, poco astutos</li></ul></div>
 <div class="panel"><dl class="kv kv-col"><div><dt>Comunicación</dt><dd>Vibración a través de la roca: un Burrowborn herido llama a los suyos.</dd></div>
 <div><dt>Territorio</dt><dd>Nidos y túneles en The Shallows; rara vez persiguen lejos de casa.</dd></div>
@@ -42,7 +43,7 @@
   <div class="mob-art"><img class="mob-img" src="../assets/img/icons/npc.burrowborn_crawler.png" alt="Crawler" loading="lazy" width="160" height="160"><div class="verbs"><span>SWARM</span><span>SKITTER</span><span>BITE</span><span>CALL</span><span>FLEE</span></div></div>
   <div class="mob-main">
     <p class="kicker">Burrowborn · Enjambre</p>
-    <h3>Crawler</h3>
+    <h3><a href="wiki/mob-burrowborn-crawler.html">Crawler</a></h3>
     <p class="mob-lore">Del tamaño de una mano al nacer, de un perro al año. Los Crawlers sienten los pasos a través de la piedra mucho antes de ver algo.</p>
     <dl class="mob-stats">
       <div><dt>PV</dt><dd>24</dd></div>
@@ -60,7 +61,7 @@
   <div class="mob-art"><img class="mob-img" src="../assets/img/icons/npc.burrowborn_ravager.png" alt="Ravager" loading="lazy" width="160" height="160"><div class="verbs"><span>LUMBER</span><span>MAUL</span><span>SLAM</span><span>GUARD</span></div></div>
   <div class="mob-main">
     <p class="kicker">Burrowborn · Bruto</p>
-    <h3>Ravager</h3>
+    <h3><a href="wiki/mob-burrowborn-ravager.html">Ravager</a></h3>
     <p class="mob-lore">Un Crawler que nunca dejó de crecer. Su piel se mineralizó en placas; las glándulas verdes todavía brillan debajo.</p>
     <dl class="mob-stats">
       <div><dt>PV</dt><dd>190</dd></div>
@@ -75,28 +76,28 @@
     <p class="found"><span>Hábitat</span>The Shallows: cámaras amplias cerca de los nidos de Crawlers.</p>
   </div>
 </article></div><header class="sec-head" id="humans"><p class="kicker">Facción</p><h2>Gente</h2><p class="sec-lead">No todo lo que hay acá abajo es un animal.</p></header><div class="mobs"><article class="mob" id="npc.scavenger">
-  <div class="mob-art"><span class="mob-img mob-ph">S</span><div class="verbs"></div></div>
+  <div class="mob-art"><span class="mob-img mob-ph">S</span><div class="verbs"><span>LOOT</span><span>SHOUT</span><span>SLASH</span><span>GANG UP</span></div></div>
   <div class="mob-main">
-    <p class="kicker">Humanos · Saqueador</p>
-    <h3>Scavenger</h3>
-    <p class="mob-lore">Gente que desarma la superficie y los túneles altos buscando cualquier cosa que todavía funcione. Pelean por lo que llevan, y lo que llevan es chatarra.</p>
+    <p class="kicker">The Castoffs · Saqueador</p>
+    <h3><a href="wiki/mob-scavenger.html">Scavenger</a></h3>
+    <p class="mob-lore">Mineros despedidos, desertores o que nunca firmaron. Desarman lo que el Outpost tira y lo que suelta cualquier operador.</p>
     <dl class="mob-stats">
       <div><dt>PV</dt><dd>30</dd></div>
       <div><dt>Ataque</dt><dd>5<small>/1s</small></dd></div>
       <div><dt>DPS</dt><dd>5,0</dd></div>
       <div><dt>Velocidad</dt><dd>2<small>m/s</small></dd></div>
       <div><dt>Detección</dt><dd>8<small>m</small></dd></div>
-      
+      <div><dt>Amenaza</dt><dd>◆◆<small>3</small></dd></div><div><dt>XP</dt><dd>35</dd></div>
     </dl>
     
-    <div class="mob-how"><p class="kicker">Cómo enfrentarlo</p><ul><li>Lento y poco armado: una buena primera pelea.</li><li>Suelta un Scrap Component al caer.</li></ul></div>
-    <p class="found"><span>Hábitat</span>Campamentos en The Scarp, los restos del convoy en The Saltpan y los túneles de The Shallows.</p>
+    <div class="mob-how"><p class="kicker">Cómo enfrentarlo</p><ul><li>Golpeá a uno y el campamento se entera: los carroñeros se llaman a gritos y vienen juntos.</li><li>Son sólo gente: sin placas de armadura ni ataques anunciados. Uno contra uno, es una pelea justa.</li></ul></div>
+    <p class="found"><span>Hábitat</span>Campamentos y desarmaderos justo afuera del Outpost, en las viejas rutas de convoyes y los primeros pozos abiertos.</p>
   </div>
 </article><article class="mob" id="npc.excavation_enforcer">
   <div class="mob-art"><span class="mob-img mob-ph">E</span><div class="verbs"></div></div>
   <div class="mob-main">
     <p class="kicker">Humanos · Guardia</p>
-    <h3>Excavation Enforcer</h3>
+    <h3><a href="wiki/mob-excavation-enforcer.html">Excavation Enforcer</a></h3>
     <p class="mob-lore">Matones a sueldo que cuidan el frente de mineral de C-3 para quien pague. El doble de duros que un carroñero, y pegan casi el doble.</p>
     <dl class="mob-stats">
       <div><dt>PV</dt><dd>70</dd></div>
@@ -104,11 +105,47 @@
       <div><dt>DPS</dt><dd>8,2</dd></div>
       <div><dt>Velocidad</dt><dd>2,4<small>m/s</small></dd></div>
       <div><dt>Detección</dt><dd>9<small>m</small></dd></div>
-      
+      <div><dt>XP</dt><dd>60</dd></div>
     </dl>
     
     <div class="mob-how"><p class="kicker">Cómo enfrentarlo</p><ul><li>Peleá donde tengas espacio para retroceder.</li><li>Custodian el Deep Seal: despejalos antes de perforar.</li></ul></div>
     <p class="found"><span>Hábitat</span>Excavation C-3: sólo personal autorizado.</p>
+  </div>
+</article></div><header class="sec-head" id="wyrms"><p class="kicker">Facción</p><h2>The Wyrms</h2><p class="sec-lead">Bajo Frontier Road este, algo cuida un nido.</p></header><div class="mobs"><article class="mob" id="npc.dragon">
+  <div class="mob-art"><span class="mob-img mob-ph">D</span><div class="verbs"><span>PROWL</span><span>BITE</span><span>SPIT</span><span>SCORCH</span><span>RETREAT</span><span>LICK WOUNDS</span></div></div>
+  <div class="mob-main">
+    <p class="kicker">The Wyrms · Hostigador</p>
+    <h3><a href="wiki/mob-dragon.html">Dragon</a></h3>
+    <p class="mob-lore">Un wyrm bajo, de cola larga, que camina sobre sus brazos-ala. Recorre las galerías alrededor del nido y caza todo lo que baja por la grieta.</p>
+    <dl class="mob-stats">
+      <div><dt>PV</dt><dd>280</dd></div>
+      <div><dt>Ataque</dt><dd>6<small>/1,5s</small></dd></div>
+      <div><dt>DPS</dt><dd>4,0</dd></div>
+      <div><dt>Velocidad</dt><dd>3,4<small>m/s</small></dd></div>
+      <div><dt>Detección</dt><dd>12<small>m</small></dd></div>
+      <div><dt>Amenaza</dt><dd>◆◆◆◆<small>8</small></dd></div><div><dt>XP</dt><dd>220</dd></div>
+    </dl>
+    <div class="mob-ab"><p class="kicker">Ataque anunciado</p><h4>Lick Wounds</h4><p>+6% PV · carga 1,8 s · recarga 22 s</p></div><div class="mob-ab"><p class="kicker">Ataque anunciado</p><h4>Scorching Breath</h4><p>20 daño · radio 6 m · 60° · carga 1,25 s · recarga 12 s</p></div><div class="mob-ab"><p class="kicker">Ataque anunciado</p><h4>Bite</h4><p>14 daño · carga 0,5 s · recarga 3,6 s</p></div><div class="mob-ab"><p class="kicker">Ataque anunciado</p><h4>Fire Spit</h4><p>13 daño · 4–11 m · carga 0,75 s · recarga 4,5 s</p></div>
+    <div class="mob-how"><p class="kicker">Cómo enfrentarlo</p><ul><li>Caza: cuando te huele te sigue mucho más allá de su galería.</li><li>De cerca muerde; si te alejás escupe fuego por el suelo: la línea brilla antes del disparo.</li><li>Su aliento abrasador se abre en abanico al frente: ponete detrás de él o detrás de la piedra. Después retrocede para volver a escupir.</li><li>Si lo dejás tranquilo se lame las heridas: seguí pegándole y la curación nunca llega.</li></ul></div>
+    <p class="found"><span>Hábitat</span>The Cinder Deep: las galerías en ruinas junto a Frontier Road este; caza en el salón de ceniza y en la galería del puente.</p>
+  </div>
+</article><article class="mob" id="npc.greater_dragon">
+  <div class="mob-art"><span class="mob-img mob-ph">G</span><div class="verbs"><span>GUARD</span><span>MAUL</span><span>BREATHE</span><span>SCORCH</span><span>HOLD</span><span>LICK WOUNDS</span></div></div>
+  <div class="mob-main">
+    <p class="kicker">The Wyrms · Bruto</p>
+    <h3><a href="wiki/mob-greater-dragon.html">Greater Dragon</a></h3>
+    <p class="mob-lore">El wyrm pesado de cuatro patas que cuida el nido. No persigue: se planta y quema todo lo que tiene adelante.</p>
+    <dl class="mob-stats">
+      <div><dt>PV</dt><dd>560</dd></div>
+      <div><dt>Ataque</dt><dd>10<small>/1,8s</small></dd></div>
+      <div><dt>DPS</dt><dd>5,6</dd></div>
+      <div><dt>Velocidad</dt><dd>2,4<small>m/s</small></dd></div>
+      <div><dt>Detección</dt><dd>13<small>m</small></dd></div>
+      <div><dt>Amenaza</dt><dd>◆◆◆◆◆<small>18</small></dd></div><div><dt>XP</dt><dd>520</dd></div>
+    </dl>
+    <div class="mob-ab"><p class="kicker">Ataque anunciado</p><h4>Lick Wounds</h4><p>+8% PV · carga 2,4 s · recarga 26 s</p></div><div class="mob-ab"><p class="kicker">Ataque anunciado</p><h4>Firestorm Breath</h4><p>30 daño · radio 8,5 m · 96° · carga 1,7 s · recarga 13 s</p></div><div class="mob-ab"><p class="kicker">Ataque anunciado</p><h4>Crushing Bite</h4><p>22 daño · carga 0,7 s · recarga 3,8 s</p></div><div class="mob-ab"><p class="kicker">Ataque anunciado</p><h4>Fire Bolt</h4><p>18 daño · 5–14 m · carga 1,05 s · recarga 6 s</p></div>
+    <div class="mob-how"><p class="kicker">Cómo enfrentarlo</p><ul><li>Cuida el nido y no te sigue lejos: llevalo al borde de su terreno y se da vuelta.</li><li>Su aliento cubre un abanico amplio y pega fuerte: cuando se echa hacia atrás, andá a su flanco o detrás de un pilar.</li><li>A distancia lanza un rayo de fuego pesado por una línea brillante: salí de la línea.</li><li>Lento, duro y paciente: se cura si le das espacio, así que mantené la presión.</li></ul></div>
+    <p class="found"><span>Hábitat</span>The Cinder Deep: el nido bajo el viejo acueducto, junto al huevo petrificado.</p>
   </div>
 </article></div><header class="sec-head" id="rumours"><p class="kicker">Informes de campo</p><h2>Rumores de abajo</h2><p class="sec-lead">Los operadores vuelven con historias. Algunas son ciertas.</p></header><div class="rumours"><article class="rumour"><p class="kicker">Industrial + decadente</p><h3>Rustbound</h3><p>Máquinas que se reparan solas y todavía patrullan los viejos complejos mineros, hablando con estática de radio y luces de alerta.</p><span class="tag tag-soon">Próximamente</span></article><article class="rumour"><p class="kicker">Antiguo + tecnológico</p><h3>The Architects</h3><p>Guardianes geométricos de estructuras prehumanas muy abajo. Cerámica oscura, simetría imposible, luz pálida.</p><span class="tag tag-soon">Próximamente</span></article><article class="rumour"><p class="kicker">Orgánico + antinatural</p><h3>The Hollow</h3><p>Cosas deformes cubiertas de cristal en las regiones más profundas. Cuanto más bajás, peor.</p><span class="tag tag-soon">Próximamente</span></article></div></div></div>
 </main>
@@ -116,10 +153,18 @@
   <div class="foot-in">
     <div class="foot-brand"><img src="../assets/img/deepkin_logo.png" alt="DEEPKIN — What lies below" width="220" height="91" loading="lazy"></div>
     <p>DEEPKIN está en desarrollo activo. Todo lo de este archivo refleja la versión actual y puede cambiar a medida que se prueba el mundo.</p>
-    <nav><a href="index.html">Inicio</a><a href="story.html">Historia</a><a href="classes.html">Clases</a><a href="arsenal.html">Arsenal</a><a href="gear.html">Equipo</a><a href="resources.html">Recursos</a><a href="bestiary.html" aria-current="page">Bestiario</a><a href="world.html">Mundo</a><a href="manual.html">Manual de campo</a></nav>
+    <nav><a href="index.html">Inicio</a><a href="story.html">Historia</a><a href="classes.html">Clases</a><a href="arsenal.html">Arsenal</a><a href="gear.html">Equipo</a><a href="resources.html">Recursos</a><a href="bestiary.html" aria-current="page">Bestiario</a><a href="world.html">Mundo</a><a href="manual.html">Manual de campo</a><a href="wiki/index.html">Wiki</a></nav>
     <p class="signal">261.6.66</p>
   </div>
 </footer>
+<div class="search" id="search" hidden role="dialog" aria-modal="true" aria-label="Buscar">
+  <div class="search-box">
+    <div class="search-in"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/></svg><input type="search" id="search-q" placeholder="Buscá objetos, criaturas, gente, zonas…" autocomplete="off" spellcheck="false" aria-controls="search-res">
+    <button type="button" class="search-x" data-search-close aria-label="Cerrar">Esc</button></div>
+    <ul class="search-res" id="search-res" role="listbox"></ul>
+    <p class="search-hint">↑ ↓ para moverte · Enter para abrir · / en cualquier página para buscar</p>
+  </div>
+</div>
 <script src="../assets/js/site.js"></script>
 </body>
 </html>

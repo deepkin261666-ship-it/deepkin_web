@@ -11,6 +11,7 @@ import glob
 import html
 import json
 import os
+import re
 import shutil
 import sys
 
@@ -20,16 +21,20 @@ sys.path.insert(0, os.path.join(ROOT, "src"))
 from i18n import (ATTR_DESC, ATTRS, CLASSES, DASH, FACTION, FAMILIES, FAMILY_DESC, FOUND_IN, ITEM_EN_FALLBACK,  # noqa: E402
                   ITEM_ES, MATERIAL_NAMES_ES, MOBS, NAV, SLOTS, UI, L)
 from story import STORY  # noqa: E402
+import gdconst as GD  # noqa: E402
+import slugs as SL  # noqa: E402
 import texts as TX  # noqa: E402
 import worldmap as WM  # noqa: E402
+from wiki_i18n import MOB_ES  # noqa: E402
 
 LANGS = ("en", "es")
 GAME_REPO = os.path.join(os.path.dirname(ROOT), "deepkin")
 
 # --- Reglas del juego (copiadas de shared/gameplay/*.gd) -------------------
 BASE_HEALTH, HEALTH_PER_END, STAMINA_PER_END = 76, 4, 5
-GEAR_TIER_LEVELS = [1, 8, 15, 22, 29, 36]
-MAX_LEVEL = 40
+GEAR_TIER_LEVELS = GD.RPG.get("GEAR_TIER_MIN_LEVELS", [1, 8, 15, 22, 29, 36])
+# Sin tope de nivel desde 2026-10-10 (curva de Tibia): el deslizador de la calculadora llega a 100.
+MAX_LEVEL = 100
 POWER_COOLDOWNS = {"ability.bastion": 14, "ability.long_shot": 12, "ability.bloom": 16, "ability.overload": 12}
 POWER_MULT = {"ability.long_shot": 2.5, "ability.overload": 3.0}
 DASH_COOLDOWN, DASH_COST, POWER_COST = 5, 6, 15
@@ -79,7 +84,7 @@ def derived(c):
 
 
 def xp_to_next(level):
-    return 100 + 25 * (level - 1)
+    return GD.xp_to_next(level)
 
 
 def skill_xp_for(level):
@@ -101,6 +106,24 @@ def load():
 
 
 CLASSES_DATA, ITEMS, NPCS, MATS, FACTIONS = load()
+ROLE_ES = {"swarm": "Enjambre", "brute": "Bruto", "skirmisher": "Hostigador"}
+
+
+def merge_mob_texts():
+    """Lore, habitat y reglas del bestiario: ingles desde data/npcs, español desde wiki_i18n.MOB_ES (2026-10-10)."""
+    for n in NPCS:
+        es = MOB_ES.get(n["id"])
+        if not es or not n.get("lore"):
+            continue
+        M = MOBS.setdefault(n["id"], {})
+        M["lore"] = L(n["lore"].replace("PROVISIONAL. ", ""), es["lore"])
+        M["habitat"] = L(n["habitat"], es["habitat"])
+        M["rules"] = L(n["rules"], es["rules"])
+        if "role" not in M:
+            M["role"] = L(n.get("role", "").title(), ROLE_ES.get(n.get("role"), n.get("role", "").title()))
+
+
+merge_mob_texts()
 CLASS_BY_ID = {c["id"]: c for c in CLASSES_DATA}
 CLASS_KEY = {"class.foundry": "foundry", "class.drift": "drift", "class.verdant": "verdant", "class.relay": "relay"}
 WEAPONS = [i for i in ITEMS.values() if i.get("equipment_slot") == "primary_weapon"]
@@ -180,6 +203,7 @@ SVG_ICONS = {
     "arrow": '<path d="M5 12h14M13 6l6 6-6 6"/>',
     "menu": '<path d="M4 7h16M4 12h16M4 17h16"/>',
     "close": '<path d="M6 6l12 12M18 6 6 18"/>',
+    "search": '<circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2"/>',
     "globe": '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3Z"/>',
 }
 
@@ -213,13 +237,18 @@ def radar(c, lang, size=180):
 
 
 # --- Layout ------------------------------------------------------------------
-def page(lang, slug, title, body, desc=None, extra_head="", body_class=""):
+def page(lang, slug, title, body, desc=None, extra_head="", body_class="", alt=None):
+    """slug puede llevar subcarpetas ("wiki/item-x"): las rutas relativas suben lo necesario (2026-10-10)."""
     other = "es" if lang == "en" else "en"
+    up = "../" * slug.count("/")
+    alt = alt or slug
     nav = ""
     for s, label in NAV:
-        cur = ' aria-current="page"' if s == slug else ""
-        nav += f'<a href="{s}.html"{cur}>{e(label[lang])}</a>'
+        cur = ' aria-current="page"' if s == slug or (s == "wiki/index" and slug.startswith("wiki/")) else ""
+        nav += f'<a href="{up}{s}.html"{cur}>{e(label[lang])}</a>'
     full_title = "DEEPKIN — " + u("what_lies_below", lang) if slug == "index" else f"{title} · DEEPKIN"
+    search_btn = (f'<button class="searchbtn" type="button" data-search-open aria-label="{e(u("search", lang))}">'
+                  f'{svg("search")}<span>{e(u("search", lang))}</span><kbd>/</kbd></button>')
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -229,23 +258,24 @@ def page(lang, slug, title, body, desc=None, extra_head="", body_class=""):
 <meta name="description" content="{e(desc or u('site_desc', lang))}">
 <meta property="og:title" content="{e(full_title)}">
 <meta property="og:description" content="{e(desc or u('site_desc', lang))}">
-<meta property="og:image" content="../assets/img/concept/hero.jpg">
+<meta property="og:image" content="{up}../assets/img/concept/hero.jpg">
 <meta name="theme-color" content="#0b0d0c">
-<link rel="alternate" hreflang="{other}" href="../{other}/{slug}.html">
-<link rel="icon" href="../assets/img/deepkin_mark.png">
+<link rel="alternate" hreflang="{other}" href="{up}../{other}/{alt}.html">
+<link rel="icon" href="{up}../assets/img/deepkin_mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/site.css">
+<link rel="stylesheet" href="{up}../assets/css/site.css">
 <script>document.documentElement.classList.add("js")</script>
 {extra_head}
 </head>
-<body class="{body_class}" data-lang="{lang}">
+<body class="{body_class}" data-lang="{lang}" data-root="{up}">
 <a class="skip" href="#main">{'Skip to content' if lang == 'en' else 'Saltar al contenido'}</a>
 <header class="topbar">
-  <a class="brand" href="index.html" aria-label="DEEPKIN"><img src="../assets/img/deepkin_mark.png" alt="" width="22" height="22"><span>DEEPKIN</span></a>
-  <nav class="mainnav" id="mainnav">{nav}<a class="navlang" href="../{other}/{slug}.html" hreflang="{other}" data-setlang="{other}">{svg('globe')}<span>{u('switch_lang', lang)}</span></a></nav>
-  <a class="lang" href="../{other}/{slug}.html" hreflang="{other}" data-setlang="{other}">{svg('globe')}<span>{u('switch_lang', lang)}</span></a>
+  <a class="brand" href="{up}index.html" aria-label="DEEPKIN"><img src="{up}../assets/img/deepkin_mark.png" alt="" width="22" height="22"><span>DEEPKIN</span></a>
+  <nav class="mainnav" id="mainnav">{nav}<a class="navlang" href="{up}../{other}/{alt}.html" hreflang="{other}" data-setlang="{other}">{svg('globe')}<span>{u('switch_lang', lang)}</span></a></nav>
+  {search_btn}
+  <a class="lang" href="{up}../{other}/{alt}.html" hreflang="{other}" data-setlang="{other}">{svg('globe')}<span>{u('switch_lang', lang)}</span></a>
   <button class="navtoggle" aria-controls="mainnav" aria-expanded="false" aria-label="{'Menu' if lang == 'en' else 'Menú'}">{svg('menu', 'ico ico-open')}{svg('close', 'ico ico-close')}</button>
 </header>
 <div class="depth" aria-hidden="true"><span class="depth-line"><span class="depth-fill"></span></span><span class="depth-val">0000 m</span></div>
@@ -254,13 +284,21 @@ def page(lang, slug, title, body, desc=None, extra_head="", body_class=""):
 </main>
 <footer class="foot">
   <div class="foot-in">
-    <div class="foot-brand"><img src="../assets/img/deepkin_logo.png" alt="DEEPKIN — What lies below" width="220" height="91" loading="lazy"></div>
+    <div class="foot-brand"><img src="{up}../assets/img/deepkin_logo.png" alt="DEEPKIN — What lies below" width="220" height="91" loading="lazy"></div>
     <p>{u('footer_note', lang)}</p>
     <nav>{nav}</nav>
     <p class="signal">261.6.66</p>
   </div>
 </footer>
-<script src="../assets/js/site.js"></script>
+<div class="search" id="search" hidden role="dialog" aria-modal="true" aria-label="{e(u('search', lang))}">
+  <div class="search-box">
+    <div class="search-in">{svg('search')}<input type="search" id="search-q" placeholder="{e(u('search_ph', lang))}" autocomplete="off" spellcheck="false" aria-controls="search-res">
+    <button type="button" class="search-x" data-search-close aria-label="{'Close' if lang == 'en' else 'Cerrar'}">Esc</button></div>
+    <ul class="search-res" id="search-res" role="listbox"></ul>
+    <p class="search-hint">{e(u('search_hint', lang))}</p>
+  </div>
+</div>
+<script src="{up}../assets/js/site.js"></script>
 </body>
 </html>
 """
@@ -575,7 +613,7 @@ def weapon_card(w, lang):
   <div class="wc-icon">{icon(w['id'], alt=w['display_name'])}</div>
   <div class="wc-main">
     <p class="kicker">{e(u(wtype, lang))} · {e(FAMILIES.get(fam, {}).get(lang, fam))}{dtype_html} {status_tag(w, lang)}</p>
-    <h3>{e(w['display_name'])}</h3>
+    <h3><a href="{SL.item(w['id'])}">{e(w['display_name'])}</a></h3>
     <p class="wc-desc">{e(item_desc(w, lang))}</p>
     {doctrine}
   </div>
@@ -623,7 +661,7 @@ def page_arsenal(lang):
     ammo_html = ""
     for a in ammo:
         pr = a["properties"]
-        ammo_html += f"""<article class="gcard">{icon(a['id'], alt=a['display_name'])}<div><p class="kicker">{u('ammo', lang)} {status_tag(a, lang)}</p><h3>{e(a['display_name'])}</h3><p>{e(item_desc(a, lang))}</p>
+        ammo_html += f"""<article class="gcard">{icon(a['id'], alt=a['display_name'])}<div><p class="kicker">{u('ammo', lang)} {status_tag(a, lang)}</p><h3><a href="{SL.item(a['id'])}">{e(a['display_name'])}</a></h3><p>{e(item_desc(a, lang))}</p>
 <dl class="kv"><div><dt>{u('damage', lang)}</dt><dd>×{num(pr['ammo_multiplier'], lang)}</dd></div><div><dt>{u('stack', lang)}</dt><dd>{pr['stack_size']}</dd></div><div><dt>{u('weight', lang)}</dt><dd>{num(a['weight'], lang)} kg</dd></div></dl></div></article>"""
 
     calc_data = {
@@ -718,7 +756,9 @@ def gear_card(i, lang):
     contents = ""
     if i.get("crate_loot"):
         lis = ""
-        for cid in i["crate_loot"]:
+        for entry in i["crate_loot"]:
+            # Una entrada es un id o {"item": id, "quantity": n} (2026-10-09, capsulas de vida).
+            cid = entry["item"] if isinstance(entry, dict) else entry
             if cid.startswith("$"):
                 label = ("Your starting weapon" if lang == "en" else "Tu arma inicial") if cid == "$starting_weapon" else (
                     "Ammunition (if it shoots)" if lang == "en" else "Munición (si dispara)")
@@ -727,7 +767,7 @@ def gear_card(i, lang):
                 lis += f'<li class="mini">{icon(cid, alt=ITEMS[cid]["display_name"])}<span>{e(ITEMS[cid]["display_name"])}</span></li>'
         contents = f'<p class="kicker">{u("contents", lang)}</p><ul class="minis">{lis}</ul>'
     return f"""<article class="gcard{' soon' if i.get('planned') else ''}" id="{e(i['id'])}">{icon(i['id'], alt=i['display_name']) if os.path.exists(os.path.join(ROOT, 'assets/img/icons', i['id'] + '.png')) else '<span class="icon icon-ph"></span>'}
-<div><p class="kicker">{e(slot)} {status_tag(i, lang)}</p><h3>{e(i['display_name'])}</h3><p>{e(item_desc(i, lang))}</p><dl class="kv">{kv_html}</dl>{contents}</div></article>"""
+<div><p class="kicker">{e(slot)} {status_tag(i, lang)}</p><h3><a href="{SL.item(i['id'])}">{e(i['display_name'])}</a></h3><p>{e(item_desc(i, lang))}</p><dl class="kv">{kv_html}</dl>{contents}</div></article>"""
 
 
 def page_gear(lang):
@@ -784,11 +824,11 @@ def page_resources(lang):
         found = FOUND_IN.get(i["id"])
         f = f'<p class="found"><span>{u("found_in", lang)}</span>{e(found[lang])}</p>' if found else ""
         return (f'<article class="gcard" id="{e(i["id"])}">{icon(i["id"], alt=i["display_name"])}<div><p class="kicker">{status_tag(i, lang)}</p>'
-                f'<h3>{e(i["display_name"])}</h3><p>{e(item_desc(i, lang))}</p>{f}</div></article>')
+                f'<h3><a href="{SL.item(i["id"])}">{e(i["display_name"])}</a></h3><p>{e(item_desc(i, lang))}</p>{f}</div></article>')
 
     coins = ""
     for i in cur:
-        coins += (f'<article class="coin">{icon(i["id"], alt=i["display_name"])}<h3>{e(i["display_name"])}</h3>'
+        coins += (f'<article class="coin">{icon(i["id"], alt=i["display_name"])}<h3><a href="{SL.item(i["id"])}">{e(i["display_name"])}</a></h3>'
                   f'<p class="coin-v">{num(i["properties"]["currency_value"], lang)} <small>Metal</small></p><p>{e(item_desc(i, lang))}</p></article>')
     mats = sorted(MATS, key=lambda m: m["durability"] / m["drill_effectiveness"])
     mx = max(m["durability"] / m["drill_effectiveness"] for m in mats)
@@ -843,10 +883,23 @@ def page_bestiary(lang):
         verbs = "".join(f"<span>{e(v)}</span>" for v in n.get("verbs", []))
         abil = ""
         for a in n.get("abilities", []):
+            # Formas de habilidad (2026-10-10, dragones): golpe, cono, linea, mordida, curacion. Solo lo que trae el dato.
+            bits = []
+            if a.get("damage"):
+                bits.append(f'{a["damage"]} {u("damage", lang).lower()}')
+            if a.get("heal"):
+                bits.append(f'+{round(a["heal"] * 100)}% {u("hp", lang)}')
+            if a.get("radius"):
+                bits.append(f'{"radius" if lang == "en" else "radio"} {num(a["radius"], lang)} m')
+            if a.get("range"):
+                bits.append(f'{num(a.get("min_range", 0), lang)}–{num(a["range"], lang)} m')
+            if a.get("half_angle") and a.get("shape") == "cone":
+                bits.append(f'{num(a["half_angle"] * 2, lang)}°')
+            bits.append(f'{"wind-up" if lang == "en" else "carga"} {num(a["windup"], lang)} s')
+            bits.append(f'{u("cooldown", lang).lower()} {num(a["cooldown"], lang)} s')
             abil += (f'<div class="mob-ab"><p class="kicker">{"Telegraphed attack" if lang == "en" else "Ataque anunciado"}</p><h4>{e(a["name"])}</h4>'
-                     f'<p>{a["damage"]} {u("damage", lang).lower()} · {"radius" if lang == "en" else "radio"} {num(a["radius"], lang)} m · '
-                     f'{"wind-up" if lang == "en" else "carga"} {num(a["windup"], lang)} s · {u("cooldown", lang).lower()} {num(a["cooldown"], lang)} s</p></div>')
-        faction = "Burrowborn" if n.get("faction") == "faction.burrowborn" else M.get("faction", L("", ""))[lang]
+                     f'<p>{" · ".join(bits)}</p></div>')
+        faction = fac[n["faction"]]["name"] if n.get("faction") in fac else M.get("faction", L("", ""))[lang]
         has_icon = os.path.exists(os.path.join(ROOT, "assets/img/icons", n["id"] + ".png"))
         art = icon(n["id"], "mob-img", n["display_name"]) if has_icon else f'<span class="mob-img mob-ph">{e(n["display_name"][0])}</span>'
         threat = n.get("threat")
@@ -856,7 +909,7 @@ def page_bestiary(lang):
   <div class="mob-art">{art}<div class="verbs">{verbs}</div></div>
   <div class="mob-main">
     <p class="kicker">{e(faction)} · {e(M['role'][lang])}</p>
-    <h3>{e(n['display_name'])}</h3>
+    <h3><a href="{SL.mob(n['id'])}">{e(n['display_name'])}</a></h3>
     <p class="mob-lore">{e(M['lore'][lang])}</p>
     <dl class="mob-stats">
       <div><dt>{u('hp', lang)}</dt><dd>{n['max_health']}</dd></div>
@@ -872,10 +925,11 @@ def page_bestiary(lang):
   </div>
 </article>"""
 
-    order = ["npc.burrowborn_crawler", "npc.burrowborn_ravager", "npc.scavenger", "npc.excavation_enforcer"]
+    order = ["npc.burrowborn_crawler", "npc.burrowborn_ravager", "npc.scavenger", "npc.excavation_enforcer", "npc.dragon", "npc.greater_dragon"]
     by_id = {n["id"]: n for n in NPCS}
     burrow = "".join(mob(by_id[i]) for i in order[:2] if i in by_id)
-    human = "".join(mob(by_id[i]) for i in order[2:] if i in by_id)
+    human = "".join(mob(by_id[i]) for i in order[2:4] if i in by_id)
+    wyrms = "".join(mob(by_id[i]) for i in order[4:] if i in by_id and i in MOBS)
     rumours = ""
     for fid in ("faction.rustbound", "faction.architects", "faction.hollow"):
         f = fac[fid]
@@ -885,10 +939,14 @@ def page_bestiary(lang):
                + section_title("humans", "Faction" if lang == "en" else "Facción", "People" if lang == "en" else "Gente",
                                "Not everything down here is an animal." if lang == "en" else "No todo lo que hay acá abajo es un animal.")
                + f'<div class="mobs">{human}</div>'
+               + section_title("wyrms", "Faction" if lang == "en" else "Facción", "The Wyrms",
+                               "Below Frontier Road east, something keeps a nest." if lang == "en" else "Bajo Frontier Road este, algo cuida un nido.")
+               + f'<div class="mobs">{wyrms}</div>'
                + section_title("rumours", "Field reports" if lang == "en" else "Informes de campo", "Rumours from below" if lang == "en" else "Rumores de abajo",
                                "Operators come back with stories. Some of them are true." if lang == "en" else "Los operadores vuelven con historias. Algunas son ciertas.")
                + f'<div class="rumours">{rumours}</div>')
-    entries = [("burrowborn", "Burrowborn"), ("humans", "People" if lang == "en" else "Gente"), ("rumours", "Rumours" if lang == "en" else "Rumores")]
+    entries = [("burrowborn", "Burrowborn"), ("humans", "People" if lang == "en" else "Gente"), ("wyrms", "Wyrms"),
+               ("rumours", "Rumours" if lang == "en" else "Rumores")]
     body = wiki_header(lang, "Bestiary" if lang == "en" else "Bestiario", "What hunts below" if lang == "en" else "Lo que caza abajo",
                        "Know what you are fighting before it knows you are there." if lang == "en" else "Conocé contra qué peleás antes de que sepa que estás ahí.",
                        "concept/tile_wilds.jpg")
@@ -958,9 +1016,9 @@ def page_manual(lang):
     steps = "".join(f'<li><h3>{e(a[lang])}</h3><p>{e(b[lang])}</p></li>' for a, b in TX.FIRST_STEPS)
     keys = "".join(f'<div class="kb"><kbd>{e(k)}</kbd><span>{e(d[lang])}</span></div>' for k, d in TX.CONTROLS)
     tiers = "".join(f'<div class="tierc"><b>T{i + 1}</b><span>{u("level", lang)} {lv}+</span></div>' for i, lv in enumerate(GEAR_TIER_LEVELS))
-    total = sum(xp_to_next(level) for level in range(1, MAX_LEVEL))
-    xp_rows = "".join(f'<tr><td>{lv}</td><td class="n">{num(xp_to_next(lv), lang)}</td><td class="n">{num(sum(xp_to_next(x) for x in range(1, lv + 1)), lang)}</td></tr>'
-                      for lv in (1, 2, 5, 10, 15, 20, 25, 30, 35, 39))
+    xp_rows = "".join(f'<tr><td>{lv}</td><td class="n">{num(xp_to_next(lv), lang)}</td><td class="n">{num(GD.total_xp(lv + 1), lang)}</td></tr>'
+                      for lv in (1, 2, 5, 10, 15, 20, 30, 40, 60, 100))
+    mob_xp = {n["id"]: n.get("xp", 0) for n in NPCS}
     skill_rows = "".join(f'<tr><td>{lv}</td><td class="n">{num(skill_xp_for(lv), lang)}</td><td class="n">{num(skill_xp_for(lv) / 10, lang, 0)}</td><td class="n">+{lv - 1}%</td></tr>'
                          for lv in (2, 5, 10, 25, 50, 75, 100))
     fam_list = "".join(f'<li><b>{e(FAMILIES[f][lang])}</b><span>{e(FAMILY_DESC[f][lang])}</span></li>' for f in FAMILIES)
@@ -1019,13 +1077,14 @@ def page_manual(lang):
 </div>
 
 {section_title('levels', 'Progression' if en else 'Progresión', 'Levels & gear tiers' if en else 'Niveles y rangos de equipo',
-               'Character level caps at 40. Creatures award XP when they fall; each level adds +0.6% to all your damage and unlocks better gear tiers.' if en
-               else 'El nivel de personaje llega hasta 40. Las criaturas dan XP al caer; cada nivel suma +0,6% a todo tu daño y desbloquea mejores rangos de equipo.')}
+               'There is no level cap, and every level costs more than the last. Creatures award XP when they fall; each level adds +0.6% to all your damage and unlocks better gear tiers.' if en
+               else 'No hay tope de nivel, y cada nivel cuesta más que el anterior. Las criaturas dan XP al caer; cada nivel suma +0,6% a todo tu daño y desbloquea mejores rangos de equipo.')}
 <div class="tiers">{tiers}</div>
 <div class="cls-grid">
-  <div class="tablewrap"><table class="data compact"><thead><tr><th>{u('level', lang)}</th><th>{'XP to next' if en else 'XP al siguiente'}</th><th>{'Total' if en else 'Total'}</th></tr></thead><tbody>{xp_rows}</tbody></table></div>
-  <div class="panel"><p class="eq">{'XP to next level = 100 + 25 × (level − 1)' if en else 'XP al siguiente nivel = 100 + 25 × (nivel − 1)'}</p>
-  <p>{f'Level 40 takes {num(total, lang)} XP in total. A Crawler is worth 14, a Ravager 80.' if en else f'El nivel 40 requiere {num(total, lang)} XP en total. Un Crawler vale 14; un Ravager, 80.'}</p>
+  <div class="tablewrap"><table class="data compact"><thead><tr><th>{u('level', lang)}</th><th>{'XP to next' if en else 'XP al siguiente'}</th><th>{'Total to reach next' if en else 'Total para el siguiente'}</th></tr></thead><tbody>{xp_rows}</tbody></table></div>
+  <div class="panel"><p class="eq">{'total XP for level L = 50/3 · (L³ − 6L² + 17L − 12)' if en else 'XP total para el nivel L = 50/3 · (L³ − 6L² + 17L − 12)'}</p>
+  <p>{f'Level 40 takes {num(GD.total_xp(40), lang)} XP in total. A Crawler is worth {mob_xp.get("npc.burrowborn_crawler")}, a Ravager {mob_xp.get("npc.burrowborn_ravager")}, a Dragon {mob_xp.get("npc.dragon")}.' if en else f'El nivel 40 requiere {num(GD.total_xp(40), lang)} XP en total. Un Crawler vale {mob_xp.get("npc.burrowborn_crawler")}; un Ravager, {mob_xp.get("npc.burrowborn_ravager")}; un Dragon, {mob_xp.get("npc.dragon")}.'}</p>
+  <a class="textlink" href="wiki/experience.html">{'XP calculator & kill XP' if en else 'Calculadora de XP y XP por criatura'} {svg('arrow')}</a>
   <p>{'Gear can also ask for a minimum level or attribute. The class never locks an item.' if en else 'El equipo también puede pedir un nivel o atributo mínimo. La clase nunca bloquea un objeto.'}</p></div>
 </div>
 
@@ -1102,12 +1161,57 @@ def root_index():
 """
 
 
+# Lo que --sync copia del repo del juego (2026-10-10): entidades, mundo, dialogos, misiones y las reglas en .gd
+# (se leen las constantes, nunca se copian a mano).
+SYNC_ENTITIES = ("classes", "items", "npcs", "materials", "factions", "discoveries", "vehicles")
+SYNC_FILES = {
+    "data/world/world_map.json": "world/world_map.json",
+    "data/world/respawn_hubs.json": "world/respawn_hubs.json",
+    "data/world/zone_banners.json": "world/zone_banners.json",
+    "data/starting_region.json": "starting_region.json",
+    "shared/gameplay/rpg_rules.gd": "rules/rpg_rules.gd",
+    "shared/gameplay/weapon_skills.gd": "rules/weapon_skills.gd",
+    "shared/gameplay/combat_skills.gd": "rules/combat_skills.gd",
+    "server/death_penalty.gd": "rules/death_penalty.gd",
+}
+SYNC_DIRS = {"data/world/sets": "world/sets", "data/dialog": "dialog", "data/quests": "quests"}
+# Constantes sueltas de archivos grandes del juego: (archivo, nombre) -> se guardan en data/rules/constants.json.
+SYNC_CONSTANTS = [
+    ("server/server_world.gd", "SCRAP_COMPONENT_ID"), ("server/server_world.gd", "COIN_ITEM_ID"),
+    ("server/server_world.gd", "STARTER_AMMUNITION_ID"), ("shared/gameplay/player_inventory.gd", "POUCH_CELLS"),
+    ("shared/networking/messages/depot_view.gd", "CELLS"), ("shared/networking/messages/computer_command.gd", "REACH"),
+    ("client/terminal_commands.gd", "NETWORK_ADDRESS"),
+]
+
+
 def sync():
     src = os.path.join(GAME_REPO, "data", "entities")
-    for sub in ("classes", "items", "npcs", "materials", "factions"):
+    for sub in SYNC_ENTITIES:
         dst = os.path.join(ROOT, "data", sub)
         shutil.rmtree(dst, ignore_errors=True)
         shutil.copytree(os.path.join(src, sub), dst)
+    for a, b in SYNC_FILES.items():
+        dst = os.path.join(ROOT, "data", b)
+        os.makedirs(os.path.dirname(dst), exist_ok=True)
+        shutil.copy(os.path.join(GAME_REPO, a), dst)
+    for a, b in SYNC_DIRS.items():
+        dst = os.path.join(ROOT, "data", b)
+        shutil.rmtree(dst, ignore_errors=True)
+        shutil.copytree(os.path.join(GAME_REPO, a), dst, ignore=shutil.ignore_patterns("*.pyc", "__pycache__", "*.import"))
+    consts = {}
+    for path, name in SYNC_CONSTANTS:
+        text = open(os.path.join(GAME_REPO, path)).read()
+        m = re.search(r"^const " + name + r"\s*:?=\s*(.+)$", text, re.M)
+        if m:
+            raw = m.group(1).strip()
+            consts[name] = json.loads(raw) if raw.startswith('"') else (float(raw) if "." in raw else int(raw))
+    # Municion del cajon de equipo: la cantidad la fija _seed_crate (server_world.gd).
+    sw = open(os.path.join(GAME_REPO, "server/server_world.gd")).read()
+    m = re.search(r'"\$starting_ammo":\s*\n.*?\n\s*quantity = (\d+)', sw)
+    if m:
+        consts["STARTER_AMMUNITION_CRATE_QUANTITY"] = int(m.group(1))
+    with open(os.path.join(ROOT, "data", "rules", "constants.json"), "w") as fh:
+        json.dump(consts, fh, indent=1, sort_keys=True)
     icons = os.path.join(GAME_REPO, "docs", "items", "icons")
     for f in glob.glob(os.path.join(icons, "*.png")):
         shutil.copy(f, os.path.join(ROOT, "assets", "img", "icons"))
@@ -1128,6 +1232,13 @@ def main():
                 fh.write(fn(lang))
     with open(os.path.join(ROOT, "index.html"), "w") as fh:
         fh.write(root_index())
+    import wiki as WK
+    wiki_pages = WK.build(page)
+    print(f"wiki: {wiki_pages} pages per language")
+    if WK.GAPS:
+        print(f"data gaps ({len(WK.GAPS)}):")
+        for g in WK.GAPS:
+            print("  -", g)
     print(f"built {len(builders) * len(LANGS)} pages · {len(WEAPONS)} weapons · {len(ITEMS)} items · {len(NPCS)} creatures")
 
 

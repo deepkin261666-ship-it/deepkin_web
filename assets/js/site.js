@@ -28,10 +28,94 @@
       if (ev.key === "Escape" && nav.classList.contains("open")) { setNav(false); toggle.focus(); }
     });
     if (window.matchMedia) {
-      var wide = window.matchMedia("(min-width: 1101px)");
+      var wide = window.matchMedia("(min-width: 1321px)");
       var onWide = function () { if (wide.matches) setNav(false); };
       if (wide.addEventListener) wide.addEventListener("change", onWide); else if (wide.addListener) wide.addListener(onWide);
     }
+  }
+
+
+  // Busqueda del wiki (2026-10-10): indice prebuilt en <idioma>/wiki/search.js, cargado al abrir (funciona en file://).
+  var sbox = $("#search"), sq = $("#search-q"), sres = $("#search-res");
+  if (sbox && sq && sres) {
+    var root = document.body.getAttribute("data-root") || "";
+    var es = document.body.getAttribute("data-lang") === "es";
+    var loaded = false, sel = 0, hits = [], lastFocus = null;
+    var norm = function (x) { return String(x).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, ""); };
+    var escH = function (x) { return String(x).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var kinds = es ? { item: "Objeto", mob: "Criatura", npc: "Persona", zone: "Zona", faction: "Facción", material: "Material", quest: "Misión", mech: "Mecánica", "class": "Clase", page: "Página" }
+                   : { item: "Item", mob: "Creature", npc: "Person", zone: "Zone", faction: "Faction", material: "Material", quest: "Quest", mech: "Mechanic", "class": "Class", page: "Page" };
+    function load(cb) {
+      if (window.DKS) { cb(); return; }
+      if (loaded) return;
+      loaded = true;
+      var sc = document.createElement("script");
+      sc.src = root + "wiki/search.js";
+      sc.onload = cb;
+      document.head.appendChild(sc);
+    }
+    function score(e, q) {
+      var n = norm(e.n), s = norm(e.s || "");
+      if (n === q) return 100;
+      if (n.indexOf(q) === 0) return 80;
+      if (n.split(/[\s\-·]+/).some(function (w) { return w.indexOf(q) === 0; })) return 60;
+      if (n.indexOf(q) > -1) return 40;
+      if (s.indexOf(q) > -1) return 15;
+      return 0;
+    }
+    function mark(name, q) {
+      var i = norm(name).indexOf(q);
+      if (i < 0 || !q) return escH(name);
+      return escH(name.slice(0, i)) + "<mark>" + escH(name.slice(i, i + q.length)) + "</mark>" + escH(name.slice(i + q.length));
+    }
+    function render() {
+      var q = norm(sq.value.trim());
+      var list = window.DKS || [];
+      if (!q) hits = list.filter(function (e) { return e.k === "mech"; }).slice(0, 8);
+      else hits = list.map(function (e) { return [score(e, q), e]; }).filter(function (x) { return x[0] > 0; })
+        .sort(function (a, b) { return b[0] - a[0] || a[1].n.localeCompare(b[1].n); }).slice(0, 14).map(function (x) { return x[1]; });
+      sel = 0;
+      if (!hits.length) { sres.innerHTML = '<li class="s-empty">' + (es ? "Sin resultados." : "No results.") + "</li>"; return; }
+      sres.innerHTML = hits.map(function (e, i) {
+        var ico = e.i ? '<img src="' + root + e.i + '" alt="" loading="lazy">' : '<span class="s-ph">' + escH(e.n.charAt(0)) + "</span>";
+        return '<li><a role="option" href="' + root + e.u + '" aria-selected="' + (i === 0) + '">' + ico + "<span><b>" + mark(e.n, q) + "</b><small>" + escH(kinds[e.k] || "") + (e.s ? " · " + escH(e.s) : "") + "</small></span></a></li>";
+      }).join("");
+    }
+    function setSel(i) {
+      var as = $$("a", sres);
+      if (!as.length) return;
+      sel = (i + as.length) % as.length;
+      as.forEach(function (a, j) { a.setAttribute("aria-selected", j === sel ? "true" : "false"); });
+      as[sel].scrollIntoView({ block: "nearest" });
+    }
+    function open() {
+      lastFocus = document.activeElement;
+      sbox.hidden = false;
+      doc.classList.add("search-open");
+      sq.focus();
+      sq.select();
+      load(render);
+      if (window.DKS) render();
+    }
+    function close() {
+      sbox.hidden = true;
+      doc.classList.remove("search-open");
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    $$("[data-search-open]").forEach(function (b) { b.addEventListener("click", open); });
+    $$("[data-search-close]").forEach(function (b) { b.addEventListener("click", close); });
+    sbox.addEventListener("click", function (ev) { if (ev.target === sbox) close(); });
+    sq.addEventListener("input", function () { if (window.DKS) render(); });
+    sq.addEventListener("keydown", function (ev) {
+      if (ev.key === "ArrowDown") { ev.preventDefault(); setSel(sel + 1); }
+      else if (ev.key === "ArrowUp") { ev.preventDefault(); setSel(sel - 1); }
+      else if (ev.key === "Enter") { var a = $$("a", sres)[sel]; if (a) { ev.preventDefault(); location.href = a.href; } }
+    });
+    document.addEventListener("keydown", function (ev) {
+      if (ev.key === "Escape" && !sbox.hidden) { close(); return; }
+      var tag = (ev.target.tagName || "").toLowerCase();
+      if (ev.key === "/" && sbox.hidden && tag !== "input" && tag !== "textarea" && tag !== "select" && !ev.target.isContentEditable) { ev.preventDefault(); open(); }
+    });
   }
 
   // Aparicion al hacer scroll.

@@ -8,6 +8,7 @@ import os
 import random
 
 from i18n import L
+import slugs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, "data", "world", "world_map.json")
@@ -72,6 +73,7 @@ T = {
                   "Capa base: arte del mapa prototipo, no definitivo. Los bordes de zona y las rutas salen del grafo del mundo del juego."),
     "hint": L("Tap a zone", "Tocá una zona"),
     "planned_city": L("Planned map", "Mapa planeado"),
+    "wiki_page": L("Open the wiki page", "Abrir la página del wiki"),
 }
 
 KIND_ICON = {  # 24x24, trazos
@@ -293,7 +295,7 @@ def client_data(data, lang):
     steps = {zid: i for i, zid in enumerate(journey["zones"])} if journey else {}
     out = {"zones": {}, "districts": {}, "t": {k: L_(v, lang) for k, v in T.items() if k in (
         "biome", "danger", "tier", "status", "layer", "exits", "below", "floor", "services", "open_city", "back_map", "step", "close",
-        "district", "gate", "landmark", "planned_city")}}
+        "district", "gate", "landmark", "planned_city", "wiki_page")}}
     for z in data["zones"]:
         conns = []
         for c in data["connections"]:
@@ -313,13 +315,15 @@ def client_data(data, lang):
             "summary": L_(z["summary"], lang), "conns": conns, "below": below,
             "parent": z.get("stack", {}).get("parent"), "depth": z.get("stack", {}).get("depth"),
             "step": steps.get(z["id"]), "city": z["id"] == data.get("dustline", {}).get("zone"),
+            "wiki": slugs.zone(z["id"]),
         }
     city = data.get("dustline")
     if city:
         for d in city["districts"]:
             out["districts"][d["id"]] = {"name": L_(d["name"], lang), "num": d["number"], "kind": out["t"]["district"],
                                          "summary": L_(d["purpose"], lang), "services": [L_(SERVICES.get(s, s), lang) for s in d["services"]],
-                                         "landmarks": [L_(lm["name"], lang) for lm in city["landmarks"] if lm["id"] in d.get("landmarks", [])]}
+                                         "landmarks": [L_(lm["name"], lang) for lm in city["landmarks"] if lm["id"] in d.get("landmarks", [])],
+                                         "wiki": slugs.zone(city["zone"]) + "#" + slugs.district_anchor(d["id"])}
         for g in city["entrances"]:
             out["districts"][g["id"]] = {"name": L_(g["name"], lang), "kind": out["t"]["gate"], "summary": L_(g["purpose"], lang),
                                          "services": [], "landmarks": [L_(lm["name"], lang) for lm in city["landmarks"] if lm.get("district") == g["id"]]}

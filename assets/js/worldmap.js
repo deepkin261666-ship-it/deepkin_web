@@ -196,6 +196,7 @@
     h += "<div><dt>" + esc(T.status) + "</dt><dd>" + planned + "</dd></div></dl>";
     if (z.step !== null && z.step !== undefined) h += '<p class="wm-stepnote">' + esc(T.step) + " " + String(z.step).padStart(2, "0") + " · " + esc(D.journeyName || "") + "</p>";
     h += '<p class="wm-sum">' + esc(z.summary) + "</p>";
+    if (z.wiki) h += '<p class="wm-wiki"><a class="textlink" href="' + esc(z.wiki) + '">' + esc(T.wiki_page) + " →</a></p>";
     if (z.city) h += '<button type="button" class="btn wm-opencity" data-open-city>' + esc(T.open_city) + "</button>";
     if (z.parent) h += '<p class="kicker wm-k2">' + esc(T.below) + '</p><ul class="wm-exits"><li><button type="button" data-goto="' + z.parent + '"><span class="ex-k">↑</span><b>' + esc(D.zones[z.parent].name) + "</b></button></li></ul>";
     if (z.below.length) {
@@ -224,6 +225,7 @@
     }
     if (d.landmarks.length) h += '<p class="wm-sub">' + esc(T.landmark) + ": " + d.landmarks.map(esc).join(" · ") + "</p>";
     if (d["in"] && D.districts[d["in"]]) h += '<ul class="wm-exits"><li><button type="button" data-goto-d="' + d["in"] + '"><span class="ex-k">↑</span><b>' + esc(D.districts[d["in"]].name) + "</b></button></li></ul>";
+    if (d.wiki) h += '<p class="wm-wiki"><a class="textlink" href="' + esc(d.wiki) + '">' + esc(T.wiki_page) + " →</a></p>";
     h += '<p class="wm-sub wm-planned">' + esc(T.planned_city) + "</p>";
     h += '<button type="button" class="textlink wm-back" data-back-map>← ' + esc(T.back_map) + "</button>";
     return h;
@@ -289,4 +291,18 @@
     b.addEventListener("click", function () { go(b.getAttribute("data-goto"), true); });
   });
   D.journeyName = ($(".wm-journey-list .kicker") || {}).textContent || "";
+
+  // Enlaces desde el wiki (2026-10-10): world.html?zone=<id>#map o ?district=<id>#map abren esa zona o distrito.
+  var params = null;
+  try { params = new URLSearchParams(location.search); } catch (e) {}
+  if (params) {
+    var wantZone = params.get("zone"), wantDistrict = params.get("district");
+    var openDeep = function () {
+      if (wantZone && D.zones[wantZone]) go(wantZone, false);
+      else if (wantDistrict && D.districts[wantDistrict]) { setView("city"); pickDistrict(wantDistrict); }
+    };
+    if (wantZone || wantDistrict) {
+      if (document.readyState === "complete") openDeep(); else window.addEventListener("load", openDeep);
+    }
+  }
 })();

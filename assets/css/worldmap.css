@@ -243,3 +243,4 @@
   .jn { font-size: 24px; }
 }
 @media (max-width: 400px) { .wm-legend, .wm-legend[data-for="city"] { grid-template-columns: minmax(0, 1fr); } }
+.wm-wiki { margin: 0 0 14px; }

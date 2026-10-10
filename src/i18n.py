@@ -16,6 +16,7 @@ NAV = [
     ("bestiary", L("Bestiary", "Bestiario")),
     ("world", L("World", "Mundo")),
     ("manual", L("Field Manual", "Manual de campo")),
+    ("wiki/index", L("Wiki", "Wiki")),
 ]
 
 UI = {
@@ -114,6 +115,9 @@ UI = {
     "per_hit": L("per hit", "por golpe"),
     "per_second": L("per second", "por segundo"),
     "power_hit": L("with class power", "con poder de clase"),
+    "search": L("Search", "Buscar"),
+    "search_ph": L("Search items, creatures, people, zones…", "Buscá objetos, criaturas, gente, zonas…"),
+    "search_hint": L("↑ ↓ to move · Enter to open · / anywhere to search", "↑ ↓ para moverte · Enter para abrir · / en cualquier página para buscar"),
     "lang_name": L("English", "Español"),
     "switch_lang": L("Español", "English"),
     "prev": L("Previous", "Anterior"),
@@ -222,10 +226,12 @@ ITEM_ES = {
     "item.armor.power_frame_boots": "Pies actuadores blindados del exoesqueleto. Reservados para un set futuro.",
     "item.backpack.provisional_drift_pack": "Una mochila de relevamiento: veinte celdas que viajan con la mochila (si la soltás, su contenido va con ella) y 15 kg más de capacidad de carga.",
     "item.battery.provisional_relay_cell": "Una celda compacta que alimenta con una reserva fija al equipo que llevás.",
-    "item.container.gear_crate": "Equipo de campo para el recién llegado: tu arma inicial (y munición si dispara), una linterna, una batería y el taladro del asentamiento. Lo de adentro es sólo tuyo.",
+    "item.container.gear_crate": "Equipo de campo para el recién llegado: tu arma inicial (y munición si dispara), una linterna, una batería, el taladro del asentamiento y dos cápsulas de vida. Lo de adentro es sólo tuyo.",
+    "item.container.operator_remains": "Lo que dejó un operador caído: su mochila con todo adentro y cualquier otra cosa que haya soltado. Cualquiera puede saquearlo. Se deshace con el tiempo.",
+    "item.consumable.health_capsule": "Una celda de La Red recargada con gel coagulante y estimulante. Rompela contra la piel para recuperar 40 de vida. Un solo uso; el cuerpo necesita unos segundos antes de que la siguiente haga efecto.",
     "item.container.supply_crate": "Cajones de suministros del Outpost: una mochila y ropa de trabajo para cada recién llegado. Lo de adentro es sólo tuyo.",
     "item.currency.lumen_coin": "El mismo sello acuñado en aleación con lumenita; brilla con un azul frío. Vale 100 Metal.",
-    "item.currency.metal_coin": "Moneda de chatarra estampada con un agujero cuadrado: la unidad base del dinero de DEEPKIN. Vale 1 Metal.",
+    "item.currency.metal_coin": "Moneda de chatarra estampada con un agujero cuadrado: la unidad base del dinero de DEEPKIN. Vale 1 Metal. Las criaturas y los carroñeros sueltan algunas; todavía nada se vende por ellas.",
     "item.currency.shard": "Un fragmento de cristal tallado para grandes transacciones y reservas de asentamiento. Vale 10.000 Metal.",
     "item.ferrous_sample": "Una muestra densa de mineral recuperada de los estratos de la brecha.",
     "item.light.brass_lantern": "Una pesada lámpara minera de bronce con un haz amplio y cálido. Todavía no se encuentra en el Outpost.",
@@ -264,7 +270,7 @@ FOUND_IN = {
     "item.mineral.lumenita": L("Lumenita clusters near The Keystone and in C-3", "Cúmulos de lumenita cerca de The Keystone y en C-3"),
     "item.ferrous_sample": L("Loose on the floor of The Shallows", "Sueltas en el suelo de The Shallows"),
     "item.relic_fragment": L("Convoy salvage in The Saltpan", "Restos del convoy en The Saltpan"),
-    "item.scrap_component": L("Dropped by Scavengers · convoy wreck in The Saltpan", "Lo sueltan los Scavengers · restos del convoy en The Saltpan"),
+    "item.scrap_component": L("Dropped by every creature · convoy wrecks in The Saltpan and on Frontier Road", "Lo suelta toda criatura · restos de convoyes en The Saltpan y en Frontier Road"),
 }
 
 MATERIAL_NAMES_ES = {
