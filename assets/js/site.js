@@ -325,3 +325,122 @@
     calc();
   }
 })();
+
+/* Intro de terminal en la portada (2026-10-11): la primera visita ve el arranque de un terminal de campo,
+   "connect 261.6.66", SIGNAL LOCKED y el logo, en el verde fosforo del final de DEEPKIN_Historia. ~4 s; se salta con
+   clic, tecla, rueda o toque; con prefers-reduced-motion se muestra quieta y breve. Se recuerda en localStorage. */
+(function () {
+  "use strict";
+  var root = document.documentElement;
+  var box = document.getElementById("dk-intro");
+  if (!box || !root.classList.contains("dk-intro-on")) return;
+  try { localStorage.setItem("dk-intro", "1"); } catch (e) {}
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var es = document.documentElement.lang === "es";
+  var log = box.querySelector(".dki-log"), big = box.querySelector(".dki-big"), bar = box.querySelector(".dki-bar i");
+  var canvas = box.querySelector(".dki-rain"), ctx = canvas && canvas.getContext ? canvas.getContext("2d") : null;
+  var CH = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$%&*+-/<>=?§±∞¶•カキクケコサシスセソㄱㄴㄷㄹΔΩλπψΦΘΞΣ";
+  var rnd = function (n) { var s = ""; for (var i = 0; i < n; i++) s += CH.charAt(Math.floor(Math.random() * CH.length)); return s; };
+  var LINES = [
+    ["DEEPKIN FIELD TERMINAL · v0.2 · 2318", 0],
+    [es ? "> chequeo de memoria ........ OK" : "> memory check .............. OK", 0],
+    [es ? "> barrido de enlace ......... 3 NODOS" : "> uplink scan ............... 3 NODES", 0],
+    [es ? "> profundidad ............... 60 m · OUTPOST" : "> depth ..................... 60 m · OUTPOST", 0],
+    ["guest@outpost-7:~$ ", 1]
+  ];
+  var CMD = "connect 261.6.66";
+  var timers = [], raf = 0, done = false, t0 = performance.now(), TOTAL = 4200;
+
+  function finish(fast) {
+    if (done) return;
+    done = true;
+    timers.forEach(clearTimeout);
+    cancelAnimationFrame(raf);
+    ["click", "keydown", "wheel", "touchstart"].forEach(function (ev) { window.removeEventListener(ev, skip, true); });
+    box.classList.add("dki-out");
+    setTimeout(function () { root.classList.remove("dk-intro-on"); box.remove(); }, fast || reduced ? 0 : 520);
+  }
+  function skip(ev) {
+    if (ev && ev.type === "keydown" && (ev.key === "Tab" || ev.key === "Shift")) return;
+    if (ev && ev.cancelable && ev.type !== "touchstart") ev.preventDefault();
+    finish(false);
+  }
+  ["click", "keydown", "wheel", "touchstart"].forEach(function (ev) { window.addEventListener(ev, skip, { capture: true, passive: ev !== "keydown" && ev !== "click" }); });
+  var skipBtn = box.querySelector(".dki-skip");
+  if (skipBtn) skipBtn.focus({ preventScroll: true });
+
+  if (reduced) {
+    log.textContent = LINES.map(function (l) { return l[0]; }).join("\n") + CMD;
+    big.textContent = "SIGNAL LOCKED";
+    box.classList.add("dki-logo-on", "dki-locked");
+    if (bar) bar.style.width = "100%";
+    timers.push(setTimeout(function () { finish(true); }, 1800));
+    return;
+  }
+
+  // Lluvia de glifos
+  var cols = [], fs = 16;
+  function size() {
+    if (!canvas) return;
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
+    canvas.style.width = innerWidth + "px"; canvas.style.height = innerHeight + "px";
+    if (ctx) ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    fs = innerWidth < 560 ? 13 : 16;
+    cols = [];
+    for (var i = 0; i < Math.ceil(innerWidth / fs); i++) cols.push(Math.random() * -40);
+  }
+  size();
+  window.addEventListener("resize", size);
+  var last = 0;
+  function frame(now) {
+    if (done) return;
+    var t = now - t0;
+    if (bar) bar.style.width = Math.min(100, t / TOTAL * 100).toFixed(1) + "%";
+    if (ctx && now - last > 45) {
+      last = now;
+      var k = Math.min(1, Math.max(0, (t - 600) / 1800));   // la lluvia crece hacia SIGNAL LOCKED
+      ctx.fillStyle = "rgba(3,5,3,0.16)";
+      ctx.fillRect(0, 0, innerWidth, innerHeight);
+      ctx.font = fs + "px 'Courier New', monospace";
+      for (var i = 0; i < cols.length; i++) {
+        if (Math.random() > 0.25 + 0.75 * k) continue;
+        var y = cols[i] * fs;
+        ctx.fillStyle = Math.random() < 0.08 ? "#c8ffd2" : "rgba(0,255,65," + (0.25 + 0.5 * k).toFixed(2) + ")";
+        ctx.fillText(CH.charAt(Math.floor(Math.random() * CH.length)), i * fs, y);
+        cols[i] = y > innerHeight && Math.random() > 0.96 ? 0 : cols[i] + 1;
+      }
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  raf = requestAnimationFrame(frame);
+
+  // Arranque tipeado
+  var text = "", at = 120;
+  LINES.forEach(function (l, li) {
+    var line = l[0];
+    timers.push(setTimeout(function () { text += (li ? "\n" : "") + line; log.textContent = text; }, at));
+    at += li === LINES.length - 1 ? 160 : 190;
+  });
+  for (var c = 1; c <= CMD.length; c++) {
+    (function (n) { timers.push(setTimeout(function () { log.textContent = text + CMD.slice(0, n) + (n < CMD.length ? "▌" : ""); }, at + n * 42)); })(c);
+  }
+  at += CMD.length * 42 + 220;
+  // Desencriptado: ruido -> 261.6.66 -> SIGNAL LOCKED
+  var dec = function (target, from, dur, then) {
+    var start = 0;
+    timers.push(setTimeout(function step() {
+      start = start || performance.now();
+      var p = Math.min(1, (performance.now() - start) / dur), out = "";
+      for (var i = 0; i < target.length; i++) out += (target[i] === " " || Math.random() < p * 1.15) ? target[i] : rnd(1);
+      big.textContent = out;
+      if (p < 1 && !done) timers.push(setTimeout(step, 40)); else if (then) then();
+    }, from));
+  };
+  dec("261.6.66", at, 650, function () { box.classList.add("dki-pulse"); });
+  at += 900;
+  dec("SIGNAL LOCKED", at, 520, function () { box.classList.add("dki-locked"); });
+  at += 700;
+  timers.push(setTimeout(function () { box.classList.add("dki-logo-on"); }, at));
+  timers.push(setTimeout(function () { finish(false); }, Math.max(TOTAL, at + 900)));
+})();

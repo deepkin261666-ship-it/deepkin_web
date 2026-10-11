@@ -25,6 +25,8 @@ import gdconst as GD  # noqa: E402
 import slugs as SL  # noqa: E402
 import texts as TX  # noqa: E402
 import worldmap as WM  # noqa: E402
+import atlas as AT  # noqa: E402
+import lore as LO  # noqa: E402
 from wiki_i18n import MOB_ES, MOB_SHOTS  # noqa: E402
 
 LANGS = ("en", "es")
@@ -252,6 +254,19 @@ def radar(c, lang, size=180):
             f'<polygon points="{p}" fill="{col}33" stroke="{col}" stroke-width="2"/>{labels}</svg>')
 
 
+# --- Intro de terminal (2026-10-11): sólo portada, primera visita; ver site.js ----------------
+INTRO_HEAD = ('<script>try{if(!localStorage.getItem("dk-intro")&&!/[?&]nointro/.test(location.search))'
+              'document.documentElement.classList.add("dk-intro-on")}catch(e){}</script>\n')
+
+
+def intro_html(lang):
+    skip = "Skip ▸" if lang == "en" else "Saltar ▸"
+    return (f'<div class="dk-intro" id="dk-intro" role="dialog" aria-label="DEEPKIN"><canvas class="dki-rain" aria-hidden="true"></canvas>'
+            f'<div class="dki-bar" aria-hidden="true"><i></i></div><div class="dki-in"><pre class="dki-log" aria-hidden="true"></pre>'
+            f'<p class="dki-big" aria-live="polite"></p><img class="dki-logo" src="../assets/img/deepkin_logo.png" alt="DEEPKIN — What lies below" width="1356" height="559"></div>'
+            f'<button type="button" class="dki-skip">{skip}</button><div class="dki-scan" aria-hidden="true"></div></div>\n')
+
+
 # --- Layout ------------------------------------------------------------------
 def page(lang, slug, title, body, desc=None, extra_head="", body_class="", alt=None):
     """slug puede llevar subcarpetas ("wiki/item-x"): las rutas relativas suben lo necesario (2026-10-10)."""
@@ -283,10 +298,10 @@ def page(lang, slug, title, body, desc=None, extra_head="", body_class="", alt=N
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{up}../assets/css/site.css">
 <script>document.documentElement.classList.add("js")</script>
-{extra_head}
+{INTRO_HEAD if slug == "index" else ""}{extra_head}
 </head>
 <body class="{body_class}" data-lang="{lang}" data-root="{up}">
-<a class="skip" href="#main">{'Skip to content' if lang == 'en' else 'Saltar al contenido'}</a>
+{intro_html(lang) if slug == "index" else ""}<a class="skip" href="#main">{'Skip to content' if lang == 'en' else 'Saltar al contenido'}</a>
 <header class="topbar">
   <a class="brand" href="{up}index.html" aria-label="DEEPKIN"><img src="{up}../assets/img/deepkin_mark.png" alt="" width="22" height="22"><span>DEEPKIN</span></a>
   <nav class="mainnav" id="mainnav">{nav}<a class="navlang" href="{up}../{other}/{alt}.html" hreflang="{other}" data-setlang="{other}">{svg('globe')}<span>{u('switch_lang', lang)}</span></a></nav>
@@ -360,7 +375,7 @@ def page_index(lang):
         txt = CLASSES[c["id"]]
         dv = derived(c)
         cards += f"""<a class="ccard reveal" href="classes.html#{k}" style="--c:{class_color(c['id'])}">
-  <img src="../assets/img/concept/class_{k}.jpg" alt="{e(c['name'])}" loading="lazy">
+  <picture><source media="(max-width: 720px)" srcset="../assets/img/classes/class_{k}_600.webp"><img src="../assets/img/classes/class_{k}.webp" alt="{e(c['name'])}" width="960" height="1200" loading="lazy" decoding="async"></picture>
   <div class="ccard-body">
     <p class="ccard-civ">{e(txt['title'][lang])}</p>
     <h3>{e(c['name'])}</h3>
@@ -551,7 +566,7 @@ def class_section(c, lang):
     power_mult = POWER_MULT.get(power_id)
     return f"""<section class="cls" id="{k}" style="--c:{col}">
   <div class="cls-top">
-    <figure class="cls-art"><img src="../assets/img/concept/class_{k}.jpg" alt="{e(c['name'])}" loading="lazy"></figure>
+    <figure class="cls-art"><picture><source media="(max-width: 720px)" srcset="../assets/img/classes/class_{k}_600.webp"><img src="../assets/img/classes/class_{k}.webp" alt="{e(c['name'])} · {e(ITEMS[c['variants'][0]['weapon_id']]['display_name'])}" width="960" height="1200" loading="lazy" decoding="async"></picture></figure>
     <div class="cls-intro">
       <p class="kicker">{e(txt['title'][lang])} · {u('home', lang)}: {e(city)}</p>
       <h2>{e(c['name'])}</h2>
@@ -572,6 +587,10 @@ def class_section(c, lang):
       <p class="skill-meta">{u('cooldown', lang)} {DASH_COOLDOWN} s · {DASH_COST} {u('energy', lang).lower()}</p></div>
     <div class="panel skill"><p class="key key-p">P</p><p class="kicker">{u('passive', lang)}</p><h4>{e(c['passive_name'])}</h4><p>{e(txt['passive_desc'][lang])}</p></div>
   </div>
+  <figure class="cls-power"><picture><source media="(max-width: 720px)" srcset="../assets/img/classes/class_{k}_power_600.webp"><img src="../assets/img/classes/class_{k}_power.webp" alt="{e(c['ability_name'])}" width="1200" height="675" loading="lazy" decoding="async"></picture>
+    <figcaption><b>{e(c['ability_name'])}</b> · {e(txt['power_desc'][lang])}</figcaption></figure>
+  <div class="cls-kit"><figure class="cls-concept"><img src="../assets/img/concept/class_{k}.jpg" alt="" loading="lazy"><figcaption>{'Concept art' if lang == 'en' else 'Arte conceptual'}</figcaption></figure>
+    <div><p class="kicker">{'Headgear & emblem' if lang == 'en' else 'Equipo de cabeza y emblema'}</p><p>{e(HEADGEAR[k][lang])}</p></div></div>
   <h3 class="sub">{u('starting_weapons', lang)}</h3>
   <div class="variants">{variants}</div>
   <div class="cls-grid">
@@ -582,7 +601,7 @@ def class_section(c, lang):
 
 
 def page_classes(lang):
-    entries = [("compare", "Compare" if lang == "en" else "Comparar")] + [(CLASS_KEY[c["id"]], c["name"]) for c in CLASSES_DATA]
+    entries = [("compare", "Compare" if lang == "en" else "Comparar"), ("choose", "Two steps" if lang == "en" else "Dos pasos")] + [(CLASS_KEY[c["id"]], c["name"]) for c in CLASSES_DATA]
     dvs = {c["id"]: derived(c) for c in CLASSES_DATA}
     rows = [
         (u("health", lang), "health", ""), (u("armor", lang), "armor", ""), (u("resistance", lang), "res", ""),
@@ -598,6 +617,38 @@ def page_classes(lang):
     tbody += "<tr><th>" + u("power", lang) + "</th>" + "".join(f"<td><b>{e(c['ability_name'])}</b></td>" for c in CLASSES_DATA) + "</tr>"
     compare = f"""{section_title('compare', 'Four disciplines' if lang == 'en' else 'Cuatro disciplinas', 'Compare' if lang == 'en' else 'Comparar', u('variants_note', lang))}
 <div class="tablewrap"><table class="cmp"><thead><tr><th></th>{thead}</tr></thead><tbody>{tbody}</tbody></table></div>"""
+    # Eleccion en dos pasos y armas iniciales (2026-10-11, docs/CLASSES.md "Class screen").
+    en = lang == "en"
+    starters = []
+    for c in CLASSES_DATA:
+        for wid in c.get("starter_weapons", [v["weapon_id"] for v in c["variants"]]):
+            if wid in ITEMS and wid not in starters:
+                starters.append(wid)
+    best = {c["id"]: max(c["skill_affinity"].get(ITEMS[w].get("weapon_family"), 0.5) for w in starters) for c in CLASSES_DATA}
+    srows = ""
+    for w in starters:
+        fam = ITEMS[w].get("weapon_family")
+        cells = ""
+        for c in CLASSES_DATA:
+            v = c["skill_affinity"].get(fam, 0.5)
+            rec = v >= best[c["id"]]
+            cells += f'<td class="{"rec" if rec else ("off" if v < 0.9 else "")}">{"★ " if rec else ""}×{num(v, lang)}</td>'
+        srows += (f'<tr><th><a class="mini-w" href="arsenal.html#{e(w)}">{icon(w, alt=ITEMS[w]["display_name"])}<span>{e(ITEMS[w]["display_name"])}</span></a>'
+                  f'<small>{e(FAMILIES[fam][lang])}</small></th>{cells}</tr>')
+    steps = [("01", "Choose your discipline" if en else "Elegí tu disciplina",
+              "Four cards with a playstyle fingerprint — durability, melee, ranged, mobility, tech — the class power, the passive and the skills it trains fast. Hold Tab to compare all four; D opens the full dossier."
+              if en else "Cuatro tarjetas con la huella de cada estilo (resistencia, cuerpo a cuerpo, distancia, movilidad, tecnología), el poder, la pasiva y las habilidades que entrena rápido. Mantené Tab para comparar las cuatro; D abre la ficha completa."),
+             ("02", "Choose your starting weapon" if en else "Elegí tu arma inicial",
+              "Every class's starter is on offer. ★ RECOMMENDED ones train at your discipline's best rate and the first is pre-selected; the others say OFF-DISCIPLINE and train at ×0.5. It waits for you in the Outpost gear crate."
+              if en else "Se ofrecen las iniciales de todas las clases. Las ★ RECOMENDADAS entrenan al mejor ritmo de tu disciplina y la primera viene elegida; las otras dicen OFF-DISCIPLINE y entrenan a ×0.5. Te espera en el cajón de equipo del Outpost.")]
+    steps_html = "".join(f'<li><span class="loop-n">{n_}</span><h3>{e(a)}</h3><p>{e(b)}</p></li>' for n_, a, b in steps)
+    choose = (section_title("choose", "Class screen" if en else "Pantalla de clase", "Two steps" if en else "Dos pasos",
+                            "Role first, then tool. Weapons are never locked: the class only sets how fast you train each one." if en
+                            else "Primero el rol, después la herramienta. Las armas nunca se bloquean: la clase sólo define qué tan rápido entrenás cada una.")
+              + f'<ol class="loop loop-2">{steps_html}</ol>'
+              + f'<div class="tablewrap"><table class="cmp starters"><thead><tr><th>{"Starting weapon · skill" if en else "Arma inicial · habilidad"}</th>{thead}</tr></thead><tbody>{srows}</tbody></table></div>'
+              + f'<p class="note">{"★ recommended for that discipline · the number is how fast it trains the weapon's skill." if en else "★ recomendada para esa disciplina · el número es qué tan rápido entrena la habilidad del arma."}</p>')
+    compare += choose
     sections = "".join(class_section(c, lang) for c in CLASSES_DATA)
     body = wiki_header(lang, "Classes" if lang == "en" else "Clases", "Choose your discipline" if lang == "en" else "Elegí tu disciplina",
                        "Your class sets your body, your power and how fast you learn each weapon. Your gear does the rest." if lang == "en"
@@ -998,6 +1049,60 @@ def page_bestiary(lang):
     return page(lang, "bestiary", "Bestiary" if lang == "en" else "Bestiario", body)
 
 
+# Equipo de cabeza por clase (2026-10-11, docs/CLASSES.md "Class visual identity"). Sólo apariencia.
+HEADGEAR = {
+    "foundry": L("A heavy welder's cap with a flipped-up welding lens glowing amber and a twin-filter respirator; anvil-and-hammer patch on the shoulder.",
+                 "Una gorra pesada de soldador con la lente levantada que brilla ámbar y un respirador de doble filtro; parche de yunque y martillo en el hombro."),
+    "drift": L("Expedition goggles with blue lenses over the cap and a sand scarf trailing over the left shoulder; chevron emblem.",
+               "Antiparras de expedición con lentes azules sobre la gorra y una bufanda de arena que cae sobre el hombro izquierdo; emblema de galón."),
+    "verdant": L("An organic filter mask with two seed-pod filters, fungal caps on the temple and two leaves at the crown; leaf emblem.",
+                 "Una máscara de filtro orgánica con dos filtros de vaina, hongos en la sien y dos hojas en la coronilla; emblema de hoja."),
+    "relay": L("A wrap-around violet visor and a headset with a mic boom and a glowing antenna tip; three-node network emblem.",
+               "Un visor violeta envolvente y un auricular con micrófono y la punta de la antena encendida; emblema de red de tres nodos."),
+}
+
+ATLAS_SIZES = {}
+
+
+def atlas_section(lang):
+    """Atlas ilustrado del mundo (2026-10-11): la imagen principal de la pagina, generada por src/atlas.py."""
+    sz = ATLAS_SIZES.get(lang) or {"wide": (1600, 1808), "tall": (640, 3400)}
+    (w, h), (tw_, th) = sz["wide"], sz["tall"]
+    base = f"../assets/img/world/atlas_{lang}"
+    en = lang == "en"
+    alt = ("Field atlas: plan of the playable region with every map, passage and service, a depth cross-section from the surface "
+           "to C-3 floor 3 (520 m), the recommended route from the Outpost to Dustline and the stairs down to the Cinder Deep."
+           if en else "Atlas de campo: planta de la región jugable con cada mapa, pasaje y servicio, un corte de profundidad desde la "
+           "superficie hasta el piso 3 de C-3 (520 m), la ruta recomendada del Outpost a Dustline y la escalera a The Cinder Deep.")
+    hint = ("Ctrl / ⌘ + scroll, double-click or pinch to zoom · drag to move" if en
+            else "Ctrl / ⌘ + rueda, doble clic o pellizco para hacer zoom · arrastrá para moverte")
+    ctrl = (f'<div class="atlas-ctrl"><button type="button" data-azoom="in" aria-label="{"Zoom in" if en else "Acercar"}">+</button>'
+            f'<button type="button" data-azoom="out" aria-label="{"Zoom out" if en else "Alejar"}">−</button>'
+            f'<button type="button" data-azoom="reset" aria-label="{"Reset view" if en else "Restablecer vista"}">⤢</button></div>')
+    return (section_title("atlas", "Field atlas" if en else "Atlas de campo", "How the maps connect" if en else "Cómo se conectan los mapas",
+                          "Surface and workings in plan, every depth in section, every passage with the sign you will read in the game. Follow the amber line from the Outpost to Dustline."
+                          if en else "Superficie y galerías en planta, cada profundidad en corte y cada pasaje con el cartel que vas a leer en el juego. Seguí la línea ámbar del Outpost a Dustline.")
+            + f'<figure class="atlas" data-atlas><div class="atlas-vp" tabindex="0" aria-label="{e(alt)}"><div class="atlas-stage">'
+            f'<picture><source media="(max-width: 720px)" srcset="{base}_m.svg" width="{tw_}" height="{th}">'
+            f'<img src="{base}.svg" width="{w}" height="{h}" alt="{e(alt)}" decoding="async" draggable="false"></picture></div></div>{ctrl}'
+            f'<figcaption><span class="atlas-hint">{e(hint)}</span><span class="atlas-links"><a href="{base}.svg" target="_blank" rel="noopener">'
+            f'{"Open full size" if en else "Abrir en tamaño completo"} ↗</a><a href="{base}_m.svg" target="_blank" rel="noopener">{"Phone version" if en else "Versión para teléfono"} ↗</a></span></figcaption></figure>')
+
+
+def lore_section(lang):
+    def entry(eid, kicker, title, body, link, _col=None, extra=""):
+        more = f'<a class="textlink" href="{link}">{"Read more" if lang == "en" else "Leer más"} {svg("arrow")}</a>' if link else ""
+        return (f'<article class="lore-e reveal" id="lore-{eid}"><p class="kicker">{e(kicker[lang])}</p><h3>{e(title[lang])}</h3>'
+                f'<p>{e(body[lang])}</p>{extra}{more}</article>')
+    civs = "".join(f'<a class="lore-civ" href="classes.html#{CLASS_KEY[cid]}" style="--c:{class_color(cid)}"><b>{e(name[lang])}</b>'
+                   f'<span>{e(CLASS_BY_ID[cid]["name"])} · {e(city)}</span><small>{e(line[lang])}</small></a>' for cid, name, city, line in LO.CIVS)
+    first = entry(*LO.ENTRIES[0])
+    second = entry(*LO.ENTRIES[1], extra=f'<div class="lore-civs">{civs}</div>')
+    rest = "".join(entry(*m) for m in LO.MORE)
+    return (section_title("lore", "Lore" if lang == "en" else "Historia", LO.TITLE[lang], LO.LEAD[lang])
+            + f'<div class="lore">{first}{second}{rest}</div>')
+
+
 def page_world(lang):
     route = ""
     for r in TX.REGIONS:
@@ -1035,7 +1140,7 @@ def page_world(lang):
                    f'<span class="city-civ">{e(CLASS_BY_ID[cid]["name"])} · {e(CLASSES[cid]["title"][lang])}</span><span class="city-line">{e(line)}</span></a>')
     machines = "".join(f'<figure class="machine" style="--c:{class_color(cid)}"><img src="../assets/img/concept/{img}.jpg" alt="{n}" loading="lazy"><figcaption><b>{n}</b><span>{e(CLASS_BY_ID[cid]["name"])} · {e(d[lang])}</span></figcaption></figure>'
                        for img, n, cid, d in TX.MACHINES)
-    content = (WM.section(lang, section_title)
+    content = (lore_section(lang) + WM.section(lang, section_title)
                + section_title("route", "The way down" if lang == "en" else "El camino hacia abajo", "The starting region" if lang == "en" else "La región inicial",
                              "The Outpost → shaft lift → The Threshold → The Shallows → Excavation C-3.")
                + f'<div class="regions">{route}</div>'
@@ -1056,7 +1161,8 @@ def page_world(lang):
                                "One day the drill becomes a machine you ride: your mount, your cargo and your way through the hardest rock." if lang == "en"
                                else "Algún día el taladro será una máquina que manejás: tu montura, tu carga y tu camino a través de la roca más dura.")
                + f'<div class="machines">{machines}</div>')
-    entries = [("map", "World map" if lang == "en" else "Mapa del mundo"),
+    entries = [("atlas", "Field atlas" if lang == "en" else "Atlas de campo"), ("lore", "Lore" if lang == "en" else "Historia"),
+               ("map", "Interactive map" if lang == "en" else "Mapa interactivo"),
                ("route", "Starting region" if lang == "en" else "Región inicial"), ("surface", "Surface" if lang == "en" else "Superficie"),
                ("east", "The road east" if lang == "en" else "El camino al este"),
                ("civilisations", "Cities" if lang == "en" else "Ciudades"), ("regions", "The wider world" if lang == "en" else "El mundo"),
@@ -1065,8 +1171,10 @@ def page_world(lang):
                        "Depth is not the only danger. A shallow flooded tunnel can be worse than a deep, dry cavern." if lang == "en"
                        else "La profundidad no es el único peligro. Un túnel inundado poco profundo puede ser peor que una caverna profunda y seca.",
                        "concept/city.jpg")
+    body += f'<div class="wrap atlas-wrap">{atlas_section(lang)}</div>'
     body += wiki(lang, entries, content)
-    head = '<link rel="stylesheet" href="../assets/css/worldmap.css">\n<script defer src="../assets/js/worldmap.js"></script>'
+    head = ('<link rel="stylesheet" href="../assets/css/worldmap.css">\n<script defer src="../assets/js/worldmap.js"></script>\n'
+            '<script defer src="../assets/js/atlas.js"></script>')
     return page(lang, "world", "World" if lang == "en" else "Mundo", body, extra_head=head)
 
 
@@ -1239,6 +1347,9 @@ SYNC_CONSTANTS = [
     ("server/server_world.gd", "STARTER_AMMUNITION_ID"), ("shared/gameplay/player_inventory.gd", "POUCH_CELLS"),
     ("shared/networking/messages/depot_view.gd", "CELLS"), ("shared/networking/messages/computer_command.gd", "REACH"),
     ("client/terminal_commands.gd", "NETWORK_ADDRESS"),
+    # Banco y combustible (2026-10-11): tope del saldo y alcances del surtidor.
+    ("shared/gameplay/bank_rules.gd", "MAX_BALANCE"), ("world/fuel_station.gd", "COMPUTER_REACH"),
+    ("world/fuel_station.gd", "PUMP_REACH"),
 ]
 
 
@@ -1281,6 +1392,7 @@ def main():
         sync()
         global CLASSES_DATA, ITEMS, NPCS, MATS, FACTIONS
         CLASSES_DATA, ITEMS, NPCS, MATS, FACTIONS = load()
+    ATLAS_SIZES.update(AT.write_all())
     builders = {"index": page_index, "story": page_story, "classes": page_classes, "arsenal": page_arsenal, "gear": page_gear,
                 "resources": page_resources, "bestiary": page_bestiary, "world": page_world, "manual": page_manual}
     for lang in LANGS:

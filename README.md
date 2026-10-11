@@ -19,6 +19,7 @@ python3 build.py --sync   # first copy fresh game data + icons from ../deepkin
 - `data/` — snapshot of the game repo: `data/entities/*` (classes, items, npcs, materials, factions, discoveries, vehicles), `starting_region.json`, `world/` (world map, sets, banners, respawn hubs), `dialog/`, `quests/`, and `rules/` (the `.gd` rule files plus `constants.json`; `src/gdconst.py` reads their constants). Retired items are skipped; `planned` items show as *Coming soon*.
 - `src/wiki.py`, `src/wiki_i18n.py` — wiki pages and their EN/ES strings (never numbers).
 - `src/i18n.py` — UI strings, class/creature copy and Spanish item descriptions.
+- `src/atlas.py` — the World page's illustrated field atlas (`assets/img/world/atlas_<lang>.svg`, phone variant `_m.svg`): plan + depth cross-section + passage key, generated from `world_map.json` and the transitions in `starting_region.json`. `src/lore.py` — the World page lore layer (EN/ES).
 - `src/story.py` — the story (Spanish original from `DEEPKIN_Historia_ES.html`, plus English translation).
 - `src/texts.py` — world regions, controls, first steps, home page copy.
 - `build.py` — derived stats use the same formulas as the game server (`shared/gameplay/rpg_rules.gd`, `weapon_skills.gd`, `combat_skills.gd`). Update the constants there if balance changes.

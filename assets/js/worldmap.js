@@ -196,6 +196,11 @@
     h += "<div><dt>" + esc(T.status) + "</dt><dd>" + planned + "</dd></div></dl>";
     if (z.step !== null && z.step !== undefined) h += '<p class="wm-stepnote">' + esc(T.step) + " " + String(z.step).padStart(2, "0") + " · " + esc(D.journeyName || "") + "</p>";
     h += '<p class="wm-sum">' + esc(z.summary) + "</p>";
+    if (z.svc && z.svc.length) {
+      h += '<p class="kicker wm-k2">' + esc(T.here) + '</p><ul class="wm-svc">';
+      z.svc.forEach(function (s) { h += "<li>" + esc(s) + "</li>"; });
+      h += "</ul>";
+    }
     if (z.wiki) h += '<p class="wm-wiki"><a class="textlink" href="' + esc(z.wiki) + '">' + esc(T.wiki_page) + " →</a></p>";
     if (z.city) h += '<button type="button" class="btn wm-opencity" data-open-city>' + esc(T.open_city) + "</button>";
     if (z.parent) h += '<p class="kicker wm-k2">' + esc(T.below) + '</p><ul class="wm-exits"><li><button type="button" data-goto="' + z.parent + '"><span class="ex-k">↑</span><b>' + esc(D.zones[z.parent].name) + "</b></button></li></ul>";

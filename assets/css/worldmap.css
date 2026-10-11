@@ -244,3 +244,44 @@
 }
 @media (max-width: 400px) { .wm-legend, .wm-legend[data-for="city"] { grid-template-columns: minmax(0, 1fr); } }
 .wm-wiki { margin: 0 0 14px; }
+
+/* ---------- Atlas de campo (2026-10-11): imagen SVG con visor de zoom ---------- */
+.atlas { position: relative; margin: 0 0 28px; border: 1px solid var(--line2); border-radius: var(--radius); background: #0b0d0c; overflow: hidden; }
+.atlas-vp { position: relative; overflow: hidden; touch-action: pan-y; user-select: none; -webkit-user-select: none; outline: none; cursor: zoom-in; }
+.atlas.zoomed .atlas-vp { cursor: grab; }
+.atlas.dragging .atlas-vp { cursor: grabbing; }
+.atlas-vp:focus-visible { box-shadow: inset 0 0 0 2px var(--amber); }
+.atlas-stage { transform-origin: 0 0; will-change: transform; }
+.atlas-stage.anim { transition: transform .35s var(--ease); }
+.atlas-stage img { width: 100%; height: auto; display: block; -webkit-user-drag: none; }
+.atlas-ctrl { position: absolute; top: 10px; right: 10px; display: flex; flex-direction: column; gap: 6px; z-index: 2; }
+.atlas-ctrl button {
+  width: 38px; height: 38px; border-radius: var(--radius); border: 1px solid var(--line2); background: rgba(11, 13, 12, .86);
+  color: var(--text); font: 500 20px/1 var(--mono); cursor: pointer; transition: border-color .2s, color .2s;
+}
+.atlas-ctrl button:hover { border-color: var(--amber); color: var(--amber); }
+.atlas figcaption { display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: space-between; align-items: center; padding: 10px 14px; border-top: 1px solid var(--line); font: 500 12px/1.4 var(--mono); color: var(--dim); }
+.atlas-links { display: flex; gap: 16px; flex-wrap: wrap; }
+.atlas-links a { color: var(--warm); }
+@media (max-width: 720px) { .atlas-hint { display: none; } .atlas-links a:last-child { display: none; } }
+
+/* ---------- Lore (2026-10-11) ---------- */
+.lore { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0 0 24px; }
+.lore-e { padding: 22px 24px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
+.lore-e h3 { font-size: 28px; text-transform: uppercase; letter-spacing: .04em; margin: 0 0 10px; }
+.lore-e p:not(.kicker) { color: var(--soft); font-size: 15.5px; }
+.lore-e:first-child, .lore-e:nth-child(2) { grid-column: 1 / -1; }
+.lore-e:first-child { background: linear-gradient(135deg, rgba(0, 255, 65, .05), var(--panel) 55%); border-color: rgba(0, 255, 65, .18); }
+.lore-e:first-child p:not(.kicker) { font-family: var(--serif); font-size: 19px; line-height: 1.6; color: var(--text); max-width: 72ch; }
+.lore-civs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 16px 0 14px; }
+.lore-civ { display: flex; flex-direction: column; gap: 4px; padding: 14px 16px; border: 1px solid var(--line); border-top: 2px solid var(--c); border-radius: var(--radius);
+  background: linear-gradient(180deg, color-mix(in srgb, var(--c) 9%, var(--panel2)), var(--panel)); color: var(--soft); transition: transform .3s var(--ease), border-color .3s; }
+.lore-civ:hover { transform: translateY(-2px); color: var(--soft); border-color: var(--c); }
+.lore-civ b { font: 600 22px/1 var(--display); letter-spacing: .04em; text-transform: uppercase; color: var(--text); }
+.lore-civ span { font: 500 11px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
+.lore-civ small { font-size: 13.5px; line-height: 1.5; color: var(--muted); }
+@media (max-width: 1000px) { .lore-civs { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 760px) { .lore { grid-template-columns: minmax(0, 1fr); } .lore-e { padding: 18px 16px; } .lore-civs { grid-template-columns: minmax(0, 1fr); } .lore-e:first-child p:not(.kicker) { font-size: 17px; } }
+.atlas-wrap { max-width: 1480px; padding-top: 56px; }
+.atlas-wrap + .wiki { padding-top: 24px; }
+@media (max-width: 720px) { .atlas-ctrl { top: 6px; right: 6px; gap: 4px; } .atlas-ctrl button { width: 32px; height: 32px; font-size: 17px; background: rgba(11, 13, 12, .7); } }

@@ -193,8 +193,22 @@ assert len(_urls) == len(set(_urls)), "duplicate wiki slugs"
 
 MECH = {  # paginas de mecanicas: slug -> clave de titulo
     "experience": "m_experience", "death": "m_death", "skills": "m_skills", "classes": "m_classes",
-    "vehicles": "m_vehicles", "currency": "m_currency", "computers": "m_computers",
+    "vehicles": "m_vehicles", "currency": "m_currency", "fuel": "m_fuel", "computers": "m_computers",
 }
+
+# Estaciones de servicio y presentacion de pasajes (2026-10-11): datos de starting_region.json.
+FUEL_STATIONS = [dict(st, zone_id=zid) for zid, fl in FLOORS.items() for st in fl.get("fuel_stations", [])]
+TRANSITIONS = {x["entity_id"]: x for x in REGION.get("transitions", [])}
+
+
+def rides_through(tr):
+    """Misma regla que VehicleRules.passage_allows_vehicles: el flag explicito gana; metro/lift/gate y cruces sin
+    presentacion si; stairs/ladder/rope no."""
+    if tr is None:
+        return True
+    if "vehicles" in tr:
+        return bool(tr["vehicles"])
+    return tr.get("presentation") not in ("stairs", "ladder", "rope")
 
 
 def _aliases():
@@ -693,6 +707,8 @@ def used_for(it, lang):
         out.append(t("capsule_used", lang))
     if cat == "currency":
         out.append(t("coin_used", lang) if not it.get("planned") else t("coin_planned", lang))
+    if cat == "fuel":
+        out.append(t("can_used", lang))
     if cat in ("ore", "mineral", "salvage"):
         out.append(t("salvage_used", lang))
     if it.get("equipment_slot") == "secondary_weapon":
@@ -1148,12 +1164,24 @@ def zone_page(z, lang):
         other = c["ends"][1] if c["ends"][0] is mine else c["ends"][0]
         o = ZONES[other["zone"]]
         pres = ""
-        if mine.get("transition"):
-            tr = next((x for x in REGION["transitions"] if x["entity_id"] == mine["transition"]), None)
-            if tr and tr.get("presentation"):
-                pres = t("pr_" + tr["presentation"], lang)
-        rows_x.append([lk(o["id"]), e(WM.CONN[c["kind"]][lang]) + (f" · {e(pres)}" if pres else ""), f'<span class="wk-sign">{e(mine["exit"])}</span>',
-                       e(mine.get("edge", "")), e(WM.STATUS[c["status"]][lang])])
+        tr = TRANSITIONS.get(mine.get("transition"))
+        if tr and tr.get("presentation"):
+            pres = t("pr_" + tr["presentation"], lang)
+        lock = f' <small>({e(t("locked_until", lang))})</small>' if tr and tr.get("requires_drill_site_cleared") else ""
+        bike = ((e(t("ride_yes", lang)) if rides_through(tr) else e(t("ride_no", lang))) if c["status"] == "playable" else "—")
+        rows_x.append([lk(o["id"]), e(WM.CONN[c["kind"]][lang]) + (f" · {e(pres)}" if pres else ""), f'<span class="wk-sign">{e(mine["exit"])}</span>{lock}',
+                       e(mine.get("edge", "")), f'<a href="vehicles.html#passages">{bike}</a>' if bike != "—" else bike, e(WM.STATUS[c["status"]][lang])])
+    ex = z.get("extraction")
+    if ex:
+        tr = TRANSITIONS.get(ex.get("transition"))
+        rows_x.append([lk(ex["zone"]), e(t("extraction", lang)) + " · " + e(t("pr_lift", lang)) + f' <small>({e(t("one_way", lang))})</small>',
+                       f'<span class="wk-sign">{e(ex["exit"])}</span>', "UP", e(t("ride_yes", lang)) if rides_through(tr) else e(t("ride_no", lang)),
+                       e(WM.STATUS["playable"][lang])])
+    for o in WORLD["zones"]:
+        oex = o.get("extraction")
+        if oex and oex["zone"] == zid:
+            rows_x.append([lk(o["id"]), e(t("extraction", lang)) + f' <small>({e(t("one_way", lang))}, ← {e(o.get("level_label", o["name"]))})</small>',
+                           f'<span class="wk-sign">{e(oex["exit"])}</span>', "—", "—", e(WM.STATUS[o["status"]][lang])])
     parent = z.get("stack", {}).get("parent")
     below = [o for o in WORLD["zones"] if o.get("stack", {}).get("parent") == zid]
     stack = ""
@@ -1162,7 +1190,7 @@ def zone_page(z, lang):
     if below:
         stack += f'<p>{e(t("levels_below", lang))} ' + ", ".join(f'{lk(o["id"])} ({o.get("level_label", o.get("stack", {}).get("depth"))})' for o in below) + ".</p>"
     body += sec("exits", t("exits", lang), stack + (table([(t("to", lang), "text"), (t("kind", lang), "text"), (t("exit_sign", lang), "text"),
-                                                           (t("edge", lang), "text"), (t("status", lang), "text")], rows_x) if rows_x else ""))
+                                                           (t("edge", lang), "text"), (t("bike", lang), "text"), (t("status", lang), "text")], rows_x) if rows_x else ""))
     # Criaturas
     mobs = ZONE_MOBS.get(zid, [])
     if mobs:
@@ -1208,7 +1236,12 @@ def zone_page(z, lang):
         body += sec("finds", t("finds", lang), ul([f'{img(i, "wk-ticon", 40)}{lk(i)} ×{n(q, lang)}' for i, q in agg.items()], "wk-list wk-items"))
     comps = fl.get("computers", [])
     if comps:
-        body += sec("computers", t("computers", lang), ul([f'<a href="computers.html">{e(t("depot_booth", lang))}</a> <code>{e(c["id"])}</code>' for c in comps]))
+        body += sec("computers", t("computers", lang), ul([f'<a href="computers.html">{e(t("bank_booth", lang))}</a> <code>{e(c["id"])}</code> · '
+                                                            f'<a href="currency.html#bank">{e(t("bank_t", lang))}</a>' for c in comps]))
+    stations = [st for st in FUEL_STATIONS if st["zone_id"] == zid]
+    if stations:
+        body += sec("fuel", t("station_t", lang), ul([f'<b>{e(st["name"])}</b> · {n(st["price_per_litre"], lang)} Metal/L · {e(t("can_price", lang))} {n(st["can_price"], lang)} Metal · '
+                                                      f'<a href="fuel.html">{e(t("pump_computer", lang))}</a> <code>{e(st["id"])}</code>' for st in stations]))
     discs = [d for d in REGION.get("discoveries", []) if d["zone_id"] == zid]
     if discs:
         body += sec("discoveries", t("discoveries", lang), ul([f'<b>{e(DISCS[d["content_id"]]["display_name"])}</b> — {e(t("hidden_disc", lang))}' for d in discs if d["content_id"] in DISCS]))
@@ -1495,21 +1528,52 @@ def power_es(sid):
     return "Te impulsás unos metros en la dirección en la que te movés (o mirás)." if sid == G.COMBAT.get("DASH") else ""
 
 
+def class_img(k, size=600):
+    """Retrato renderizado de la clase (2026-10-11) si existe; si no, el arte conceptual."""
+    if os.path.exists(os.path.join(ROOT, "assets", "img", "classes", f"class_{k}_600.webp")):
+        return f"../../assets/img/classes/class_{k}_600.webp"
+    return f"../../assets/img/concept/class_{k}.jpg"
+
+
 def page_classes(lang):
+    K = G.SKILLS
+    starters = []
+    for c in CLASSES:
+        for wid in c.get("starter_weapons", [v["weapon_id"] for v in c["variants"]]):
+            if wid in ITEMS and wid not in starters:
+                starters.append(wid)
     cards = ""
     for c in CLASSES:
         k = CLASS_KEY[c["id"]]
         top = sorted(c["skill_affinity"].items(), key=lambda x: -x[1])[:3]
         starts = ", ".join(lk(v["weapon_id"]) for v in c["variants"])
-        cards += (f'<article class="wk-class" style="--c:#{c["visual_color"]}" id="{k}"><img src="../../assets/img/concept/class_{k}.jpg" alt="" loading="lazy">'
+        aff = lambda w: c["skill_affinity"].get(ITEMS[w].get("weapon_family"), K.get("DEFAULT_AFFINITY", 0.5))  # noqa: E731
+        best = max(aff(w) for w in starters) if starters else 1
+        rec = [w for w in starters if aff(w) >= best]
+        cards += (f'<article class="wk-class" style="--c:#{c["visual_color"]}" id="{k}"><img src="{class_img(k)}" alt="{e(c["name"])}" loading="lazy">'
                   f'<div><p class="kicker">{e(CLASS_TXT[c["id"]]["title"][lang])} · {e(CLASS_TXT[c["id"]]["role"][lang])}</p><h3><a href="../classes.html#{k}">{e(c["name"])}</a></h3>'
                   f'<p>{e(CLASS_TXT[c["id"]]["fantasy"][lang])}</p>'
                   f'<dl class="kv"><div><dt>{e(t("power", lang))}</dt><dd><a href="skills.html#powers">{e(c["ability_name"])}</a></dd></div>'
                   f'<div><dt>{e(t("passive", lang))}</dt><dd><a href="skills.html#passives">{e(c["passive_name"])}</a></dd></div>'
                   f'<div><dt>{e(t("carry", lang))}</dt><dd>{n(c["carry"]["base"], lang)} kg</dd></div></dl>'
+                  f'<p class="wk-sub">★ {e(t("recommended", lang))}: {", ".join(lk(w) for w in rec)} <small>(×{n(best, lang)})</small></p>'
                   f'<p class="wk-sub">{e(t("starting_title", lang))}: {starts}</p>'
+                  f'<p class="wk-sub">{e(t("headgear", lang))}: {e(t("hg_" + k, lang))}</p>'
                   f'<p class="wk-sub">{e(t("trains_fast", lang))}: ' + ", ".join(f'<a href="skills.html#{S.skill_anchor(f)}">{e(FAMILIES[f][lang])}</a> ×{n(v, lang)}' for f, v in top) + "</p></div></article>")
-    body = sec("classes", t("m_classes", lang), f'<div class="wk-classes">{cards}</div><p><a class="btn" href="../classes.html">{e(t("full_classes", lang))}</a></p>')
+    body = sec("classes", t("m_classes", lang), f'<div class="wk-classes">{cards}</div><p class="note">{e(t("hg_note", lang))}</p><p><a class="btn" href="../classes.html">{e(t("full_classes", lang))}</a></p>')
+    body += sec("choose", t("choose_t", lang), '<ol class="wk-steps wk-plain">' + "".join(f"<li>{e(x)}</li>" for x in W["choose_steps"][lang]) + "</ol>"
+                + f'<p>{e(t("choose_why", lang))}</p>')
+    head = [(t("starters_t", lang), "text"), (t("skill", lang), "text")] + [(c["name"], "num") for c in CLASSES]
+    rows = []
+    for w in starters:
+        fam = ITEMS[w].get("weapon_family")
+        cells = []
+        for c in CLASSES:
+            v = c["skill_affinity"].get(fam, K.get("DEFAULT_AFFINITY", 0.5))
+            hot = v >= max(c["skill_affinity"].get(ITEMS[x].get("weapon_family"), 0.5) for x in starters)
+            cells.append(f'<span class="aff-v {"hot" if hot else ("cold" if v < 0.9 else "")}">{"★ " if hot else ""}×{n(v, lang)}</span>')
+        rows.append([f'<span class="tn-in">{img(w, "wk-ticon", 40)}{lk(w)}</span>', f'<a href="skills.html#{S.skill_anchor(fam)}">{e(FAMILIES[fam][lang])}</a>'] + cells)
+    body += sec("starters", t("starters_t", lang), table(head, rows, sortable=False))
     return mech_article(lang, "classes", t("classes_lead", lang), body)
 
 
@@ -1526,10 +1590,26 @@ def page_vehicles(lang):
                 (t("mount_range", lang), n(v["mount_range"], lang) + " m"), ("ID", f'<code>{e(v["id"])}</code>')]
         box = infobox(v["display_name"], '<img class="wk-icon" src="../../assets/img/concept/machine_mule.jpg" alt="" loading="lazy">', rows)
         lis = [t("v_get", lang), t("v_controls", lang, r=n(v["mount_range"], lang)), t("v_fuel", lang, f=n(v["fuel_per_meter"], lang), m=n(1 / v["fuel_per_meter"], lang)),
-               t("v_empty", lang, low=pct(v["low_fuel_fraction"], lang)), t("v_rules", lang), t("v_zone", lang), t("v_owner", lang)]
+               t("v_empty", lang, low=pct(v["low_fuel_fraction"], lang)), t("v_rules", lang), t("v_owner", lang)]
         body += sec("rules", t("v_rules_t", lang), ul([e(x) for x in lis]))
+        can = ITEMS.get("item.fuel.gas_can", {})
+        cap = can.get("properties", {}).get("fuel_capacity", 20)
+        body += sec("refuel", t("refuel_t", lang), f'<p>{e(t("v_refuel", lang))}</p>'
+                    + ul([f'{lk(st["zone_id"])}: <b>{e(st["name"])}</b> · {n(st["price_per_litre"], lang)} Metal/L · '
+                          f'{e(t("fill_cost", lang))} ≈ {n(math.ceil(v["max_fuel"] * st["price_per_litre"]), lang)} Metal' for st in FUEL_STATIONS]
+                         + [f'{lk("item.fuel.gas_can")}: {n(cap, lang)} L ≈ {n(cap / v["fuel_per_meter"], lang)} m']) 
+                    + f'<p><a class="btn" href="fuel.html">{e(t("m_fuel", lang))}</a></p>')
+        kinds = {}
+        for tr in REGION.get("transitions", []):
+            if tr.get("from_zone") not in ZONES or ZONES[tr["from_zone"]]["status"] != "playable":
+                continue
+            kinds.setdefault(tr.get("presentation") or "road", []).append(tr["label"])
+        prow = [[e(t("pr_" + k, lang)), e(t("ride_yes", lang)) if rides_through({"presentation": k} if k != "road" else None) else e(t("ride_no", lang)),
+                 " ".join(f'<span class="wk-sign">{e(x)}</span>' for x in labels[:4])] for k, labels in sorted(kinds.items())]
+        body += sec("passages", t("v_passages_t", lang), f'<p>{e(t("v_zone", lang))}</p><p>{e(t("v_pass_lead", lang))}</p>'
+                    + table([(t("passage", lang), "text"), (t("with_bike", lang), "text"), (t("examples", lang), "text")], prow, sortable=False, cls="wrap-cells"))
         body += sec("planned", t("soon", lang), ul([e(x) for x in W["v_planned"][lang]]))
-    body += seealso(lang, [f'<a href="../world.html#machines">{e(t("excavators", lang))}</a>', lk("zone.frontier_road_east")])
+    body += seealso(lang, [f'<a href="fuel.html">{e(t("m_fuel", lang))}</a>', lk("item.fuel.gas_can"), f'<a href="../world.html#machines">{e(t("excavators", lang))}</a>', lk("zone.frontier_road_east")])
     return mech_article(lang, "vehicles", t("vehicles_lead", lang), body, box)
 
 
@@ -1544,9 +1624,61 @@ def page_currency(lang):
               n((m["coins"][0] + m["coins"][1]) / 2 / max(1, m.get("xp", 1)) * 100, lang, 1)] for m in sorted(MOBS.values(), key=lambda m: m.get("coins", [0, 0])[1]) if m.get("coins")]
     body += sec("sources", t("coin_sources", lang), f'<p>{e(t("coin_sources_lead", lang))}</p>'
                 + table([(t("creature", lang), "text"), (t("coins", lang), "text"), (t("average", lang), "num"), (t("per_100xp", lang), "num")], mrows))
-    body += sec("sinks", t("coin_sinks", lang), f'<p>{t("coin_sinks_lead", lang, death="death.html")}</p>')
-    body += seealso(lang, [lk(c["id"]) for c in coins] + [lk("zone.dustline"), f'<a href="../resources.html#currency">{e(t("resources", lang))}</a>'])
+    # Conversion (2026-10-11): todas las monedas valen una cantidad fija de Metal.
+    real = [c for c in coins if not c.get("planned")]
+    crow = []
+    for a in real:
+        va = a["properties"]["currency_value"]
+        crow.append([f'<span class="tn-in">{img(a["id"], "wk-ticon", 40)}{lk(a["id"])}</span>']
+                    + [(n(va / b["properties"]["currency_value"], lang) if va >= b["properties"]["currency_value"] else "—") for b in real])
+    body += sec("conversion", t("conversion", lang), f'<p>{e(t("conversion_lead", lang))}</p>'
+                + table([("1 ×", "text")] + [(b["display_name"], "num") for b in real], crow, sortable=False))
+    # Banco
+    where = ", ".join(lk(zid) for zid, fl in FLOORS.items() if fl.get("computers"))
+    cmds = [("balance", "bc_balance"), ("deposit all", "bc_deposit_all"), ("deposit <n>", "bc_deposit_n"), ("withdraw all", "bc_withdraw_all"),
+            ("withdraw <n>", "bc_withdraw_n"), ("transfer <n> to <name>", "bc_transfer"), ("help · clear · exit", "bc_other")]
+    term = ("guest@outpost-7:~$ connect 261.6.66\n…\nbank@261.6.66:~$ deposit all\n&gt;&gt; DEPOSITED 237 METAL. BALANCE 1,530 METAL\n"
+            "bank@261.6.66:~$ withdraw all\n&gt;&gt; PAID OUT 10,000 METAL OF 10,230 METAL — YOUR CARGO IS FULL\n"
+            "bank@261.6.66:~$ transfer 50 to nobody\nERR NO OPERATOR BY THAT NAME …")
+    body += sec("bank", t("bank_t", lang), f'<p>{t("bank_lead", lang, max=n(CONST.get("MAX_BALANCE", 10 ** 12), lang), where=where)}</p>'
+                + f'<h3>{e(t("bank_cmds", lang))}</h3>'
+                + table([(t("bank_cmd_t", lang), "text"), (t("bank_does", lang), "text")], [[f'<code>{e(c)}</code>', e(t(k, lang))] for c, k in cmds], sortable=False, cls="wrap-cells")
+                + f'<p class="note">{e(t("bank_amounts", lang))}</p><h3>{e(t("bank_example", lang))}</h3><pre class="wk-term">{term}</pre>'
+                + f'<h3>{e(t("bank_rules_t", lang))}</h3>' + ul([e(x) for x in W["bank_rules"][lang]]))
+    body += sec("sinks", t("coin_sinks", lang), f'<p>{t("coin_sinks_lead", lang, death="death.html", fuel="fuel.html")}</p>')
+    body += seealso(lang, [lk(c["id"]) for c in coins] + [f'<a href="computers.html">{e(t("m_computers", lang))}</a>', f'<a href="fuel.html">{e(t("m_fuel", lang))}</a>',
+                                                         lk("zone.dustline"), f'<a href="../resources.html#currency">{e(t("resources", lang))}</a>'])
     return mech_article(lang, "currency", t("currency_lead", lang), body)
+
+
+def page_fuel(lang):
+    v = VEHICLES[0] if VEHICLES else {"max_fuel": 100, "fuel_per_meter": 0.05, "low_fuel_fraction": 0.2}
+    can = ITEMS.get("item.fuel.gas_can", {})
+    cap = can.get("properties", {}).get("fuel_capacity", 20)
+    rows = [[lk(st["zone_id"]), f'<b>{e(st["name"])}</b>', n(st["price_per_litre"], lang) + " Metal/L", n(st["can_price"], lang) + " Metal"] for st in FUEL_STATIONS]
+    body = sec("stations", t("station_t", lang), table([(t("zone", lang), "text"), (t("name", lang), "text"), (t("price_l", lang), "text"), (t("can_price", lang), "text")], rows, sortable=False)
+               + f'<p>{e(t("station_desc", lang))}</p><p class="ib-map">{map_link(lang, zone_id="zone.frontier_road_east")}</p>')
+    st = FUEL_STATIONS[0] if FUEL_STATIONS else {"price_per_litre": 2, "can_price": 25}
+    steps = [e(x).format(r=n(CONST.get("PUMP_REACH", 3.6), lang), c=n(CONST.get("COMPUTER_REACH", 2.5), lang), can=n(st["can_price"], lang)) for x in W["pump_steps"][lang]]
+    body += sec("pump", t("pump_t", lang), '<ol class="wk-steps wk-plain">' + "".join(f"<li>{x}</li>" for x in steps) + "</ol>"
+                + f'<p>{e(t("pump_pay", lang))}</p>'
+                + f'<pre class="wk-term">PUMP COMPUTER · {e(st.get("name", "GATE FUEL"))}\n1 FILL TANK   2 FILL GAS CAN   3 BUY GAS CAN ({n(st["can_price"], "en")} METAL)   ESC EXIT\n'
+                  '&gt;&gt; PUMPED 21.5 L INTO YOUR TANK FOR 43 METAL\nERR NO VEHICLE OF YOURS AT A PUMP …</pre>')
+    pl = st["price_per_litre"]
+    low = v["max_fuel"] * (1 - v["low_fuel_fraction"])
+    crow = [[e(t("tank_empty", lang)), n(v["max_fuel"], lang), n(math.ceil(v["max_fuel"] * pl), lang)],
+            [e(t("tank_low", lang)), n(low, lang), n(math.ceil(low * pl), lang)],
+            [e(t("can_fill", lang)), n(cap, lang), n(math.ceil(cap * pl), lang)],
+            [e(t("can_price", lang)), "—", n(st["can_price"], lang)]]
+    body += sec("costs", t("fill_cost", lang), table([("", "text"), (t("litres", lang), "num"), (t("metal", lang), "num")], crow, sortable=False))
+    body += sec("can", t("can_t", lang), f'<p>{t("can_desc", lang, can=lk("item.fuel.gas_can"), cap=n(cap, lang), w=n(can.get("weight", 4), lang))}</p>'
+                + f'<p class="note">{e(t("fuel_tip", lang, km=n(cap / v["fuel_per_meter"], lang) + " m"))}</p>')
+    body += seealso(lang, [f'<a href="vehicles.html">{e(t("m_vehicles", lang))}</a>', f'<a href="currency.html#bank">{e(t("bank_t", lang))}</a>', lk("item.fuel.gas_can"),
+                           lk("zone.frontier_road_east"), lk("zone.dustline")])
+    box = infobox(st.get("name", "GATE FUEL"), img("item.fuel.gas_can") if has_icon("item.fuel.gas_can") else "",
+                  [(t("zone", lang), lk(st.get("zone_id", "zone.frontier_road_east"))), (t("price_l", lang), n(pl, lang) + " Metal/L"),
+                   (t("can_price", lang), n(st["can_price"], lang) + " Metal"), ("ID", f'<code>{e(st.get("id", ""))}</code>')])
+    return mech_article(lang, "fuel", t("fuel_lead", lang), body, box)
 
 
 def page_computers(lang):
@@ -1559,12 +1691,15 @@ def page_computers(lang):
                 if best is None or d < best[0]:
                     best = (d, txt)
             rows.append([lk(zid), f'<code>{e(c["id"])}</code>', e(t("near_sign", lang, sign=best[1])) if best and best[0] < 12 else "—"])
+    for st in FUEL_STATIONS:
+        rows.append([lk(st["zone_id"]), f'<code>{e(st["id"])}</code>', f'<a href="fuel.html">{e(t("pump_computer", lang))}</a> · {e(st["name"])}'])
     body = sec("booths", t("booths", lang), table([(t("zone", lang), "text"), ("ID", "text"), (t("location", lang), "text")], rows))
     lis = [t("c_use", lang, r=n(CONST.get("REACH", 2.5), lang)), t("c_login", lang, addr=e(CONST.get("NETWORK_ADDRESS", "261.6.66"))),
            t("c_menu", lang), t("c_depot", lang, cells=n(CONST.get("CELLS", 40), lang)), t("c_shared", lang)]
     body += sec("how", t("how_it_works", lang), '<ol class="wk-steps wk-plain">' + "".join(f"<li>{x}</li>" for x in lis) + "</ol>"
                 + f'<pre class="wk-term">guest@outpost-7:~$ connect {e(CONST.get("NETWORK_ADDRESS", "261.6.66"))}</pre>')
-    body += seealso(lang, [lk("zone.outpost"), lk("zone.dustline"), lk("npc.dustline_exchange_clerk")])
+    body += seealso(lang, [f'<a href="currency.html#bank">{e(t("bank_t", lang))}</a>', f'<a href="fuel.html">{e(t("m_fuel", lang))}</a>',
+                           lk("zone.outpost"), lk("zone.dustline"), lk("npc.dustline_exchange_clerk")])
     return mech_article(lang, "computers", t("computers_lead", lang), body)
 
 
@@ -1659,7 +1794,7 @@ def build(page):
         for q in QUESTS:
             out[S.quest(q["id"])[5:-5]] = (q["title"].title(), quest_page(q, lang), None)
         builders = {"experience": page_experience, "death": page_death, "skills": page_skills, "classes": page_classes,
-                    "vehicles": page_vehicles, "currency": page_currency, "computers": page_computers}
+                    "vehicles": page_vehicles, "currency": page_currency, "fuel": page_fuel, "computers": page_computers}
         for k, fn in builders.items():
             out[k] = (t(MECH[k], lang), fn(lang), None)
         for slug, (title, body, desc) in out.items():

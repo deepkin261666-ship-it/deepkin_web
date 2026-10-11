@@ -16,9 +16,11 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Saira+Condensed:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/site.css">
 <script>document.documentElement.classList.add("js")</script>
+<script>try{if(!localStorage.getItem("dk-intro")&&!/[?&]nointro/.test(location.search))document.documentElement.classList.add("dk-intro-on")}catch(e){}</script>
 
 </head>
 <body class="home" data-lang="en" data-root="">
+<div class="dk-intro" id="dk-intro" role="dialog" aria-label="DEEPKIN"><canvas class="dki-rain" aria-hidden="true"></canvas><div class="dki-bar" aria-hidden="true"><i></i></div><div class="dki-in"><pre class="dki-log" aria-hidden="true"></pre><p class="dki-big" aria-live="polite"></p><img class="dki-logo" src="../assets/img/deepkin_logo.png" alt="DEEPKIN — What lies below" width="1356" height="559"></div><button type="button" class="dki-skip">Skip ▸</button><div class="dki-scan" aria-hidden="true"></div></div>
 <a class="skip" href="#main">Skip to content</a>
 <header class="topbar">
   <a class="brand" href="index.html" aria-label="DEEPKIN"><img src="../assets/img/deepkin_mark.png" alt="" width="22" height="22"><span>DEEPKIN</span></a>
@@ -60,7 +62,7 @@
   <div class="wrap">
     <header class="sec-head" id="classes"><p class="kicker">02</p><h2>Meet the classes</h2><p class="sec-lead">Four civilisations survived the Collapse. Each one sends its own kind of operator below.</p></header>
     <div class="ccards"><a class="ccard reveal" href="classes.html#foundry" style="--c:#e0902a">
-  <img src="../assets/img/concept/class_foundry.jpg" alt="FOUNDRY" loading="lazy">
+  <picture><source media="(max-width: 720px)" srcset="../assets/img/classes/class_foundry_600.webp"><img src="../assets/img/classes/class_foundry.webp" alt="FOUNDRY" width="960" height="1200" loading="lazy" decoding="async"></picture>
   <div class="ccard-body">
     <p class="ccard-civ">The Forge</p>
     <h3>FOUNDRY</h3>
@@ -69,7 +71,7 @@
     <dl class="ccard-stats"><div><dt>HP</dt><dd>140</dd></div><div><dt>Speed</dt><dd>4.5</dd></div><div><dt>Energy</dt><dd>70</dd></div></dl>
   </div>
 </a><a class="ccard reveal" href="classes.html#drift" style="--c:#3aa8e0">
-  <img src="../assets/img/concept/class_drift.jpg" alt="DRIFT" loading="lazy">
+  <picture><source media="(max-width: 720px)" srcset="../assets/img/classes/class_drift_600.webp"><img src="../assets/img/classes/class_drift.webp" alt="DRIFT" width="960" height="1200" loading="lazy" decoding="async"></picture>
   <div class="ccard-body">
     <p class="ccard-civ">The Drift</p>
     <h3>DRIFT</h3>
@@ -78,7 +80,7 @@
     <dl class="ccard-stats"><div><dt>HP</dt><dd>104</dd></div><div><dt>Speed</dt><dd>7</dd></div><div><dt>Energy</dt><dd>110</dd></div></dl>
   </div>
 </a><a class="ccard reveal" href="classes.html#verdant" style="--c:#5cc25a">
-  <img src="../assets/img/concept/class_verdant.jpg" alt="VERDANT" loading="lazy">
+  <picture><source media="(max-width: 720px)" srcset="../assets/img/classes/class_verdant_600.webp"><img src="../assets/img/classes/class_verdant.webp" alt="VERDANT" width="960" height="1200" loading="lazy" decoding="async"></picture>
   <div class="ccard-body">
     <p class="ccard-civ">The Living</p>
     <h3>VERDANT</h3>
@@ -87,7 +89,7 @@
     <dl class="ccard-stats"><div><dt>HP</dt><dd>120</dd></div><div><dt>Speed</dt><dd>5</dd></div><div><dt>Energy</dt><dd>150</dd></div></dl>
   </div>
 </a><a class="ccard reveal" href="classes.html#relay" style="--c:#9a6be0">
-  <img src="../assets/img/concept/class_relay.jpg" alt="RELAY" loading="lazy">
+  <picture><source media="(max-width: 720px)" srcset="../assets/img/classes/class_relay_600.webp"><img src="../assets/img/classes/class_relay.webp" alt="RELAY" width="960" height="1200" loading="lazy" decoding="async"></picture>
   <div class="ccard-body">
     <p class="ccard-civ">The Network</p>
     <h3>RELAY</h3>

@@ -74,6 +74,7 @@ T = {
     "hint": L("Tap a zone", "Tocá una zona"),
     "planned_city": L("Planned map", "Mapa planeado"),
     "wiki_page": L("Open the wiki page", "Abrir la página del wiki"),
+    "here": L("Here", "Acá"),
 }
 
 KIND_ICON = {  # 24x24, trazos
@@ -289,13 +290,39 @@ def city_svg(data, lang):
 
 
 # --- Datos para el JS y HTML de la seccion ------------------------------------------------------
+PRES = {"metro": L("Metro tunnel", "Túnel de metro"), "lift": L("Lift", "Elevador"), "stairs": L("Stairs", "Escaleras"),
+        "gate": L("Gate", "Puerta"), "road": L("Road", "Camino")}
+
+
+def _region():
+    p = os.path.join(ROOT, "data", "starting_region.json")
+    return json.load(open(p)) if os.path.exists(p) else {"transitions": [], "floors": []}
+
+
+def zone_services(zid, region, hubs, lang):
+    """Servicios reales de una zona jugable (2026-10-11): reaparicion, terminal 261.6.66 (banco y deposito), surtidor."""
+    out = []
+    fl = next((f for f in region["floors"] if f["zone_id"] == zid), {})
+    if zid in hubs:
+        out.append(L_(L("Respawn hub", "Punto de reaparición"), lang))
+    if fl.get("computers"):
+        out.append(L_(L("261.6.66 terminal: bank & depot", "Terminal 261.6.66: banco y depósito"), lang))
+    for st in fl.get("fuel_stations", []):
+        out.append(f'{st["name"]} · ' + L_(L("gas station, {p} Metal/L, gas can {c}", "estación de servicio, {p} Metal/L, bidón {c}"), lang).format(p=st["price_per_litre"], c=st["can_price"]))
+    return out
+
+
 def client_data(data, lang):
     zones = {z["id"]: z for z in data["zones"]}
+    region = _region()
+    trans = {t["entity_id"]: t for t in region["transitions"]}
+    hp = os.path.join(ROOT, "data", "world", "respawn_hubs.json")
+    hubs = {h["zone_id"] for h in json.load(open(hp))["hubs"]} if os.path.exists(hp) else set()
     journey = next((r for r in data.get("routes", []) if r["id"] == "route.first_journey"), None)
     steps = {zid: i for i, zid in enumerate(journey["zones"])} if journey else {}
     out = {"zones": {}, "districts": {}, "t": {k: L_(v, lang) for k, v in T.items() if k in (
         "biome", "danger", "tier", "status", "layer", "exits", "below", "floor", "services", "open_city", "back_map", "step", "close",
-        "district", "gate", "landmark", "planned_city", "wiki_page")}}
+        "district", "gate", "landmark", "planned_city", "wiki_page", "here")}}
     for z in data["zones"]:
         conns = []
         for c in data["connections"]:
@@ -304,8 +331,18 @@ def client_data(data, lang):
             if not mine:
                 continue
             other = ends[1] if ends[0] is mine else ends[0]
-            conns.append({"to": other["zone"], "name": zones[other["zone"]]["name"], "kind": L_(CONN[c["kind"]], lang), "k": c["kind"],
+            tr = trans.get(mine.get("transition"))
+            kind = L_(CONN[c["kind"]], lang)
+            if c["status"] == "playable":
+                kind = L_(PRES[(tr or {}).get("presentation") or "road"], lang)
+            if tr and tr.get("requires_drill_site_cleared"):
+                kind += " · " + L_(L("locked: drill the Deep Seal", "cerrado: perforá el Sello Profundo"), lang)
+            conns.append({"to": other["zone"], "name": zones[other["zone"]]["name"], "kind": kind, "k": c["kind"],
                           "exit": mine["exit"], "edge": mine.get("edge", ""), "status": c["status"]})
+        ex = z.get("extraction")
+        if ex:
+            conns.append({"to": ex["zone"], "name": zones[ex["zone"]]["name"], "kind": L_(L("Lift · one way", "Elevador · sólo ida"), lang), "k": "lift",
+                          "exit": ex["exit"], "edge": "UP", "status": "playable"})
         below = sorted((o["id"] for o in data["zones"] if o.get("stack", {}).get("parent") == z["id"]), key=lambda i: zones[i]["stack"]["depth"])
         out["zones"][z["id"]] = {
             "name": z["name"], "sub": L_(z.get("subtitle", ""), lang) if z.get("subtitle") else "",
@@ -316,6 +353,7 @@ def client_data(data, lang):
             "parent": z.get("stack", {}).get("parent"), "depth": z.get("stack", {}).get("depth"),
             "step": steps.get(z["id"]), "city": z["id"] == data.get("dustline", {}).get("zone"),
             "wiki": slugs.zone(z["id"]),
+            "svc": zone_services(z["id"], region, hubs, lang) if z["status"] == "playable" else [],
         }
     city = data.get("dustline")
     if city:
