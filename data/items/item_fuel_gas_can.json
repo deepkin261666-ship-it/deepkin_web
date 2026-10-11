@@ -1,0 +1,10 @@
+{
+  "id": "item.fuel.gas_can",
+  "display_name": "Gas Can",
+  "description": "A dented 20-litre jerrycan. Fill it at a fuel pump and pour it into your vehicle's tank when you are near it (right-click it or put it on a hotkey: Refuel).",
+  "visual_id": "visual.fuel.gas_can",
+  "properties": {
+    "fuel_capacity": 20.0
+  },
+  "weight": 4.0
+}

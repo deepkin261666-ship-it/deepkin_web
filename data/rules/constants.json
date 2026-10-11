@@ -1,8 +1,11 @@
 {
  "CELLS": 40,
  "COIN_ITEM_ID": "item.currency.metal_coin",
+ "COMPUTER_REACH": 2.5,
+ "MAX_BALANCE": 1000000000000,
  "NETWORK_ADDRESS": "261.6.66",
  "POUCH_CELLS": 4,
+ "PUMP_REACH": 3.6,
  "REACH": 2.5,
  "SCRAP_COMPONENT_ID": "item.scrap_component",
  "STARTER_AMMUNITION_CRATE_QUANTITY": 100,

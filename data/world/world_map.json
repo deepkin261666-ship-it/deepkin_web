@@ -601,8 +601,8 @@
         0.834
       ],
       "summary": {
-        "en": "An active, guarded dig at the bottom of the shaft. Floor one is open; the Deep Seal at its end leads to floors two and three.",
-        "es": "Una excavación activa y custodiada al fondo del pozo. El piso uno está abierto; el Deep Seal del final lleva a los pisos dos y tres."
+        "en": "An active, guarded dig at the bottom of the shaft. Floor one is open; drilling through the Deep Seal at its east end opens the deep survey shaft down to floors two and three.",
+        "es": "Una excavación activa y custodiada al fondo del pozo. El piso uno está abierto; perforar el Deep Seal en su extremo este abre el pozo de relevamiento hacia los pisos dos y tres."
       },
       "subtitle": {
         "en": "3 floors",
@@ -639,7 +639,7 @@
       "level_label": "FLOOR 2",
       "tier": 3,
       "danger": "high",
-      "status": "planned",
+      "status": "playable",
       "region": "region.starting_region",
       "stack": {
         "parent": "zone.excavation_c3",
@@ -650,10 +650,22 @@
         ]
       },
       "summary": {
-        "en": "Below the Deep Seal: narrower, darker, hot vents. Candidate content: the Phase 11 Dark Stratum.",
-        "es": "Debajo del Deep Seal: más angosto, más oscuro, con respiraderos calientes. Contenido candidato: el Dark Stratum de la Fase 11."
+        "en": "Below the Deep Seal: The Dark Stratum (the Phase 11 floor two), narrow and dark, with a thermal vent, a soft-rock face to drill, a scavenger and ferrous samples. The shaft's lift cage climbs back to floor one; a stair pit drops to floor three.",
+        "es": "Debajo del Deep Seal: The Dark Stratum (el piso dos de la Fase 11), angosto y oscuro, con un respiradero térmico, una cara de roca blanda para perforar, un carroñero y muestras ferrosas. La jaula del ascensor sube al piso uno; una escalera baja al piso tres."
       },
-      "candidate_content": "zone.expedition_stratum",
+      "subtitle": {
+        "en": "The Dark Stratum",
+        "es": "The Dark Stratum"
+      },
+      "size_m": [
+        30,
+        24
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.excavation_c3_f2"
+      },
+      "reuses": "Phase 11 The Dark Stratum (data/handcrafted_expedition.json before 2026-10-10)",
       "connections": [
         "conn.c3_f2",
         "conn.c3_f2_f3"
@@ -670,7 +682,7 @@
       "level_label": "FLOOR 3",
       "tier": 4,
       "danger": "high",
-      "status": "planned",
+      "status": "playable",
       "region": "region.starting_region",
       "stack": {
         "parent": "zone.excavation_c3",
@@ -681,14 +693,31 @@
         ]
       },
       "summary": {
-        "en": "The bottom of the old survey: a relic chamber and the first boss of the region. Candidate content: the Phase 11 Relic Chamber.",
-        "es": "El fondo del viejo relevamiento: una cámara de reliquias y el primer jefe de la región. Contenido candidato: la Relic Chamber de la Fase 11."
+        "en": "The bottom of the old survey: The Relic Chamber (the Phase 11 floor three), its relic relay and a relic fragment guarded by a scavenger. Stairs climb to floor two; the extraction lift takes you straight up to C-3 floor one, beside the Threshold lift.",
+        "es": "El fondo del viejo relevamiento: The Relic Chamber (el piso tres de la Fase 11), su relé de reliquias y un fragmento de reliquia custodiado por un carroñero. Una escalera sube al piso dos; el ascensor de extracción lleva directo al piso uno de C-3, junto al ascensor del Threshold."
       },
-      "candidate_content": "zone.expedition_relic_chamber",
+      "subtitle": {
+        "en": "The Relic Chamber",
+        "es": "The Relic Chamber"
+      },
+      "size_m": [
+        30,
+        24
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.excavation_c3_f3"
+      },
+      "reuses": "Phase 11 The Relic Chamber (data/handcrafted_expedition.json before 2026-10-10)",
       "connections": [
         "conn.c3_f2_f3",
         "conn.abyss_c3_f3"
-      ]
+      ],
+      "extraction": {
+        "zone": "zone.excavation_c3",
+        "exit": "EXTRACTION LIFT · C-3 FLOOR 1",
+        "transition": 246
+      }
     },
     {
       "id": "zone.surface_scarp",
@@ -2340,38 +2369,46 @@
     {
       "id": "conn.c3_f2",
       "kind": "shaft",
-      "status": "planned",
+      "status": "playable",
       "ends": [
         {
           "zone": "zone.excavation_c3",
-          "exit": "DEEP SEAL",
+          "exit": "DEEP SURVEY SHAFT · FLOOR 2",
           "edge": "DOWN",
-          "edge_fixed": true
+          "edge_fixed": true,
+          "transition": 244
         },
         {
           "zone": "zone.excavation_c3_f2",
-          "exit": "UP · FLOOR 1",
+          "exit": "LIFT · C-3 FLOOR 1",
           "edge": "UP",
-          "edge_fixed": true
+          "edge_fixed": true,
+          "transition": 245
         }
-      ]
+      ],
+      "gate": {
+        "drill_site": 92,
+        "note": "locked until the Deep Seal (basalt) is drilled through; it reseals when the server restarts"
+      }
     },
     {
       "id": "conn.c3_f2_f3",
       "kind": "shaft",
-      "status": "planned",
+      "status": "playable",
       "ends": [
         {
           "zone": "zone.excavation_c3_f2",
-          "exit": "DOWN · FLOOR 3",
+          "exit": "STAIRS DOWN · FLOOR 3",
           "edge": "DOWN",
-          "edge_fixed": true
+          "edge_fixed": true,
+          "transition": 24
         },
         {
           "zone": "zone.excavation_c3_f3",
-          "exit": "UP · FLOOR 2",
+          "exit": "STAIRS UP · FLOOR 2",
           "edge": "UP",
-          "edge_fixed": true
+          "edge_fixed": true,
+          "transition": 25
         }
       ]
     },
@@ -3509,8 +3546,6 @@
   },
   "dev_zones": [
     "zone.prototype_outpost",
-    "zone.expedition_breach",
-    "zone.expedition_stratum",
-    "zone.expedition_relic_chamber"
+    "zone.expedition_breach"
   ]
 }

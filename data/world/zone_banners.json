@@ -4,15 +4,15 @@
     "zone.outpost": {"title": "THE OUTPOST", "subtitle": "SETTLEMENT", "objective": "THE SHAFT LIFT GOES DOWN · WHAT LIES BELOW"},
     "zone.threshold": {"title": "THE THRESHOLD", "subtitle": "SHELTER", "objective": "EAST TO THE SHALLOWS · LIFT BACK UP"},
     "zone.shallows": {"title": "THE SHALLOWS", "subtitle": "CAVERN", "objective": "GATHER ORE · CLEAR THE SCAVENGERS"},
-    "zone.excavation_c3": {"title": "EXCAVATION C-3", "subtitle": "INDUSTRIAL", "objective": "BREAK THE SURVEY FACE · BEWARE ENFORCERS"},
+    "zone.excavation_c3": {"title": "EXCAVATION C-3", "subtitle": "FLOOR 1", "objective": "DRILL THE DEEP SEAL · THE SURVEY SHAFT GOES DOWN · BEWARE ENFORCERS"},
+    "zone.excavation_c3_f2": {"title": "THE DARK STRATUM", "subtitle": "C-3 · FLOOR 2", "objective": "MIND THE VENT · STAIRS DOWN TO FLOOR 3 · LIFT BACK UP"},
+    "zone.excavation_c3_f3": {"title": "THE RELIC CHAMBER", "subtitle": "C-3 · FLOOR 3", "objective": "SECURE THE RELIC · EXTRACTION LIFT TO FLOOR 1"},
     "zone.surface_scarp": {"title": "THE SCARP", "subtitle": "SURFACE", "objective": "OPEN SKY · SCAVENGER CAMP · SHAFT DOWN"},
     "zone.surface_saltpan": {"title": "THE SALTPAN", "subtitle": "SURFACE", "objective": "SEARCH THE CONVOY · SALT WORKS EAST"},
     "zone.frontier_road_east": {"title": "FRONTIER ROAD", "subtitle": "EAST", "objective": "FOLLOW THE ROAD NORTH TO DUSTLINE · MIND THE WRECKS"},
     "zone.dustline": {"title": "DUSTLINE", "subtitle": "CITY · SAFE", "objective": "MARKET · EXCHANGE · SCRAPPER'S ROW"},
     "zone.dragon_lair": {"title": "THE CINDER DEEP", "subtitle": "DRAGON LAIR", "objective": "HUNT PAST THE GATE · CLIMB OUT BY THE LADDER"},
-    "zone.expedition_breach": {"title": "THE BREACH", "subtitle": "FLOOR 1 / 3", "objective": "DRILL THROUGH BASALT"},
-    "zone.expedition_stratum": {"title": "THE DARK STRATUM", "subtitle": "FLOOR 2 / 3", "objective": "TRACE THE LOWER PASSAGE"},
-    "zone.expedition_relic_chamber": {"title": "THE RELIC CHAMBER", "subtitle": "FLOOR 3 / 3", "objective": "SECURE THE DISCOVERY · RETURN"},
+    "zone.expedition_breach": {"title": "THE BREACH", "subtitle": "TEST FIXTURE", "objective": "DRILL THROUGH BASALT"},
     "zone.prototype_outpost": {"title": "PROTOTYPE OUTPOST", "subtitle": "SAFE ENTRY", "objective": "PREPARE FOR DESCENT", "fixture": true}
   }
 }

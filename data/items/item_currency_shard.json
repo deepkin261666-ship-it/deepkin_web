@@ -7,6 +7,5 @@
     "currency_value": 10000,
     "stack_size": 100
   },
-  "weight": 0.3,
-  "planned": true
+  "weight": 0.02
 }
