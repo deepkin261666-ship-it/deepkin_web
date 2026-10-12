@@ -1,6 +1,7 @@
 /* DEEPKIN — Field Archive: mapa interactivo del mundo (pagina Mundo).
    Pan/zoom con rueda, arrastre y pellizco; panel lateral (escritorio) u hoja inferior (movil);
-   vista del continente y plano de Dustline. Datos: #worldmap-data, generado de world_map.json (2026-10-09). */
+   vista del continente por niveles de profundidad (superficie, −1, −2, −3) y plano de Dustline.
+   Datos: #worldmap-data, generado de world_map.json (2026-10-09; niveles 2026-10-12). */
 (function () {
   "use strict";
   var root = document.querySelector("[data-worldmap]");
@@ -12,15 +13,17 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || root).querySelectorAll(s)); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var panel = $(".wm-panel"), panelIn = $(".wm-panel-in");
+  var LEVELS = [0, -1, -2, -3];
 
   // ---------- Visor con pan/zoom ----------
-  function Viewer(frame, onPick) {
+  function Viewer(frame, opts) {
     var vp = $(".wm-viewport", frame), stage = $(".wm-stage", frame), svg = $("svg", stage);
     var vbw = svg.viewBox.baseVal.width;
     var scaled = $$(".wm-sc", svg);
     var tip = $(".wm-tip", frame);
     var s = 1, x = 0, y = 0, MIN = 1, MAX = 6;
     var pts = {}, drag = null, pinch = null;
+    var HIT = "[data-vlink],[data-ghost],[data-id]";
 
     function size() { return { w: vp.clientWidth, h: vp.clientHeight }; }
     function clamp() {
@@ -66,7 +69,7 @@
       pts[ev.pointerId] = local(ev);
       var ids = Object.keys(pts);
       if (ids.length === 1) {
-        var t = ev.target.closest ? ev.target.closest("[data-id]") : null;
+        var t = ev.target.closest ? ev.target.closest(HIT) : null;
         drag = { sx: pts[ev.pointerId].x, sy: pts[ev.pointerId].y, x0: x, y0: y, moved: false, target: t };
       } else if (ids.length === 2) {
         var a = pts[ids[0]], b = pts[ids[1]];
@@ -100,8 +103,7 @@
       var left = Object.keys(pts).length;
       if (left < 2) pinch = null;
       if (left === 0) {
-        if (drag && !drag.moved && ev.type === "pointerup" && drag.target) onPick(drag.target.getAttribute("data-id"));
-        else if (drag && !drag.moved && ev.type === "pointerup" && !drag.target) onPick(null);
+        if (drag && !drag.moved && ev.type === "pointerup") opts.onPick(drag.target);
         drag = null;
         frame.classList.remove("dragging");
       } else if (left === 1) {
@@ -113,14 +115,18 @@
     vp.addEventListener("pointercancel", end);
 
     function hover(ev) {
-      var t = ev.target.closest ? ev.target.closest("[data-id]") : null;
-      var info = t && (D.zones[t.getAttribute("data-id")] || D.districts[t.getAttribute("data-id")]);
-      if (!info || frame.classList.contains("dragging")) { tip.hidden = true; return; }
+      var t = ev.target.closest ? ev.target.closest("[data-tip],[data-id]") : null;
+      var text = null;
+      if (t) {
+        if (t.hasAttribute("data-tip")) text = t.getAttribute("data-tip");
+        else { var info = D.zones[t.getAttribute("data-id")] || D.districts[t.getAttribute("data-id")]; text = info && info.name; }
+      }
+      if (!text || frame.classList.contains("dragging")) { tip.hidden = true; return; }
       var r = frame.getBoundingClientRect();
-      tip.textContent = info.name;
+      tip.textContent = text;
       tip.hidden = false;
       var tx = ev.clientX - r.left + 14, ty = ev.clientY - r.top + 16;
-      tip.style.transform = "translate(" + Math.min(tx, r.width - tip.offsetWidth - 8) + "px," + Math.min(ty, r.height - 34) + "px)";
+      tip.style.transform = "translate(" + Math.max(8, Math.min(tx, r.width - tip.offsetWidth - 8)) + "px," + Math.min(ty, r.height - 34) + "px)";
     }
     vp.addEventListener("pointerleave", function () { if (tip) tip.hidden = true; });
 
@@ -133,6 +139,8 @@
       else if (ev.key === "ArrowRight") { x -= step; apply(true); }
       else if (ev.key === "ArrowUp") { y += step; apply(true); }
       else if (ev.key === "ArrowDown") { y -= step; apply(true); }
+      else if (ev.key === "PageDown" && opts.onDive) opts.onDive(-1);
+      else if (ev.key === "PageUp" && opts.onDive) opts.onDive(1);
       else return;
       ev.preventDefault();
     });
@@ -148,10 +156,10 @@
     return {
       apply: apply,
       // Centra un punto del SVG (unidades del viewBox) con al menos ese zoom.
-      focus: function (ux, uy, minS) {
+      focus: function (ux, uy, minS, shiftX) {
         var z = size(), fit = z.w / vbw;
         s = Math.max(s, minS || 1);
-        x = z.w / 2 - ux * fit * s;
+        x = z.w / 2 - (shiftX || 0) - ux * fit * s;
         y = z.h / 2 - uy * fit * s;
         apply(true);
       }
@@ -184,14 +192,28 @@
     for (var i = 0; i < 5; i++) out += '<i class="' + (i <= d ? "on dg-" + d : "") + '"></i>';
     return out + "</span>";
   }
+  function depthText(z) { return z.lv === 0 ? esc(T.surface) : "−" + z.dm + " m · " + esc(z.lvname.toLowerCase()); }
+  function exitsList(list, cls) {
+    var h = '<ul class="wm-exits">';
+    list.forEach(function (c) {
+      var oz = D.zones[c.to];
+      var chip = c.dir === "same" ? esc(c.kind) : ((c.dir === "up" ? "↑ " : "↓ ") + (c.lv === 0 ? esc(T.surface) : "−" + c.dm + " m"));
+      var sub = c.dir === "same" ? esc(c.exit) + (c.edge ? " · " + esc(c.edge) : "") : esc(c.kind) + " · " + esc(c.exit);
+      h += '<li class="ex-' + c.status + '"><button type="button" data-goto="' + c.to + '" data-vl="' + esc(c.conn) + '"><span class="ex-k k-' + c.k + (c.dir !== "same" ? " ex-lv" : "") + '">' + chip + "</span><b>" + esc(oz.name) + "</b>" +
+        '<span class="ex-l">' + sub + "</span></button></li>";
+    });
+    return h + "</ul>";
+  }
   function zoneHtml(id) {
     var z = D.zones[id];
     var planned = z.s === "planned" ? ' <span class="tag tag-soon">' + esc(z.status) + "</span>" : ' <span class="tag tag-live">' + esc(z.status) + "</span>";
-    var h = '<p class="kicker">' + esc(z.kind) + " · " + esc(z.layer) + (z.depth ? " · −" + z.depth : "") + "</p>";
+    var h = '<p class="kicker">' + esc(z.kind) + " · " + esc(z.lvname) + (z.floor ? " · " + esc(z.floor) : "") + "</p>";
     h += "<h3>" + esc(z.name) + "</h3>" + (z.sub ? '<p class="wm-sub">' + esc(z.sub) + "</p>" : "");
     h += '<dl class="wm-facts">';
     h += "<div><dt>" + esc(T.biome) + '</dt><dd><i class="sw" style="background:' + z.b + '"></i>' + esc(z.biome) + "</dd></div>";
     h += "<div><dt>" + esc(T.danger) + "</dt><dd>" + meter(z.d) + esc(z.danger) + "</dd></div>";
+    h += "<div><dt>" + esc(T.depth) + '</dt><dd><span class="wm-lv l-' + Math.abs(z.lv) + '">' + (z.lv === 0 ? "0" : z.lv) + "</span>" + depthText(z) + "</dd></div>";
+    h += "<div><dt>" + esc(T.layer) + "</dt><dd>" + esc(z.layer) + "</dd></div>";
     h += "<div><dt>" + esc(T.tier) + "</dt><dd>T" + z.tier + "</dd></div>";
     h += "<div><dt>" + esc(T.status) + "</dt><dd>" + planned + "</dd></div></dl>";
     if (z.step !== null && z.step !== undefined) h += '<p class="wm-stepnote">' + esc(T.step) + " " + String(z.step).padStart(2, "0") + " · " + esc(D.journeyName || "") + "</p>";
@@ -203,20 +225,11 @@
     }
     if (z.wiki) h += '<p class="wm-wiki"><a class="textlink" href="' + esc(z.wiki) + '">' + esc(T.wiki_page) + " →</a></p>";
     if (z.city) h += '<button type="button" class="btn wm-opencity" data-open-city>' + esc(T.open_city) + "</button>";
-    if (z.parent) h += '<p class="kicker wm-k2">' + esc(T.below) + '</p><ul class="wm-exits"><li><button type="button" data-goto="' + z.parent + '"><span class="ex-k">↑</span><b>' + esc(D.zones[z.parent].name) + "</b></button></li></ul>";
-    if (z.below.length) {
-      h += '<p class="kicker wm-k2">' + esc(T.below) + '</p><ul class="wm-exits">';
-      z.below.forEach(function (b) { h += '<li><button type="button" data-goto="' + b + '"><span class="ex-k">−' + D.zones[b].depth + "</span><b>" + esc(D.zones[b].name) + "</b></button></li>"; });
-      h += "</ul>";
-    }
-    if (z.conns.length) {
-      h += '<p class="kicker wm-k2">' + esc(T.exits) + '</p><ul class="wm-exits">';
-      z.conns.forEach(function (c) {
-        h += '<li class="ex-' + c.status + '"><button type="button" data-goto="' + c.to + '"><span class="ex-k k-' + c.k + '">' + esc(c.kind) + "</span><b>" + esc(c.name) + "</b>" +
-          '<span class="ex-l">' + esc(c.exit) + (c.edge ? " · " + esc(c.edge) : "") + "</span></button></li>";
-      });
-      h += "</ul>";
-    }
+    var up = z.conns.filter(function (c) { return c.dir === "up"; }), down = z.conns.filter(function (c) { return c.dir === "down"; }),
+      same = z.conns.filter(function (c) { return c.dir === "same"; });
+    if (up.length) h += '<p class="kicker wm-k2">' + esc(T.above) + "</p>" + exitsList(up);
+    if (down.length) h += '<p class="kicker wm-k2">' + esc(T.below) + "</p>" + exitsList(down);
+    if (same.length) h += '<p class="kicker wm-k2">' + esc(T.exits) + "</p>" + exitsList(same);
     return h;
   }
   function districtHtml(id) {
@@ -236,25 +249,96 @@
     return h;
   }
 
-  // ---------- Vistas ----------
+  // ---------- Niveles ----------
   var frames = { map: $('[data-pane="map"]'), city: $('[data-pane="city"]') };
+  var layers = $$(".wm-layer", frames.map);
+  var rail = $(".wm-rail", frames.map);
+  var gaugeM = $("[data-m]", rail), gaugeBand = $("[data-band]", rail);
+  var level = 0, shownM = 0, tickRaf = 0;
+  function levelInfo(n) { return D.levels[String(n)]; }
+  // El indicador baja o sube en metros, como el del juego al cambiar de zona.
+  function tick(toM) {
+    cancelAnimationFrame(tickRaf);
+    var fromM = shownM, t0 = performance.now(), dur = reduced ? 0 : 520;
+    rail.classList.add("ticking");
+    function frame(now) {
+      var k = dur ? Math.min(1, (now - t0) / dur) : 1;
+      k = 1 - Math.pow(1 - k, 3);
+      shownM = Math.round(fromM + (toM - fromM) * k);
+      gaugeM.textContent = (shownM ? "−" : "") + shownM;
+      if (k < 1) tickRaf = requestAnimationFrame(frame); else rail.classList.remove("ticking");
+    }
+    tickRaf = requestAnimationFrame(frame);
+  }
+  function setLevel(n, meters) {
+    if (LEVELS.indexOf(n) < 0) return;
+    var prev = level;
+    level = n;
+    frames.map.setAttribute("data-level", String(n));
+    frames.map.setAttribute("data-dir", n < prev ? "down" : n > prev ? "up" : "");
+    layers.forEach(function (g) {
+      var l = +g.getAttribute("data-level");
+      g.classList.toggle("is-active", l === n);
+      if (l > n) g.setAttribute("data-above", ""); else g.removeAttribute("data-above");
+      if (l < n) g.setAttribute("data-below", ""); else g.removeAttribute("data-below");
+    });
+    $$("[data-level]", rail).forEach(function (b) { b.setAttribute("aria-pressed", +b.getAttribute("data-level") === n ? "true" : "false"); });
+    $('[data-dive="up"]', rail).disabled = n === 0;
+    $('[data-dive="down"]', rail).disabled = n === LEVELS[LEVELS.length - 1];
+    var info = levelInfo(n);
+    gaugeBand.textContent = info.band;
+    tick(meters !== undefined ? meters : info.m);
+    if (viewers.map) viewers.map.apply();
+  }
+  function dive(dir) {
+    var i = LEVELS.indexOf(level) - dir; // dir -1 = bajar (indice sube)
+    if (i < 0 || i >= LEVELS.length) return;
+    closePanel();
+    setLevel(LEVELS[i]);
+  }
+  $$("[data-level]", rail).forEach(function (b) { b.addEventListener("click", function () { closePanel(); setLevel(+b.getAttribute("data-level")); }); });
+  $$("[data-dive]", rail).forEach(function (b) { b.addEventListener("click", function () { dive(b.getAttribute("data-dive") === "down" ? -1 : 1); }); });
+
+  // ---------- Vistas ----------
   var view = "map";
   var viewers = {};
   function mark(sel, id) {
     $$(".is-sel").forEach(function (el) { el.classList.remove("is-sel"); });
-    $$('[data-id="' + id + '"]', frames[sel]).forEach(function (el) { el.classList.add("is-sel"); });
+    $$('[data-id="' + id + '"],[data-ghost="' + id + '"]', frames[sel]).forEach(function (el) { el.classList.add("is-sel"); });
   }
-  function pickZone(id) {
+  function pulse(el) {
+    if (!el) return;
+    el.classList.remove("is-arrive");
+    void el.getBoundingClientRect();
+    el.classList.add("is-arrive");
+  }
+  function pickZone(id, arriveConn) {
     if (!id || !D.zones[id]) { closePanel(); return; }
-    mark("map", id);
     var z = D.zones[id];
-    if (z.parent) $$('.wm-cell[data-id="' + z.parent + '"]', frames.map).forEach(function (el) { el.classList.add("is-sel"); });
+    if (z.lv !== level) setLevel(z.lv, z.dm); else tick(z.dm);
+    mark("map", id);
+    if (arriveConn) {
+      var el = $('.wm-layer[data-level="' + z.lv + '"] [data-vlink="' + arriveConn + '"]', frames.map);
+      if (el) { el.classList.add("is-sel"); pulse(el); }
+    }
     openPanel(zoneHtml(id));
   }
   function pickDistrict(id) {
     if (!id || !D.districts[id]) { closePanel(); return; }
     mark("city", id);
     openPanel(districtHtml(id));
+  }
+  // Toque en el continente: pasaje vertical (cambia de nivel y resalta la llegada), fantasma del nivel de abajo (baja), zona, o nada.
+  function pickMap(el) {
+    if (!el) { closePanel(); return; }
+    if (el.hasAttribute("data-vlink")) {
+      var to = el.getAttribute("data-to");
+      pickZone(to, el.getAttribute("data-vlink"));
+      focusZone(to, true);
+      return;
+    }
+    if (el.hasAttribute("data-ghost")) { pickZone(el.getAttribute("data-ghost")); return; }
+    pickZone(el.getAttribute("data-id"));
   }
   function setView(v) {
     if (v === view) return;
@@ -264,30 +348,32 @@
     frames.map.hidden = v !== "map";
     frames.city.hidden = v !== "city";
     $$(".wm-legend, .wm-note").forEach(function (l) { l.hidden = l.getAttribute("data-for") !== v; });
-    if (!viewers[v]) viewers[v] = Viewer(frames[v], v === "map" ? pickZone : pickDistrict);
+    if (!viewers[v]) viewers[v] = Viewer(frames[v], { onPick: function (el) { pickDistrict(el && el.getAttribute("data-id")); } });
     viewers[v].apply();
   }
-  viewers.map = Viewer(frames.map, pickZone);
+  viewers.map = Viewer(frames.map, { onPick: pickMap, onDive: dive });
   viewers.map.apply();
   $$("[data-view]").forEach(function (b) { b.addEventListener("click", function () { setView(b.getAttribute("data-view")); }); });
 
-  function focusZone(id) {
+  function focusZone(id, keepZoom) {
     var el = $('.wm-mark[data-id="' + id + '"]', frames.map);
     if (!el) return;
     var x = parseFloat(el.getAttribute("data-x")), y = parseFloat(el.getAttribute("data-y"));
     if (isNaN(x)) { var m = /translate\(([-\d.]+),([-\d.]+)\)/.exec(el.getAttribute("transform")); x = +m[1]; y = +m[2]; }
-    viewers.map.focus(x, y, mobile.matches ? 2.4 : 1.8);
+    // En escritorio el panel tapa la derecha: el punto se centra en lo que queda visible.
+    var shift = (!mobile.matches && !panel.hidden) ? panel.offsetWidth / 2 : 0;
+    viewers.map.focus(x, y, keepZoom ? 1 : (mobile.matches ? 2.4 : 1.8), shift);
   }
-  function go(id, scroll) {
+  function go(id, scroll, conn) {
     setView("map");
-    pickZone(id);
+    pickZone(id, conn);
     focusZone(id);
     if (scroll) frames.map.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
   }
   panel.addEventListener("click", function (ev) {
     var b = ev.target.closest("button");
     if (!b) return;
-    if (b.hasAttribute("data-goto")) go(b.getAttribute("data-goto"), false);
+    if (b.hasAttribute("data-goto")) go(b.getAttribute("data-goto"), false, b.getAttribute("data-vl"));
     else if (b.hasAttribute("data-goto-d")) pickDistrict(b.getAttribute("data-goto-d"));
     else if (b.hasAttribute("data-open-city")) { setView("city"); frames.city.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" }); }
     else if (b.hasAttribute("data-back-map")) go("zone.dustline", false);
@@ -297,7 +383,7 @@
   });
   D.journeyName = ($(".wm-journey-list .kicker") || {}).textContent || "";
 
-  // Enlaces desde el wiki (2026-10-10): world.html?zone=<id>#map o ?district=<id>#map abren esa zona o distrito.
+  // Enlaces desde el wiki (2026-10-10): world.html?zone=<id>#map o ?district=<id>#map abren esa zona (en su nivel) o distrito.
   var params = null;
   try { params = new URLSearchParams(location.search); } catch (e) {}
   if (params) {

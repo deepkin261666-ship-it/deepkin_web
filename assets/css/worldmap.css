@@ -1,4 +1,5 @@
-/* DEEPKIN — Field Archive: mapa interactivo del mundo (pagina Mundo). Usa los tokens de site.css (2026-10-09). */
+/* DEEPKIN — Field Archive: mapa interactivo del mundo (pagina Mundo). Usa los tokens de site.css (2026-10-09).
+   Niveles de profundidad (2026-10-12): una capa SVG por banda; el arte se apaga bajo tierra y aparece la roca. */
 .wm { position: relative; margin: 0 0 24px; }
 .wm-tabs { display: flex; align-items: center; gap: 6px; margin: 0 0 12px; flex-wrap: wrap; }
 .wm-tabs button {
@@ -19,10 +20,49 @@
 .wm-stage { position: relative; width: 100%; transform-origin: 0 0; will-change: transform; }
 .wm-stage.anim { transition: transform .38s var(--ease); }
 .wm-art, .wm-stage picture { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-.wm-art { object-fit: fill; filter: saturate(.92) brightness(.92); }
+.wm-art { object-fit: fill; filter: saturate(.92) brightness(.92); transition: filter .55s var(--ease); }
+/* Bajo tierra el arte se apaga casi a negro (mas cuanto mas hondo) y la capa pone su roca encima. */
+.wm-frame[data-level="-1"] .wm-art { filter: saturate(.25) brightness(.14); }
+.wm-frame[data-level="-2"] .wm-art { filter: saturate(.2) brightness(.11); }
+.wm-frame[data-level="-3"] .wm-art { filter: saturate(.15) brightness(.07); }
 .wm-svg, .dl-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
 
-/* Celdas (un mapa cada una), al estilo de los bordes de Albion */
+/* Capas: solo la activa se ve y recibe toques; al bajar, la que queda arriba se acerca y se esfuma, la de abajo llega desde lejos. */
+.wm-layer { opacity: 0; pointer-events: none; transform-box: fill-box; transform-origin: center; transition: opacity .42s var(--ease), transform .48s var(--ease); }
+.wm-layer[data-above] { transform: scale(1.035); }
+.wm-layer[data-below] { transform: scale(.965); }
+.wm-layer.is-active { opacity: 1; pointer-events: auto; transform: none; }
+@media (prefers-reduced-motion: reduce) { .wm-layer { transition: none; } .wm-art { transition: none; } }
+.wm-rock { fill-opacity: .9; }
+.wm-dark { fill: #06080c; fill-opacity: .62; }
+.wm-veins path { fill: none; stroke: #7b8fb8; stroke-width: 1.1; }
+.wm-grains circle { fill: #9fb3d8; fill-opacity: .14; }
+.wm-hatch-l { stroke: #8ea2c8; stroke-opacity: .5; stroke-width: 1; }
+.wm-hatch-l2 { stroke: #c6c0b0; stroke-opacity: .35; stroke-width: 1; }
+
+/* Fantasmas: la superficie (contorno) y el nivel de arriba sobre las capas hondas; el nivel de abajo, tramado y tocable. */
+.wm-ghost { vector-effect: non-scaling-stroke; }
+.wm-ghost.up { fill: none; stroke: rgba(232, 227, 213, .16); stroke-width: 1; pointer-events: none; }
+.wm-ghost.up.surface { stroke: rgba(226, 200, 143, .14); stroke-dasharray: 3 5; }
+.wm-ghost.down { fill: url(#wm-hatch); fill-opacity: .55; stroke: rgba(142, 162, 200, .45); stroke-width: 1; stroke-dasharray: 2 3; cursor: pointer; transition: fill-opacity .2s, stroke .2s; }
+.wm-ghost.down.s-planned { fill-opacity: .3; stroke: rgba(154, 149, 138, .35); }
+.wm-ghost.down:hover { fill-opacity: 1; stroke: var(--relay); }
+.wm-ghost.down.is-sel { stroke: var(--amber); fill-opacity: 1; }
+/* Tapas sobre los rotulos pintados de mapas que hoy estan bajo tierra, y su marca "abajo" */
+.wm-cover { pointer-events: none; filter: url(#wm-feather); }
+.wm-cover-dark { fill: #0b1018; fill-opacity: .9; }
+.wm-cover-rock { fill-opacity: .7; }
+.wm-below { cursor: pointer; }
+.wm-below .wm-vl-bg { fill: rgba(11, 16, 24, .95); stroke: #8ea2c8; stroke-width: 1.5; }
+.wm-below .wm-glyph { stroke: #cfdcf5; stroke-width: 2.2; }
+.wm-below:hover .wm-vl-bg, .wm-below.is-sel .wm-vl-bg { stroke: var(--amber); }
+.wm-below-label { font: 600 11px/1 var(--display); letter-spacing: .1em; fill: #cfdcf5; paint-order: stroke; stroke: rgba(5, 6, 6, .92); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.lowzoom .wm-below-label { display: none; }
+.wm-stub { fill: none; stroke: rgba(226, 200, 143, .45); stroke-width: 1; stroke-dasharray: 2 3; vector-effect: non-scaling-stroke; pointer-events: none; }
+.wm-stub.s-planned { stroke: rgba(154, 149, 138, .35); }
+.wm-layer:not([data-level="0"]) .wm-stub { stroke: rgba(159, 179, 216, .5); }
+
+/* Celdas (un mapa cada una), al estilo de los bordes de Albion; camaras bajo tierra */
 .wm-cell {
   fill: var(--tint); fill-opacity: 0; stroke: rgba(232, 227, 213, .34); stroke-width: 1; vector-effect: non-scaling-stroke;
   stroke-dasharray: 5 4; cursor: pointer; transition: fill-opacity .2s, stroke .2s;
@@ -31,19 +71,62 @@
 .wm-cell:hover { fill-opacity: .26; stroke: rgba(232, 227, 213, .7); }
 .wm-cell.is-sel { fill-opacity: .32; stroke: var(--amber); stroke-width: 2.4; stroke-dasharray: none; }
 .lowzoom .wm-cell.s-planned { stroke-dasharray: 3 3; }
+.wm-cell.u-cell { fill: #5468c0; fill-opacity: .14; stroke: rgba(159, 179, 216, .8); stroke-width: 1.6; stroke-dasharray: none; stroke-linejoin: round; }
+.wm-cell.u-cell.s-planned { fill: url(#wm-hatch2); fill-opacity: .35; stroke: rgba(154, 149, 138, .5); stroke-width: 1; stroke-dasharray: 4 4; }
+.wm-cell.u-cell:hover { fill-opacity: .3; stroke: #cfdcf5; }
+.wm-cell.u-cell.is-sel { fill-opacity: .36; stroke: var(--amber); }
 
 /* Conexiones */
 .wm-link { fill: none; vector-effect: non-scaling-stroke; pointer-events: none; stroke-linecap: round; }
 .wm-link.k-road { stroke: rgba(232, 227, 213, .5); stroke-width: 1.5; }
 .wm-link.k-road.s-planned { stroke: rgba(232, 227, 213, .3); stroke-dasharray: 6 5; }
-.wm-link.k-tunnel, .wm-link.k-shaft, .wm-link.k-lift { stroke: rgba(111, 153, 152, .85); stroke-width: 1.4; stroke-dasharray: 2 4; }
+.wm-link.k-tunnel, .wm-link.k-shaft, .wm-link.k-lift, .wm-link.p-metro { stroke: rgba(111, 179, 172, .9); stroke-width: 1.6; stroke-dasharray: 2 4; }
 .wm-link.s-planned.k-tunnel, .wm-link.s-planned.k-shaft { stroke: rgba(111, 153, 152, .45); }
+.wm-link.k-lift:not(.s-planned), .wm-link.k-shaft:not(.s-planned) { stroke: rgba(226, 200, 143, .7); stroke-dasharray: 1 4; stroke-width: 2; }
 .wm-journey-glow { fill: none; stroke: rgba(211, 154, 75, .28); stroke-width: 9; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
 .wm-journey { fill: none; stroke: var(--amber); stroke-width: 2.6; vector-effect: non-scaling-stroke; stroke-dasharray: 10 7; stroke-linecap: round; pointer-events: none; animation: wm-flow 1.4s linear infinite; }
 @keyframes wm-flow { to { stroke-dashoffset: -17; } }
 @media (prefers-reduced-motion: reduce) { .wm-journey { animation: none; } }
 .wm-pip rect { fill: #0b0d0c; stroke: var(--warm); stroke-width: 1.4; pointer-events: none; }
 .wm-pip.s-planned rect { stroke: var(--muted); }
+/* Puertas de ciudad sobre la salida del borde; la cerrada va tenue y tachada */
+.wm-gate { cursor: pointer; }
+.wm-gate .wm-gate-bg { fill: rgba(11, 13, 12, .92); stroke: var(--warm); stroke-width: 1.5; }
+.wm-gate .wm-glyph { fill: none; stroke: var(--warm); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wm-gate.closed { opacity: .55; }
+.wm-gate.closed .wm-gate-bg, .wm-gate.closed .wm-glyph { stroke: var(--muted); }
+.wm-gate.closed .wm-gate-bg { stroke-dasharray: 2 2; }
+.wm-gate-x { stroke: var(--danger); stroke-width: 1.8; stroke-linecap: round; }
+.wm-gate:hover .wm-gate-bg, .wm-gate.is-sel .wm-gate-bg { stroke: var(--amber); }
+.wm-fuel { cursor: pointer; }
+.wm-fuel .wm-vl-bg { fill: rgba(11, 13, 12, .92); stroke: var(--foundry); stroke-width: 1.4; }
+.wm-fuel .wm-glyph { fill: none; stroke: var(--foundry); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wm-fuel:hover .wm-vl-bg { stroke: var(--amber); }
+
+/* Pasajes verticales (en ambos niveles) e iconos de elevador/pozo dentro de un nivel */
+.wm-vl { cursor: pointer; }
+.wm-vl.same { pointer-events: none; }
+.wm-vl .wm-vl-bg { fill: rgba(11, 13, 12, .94); stroke: var(--relay); stroke-width: 1.5; transition: stroke .2s, fill .2s; }
+.wm-vl .wm-glyph { fill: none; stroke: #cfdcf5; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.wm-vl.k-lift .wm-vl-bg, .wm-vl.k-extract .wm-vl-bg { stroke: var(--amber); }
+.wm-vl.k-lift .wm-glyph, .wm-vl.k-extract .wm-glyph { stroke: var(--warm); }
+.wm-vl.k-stairs .wm-vl-bg, .wm-vl.k-adit .wm-vl-bg { stroke: var(--warm); }
+.wm-vl.k-stairs .wm-glyph, .wm-vl.k-adit .wm-glyph { stroke: var(--warm); }
+.wm-vl.s-planned .wm-vl-bg { stroke: var(--muted); stroke-dasharray: 3 2; }
+.wm-vl.s-planned .wm-glyph { stroke: var(--muted); }
+.wm-vl.s-planned { opacity: .7; }
+.wm-vl-dot { fill: var(--relay); stroke: #0b0d0c; stroke-width: 1.2; }
+.wm-vl.dir-up .wm-vl-dot { fill: var(--lichen); }
+.wm-vl.dir-up.k-extract .wm-vl-dot { fill: var(--amber); }
+.wm-vl-arrow { fill: none; stroke: #0b0d0c; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.wm-vl:hover .wm-vl-bg, .wm-vl.is-sel .wm-vl-bg { stroke: var(--amber); fill: rgba(36, 31, 20, .96); }
+.wm-vl.is-journey .wm-vl-bg { stroke: var(--amber); stroke-width: 2; }
+.wm-vl-label { font: 600 11px/1 var(--display); letter-spacing: .12em; fill: var(--amber); paint-order: stroke; stroke: rgba(5, 6, 6, .92); stroke-width: 3px; stroke-linejoin: round; pointer-events: none; }
+.wm-vl.is-arrive .wm-vl-bg { animation: wm-arrive 1.1s var(--ease) 1; }
+@keyframes wm-arrive { 0% { stroke-width: 2; } 40% { stroke-width: 7; stroke-opacity: .35; } 100% { stroke-width: 2; } }
+.wm-vl.same .wm-vl-bg { fill: rgba(11, 13, 12, .9); stroke: rgba(226, 200, 143, .7); stroke-width: 1.2; }
+.wm-vl.same .wm-glyph { stroke: var(--warm); stroke-width: 2.2; }
+.wm-vl.same { pointer-events: auto; cursor: default; }
 
 /* Marcas */
 .wm-mark { cursor: pointer; }
@@ -54,16 +137,18 @@
 .wm-mark.is-sel .wm-ring { stroke: var(--amber); stroke-width: 2.4; }
 .wm-badge { fill: rgba(11, 13, 12, .92); stroke: var(--warm); stroke-width: 1.4; }
 .wm-mark.s-planned .wm-badge { stroke: var(--muted); stroke-dasharray: 3 2; }
-.wm-mark.stacked .wm-badge { fill: #0f1a1a; stroke: var(--relay); }
+.wm-mark.under .wm-badge { fill: #0f1a22; stroke: #9fb3d8; }
 .wm-mark.is-sel .wm-badge, .wm-mark.own:hover .wm-badge { stroke: var(--amber); stroke-width: 2; }
 .wm-glyph { fill: none; stroke: var(--warm); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.wm-mark.under .wm-glyph { stroke: #cfdcf5; }
 .wm-mark.s-planned .wm-glyph { stroke: var(--soft); }
 .wm-label {
   font: 600 12px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; fill: var(--text);
   paint-order: stroke; stroke: rgba(5, 6, 6, .92); stroke-width: 3.2px; stroke-linejoin: round; pointer-events: none;
 }
-.wm-depth { fill: var(--relay); }
-.lowzoom .wm-mark.own .wm-label, .lowzoom .wm-pip { display: none; }
+.wm-mark.under .wm-label { fill: #e3ebf7; }
+.wm-depth { fill: #8ea2c8; font-family: var(--mono); font-weight: 500; font-size: 10px; letter-spacing: .08em; }
+.lowzoom .wm-layer[data-level="0"] .wm-mark.own .wm-label, .lowzoom .wm-pip:not(.wm-gate), .lowzoom .wm-vl-label { display: none; }
 .wm-step circle { fill: var(--amber); stroke: #15110b; stroke-width: 1.2; }
 .wm-step text { font: 600 10px/1 var(--mono); fill: #15110b; text-anchor: middle; pointer-events: none; }
 .wm-step { pointer-events: none; }
@@ -78,10 +163,43 @@
 .wm-ctrl button:hover { border-color: var(--amber); color: var(--amber); }
 .wm-ctrl svg { width: 16px; height: 16px; }
 .wm-tip {
-  position: absolute; left: 0; top: 0; z-index: 4; pointer-events: none; white-space: nowrap;
+  position: absolute; left: 0; top: 0; z-index: 4; pointer-events: none; white-space: nowrap; max-width: calc(100% - 16px);
   font: 600 13px/1 var(--display); letter-spacing: .1em; text-transform: uppercase; color: var(--text);
   background: rgba(10, 12, 11, .9); border: 1px solid var(--line2); border-left: 2px solid var(--amber); padding: 7px 10px; border-radius: 2px;
 }
+
+/* Barra de profundidad: subir, niveles, bajar, lectura del indicador (como el del juego, bajo el radar) */
+.wm-rail { position: absolute; left: 10px; top: 140px; z-index: 3; display: flex; flex-direction: column; gap: 4px; width: 64px; }
+.wm-rail ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; }
+.wm-rail button {
+  width: 100%; cursor: pointer; color: var(--soft); background: rgba(10, 12, 11, .84); border: 1px solid var(--line2); border-radius: var(--radius);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); transition: border-color .2s, color .2s, background .2s;
+  display: grid; justify-items: center; gap: 2px; padding: 7px 4px 6px;
+}
+.wm-rail ol button b { font: 600 17px/1 var(--display); letter-spacing: .02em; color: var(--text); }
+.wm-rail ol button span { font: 500 9px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); white-space: nowrap; }
+.wm-rail button:hover { border-color: var(--amber); color: var(--amber); }
+.wm-rail ol button[aria-pressed="true"] { background: var(--amber); border-color: var(--amber); }
+.wm-rail ol button[aria-pressed="true"] b, .wm-rail ol button[aria-pressed="true"] span { color: #15110b; }
+.wm-rail ol li:not(:first-child) button[aria-pressed="true"] { background: #2f4062; border-color: #6f8dc0; }
+.wm-rail ol li:not(:first-child) button[aria-pressed="true"] b, .wm-rail ol li:not(:first-child) button[aria-pressed="true"] span { color: #e3ebf7; }
+.wm-dive { padding: 5px 4px; font: 600 9px/1 var(--display); letter-spacing: .12em; text-transform: uppercase; }
+.wm-dive svg { width: 16px; height: 16px; }
+.wm-dive[disabled] { opacity: .35; cursor: default; pointer-events: none; }
+.wm-dive[data-dive="down"] { border-color: #6f8dc0; color: #cfdcf5; }
+.wm-gauge { display: grid; grid-template-columns: auto auto; justify-content: center; align-items: baseline; column-gap: 3px; margin-top: 2px; padding: 7px 4px 6px;
+  background: rgba(10, 12, 11, .84); border: 1px solid var(--line2); border-radius: var(--radius); text-align: center; }
+.wm-gauge b { font: 600 16px/1 var(--mono); color: var(--relay); font-variant-numeric: tabular-nums; }
+.wm-gauge small { font: 500 9px/1 var(--mono); color: var(--dim); }
+.wm-gauge span { grid-column: 1 / -1; font: 500 8px/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin-top: 3px; }
+.wm-rail.ticking .wm-gauge b { color: var(--amber); }
+.wm-frame[data-level="0"] .wm-gauge b { color: var(--warm); }
+
+/* Panel: nivel y chips de profundidad */
+.wm-lv { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 2px; font: 600 11px/1 var(--mono); color: #15110b; background: var(--warm); }
+.wm-lv.l-1, .wm-lv.l-2, .wm-lv.l-3 { background: #6f8dc0; color: #0b0d0c; }
+.ex-k.ex-lv { color: #cfdcf5; border-color: #4a5e86; background: rgba(47, 64, 98, .35); }
+
 
 /* Panel lateral / hoja inferior */
 .wm-panel {
@@ -135,14 +253,17 @@
 .wm-opencity { margin: 4px 0 6px; }
 .wm-back { background: none; border: 0; padding: 0; margin-top: 16px; cursor: pointer; }
 
+
 /* Leyenda, nota, viaje */
-.wm-legend { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 24px; margin: 18px 0 0; padding: 18px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
+.wm-legend { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 18px 22px; margin: 18px 0 0; padding: 18px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); }
 .wm-legend[hidden], .wm-note[hidden] { display: none; }
 .wm-legend[data-for="city"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .wm-legend .kicker { color: var(--dim); }
 .wm-legend ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
 .wm-legend li { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--soft); line-height: 1.25; }
 .wm-legend .wm-ico { width: 18px; height: 18px; color: var(--warm); flex: none; }
+.wm-legend .wm-ico-vl { color: #cfdcf5; background: rgba(15, 26, 34, .9); border: 1px solid var(--relay); border-radius: 3px; padding: 2px; box-sizing: content-box; width: 14px; height: 14px; }
+.wm-legend .wm-ico-gate { color: var(--warm); }
 .wm-legend .dg { width: 12px; height: 12px; border-radius: 2px; flex: none; }
 .ln { width: 26px; height: 0; flex: none; border-top: 2px solid; }
 .ln-play { border-color: var(--warm); }
@@ -151,7 +272,9 @@
 .ln-under { border-top: 2px dotted var(--relay); }
 .ln-journey { border-top: 3px dashed var(--amber); }
 .ln-pip { width: 9px; height: 9px; border: 1.5px solid var(--warm); transform: rotate(45deg); margin: 0 8px; }
-.ln-stack { width: 10px; height: 10px; border: 1.5px solid var(--relay); transform: rotate(45deg); margin: 0 8px; }
+.ln-ghost-below { width: 22px; height: 12px; border: 1px dashed rgba(142, 162, 200, .7); background: repeating-linear-gradient(45deg, rgba(142, 162, 200, .5) 0 1px, transparent 1px 5px); margin: 0 2px; }
+.ln-ghost-above { width: 22px; height: 12px; border: 1px dashed rgba(226, 200, 143, .5); margin: 0 2px; }
+.ln-switch { width: 20px; height: 20px; border: 0; display: grid; place-items: center; font: 600 14px/1 var(--mono); color: var(--amber); margin: 0 3px; font-style: normal; }
 .ln-gate { width: 14px; height: 10px; border: 2px solid #b9a688; margin: 0 6px; }
 .ln-lm { width: 10px; height: 10px; background: var(--amber); transform: rotate(45deg); margin: 0 8px; }
 .ln-sight { border-top: 1px dashed var(--amber); }
@@ -167,8 +290,13 @@
 .wm-journey-list button:hover { border-color: var(--amber); transform: translateX(3px); }
 .jn { font: 600 30px/1 var(--display); color: var(--amber); }
 .jb { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
-.jb b { font: 600 20px/1.1 var(--display); letter-spacing: .05em; text-transform: uppercase; color: var(--text); }
+.jb b { font: 600 20px/1.1 var(--display); letter-spacing: .05em; text-transform: uppercase; color: var(--text); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .jb > span { font-size: 14px; color: var(--muted); line-height: 1.5; }
+.jl { font: 500 10px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--line2); padding: 4px 6px; border-radius: 2px; }
+.jl.l-1, .jl.l-2, .jl.l-3 { color: #cfdcf5; border-color: #4a5e86; background: rgba(47, 64, 98, .35); }
+.jsw button { grid-template-columns: 52px minmax(0, 1fr); padding: 9px 16px; border-left-color: #6f8dc0; background: linear-gradient(90deg, rgba(47, 64, 98, .25), var(--panel)); }
+.jsw-a { font: 600 22px/1 var(--display); color: #cfdcf5; }
+.jsw button > span:last-child { font: 600 13px/1.4 var(--display); letter-spacing: .1em; text-transform: uppercase; color: #cfdcf5; align-self: center; }
 .wm-journey-list .note { font: 400 12px/1.5 var(--mono); color: var(--dim); margin: 10px 0 0; }
 
 /* Dustline: plano */
@@ -221,13 +349,25 @@
 .wm-citycap p { margin: 0; font-size: 13px; color: var(--muted); line-height: 1.45; }
 .wm-citycap .kicker { margin-bottom: 4px; }
 
+@media (max-width: 1100px) { .wm-legend { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 960px) { .wm-legend { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 720px) {
   .wm-hint { display: none; }
   .wm-tabs button { flex: 1; padding: 11px 10px; }
   .wm-frame { border-radius: 2px; }
-  .wm-ctrl { left: 8px; top: 8px; }
+  /* La barra de profundidad pasa a una fila de pildoras sobre el mapa; el zoom baja para no taparla */
+  .wm-ctrl { left: 8px; top: 66px; }
   .wm-ctrl button { width: 34px; height: 34px; }
+  .wm-rail { position: static; width: auto; flex-direction: row; align-items: stretch; gap: 4px; padding: 6px; border-bottom: 1px solid var(--line); background: #0b0d0c; }
+  .wm-rail ol { flex: 1; flex-direction: row; gap: 4px; }
+  .wm-rail ol li { flex: 1; min-width: 0; }
+  .wm-rail ol button { padding: 6px 2px 5px; gap: 1px; border-radius: 999px; }
+  .wm-rail ol button b { font-size: 14px; }
+  .wm-rail ol button span { font-size: 8px; letter-spacing: .04em; }
+  .wm-rail button { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .wm-dive { width: 36px; padding: 0; border-radius: 999px; }
+  .wm-dive span { display: none; }
+  .wm-gauge { display: none; }
   .wm-citycap { position: static; max-width: none; border: 0; border-top: 1px solid var(--line); border-radius: 0; }
   /* Hoja inferior */
   .wm-panel {
@@ -244,6 +384,7 @@
 }
 @media (max-width: 400px) { .wm-legend, .wm-legend[data-for="city"] { grid-template-columns: minmax(0, 1fr); } }
 .wm-wiki { margin: 0 0 14px; }
+
 
 /* ---------- Atlas de campo (2026-10-11): imagen SVG con visor de zoom ---------- */
 .atlas { position: relative; margin: 0 0 28px; border: 1px solid var(--line2); border-radius: var(--radius); background: #0b0d0c; overflow: hidden; }
