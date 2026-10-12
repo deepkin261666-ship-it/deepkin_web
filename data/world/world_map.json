@@ -551,6 +551,10 @@
         "weight": 0.0006,
         "polygon": [
           [
+            0.5208,
+            0.8788
+          ],
+          [
             0.295,
             0.7098
           ],
@@ -563,12 +567,12 @@
             0.5504
           ],
           [
-            0.5035,
-            0.5925
+            0.4814,
+            0.5786
           ],
           [
-            0.478,
-            0.8467
+            0.4949,
+            0.6096
           ]
         ]
       },
@@ -715,12 +719,8 @@
         "weight": 0.0,
         "polygon": [
           [
-            0.5746,
-            0.5428
-          ],
-          [
-            0.5035,
-            0.5925
+            0.4814,
+            0.5786
           ],
           [
             0.4363,
@@ -735,18 +735,22 @@
             0.3422
           ],
           [
-            0.5247,
-            0.3486
+            0.5488,
+            0.3527
+          ],
+          [
+            0.5548,
+            0.4614
           ]
         ]
       },
       "label": [
-        0.5,
-        0.475
+        0.49,
+        0.496
       ],
       "marker": [
-        0.5,
-        0.45
+        0.49,
+        0.47
       ],
       "summary": {
         "en": "Open sky over the Outpost: a basin of cracked mud and hoodoos with a scavenger camp. The shaft in its crater drops to The Threshold.",
@@ -783,72 +787,40 @@
       "region": "region.frontier",
       "cell": {
         "seed": [
-          0.62,
-          0.68
+          0.6,
+          0.53
         ],
         "weight": 0.0,
         "polygon": [
           [
-            0.7755,
-            0.7273
+            0.4949,
+            0.6096
           ],
           [
-            0.7637,
-            0.7423
+            0.4814,
+            0.5786
           ],
           [
-            0.7027,
-            0.7807
+            0.5548,
+            0.4614
           ],
           [
-            0.6555,
-            0.7656
+            0.6674,
+            0.5018
           ],
           [
-            0.596,
-            0.769
-          ],
-          [
-            0.5655,
-            0.794
-          ],
-          [
-            0.5351,
-            0.8207
-          ],
-          [
-            0.5259,
-            0.8757
-          ],
-          [
-            0.4972,
-            0.9087
-          ],
-          [
-            0.478,
-            0.8467
-          ],
-          [
-            0.5035,
-            0.5925
-          ],
-          [
-            0.5746,
-            0.5428
-          ],
-          [
-            0.59,
-            0.5421
+            0.6585,
+            0.5443
           ]
         ]
       },
       "label": [
-        0.64,
-        0.73
+        0.6,
+        0.556
       ],
       "marker": [
-        0.64,
-        0.7
+        0.6,
+        0.53
       ],
       "summary": {
         "en": "Frontier Road, west half. A salt flat where a convoy died on the old road; salvage, a salt-works ruin and the first raiders.",
@@ -870,7 +842,8 @@
       "connections": [
         "conn.scarp_saltpan_ne",
         "conn.scarp_saltpan_sw",
-        "conn.saltpan_frontier_east"
+        "conn.saltpan_frontier_east",
+        "conn.saltpan_salt_pit"
       ]
     },
     {
@@ -909,16 +882,20 @@
             0.6939
           ],
           [
-            0.7755,
-            0.7273
+            0.7666,
+            0.7386
           ],
           [
-            0.59,
-            0.5421
+            0.6585,
+            0.5443
           ],
           [
-            0.65,
-            0.4927
+            0.6674,
+            0.5018
+          ],
+          [
+            0.6755,
+            0.495
           ],
           [
             0.807,
@@ -927,12 +904,12 @@
         ]
       },
       "label": [
-        0.71,
-        0.59
+        0.705,
+        0.56
       ],
       "marker": [
-        0.71,
-        0.565
+        0.705,
+        0.535
       ],
       "summary": {
         "en": "The east half of the road: a long dry valley with relay pylons and wrecks. Dustline's walls come into view at the end; raiders know that too.",
@@ -982,11 +959,11 @@
             0.5072
           ],
           [
-            0.65,
-            0.4927
+            0.6755,
+            0.495
           ],
           [
-            0.6784,
+            0.6755,
             0.3566
           ],
           [
@@ -1040,40 +1017,40 @@
       "region": "region.frontier",
       "cell": {
         "seed": [
-          0.61,
-          0.4
+          0.63,
+          0.43
         ],
         "weight": 0.0005,
         "polygon": [
           [
-            0.6784,
+            0.6755,
             0.3566
           ],
           [
-            0.65,
-            0.4927
+            0.6755,
+            0.495
           ],
           [
-            0.59,
-            0.5421
+            0.6674,
+            0.5018
           ],
           [
-            0.5746,
-            0.5428
+            0.5548,
+            0.4614
           ],
           [
-            0.5247,
-            0.3486
+            0.5488,
+            0.3527
           ],
           [
-            0.6207,
-            0.2811
+            0.6152,
+            0.305
           ]
         ]
       },
       "marker": [
-        0.61,
-        0.4
+        0.63,
+        0.43
       ],
       "summary": {
         "en": "Hunting grounds in a drained reservoir east of the Outpost. Its edge runs along Frontier Road: a detour for hides, meat and bounties.",
@@ -1091,8 +1068,8 @@
         "conn.sump_verdant"
       ],
       "label": [
-        0.61,
-        0.425
+        0.63,
+        0.455
       ]
     },
     {
@@ -1123,12 +1100,12 @@
             0.2773
           ],
           [
-            0.6207,
-            0.2811
+            0.6152,
+            0.305
           ],
           [
-            0.5247,
-            0.3486
+            0.5488,
+            0.3527
           ],
           [
             0.487,
@@ -1823,8 +1800,8 @@
         "weight": 0.001,
         "polygon": [
           [
-            0.4972,
-            0.9087
+            0.5216,
+            0.8806
           ],
           [
             0.4954,
@@ -1875,8 +1852,8 @@
             0.7098
           ],
           [
-            0.478,
-            0.8467
+            0.5208,
+            0.8788
           ]
         ]
       },
@@ -1942,12 +1919,12 @@
             0.3566
           ],
           [
-            0.6784,
+            0.6755,
             0.3566
           ],
           [
-            0.6207,
-            0.2811
+            0.6152,
+            0.305
           ],
           [
             0.6215,
@@ -2070,7 +2047,7 @@
         "depth": 1,
         "marker": [
           0.675,
-          0.56
+          0.575
         ]
       },
       "summary": {
@@ -2091,6 +2068,95 @@
       },
       "connections": [
         "conn.frontier_east_dragon_lair"
+      ]
+    },
+    {
+      "id": "zone.salt_pit",
+      "name": "The Salt Pit",
+      "kind": "wild",
+      "biome": "desert",
+      "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
+      "tier": 2,
+      "danger": "medium",
+      "status": "planned",
+      "region": "region.frontier",
+      "cell": {
+        "seed": [
+          0.63,
+          0.62
+        ],
+        "weight": 0.002,
+        "polygon": [
+          [
+            0.7666,
+            0.7386
+          ],
+          [
+            0.7637,
+            0.7423
+          ],
+          [
+            0.7027,
+            0.7807
+          ],
+          [
+            0.6555,
+            0.7656
+          ],
+          [
+            0.596,
+            0.769
+          ],
+          [
+            0.5655,
+            0.794
+          ],
+          [
+            0.5351,
+            0.8207
+          ],
+          [
+            0.5259,
+            0.8757
+          ],
+          [
+            0.5216,
+            0.8806
+          ],
+          [
+            0.5208,
+            0.8788
+          ],
+          [
+            0.4949,
+            0.6096
+          ],
+          [
+            0.6585,
+            0.5443
+          ]
+        ]
+      },
+      "marker": [
+        0.69,
+        0.68
+      ],
+      "summary": {
+        "en": "An old open-cast salt and ore pit in the white flats south of Frontier Road: terraces of rust-red rock, wrecked trucks on the haul roads. Uncharted; name provisional.",
+        "es": "Una vieja cantera a cielo abierto de sal y mineral en los salares blancos al sur de Frontier Road: terrazas de roca rojiza, camiones destrozados en los caminos de acarreo. Sin cartografiar; nombre provisional."
+      },
+      "subtitle": {
+        "en": "Open-cast pit · provisional",
+        "es": "Cantera a cielo abierto · provisional"
+      },
+      "connections": [
+        "conn.saltpan_salt_pit"
+      ],
+      "label": [
+        0.69,
+        0.71
       ]
     }
   ],
@@ -2201,8 +2267,8 @@
       ],
       "route": "route.frontier_road",
       "exit_at": [
-        0.5509,
-        0.5594
+        0.5303,
+        0.5005
       ]
     },
     {
@@ -2226,8 +2292,8 @@
         }
       ],
       "exit_at": [
-        0.5272,
-        0.5759
+        0.5058,
+        0.5395
       ]
     },
     {
@@ -2238,20 +2304,20 @@
         {
           "zone": "zone.surface_saltpan",
           "exit": "EAST · FRONTIER ROAD",
-          "edge": "NE",
+          "edge": "E",
           "transition": 160
         },
         {
           "zone": "zone.frontier_road_east",
           "exit": "WEST · THE SALTPAN",
-          "edge": "SW",
+          "edge": "W",
           "transition": 161
         }
       ],
       "route": "route.frontier_road",
       "exit_at": [
-        0.6827,
-        0.6347
+        0.6629,
+        0.5231
       ]
     },
     {
@@ -2262,7 +2328,7 @@
         {
           "zone": "zone.frontier_road_east",
           "exit": "DUSTLINE GATE",
-          "edge": "N",
+          "edge": "NE",
           "transition": 162
         },
         {
@@ -2274,8 +2340,8 @@
       ],
       "route": "route.frontier_road",
       "exit_at": [
-        0.7285,
-        0.4999
+        0.7413,
+        0.5011
       ]
     },
     {
@@ -2286,17 +2352,17 @@
         {
           "zone": "zone.surface_scarp",
           "exit": "EAST TRAIL · THE SUMP",
-          "edge": "E"
+          "edge": "NE"
         },
         {
           "zone": "zone.the_sump",
           "exit": "WEST TRAIL · THE SCARP",
-          "edge": "SW"
+          "edge": "W"
         }
       ],
       "exit_at": [
-        0.5497,
-        0.4457
+        0.5518,
+        0.4071
       ]
     },
     {
@@ -2307,7 +2373,7 @@
         {
           "zone": "zone.the_sump",
           "exit": "SOUTH · FRONTIER ROAD",
-          "edge": "S"
+          "edge": "SE"
         },
         {
           "zone": "zone.frontier_road_east",
@@ -2316,8 +2382,8 @@
         }
       ],
       "exit_at": [
-        0.62,
-        0.5174
+        0.6714,
+        0.4984
       ]
     },
     {
@@ -2441,7 +2507,7 @@
         {
           "zone": "zone.the_sump",
           "exit": "NE · FUNGAL DEPTHS",
-          "edge": "NE"
+          "edge": "N"
         },
         {
           "zone": "zone.fungal_depths",
@@ -2450,8 +2516,8 @@
         }
       ],
       "exit_at": [
-        0.6495,
-        0.3188
+        0.6454,
+        0.3308
       ]
     },
     {
@@ -2471,8 +2537,8 @@
         }
       ],
       "exit_at": [
-        0.5727,
-        0.3149
+        0.582,
+        0.3289
       ]
     },
     {
@@ -2504,7 +2570,7 @@
         {
           "zone": "zone.verdant_reach",
           "exit": "EAST · FUNGAL DEPTHS",
-          "edge": "E"
+          "edge": "SE"
         },
         {
           "zone": "zone.fungal_depths",
@@ -2513,8 +2579,8 @@
         }
       ],
       "exit_at": [
-        0.6211,
-        0.2792
+        0.6184,
+        0.2911
       ]
     },
     {
@@ -2849,6 +2915,27 @@
           "edge_fixed": true,
           "transition": 231
         }
+      ]
+    },
+    {
+      "id": "conn.saltpan_salt_pit",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.surface_saltpan",
+          "exit": "SOUTH · THE SALT PIT",
+          "edge": "SW"
+        },
+        {
+          "zone": "zone.salt_pit",
+          "exit": "NORTH · THE SALTPAN",
+          "edge": "NW"
+        }
+      ],
+      "exit_at": [
+        0.5767,
+        0.577
       ]
     }
   ],

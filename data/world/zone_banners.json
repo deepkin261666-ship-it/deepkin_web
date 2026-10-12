@@ -9,6 +9,7 @@
     "zone.excavation_c3_f3": {"title": "THE RELIC CHAMBER", "subtitle": "C-3 · FLOOR 3", "objective": "SECURE THE RELIC · EXTRACTION LIFT TO FLOOR 1"},
     "zone.surface_scarp": {"title": "THE SCARP", "subtitle": "SURFACE", "objective": "OPEN SKY · SCAVENGER CAMP · SHAFT DOWN"},
     "zone.surface_saltpan": {"title": "THE SALTPAN", "subtitle": "SURFACE", "objective": "SEARCH THE CONVOY · SALT WORKS EAST"},
+    "zone.salt_pit": {"title": "THE SALT PIT", "subtitle": "UNCHARTED · PROVISIONAL", "objective": "AN OLD OPEN-CAST PIT · NOT YET MAPPED"},
     "zone.frontier_road_east": {"title": "FRONTIER ROAD", "subtitle": "EAST", "objective": "FOLLOW THE ROAD NORTH TO DUSTLINE · MIND THE WRECKS"},
     "zone.dustline": {"title": "DUSTLINE", "subtitle": "CITY · SAFE", "objective": "MARKET · EXCHANGE · SCRAPPER'S ROW"},
     "zone.dragon_lair": {"title": "THE CINDER DEEP", "subtitle": "DRAGON LAIR", "objective": "HUNT PAST THE GATE · CLIMB OUT BY THE LADDER"},
