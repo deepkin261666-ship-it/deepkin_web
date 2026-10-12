@@ -707,38 +707,38 @@ def header(x, y, lang, fs):
             + text(x, y + fs * 2.85, tr("survey", lang) + "  ·  NET 261.6.66", fs * .78, C["dim"], "start", 500, MONO, .14, False))
 
 
-LENS = (0.55, 0.672, 560, 2.0)
+# Pintura 2026-10-12: el corredor ya ocupa buena parte del arte, la lupa solo lo realza un poco.
+LENS = (0.60, 0.52, 520, 1.3)
 
 
 # --- Laminas ------------------------------------------------------------------------------------------------------
 def common_layout():
     return {
-        "pos": {"zone.dragon_lair": (0.552, 0.766), "zone.threshold": (0.432, 0.633), "zone.excavation_c3_f2": (0.428, 0.893),
-                "zone.excavation_c3_f3": (0.428, 0.952)},
-        "via": {"conn.outpost_threshold": None, "conn.threshold_scarp": None, "conn.threshold_shallows": (0.38, 0.55),
-                "conn.shallows_c3": (0.335, 0.66), "conn.threshold_c3": None, "conn.frontier_east_dragon_lair": None,
-                "conn.c3_f2": None, "conn.c3_f2_f3": None, "conn.outpost_scarp": (0.452, 0.556),
-                "extraction.zone.excavation_c3_f3": (0.395, 0.905)},
+        "pos": {"zone.dragon_lair": (0.66, 0.605), "zone.threshold": (0.43, 0.505), "zone.excavation_c3_f2": (0.405, 0.705), "zone.excavation_c3_f3": (0.405, 0.755)},
+        "via": {"conn.outpost_threshold": None, "conn.threshold_scarp": None, "conn.threshold_shallows": (0.445, 0.36),
+                "conn.shallows_c3": (0.315, 0.50), "conn.threshold_c3": (0.44, 0.56), "conn.frontier_east_dragon_lair": None,
+                "conn.c3_f2": None, "conn.c3_f2_f3": None, "conn.outpost_scarp": (0.43, 0.495),
+                "extraction.zone.excavation_c3_f3": (0.35, 0.73)},
         "short": {"zone.excavation_c3": "C-3 F1", "zone.excavation_c3_f2": "C-3 F2", "zone.excavation_c3_f3": "C-3 F3",
                   "zone.frontier_road_east": "Frontier Rd", "zone.dragon_lair": "Cinder Deep", "zone.surface_scarp": "Scarp",
                   "zone.surface_saltpan": "Saltpan"},
-        "city_at": (0.676, 0.666), "city_size": (0.085, 0.066),
+        "city_at": (0.73, 0.43), "city_size": (0.085, 0.07),
         "fuel_off": (44, -26),
         "svc_off": {"zone.outpost": (-34, 42), "zone.dustline": (-6, -40)},
     }
 
 
 def wide(lang):
-    win = (0.255, 0.355, 0.825, 0.985)
+    win = (0.22, 0.22, 0.88, 0.82)
     L = common_layout()
     L.update({"id": "w", "fs_zone": 15, "fs_planned": 11.5, "fs_grid": 11, "fs_title": 14, "fs_band": 11, "fs_node": 12.5, "fs_key": 12.5,
               "mark_r": 13, "plate": 15, "badge_r": 8, "step_r": 11, "svc": 13,
-              "labels": {"zone.outpost": (-20, -16, "end"), "zone.shallows": (0, -26, "middle"), "zone.excavation_c3": (-22, -6, "end"),
-                         "zone.surface_scarp": (6, -24, "middle"), "zone.surface_saltpan": (-4, 34, "middle"),
+              "labels": {"zone.outpost": (0, -28, "middle"), "zone.shallows": (0, -26, "middle"), "zone.excavation_c3": (18, -8, "start"),
+                         "zone.surface_scarp": (22, -26, "start"), "zone.surface_saltpan": (-4, 34, "middle"),
                          "zone.frontier_road_east": (30, 8, "start"), "zone.dustline": (26, 34, "start"),
-                         "zone.threshold": (-26, 44, "end", True), "zone.dragon_lair": (-24, 4, "end"),
+                         "zone.threshold": (18, 6, "start"), "zone.dragon_lair": (-24, 4, "end"),
                          "zone.excavation_c3_f2": (26, 5, "start"), "zone.excavation_c3_f3": (26, 5, "start")},
-              "step_off": {"zone.outpost": (-24, 16), "zone.threshold": (22, 16), "zone.surface_scarp": (-26, -18),
+              "step_off": {"zone.outpost": (-24, 16), "zone.threshold": (-22, -16), "zone.surface_scarp": (-26, -18),
                            "zone.surface_saltpan": (-24, 12), "zone.frontier_road_east": (-26, -14), "zone.dustline": (-30, -8)},
               "badge_off": {"conn.outpost_threshold": (-1.2, -1.6), "conn.threshold_scarp": (1.6, 0.4), "conn.scarp_saltpan_ne": (1.6, -1.6),
                             "conn.scarp_saltpan_sw": (-1.4, 1.6), "conn.frontier_east_dragon_lair": (1.9, 0.2),
@@ -793,16 +793,16 @@ def route_card(x, y, w, lang, L):
 
 def tall(lang):
     W_ = 640
-    win = (0.335, 0.42, 0.745, 0.975)
+    win = (0.25, 0.25, 0.90, 0.82)
     L = common_layout()
     L.update({"id": "t", "fs_zone": 16.5, "fs_planned": 11.5, "fs_grid": 12, "fs_title": 16, "fs_band": 13, "fs_node": 13.5, "fs_key": 16,
               "mark_r": 14, "plate": 15, "badge_r": 9.5, "step_r": 11.5, "svc": 14,
-              "labels": {"zone.outpost": (16, -28, "start"), "zone.shallows": (20, -24, "middle"), "zone.excavation_c3": (-6, -28, "start"),
-                         "zone.surface_scarp": (22, -22, "start"), "zone.surface_saltpan": (0, 36, "middle"),
-                         "zone.frontier_road_east": (30, 8, "start"), "zone.dustline": (26, 36, "start"),
-                         "zone.threshold": (-10, 92, "start", True), "zone.dragon_lair": (0, 32, "middle"),
+              "labels": {"zone.outpost": (0, -28, "middle"), "zone.shallows": (20, -24, "middle"), "zone.excavation_c3": (18, -8, "start"),
+                         "zone.surface_scarp": (22, 10, "start"), "zone.surface_saltpan": (0, 36, "middle"),
+                         "zone.frontier_road_east": (14, -30, "start"), "zone.dustline": (26, 36, "start"),
+                         "zone.threshold": (18, 6, "start"), "zone.dragon_lair": (0, 34, "middle"),
                          "zone.excavation_c3_f2": (24, 5, "start"), "zone.excavation_c3_f3": (24, 5, "start")},
-              "step_off": {"zone.outpost": (-26, 16), "zone.threshold": (22, 18), "zone.surface_scarp": (-24, -20),
+              "step_off": {"zone.outpost": (-26, 16), "zone.threshold": (-22, -16), "zone.surface_scarp": (-24, -20),
                            "zone.surface_saltpan": (-22, 16), "zone.frontier_road_east": (-26, -16), "zone.dustline": (26, -26)},
               "badge_off": {"conn.outpost_threshold": (-1.2, -1.6), "conn.threshold_scarp": (1.6, 0.4), "conn.scarp_saltpan_ne": (1.6, -1.6),
                             "conn.scarp_saltpan_sw": (-1.6, -1.4), "conn.frontier_east_dragon_lair": (1.9, 0.2),
@@ -819,7 +819,7 @@ def tall(lang):
                             "extraction.zone.excavation_c3_f3": (0, -30)}})
     L["pos"].update({"zone.excavation_c3_f2": (0.44, 0.868), "zone.excavation_c3_f3": (0.44, 0.958)})
     pf = (12, 128, W_ - 24, 780)
-    P = Plan(*pf, *win, lens=(0.55, 0.672, 520, 2.6))
+    P = Plan(*pf, *win, lens=(0.60, 0.52, 460, 1.45))
     sec_y = pf[1] + pf[3] + 40
     sec_h = 760
     key_y = sec_y + sec_h + 46

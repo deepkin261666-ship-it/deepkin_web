@@ -2,7 +2,7 @@
   "$schema_note": "DEEPKIN world graph — single source of truth for the game and the web wiki. See docs/design/WORLD_MAP.md.",
   "version": 1,
   "status": "provisional",
-  "updated": "2026-10-10",
+  "updated": "2026-10-12",
   "image": {
     "file": "docs/design/world_map_prototype.jpg",
     "width": 1312,
@@ -351,40 +351,40 @@
       "region": "region.starting_region",
       "cell": {
         "seed": [
-          0.42,
-          0.5463
+          0.365,
+          0.455
         ],
         "weight": 0.0006,
         "polygon": [
           [
-            0.3025,
-            0.5581
+            0.4363,
+            0.5504
           ],
           [
-            0.3017,
-            0.5303
+            0.295,
+            0.5547
           ],
           [
-            0.3267,
-            0.5059
+            0.2522,
+            0.5166
           ],
           [
-            0.4905,
-            0.4958
+            0.2534,
+            0.4505
           ],
           [
-            0.4905,
-            0.5327
+            0.3633,
+            0.3761
           ],
           [
-            0.3716,
-            0.6554
+            0.4191,
+            0.3922
           ]
         ]
       },
       "marker": [
-        0.4192,
-        0.5438
+        0.365,
+        0.46
       ],
       "summary": {
         "en": "Where every operator arrives: a fortified mining settlement dug in around an old excavation shaft. The lift on the shaft is the way on.",
@@ -410,8 +410,8 @@
         "conn.outpost_ruins"
       ],
       "label": [
-        0.419,
-        0.571
+        0.365,
+        0.488
       ]
     },
     {
@@ -430,8 +430,8 @@
         "parent": "zone.outpost",
         "depth": 1,
         "marker": [
-          0.472,
-          0.645
+          0.447,
+          0.432
         ]
       },
       "summary": {
@@ -467,32 +467,40 @@
       "region": "region.starting_region",
       "cell": {
         "seed": [
-          0.4154,
-          0.457
+          0.4,
+          0.31
         ],
         "weight": 0.0004,
         "polygon": [
           [
-            0.4163,
-            0.2896
+            0.3888,
+            0.1805
           ],
           [
-            0.5089,
-            0.46
+            0.487,
+            0.3422
           ],
           [
-            0.4905,
-            0.4958
+            0.4191,
+            0.3922
           ],
           [
-            0.3267,
-            0.5059
+            0.3633,
+            0.3761
+          ],
+          [
+            0.3258,
+            0.2262
+          ],
+          [
+            0.3332,
+            0.2108
           ]
         ]
       },
       "marker": [
-        0.4123,
-        0.4579
+        0.4,
+        0.315
       ],
       "summary": {
         "en": "A wide, damp cavern around the Keystone column. First ore, first Burrowborn nest, first Ravager.",
@@ -518,8 +526,8 @@
         "conn.old_metro_shallows"
       ],
       "label": [
-        0.412,
-        0.433
+        0.4,
+        0.29
       ]
     },
     {
@@ -537,68 +545,36 @@
       "region": "region.starting_region",
       "cell": {
         "seed": [
-          0.3925,
-          0.8257
+          0.37,
+          0.65
         ],
         "weight": 0.0006,
         "polygon": [
           [
-            0.531,
-            0.8452
+            0.295,
+            0.7098
           ],
           [
-            0.5259,
-            0.8757
+            0.295,
+            0.5547
           ],
           [
-            0.4954,
-            0.9108
+            0.4363,
+            0.5504
           ],
           [
-            0.4573,
-            0.9358
+            0.5035,
+            0.5925
           ],
           [
-            0.4284,
-            0.9775
-          ],
-          [
-            0.3872,
-            0.9691
-          ],
-          [
-            0.3582,
-            0.9274
-          ],
-          [
-            0.3277,
-            0.9024
-          ],
-          [
-            0.3195,
-            0.8997
-          ],
-          [
-            0.3195,
-            0.7614
-          ],
-          [
-            0.3836,
-            0.6934
-          ],
-          [
-            0.4041,
-            0.7017
-          ],
-          [
-            0.527,
-            0.8365
+            0.478,
+            0.8467
           ]
         ]
       },
       "marker": [
-        0.3887,
-        0.834
+        0.362,
+        0.645
       ],
       "summary": {
         "en": "An active, guarded dig at the bottom of the shaft. Floor one is open; drilling through the Deep Seal at its east end opens the deep survey shaft down to floors two and three.",
@@ -624,8 +600,8 @@
         "conn.c3_f2"
       ],
       "label": [
-        0.389,
-        0.861
+        0.362,
+        0.675
       ]
     },
     {
@@ -645,8 +621,8 @@
         "parent": "zone.excavation_c3",
         "depth": 2,
         "marker": [
-          0.4101,
-          0.8882
+          0.385,
+          0.7
         ]
       },
       "summary": {
@@ -688,8 +664,8 @@
         "parent": "zone.excavation_c3",
         "depth": 3,
         "marker": [
-          0.41,
-          0.922
+          0.385,
+          0.735
         ]
       },
       "summary": {
@@ -733,40 +709,44 @@
       "region": "region.starting_region",
       "cell": {
         "seed": [
-          0.468,
-          0.602
+          0.48,
+          0.44
         ],
         "weight": 0.0,
         "polygon": [
           [
-            0.5346,
-            0.6201
+            0.5746,
+            0.5428
           ],
           [
-            0.4041,
-            0.7017
+            0.5035,
+            0.5925
           ],
           [
-            0.3836,
-            0.6934
+            0.4363,
+            0.5504
           ],
           [
-            0.3716,
-            0.6554
+            0.4191,
+            0.3922
           ],
           [
-            0.4905,
-            0.5327
+            0.487,
+            0.3422
+          ],
+          [
+            0.5247,
+            0.3486
           ]
         ]
       },
       "label": [
-        0.49,
-        0.571
+        0.5,
+        0.475
       ],
       "marker": [
-        0.49,
-        0.598
+        0.5,
+        0.45
       ],
       "summary": {
         "en": "Open sky over the Outpost: a basin of cracked mud and hoodoos with a scavenger camp. The shaft in its crater drops to The Threshold.",
@@ -803,36 +783,72 @@
       "region": "region.frontier",
       "cell": {
         "seed": [
-          0.515,
-          0.692
+          0.62,
+          0.68
         ],
         "weight": 0.0,
         "polygon": [
           [
-            0.527,
-            0.8365
+            0.7755,
+            0.7273
           ],
           [
-            0.4041,
-            0.7017
+            0.7637,
+            0.7423
           ],
           [
-            0.5346,
-            0.6201
+            0.7027,
+            0.7807
           ],
           [
-            0.5681,
-            0.6325
+            0.6555,
+            0.7656
+          ],
+          [
+            0.596,
+            0.769
+          ],
+          [
+            0.5655,
+            0.794
+          ],
+          [
+            0.5351,
+            0.8207
+          ],
+          [
+            0.5259,
+            0.8757
+          ],
+          [
+            0.4972,
+            0.9087
+          ],
+          [
+            0.478,
+            0.8467
+          ],
+          [
+            0.5035,
+            0.5925
+          ],
+          [
+            0.5746,
+            0.5428
+          ],
+          [
+            0.59,
+            0.5421
           ]
         ]
       },
       "label": [
-        0.523,
-        0.732
+        0.64,
+        0.73
       ],
       "marker": [
-        0.523,
-        0.705
+        0.64,
+        0.7
       ],
       "summary": {
         "en": "Frontier Road, west half. A salt flat where a convoy died on the old road; salvage, a salt-works ruin and the first raiders.",
@@ -871,56 +887,52 @@
       "region": "region.frontier",
       "cell": {
         "seed": [
-          0.598,
-          0.712
+          0.72,
+          0.56
         ],
         "weight": 0.0004,
         "polygon": [
           [
-            0.6616,
-            0.7676
+            0.8744,
+            0.5936
           ],
           [
-            0.6555,
-            0.7656
+            0.8552,
+            0.6188
           ],
           [
-            0.596,
-            0.769
+            0.8095,
+            0.6355
           ],
           [
-            0.5655,
-            0.794
+            0.8018,
+            0.6939
           ],
           [
-            0.5351,
-            0.8207
+            0.7755,
+            0.7273
           ],
           [
-            0.531,
-            0.8452
+            0.59,
+            0.5421
           ],
           [
-            0.527,
-            0.8365
+            0.65,
+            0.4927
           ],
           [
-            0.5681,
-            0.6325
-          ],
-          [
-            0.5883,
-            0.627
+            0.807,
+            0.5072
           ]
         ]
       },
       "label": [
-        0.598,
-        0.749
+        0.71,
+        0.59
       ],
       "marker": [
-        0.59,
-        0.722
+        0.71,
+        0.565
       ],
       "summary": {
         "en": "The east half of the road: a long dry valley with relay pylons and wrecks. Dustline's walls come into view at the end; raiders know that too.",
@@ -960,40 +972,32 @@
       "region": "region.frontier",
       "cell": {
         "seed": [
-          0.662,
-          0.672
+          0.73,
+          0.43
         ],
         "weight": 0.0014,
         "polygon": [
           [
-            0.7862,
-            0.7137
+            0.807,
+            0.5072
           ],
           [
-            0.7637,
-            0.7423
+            0.65,
+            0.4927
           ],
           [
-            0.7027,
-            0.7807
+            0.6784,
+            0.3566
           ],
           [
-            0.6616,
-            0.7676
-          ],
-          [
-            0.5883,
-            0.627
-          ],
-          [
-            0.6482,
-            0.5688
+            0.7981,
+            0.3566
           ]
         ]
       },
       "marker": [
-        0.6311,
-        0.6797
+        0.73,
+        0.425
       ],
       "summary": {
         "en": "The trading city. Neutral ground where every civilisation buys, sells and hires: market, caravans, workshops, the Exchange and the Warrens.",
@@ -1014,8 +1018,8 @@
         "conn.dustline_floodlands"
       ],
       "label": [
-        0.6669,
-        0.7035
+        0.77,
+        0.4
       ],
       "game": {
         "file": "data/starting_region.json",
@@ -1036,52 +1040,40 @@
       "region": "region.frontier",
       "cell": {
         "seed": [
-          0.5602,
-          0.5463
+          0.61,
+          0.4
         ],
         "weight": 0.0005,
         "polygon": [
           [
-            0.6482,
-            0.5688
+            0.6784,
+            0.3566
           ],
           [
-            0.5883,
-            0.627
+            0.65,
+            0.4927
           ],
           [
-            0.5681,
-            0.6325
+            0.59,
+            0.5421
           ],
           [
-            0.5346,
-            0.6201
+            0.5746,
+            0.5428
           ],
           [
-            0.4905,
-            0.5327
+            0.5247,
+            0.3486
           ],
           [
-            0.4905,
-            0.4958
-          ],
-          [
-            0.5089,
-            0.46
-          ],
-          [
-            0.6121,
-            0.4626
-          ],
-          [
-            0.6517,
-            0.5492
+            0.6207,
+            0.2811
           ]
         ]
       },
       "marker": [
-        0.5526,
-        0.5321
+        0.61,
+        0.4
       ],
       "summary": {
         "en": "Hunting grounds in a drained reservoir east of the Outpost. Its edge runs along Frontier Road: a detour for hides, meat and bounties.",
@@ -1099,8 +1091,8 @@
         "conn.sump_verdant"
       ],
       "label": [
-        0.5683,
-        0.5286
+        0.61,
+        0.425
       ]
     },
     {
@@ -1117,40 +1109,44 @@
       "region": "region.verdant",
       "cell": {
         "seed": [
-          0.564,
-          0.3603
+          0.51,
+          0.23
         ],
         "weight": 0.003,
         "polygon": [
           [
-            0.6121,
-            0.4626
+            0.5834,
+            0.1404
           ],
           [
-            0.5089,
-            0.46
+            0.6215,
+            0.2773
           ],
           [
-            0.4163,
-            0.2896
+            0.6207,
+            0.2811
           ],
           [
-            0.4158,
-            0.2859
+            0.5247,
+            0.3486
           ],
           [
-            0.5154,
-            0.2336
+            0.487,
+            0.3422
           ],
           [
-            0.6871,
-            0.3441
+            0.3888,
+            0.1805
+          ],
+          [
+            0.4037,
+            0.1538
           ]
         ]
       },
       "marker": [
-        0.5602,
-        0.3628
+        0.51,
+        0.235
       ],
       "summary": {
         "en": "The Living City, home of the Verdant. Gardens grown over old reservoirs; medicine, seeds and symbiotes.",
@@ -1168,8 +1164,8 @@
         "conn.verdant_relay"
       ],
       "label": [
-        0.5484,
-        0.3528
+        0.51,
+        0.26
       ]
     },
     {
@@ -1186,36 +1182,48 @@
       "region": "region.relay",
       "cell": {
         "seed": [
-          0.6402,
-          0.2185
+          0.69,
+          0.17
         ],
         "weight": 0.003,
         "polygon": [
           [
-            0.6083,
-            0.0336
+            0.6282,
+            0.0384
           ],
           [
-            0.6369,
-            0.0405
+            0.6555,
+            0.045
           ],
           [
-            0.7599,
-            0.3213
+            0.7012,
+            0.0317
           ],
           [
-            0.6871,
-            0.3441
+            0.7622,
+            0.0484
           ],
           [
-            0.5154,
-            0.2336
+            0.7672,
+            0.0508
+          ],
+          [
+            0.7758,
+            0.2157
+          ],
+          [
+            0.6215,
+            0.2773
+          ],
+          [
+            0.5834,
+            0.1404
           ]
         ]
       },
       "marker": [
-        0.6326,
-        0.221
+        0.69,
+        0.175
       ],
       "summary": {
         "en": "The Network: home of the Relay, a city wired into an ancient relay station that still answers.",
@@ -1232,8 +1240,8 @@
         "conn.relay_pale"
       ],
       "label": [
-        0.6358,
-        0.2063
+        0.69,
+        0.2
       ]
     },
     {
@@ -1250,32 +1258,52 @@
       "region": "region.foundry",
       "cell": {
         "seed": [
-          0.2325,
-          0.2627
+          0.21,
+          0.2
         ],
         "weight": 0.003,
         "polygon": [
           [
-            0.3224,
-            0.1441
+            0.0835,
+            0.1929
           ],
           [
-            0.39,
-            0.2688
+            0.1143,
+            0.1668
           ],
           [
-            0.1891,
-            0.3887
+            0.1357,
+            0.1268
           ],
           [
-            0.1222,
-            0.2491
+            0.1905,
+            0.0984
+          ],
+          [
+            0.2115,
+            0.0915
+          ],
+          [
+            0.3332,
+            0.2108
+          ],
+          [
+            0.3258,
+            0.2262
+          ],
+          [
+            0.1863,
+            0.3336
+          ],
+          [
+            0.175,
+            0.3298
           ]
         ]
       },
       "marker": [
-        0.2287,
-        0.2569
+        0.21,
+        0.205
       ],
       "summary": {
         "en": "The Forge City, home of the Foundry. Furnaces, rail yards and the heaviest machines in the world.",
@@ -1292,8 +1320,8 @@
         "conn.ironhaven_old_metro"
       ],
       "label": [
-        0.2547,
-        0.2639
+        0.21,
+        0.23
       ]
     },
     {
@@ -1310,26 +1338,14 @@
       "region": "region.relay",
       "cell": {
         "seed": [
-          0.7546,
-          0.1585
+          0.85,
+          0.16
         ],
         "weight": 0.002,
         "polygon": [
           [
-            0.6369,
-            0.0405
-          ],
-          [
-            0.6555,
-            0.045
-          ],
-          [
-            0.7012,
-            0.0317
-          ],
-          [
-            0.7622,
-            0.0484
+            0.7672,
+            0.0508
           ],
           [
             0.8095,
@@ -1344,22 +1360,18 @@
             0.2185
           ],
           [
-            0.7957,
-            0.2752
+            0.8101,
+            0.2537
           ],
           [
-            0.8001,
-            0.329
-          ],
-          [
-            0.7599,
-            0.3213
+            0.7758,
+            0.2157
           ]
         ]
       },
       "marker": [
-        0.747,
-        0.1501
+        0.85,
+        0.16
       ],
       "summary": {
         "en": "Fused crystal plains north-east of Relay Nine. Light bends, signals echo, and nothing grows.",
@@ -1370,8 +1382,8 @@
         "conn.relay_glasslands"
       ],
       "label": [
-        0.753,
-        0.1568
+        0.85,
+        0.185
       ]
     },
     {
@@ -1388,18 +1400,14 @@
       "region": "region.north",
       "cell": {
         "seed": [
-          0.4573,
-          0.1168
+          0.5,
+          0.07
         ],
         "weight": 0.002,
         "polygon": [
           [
-            0.3099,
-            0.0642
-          ],
-          [
-            0.3201,
-            0.0617
+            0.3946,
+            0.0454
           ],
           [
             0.3963,
@@ -1422,30 +1430,22 @@
             0.0284
           ],
           [
-            0.6083,
-            0.0336
+            0.6282,
+            0.0384
           ],
           [
-            0.5154,
-            0.2336
+            0.5834,
+            0.1404
           ],
           [
-            0.4158,
-            0.2859
-          ],
-          [
-            0.39,
-            0.2688
-          ],
-          [
-            0.3224,
-            0.1441
+            0.4037,
+            0.1538
           ]
         ]
       },
       "marker": [
-        0.4588,
-        0.1209
+        0.52,
+        0.075
       ],
       "summary": {
         "en": "The frozen north: snowfields over collapsed peaks. Cold drains batteries faster than any creature.",
@@ -1457,8 +1457,8 @@
         "conn.pale_ash"
       ],
       "label": [
-        0.4504,
-        0.1354
+        0.52,
+        0.1
       ]
     },
     {
@@ -1475,48 +1475,44 @@
       "region": "region.foundry",
       "cell": {
         "seed": [
-          0.1905,
-          0.1668
+          0.3,
+          0.09
         ],
         "weight": 0.001,
         "polygon": [
           [
-            0.0655,
-            0.2082
-          ],
-          [
-            0.1143,
-            0.1668
-          ],
-          [
-            0.1357,
-            0.1268
-          ],
-          [
-            0.1905,
-            0.0984
+            0.2115,
+            0.0915
           ],
           [
             0.2515,
             0.0784
           ],
           [
-            0.3099,
-            0.0642
+            0.3201,
+            0.0617
           ],
           [
-            0.3224,
-            0.1441
+            0.3946,
+            0.0454
           ],
           [
-            0.1222,
-            0.2491
+            0.4037,
+            0.1538
+          ],
+          [
+            0.3888,
+            0.1805
+          ],
+          [
+            0.3332,
+            0.2108
           ]
         ]
       },
       "marker": [
-        0.1905,
-        0.171
+        0.3,
+        0.1
       ],
       "summary": {
         "en": "Burnt ground downwind of Ironhaven's furnaces. Slag fields, ash storms and scavenger clans.",
@@ -1528,8 +1524,8 @@
         "conn.ash_ironhaven"
       ],
       "label": [
-        0.2025,
-        0.1541
+        0.3,
+        0.125
       ]
     },
     {
@@ -1546,8 +1542,8 @@
       "region": "region.foundry",
       "cell": {
         "seed": [
-          0.08,
-          0.3503
+          0.06,
+          0.32
         ],
         "weight": 0.001,
         "polygon": [
@@ -1560,28 +1556,16 @@
             0.2185
           ],
           [
-            0.0655,
-            0.2082
+            0.0835,
+            0.1929
           ],
           [
-            0.1222,
-            0.2491
+            0.175,
+            0.3298
           ],
           [
-            0.1891,
-            0.3887
-          ],
-          [
-            0.183,
-            0.4214
-          ],
-          [
-            0.0386,
-            0.5085
-          ],
-          [
-            0.0305,
-            0.4837
+            0.0391,
+            0.4298
           ],
           [
             0.0412,
@@ -1594,8 +1578,8 @@
         ]
       },
       "marker": [
-        0.0701,
-        0.3053
+        0.085,
+        0.33
       ],
       "summary": {
         "en": "Abandoned industry on the western margin: rusted works, rail spurs and Rustbound machines.",
@@ -1607,8 +1591,8 @@
         "conn.rustbelt_crags"
       ],
       "label": [
-        0.0947,
-        0.3591
+        0.13,
+        0.33
       ]
     },
     {
@@ -1625,44 +1609,32 @@
       "region": "region.forgotten_works",
       "cell": {
         "seed": [
-          0.3011,
-          0.4003
+          0.3,
+          0.34
         ],
         "weight": 0.0005,
         "polygon": [
           [
-            0.4158,
-            0.2859
+            0.3258,
+            0.2262
           ],
           [
-            0.4163,
-            0.2896
+            0.3633,
+            0.3761
           ],
           [
-            0.3267,
-            0.5059
+            0.2534,
+            0.4505
           ],
           [
-            0.3017,
-            0.5303
-          ],
-          [
-            0.183,
-            0.4214
-          ],
-          [
-            0.1891,
-            0.3887
-          ],
-          [
-            0.39,
-            0.2688
+            0.1863,
+            0.3336
           ]
         ]
       },
       "marker": [
-        0.2919,
-        0.4053
+        0.3,
+        0.345
       ],
       "summary": {
         "en": "A pre-collapse transit network under the west. Platforms, flooded tunnels and the Castoffs who live there.",
@@ -1675,8 +1647,8 @@
         "conn.crags_old_metro"
       ],
       "label": [
-        0.3027,
-        0.3973
+        0.3,
+        0.37
       ]
     },
     {
@@ -1693,48 +1665,48 @@
       "region": "region.west",
       "cell": {
         "seed": [
-          0.1829,
-          0.5546
+          0.14,
+          0.45
         ],
         "weight": 0.001,
         "polygon": [
           [
-            0.3017,
-            0.5303
+            0.2534,
+            0.4505
           ],
           [
-            0.3025,
-            0.5581
+            0.2522,
+            0.5166
           ],
           [
-            0.1849,
-            0.6482
-          ],
-          [
-            0.1814,
-            0.6355
-          ],
-          [
-            0.1143,
-            0.5855
+            0.112,
+            0.5838
           ],
           [
             0.0473,
             0.5354
           ],
           [
-            0.0386,
-            0.5085
+            0.0305,
+            0.4837
           ],
           [
-            0.183,
-            0.4214
+            0.0391,
+            0.4298
+          ],
+          [
+            0.175,
+            0.3298
+          ],
+          [
+            0.1863,
+            0.3336
           ]
         ]
       },
       "marker": [
-        0.1905,
-        0.5563
+        0.14,
+        0.45
       ],
       "summary": {
         "en": "Broken uplands west of the Outpost. Climbing routes, nests on ledges, and a cave entrance nobody maps the same way twice.",
@@ -1747,8 +1719,8 @@
         "conn.crags_ruins"
       ],
       "label": [
-        0.1766,
-        0.5317
+        0.14,
+        0.475
       ]
     },
     {
@@ -1765,30 +1737,18 @@
       "region": "region.forgotten_works",
       "cell": {
         "seed": [
-          0.263,
-          0.6797
+          0.22,
+          0.65
         ],
         "weight": 0.0006,
         "polygon": [
           [
-            0.3025,
-            0.5581
+            0.1326,
+            0.7706
           ],
           [
-            0.3716,
-            0.6554
-          ],
-          [
-            0.3836,
-            0.6934
-          ],
-          [
-            0.3195,
-            0.7614
-          ],
-          [
-            0.1411,
-            0.7335
+            0.128,
+            0.7523
           ],
           [
             0.1524,
@@ -1799,14 +1759,34 @@
             0.6856
           ],
           [
-            0.1849,
-            0.6482
+            0.1814,
+            0.6355
+          ],
+          [
+            0.1143,
+            0.5855
+          ],
+          [
+            0.112,
+            0.5838
+          ],
+          [
+            0.2522,
+            0.5166
+          ],
+          [
+            0.295,
+            0.5547
+          ],
+          [
+            0.295,
+            0.7098
           ]
         ]
       },
       "marker": [
-        0.2515,
-        0.6772
+        0.21,
+        0.66
       ],
       "summary": {
         "en": "Structures older than every civilisation, half swallowed by the purple waste. Architects' machines still guard them.",
@@ -1819,8 +1799,8 @@
         "conn.ruins_abyss"
       ],
       "label": [
-        0.2766,
-        0.6754
+        0.21,
+        0.685
       ]
     },
     {
@@ -1837,14 +1817,38 @@
       "region": "region.abyss",
       "cell": {
         "seed": [
-          0.2439,
-          0.8257
+          0.27,
+          0.81
         ],
         "weight": 0.001,
         "polygon": [
           [
-            0.3195,
-            0.8997
+            0.4972,
+            0.9087
+          ],
+          [
+            0.4954,
+            0.9108
+          ],
+          [
+            0.4573,
+            0.9358
+          ],
+          [
+            0.4284,
+            0.9775
+          ],
+          [
+            0.3872,
+            0.9691
+          ],
+          [
+            0.3582,
+            0.9274
+          ],
+          [
+            0.3277,
+            0.9024
           ],
           [
             0.282,
@@ -1863,22 +1867,22 @@
             0.819
           ],
           [
-            0.128,
-            0.7523
+            0.1326,
+            0.7706
           ],
           [
-            0.1411,
-            0.7335
+            0.295,
+            0.7098
           ],
           [
-            0.3195,
-            0.7614
+            0.478,
+            0.8467
           ]
         ]
       },
       "marker": [
-        0.2515,
-        0.844
+        0.27,
+        0.82
       ],
       "summary": {
         "en": "Unknown. Extreme strata, exceptional resources, and whatever is waiting at the bottom.",
@@ -1894,8 +1898,8 @@
         "conn.abyss_c3_f3"
       ],
       "label": [
-        0.2326,
-        0.8118
+        0.27,
+        0.845
       ]
     },
     {
@@ -1912,52 +1916,52 @@
       "region": "region.verdant",
       "cell": {
         "seed": [
-          0.705,
-          0.4671
+          0.73,
+          0.29
         ],
         "weight": 0.0006,
         "polygon": [
           [
-            0.8001,
-            0.329
+            0.8101,
+            0.2537
+          ],
+          [
+            0.7957,
+            0.2752
           ],
           [
             0.8018,
             0.3503
           ],
           [
-            0.8247,
-            0.402
+            0.8022,
+            0.3512
           ],
           [
-            0.8338,
-            0.4637
+            0.7981,
+            0.3566
           ],
           [
-            0.8651,
-            0.4741
+            0.6784,
+            0.3566
           ],
           [
-            0.6517,
-            0.5492
+            0.6207,
+            0.2811
           ],
           [
-            0.6121,
-            0.4626
+            0.6215,
+            0.2773
           ],
           [
-            0.6871,
-            0.3441
-          ],
-          [
-            0.7599,
-            0.3213
+            0.7758,
+            0.2157
           ]
         ]
       },
       "marker": [
-        0.6997,
-        0.4712
+        0.73,
+        0.295
       ],
       "summary": {
         "en": "A cave entrance into a fungal forest east of Verdant Reach. Spores, glowcaps and things that farm them.",
@@ -1970,8 +1974,8 @@
         "conn.verdant_fungal"
       ],
       "label": [
-        0.7287,
-        0.4354
+        0.73,
+        0.32
       ]
     },
     {
@@ -1988,14 +1992,22 @@
       "region": "region.frontier",
       "cell": {
         "seed": [
-          0.7393,
-          0.5838
+          0.87,
+          0.42
         ],
         "weight": 0.0008,
         "polygon": [
           [
-            0.8651,
-            0.4741
+            0.8022,
+            0.3512
+          ],
+          [
+            0.8247,
+            0.402
+          ],
+          [
+            0.8338,
+            0.4637
           ],
           [
             0.8841,
@@ -2010,34 +2022,22 @@
             0.5688
           ],
           [
-            0.8552,
-            0.6188
+            0.8744,
+            0.5936
           ],
           [
-            0.8095,
-            0.6355
+            0.807,
+            0.5072
           ],
           [
-            0.8018,
-            0.6939
-          ],
-          [
-            0.7862,
-            0.7137
-          ],
-          [
-            0.6482,
-            0.5688
-          ],
-          [
-            0.6517,
-            0.5492
+            0.7981,
+            0.3566
           ]
         ]
       },
       "marker": [
-        0.7241,
-        0.5863
+        0.87,
+        0.43
       ],
       "summary": {
         "en": "The drowned east, beyond Dustline's frontier gate. Stilt villages, tide channels and shallow water that hides deep holes.",
@@ -2049,8 +2049,8 @@
         "conn.fungal_floodlands"
       ],
       "label": [
-        0.7843,
-        0.5768
+        0.87,
+        0.455
       ]
     },
     {
@@ -2069,8 +2069,8 @@
         "parent": "zone.frontier_road_east",
         "depth": 1,
         "marker": [
-          0.572,
-          0.742
+          0.675,
+          0.56
         ]
       },
       "summary": {
@@ -2201,8 +2201,8 @@
       ],
       "route": "route.frontier_road",
       "exit_at": [
-        0.4911,
-        0.6473
+        0.5509,
+        0.5594
       ]
     },
     {
@@ -2226,8 +2226,8 @@
         }
       ],
       "exit_at": [
-        0.4476,
-        0.6745
+        0.5272,
+        0.5759
       ]
     },
     {
@@ -2238,20 +2238,20 @@
         {
           "zone": "zone.surface_saltpan",
           "exit": "EAST · FRONTIER ROAD",
-          "edge": "SE",
+          "edge": "NE",
           "transition": 160
         },
         {
           "zone": "zone.frontier_road_east",
           "exit": "WEST · THE SALTPAN",
-          "edge": "W",
+          "edge": "SW",
           "transition": 161
         }
       ],
       "route": "route.frontier_road",
       "exit_at": [
-        0.5475,
-        0.7345
+        0.6827,
+        0.6347
       ]
     },
     {
@@ -2262,7 +2262,7 @@
         {
           "zone": "zone.frontier_road_east",
           "exit": "DUSTLINE GATE",
-          "edge": "NE",
+          "edge": "N",
           "transition": 162
         },
         {
@@ -2274,8 +2274,8 @@
       ],
       "route": "route.frontier_road",
       "exit_at": [
-        0.6249,
-        0.6973
+        0.7285,
+        0.4999
       ]
     },
     {
@@ -2286,7 +2286,7 @@
         {
           "zone": "zone.surface_scarp",
           "exit": "EAST TRAIL · THE SUMP",
-          "edge": "NE"
+          "edge": "E"
         },
         {
           "zone": "zone.the_sump",
@@ -2295,8 +2295,8 @@
         }
       ],
       "exit_at": [
-        0.5125,
-        0.5764
+        0.5497,
+        0.4457
       ]
     },
     {
@@ -2312,12 +2312,12 @@
         {
           "zone": "zone.frontier_road_east",
           "exit": "NORTH · SUMP EDGE",
-          "edge": "N"
+          "edge": "NW"
         }
       ],
       "exit_at": [
-        0.5782,
-        0.6298
+        0.62,
+        0.5174
       ]
     },
     {
@@ -2341,8 +2341,8 @@
         }
       ],
       "exit_at": [
-        0.431,
-        0.594
+        0.4277,
+        0.4713
       ]
     },
     {
@@ -2425,12 +2425,12 @@
         {
           "zone": "zone.floodlands",
           "exit": "WEST · DUSTLINE",
-          "edge": "S"
+          "edge": "W"
         }
       ],
       "exit_at": [
-        0.7172,
-        0.6412
+        0.8026,
+        0.4319
       ]
     },
     {
@@ -2441,17 +2441,17 @@
         {
           "zone": "zone.the_sump",
           "exit": "NE · FUNGAL DEPTHS",
-          "edge": "E"
+          "edge": "NE"
         },
         {
           "zone": "zone.fungal_depths",
           "exit": "SW · THE SUMP",
-          "edge": "SW"
+          "edge": "W"
         }
       ],
       "exit_at": [
-        0.6319,
-        0.5059
+        0.6495,
+        0.3188
       ]
     },
     {
@@ -2462,17 +2462,17 @@
         {
           "zone": "zone.the_sump",
           "exit": "NORTH · VERDANT REACH",
-          "edge": "N"
+          "edge": "NW"
         },
         {
           "zone": "zone.verdant_reach",
           "exit": "SOUTH · THE SUMP",
-          "edge": "S"
+          "edge": "SE"
         }
       ],
       "exit_at": [
-        0.5605,
-        0.4613
+        0.5727,
+        0.3149
       ]
     },
     {
@@ -2488,12 +2488,12 @@
         {
           "zone": "zone.floodlands",
           "exit": "NORTH · FUNGAL DEPTHS",
-          "edge": "NE"
+          "edge": "NW"
         }
       ],
       "exit_at": [
-        0.7584,
-        0.5117
+        0.8001,
+        0.3539
       ]
     },
     {
@@ -2509,12 +2509,12 @@
         {
           "zone": "zone.fungal_depths",
           "exit": "NORTH · VERDANT REACH",
-          "edge": "NW"
+          "edge": "W"
         }
       ],
       "exit_at": [
-        0.6496,
-        0.4033
+        0.6211,
+        0.2792
       ]
     },
     {
@@ -2534,8 +2534,8 @@
         }
       ],
       "exit_at": [
-        0.4626,
-        0.3748
+        0.4379,
+        0.2613
       ]
     },
     {
@@ -2546,17 +2546,17 @@
         {
           "zone": "zone.verdant_reach",
           "exit": "NORTH · RELAY NINE",
-          "edge": "NE"
+          "edge": "E"
         },
         {
           "zone": "zone.relay_nine",
           "exit": "SOUTH · VERDANT REACH",
-          "edge": "SW"
+          "edge": "W"
         }
       ],
       "exit_at": [
-        0.6012,
-        0.2888
+        0.6025,
+        0.2088
       ]
     },
     {
@@ -2572,12 +2572,12 @@
         {
           "zone": "zone.the_glasslands",
           "exit": "WEST · RELAY NINE",
-          "edge": "SW"
+          "edge": "W"
         }
       ],
       "exit_at": [
-        0.6984,
-        0.1809
+        0.7715,
+        0.1333
       ]
     },
     {
@@ -2597,8 +2597,8 @@
         }
       ],
       "exit_at": [
-        0.5618,
-        0.1336
+        0.6058,
+        0.0894
       ]
     },
     {
@@ -2614,12 +2614,12 @@
         {
           "zone": "zone.ash_wastes",
           "exit": "EAST · THE PALE",
-          "edge": "NE"
+          "edge": "E"
         }
       ],
       "exit_at": [
-        0.3161,
-        0.1042
+        0.3991,
+        0.0996
       ]
     },
     {
@@ -2630,17 +2630,17 @@
         {
           "zone": "zone.ash_wastes",
           "exit": "SOUTH · IRONHAVEN",
-          "edge": "SE"
+          "edge": "SW"
         },
         {
           "zone": "zone.ironhaven",
           "exit": "NORTH · ASH WASTES",
-          "edge": "N"
+          "edge": "NE"
         }
       ],
       "exit_at": [
-        0.2223,
-        0.1966
+        0.2724,
+        0.1511
       ]
     },
     {
@@ -2656,12 +2656,12 @@
         {
           "zone": "zone.rustbelt",
           "exit": "EAST · IRONHAVEN",
-          "edge": "E"
+          "edge": "NE"
         }
       ],
       "exit_at": [
-        0.1557,
-        0.3189
+        0.1292,
+        0.2614
       ]
     },
     {
@@ -2677,12 +2677,12 @@
         {
           "zone": "zone.old_metro",
           "exit": "NORTH · IRONHAVEN",
-          "edge": "N"
+          "edge": "NW"
         }
       ],
       "exit_at": [
-        0.2896,
-        0.3288
+        0.256,
+        0.2799
       ]
     },
     {
@@ -2693,17 +2693,17 @@
         {
           "zone": "zone.old_metro",
           "exit": "EAST LINE · THE SHALLOWS",
-          "edge": "E"
+          "edge": "NE"
         },
         {
           "zone": "zone.shallows",
           "exit": "WEST · OLD METRO",
-          "edge": "NW"
+          "edge": "W"
         }
       ],
       "exit_at": [
-        0.3715,
-        0.3978
+        0.3445,
+        0.3012
       ]
     },
     {
@@ -2714,7 +2714,7 @@
         {
           "zone": "zone.rustbelt",
           "exit": "SOUTH · THE CRAGS",
-          "edge": "S"
+          "edge": "SE"
         },
         {
           "zone": "zone.the_crags",
@@ -2723,8 +2723,8 @@
         }
       ],
       "exit_at": [
-        0.1108,
-        0.4649
+        0.107,
+        0.3798
       ]
     },
     {
@@ -2744,8 +2744,8 @@
         }
       ],
       "exit_at": [
-        0.2423,
-        0.4758
+        0.2199,
+        0.392
       ]
     },
     {
@@ -2765,8 +2765,8 @@
         }
       ],
       "exit_at": [
-        0.2437,
-        0.6032
+        0.1821,
+        0.5502
       ]
     },
     {
@@ -2786,8 +2786,8 @@
         }
       ],
       "exit_at": [
-        0.337,
-        0.6067
+        0.2736,
+        0.5357
       ]
     },
     {
@@ -2803,12 +2803,12 @@
         {
           "zone": "zone.the_abyss",
           "exit": "UP · ANCIENT RUINS",
-          "edge": "N"
+          "edge": "NW"
         }
       ],
       "exit_at": [
-        0.2303,
-        0.7474
+        0.2138,
+        0.7402
       ]
     },
     {

@@ -49,9 +49,6 @@
 .wm-ghost.down:hover { fill-opacity: 1; stroke: var(--relay); }
 .wm-ghost.down.is-sel { stroke: var(--amber); fill-opacity: 1; }
 /* Tapas sobre los rotulos pintados de mapas que hoy estan bajo tierra, y su marca "abajo" */
-.wm-cover { pointer-events: none; filter: url(#wm-feather); }
-.wm-cover-dark { fill: #0b1018; fill-opacity: .9; }
-.wm-cover-rock { fill-opacity: .7; }
 .wm-below { cursor: pointer; }
 .wm-below .wm-vl-bg { fill: rgba(11, 16, 24, .95); stroke: #8ea2c8; stroke-width: 1.5; }
 .wm-below .wm-glyph { stroke: #cfdcf5; stroke-width: 2.2; }

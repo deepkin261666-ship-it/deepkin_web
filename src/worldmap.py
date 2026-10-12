@@ -126,13 +126,12 @@ PASS_ICON = {
 # Geometria de presentacion de esta pagina (coordenadas 0..1 del arte): punto de cada pasaje vertical cuando el dato
 # no lo fija (sin exit_at y sin apilado directo), desvios de tuneles del mismo nivel y radios de camara (px) de los
 # mapas apilados. El dato del juego no cambia por esto.
-VLINK_AT = {"conn.threshold_scarp": (0.462, 0.633), "extraction.zone.excavation_c3_f3": (0.386, 0.902)}
-# El arte del prototipo trae pintados "The Outpost", "The Shallows" y "Excavation C-3", que hoy estan bajo tierra: en la
-# superficie se tapan con un parche de roca difuminado (u0, v0, u1, v1 sobre el arte) y una marca "abajo" en el icono pintado.
-COVERS = {"zone.outpost": (0.396, 0.522, 0.52, 0.568), "zone.shallows": (0.388, 0.436, 0.505, 0.482),
-          "zone.excavation_c3": (0.362, 0.812, 0.505, 0.862)}
-VIA = {"conn.threshold_shallows": (0.482, 0.545), "conn.shallows_c3": (0.332, 0.655), "conn.threshold_c3": (0.447, 0.75),
-       "conn.old_metro_shallows": None, "conn.abyss_c3_f3": (0.33, 0.95)}
+VLINK_AT = {"conn.threshold_scarp": (0.468, 0.392), "extraction.zone.excavation_c3_f3": (0.355, 0.715)}
+# Entradas pintadas en el arte (2026-10-12, pintura sin rotulos): el pozo de C-3 se ve en la superficie pero el mapa
+# vive en -1; una marca chica "↓ −1" sobre el pozo baja a esa capa. Shaft 3 y la galeria del Outpost ya son pasajes.
+ENTRANCES = {"zone.excavation_c3": "left"}  # lado del rotulo
+VIA = {"conn.threshold_shallows": (0.445, 0.36), "conn.shallows_c3": (0.325, 0.49), "conn.threshold_c3": (0.44, 0.56),
+       "conn.old_metro_shallows": None, "conn.abyss_c3_f3": (0.325, 0.80)}
 CHAMBER_R = {"zone.threshold": 30, "zone.dragon_lair": 44, "zone.excavation_c3_f2": 52, "zone.excavation_c3_f3": 48}
 CHAMBER_SHRINK = 0.6
 UNDER_FILL = {-1: .10, -2: .14, -3: .18}
@@ -341,20 +340,15 @@ def layer_svg(w, lv, lang):
                 ghosts_below.append(f'<path class="wm-ghost down s-{z["status"]}" d="{poly_d(w.chamber(z))}" data-ghost="{z["id"]}" data-tip="{e(z["name"])} · {e(L_(LEVEL_NAME[lv - 1], lang))}"/>')
     covers = []
     if lv == 0:
-        for zid, (u0, v0, u1, v1) in COVERS.items():
+        for zid, side in ENTRANCES.items():
             z = w.zones[zid]
-            x0, y0, x1, y1 = u0 * W, v0 * H, u1 * W, v1 * H
-            covers.append(f'<g class="wm-cover"><rect x="{x0:.0f}" y="{y0:.0f}" width="{x1 - x0:.0f}" height="{y1 - y0:.0f}" rx="14" class="wm-cover-dark"/>'
-                          f'<rect x="{x0:.0f}" y="{y0:.0f}" width="{x1 - x0:.0f}" height="{y1 - y0:.0f}" rx="14" class="wm-cover-rock" fill="url(#wm-rock)"/></g>')
             ax, ay = w.anchor(z)
             lvz = w.level(zid)
-            sub = f"−{z.get('depth_m', 0)} m" + (" · " + L_(L("3 floors", "3 pisos"), lang) if zid == "zone.excavation_c3" else "")
-            txt = f"↓ {lvz} · {z['name'].upper()} · {sub}"
-            # El Outpost lleva el rotulo a la izquierda: a la derecha chocaria con "THE SCARP" en el zoom inicial.
-            lab = (f'<text class="wm-below-label" x="-17" y="4" text-anchor="end">{e(txt)}</text>' if zid == "zone.outpost"
+            txt = f"↓ {lvz}"
+            lab = (f'<text class="wm-below-label" x="-17" y="4" text-anchor="end">{e(txt)}</text>' if side == "left"
                    else f'<text class="wm-below-label" x="17" y="4">{e(txt)}</text>')
-            covers.append(sc("wm-below", ax, ay, f'<circle class="wm-hit" r="16"/><rect class="wm-vl-bg" x="-11" y="-11" width="22" height="22" rx="4"/>{glyph("dungeon", 14)}{lab}', f' data-ghost="{zid}" data-tip="{e(z["name"])} · {e(L_(LEVEL_NAME[lvz], lang))}"'))
-    out.append(f'<g class="wm-ghosts-up">{"".join(ghosts_above)}</g><g class="wm-covers">{"".join(covers)}</g><g class="wm-ghosts-down">{"".join(ghosts_below)}</g>')
+            covers.append(sc("wm-below", ax, ay, f'<circle class="wm-hit" r="16"/><rect class="wm-vl-bg" x="-11" y="-11" width="22" height="22" rx="4"/>{glyph("dungeon", 14)}{lab}', f' data-ghost="{zid}" data-tip="{e(z["name"])} · {e(L_(LEVEL_NAME[lvz], lang))} · −{z.get("depth_m", 0)} m"'))
+    out.append(f'<g class="wm-ghosts-up">{"".join(ghosts_above)}</g><g class="wm-entrances">{"".join(covers)}</g><g class="wm-ghosts-down">{"".join(ghosts_below)}</g>')
     # Celdas (superficie) o camaras (bajo tierra)
     cells = []
     for z in sorted(zs, key=lambda z: z["status"] == "playable"):
@@ -456,10 +450,7 @@ def layer_svg(w, lv, lang):
         step = w.steps.get(z["id"])
         if step is not None:
             badges.append(sc("wm-step", x, y, f'<g transform="translate(13,-15)"><circle r="8"/><text y="3.5">{step:02d}</text></g>'))
-        if z.get("art_icon") and not under:
-            marks.append(f'<g class="wm-mark art s-{z["status"]}" data-id="{z["id"]}" transform="translate({x:.1f},{y:.1f})">'
-                         f'<circle class="wm-hit" r="22"/><circle class="wm-ring" r="19"/></g>')
-            continue
+        # `art_icon` del dato ya no aplica (2026-10-12): la pintura nueva no trae iconos ni rotulos, todas las marcas son propias.
         r = 10 if under else 11
         shape = f'<circle class="wm-badge" r="{r}"/>'
         ico = glyph(z["kind"], 14)
