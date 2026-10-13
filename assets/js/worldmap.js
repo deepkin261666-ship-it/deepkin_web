@@ -182,6 +182,7 @@
     clearTimeout(hideTimer);
     panel.classList.remove("open");
     $$(".is-sel").forEach(function (el) { el.classList.remove("is-sel"); });
+    secMark(null);
     hideTimer = setTimeout(function () { if (!panel.classList.contains("open")) panel.hidden = true; }, reduced ? 0 : 260);
   }
   $(".wm-close").addEventListener("click", closePanel);
@@ -317,6 +318,7 @@
     var z = D.zones[id];
     if (z.lv !== level) setLevel(z.lv, z.dm); else tick(z.dm);
     mark("map", id);
+    secMark(id);
     if (arriveConn) {
       var el = $('.wm-layer[data-level="' + z.lv + '"] [data-vlink="' + arriveConn + '"]', frames.map);
       if (el) { el.classList.add("is-sel"); pulse(el); }
@@ -335,10 +337,12 @@
       var to = el.getAttribute("data-to");
       pickZone(to, el.getAttribute("data-vlink"));
       focusZone(to, true);
+      secReveal();
       return;
     }
-    if (el.hasAttribute("data-ghost")) { pickZone(el.getAttribute("data-ghost")); return; }
+    if (el.hasAttribute("data-ghost")) { pickZone(el.getAttribute("data-ghost")); secReveal(); return; }
     pickZone(el.getAttribute("data-id"));
+    secReveal();
   }
   function setView(v) {
     if (v === view) return;
@@ -364,12 +368,55 @@
     var shift = (!mobile.matches && !panel.hidden) ? panel.offsetWidth / 2 : 0;
     viewers.map.focus(x, y, keepZoom ? 1 : (mobile.matches ? 2.4 : 1.8), shift);
   }
-  function go(id, scroll, conn) {
+  function go(id, scroll, conn, block) {
     setView("map");
     pickZone(id, conn);
     focusZone(id);
-    if (scroll) frames.map.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "center" });
+    if (scroll) frames.map.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: block || "center" });
   }
+
+  // ---------- Corte de profundidad del atlas (2026-10-12) ----------
+  // Los SVG .at-sec (ancho y alto) viven fuera de [data-worldmap]; cada placa trae data-zone y cada pasaje data-a/data-b.
+  // Elegir una zona en el mapa enciende su placa y sus pasajes; en escritorio el corte se asoma si quedo fuera de la vista
+  // (nunca en telefono). Pasar por una placa resalta la zona en el mapa; tocarla la abre en su nivel.
+  var secs = Array.prototype.slice.call(document.querySelectorAll(".at-sec"));
+  var secFig = document.querySelector("[data-atlas-sec]");
+  function secMark(id) {
+    secs.forEach(function (svg) {
+      $$(".is-sel, .is-lit", svg).forEach(function (el) { el.classList.remove("is-sel"); el.classList.remove("is-lit"); });
+      svg.classList.toggle("has-sel", !!id);
+      if (!id) return;
+      $$('[data-zone="' + id + '"]', svg).forEach(function (el) { el.classList.add("is-sel"); });
+      $$('[data-a="' + id + '"], [data-b="' + id + '"]', svg).forEach(function (el) { el.classList.add("is-lit"); });
+    });
+  }
+  function secReveal() {
+    if (!secFig || mobile.matches) return;
+    var r = secFig.getBoundingClientRect();
+    if (r.bottom < 0 || r.top > window.innerHeight) secFig.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" });
+  }
+  function peek(id) {
+    $$(".is-peek", frames.map).forEach(function (el) { el.classList.remove("is-peek"); });
+    if (id) $$('[data-id="' + id + '"], [data-ghost="' + id + '"]', frames.map).forEach(function (el) { el.classList.add("is-peek"); });
+  }
+  function secZone(ev) { var n = ev.target.closest ? ev.target.closest("[data-zone]") : null; return n && n.getAttribute("data-zone"); }
+  secs.forEach(function (svg) {
+    svg.addEventListener("pointerover", function (ev) { var id = secZone(ev); if (id) peek(id); });
+    svg.addEventListener("pointerout", function (ev) { if (secZone(ev)) peek(null); });
+    svg.addEventListener("click", function (ev) {
+      var id = secZone(ev);
+      if (!id || !D.zones[id]) return;
+      peek(null);
+      go(id, !mobile.matches, null, "nearest");
+    });
+    svg.addEventListener("keydown", function (ev) {
+      if (ev.key !== "Enter" && ev.key !== " ") return;
+      var id = secZone(ev);
+      if (!id || !D.zones[id]) return;
+      ev.preventDefault();
+      go(id, !mobile.matches, null, "nearest");
+    });
+  });
   panel.addEventListener("click", function (ev) {
     var b = ev.target.closest("button");
     if (!b) return;

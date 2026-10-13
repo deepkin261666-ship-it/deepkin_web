@@ -351,8 +351,12 @@ def toc(lang, entries):
     return f'<aside class="toc"><p>{u("on_this_page", lang)}</p><nav>{links}</nav></aside>'
 
 
-def wiki(lang, entries, content):
-    return f'<div class="wrap wiki">{toc(lang, entries)}<div class="wiki-body">{content}</div></div>'
+def wiki(lang, entries, content, ghost_toc=False):
+    # ghost_toc (2026-10-12): segunda grilla de la misma pagina; repite el indice solo como guia visual (sin foco ni lector).
+    t = toc(lang, entries)
+    if ghost_toc:
+        t = t.replace('<aside class="toc">', '<aside class="toc toc-ghost" aria-hidden="true">', 1).replace("<a href=", '<a tabindex="-1" href=')
+    return f'<div class="wrap wiki">{t}<div class="wiki-body">{content}</div></div>'
 
 
 def section_title(anchor, kicker, title, lead=""):
@@ -1065,7 +1069,8 @@ ATLAS_SIZES = {}
 
 
 def atlas_section(lang):
-    """Atlas ilustrado del mundo (2026-10-11): la imagen principal de la pagina, generada por src/atlas.py."""
+    """Atlas ilustrado del mundo (2026-10-11): lamina generada por src/atlas.py. Desde 2026-10-12 va despues del mapa
+    interactivo y su corte de profundidad se incrusta en linea (data-zone por placa) para resaltarse junto con el mapa."""
     sz = ATLAS_SIZES.get(lang) or {"wide": (1600, 1808), "tall": (640, 3400)}
     (w, h), (tw_, th) = sz["wide"], sz["tall"]
     base = f"../assets/img/world/atlas_{lang}"
@@ -1079,9 +1084,14 @@ def atlas_section(lang):
     ctrl = (f'<div class="atlas-ctrl"><button type="button" data-azoom="in" aria-label="{"Zoom in" if en else "Acercar"}">+</button>'
             f'<button type="button" data-azoom="out" aria-label="{"Zoom out" if en else "Alejar"}">−</button>'
             f'<button type="button" data-azoom="reset" aria-label="{"Reset view" if en else "Restablecer vista"}">⤢</button></div>')
+    sec = AT.section_inline(lang)
+    sec_cap = ("Live with the map above: the zone you pick lights up here. Hover a plate to find it on the map, click it to open it on its level."
+               if en else "Vive con el mapa de arriba: la zona que elegís se enciende acá. Pasá por una placa para ubicarla en el mapa, hacé clic para abrirla en su nivel.")
+    sec_fig = (f'<figure class="atlas-sec" data-atlas-sec>{sec["w"]}{sec["t"]}<figcaption>{e(sec_cap)}</figcaption></figure>')
     return (section_title("atlas", "Field atlas" if en else "Atlas de campo", "How the maps connect" if en else "Cómo se conectan los mapas",
-                          "Surface and workings in plan, every depth in section, every passage with the sign you will read in the game. Follow the amber line from the Outpost to Dustline."
-                          if en else "Superficie y galerías en planta, cada profundidad en corte y cada pasaje con el cartel que vas a leer en el juego. Seguí la línea ámbar del Outpost a Dustline.")
+                          "The same world as a surveyor's sheet: the depth cross-section first, then the full plate with surface and workings in plan and every passage with the sign you will read in the game. Follow the amber line from the Outpost to Dustline."
+                          if en else "El mismo mundo como lámina de relevamiento: primero el corte de profundidad, después la lámina completa con superficie y galerías en planta y cada pasaje con el cartel que vas a leer en el juego. Seguí la línea ámbar del Outpost a Dustline.")
+            + sec_fig
             + f'<figure class="atlas" data-atlas><div class="atlas-vp" tabindex="0" aria-label="{e(alt)}"><div class="atlas-stage">'
             f'<picture><source media="(max-width: 720px)" srcset="{base}_m.svg" width="{tw_}" height="{th}">'
             f'<img src="{base}.svg" width="{w}" height="{h}" alt="{e(alt)}" decoding="async" draggable="false"></picture></div></div>{ctrl}'
@@ -1140,7 +1150,7 @@ def page_world(lang):
                    f'<span class="city-civ">{e(CLASS_BY_ID[cid]["name"])} · {e(CLASSES[cid]["title"][lang])}</span><span class="city-line">{e(line)}</span></a>')
     machines = "".join(f'<figure class="machine" style="--c:{class_color(cid)}"><img src="../assets/img/concept/{img}.jpg" alt="{n}" loading="lazy"><figcaption><b>{n}</b><span>{e(CLASS_BY_ID[cid]["name"])} · {e(d[lang])}</span></figcaption></figure>'
                        for img, n, cid, d in TX.MACHINES)
-    content = (lore_section(lang) + WM.section(lang, section_title)
+    content = (lore_section(lang)
                + section_title("route", "The way down" if lang == "en" else "El camino hacia abajo", "The starting region" if lang == "en" else "La región inicial",
                              "The Outpost → shaft lift → The Threshold → The Shallows → Excavation C-3.")
                + f'<div class="regions">{route}</div>'
@@ -1161,8 +1171,8 @@ def page_world(lang):
                                "One day the drill becomes a machine you ride: your mount, your cargo and your way through the hardest rock." if lang == "en"
                                else "Algún día el taladro será una máquina que manejás: tu montura, tu carga y tu camino a través de la roca más dura.")
                + f'<div class="machines">{machines}</div>')
-    entries = [("atlas", "Field atlas" if lang == "en" else "Atlas de campo"), ("lore", "Lore" if lang == "en" else "Historia"),
-               ("map", "Interactive map" if lang == "en" else "Mapa interactivo"),
+    entries = [("map", "Interactive map" if lang == "en" else "Mapa interactivo"), ("atlas", "Field atlas" if lang == "en" else "Atlas de campo"),
+               ("lore", "Lore" if lang == "en" else "Historia"),
                ("route", "Starting region" if lang == "en" else "Región inicial"), ("surface", "Surface" if lang == "en" else "Superficie"),
                ("east", "The road east" if lang == "en" else "El camino al este"),
                ("civilisations", "Cities" if lang == "en" else "Ciudades"), ("regions", "The wider world" if lang == "en" else "El mundo"),
@@ -1171,8 +1181,11 @@ def page_world(lang):
                        "Depth is not the only danger. A shallow flooded tunnel can be worse than a deep, dry cavern." if lang == "en"
                        else "La profundidad no es el único peligro. Un túnel inundado poco profundo puede ser peor que una caverna profunda y seca.",
                        "concept/city.jpg")
+    # Orden (2026-10-12): primero el mapa interactivo con su leyenda y el viaje, despues el atlas de campo a todo el
+    # ancho, y recien entonces el resto con el indice repetido como guia visual.
+    body += wiki(lang, entries, WM.section(lang, section_title)).replace('class="wrap wiki"', 'class="wrap wiki wiki-first"', 1)
     body += f'<div class="wrap atlas-wrap">{atlas_section(lang)}</div>'
-    body += wiki(lang, entries, content)
+    body += wiki(lang, entries, content, ghost_toc=True)
     head = ('<link rel="stylesheet" href="../assets/css/worldmap.css">\n<script defer src="../assets/js/worldmap.js"></script>\n'
             '<script defer src="../assets/js/atlas.js"></script>')
     return page(lang, "world", "World" if lang == "en" else "Mundo", body, extra_head=head)
