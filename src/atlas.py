@@ -745,7 +745,7 @@ def common_layout():
     }
 
 
-def wide(lang, layout_only=False):
+def wide(lang, layout_only=False, section=True):
     win = (0.22, 0.22, 0.88, 0.82)
     L = common_layout()
     L.update({"id": "w", "fs_zone": 15, "fs_planned": 11.5, "fs_grid": 11, "fs_title": 14, "fs_band": 11, "fs_node": 11.5, "fs_key": 12.5,
@@ -780,10 +780,17 @@ def wide(lang, layout_only=False):
     o.append(compass(pf[0] + pf[2] - 48, pf[1] + 62, 22))
     o.append(locator(pf[0] + 26, pf[1] + pf[3] - 186, 150, lang, win, L))
     o.append(route_card(pf[0] + pf[2] - 300, pf[1] + pf[3] - 150, 280, lang, L))
-    o.append(section_svg(1010, 150, 566, 1040, lang, L))
-    k, ky = key_svg(24, 1250, 1552, lang, L, cols=3)
-    o.append(k)
-    lg, ly = legend_svg(24, ky + 40, 1552, lang, L, cols=5)
+    if section:
+        o.append(section_svg(1010, 150, 566, 1040, lang, L))
+        k, ky = key_svg(24, 1250, 1552, lang, L, cols=3)
+        o.append(k)
+        lg, ly = legend_svg(24, ky + 40, 1552, lang, L, cols=5)
+    else:
+        # Lamina para la pagina (2026-10-13): el corte vive en linea arriba, asi que la columna derecha lleva la
+        # clave de pasajes y la leyenda va debajo de la planta.
+        k, ky = key_svg(1010, 150, 566, lang, L, cols=1)
+        o.append(k)
+        lg, ly = legend_svg(24, max(ky, 1250) + 40, 1552, lang, L, cols=5)
     o.append(lg)
     H_ = int(ly + 30)
     head = f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W_} {H_}" width="{W_}" height="{H_}" role="img" aria-label="DEEPKIN {e(tr("title", lang))}">'
@@ -810,7 +817,7 @@ def route_card(x, y, w, lang, L):
     return "".join(o)
 
 
-def tall(lang, layout_only=False):
+def tall(lang, layout_only=False, section=True):
     W_ = 640
     # Telefono (2026-10-12): ventana mas cerrada sobre el corredor y tipos mas chicos; las etiquetas del corredor
     # Scarp-Threshold-Saltpan-Frontier-Dustline se reparten arriba/abajo para no pisarse.
@@ -844,12 +851,13 @@ def tall(lang, layout_only=False):
     pf = (12, 128, W_ - 24, 780)
     P = Plan(*pf, *win, lens=(0.60, 0.52, 440, 1.4))
     sec_y = pf[1] + pf[3] + 40
-    sec_h = 760
-    key_y = sec_y + sec_h + 46
+    sec_h = 760 if section else 0
+    key_y = sec_y + sec_h + (46 if section else 6)
     o = [DEFS, f'<rect width="{W_}" height="99999" fill="{C["bg"]}"/>', header(14, 48, lang, 14)]
     o.append(plan_svg(P, lang, L))
     o.append(compass(pf[0] + pf[2] - 40, pf[1] + 56, 20))
-    o.append(section_svg(12, sec_y, W_ - 24, sec_h, lang, L))
+    if section:
+        o.append(section_svg(12, sec_y, W_ - 24, sec_h, lang, L))
     k, ky = key_svg(14, key_y, W_ - 28, lang, L)
     o.append(k)
     lg, ly = legend_svg(14, ky + 30, W_ - 28, lang, L, cols=2)
@@ -888,7 +896,9 @@ def section_inline(lang):
 
 
 def write_all():
-    """Escribe assets/img/world/atlas_<lang>.svg y atlas_<lang>_m.svg; devuelve {lang: {"wide": (w, h), "tall": (w, h)}}."""
+    """Escribe assets/img/world/atlas_<lang>.svg y atlas_<lang>_m.svg (laminas completas, con corte) y
+    atlas_<lang>_page.svg / atlas_<lang>_page_m.svg (para la pagina, sin corte: el corte va en linea);
+    devuelve {lang: {"wide", "tall", "page_wide", "page_tall": (w, h)}}."""
     out = {}
     d = os.path.join(ROOT, "assets", "img", "world")
     os.makedirs(d, exist_ok=True)
@@ -897,7 +907,11 @@ def write_all():
         st, size_t = tall(lang)
         open(os.path.join(d, f"atlas_{lang}.svg"), "w").write(sw)
         open(os.path.join(d, f"atlas_{lang}_m.svg"), "w").write(st)
-        out[lang] = {"wide": size_w, "tall": size_t}
+        pw, size_pw = wide(lang, section=False)
+        pt, size_pt = tall(lang, section=False)
+        open(os.path.join(d, f"atlas_{lang}_page.svg"), "w").write(pw)
+        open(os.path.join(d, f"atlas_{lang}_page_m.svg"), "w").write(pt)
+        out[lang] = {"wide": size_w, "tall": size_t, "page_wide": size_pw, "page_tall": size_pt}
     return out
 
 

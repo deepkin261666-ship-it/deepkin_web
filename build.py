@@ -1072,7 +1072,8 @@ def atlas_section(lang):
     """Atlas ilustrado del mundo (2026-10-11): lamina generada por src/atlas.py. Desde 2026-10-12 va despues del mapa
     interactivo y su corte de profundidad se incrusta en linea (data-zone por placa) para resaltarse junto con el mapa."""
     sz = ATLAS_SIZES.get(lang) or {"wide": (1600, 1808), "tall": (640, 3400)}
-    (w, h), (tw_, th) = sz["wide"], sz["tall"]
+    # En la pagina va la lamina SIN corte (el corte vive en linea arriba); los enlaces abren la lamina completa.
+    (w, h), (tw_, th) = sz.get("page_wide", sz["wide"]), sz.get("page_tall", sz["tall"])
     base = f"../assets/img/world/atlas_{lang}"
     en = lang == "en"
     alt = ("Field atlas: plan of the playable region with every map, passage and service, a depth cross-section from the surface "
@@ -1089,12 +1090,12 @@ def atlas_section(lang):
                if en else "Vive con el mapa de arriba: la zona que elegís se enciende acá. Pasá por una placa para ubicarla en el mapa, hacé clic para abrirla en su nivel.")
     sec_fig = (f'<figure class="atlas-sec" data-atlas-sec>{sec["w"]}{sec["t"]}<figcaption>{e(sec_cap)}</figcaption></figure>')
     return (section_title("atlas", "Field atlas" if en else "Atlas de campo", "How the maps connect" if en else "Cómo se conectan los mapas",
-                          "The same world as a surveyor's sheet: the depth cross-section first, then the full plate with surface and workings in plan and every passage with the sign you will read in the game. Follow the amber line from the Outpost to Dustline."
-                          if en else "El mismo mundo como lámina de relevamiento: primero el corte de profundidad, después la lámina completa con superficie y galerías en planta y cada pasaje con el cartel que vas a leer en el juego. Seguí la línea ámbar del Outpost a Dustline.")
+                          "The same world as a surveyor's sheet: the depth cross-section first, then the plan with surface and workings and every passage with the sign you will read in the game. Follow the amber line from the Outpost to Dustline; the full-size links open the complete sheet."
+                          if en else "El mismo mundo como lámina de relevamiento: primero el corte de profundidad, después la planta con superficie y galerías y cada pasaje con el cartel que vas a leer en el juego. Seguí la línea ámbar del Outpost a Dustline; los enlaces de tamaño completo abren la lámina entera.")
             + sec_fig
             + f'<figure class="atlas" data-atlas><div class="atlas-vp" tabindex="0" aria-label="{e(alt)}"><div class="atlas-stage">'
-            f'<picture><source media="(max-width: 720px)" srcset="{base}_m.svg" width="{tw_}" height="{th}">'
-            f'<img src="{base}.svg" width="{w}" height="{h}" alt="{e(alt)}" decoding="async" draggable="false"></picture></div></div>{ctrl}'
+            f'<picture><source media="(max-width: 720px)" srcset="{base}_page_m.svg" width="{tw_}" height="{th}">'
+            f'<img src="{base}_page.svg" width="{w}" height="{h}" alt="{e(alt)}" decoding="async" draggable="false"></picture></div></div>{ctrl}'
             f'<figcaption><span class="atlas-hint">{e(hint)}</span><span class="atlas-links"><a href="{base}.svg" target="_blank" rel="noopener">'
             f'{"Open full size" if en else "Abrir en tamaño completo"} ↗</a><a href="{base}_m.svg" target="_blank" rel="noopener">{"Phone version" if en else "Versión para teléfono"} ↗</a></span></figcaption></figure>')
 
