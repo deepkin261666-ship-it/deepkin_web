@@ -337,12 +337,11 @@
       var to = el.getAttribute("data-to");
       pickZone(to, el.getAttribute("data-vlink"));
       focusZone(to, true);
-      secReveal();
       return;
     }
-    if (el.hasAttribute("data-ghost")) { pickZone(el.getAttribute("data-ghost")); secReveal(); return; }
+    if (el.hasAttribute("data-ghost")) { pickZone(el.getAttribute("data-ghost")); return; }
     pickZone(el.getAttribute("data-id"));
-    secReveal();
+    // The cross-section highlights the pick (secMark in pickZone) but never scrolls the page to it.
   }
   function setView(v) {
     if (v === view) return;
