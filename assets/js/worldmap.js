@@ -1,6 +1,6 @@
 /* DEEPKIN — Field Archive: mapa interactivo del mundo (pagina Mundo).
    Pan/zoom con rueda, arrastre y pellizco; panel lateral (escritorio) u hoja inferior (movil);
-   vista del continente por niveles de profundidad (superficie, −1, −2, −3) y plano de Dustline.
+   vista del continente por niveles de profundidad (superficie, −1 … −4, un piso por nivel) y plano de Dustline.
    Datos: #worldmap-data, generado de world_map.json (2026-10-09; niveles 2026-10-12). */
 (function () {
   "use strict";
@@ -13,7 +13,7 @@
   var $$ = function (s, r) { return Array.prototype.slice.call((r || root).querySelectorAll(s)); };
   var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
   var panel = $(".wm-panel"), panelIn = $(".wm-panel-in");
-  var LEVELS = [0, -1, -2, -3];
+  var LEVELS = Object.keys(D.levels).map(Number).sort(function (a, b) { return b - a; });
 
   // ---------- Visor con pan/zoom ----------
   function Viewer(frame, opts) {
@@ -386,7 +386,7 @@
       svg.classList.toggle("has-sel", !!id);
       if (!id) return;
       $$('[data-zone="' + id + '"]', svg).forEach(function (el) { el.classList.add("is-sel"); });
-      $$('[data-a="' + id + '"], [data-b="' + id + '"]', svg).forEach(function (el) { el.classList.add("is-lit"); });
+      $$('[data-a="' + id + '"], [data-b="' + id + '"], [data-zones~="' + id + '"]', svg).forEach(function (el) { el.classList.add("is-lit"); });
     });
   }
   function secReveal() {

@@ -48,7 +48,8 @@
       "road",
       "shaft",
       "tunnel",
-      "lift"
+      "lift",
+      "elevator"
     ]
   },
   "regions": [
@@ -405,9 +406,9 @@
       },
       "art_icon": true,
       "connections": [
-        "conn.outpost_threshold",
-        "conn.outpost_scarp",
-        "conn.outpost_ruins"
+        "conn.outpost_ruins",
+        "conn.shaft3_scarp_outpost",
+        "conn.shaft3_outpost_threshold"
       ],
       "label": [
         0.365,
@@ -421,7 +422,7 @@
       "biome": "caves",
       "layer": "underground",
       "depth_m": 120,
-      "level": -1,
+      "level": -2,
       "tier": 1,
       "danger": "low",
       "status": "playable",
@@ -435,8 +436,8 @@
         ]
       },
       "summary": {
-        "en": "The first cavern under the lift: lit, quiet, painted with instructions. Every way out of the Outpost passes through here.",
-        "es": "La primera caverna bajo el elevador: iluminada, tranquila, con instrucciones pintadas. Toda salida del Outpost pasa por acá."
+        "en": "The first cavern below the Outpost, at the foot of Shaft 3: lit, quiet, painted with instructions. The elevator goes back up; the tunnel east leads to the Shallows.",
+        "es": "La primera caverna bajo el Outpost, al pie del Pozo 3: iluminada, tranquila, con instrucciones pintadas. El elevador vuelve a subir; el túnel al este lleva a The Shallows."
       },
       "size_m": [
         32,
@@ -447,10 +448,9 @@
         "zone_id": "zone.threshold"
       },
       "connections": [
-        "conn.outpost_threshold",
         "conn.threshold_shallows",
-        "conn.threshold_scarp",
-        "conn.threshold_c3"
+        "conn.shaft3_outpost_threshold",
+        "conn.shaft3_scarp_threshold"
       ]
     },
     {
@@ -460,7 +460,7 @@
       "biome": "wetlands",
       "layer": "underground",
       "depth_m": 120,
-      "level": -1,
+      "level": -2,
       "tier": 1,
       "danger": "low",
       "status": "playable",
@@ -537,7 +537,7 @@
       "biome": "caves",
       "layer": "underground",
       "depth_m": 140,
-      "level": -1,
+      "level": -2,
       "level_label": "FLOOR 1",
       "tier": 2,
       "danger": "medium",
@@ -600,7 +600,6 @@
       "art_icon": true,
       "connections": [
         "conn.shallows_c3",
-        "conn.threshold_c3",
         "conn.c3_f2"
       ],
       "label": [
@@ -615,7 +614,7 @@
       "biome": "caves",
       "layer": "underground",
       "depth_m": 340,
-      "level": -2,
+      "level": -3,
       "level_label": "FLOOR 2",
       "tier": 3,
       "danger": "high",
@@ -658,7 +657,7 @@
       "biome": "anomaly",
       "layer": "underground",
       "depth_m": 520,
-      "level": -3,
+      "level": -4,
       "level_label": "FLOOR 3",
       "tier": 4,
       "danger": "high",
@@ -766,11 +765,11 @@
         "zone_id": "zone.surface_scarp"
       },
       "connections": [
-        "conn.threshold_scarp",
         "conn.scarp_saltpan_ne",
         "conn.scarp_saltpan_sw",
         "conn.scarp_sump",
-        "conn.outpost_scarp"
+        "conn.shaft3_scarp_outpost",
+        "conn.shaft3_scarp_threshold"
       ]
     },
     {
@@ -1574,12 +1573,12 @@
     },
     {
       "id": "zone.old_metro",
-      "name": "Old Metro",
+      "name": "The Old Tunnels",
       "kind": "dungeon",
       "biome": "caves",
       "layer": "underground",
       "depth_m": 80,
-      "level": -1,
+      "level": -2,
       "tier": 3,
       "danger": "medium",
       "status": "planned",
@@ -1787,7 +1786,7 @@
       "biome": "anomaly",
       "layer": "underground",
       "depth_m": 600,
-      "level": -3,
+      "level": -4,
       "tier": 6,
       "danger": "deadly",
       "status": "planned",
@@ -2162,27 +2161,6 @@
   ],
   "connections": [
     {
-      "id": "conn.outpost_threshold",
-      "kind": "lift",
-      "status": "playable",
-      "ends": [
-        {
-          "zone": "zone.outpost",
-          "exit": "SHAFT LIFT · DESCEND TO THE THRESHOLD",
-          "edge": "DOWN",
-          "edge_fixed": true,
-          "transition": 142
-        },
-        {
-          "zone": "zone.threshold",
-          "exit": "LIFT · THE OUTPOST",
-          "edge": "UP",
-          "edge_fixed": true,
-          "transition": 54
-        }
-      ]
-    },
-    {
       "id": "conn.threshold_shallows",
       "kind": "tunnel",
       "status": "playable",
@@ -2221,27 +2199,6 @@
           "edge": "W",
           "edge_fixed": true,
           "transition": 53
-        }
-      ]
-    },
-    {
-      "id": "conn.threshold_scarp",
-      "kind": "shaft",
-      "status": "playable",
-      "ends": [
-        {
-          "zone": "zone.threshold",
-          "exit": "SURFACE · THE SCARP",
-          "edge": "N",
-          "edge_fixed": true,
-          "transition": 120
-        },
-        {
-          "zone": "zone.surface_scarp",
-          "exit": "DESCEND · THE THRESHOLD",
-          "edge": "CRATER",
-          "edge_fixed": true,
-          "transition": 121
         }
       ]
     },
@@ -2384,52 +2341,6 @@
       "exit_at": [
         0.6714,
         0.4984
-      ]
-    },
-    {
-      "id": "conn.outpost_scarp",
-      "kind": "shaft",
-      "status": "playable",
-      "ends": [
-        {
-          "zone": "zone.outpost",
-          "exit": "ADIT · UP TO THE SCARP",
-          "edge": "E",
-          "edge_fixed": true,
-          "transition": 242
-        },
-        {
-          "zone": "zone.surface_scarp",
-          "exit": "ADIT · DOWN TO THE OUTPOST",
-          "edge": "W",
-          "edge_fixed": true,
-          "transition": 243
-        }
-      ],
-      "exit_at": [
-        0.4277,
-        0.4713
-      ]
-    },
-    {
-      "id": "conn.threshold_c3",
-      "kind": "shaft",
-      "status": "playable",
-      "ends": [
-        {
-          "zone": "zone.threshold",
-          "exit": "DEEP SHAFT · EXCAVATION C-3",
-          "edge": "S",
-          "edge_fixed": true,
-          "transition": 240
-        },
-        {
-          "zone": "zone.excavation_c3",
-          "exit": "LIFT · THE THRESHOLD",
-          "edge": "UP",
-          "edge_fixed": true,
-          "transition": 241
-        }
       ]
     },
     {
@@ -2737,7 +2648,7 @@
       "ends": [
         {
           "zone": "zone.ironhaven",
-          "exit": "SOUTH · OLD METRO",
+          "exit": "SOUTH · OLD TUNNELS",
           "edge": "SE"
         },
         {
@@ -2763,7 +2674,7 @@
         },
         {
           "zone": "zone.shallows",
-          "exit": "WEST · OLD METRO",
+          "exit": "WEST · OLD TUNNELS",
           "edge": "W"
         }
       ],
@@ -2800,7 +2711,7 @@
       "ends": [
         {
           "zone": "zone.the_crags",
-          "exit": "NE · OLD METRO",
+          "exit": "NE · OLD TUNNELS",
           "edge": "NE"
         },
         {
@@ -2937,6 +2848,72 @@
         0.5767,
         0.577
       ]
+    },
+    {
+      "id": "conn.shaft3_scarp_outpost",
+      "kind": "elevator",
+      "status": "playable",
+      "elevator": "elevator.shaft3",
+      "ends": [
+        {
+          "zone": "zone.surface_scarp",
+          "exit": "SHAFT 3 ELEVATOR · THE SCARP",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 250
+        },
+        {
+          "zone": "zone.outpost",
+          "exit": "SHAFT 3 ELEVATOR · THE OUTPOST",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 251
+        }
+      ]
+    },
+    {
+      "id": "conn.shaft3_outpost_threshold",
+      "kind": "elevator",
+      "status": "playable",
+      "elevator": "elevator.shaft3",
+      "ends": [
+        {
+          "zone": "zone.outpost",
+          "exit": "SHAFT 3 ELEVATOR · THE OUTPOST",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 251
+        },
+        {
+          "zone": "zone.threshold",
+          "exit": "SHAFT 3 ELEVATOR · THE THRESHOLD",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 252
+        }
+      ]
+    },
+    {
+      "id": "conn.shaft3_scarp_threshold",
+      "kind": "elevator",
+      "status": "playable",
+      "elevator": "elevator.shaft3",
+      "ends": [
+        {
+          "zone": "zone.surface_scarp",
+          "exit": "SHAFT 3 ELEVATOR · THE SCARP",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 250
+        },
+        {
+          "zone": "zone.threshold",
+          "exit": "SHAFT 3 ELEVATOR · THE THRESHOLD",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 252
+        }
+      ]
     }
   ],
   "routes": [
@@ -2947,7 +2924,7 @@
         "es": "Tu primer viaje"
       },
       "summary": {
-        "en": "From the Outpost to Dustline: down the lift, up onto open sky, and along Frontier Road to the first city.",
+        "en": "From the Outpost to Dustline: down the Shaft 3 elevator, back up to open sky, and along Frontier Road to the first city.",
         "es": "Del Outpost a Dustline: bajar en el elevador, subir al cielo abierto y seguir Frontier Road hasta la primera ciudad."
       },
       "zones": [
@@ -2959,8 +2936,8 @@
         "zone.dustline"
       ],
       "connections": [
-        "conn.outpost_threshold",
-        "conn.threshold_scarp",
+        "conn.shaft3_outpost_threshold",
+        "conn.shaft3_scarp_threshold",
         "conn.scarp_saltpan_ne",
         "conn.saltpan_frontier_east",
         "conn.frontier_east_dustline"
@@ -2979,15 +2956,15 @@
         {
           "zone": "zone.outpost",
           "text": {
-            "en": "Open the newcomer crates, hear Old Brannock out, and ride the shaft lift down.",
-            "es": "Abrí los cajones de recién llegado, escuchá al viejo Brannock y bajá en el elevador del pozo."
+            "en": "Open the newcomer crates, hear Old Brannock out, and ride the Shaft 3 elevator down.",
+            "es": "Abrí los cajones de recién llegado, escuchá al viejo Brannock y bajá en el elevador del Pozo 3."
           }
         },
         {
           "zone": "zone.threshold",
           "text": {
-            "en": "Painted signs teach movement, loadout, lantern and dash. The passage on the north wall climbs to open sky.",
-            "es": "Los carteles pintados enseñan movimiento, inventario, linterna y dash. El pasaje de la pared norte sube al cielo abierto."
+            "en": "Painted signs teach movement, loadout, lantern and dash. The Shaft 3 elevator climbs to open sky.",
+            "es": "Los carteles pintados enseñan movimiento, inventario, linterna y dash. El elevador del Pozo 3 sube al cielo abierto."
           }
         },
         {

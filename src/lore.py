@@ -36,8 +36,8 @@ CIVS = [
 
 MORE = [
     ("outpost", L("Where you start", "Donde empezás"), L("The Outpost and the shaft", "El Outpost y el pozo"),
-     L("A small fortified mining settlement dug in 60 m down around an old excavation shaft. Newcomer crates, Old Brannock at his rock face, a terminal booth — and the lift car waiting in its well. Every way out passes through The Threshold below; the surface is one shaft, or one adit, away.",
-       "Un pequeño asentamiento minero fortificado, cavado a 60 m alrededor de un viejo pozo de excavación. Cajones para recién llegados, el viejo Brannock en su frente de roca, una cabina con terminal… y el elevador esperando en su pozo. Toda salida pasa por The Threshold, abajo; la superficie está a un pozo, o a un socavón, de distancia."),
+     L("A small fortified mining settlement dug in 60 m down around an old excavation shaft. Newcomer crates, Old Brannock at his rock face, a terminal booth — and the lift car waiting in its well. The Shaft 3 elevator stops here on its way between the surface and The Threshold below.",
+       "Un pequeño asentamiento minero fortificado, cavado a 60 m alrededor de un viejo pozo de excavación. Cajones para recién llegados, el viejo Brannock en su frente de roca, una cabina con terminal… y el elevador esperando en su pozo. El elevador del Pozo 3 para acá en su recorrido entre la superficie y The Threshold, abajo."),
      "wiki/zone-outpost.html"),
     ("dustline", L("Everything has a price", "Todo tiene un precio"), L("Dustline", "Dustline"),
      L("The largest trading settlement on the frontier, built from containers and recovered steel around a dead transport hub. Neutral ground where every civilisation buys, sells and hires — and where almost nothing is what it seems. Its unofficial rule: everything has a price; the only question is whether you can afford it.",

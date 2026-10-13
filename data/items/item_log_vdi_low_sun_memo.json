@@ -1,0 +1,16 @@
+{
+  "id": "item.log.vdi_low_sun_memo",
+  "display_name": "VDI Memo · Project LOW SUN",
+  "description": "A sealed VDI tablet from the deep floors of Excavation C-3. Classified, and still powered. Provisional lore.",
+  "visual_id": "visual.log.tablet",
+  "category": "log",
+  "log": {
+    "title": "VANTAGE DEEP INDUSTRIES — INTERNAL · CLASSIFIED",
+    "text": "TO: Shaft supervisors, all sites\nRE: Project LOW SUN\n\n1. Effective immediately, every rig below 1,000 m accepts instructions from the network node designated 261.6.66. These instructions take precedence over local command.\n2. Do not attempt to contact 261.6.66.\n3. Crews are not to be told the target depth. Supervisors are not to be told the target.\n4. Anything recovered below 1,400 m is property of VDI. Seal it. Do not open it.\n5. If a rig keeps operating after an evacuation, do not shut it down.\n\nWe go where the world ends.\n— Office of the Director (signature redacted)",
+    "text_es": "PARA: Supervisores de pozo, todos los sitios\nASUNTO: Proyecto SOL BAJO\n\n1. Desde ya, todo equipo por debajo de los 1.000 m acepta instrucciones del nodo de red 261.6.66. Esas instrucciones tienen prioridad sobre el mando local.\n2. No intenten contactar a 261.6.66.\n3. A las cuadrillas no se les informa la profundidad objetivo. A los supervisores no se les informa el objetivo.\n4. Todo lo recuperado por debajo de los 1.400 m es propiedad de VDI. Se sella. No se abre.\n5. Si un equipo sigue operando después de una evacuación, no lo apaguen.\n\nLlegamos donde termina el mundo.\n— Oficina del Director (firma tachada)"
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "weight": 0.3
+}

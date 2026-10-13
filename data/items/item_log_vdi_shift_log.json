@@ -1,0 +1,16 @@
+{
+  "id": "item.log.vdi_shift_log",
+  "display_name": "VDI Shift Log · Shaft 3",
+  "description": "A Vantage Deep Industries field tablet, still holding a foreman's night-shift notes from Shaft 3. Provisional lore.",
+  "visual_id": "visual.log.tablet",
+  "category": "log",
+  "log": {
+    "title": "VANTAGE DEEP INDUSTRIES · SHAFT 3 · SHIFT LOG",
+    "text": "Foreman R. Achával, night rotation.\n\nDay 211. Drill head 4 at 1,180 m. Core samples come up warm. Geology says that's wrong. Geology can come down and say it here.\n\nDay 214. Head 4 stopped on its own at 02:10. Nobody on the console. Restarted it; it stopped again at 02:10 the next night. Logged as a fault.\n\nDay 219. The rig took an order I didn't give: depth 1,400, bearing straight down, priority BLACK. There is no priority BLACK in our manual. Head office says the order is valid. Head office would not say who sent it.\n\nDay 220. The crew wants hazard pay. Head office says everything has a price, and that ours has been paid.\n\nDay 221. We go where the world ends. I used to like that line.",
+    "text_es": "Capataz R. Achával, turno noche.\n\nDía 211. Cabezal 4 a 1.180 m. Los testigos suben tibios. Geología dice que eso está mal. Que baje Geología y lo diga acá.\n\nDía 214. El cabezal 4 se paró solo a las 02:10. Nadie en la consola. Lo reinicié; se volvió a parar a las 02:10 la noche siguiente. Lo anoté como falla.\n\nDía 219. El equipo recibió una orden que yo no di: profundidad 1.400, rumbo derecho para abajo, prioridad NEGRA. En nuestro manual no existe la prioridad NEGRA. Casa central dice que la orden es válida. Casa central no quiso decir quién la mandó.\n\nDía 220. La cuadrilla pide plus por riesgo. Casa central dice que todo tiene un precio, y que el nuestro ya está pagado.\n\nDía 221. Llegamos donde termina el mundo. Antes me gustaba esa frase."
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "weight": 0.3
+}

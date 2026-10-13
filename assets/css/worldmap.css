@@ -25,6 +25,7 @@
 .wm-frame[data-level="-1"] .wm-art { filter: saturate(.25) brightness(.14); }
 .wm-frame[data-level="-2"] .wm-art { filter: saturate(.2) brightness(.11); }
 .wm-frame[data-level="-3"] .wm-art { filter: saturate(.15) brightness(.07); }
+.wm-frame[data-level="-4"] .wm-art { filter: saturate(.1) brightness(.05); }
 .wm-svg, .dl-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; overflow: visible; }
 
 /* Capas: solo la activa se ve y recibe toques; al bajar, la que queda arriba se acerca y se esfuma, la de abajo llega desde lejos. */
@@ -77,7 +78,7 @@
 .wm-link { fill: none; vector-effect: non-scaling-stroke; pointer-events: none; stroke-linecap: round; }
 .wm-link.k-road { stroke: rgba(232, 227, 213, .5); stroke-width: 1.5; }
 .wm-link.k-road.s-planned { stroke: rgba(232, 227, 213, .3); stroke-dasharray: 6 5; }
-.wm-link.k-tunnel, .wm-link.k-shaft, .wm-link.k-lift, .wm-link.p-metro { stroke: rgba(111, 179, 172, .9); stroke-width: 1.6; stroke-dasharray: 2 4; }
+.wm-link.k-tunnel, .wm-link.k-shaft, .wm-link.k-lift, .wm-link.p-tunnel { stroke: rgba(111, 179, 172, .9); stroke-width: 1.6; stroke-dasharray: 2 4; }
 .wm-link.s-planned.k-tunnel, .wm-link.s-planned.k-shaft { stroke: rgba(111, 153, 152, .45); }
 .wm-link.k-lift:not(.s-planned), .wm-link.k-shaft:not(.s-planned) { stroke: rgba(226, 200, 143, .7); stroke-dasharray: 1 4; stroke-width: 2; }
 .wm-journey-glow { fill: none; stroke: rgba(211, 154, 75, .28); stroke-width: 9; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
@@ -105,10 +106,10 @@
 .wm-vl.same { pointer-events: none; }
 .wm-vl .wm-vl-bg { fill: rgba(11, 13, 12, .94); stroke: var(--relay); stroke-width: 1.5; transition: stroke .2s, fill .2s; }
 .wm-vl .wm-glyph { fill: none; stroke: #cfdcf5; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.wm-vl.k-lift .wm-vl-bg, .wm-vl.k-extract .wm-vl-bg { stroke: var(--amber); }
-.wm-vl.k-lift .wm-glyph, .wm-vl.k-extract .wm-glyph { stroke: var(--warm); }
-.wm-vl.k-stairs .wm-vl-bg, .wm-vl.k-adit .wm-vl-bg { stroke: var(--warm); }
-.wm-vl.k-stairs .wm-glyph, .wm-vl.k-adit .wm-glyph { stroke: var(--warm); }
+.wm-vl.k-lift .wm-vl-bg, .wm-vl.k-elevator .wm-vl-bg, .wm-vl.k-extract .wm-vl-bg { stroke: var(--amber); }
+.wm-vl.k-lift .wm-glyph, .wm-vl.k-elevator .wm-glyph, .wm-vl.k-extract .wm-glyph { stroke: var(--warm); }
+.wm-vl.k-stairs .wm-vl-bg { stroke: var(--warm); }
+.wm-vl.k-stairs .wm-glyph { stroke: var(--warm); }
 .wm-vl.s-planned .wm-vl-bg { stroke: var(--muted); stroke-dasharray: 3 2; }
 .wm-vl.s-planned .wm-glyph { stroke: var(--muted); }
 .wm-vl.s-planned { opacity: .7; }
@@ -124,6 +125,11 @@
 .wm-vl.same .wm-vl-bg { fill: rgba(11, 13, 12, .9); stroke: rgba(226, 200, 143, .7); stroke-width: 1.2; }
 .wm-vl.same .wm-glyph { stroke: var(--warm); stroke-width: 2.2; }
 .wm-vl.same { pointer-events: auto; cursor: default; }
+/* Elevador de varias paradas: columna de paradas junto a la cabina, la de este piso encendida */
+.wm-el-shaft { stroke: rgba(226, 200, 143, .55); stroke-width: 1.4; }
+.wm-el-stop { fill: #0b0d0c; stroke: var(--warm); stroke-width: 1.3; }
+.wm-el-stop.is-here { fill: var(--amber); stroke: #0b0d0c; }
+.wm-el-go:hover .wm-el-stop { fill: var(--warm); }
 
 /* Marcas */
 .wm-mark { cursor: pointer; }
@@ -194,7 +200,7 @@
 
 /* Panel: nivel y chips de profundidad */
 .wm-lv { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 2px; font: 600 11px/1 var(--mono); color: #15110b; background: var(--warm); }
-.wm-lv.l-1, .wm-lv.l-2, .wm-lv.l-3 { background: #6f8dc0; color: #0b0d0c; }
+.wm-lv.l-1, .wm-lv.l-2, .wm-lv.l-3, .wm-lv.l-4 { background: #6f8dc0; color: #0b0d0c; }
 .ex-k.ex-lv { color: #cfdcf5; border-color: #4a5e86; background: rgba(47, 64, 98, .35); }
 
 
@@ -241,7 +247,7 @@
 .wm-exits button:hover { border-color: var(--amber); }
 .wm-exits b { font: 600 16px/1.1 var(--display); letter-spacing: .05em; color: var(--text); text-transform: uppercase; }
 .ex-k { grid-row: span 2; font: 500 10px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--warm); border: 1px solid var(--line2); padding: 5px 6px; border-radius: 2px; min-width: 44px; text-align: center; }
-.ex-k.k-tunnel, .ex-k.k-shaft, .ex-k.k-lift { color: var(--relay); }
+.ex-k.k-tunnel, .ex-k.k-shaft, .ex-k.k-lift, .ex-k.k-elevator { color: var(--relay); }
 .ex-l { font: 400 11px/1.3 var(--mono); color: var(--muted); letter-spacing: .04em; overflow-wrap: anywhere; }
 .ex-planned button { opacity: .78; }
 .wm-svc { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; }
@@ -290,7 +296,7 @@
 .jb b { font: 600 20px/1.1 var(--display); letter-spacing: .05em; text-transform: uppercase; color: var(--text); display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .jb > span { font-size: 14px; color: var(--muted); line-height: 1.5; }
 .jl { font: 500 10px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--line2); padding: 4px 6px; border-radius: 2px; }
-.jl.l-1, .jl.l-2, .jl.l-3 { color: #cfdcf5; border-color: #4a5e86; background: rgba(47, 64, 98, .35); }
+.jl.l-1, .jl.l-2, .jl.l-3, .jl.l-4 { color: #cfdcf5; border-color: #4a5e86; background: rgba(47, 64, 98, .35); }
 .jsw button { grid-template-columns: 52px minmax(0, 1fr); padding: 9px 16px; border-left-color: #6f8dc0; background: linear-gradient(90deg, rgba(47, 64, 98, .25), var(--panel)); }
 .jsw-a { font: 600 22px/1 var(--display); color: #cfdcf5; }
 .jsw button > span:last-child { font: 600 13px/1.4 var(--display); letter-spacing: .1em; text-transform: uppercase; color: #cfdcf5; align-self: center; }

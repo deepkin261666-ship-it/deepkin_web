@@ -1,0 +1,16 @@
+{
+  "id": "item.log.castoff_ledger",
+  "display_name": "Castoff Ledger",
+  "description": "A cracked tablet a Castoff camp used as its books: what they took and what it cost them. Provisional lore.",
+  "visual_id": "visual.log.tablet",
+  "category": "log",
+  "log": {
+    "title": "WHAT WE TOOK · WHAT IT COST",
+    "text": "(kept by Moss, camp at the Scarp wrecks)\n\n2 drill bits, Outpost issue — sold to Nell for 9. Cost: Pell's hand.\n1 battery cell, half charge — kept. Cost: nothing, the operator was already dead.\n6 Field rounds — kept. Cost: 4 rounds.\n1 VDI tag, brass, 'R. ACHÁVAL' — nobody buys these. Kept anyway.\n\nThe Outpost let us go when the shafts closed. Said there was no work. There's work. It's just that now we decide the price.\n\nRule of the camp: if one of us shouts, everyone comes.\nRule of the camp: nobody goes below the Threshold. The Burrowborn don't bargain.",
+    "text_es": "(lo lleva Moss, campamento en los restos del Scarp)\n\n2 brocas, del Outpost — vendidas a Nell por 9. Costo: la mano de Pell.\n1 celda de batería, media carga — nos la quedamos. Costo: nada, el operador ya estaba muerto.\n6 balas de campaña — nos las quedamos. Costo: 4 balas.\n1 chapa de VDI, de bronce, 'R. ACHÁVAL' — nadie compra esto. Igual nos la quedamos.\n\nEl Outpost nos soltó cuando cerraron los pozos. Dijeron que no había trabajo. Trabajo hay. Lo que pasa es que ahora el precio lo ponemos nosotros.\n\nRegla del campamento: si uno grita, vienen todos.\nRegla del campamento: nadie baja del Threshold. Los Burrowborn no negocian."
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "weight": 0.3
+}

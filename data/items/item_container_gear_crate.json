@@ -1,7 +1,7 @@
 {
   "id": "item.container.gear_crate",
   "display_name": "Gear Crate",
-  "description": "Field gear for a newcomer: your starting weapon (and rounds if it shoots), a lantern, a battery cell, the settlement drill and two health capsules. What's inside is yours alone.",
+  "description": "Field gear for a newcomer: your starting weapon (and rounds if it shoots), a lantern, three battery cells (wear one; the spares trickle-charge it while you are out of a fight), the settlement drill and two health capsules. What's inside is yours alone.",
   "visual_id": "visual.container.gear_crate",
   "container": {
     "cells": 8
@@ -11,7 +11,7 @@
     "$starting_weapon",
     "$starting_ammo",
     "item.light.provisional_verdant_lumen",
-    "item.battery.provisional_relay_cell",
+    {"item": "item.battery.provisional_relay_cell", "quantity": 3},
     "item.tool.big_daddy_drill",
     {"item": "item.consumable.health_capsule", "quantity": 2}
   ],

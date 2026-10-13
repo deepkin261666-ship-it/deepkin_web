@@ -2,10 +2,11 @@
 # (copiado de deepkin/data/world/world_map.json), y genera la capa SVG sobre el arte del prototipo y el plano
 # de Dustline. La interaccion (pan/zoom, panel, vistas, niveles) vive en assets/js/worldmap.js (2026-10-09).
 #
-# Niveles (2026-10-12): el mapa tiene una capa por banda de profundidad (`level` del dato: 0 superficie, -1, -2, -3).
+# Niveles (2026-10-12; pisos 2026-10-13): el mapa tiene una capa por nivel (`level` del dato: 0 superficie, -1 .. -4). Desde
+# la decision 11 del juego el nivel es el ordinal del piso en cada pila vertical, no una banda de 200 m; depth_m no cambia.
 # Cada capa dibuja solo sus mapas: las celdas de superficie sobre el arte, y bajo tierra las "camaras" (celda encogida
 # o un poligono alrededor del marcador apilado) sobre la roca. Los pasajes verticales (pozo, escaleras, elevador)
-# se marcan en las dos capas que unen, en el mismo punto del plano; tocarlos cambia de nivel. Toda la geometria de
+# se marcan en las capas que unen (un elevador de varias paradas es un solo pozo con una marca por piso), en el mismo punto del plano; tocarlos cambia de nivel. Toda la geometria de
 # presentacion propia de esta pagina (puntos de pozos, desvios de tuneles, radios de camaras) vive aca, no en el dato.
 import html
 import json
@@ -32,7 +33,8 @@ DANGER = {"safe": L("Safe", "Segura"), "low": L("Low", "Baja"), "medium": L("Med
 DANGER_ORDER = ["safe", "low", "medium", "high", "deadly"]
 STATUS = {"playable": L("Playable now", "Jugable hoy"), "planned": L("Planned", "Planeada")}
 LAYER = {"surface": L("Surface", "Superficie"), "underground": L("Underground", "Subterránea")}
-CONN = {"road": L("Road", "Camino"), "shaft": L("Shaft", "Pozo"), "tunnel": L("Tunnel", "Túnel"), "lift": L("Lift", "Elevador")}
+CONN = {"road": L("Road", "Camino"), "shaft": L("Shaft", "Pozo"), "tunnel": L("Tunnel", "Túnel"), "lift": L("Lift", "Elevador"),
+        "elevator": L("Elevator", "Elevador")}
 SERVICES = {
     "service.vendor_consumables": L("Consumables vendor", "Vendedor de consumibles"),
     "service.contract_board": L("Contract board", "Tablero de contratos"),
@@ -48,17 +50,39 @@ SERVICES = {
     "service.fence": L("Informal traders", "Comerciantes informales"),
     "service.rumours": L("Rumours", "Rumores"),
 }
-# Niveles: bandas de 200 m del dato (`level`), nombre y lectura del indicador de profundidad del juego.
-LEVELS = [0, -1, -2, -3]
-LEVEL_NAME = {0: L("Surface", "Superficie"), -1: L("Level −1", "Nivel −1"), -2: L("Level −2", "Nivel −2"), -3: L("Level −3", "Nivel −3")}
-LEVEL_BAND = {0: L("0 m · open sky", "0 m · cielo abierto"), -1: L("1–200 m down", "1–200 m abajo"),
-              -2: L("201–400 m down", "201–400 m abajo"), -3: L("401–600 m down", "401–600 m abajo")}
-LEVEL_M = {0: 0, -1: 120, -2: 340, -3: 520}  # lectura por defecto del indicador al entrar a la capa
+# Niveles: el piso de cada pila vertical (`level` del dato). El rango de metros de cada capa sale del depth_m de sus mapas.
+LEVELS = [0, -1, -2, -3, -4]
+LEVEL_NAME = {0: L("Surface", "Superficie"), **{lv: L(f"Level {lv}".replace("-", "−"), f"Nivel {lv}".replace("-", "−")) for lv in LEVELS[1:]}}
+# Nombre en la pagina de cada elevador de varias paradas (el dato del juego trae solo el rotulo en ingles).
+ELEVATOR_NAME = {"elevator.shaft3": L("Shaft 3 elevator", "Elevador del Pozo 3")}
+
+
+def level_depths(data):
+    """{nivel: (min, max)} de depth_m de los mapas de cada capa; la lectura por defecto del indicador es el minimo jugable."""
+    out = {}
+    for lv in LEVELS:
+        ds = [z.get("depth_m", 0) for z in data["zones"] if z.get("level", 0 if z["layer"] == "surface" else -1) == lv]
+        out[lv] = (min(ds), max(ds)) if ds else (0, 0)
+    return out
+
+
+def level_band(lv, depths, lang, short=False):
+    if lv == 0:
+        return "0 m" if short else L_(L("0 m · open sky", "0 m · cielo abierto"), lang)
+    a, b = depths[lv]
+    rng = f"{a}–{b}" if a != b else f"{a}"
+    return f"{rng} m" if short else L_(L("{r} m down", "{r} m abajo"), lang).format(r=rng)
+
+
+def level_m(lv, data):
+    ds = [z.get("depth_m", 0) for z in data["zones"] if z.get("level", 0 if z["layer"] == "surface" else -1) == lv and z["status"] == "playable"]
+    return min(ds) if ds else level_depths(data)[lv][0]
+
 T = {
     "kicker": L("Interactive map", "Mapa interactivo"),
     "title": L("The world map", "El mapa del mundo"),
-    "lead": L("A continent of connected maps, level by level. Each cell is one map with exits on its borders; the workings hang under the surface in 200 m bands. Drag to pan, scroll or pinch to zoom, tap a zone, and use the depth rail (or PageDown) to go down.",
-              "Un continente de mapas conectados, nivel por nivel. Cada celda es un mapa con salidas en sus bordes; las galerías cuelgan bajo la superficie en bandas de 200 m. Arrastrá para moverte, usá la rueda o pellizcá para hacer zoom, tocá una zona y usá la barra de profundidad (o AvPág) para bajar."),
+    "lead": L("A continent of connected maps, level by level. Each cell is one map with exits on its borders; the workings hang under the surface, one floor per level. Drag to pan, scroll or pinch to zoom, tap a zone, and use the depth rail (or PageDown) to go down.",
+              "Un continente de mapas conectados, nivel por nivel. Cada celda es un mapa con salidas en sus bordes; las galerías cuelgan bajo la superficie, un piso por nivel. Arrastrá para moverte, usá la rueda o pellizcá para hacer zoom, tocá una zona y usá la barra de profundidad (o AvPág) para bajar."),
     "continent": L("Continent", "Continente"),
     "city": L("Dustline", "Dustline"),
     "zoom_in": L("Zoom in", "Acercar"), "zoom_out": L("Zoom out", "Alejar"), "reset": L("Reset view", "Restablecer vista"),
@@ -75,10 +99,10 @@ T = {
     "legend": L("Legend", "Referencias"), "kinds": L("Places", "Lugares"), "biomes": L("Biomes", "Biomas"),
     "lines": L("Routes & borders", "Rutas y bordes"), "passages": L("Levels & passages", "Niveles y pasajes"),
     "l_playable": L("Playable map", "Mapa jugable"), "l_planned": L("Planned · uncharted", "Planeado · sin cartografiar"),
-    "l_road": L("Road (border exit)", "Camino (salida en el borde)"), "l_metro": L("Metro tunnel (same level)", "Túnel de metro (mismo nivel)"),
+    "l_road": L("Road (border exit)", "Camino (salida en el borde)"), "l_tunnel": L("Tunnel (same level)", "Túnel (mismo nivel)"),
     "l_journey": L("Your first journey", "Tu primer viaje"), "l_exit": L("Exit on a border", "Salida en un borde"),
     "l_gate": L("City gate · faint when closed", "Puerta de ciudad · tenue si está cerrada"),
-    "l_lift": L("Lift", "Elevador"), "l_stairs": L("Stairs", "Escaleras"), "l_adit": L("Adit · stairs to the surface", "Galería · escaleras a la superficie"),
+    "l_lift": L("Lift", "Elevador"), "l_stairs": L("Stairs", "Escaleras"), "l_elevator": L("Elevator · one shaft, a stop on each floor", "Elevador · un solo pozo, una parada en cada piso"),
     "l_deep": L("Deep shaft · stair pit", "Pozo profundo · escalera en pozo"), "l_extract": L("Extraction lift · one way up", "Elevador de extracción · sólo sube"),
     "l_switch": L("Tap a passage to change level", "Tocá un pasaje para cambiar de nivel"),
     "l_ghost_below": L("Workings on the level below", "Galerías del nivel de abajo"),
@@ -101,6 +125,7 @@ T = {
     "m_down": L("{m} m down", "{m} m abajo"), "level_short": L("level", "nivel"),
     "fuel": L("gas station", "estación de servicio"),
     "arrives": L("arrives here from", "llega acá desde"),
+    "stops": L("stops", "paradas"),
 }
 
 KIND_ICON = {  # 24x24, trazos
@@ -111,12 +136,12 @@ KIND_ICON = {  # 24x24, trazos
     "dungeon": '<path d="M5 20V11a7 7 0 0 1 14 0v9M9 20v-6a3 3 0 0 1 6 0v6M3 20h18"/>',
     "route": '<path d="M9 21 11 3M15 21 13 3M12 6v2M12 11v2M12 16v2"/>',
 }
-# Pasajes verticales, 24x24: elevador (cabina y cable), escaleras, galeria (arco con escalera), pozo profundo (escalera
-# en pozo), elevador de extraccion (solo sube), pozo generico (planeado), surtidor.
+# Pasajes verticales, 24x24: elevador (cabina y cable), elevador de varias paradas (cabina que sube y baja), escaleras,
+# pozo profundo (escalera en pozo), elevador de extraccion (solo sube), pozo generico (planeado), surtidor.
 PASS_ICON = {
     "lift": '<rect x="6" y="9" width="12" height="11" rx="1"/><path d="M12 2v7M9 5l3-3 3 3M9 14h6"/>',
+    "elevator": '<rect x="5" y="2" width="14" height="20" rx="1.5"/><path d="M9 9.5l3-3 3 3M9 14.5l3 3 3-3"/>',
     "stairs": '<path d="M3 20h4v-4h4v-4h4v-4h4V4"/>',
-    "adit": '<path d="M3 20V11a9 9 0 0 1 18 0v9"/><path d="M7 20v-3h3v-3h3v-3h4"/>',
     "deep": '<circle cx="12" cy="12" r="9"/><path d="M6 15h3v-3h3v-3h3V7"/>',
     "extract": '<rect x="6" y="11" width="12" height="9" rx="1"/><path d="M12 2v9M8 6l4-4 4 4M3 8l-1 1M21 8l1 1"/>',
     "shaft": '<circle cx="12" cy="12" r="9" stroke-dasharray="3 2.5"/><path d="M12 7v10M8.5 13.5 12 17l3.5-3.5"/>',
@@ -126,15 +151,16 @@ PASS_ICON = {
 # Geometria de presentacion de esta pagina (coordenadas 0..1 del arte): punto de cada pasaje vertical cuando el dato
 # no lo fija (sin exit_at y sin apilado directo), desvios de tuneles del mismo nivel y radios de camara (px) de los
 # mapas apilados. El dato del juego no cambia por esto.
-VLINK_AT = {"conn.threshold_scarp": (0.468, 0.392), "extraction.zone.excavation_c3_f3": (0.355, 0.715)}
+# El elevador del Pozo 3 (2026-10-13) toma el punto del crater de Shaft 3 en el arte, el de la vieja escalera Threshold-Scarp.
+VLINK_AT = {"elevator.shaft3": (0.468, 0.392), "extraction.zone.excavation_c3_f3": (0.355, 0.715)}
 # Entradas pintadas en el arte (2026-10-12, pintura sin rotulos): el pozo de C-3 se ve en la superficie pero el mapa
-# vive en -1; una marca chica "↓ −1" sobre el pozo baja a esa capa. Shaft 3 y la galeria del Outpost ya son pasajes.
+# vive bajo tierra; una marca chica "↓ nivel" sobre el pozo baja a esa capa. Shaft 3 ya es el elevador.
 ENTRANCES = {"zone.excavation_c3": "left"}  # lado del rotulo
-VIA = {"conn.threshold_shallows": (0.445, 0.36), "conn.shallows_c3": (0.325, 0.49), "conn.threshold_c3": (0.44, 0.56),
+VIA = {"conn.threshold_shallows": (0.445, 0.36), "conn.shallows_c3": (0.325, 0.49),
        "conn.old_metro_shallows": None, "conn.abyss_c3_f3": (0.325, 0.80)}
 CHAMBER_R = {"zone.threshold": 30, "zone.dragon_lair": 44, "zone.excavation_c3_f2": 52, "zone.excavation_c3_f3": 48}
 CHAMBER_SHRINK = 0.6
-UNDER_FILL = {-1: .10, -2: .14, -3: .18}
+UNDER_FILL = {-1: .10, -2: .14, -3: .18, -4: .21}
 
 
 def L_(d, lang):
@@ -166,7 +192,7 @@ def glyph(kind, size, table=None, cls="wm-glyph"):
 
 def _region():
     p = os.path.join(ROOT, "data", "starting_region.json")
-    return json.load(open(p)) if os.path.exists(p) else {"transitions": [], "floors": []}
+    return json.load(open(p)) if os.path.exists(p) else {"transitions": [], "floors": [], "elevators": []}
 
 
 # --- Continente, por niveles ---------------------------------------------------------------------
@@ -185,6 +211,14 @@ class World:
         self.jconns = set(self.journey["connections"]) if self.journey else set()
         self.steps = {zid: i for i, zid in enumerate(self.journey["zones"])} if self.journey else {}
         self.entrances = {g["connection"]: g for g in data.get("dustline", {}).get("entrances", [])}
+        # Elevadores de varias paradas: los pisos del dato de la region, en el orden del pozo (de arriba hacia abajo).
+        used = {c.get("elevator") for c in data["connections"] if c["kind"] == "elevator"}
+        self.elevators = [dict(el, floors=sorted(el["floors"], key=lambda f: -self.level(f["zone"])),
+                               status="playable" if all(c["status"] == "playable" for c in data["connections"] if c.get("elevator") == el["id"]) else "planned")
+                          for el in region.get("elevators", []) if el["id"] in used]
+
+    def elevator_name(self, el):
+        return L_(ELEVATOR_NAME.get(el["id"], el.get("label", el["id"]).capitalize()), self.lang)
 
     def level(self, zid):
         z = self.zones[zid]
@@ -223,9 +257,11 @@ class World:
         return (ax + bx) / 2, (ay + by) / 2
 
     def vertical(self):
-        """Pasajes que cambian de nivel: conexiones entre niveles distintos y la extraccion de solo ida."""
+        """Pasajes que cambian de nivel: conexiones entre niveles distintos y la extraccion de solo ida (los elevadores aparte)."""
         out = []
         for c in self.d["connections"]:
+            if c["kind"] == "elevator":
+                continue
             la, lb = (self.level(x["zone"]) for x in c["ends"])
             if la != lb:
                 out.append(("conn", c))
@@ -245,9 +281,9 @@ class World:
         """Icono del pasaje visto desde `end`: galeria, pozo profundo, extraccion, o por la presentacion real del juego."""
         if c.get("one_way"):
             return "extract"
-        if c["id"] == "conn.outpost_scarp":
-            return "adit"
-        if c["id"] in ("conn.threshold_c3", "conn.c3_f2"):
+        if c["kind"] == "elevator":
+            return "elevator"
+        if c["id"] == "conn.c3_f2":
             return "deep"
         if c["status"] != "playable":
             return "shaft"
@@ -256,8 +292,8 @@ class World:
 
 
 def pres_name(p, lang):
-    return L_({"metro": L("Metro tunnel", "Túnel de metro"), "lift": L("Lift", "Elevador"), "stairs": L("Stairs", "Escaleras"),
-               "gate": L("Gate", "Puerta"), "road": L("Road", "Camino"), "adit": L("Adit", "Galería"),
+    return L_({"tunnel": L("Tunnel", "Túnel"), "lift": L("Lift", "Elevador"), "stairs": L("Stairs", "Escaleras"),
+               "gate": L("Gate", "Puerta"), "road": L("Road", "Camino"), "elevator": L("Elevator", "Elevador"),
                "deep": L("Deep shaft", "Pozo profundo"), "extract": L("Extraction lift", "Elevador de extracción"),
                "shaft": L("Shaft", "Pozo")}.get(p, L("Passage", "Pasaje")), lang)
 
@@ -334,7 +370,7 @@ def layer_svg(w, lv, lang):
                     ghosts_above.append(f'<path class="wm-ghost up" d="{poly_d(w.chamber(z))}"/>')
     # Fantasmas de abajo: camaras del nivel siguiente, trama tenue; tocarlas baja.
     ghosts_below = []
-    if lv > -3:
+    if lv > LEVELS[-1]:
         for z in w.d["zones"]:
             if w.level(z["id"]) == lv - 1:
                 ghosts_below.append(f'<path class="wm-ghost down s-{z["status"]}" d="{poly_d(w.chamber(z))}" data-ghost="{z["id"]}" data-tip="{e(z["name"])} · {e(L_(LEVEL_NAME[lv - 1], lang))}"/>')
@@ -360,7 +396,7 @@ def layer_svg(w, lv, lang):
     links, pips, midicons, jsegs = [], [], [], []
     for c in w.d["connections"]:
         za, zb = (w.zones[x["zone"]] for x in c["ends"])
-        if w.level(za["id"]) != lv or w.level(zb["id"]) != lv:
+        if w.level(za["id"]) != lv or w.level(zb["id"]) != lv or c["kind"] == "elevator":
             continue
         ax, ay = w.anchor(za)
         bx, by = w.anchor(zb)
@@ -368,7 +404,7 @@ def layer_svg(w, lv, lang):
         d = curve_d(ax, ay, bx, by, ex, VIA.get(c["id"]) and w.px(VIA[c["id"]]))
         kind = c["kind"]
         pres = w.pres(c["ends"][0].get("transition")) if c["status"] == "playable" else ""
-        cls = f'wm-link k-{kind} s-{c["status"]}' + (" p-metro" if pres == "metro" else "") + (" is-journey" if c["id"] in w.jconns else "")
+        cls = f'wm-link k-{kind} s-{c["status"]}' + (" p-tunnel" if pres == "tunnel" else "") + (" is-journey" if c["id"] in w.jconns else "")
         links.append(f'<path class="{cls}" d="{d}" data-conn="{c["id"]}"/>')
         if c["id"] in w.jconns:
             jsegs.append(d)
@@ -383,7 +419,7 @@ def layer_svg(w, lv, lang):
             else:
                 pips.append(sc(f'wm-pip s-{c["status"]}', ex[0], ex[1], '<rect x="-3.5" y="-3.5" width="7" height="7" transform="rotate(45)"/>'))
         if kind in ("lift", "shaft") and not ex:
-            # Elevador o pozo dentro de la misma banda (Outpost -> Threshold, Threshold -> C-3): icono en el medio del tramo.
+            # Elevador o pozo dentro del mismo nivel (hoy ninguno): icono en el medio del tramo.
             mx, my = ax + (bx - ax) * .62, ay + (by - ay) * .62
             if VIA.get(c["id"]):
                 vx, vy = w.px(VIA[c["id"]])
@@ -429,6 +465,47 @@ def layer_svg(w, lv, lang):
             ax, ay = w.anchor(w.zones[end["zone"]])
             if math.hypot(ax - x, ay - y) > 16:
                 stubs.append(f'<path class="wm-stub s-{c["status"]}" d="M{ax:.1f},{ay:.1f}L{x:.1f},{y:.1f}"/>')
+    # Elevadores de varias paradas: un solo pozo en el mismo punto del plano, marcado en cada piso que sirve. La marca lleva
+    # la columna de paradas (la de este piso encendida); tocar la marca va a la parada de abajo (o a la de arriba desde el
+    # fondo) y tocar una parada de la columna va directo a ese piso.
+    for el in w.elevators:
+        floors = el["floors"]
+        here = next((i for i, f in enumerate(floors) if w.level(f["zone"]) == lv), None)
+        if here is None:
+            continue
+        x, y = w.px(VLINK_AT[el["id"]]) if el["id"] in VLINK_AT else w.anchor(w.zones[floors[0]["zone"]])
+        name = w.elevator_name(el)
+        cid = next((c["id"] for c in w.d["connections"] if c.get("elevator") == el["id"]), el["id"])
+        journey = any(c["id"] in w.jconns for c in w.d["connections"] if c.get("elevator") == el["id"])
+
+        def stop_txt(f):
+            z = w.zones[f["zone"]]
+            flv = w.level(f["zone"])
+            return f'{z["name"]} ({L_(T["surface"], lang).lower() if flv == 0 else str(flv).replace("-", "−")})'
+        stops = " · ".join(stop_txt(f) for f in floors)
+        tip = f'{name.upper()} · {L_(T["stops"], lang)}: {stops}' + (f' · {L_(T["planned_passage"], lang)}' if el["status"] != "playable" else "")
+        nxt = floors[here + 1] if here + 1 < len(floors) else floors[here - 1]
+        to_lv = w.level(nxt["zone"])
+        n = len(floors)
+        gap = 9
+        col = [f'<path class="wm-el-shaft" d="M22,{-(n - 1) * gap / 2:.1f}V{(n - 1) * gap / 2:.1f}"/>']
+        for i, f in enumerate(floors):
+            fy = -(n - 1) * gap / 2 + i * gap
+            flv = w.level(f["zone"])
+            if i == here:
+                col.append(f'<circle class="wm-el-stop is-here" cx="22" cy="{fy:.1f}" r="3.6"/>')
+            else:
+                col.append(f'<g class="wm-el-go" data-vlink="{el["id"]}" data-from="{floors[here]["zone"]}" data-to="{f["zone"]}" data-to-level="{flv}" '
+                           f'data-tip="{e(name.upper())} · {e(stop_txt(f))}"><circle class="wm-hit" cx="22" cy="{fy:.1f}" r="6"/>'
+                           f'<circle class="wm-el-stop" cx="22" cy="{fy:.1f}" r="3.2"/></g>')
+        label = f'<text class="wm-vl-label" x="-18" y="4" text-anchor="end">{e(name.upper())}</text>' if journey else ""
+        vls.append(sc(f'wm-vl wm-elevator k-elevator s-{el["status"]} dir-{"down" if to_lv < lv else "up"}{" is-journey" if journey else ""}', x, y,
+                      f'<circle class="wm-hit" r="18"/><rect class="wm-vl-bg" x="-12" y="-12" width="24" height="24" rx="4"/>{glyph("elevator", 15, PASS_ICON)}'
+                      f'{"".join(col)}{label}',
+                      f' data-vlink="{el["id"]}" data-conn="{cid}" data-from="{floors[here]["zone"]}" data-to="{nxt["zone"]}" data-to-level="{to_lv}" data-tip="{e(tip)}"'))
+        ax, ay = w.anchor(w.zones[floors[here]["zone"]])
+        if math.hypot(ax - x, ay - y) > 16:
+            stubs.append(f'<path class="wm-stub s-{el["status"]}" d="M{ax:.1f},{ay:.1f}L{x:.1f},{y:.1f}"/>')
     out.append(f'<g class="wm-stubs">{"".join(stubs)}</g>')
     # Surtidor de Frontier Road: sobre el camino, justo antes de la puerta.
     extras = []
@@ -596,7 +673,7 @@ def city_svg(data, lang):
 
 
 # --- Datos para el JS y HTML de la seccion ------------------------------------------------------
-PRES = {"metro": L("Metro tunnel", "Túnel de metro"), "lift": L("Lift", "Elevador"), "stairs": L("Stairs", "Escaleras"),
+PRES = {"tunnel": L("Tunnel", "Túnel"), "lift": L("Lift", "Elevador"), "stairs": L("Stairs", "Escaleras"),
         "gate": L("Gate", "Puerta"), "road": L("Road", "Camino")}
 
 
@@ -620,7 +697,8 @@ def client_data(data, lang):
     trans = w.trans
     hp = os.path.join(ROOT, "data", "world", "respawn_hubs.json")
     hubs = {h["zone_id"] for h in json.load(open(hp))["hubs"]} if os.path.exists(hp) else set()
-    out = {"zones": {}, "districts": {}, "levels": {str(lv): {"name": L_(LEVEL_NAME[lv], lang), "band": L_(LEVEL_BAND[lv], lang), "m": LEVEL_M[lv]} for lv in LEVELS},
+    depths = level_depths(data)
+    out = {"zones": {}, "districts": {}, "levels": {str(lv): {"name": L_(LEVEL_NAME[lv], lang), "band": level_band(lv, depths, lang), "m": level_m(lv, data)} for lv in LEVELS},
            "t": {k: L_(v, lang) for k, v in T.items() if k in (
                "biome", "danger", "tier", "status", "layer", "exits", "above", "below", "depth", "floor", "services", "open_city", "back_map", "step", "close",
                "district", "gate", "landmark", "planned_city", "wiki_page", "here", "surface", "one_way", "go_down", "go_up", "level_short", "m_down")}}
@@ -635,14 +713,16 @@ def client_data(data, lang):
             other = ends[1] if ends[0] is mine else ends[0]
             tr = trans.get(mine.get("transition"))
             kind = L_(CONN[c["kind"]], lang)
-            if c["status"] == "playable":
+            el = next((x for x in w.elevators if x["id"] == c.get("elevator")), None)
+            if c["status"] == "playable" and not el:
                 kind = L_(PRES[(tr or {}).get("presentation") or "road"], lang)
             if tr and tr.get("requires_drill_site_cleared"):
                 kind += " · " + L_(L("locked: drill the Deep Seal", "cerrado: perforá el Sello Profundo"), lang)
             olv = w.level(other["zone"])
             conns.append({"to": other["zone"], "name": zones[other["zone"]]["name"], "kind": kind, "k": c["kind"],
                           "exit": mine["exit"], "edge": mine.get("edge", ""), "status": c["status"],
-                          "lv": olv, "dm": zones[other["zone"]].get("depth_m", 0), "dir": "same" if olv == lv else ("up" if olv > lv else "down"), "conn": c["id"]})
+                          "lv": olv, "dm": zones[other["zone"]].get("depth_m", 0), "dir": "same" if olv == lv else ("up" if olv > lv else "down"),
+                          "conn": el["id"] if el else c["id"]})
         ex = z.get("extraction")
         if ex:
             olv = w.level(ex["zone"])
@@ -687,13 +767,13 @@ def legend(data, lang, view):
     biomes = "".join(f'<li><i class="sw" style="background:{BIOME_COLOR[b]}"></i>{e(L_(BIOME[b], lang))}</li>' for b in BIOME)
     danger = "".join(f'<li><i class="dg dg-{i}"></i>{e(L_(DANGER[k], lang))}</li>' for i, k in enumerate(DANGER_ORDER))
     lines = (f'<li><i class="ln ln-play"></i>{e(L_(T["l_playable"], lang))}</li><li><i class="ln ln-plan"></i>{e(L_(T["l_planned"], lang))}</li>'
-             f'<li><i class="ln ln-road"></i>{e(L_(T["l_road"], lang))}</li><li><i class="ln ln-under"></i>{e(L_(T["l_metro"], lang))}</li>'
+             f'<li><i class="ln ln-road"></i>{e(L_(T["l_road"], lang))}</li><li><i class="ln ln-under"></i>{e(L_(T["l_tunnel"], lang))}</li>'
              f'<li><i class="ln ln-journey"></i>{e(L_(T["l_journey"], lang))}</li><li><i class="ln ln-pip"></i>{e(L_(T["l_exit"], lang))}</li>'
              f'<li>{icon_svg("gate", "wm-ico wm-ico-gate", PASS_ICON)}{e(L_(T["l_gate"], lang))}</li>'
              f'<li>{icon_svg("fuel", "wm-ico wm-ico-gate", PASS_ICON)}{e(L_(T["l_fuel"], lang))}</li>')
-    passages = (f'<li>{icon_svg("lift", "wm-ico wm-ico-vl", PASS_ICON)}{e(L_(T["l_lift"], lang))}</li>'
+    passages = (f'<li>{icon_svg("elevator", "wm-ico wm-ico-vl", PASS_ICON)}{e(L_(T["l_elevator"], lang))}</li>'
+                f'<li>{icon_svg("lift", "wm-ico wm-ico-vl", PASS_ICON)}{e(L_(T["l_lift"], lang))}</li>'
                 f'<li>{icon_svg("stairs", "wm-ico wm-ico-vl", PASS_ICON)}{e(L_(T["l_stairs"], lang))}</li>'
-                f'<li>{icon_svg("adit", "wm-ico wm-ico-vl", PASS_ICON)}{e(L_(T["l_adit"], lang))}</li>'
                 f'<li>{icon_svg("deep", "wm-ico wm-ico-vl", PASS_ICON)}{e(L_(T["l_deep"], lang))}</li>'
                 f'<li>{icon_svg("extract", "wm-ico wm-ico-vl", PASS_ICON)}{e(L_(T["l_extract"], lang))}</li>'
                 f'<li><i class="ln ln-ghost-below"></i>{e(L_(T["l_ghost_below"], lang))}</li>'
@@ -739,15 +819,16 @@ def journey_html(data, lang):
             f'<ol>{items}</ol>{mins}</div>')
 
 
-def rail_html(lang):
-    """Barra de profundidad: subir, un boton por nivel (metros de la banda), bajar, y la lectura del indicador."""
+def rail_html(data, lang):
+    """Barra de profundidad: subir, un boton por nivel (metros de sus mapas), bajar, y la lectura del indicador."""
+    depths = level_depths(data)
     btns = "".join(f'<li><button type="button" data-level="{lv}" aria-pressed="{"true" if lv == 0 else "false"}">'
-                   f'<b>{"0" if lv == 0 else lv}</b><span>{e(L_(T["surface"], lang)) if lv == 0 else e(L_(LEVEL_BAND[lv], lang).split(" ")[0] + " m")}</span></button></li>' for lv in LEVELS)
+                   f'<b>{"0" if lv == 0 else str(lv).replace("-", "−")}</b><span>{e(L_(T["surface"], lang)) if lv == 0 else e(level_band(lv, depths, lang, short=True))}</span></button></li>' for lv in LEVELS)
     return (f'<div class="wm-rail" role="group" aria-label="{e(L_(T["rail"], lang))}">'
             f'<button type="button" class="wm-dive" data-dive="up" aria-label="{e(L_(T["go_up"], lang))}" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg><span>{e(L_(T["go_up"], lang))}</span></button>'
             f'<ol>{btns}</ol>'
             f'<button type="button" class="wm-dive" data-dive="down" aria-label="{e(L_(T["go_down"], lang))}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg><span>{e(L_(T["go_down"], lang))}</span></button>'
-            f'<output class="wm-gauge" aria-live="polite"><b data-m>0</b><small>m</small><span data-band>{e(L_(LEVEL_BAND[0], lang))}</span></output></div>')
+            f'<output class="wm-gauge" aria-live="polite"><b data-m>0</b><small>m</small><span data-band>{e(level_band(0, {}, lang))}</span></output></div>')
 
 
 def section(lang, section_title):
@@ -773,7 +854,7 @@ def section(lang, section_title):
   </div>
   <div class="wm-body">
   <div class="wm-frame" data-pane="map" data-level="0">
-    {rail_html(lang)}
+    {rail_html(data, lang)}
     <div class="wm-viewport" tabindex="0" aria-label="{e(L_(T["title"], lang))}">
       <div class="wm-stage" style="aspect-ratio:{W}/{H}">
         <picture><source media="(max-width: 720px)" srcset="{img}_800.webp" type="image/webp"><source srcset="{img}.webp" type="image/webp">

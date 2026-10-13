@@ -121,22 +121,7 @@
       "rotation": 30
      }
     ],
-    "passages": [
-     {
-      "name": "deep_scarp_adit",
-      "points": [
-       [
-        -33.0,
-        -1.0
-       ],
-       [
-        -37.35,
-        -5.35
-       ]
-      ],
-      "width": 4.0
-     }
-    ],
+    "passages": [],
     "wet": [
      {
       "center": [
@@ -979,6 +964,103 @@
         ]
        }
       }
+     },
+     "body": {
+      "model": "characters/dustline/street_medic",
+      "height": 1.74,
+      "idle": true
+     }
+    },
+    {
+     "id": "npc.outpost_miner_north",
+     "name": "HALE  ·  MINER",
+     "position": [
+      12.05,
+      20.92
+     ],
+     "rotation": 30,
+     "dialog": {
+      "start": "line",
+      "nodes": {
+       "line": {
+        "text": "North face gives iron if you're patient. I'm not. The drill is.",
+        "options": [
+         [
+          "Keep at it.",
+          ""
+         ]
+        ]
+       }
+      }
+     }
+    },
+    {
+     "id": "npc.outpost_miner_northwest",
+     "name": "DOSS  ·  MINER",
+     "position": [
+      -10.05,
+      17.42
+     ],
+     "rotation": -30,
+     "dialog": {
+      "start": "line",
+      "nodes": {
+       "line": {
+        "text": "Every metre of this wall is somebody's pay. Mostly the Exchange's.",
+        "options": [
+         [
+          "Right.",
+          ""
+         ]
+        ]
+       }
+      }
+     }
+    },
+    {
+     "id": "npc.outpost_miner_southwest",
+     "name": "KITO  ·  MINER",
+     "position": [
+      -21.91,
+      -18.42
+     ],
+     "rotation": -130,
+     "dialog": {
+      "start": "line",
+      "nodes": {
+       "line": {
+        "text": "Hear that hum under the hammer? That's not the rock. Don't ask me what it is.",
+        "options": [
+         [
+          "I won't.",
+          ""
+         ]
+        ]
+       }
+      }
+     }
+    },
+    {
+     "id": "npc.outpost_miner_south",
+     "name": "RUNE  ·  MINER",
+     "position": [
+      14.35,
+      -24.72
+     ],
+     "rotation": 150,
+     "dialog": {
+      "start": "line",
+      "nodes": {
+       "line": {
+        "text": "Fresh boots, huh. Lamp on before the Threshold, or you'll come back up in a bag.",
+        "options": [
+         [
+          "Noted.",
+          ""
+         ]
+        ]
+       }
+      }
      }
     }
    ],
@@ -1395,7 +1477,28 @@
     }
    ],
    "set": "res://data/world/sets/outpost.json",
-   "links": "res://data/world/sets/links_outpost.json"
+   "links": "res://data/world/sets/links_outpost.json",
+   "work_lights": [
+    {
+     "id": "outpost.crate_reflector",
+     "model": "props/outpost/work_reflector",
+     "position": [
+      19.9,
+      4.1
+     ],
+     "rotation": 0,
+     "aim": [
+      16.8,
+      0.0,
+      3.2
+     ],
+     "head_height": 1.8,
+     "energy": 11.0,
+     "range": 10.0,
+     "angle": 38.0,
+     "color": "fff1d6"
+    }
+   ]
   },
   {
    "zone_id": "zone.threshold",
@@ -1463,12 +1566,12 @@
       "name": "portal_0",
       "points": [
        [
-        12.28,
-        -2.82
+        14.5,
+        -1.9
        ],
        [
-        10.87,
-        -4.23
+        16.5,
+        -1.9
        ]
       ],
       "width": 4.78
@@ -1486,20 +1589,6 @@
        ]
       ],
       "width": 4.2
-     },
-     {
-      "name": "portal_2",
-      "points": [
-       [
-        -6.64,
-        -5.04
-       ],
-       [
-        -10.84,
-        -9.24
-       ]
-      ],
-      "width": 4.0
      }
     ],
     "wet": [
@@ -1662,20 +1751,6 @@
       "solid": false,
       "y": 1.1
      }
-    ],
-    "holes": [
-     {
-      "name": "deep_c3_shaft",
-      "center": [
-       -2.0,
-       3.5
-      ],
-      "size": [
-       2.8000000000000003,
-       4.6000000000000005
-      ],
-      "rotation": 45
-     }
     ]
    },
    "pieces": [
@@ -1813,7 +1888,7 @@
       1.9,
       4.4
      ],
-     "text": "LIFT  ·  G\nback up to the Outpost"
+     "text": "SHAFT 3 ELEVATOR  ·  G\nscarp · outpost · threshold"
     }
    ],
    "drill_sites": [],
@@ -1946,12 +2021,12 @@
       "name": "portal_0",
       "points": [
        [
-        -22.32,
-        1.28
+        -22.7,
+        2.2
        ],
        [
-        -23.73,
-        -0.13
+        -24.7,
+        2.2
        ]
       ],
       "width": 4.78
@@ -1960,12 +2035,12 @@
       "name": "portal_1",
       "points": [
        [
-        21.48,
-        -11.32
+        23.7,
+        -10.4
        ],
        [
-        20.07,
-        -12.73
+        25.7,
+        -10.4
        ]
       ],
       "width": 4.78
@@ -2561,12 +2636,12 @@
       "name": "portal_0",
       "points": [
        [
-        -23.32,
-        -0.92
+        -23.7,
+        0.0
        ],
        [
-        -24.73,
-        -2.33
+        -25.7,
+        0.0
        ]
       ],
       "width": 4.78
@@ -3353,11 +3428,11 @@
       "points": [
        [
         -37.13,
-        32.87
+        35.13
        ],
        [
         -38.55,
-        31.45
+        36.55
        ]
       ],
       "width": 5.88
@@ -3510,18 +3585,6 @@
       "size": [
        5.68,
        6.33
-      ],
-      "rotation": 45
-     },
-     {
-      "name": "deep_outpost_adit",
-      "center": [
-       -28.0,
-       10.0
-      ],
-      "size": [
-       2.8000000000000003,
-       4.6000000000000005
       ],
       "rotation": 45
      }
@@ -6325,7 +6388,7 @@
     102.4
    ],
    "label": "THE SHALLOWS",
-   "presentation": "metro",
+   "presentation": "tunnel",
    "label_offset": [
     0.0,
     3.0,
@@ -6347,7 +6410,7 @@
     98.4
    ],
    "label": "RETURN · THE THRESHOLD",
-   "presentation": "metro",
+   "presentation": "tunnel",
    "label_offset": [
     0.0,
     3.0,
@@ -6369,7 +6432,7 @@
     100.0
    ],
    "label": "EXCAVATION C-3",
-   "presentation": "metro",
+   "presentation": "tunnel",
    "label_offset": [
     0.0,
     3.0,
@@ -6391,34 +6454,11 @@
     90.4
    ],
    "label": "RETURN · THE SHALLOWS",
-   "presentation": "metro",
+   "presentation": "tunnel",
    "label_offset": [
     0.0,
     3.0,
     0.0
-   ]
-  },
-  {
-   "entity_id": 54,
-   "from_zone": "zone.threshold",
-   "position": [
-    -12.4,
-    0.0,
-    104.4
-   ],
-   "to_zone": "zone.outpost",
-   "arrival": [
-    -138.26,
-    0.0,
-    103.74
-   ],
-   "label": "LIFT · THE OUTPOST",
-   "arrival_rotation": 3.927,
-   "presentation": "lift",
-   "label_offset": [
-    -1.4,
-    2.6,
-    -1.4
    ]
   },
   {
@@ -6436,50 +6476,6 @@
     103.4
    ],
    "label": "THE THRESHOLD"
-  },
-  {
-   "entity_id": 120,
-   "from_zone": "zone.threshold",
-   "position": [
-    -6.0,
-    0.0,
-    95.6
-   ],
-   "to_zone": "zone.surface_scarp",
-   "arrival": [
-    0.0,
-    0.0,
-    223.6
-   ],
-   "label": "SURFACE · THE SCARP",
-   "presentation": "stairs",
-   "label_offset": [
-    0.0,
-    2.6,
-    0.0
-   ]
-  },
-  {
-   "entity_id": 121,
-   "from_zone": "zone.surface_scarp",
-   "position": [
-    0.0,
-    0.0,
-    221.4
-   ],
-   "to_zone": "zone.threshold",
-   "arrival": [
-    -6.0,
-    0.0,
-    97.4
-   ],
-   "label": "DESCEND · THE THRESHOLD",
-   "presentation": "lift",
-   "label_offset": [
-    -2.34,
-    1.8,
-    -2.34
-   ]
   },
   {
    "entity_id": 125,
@@ -6528,7 +6524,7 @@
     377.0
    ],
    "label": "SW CANYON · THE SALTPAN",
-   "presentation": "metro",
+   "presentation": "tunnel",
    "label_offset": [
     0.0,
     3.0,
@@ -6550,28 +6546,6 @@
     250.0
    ],
    "label": "SOUTH CANYON · THE SCARP"
-  },
-  {
-   "entity_id": 142,
-   "from_zone": "zone.outpost",
-   "position": [
-    -139.03,
-    0.0,
-    102.97
-   ],
-   "to_zone": "zone.threshold",
-   "arrival": [
-    -10.4,
-    0.0,
-    103.4
-   ],
-   "label": "SHAFT LIFT · DESCEND TO THE THRESHOLD",
-   "presentation": "lift",
-   "label_offset": [
-    -2.34,
-    1.8,
-    -2.34
-   ]
   },
   {
    "entity_id": 230,
@@ -6746,98 +6720,6 @@
    "label_offset": [
     0.0,
     2.6,
-    0.0
-   ]
-  },
-  {
-   "entity_id": 240,
-   "from_zone": "zone.threshold",
-   "position": [
-    0.05,
-    0.0,
-    105.55
-   ],
-   "to_zone": "zone.excavation_c3",
-   "arrival": [
-    113.26,
-    0.0,
-    104.76
-   ],
-   "arrival_rotation": -2.356,
-   "label": "DEEP SHAFT · EXCAVATION C-3",
-   "presentation": "stairs",
-   "label_offset": [
-    0.0,
-    2.4,
-    0.0
-   ]
-  },
-  {
-   "entity_id": 241,
-   "from_zone": "zone.excavation_c3",
-   "position": [
-    112.41,
-    0.0,
-    103.91
-   ],
-   "to_zone": "zone.threshold",
-   "arrival": [
-    1.53,
-    0.0,
-    104.77
-   ],
-   "arrival_rotation": -2.356,
-   "label": "LIFT · THE THRESHOLD",
-   "presentation": "lift",
-   "label_offset": [
-    0.0,
-    3.0,
-    0.0
-   ]
-  },
-  {
-   "entity_id": 242,
-   "from_zone": "zone.outpost",
-   "position": [
-    -182.36,
-    0.0,
-    99.64
-   ],
-   "to_zone": "zone.surface_scarp",
-   "arrival": [
-    -24.47,
-    0.0,
-    231.27
-   ],
-   "arrival_rotation": -2.356,
-   "label": "ADIT · UP TO THE SCARP",
-   "presentation": "stairs",
-   "label_offset": [
-    0.0,
-    2.6,
-    0.0
-   ]
-  },
-  {
-   "entity_id": 243,
-   "from_zone": "zone.surface_scarp",
-   "position": [
-    -25.95,
-    0.0,
-    232.05
-   ],
-   "to_zone": "zone.outpost",
-   "arrival": [
-    -181.37,
-    0.0,
-    100.63
-   ],
-   "arrival_rotation": -2.356,
-   "label": "ADIT · DOWN TO THE OUTPOST",
-   "presentation": "stairs",
-   "label_offset": [
-    0.0,
-    2.4,
     0.0
    ]
   },
@@ -7081,7 +6963,12 @@
     0.16,
     101.48
    ],
-   "quantity": 1
+   "quantity": 1,
+   "collider": [
+    2.5,
+    1.7,
+    2.0
+   ]
   },
   {
    "entity_id": 147,
@@ -7207,6 +7094,51 @@
     190.0,
     0.0,
     -5.2
+   ]
+  },
+  {
+   "entity_id": 170,
+   "entity_type": 4,
+   "content_id": "item.container.document_case",
+   "zone_id": "zone.surface_scarp",
+   "position": [
+    1.8,
+    0.12,
+    224.6
+   ],
+   "quantity": 1,
+   "crate_loot": [
+    "item.log.vdi_shift_log"
+   ]
+  },
+  {
+   "entity_id": 171,
+   "entity_type": 4,
+   "content_id": "item.container.document_case",
+   "zone_id": "zone.surface_scarp",
+   "position": [
+    -11.6,
+    0.12,
+    227.4
+   ],
+   "quantity": 1,
+   "crate_loot": [
+    "item.log.castoff_ledger"
+   ]
+  },
+  {
+   "entity_id": 172,
+   "entity_type": 4,
+   "content_id": "item.container.document_case",
+   "zone_id": "zone.excavation_c3_f3",
+   "position": [
+    192.6,
+    0.12,
+    -6.2
+   ],
+   "quantity": 1,
+   "crate_loot": [
+    "item.log.vdi_low_sun_memo"
    ]
   }
  ],
@@ -7392,6 +7324,78 @@
     210.0
    ],
    "safe_radius": 14.0
+  }
+ ],
+ "elevators": [
+  {
+   "id": "elevator.shaft3",
+   "label": "SHAFT 3 ELEVATOR",
+   "floors": [
+    {
+     "zone": "zone.surface_scarp",
+     "level": 0,
+     "label": "THE SCARP · SHAFT 3 HEAD",
+     "stop": 250,
+     "position": [
+      0.0,
+      0.0,
+      221.4
+     ],
+     "arrival": [
+      0.0,
+      0.0,
+      223.6
+     ],
+     "label_offset": [
+      -2.34,
+      1.8,
+      -2.34
+     ]
+    },
+    {
+     "zone": "zone.outpost",
+     "level": -1,
+     "label": "THE OUTPOST",
+     "stop": 251,
+     "position": [
+      -139.03,
+      0.0,
+      102.97
+     ],
+     "arrival": [
+      -138.26,
+      0.0,
+      103.74
+     ],
+     "arrival_rotation": 3.927,
+     "label_offset": [
+      -2.34,
+      1.8,
+      -2.34
+     ]
+    },
+    {
+     "zone": "zone.threshold",
+     "level": -2,
+     "label": "THE THRESHOLD",
+     "stop": 252,
+     "position": [
+      -12.4,
+      0.0,
+      104.4
+     ],
+     "arrival": [
+      -10.4,
+      0.0,
+      103.4
+     ],
+     "label_offset": [
+      -1.4,
+      2.6,
+      -1.4
+     ]
+    }
+   ]
   }
  ]
 }

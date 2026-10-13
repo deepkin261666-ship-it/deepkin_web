@@ -84,6 +84,28 @@ def has_icon(content_id):
     return os.path.exists(os.path.join(ICON_DIR, content_id + ".png"))
 
 
+# Modelos 3D de items (2026-10-13): GLB chicos (<= 1 MB) exportados desde el juego con tools/export_web_models.gd a
+# assets/models/<id>.glb. La ficha los muestra con <model-viewer> (carga diferida; el icono es el poster y el
+# respaldo si el script no carga). Version fijada del componente.
+MODEL_DIR = os.path.join(ROOT, "assets", "models")
+MODEL_VIEWER_SRC = "https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"
+
+
+def has_model(content_id):
+    return os.path.exists(os.path.join(MODEL_DIR, content_id + ".glb"))
+
+
+def model_viewer(cid, name):
+    poster = f"../../assets/img/icons/{cid}.png" if has_icon(cid) else ""
+    fallback = img(cid, "wk-icon")
+    return (f'<script type="module" src="{MODEL_VIEWER_SRC}"></script>'
+            f'<model-viewer class="wk-model" src="../../assets/models/{e(cid)}.glb"'
+            + (f' poster="{poster}"' if poster else "")
+            + f' alt="{e(name)}" loading="lazy" reveal="auto" camera-controls auto-rotate auto-rotate-delay="0"'
+            f' rotation-per-second="24deg" interaction-prompt="none" shadow-intensity="0.7" exposure="1.15"'
+            f' environment-image="neutral" touch-action="pan-y">{fallback}</model-viewer>')
+
+
 def item_cat(item_id):
     p = item_id.split(".")
     return p[1] if len(p) == 3 else "salvage"
@@ -202,7 +224,7 @@ TRANSITIONS = {x["entity_id"]: x for x in REGION.get("transitions", [])}
 
 
 def rides_through(tr):
-    """Misma regla que VehicleRules.passage_allows_vehicles: el flag explicito gana; metro/lift/gate y cruces sin
+    """Misma regla que VehicleRules.passage_allows_vehicles: el flag explicito gana; tunnel/lift/gate y cruces sin
     presentacion si; stairs/ladder/rope no."""
     if tr is None:
         return True
@@ -594,7 +616,8 @@ def item_page(it, lang):
     rows.append(("ID", f'<code>{e(iid)}</code>'))
     if not it.get("description"):
         gap(f"{iid} has no description in its item definition" + (" (the site uses its own fallback text)." if item_desc(it, "en") else "."))
-    box = infobox(it["display_name"], img(iid, "wk-icon"), rows)
+    art = model_viewer(iid, it["display_name"]) if has_model(iid) else img(iid, "wk-icon")
+    box = infobox(it["display_name"], art, rows)
 
     body = sec("description", t("description", lang), f'<p class="wk-lead2">{L_(item_desc(it, lang))}</p>' if item_desc(it, lang) else "")
     if it.get("planned"):
@@ -1167,6 +1190,8 @@ def zone_page(z, lang):
         tr = TRANSITIONS.get(mine.get("transition"))
         if tr and tr.get("presentation"):
             pres = t("pr_" + tr["presentation"], lang)
+        elif c.get("elevator") in WM.ELEVATOR_NAME:
+            pres = WM.ELEVATOR_NAME[c["elevator"]][lang]
         lock = f' <small>({e(t("locked_until", lang))})</small>' if tr and tr.get("requires_drill_site_cleared") else ""
         bike = ((e(t("ride_yes", lang)) if rides_through(tr) else e(t("ride_no", lang))) if c["status"] == "playable" else "—")
         rows_x.append([lk(o["id"]), e(WM.CONN[c["kind"]][lang]) + (f" · {e(pres)}" if pres else ""), f'<span class="wk-sign">{e(mine["exit"])}</span>{lock}',
@@ -1604,6 +1629,9 @@ def page_vehicles(lang):
             if tr.get("from_zone") not in ZONES or ZONES[tr["from_zone"]]["status"] != "playable":
                 continue
             kinds.setdefault(tr.get("presentation") or "road", []).append(tr["label"])
+        # Elevadores de varias paradas (2026-10-13): sus paradas no estan en "transitions" (el juego las expande al cargar).
+        for el in REGION.get("elevators", []):
+            kinds.setdefault("elevator", []).extend(f["label"] for f in el["floors"])
         prow = [[e(t("pr_" + k, lang)), e(t("ride_yes", lang)) if rides_through({"presentation": k} if k != "road" else None) else e(t("ride_no", lang)),
                  " ".join(f'<span class="wk-sign">{e(x)}</span>' for x in labels[:4])] for k, labels in sorted(kinds.items())]
         body += sec("passages", t("v_passages_t", lang), f'<p>{e(t("v_zone", lang))}</p><p>{e(t("v_pass_lead", lang))}</p>'

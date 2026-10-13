@@ -8,7 +8,7 @@ CATS = {  # orden de las categorias de objetos
     "backpack": L("Backpacks", "Mochilas"), "tool": L("Tools", "Herramientas"), "consumable": L("Consumables", "Consumibles"),
     "currency": L("Currency", "Moneda"), "ore": L("Ores", "Minerales"), "mineral": L("Minerals", "Cristales"),
     "salvage": L("Salvage", "Chatarra y hallazgos"), "container": L("Containers", "Contenedores"),
-    "fuel": L("Fuel", "Combustible"),
+    "fuel": L("Fuel", "Combustible"), "log": L("Reading logs", "Registros"),
 }
 
 ROLES = {  # role / archetype de los mobs
@@ -45,8 +45,8 @@ MOB_SHOTS = {
                                       "Aviso de la ola de fuego: se echa hacia atrás y un abanico amplio brilla en el suelo. El pilar de la izquierda sirve de cobertura.")),
     ],
     "npc.burrowborn_ravager": [
-        ("shots/world_shallows_ravager", L("At the end of the Shallows, in front of the metro to C-3: the red lane of its charge.",
-                                           "Al final de The Shallows, frente al metro a C-3: el carril rojo de su embestida.")),
+        ("shots/world_shallows_ravager", L("At the end of the Shallows, in front of the tunnel to C-3: the red lane of its charge.",
+                                           "Al final de The Shallows, frente al túnel a C-3: el carril rojo de su embestida.")),
     ],
 }
 # Carteles que publicitan otro lugar: no sirven para ubicar a la gente (texto, subtitulo).
@@ -322,7 +322,7 @@ W = {
     "zone_planned": L("Planned: on the world map, not playable yet.", "Planeada: está en el mapa del mundo, todavía no se puede jugar."),
     "step": L("step", "paso"), "exits": L("Exits & connections", "Salidas y conexiones"), "to": L("To", "Hacia"), "exit_sign": L("Exit sign", "Cartel de salida"),
     "edge": L("Edge", "Borde"), "stacked_under": L("A level below", "Un nivel debajo de"), "levels_below": L("Levels below:", "Niveles debajo:"),
-    "pr_lift": L("lift", "elevador"), "pr_metro": L("metro tunnel", "túnel de metro"), "pr_stairs": L("stairs", "escaleras"), "pr_gate": L("gate", "puerta"),
+    "pr_lift": L("lift", "elevador"), "pr_tunnel": L("tunnel", "túnel"), "pr_elevator": L("elevator", "elevador"), "pr_stairs": L("stairs", "escaleras"), "pr_gate": L("gate", "puerta"),
     "creature_total": L("{n} creatures at once when everything is up.", "{n} criaturas a la vez cuando está todo lleno."),
     "districts": L("Districts", "Distritos"), "streets": L("In the streets", "En las calles"),
     "drill_sites": L("Drill sites", "Puntos de perforación"), "drill_hint": L("Hold F at a site with a drill in your tool slot:", "Mantené F en un punto con un taladro en la ranura de herramienta:"),
@@ -412,7 +412,7 @@ W = {
                 "El combustible se gasta por distancia recorrida ({f} por metro: {m} m por unidad), nunca por tiempo. Quedarse quieto no gasta."),
     "v_empty": L("At {low} the gauge turns amber (LOW FUEL); at zero the bike coasts to a stop and stays there until you bring fuel.", "Al {low} el indicador se pone ámbar (LOW FUEL); en cero la moto se detiene y se queda ahí hasta que le traigas combustible."),
     "v_rules": L("While riding you cannot attack, dash, use powers or drill.", "Mientras manejás no podés atacar, hacer dash, usar poderes ni perforar."),
-    "v_zone": L("Passages: you can ride through metro tunnels, lifts and gates (G near one: RIDE THROUGH) and the bike comes with you. Stairs are on foot only: G parks the bike at their head (GET OFF · STAIRS).", "Pasajes: podés cruzar montado túneles de metro, elevadores y puertas (G cerca de uno: RIDE THROUGH) y la moto viaja con vos. Las escaleras son sólo a pie: G estaciona la moto al borde (GET OFF · STAIRS)."),
+    "v_zone": L("Passages: you can ride through tunnels, elevators, lifts and gates (G near one: RIDE THROUGH) and the bike comes with you. Stairs are on foot only: G parks the bike at their head (GET OFF · STAIRS).", "Pasajes: podés cruzar montado túneles, elevadores y puertas (G cerca de uno: RIDE THROUGH) y la moto viaja con vos. Las escaleras son sólo a pie: G estaciona la moto al borde (GET OFF · STAIRS)."),
     "v_owner": L("Only its owner can ride it, and it is only in the world while its owner is online.", "Sólo su dueño puede manejarla, y sólo está en el mundo mientras su dueño está conectado."),
     "v_planned": L(["More fuel stations, fuel production and transport", "Upgrades: tank, engine, frame, storage, scanner, lights", "Cargo, passengers and crew platforms", "Damage, wear and repair", "Garages, and vehicles that stay in the world while you are offline"], ["Más estaciones, producción y transporte de combustible", "Mejoras: tanque, motor, chasis, almacenamiento, escáner, luces", "Carga, pasajeros y plataformas de equipo", "Daño, desgaste y reparación", "Garajes, y vehículos que se quedan en el mundo mientras no estás"]),
     "excavators": L("Excavators (concept)", "Excavadoras (concepto)"),
@@ -485,8 +485,8 @@ W = {
     "can_t": L("The gas can", "El bidón"),
     "can_desc": L("{can} holds {cap} L and weighs {w} kg; it never stacks. Bought empty at a station, filled at the pump computer, and carried anywhere: right-click it (REFUEL VEHICLE) or put it on a hotkey to pour it into your bike within mount reach. Its cell shows the litres it holds.",
                   "{can} lleva {cap} L y pesa {w} kg; no se apila. Se compra vacío en una estación, se llena en la computadora del surtidor y lo llevás a donde quieras: clic derecho (REFUEL VEHICLE) o en una tecla rápida para volcarlo en tu moto, al alcance para subir. Su celda muestra los litros que tiene."),
-    "fuel_tip": L("Tip: a full can is {km} of riding. Keep one in the backpack before taking the bike down the road or into the metro.",
-                  "Consejo: un bidón lleno son {km} de manejo. Llevá uno en la mochila antes de sacar la moto por el camino o meterla al metro."),
+    "fuel_tip": L("Tip: a full can is {km} of riding. Keep one in the backpack before taking the bike down the road or into the tunnels.",
+                  "Consejo: un bidón lleno son {km} de manejo. Llevá uno en la mochila antes de sacar la moto por el camino o meterla en los túneles."),
     "refuel_t": L("Refuelling", "Recargar"),
     "v_refuel": L("Refuel at a gas station's pump computer (paid from the bank) or pour a gas can into the tank anywhere.",
                   "Recargá en la computadora del surtidor de una estación (se paga con el banco) o volcá un bidón en el tanque en cualquier lugar."),

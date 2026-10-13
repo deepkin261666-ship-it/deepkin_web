@@ -1,0 +1,12 @@
+{
+  "id": "item.container.document_case",
+  "display_name": "Document Case",
+  "description": "A battered field case left where someone stopped writing. Whatever is inside is yours to take; everyone finds their own copy.",
+  "visual_id": "visual.container.document_case",
+  "container": {
+    "cells": 2
+  },
+  "fixed": true,
+  "crate_loot": [],
+  "weight": 0.0
+}
