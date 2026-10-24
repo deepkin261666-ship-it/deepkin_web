@@ -59,6 +59,12 @@
       "energy": 0.9,
       "range": 3.0,
       "height": 0.5
+    },
+    "gait_legs": {
+      "height": 0.5,
+      "stride": 0.1,
+      "lift": 0.06,
+      "pattern": "tripod"
     }
   },
   "loot": [

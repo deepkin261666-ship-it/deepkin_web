@@ -1,0 +1,100 @@
+{
+  "id": "npc.rustbound_turret",
+  "display_name": "Sentry Turret",
+  "max_health": 140,
+  "movement_speed": 0.5,
+  "detection_range": 14.0,
+  "attack_range": 1.2,
+  "attack_damage": 6,
+  "attack_cooldown": 1.5,
+  "faction": "faction.rustbound",
+  "species": "Sentry Turret",
+  "role": "turret",
+  "archetype": "ranged",
+  "tier": "normal",
+  "threat": 4,
+  "xp": 70,
+  "coins": [
+    6,
+    14
+  ],
+  "habitat": "The Pump Works, the Robot hideout under the Sump (floors 2-4)",
+  "lore": "A wall-fed sentry gun on the hideout's grid. When the grid drops, so does it. Provisional lore.",
+  "verbs": [
+    "TRACK",
+    "VOLLEY",
+    "GO DARK"
+  ],
+  "rules": [
+    "It never moves: it turns and fires a volley along a glowing line. Walls and crates block it.",
+    "It runs on the floor's power: in a blackout it goes dark and stops shooting - that is the moment to push.",
+    "Kill it from behind cover, or rush it between volleys."
+  ],
+  "perception": {
+    "aggro_radius": 12.0,
+    "memory_seconds": 3.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      13.0
+    ],
+    "leash_radius": 0.0,
+    "lure": "territorial",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0,
+    "anchored": true
+  },
+  "abilities": [
+    {
+      "id": "volley",
+      "name": "Volley",
+      "shape": "line",
+      "damage": 14,
+      "windup": 1.0,
+      "range": 13.0,
+      "width": 0.9,
+      "cooldown": 2.6,
+      "min_range": 1.5,
+      "trigger_range": 13.0,
+      "los": true,
+      "recovery": 0.2
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/rustbound/turret.glb",
+    "size": 1.7,
+    "fit": "height",
+    "gait": "turret",
+    "mouth": [
+      0.0,
+      1.2,
+      -0.9
+    ],
+    "yaw": 90,
+    "tint": "ffffff",
+    "metallic": 0.35,
+    "roughness": 0.55
+  },
+  "body_radius": 0.6,
+  "powered": true,
+  "loot": [
+    {
+      "item": "item.scrap_component",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.6
+    },
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        6,
+        14
+      ],
+      "chance": 0.4
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "item.armor.relay_signal_helmet",
+  "display_name": "Signal Helm",
+  "equipment_slot": "head",
+  "description": "A Relay field helm with a sealed visor and a red signal band; the mask carries the squad net. Tier III. Not issued yet.",
+  "visual_id": "visual.armor.relay_signal_helmet",
+  "gear_tier": 3,
+  "requirements": {
+    "minimum_level": 20,
+    "class_ids": [
+      "class.relay"
+    ]
+  },
+  "properties": {
+    "armor_defense": 9,
+    "resistance_bonus": 5
+  },
+  "weight": 2.1,
+  "planned": true
+}

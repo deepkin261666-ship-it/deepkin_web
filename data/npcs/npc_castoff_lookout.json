@@ -1,0 +1,106 @@
+{
+  "id": "npc.castoff_lookout",
+  "display_name": "Castoff Lookout",
+  "faction": "faction.castoffs",
+  "species": "Lookout",
+  "role": "ranged skirmisher",
+  "archetype": "ranged",
+  "tier": "normal",
+  "hunt_tier": 1,
+  "max_health": 50,
+  "movement_speed": 2.3,
+  "detection_range": 12.0,
+  "attack_range": 7.5,
+  "attack_damage": 4,
+  "attack_cooldown": 1.4,
+  "xp": 55,
+  "coins": [
+    3,
+    8
+  ],
+  "threat": 3,
+  "perception": {
+    "aggro_radius": 10.0,
+    "memory_seconds": 4.0,
+    "call_radius": 11.0
+  },
+  "movement": {
+    "preferred_range": [
+      4.5,
+      7.5
+    ],
+    "leash_radius": 18.0,
+    "lure": "pack",
+    "retreat_health": 0.3,
+    "retreat_seconds": 2.5
+  },
+  "abilities": [
+    {
+      "id": "aimed_shot",
+      "name": "Aimed Shot",
+      "shape": "line",
+      "damage": 12,
+      "windup": 0.9,
+      "range": 11.0,
+      "width": 0.7,
+      "min_range": 3.0,
+      "trigger_range": 11.0,
+      "los": true,
+      "cooldown": 6.0,
+      "recovery": 0.4,
+      "fx": "firearm"
+    }
+  ],
+  "verbs": [
+    "WATCH",
+    "SHOUT",
+    "AIM",
+    "BACK OFF"
+  ],
+  "rules": [
+    "She sees you first and shouts: every Castoff within earshot comes running.",
+    "She keeps her distance and plinks; before a real shot she shoulders the rifle and a thin line marks where it goes — step off it.",
+    "Hurt, she backs away to shoot again: close the gap or use cover."
+  ],
+  "habitat": "The Castoff hideout under Frontier Road east: the upper floors, on the barricades.",
+  "lore": "PROVISIONAL. Young, sharp-eyed, too old for the Outpost's school and too young for its payroll. The hideout pays its lookouts in rounds.",
+  "visual": {
+    "model": "res://assets/game/mobs/castoffs/lookout.glb",
+    "size": 1.72,
+    "fit": "height",
+    "yaw": 180,
+    "rig": "humanoid",
+    "attack": "firearm",
+    "mouth": [
+      0.12,
+      1.5,
+      -0.45
+    ]
+  },
+  "loot": [
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        6,
+        14
+      ],
+      "chance": 0.45
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.1
+    },
+    {
+      "item": "item.scrap_component",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.25
+    }
+  ]
+}

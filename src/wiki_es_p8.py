@@ -1,0 +1,221 @@
+# Textos en español (voseo rioplatense) para el contenido de las Fases 1-7 del juego (2026-10-23, Fase 8 del sitio).
+# Se fusionan sobre ITEM_ES / MOB_ES / FACTION_ES / QUEST_ES en wiki.py. Mismo formato que esos diccionarios.
+ITEM_ES_P8 = {
+    # Municion de esporas y de sinapsis
+    "item.ammunition.spore_cartridge": "Una carga de esporas sellada para Spore Projectors. Pega menos que una bala y después envenena al blanco unos segundos.",
+    "item.ammunition.synapse_dart": "Un dardo vivo para Synapse Carbines. Hiere a un enemigo y cura a un operador: apuntalo a un aliado para curarlo.",
+    "item.ammunition.synapse_surge": "Un dardo cargado para Synapse Carbines. Cura al aliado que alcanza; si pega en un enemigo, además cura a todos los operadores cerca tuyo.",
+    "item.ammunition.virulent_cartridge": "Una cepa concentrada de esporas para Spore Projectors: un veneno más fuerte que dura más. Más rara que los spore cartridges.",
+    # Cascos planeados y el del Warlord
+    "item.armor.drift_tactical_helmet": "Un casco balístico recortado con óptica nocturna, radio y funda de tela; sin insignias. Nivel IV. Todavía no se reparte.",
+    "item.armor.drift_visor_helmet": "Un casco de exploración de largo alcance con visor dorado de datos, rayado por cien salidas a la superficie. Nivel III. Todavía no se reparte.",
+    "item.armor.foundry_furnace_helmet": "Yelmo negro de acero prensado con rejilla de respiración, hecho para el calor de las coladas de la Foundry. Nivel III. Todavía no se reparte.",
+    "item.armor.foundry_pressure_helmet": "Un yelmo sellado de presión profunda con máscara alimentada por manguera: la respuesta de la Foundry a las galerías de abajo. Nivel IV. Todavía no se reparte.",
+    "item.armor.pilots_helmet": "Un casco de vuelo sellado con visor polarizado y máscara con manguera, más viejo que la Frontera. El Warlord lo guardaba en su cofre; nadie en el escondite voló nunca. Nivel II.",
+    "item.armor.relay_nightwire_helmet": "Un yelmo de infiltración del Relay con camuflaje de sombra; unas costuras cian apenas encendidas le marcan el camino en la oscuridad. Nivel IV. Todavía no se reparte.",
+    "item.armor.relay_signal_helmet": "Un yelmo de campo del Relay con visor sellado y una franja roja de señal; la máscara lleva la red del escuadrón. Nivel III. Todavía no se reparte.",
+    "item.armor.verdant_hornet_helmet": "Un caparazón de placas hexagonales crecido sobre un respirador: el casco de escalada de las cuadrillas del dosel Verdant. Nivel III. Todavía no se reparte.",
+    "item.armor.verdant_vulture_helmet": "Un yelmo de vuelo con alas, visor verde y línea de oxígeno, para los vigías Verdant que trabajan por encima del dosel. Nivel IV. Todavía no se reparte.",
+    # Componentes, contenedores, contratos, servicios
+    "item.component.servo_core": "La unidad motriz sellada de una máquina Rustbound: motor, controlador y una radio que todavía escucha. Los chatarreros pagan por ellas; nadie admite en qué las vuelven a armar.",
+    "item.container.document_case": "Un estuche de campo golpeado, dejado donde alguien dejó de escribir. Lo que tiene adentro es tuyo; cada uno encuentra su propia copia.",
+    "item.container.rustbound_cache": "El casillero del Chopper en el Switchyard: lo que fuera que guardaba la máquina capataz. Cada operador puede vaciarlo una vez; después es sólo una caja.",
+    "item.container.vdi_cache": "Un casillero de suministros de Vantage Deep Industries dejado en un piso de excavación. Los pisos más hondos tienen mejor stock. Lo que hay adentro es sólo tuyo. (Provisorio.)",
+    "item.container.warlord_strongbox": "El cofre del propio Warlord, abulonado al piso de su salón. Cada operador puede abrirlo una vez: lo primero que sacás lo reclama, y después queda vacío para vos.",
+    "item.contract.drive_800": "Un pendrive rayado con un sello de lacre sobre el puerto: el pago de un empleador en cripto, 800 Metal. Insertalo en la app BANK de cualquier terminal 261.6.66 (INSERT DRIVE) para acreditarlo en tu cuenta; el banco borra el pendrive y se lo queda.",
+    "item.service.expedition_service": "Una tablet de campo de Vantage Deep Industries con una excavación paga cargada. Usala en terreno abierto de un mapa salvaje (no en un camino, en un asentamiento ni cerca de un pasaje) y a los pocos segundos baja del cielo un drillship de VDI, trece metros delante tuyo. Sos su Dueño: entrá por la puerta, corré el software VDI Excavation en la terminal, cargá baterías y bidones de nafta en sus reservas y bajalo piso por piso. \"We go where the world ends.\" Se gasta al llamar a la nave.",
+    # Drones
+    "item.drone.assault": "Un cuadricóptero con una carabina corta colgada debajo del chasis. Desplegado, vuela a tu lado hasta 45 segundos y dispara a lo que estés peleando, cargando Field o Hardened rounds de tu carga (24 por vuelo como máximo) y consumiendo 0,6 de energía por segundo de la celda que llevás puesta. Requiere Tech 3. Los élites y los jefes ignoran casi todo su fuego. Stock de Relay Nine; Rask lo vende en Dustline.",
+    "item.drone.kamikaze": "Un cuadricóptero FPV de un solo uso con una carga hueca atada abajo. Lanzalo y quedate quieto en su tablet: lo volás en primera persona (teclas de movimiento; hasta 45 m de distancia) hasta que choca con algo o lo detonás (Espacio o su tecla otra vez). La explosión daña a todo hostil a menos de 3,5 m (45 en el centro, menos en el borde; los élites y los jefes ignoran casi todo). El dron se gasta. Consume 0,8 de energía por segundo mientras vuela, 40 segundos como máximo. Stock de Relay Nine; Rask lo vende en Dustline.",
+    "item.drone.kamikaze_heavy": "Un cuadricóptero FPV de un solo uso, más pesado, con el doble de carga. Lanzalo y quedate quieto en su tablet: lo volás en primera persona (teclas de movimiento; hasta 55 m de distancia) hasta que choca con algo o lo detonás (Espacio o su tecla otra vez). La explosión daña a todo hostil a menos de 4,5 m (75 en el centro, menos en el borde; los élites y los jefes ignoran casi todo). El dron se gasta. Consume 1 de energía por segundo mientras vuela, 45 segundos como máximo. Stock de Relay Nine; Rask lo vende en Dustline.",
+    "item.drone.light": "Un cuadricóptero del tamaño de la palma con un reflector en la panza. Desplegado, flota sobre tu hombro e ilumina el suelo a tu alrededor hasta tres minutos, consumiendo 0,25 de energía por segundo de la celda que llevás puesta. Apretá su tecla otra vez para que vuelva. Stock de Relay Nine; Rask vende algunos en Dustline.",
+    "item.drone.scan": "Un cuadricóptero de relevamiento pesado y barato con un módulo de sensores voluminoso. Lanzalo y quedate quieto en su laptop: lo volás con las teclas de movimiento y la cámara lo sigue hasta 30 m, mientras su radar (18 m a su alrededor) marca terreno, mineral y hostiles para vos y tu grupo. Si te movés o te pegan se corta el enlace y vuelve solo. Consume 0,5 de energía por segundo de la celda que llevás puesta, 90 segundos por vuelo. Requiere Tech 2. Stock de Relay Nine; Rask lo vende en Dustline.",
+    "item.drone.scan_fpv": "Un cuadricóptero rápido de carreras adaptado con un sensor de relevamiento. Lanzalo y quedate quieto en su laptop: lo volás con las teclas de movimiento y la cámara lo sigue hasta 40 m, mientras su radar (24 m a su alrededor) marca terreno, mineral y hostiles para vos y tu grupo. Si te movés o te pegan se corta el enlace y vuelve solo. Consume 0,45 de energía por segundo de la celda que llevás puesta, dos minutos por vuelo. Requiere Tech 3. Stock de Relay Nine; Rask lo vende en Dustline.",
+    "item.drone.scan_light": "Un cuadricóptero de relevamiento liviano con un reflector bajo el sensor. Lanzalo y quedate quieto en su laptop: lo volás con las teclas de movimiento y la cámara lo sigue hasta 45 m, iluminando el suelo debajo mientras su radar (28 m a su alrededor) marca terreno, mineral y hostiles para vos y tu grupo. Si te movés o te pegan se corta el enlace y vuelve solo. Consume 0,55 de energía por segundo de la celda que llevás puesta, 2:30 por vuelo. Requiere Tech 5. Stock de Relay Nine; Rask lo vende en Dustline.",
+    # Comida
+    "item.food.empanada": "Una media luna de masa horneada rellena de carne condimentada, todavía tibia del horno de Auntie Rhea. Comela para recuperar 60 de vida en 20 segundos; una comida por vez. Nadie pregunta de qué era la carne.",
+    # Registros de lectura
+    "item.log.castoff_ledger": "Una tablet rajada que un campamento Castoff usaba como libro de cuentas: lo que se llevaron y lo que les costó. Lore provisorio.",
+    "item.log.castoff_warlord_orders": "Una tablet de campo VDI rayada, sacada del cofre del Warlord: sus órdenes permanentes para el escondite y una nota que nunca mandó. Lore provisorio.",
+    "item.log.vdi_low_sun_memo": "Una tablet sellada de VDI de los pisos profundos de Excavation C-3. Clasificada, y todavía encendida. Lore provisorio.",
+    "item.log.vdi_shift_log": "Una tablet de campo de Vantage Deep Industries que todavía guarda las notas del turno noche de un capataz del Shaft 3. Lore provisorio.",
+    "item.log.vdi_still_receiving": "Una tablet de mantenimiento cableada al mainframe del Switchyard. El registro todavía se está escribiendo. Lore provisorio.",
+    # Armas
+    "item.weapon.relay_twin_blades": "Un par de hojas cortas gemelas, una en cada mano. Cortes rápidos que abren al blanco y un golpe final para cualquiera que ya esté de rodillas.",
+}
+
+MOB_ES_P8 = {
+    "npc.burrowborn_red_mandible": {
+        "lore": "Un cazador Burrowborn de caparazón rojo óxido y un par de pinzas que se cierran como las mandíbulas de una perforadora. Pega, retrocede y vuelve a entrar.",
+        "habitat": "La bahía sur de The Shallows y el fondo oscuro de la primera cámara de Excavation C-3.",
+        "rules": ["Las pinzas se abren antes de cerrarse: cuando se enciende el arco rojo frente a él, correte a un costado.",
+                  "Desde unos metros se lanza por un carril rojo y después se escabulle hacia atrás para volver a atacar.",
+                  "Cuida su rincón de la cueva y más allá abandona."],
+    },
+    "npc.castoff_gunner": {
+        "lore": "Un desertor de la guardia de un convoy que se fue con su máscara de gas y sus mañas. Nadie le vio la cara desde entonces.",
+        "habitat": "El escondite Castoff bajo Frontier Road este: los pisos del medio.",
+        "rules": ["Se queda a distancia de fusil. La ráfaga sigue una línea marcada: salí de ella o poné una pared en el medio.",
+                  "El fuego de supresión barre un abanico angosto: cubrite o andá a su costado, y después se repliega a recargar.",
+                  "Acortá la distancia: le cuesta darse vuelta."],
+    },
+    "npc.castoff_lookout": {
+        "lore": "Joven, de vista aguda, demasiado grande para la escuela del Outpost y demasiado chica para su nómina. El escondite les paga a sus vigías en balas.",
+        "habitat": "El escondite Castoff bajo Frontier Road este: los pisos de arriba, en las barricadas.",
+        "rules": ["Te ve primero y grita: todos los Castoffs que la oyen vienen corriendo.",
+                  "Se mantiene lejos y tira tiros sueltos; antes de un disparo en serio se acomoda el fusil y una línea fina marca adónde va: salí de ella.",
+                  "Herida, retrocede para volver a disparar: acortá la distancia o usá cobertura."],
+    },
+    "npc.castoff_raider": {
+        "lore": "Ex cuadrilla de pozo despedida que se quedó con las botas de trabajo y el rencor. La fuerza bruta del escondite.",
+        "habitat": "El escondite Castoff bajo Frontier Road este: todos los pisos.",
+        "rules": ["Desde unos metros baja la cabeza y embiste por un carril rojo: esquivalo y pasa de largo, desprotegido.",
+                  "De cerca es una pelea a cuchillo; pega más fuerte que un carroñero pero no tiene trucos."],
+    },
+    "npc.castoff_trooper": {
+        "lore": "Usa una armadura que nadie fabrica en la Frontera. Los Castoffs dicen que el Warlord subió un cajón desde algún lugar hondo y la repartió entre los de su confianza.",
+        "habitat": "El escondite Castoff bajo Frontier Road este: los pisos de abajo.",
+        "rules": ["Te tira una carga de fragmentación donde estás parado: un círculo rojo se llena en el suelo; salí antes de que se complete.",
+                  "A distancia dispara ráfagas por una línea marcada, como los artilleros; si estás muy cerca te da un culatazo en un arco corto.",
+                  "Equipo rescatado de algún lugar mucho más rico que el Outpost: cuesta más voltearlo de lo que parece."],
+    },
+    "npc.castoff_vanguard": {
+        "lore": "Placas del mismo cajón profundo que los troopers, que usan los que se ganaron la confianza del Warlord por las malas.",
+        "habitat": "El escondite Castoff bajo Frontier Road este: los pisos tres y cuatro, cuidando la puerta del Warlord.",
+        "rules": ["El rompepuertas del escondite: a distancia embiste por un carril rojo, y lo frenan las paredes y el primer operador del carril.",
+                  "De cerca barre con la maza en un arco amplio y golpea un círculo rojo frente a él: ponete detrás entre golpe y golpe.",
+                  "Cada golpe lo deja quieto un momento: ése es el momento de devolverle."],
+    },
+    "npc.castoff_warlord": {
+        "lore": "Más máquina que hombre de las clavículas para abajo. Subió de los pozos profundos con un cajón de armaduras que nadie en la Frontera sabe hacer, y desde entonces los Castoffs lo siguen. Paga en balas, en agua y en lo que suelte un operador.",
+        "habitat": "El escondite Castoff bajo Frontier Road este, piso cuatro: la sala del Warlord.",
+        "rules": ["El jefe del escondite y de su cuarto piso. Pegale y todos los Castoffs de la sala van por vos.",
+                  "A distancia dispara una lanza de riel por una línea larga marcada; desde unos metros embiste por un carril rojo.",
+                  "De cerca barre un arco amplio y pisotea un círculo rojo a su alrededor: el círculo es la señal para salir, el arco para ponerte detrás.",
+                  "Nunca se cura. Mantené la presión entre sus golpes: cada uno lo deja abierto un segundo."],
+    },
+    "npc.mutant_brood": {
+        "lore": "Tres cabezas sobre un cuerpo chico e hinchado. Nadie sabe qué era antes de que el pozo le respirara encima. Vienen en manada y chillan para llamarse.",
+        "habitat": "The Saltpan: el borde norte de las salinas, en manadas.",
+        "rules": ["Uno no es nada; el peligro es la manada. Uno herido chilla y todos los brood cercanos corren hacia vos.",
+                  "Las tres cabezas muerden a la vez: el arco rojo frente a él marca dónde.",
+                  "Muy herido, se dispersa un momento y vuelve."],
+    },
+    "npc.mutant_ripper": {
+        "lore": "Los antebrazos se le volvieron cuchillas de hueso brillante. Salta sobre cualquier cosa que se mueva en las salinas y la desgarra.",
+        "habitat": "The Saltpan: las planicies del oeste, con los zombine miners.",
+        "rules": ["Mantenete lejos y salta por un carril rojo: salí de él.",
+                  "De cerca, las dos cuchillas rastrillan un arco rojo amplio frente a él.",
+                  "Caza: cuando te agarra el rastro te sigue mucho más allá de sus planicies."],
+    },
+    "npc.mutant_spitter": {
+        "lore": "La cabeza se le abrió alrededor de una segunda boca que escupe lo que su estómago hace con la sal. Lo que toca, humea.",
+        "habitat": "The Saltpan: el borde norte, sobre las planicies.",
+        "rules": ["Se queda lejos y escupe ácido por una línea verde: la línea brilla antes del escupitajo; esquivala o poné roca en el medio.",
+                  "Si te acercás rocía un abanico verde de ácido y después retrocede para volver a escupir.",
+                  "El ácido es daño biológico: protege la Resistencia, no la Armadura."],
+    },
+    "npc.mutant_tribal_bug": {
+        "lore": "Algo que camina erguido, se viste con plumas y chatarra y lleva un garrote hecho con la mandíbula de otra criatura. Los demás mutantes se mantienen lejos de su hondonada.",
+        "habitat": "The Saltpan: entre las chimeneas de hadas de la hondonada noroeste.",
+        "rules": ["Lo más fuerte de las salinas. Embiste por un carril rojo ancho: salí de él, nunca retrocedas en línea recta.",
+                  "De cerca, el garrote barre un arco rojo amplio; antes del aplastamiento levanta el garrote y el suelo brilla en rojo.",
+                  "Te sigue lejos de su hondonada, pero no hasta el camino."],
+    },
+    "npc.mutant_zombine": {
+        "lore": "Un turno de VDI que bajó por un pozo y volvió a subir. La lámpara del casco todavía funciona; el hombre debajo, no. Nunca suelta el pico.",
+        "habitat": "The Saltpan: las planicies del oeste, lejos del camino.",
+        "rules": ["Lento, pero nunca deja de seguirte: se acuerda adónde fuiste.",
+                  "Estira los brazos antes de agarrarte (el arco rojo) y el agarre duele. Retrocedé fuera de su alcance.",
+                  "El pico cae en un círculo rojo: no te quedes adentro."],
+    },
+    "npc.rustbound_chopper": {
+        "lore": "El capataz de The Pump Works: un guerrero mecánico con aspas de rotor por brazos que todavía recibe instrucciones de algún lugar de abajo. Nadie sabe quién las manda. Lore provisorio.",
+        "habitat": "The Pump Works, el escondite robot bajo The Sump: el Switchyard, piso 4.",
+        "rules": ["Herido, se encierra detrás de un escudo: los golpes apenas lo rayan, y cuando el escudo termina suelta una onda de choque. Salí del círculo rojo antes de que se llene.",
+                  "Pide una andanada: los círculos rojos avanzan siguiendo su mira y los proyectiles caen donde brillan.",
+                  "A distancia embiste por un carril rojo: salí de él.",
+                  "De cerca, las aspas barren un arco amplio.",
+                  "Los apagones no lo frenan: caza por sensor."],
+    },
+    "npc.rustbound_drone": {
+        "lore": "Un dron artillado en una ruta de patrulla que su controlador dejó de actualizar hace años. Se mantiene lejos y dispara ráfagas. Lore provisorio.",
+        "habitat": "The Sump (alrededor de la estación de bombeo inundada) y el piso 2 de The Pump Works.",
+        "rules": ["Se queda atrás y dispara una ráfaga por una línea brillante: salí de la línea o poné una pared en el medio.",
+                  "Necesita línea libre para disparar: los pilares y los cajones lo bloquean.",
+                  "Frágil: acortá la distancia y cae rápido."],
+    },
+    "npc.rustbound_miner": {
+        "lore": "Una cortadora de roca de VDI que nunca dejó de cortar. Su orden de trabajo todavía dice DIG; cualquier cosa tibia en el camino es roca. Lore provisorio.",
+        "habitat": "The Pump Works, el escondite robot bajo The Sump (pisos 1 y 3).",
+        "rules": ["Lento y pesado: nunca corre, así que siempre podés retroceder.",
+                  "Antes del golpe de taladro levanta el brazo y un círculo rojo se llena en el piso: salí del círculo.",
+                  "Recorre una ruta de patrulla y vuelve a ella cuando te alejás."],
+    },
+    "npc.rustbound_pelter": {
+        "lore": "Un caminante de artillería que lanza proyectiles a lo que marque su sistema de puntería. Los proyectiles caen donde brillan los círculos. Lore provisorio.",
+        "habitat": "The Pump Works, el escondite robot bajo The Sump (piso 3).",
+        "rules": ["A distancia planta las patas y lanza una salva: los círculos rojos avanzan hacia vos y los proyectiles caen donde brillan. Salí de los círculos.",
+                  "De cerca pisotea un círculo a su alrededor.",
+                  "Lento: metete dentro de su alcance y no te quedes quieto."],
+    },
+    "npc.rustbound_skirmisher": {
+        "lore": "Un mecha liviano de combate de un contrato de seguridad de VDI. Lanzador de plasma en un brazo y una cortadora rotativa en el otro. Lore provisorio.",
+        "habitat": "The Pump Works, el escondite robot bajo The Sump (piso 3).",
+        "rules": ["A distancia carga el lanzador de plasma por una línea larga brillante: esquivala o cortá la línea de visión.",
+                  "De cerca, la cortadora rotativa barre un arco amplio frente a él.",
+                  "No sale de su salón."],
+    },
+    "npc.rustbound_turret": {
+        "lore": "Una torreta centinela alimentada desde la pared, conectada a la red del escondite. Cuando cae la red, cae ella. Lore provisorio.",
+        "habitat": "The Pump Works, el escondite robot bajo The Sump (pisos 2 a 4).",
+        "rules": ["Nunca se mueve: gira y dispara una descarga por una línea brillante. Las paredes y los cajones la bloquean.",
+                  "Funciona con la energía del piso: en un apagón se apaga y deja de disparar; ése es el momento de avanzar.",
+                  "Matala desde atrás de una cobertura, o corré hacia ella entre descarga y descarga."],
+    },
+}
+
+FACTION_ES_P8 = {
+    "faction.mutants": {
+        "identity": "Humano + animal + lo que sea que subió por los pozos (PROVISORIO)",
+        "traits": ["gente y animales cambiados por lo que dejaron salir los pozos más hondos de VDI",
+                   "salen a la superficie en The Saltpan; los bordes de las salinas son suyos",
+                   "más fuertes que los Castoffs, más débiles que los Wyrms",
+                   "detectan desde más lejos y persiguen más lejos que la gente",
+                   "anuncian cada golpe especial: un arco, círculo o carril rojo, una línea verde para el ácido"],
+        "communication": "Chillidos y llamados dentro de cada especie: un brood herido trae a la manada.",
+        "hierarchy": "Brood → Zombine Miner / Ripper / Acid Spitter → Tribal Bug",
+        "territory": "Los bordes de The Saltpan: la hondonada de chimeneas de hadas del noroeste, el borde norte y las planicies del suroeste. No se acercan al camino de los convoyes.",
+        "visual": "Ropa de trabajo rota sobre una anatomía equivocada, piel enfermiza, cabezas y bocas de más, cuchillas de hueso, chatarra y plumas; verde ácido.",
+    },
+    "faction.castoffs": {
+        "identity": "Humanos + desesperados",
+        "traits": ["oportunistas", "se juntan contra el operador solitario", "se llaman a gritos",
+                   "los carroñeros de campamento pelean sin trucos; las cuadrillas del escondite anuncian cada golpe en serio"],
+        "communication": "Gritos de punta a punta del campamento: golpeá a uno y los cercanos vienen corriendo.",
+        "hierarchy": "Scavenger → Lookout / Raider (nivel 1) → Gunner (nivel 2) → Trooper / Vanguard (nivel 3) → el Warlord (jefe del escondite)",
+        "territory": "Campamentos y desarmaderos afuera del Outpost, las viejas rutas de convoyes y los primeros pozos abiertos; su escondite tiene cuatro pisos bajo Frontier Road este. Nunca bajan más hondo.",
+        "visual": "Carroñeros de campamento: abrigos largos, gorras, pasamontañas, cuero emparchado y jean. Cuadrillas del escondite: equipo militar rescatado, máscaras de gas y, para los pocos de confianza, placas de un cajón sellado de VDI que el Warlord subió de lo hondo.",
+    },
+    "faction.rustbound": {
+        "identity": "Industriales + decadentes: máquinas de VDI que todavía reciben instrucciones (PROVISORIO)",
+        "traits": ["patrullan rutas fijas", "se apoyan en torretas y trampas",
+                   "más pesados, lentos y pegadores que los Castoffs", "cazan por sensor en la oscuridad"],
+        "communication": "Charla de radio y luces de alerta; las torretas y las trampas comparten la red eléctrica del piso.",
+        "hierarchy": "War Drone → Miner Unit / Sentry Turret → Haze Skirmisher / Pelter → Chopper (capataz)",
+        "territory": "The Pump Works: una estación de bombeo de VDI inundada bajo The Sump, cuatro pisos hacia abajo.",
+        "visual": "Acero oxidado, servos a la vista, cables, franjas de advertencia, lámparas de estado ámbar.",
+    },
+}
+
+QUEST_ES_P8 = {
+    "quest.vdi_expedition": {
+        "issue": "Retirá el Expedition Service de prueba con el agente de VDI",
+        "call_out": "Llamá al drillship en el claro de relevamiento de VDI sobre Frontier Road, al sur de Dustline",
+        "report": "Contale el llamado al agente de VDI en Dustline",
+    },
+    "quest.contract_warlord": {
+        "kill": "Matá al Warlord, en el piso 4 del escondite Castoff",
+        "redeem": "Cobrá tu pago con Lister en el tablero de contratos",
+    },
+}

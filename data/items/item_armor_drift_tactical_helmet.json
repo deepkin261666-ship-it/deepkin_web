@@ -1,0 +1,20 @@
+{
+  "id": "item.armor.drift_tactical_helmet",
+  "display_name": "Tactical Helmet",
+  "equipment_slot": "head",
+  "description": "A cut-down ballistic helmet with night optics, comms and a cloth cover; insignia removed. Tier IV. Not issued yet.",
+  "visual_id": "visual.armor.drift_tactical_helmet",
+  "gear_tier": 4,
+  "requirements": {
+    "minimum_level": 35,
+    "class_ids": [
+      "class.drift"
+    ]
+  },
+  "properties": {
+    "armor_defense": 13,
+    "resistance_bonus": 6
+  },
+  "weight": 2.6,
+  "planned": true
+}

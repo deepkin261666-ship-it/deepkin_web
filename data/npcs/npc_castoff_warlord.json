@@ -1,0 +1,159 @@
+{
+  "id": "npc.castoff_warlord",
+  "display_name": "The Warlord",
+  "faction": "faction.castoffs",
+  "species": "Warlord",
+  "role": "boss",
+  "archetype": "brute",
+  "tier": "boss",
+  "hunt_tier": 3,
+  "max_health": 1100,
+  "movement_speed": 2.6,
+  "detection_range": 16.0,
+  "attack_range": 2.2,
+  "attack_damage": 14,
+  "attack_cooldown": 1.4,
+  "xp": 900,
+  "coins": [
+    120,
+    220
+  ],
+  "threat": 30,
+  "body_radius": 0.6,
+  "perception": {
+    "aggro_radius": 13.0,
+    "memory_seconds": 10.0,
+    "call_radius": 22.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      2.0
+    ],
+    "leash_radius": 20.0,
+    "lure": "territorial"
+  },
+  "abilities": [
+    {
+      "id": "rail_lance",
+      "name": "Rail Lance",
+      "shape": "line",
+      "damage": 30,
+      "windup": 1.3,
+      "range": 16.0,
+      "width": 1.3,
+      "min_range": 4.5,
+      "trigger_range": 16.0,
+      "los": true,
+      "cooldown": 8.0,
+      "recovery": 0.8,
+      "fx": "tech"
+    },
+    {
+      "id": "overclock_charge",
+      "name": "Overclock Charge",
+      "shape": "charge",
+      "damage": 28,
+      "windup": 1.0,
+      "range": 10.0,
+      "width": 1.8,
+      "min_range": 4.0,
+      "trigger_range": 10.0,
+      "cooldown": 11.0,
+      "recovery": 1.2
+    },
+    {
+      "id": "shock_stomp",
+      "name": "Shock Stomp",
+      "shape": "circle",
+      "damage": 26,
+      "windup": 1.1,
+      "radius": 3.4,
+      "reach": 0.0,
+      "trigger_range": 3.0,
+      "cooldown": 9.0,
+      "recovery": 1.0
+    },
+    {
+      "id": "arc_sweep",
+      "name": "Arc Sweep",
+      "shape": "cone",
+      "damage": 20,
+      "windup": 0.7,
+      "radius": 4.5,
+      "half_angle": 70.0,
+      "trigger_range": 3.6,
+      "cooldown": 6.0,
+      "recovery": 0.6,
+      "fx": "tech"
+    }
+  ],
+  "verbs": [
+    "LANCE",
+    "CHARGE",
+    "STOMP",
+    "SWEEP",
+    "CALL THE GUARD"
+  ],
+  "rules": [
+    "The boss of the hideout and its fourth floor. Hit him and every Castoff in the room comes for you.",
+    "At range he fires a rail lance down a long marked line; from a few metres he charges along a red lane.",
+    "Close in he sweeps a wide arc and stomps a red ring around himself: the ring is the cue to step out, the arc to get behind him.",
+    "He never heals. Keep the pressure on between his blows — each one leaves him open for a second."
+  ],
+  "habitat": "The Castoff hideout under Frontier Road east, floor four: the Warlord's room.",
+  "lore": "PROVISIONAL. More machine than man below the collarbones. He came up out of the deep shafts with a crate of armour nobody in the Frontier can make, and the Castoffs have followed him since. He pays in rounds, in water and in whatever an operator drops.",
+  "visual": {
+    "model": "res://assets/game/mobs/castoffs/warlord.glb",
+    "size": 2.15,
+    "fit": "height",
+    "yaw": 180,
+    "rig": "humanoid",
+    "attack": "unarmed",
+    "glow": {
+      "color": "ffb347",
+      "energy": 0.8,
+      "range": 3.0,
+      "height": 1.7
+    },
+    "mouth": [
+      0.45,
+      1.45,
+      -0.5
+    ]
+  },
+  "loot": [
+    {
+      "item": "item.ammunition.hardened_round",
+      "quantity": [
+        10,
+        20
+      ],
+      "chance": 0.8
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.6
+    },
+    {
+      "item": "item.battery.provisional_relay_cell",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.relic_fragment",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.25
+    }
+  ]
+}

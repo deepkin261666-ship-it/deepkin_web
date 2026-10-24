@@ -1,0 +1,15 @@
+{
+  "id": "item.container.warlord_strongbox",
+  "display_name": "Warlord's Strongbox",
+  "description": "The Warlord's own box, bolted to the floor of his hall. Each operator gets to open it once: the first thing you take claims it, and it stays empty for you after that.",
+  "visual_id": "visual.container.warlord_strongbox",
+  "container": {
+    "cells": 4
+  },
+  "fixed": true,
+  "crate_loot": [
+    "item.log.castoff_warlord_orders",
+    "item.armor.pilots_helmet"
+  ],
+  "weight": 0.0
+}

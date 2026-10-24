@@ -26,29 +26,30 @@
     "opportunistic",
     "gang up on the lone operator",
     "shout for each other",
-    "no telegraphs, no armour plates: people, not monsters"
+    "camp scavengers fight without tricks; the hideout crews telegraph every real blow"
    ],
    "communication": "Shouting across the camp: hit one and the others nearby come running.",
-   "hierarchy": "Scavenger \u2192 Enforcer \u2192 Boss (planned)",
-   "territory": "Camps and wreck yards outside the Outpost, the old convoy roads and the first open shafts; they never go deep.",
-   "visual": "Long coats, flat caps and balaclavas, patched leather and work denim; dull browns and blacks, no glow, no machinery of their own.",
+   "hierarchy": "Scavenger \u2192 Lookout / Raider (tier 1) \u2192 Gunner (tier 2) \u2192 Trooper / Vanguard (tier 3) \u2192 the Warlord (hideout boss)",
+   "territory": "Camps and wreck yards outside the Outpost, the old convoy roads and the first open shafts; their hideout is four floors under Frontier Road east. They never go deeper.",
+   "visual": "Camp scavengers: long coats, flat caps, balaclavas, patched leather and denim. Hideout crews: salvaged military kit, gas masks, and for the trusted few plate from a sealed VDI crate the Warlord brought up from the deep.",
    "status": "active"
   },
   {
    "id": "faction.rustbound",
-   "name": "Rustbound",
-   "category": "civilized",
-   "identity": "Industrial + decayed",
+   "name": "The Rustbound",
+   "category": "mechanical",
+   "identity": "Industrial + decayed: VDI machines still receiving instructions (PROVISIONAL)",
    "traits": [
-    "patrols",
-    "repairs itself",
-    "ranged"
+    "patrol fixed routes",
+    "rely on turrets and traps",
+    "heavier, slower and harder-hitting than the Castoffs",
+    "hunt by sensor in the dark"
    ],
-   "communication": "Radio chatter and warning lights.",
-   "hierarchy": "Scout \u2192 Gunner \u2192 Shieldbearer \u2192 Repair Drone \u2192 Heavy Excavator \u2192 Overseer",
-   "territory": "Old mining complexes.",
-   "visual": "Rusted steel, cables, hydraulics, warning stripes, obsolete lamps.",
-   "status": "planned"
+   "communication": "Radio chatter and warning lights; turrets and traps share the floor's power grid.",
+   "hierarchy": "War Drone \u2192 Miner Unit / Sentry Turret \u2192 Haze Skirmisher / Pelter \u2192 Chopper (foreman)",
+   "territory": "The Pump Works: a drowned VDI pump station under the Sump, four floors down.",
+   "visual": "Rusted steel, exposed servos, cables, warning stripes, amber status lamps.",
+   "status": "active"
   },
   {
    "id": "faction.architects",
@@ -97,6 +98,24 @@
    "hierarchy": "Dragon \u2192 Greater Dragon (provisional labels)",
    "territory": "The Cinder Deep: ruined galleries of an older people, swallowed by rock, under the cleft off Frontier Road east.",
    "visual": "Scaled hide in ash browns and soot greys, ember glow in the throat; nests in ash, bone and petrified eggs.",
+   "status": "active"
+  },
+  {
+   "id": "faction.mutants",
+   "name": "The Mutants",
+   "category": "corrupted",
+   "identity": "Human + animal + whatever came up the shafts (PROVISIONAL)",
+   "traits": [
+    "people and animals changed by what VDI's deepest shafts let out",
+    "surface at the Saltpan; the salt flats' edges are theirs",
+    "stronger than the Castoffs, weaker than the Wyrms",
+    "detect from further and follow further than people do",
+    "telegraph every special blow: a red arc, ring or lane, a green line for acid"
+   ],
+   "communication": "Squeals and calls within a species: a hurt brood brings the pack.",
+   "hierarchy": "Brood \u2192 Zombine Miner / Ripper / Acid Spitter \u2192 Tribal Bug",
+   "territory": "The Saltpan's edges: the north-west hoodoo hollow, the north rim and the south-west flats. They keep off the convoy road.",
+   "visual": "Torn work clothes over wrong anatomy, sickly skin, extra heads and mouths, bone blades, scrap and feathers; acid green.",
    "status": "active"
   }
  ]

@@ -1,0 +1,14 @@
+{
+  "id": "item.ammunition.synapse_surge",
+  "display_name": "Synapse Surge",
+  "description": "A charged dart for Synapse Carbines. Heals an ally it strikes; on an enemy hit it also mends every operator near you.",
+  "ammo_family": "synapse",
+  "properties": {
+    "ammo_multiplier": 1.0,
+    "ally_heal": 12,
+    "surge_heal": 6,
+    "surge_radius": 6.0,
+    "stack_size": 100
+  },
+  "weight": 0.025
+}

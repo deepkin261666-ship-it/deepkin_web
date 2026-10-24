@@ -1,0 +1,16 @@
+{
+  "id": "item.armor.pilots_helmet",
+  "display_name": "Pilot's Helmet",
+  "equipment_slot": "head",
+  "description": "A sealed flight helmet with a tinted visor and a hose-fed mask, older than the Frontier. The Warlord kept it in his strongbox; nobody in the hideout ever flew. Tier II.",
+  "visual_id": "visual.armor.pilots_helmet",
+  "gear_tier": 2,
+  "requirements": {
+    "minimum_level": 8
+  },
+  "properties": {
+    "armor_defense": 7,
+    "resistance_bonus": 3
+  },
+  "weight": 2.4
+}

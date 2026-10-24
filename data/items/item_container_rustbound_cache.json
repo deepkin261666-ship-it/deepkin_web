@@ -1,0 +1,22 @@
+{
+  "id": "item.container.rustbound_cache",
+  "display_name": "Switchyard Cache",
+  "description": "The Chopper's locker in the Switchyard: whatever the foreman machine kept. Each operator can empty it once; after that it is just a box.",
+  "visual_id": "visual.container.rustbound_cache",
+  "container": {
+    "cells": 4
+  },
+  "fixed": true,
+  "crate_loot": [
+    "item.log.vdi_still_receiving",
+    {
+      "item": "item.component.servo_core",
+      "quantity": 2
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": 2
+    }
+  ],
+  "weight": 0.0
+}

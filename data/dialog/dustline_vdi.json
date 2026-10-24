@@ -1,0 +1,16 @@
+{
+  "comment": "The VDI agent in Dustline (2026-10-15, Phase 7, docs/EXCAVATIONS.md). Lore provisional: Vantage Deep Industries, pre-collapse deep-excavation giant; its machines still take instructions nobody remembers installing.",
+  "speakers": {
+    "npc.dustline_vdi_agent": {
+      "name": "VDI FIELD UNIT  ·  EXPEDITION SERVICE",
+      "lines": [
+        "Vantage Deep Industries. We go where the world ends. State your business.",
+        "One Expedition Service, one drillship, one hole in the ground with your name on it. Ten thousand Metal. Delivery is immediate.",
+        "Our ships drill. You walk. Batteries and fuel keep the bore going; every floor down costs more than the last.",
+        "Settlements, roads and other people's sites are excluded. Open ground only. The ship is large; stand back when it lands.",
+        "This unit has been operating for an unrecorded number of years. Instructions continue to arrive. They are followed.",
+        "The 261.6.66 network does not reach our ships. VDI has its own lines. Nobody answers on them."
+      ]
+    }
+  }
+}

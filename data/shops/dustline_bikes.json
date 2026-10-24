@@ -1,0 +1,14 @@
+{
+  "comment": "The Dustline bike shop (2026-10-13, NEXT_SESSION 3b, docs/VEHICLES.md \"Bike shop\"). \"vehicles\": definitions sold (price in whole Metal, paid in carried coins); they are parked at the shop's bay (floor data \"vehicle_bays\", tools/author_dustline.py). \"crane\": hauls one of the operator's stranded (empty or wrecked) vehicles of a kind sold here to the bay for fraction × its list price, also paid in carried coins. Provisional balance.",
+  "shops": {
+    "npc.dustline_bike_dealer": {
+      "goods": [],
+      "vehicles": [
+        {"vehicle": "vehicle.motorcycle", "buy": 2500},
+        {"vehicle": "vehicle.cargo_motorcycle", "buy": 4500}
+      ],
+      "crane": {"fraction": 0.3},
+      "bay": "bay.dustline.bike_shop"
+    }
+  }
+}

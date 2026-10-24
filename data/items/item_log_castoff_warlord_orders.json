@@ -1,0 +1,16 @@
+{
+  "id": "item.log.castoff_warlord_orders",
+  "display_name": "Warlord's Orders",
+  "description": "A scratched VDI field tablet from the Warlord's strongbox: his standing orders to the hideout, and a note he never sent. Provisional lore.",
+  "visual_id": "visual.log.tablet",
+  "category": "log",
+  "log": {
+    "title": "STANDING ORDERS · THE HIDEOUT",
+    "text": "(the Warlord's own tablet, VDI casing, serial scratched off)\n\nOne. The yard holds the stairs. Nobody comes down who did not pay at the barricade.\nTwo. Lookouts shout first and shoot second. A shout costs nothing.\nThree. Whatever an operator drops belongs to the floor that dropped him. Split it at the Works.\nFour. The plate from the deep crate is for the ones who have bled for this place. Nobody sells it. Nobody.\nFive. Nobody goes below the fourth floor. There is nothing below the fourth floor.\n\n—\n\n(unsent)\nThey ask where I found the armour. I tell them a crate. I do not tell them the crate was still sealed, that the shaft it sat in had been dug after the shafts closed, that the stamp on it said VANTAGE DEEP INDUSTRIES and a date nobody here would believe.\nI do not tell them the machine that dug it was still running when I left.\nEverything has a price. I am still finding out what that one cost.",
+    "text_es": "(la tablet del propio Warlord, carcasa de VDI, número de serie rayado)\n\nUno. El patio cuida la escalera. Nadie baja si no pagó en la barricada.\nDos. Los vigías gritan primero y tiran después. Gritar no cuesta nada.\nTres. Lo que suelta un operador es del piso que lo tumbó. Se reparte en el Taller.\nCuatro. El blindaje del cajón profundo es para los que sangraron por este lugar. Nadie lo vende. Nadie.\nCinco. Nadie baja del cuarto piso. Debajo del cuarto piso no hay nada.\n\n—\n\n(sin enviar)\nMe preguntan de dónde saqué el blindaje. Les digo que de un cajón. No les digo que el cajón seguía sellado, que el pozo donde estaba lo habían cavado después de que cerraran los pozos, que el sello decía VANTAGE DEEP INDUSTRIES y una fecha que nadie acá se creería.\nNo les digo que la máquina que lo cavó seguía andando cuando me fui.\nTodo tiene un precio. Todavía estoy averiguando cuánto me costó ese."
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "weight": 0.3
+}

@@ -1,0 +1,75 @@
+{
+  "comment": "NPC trading (2026-10-13, docs/ECONOMY.md \"Trading\"). Keys are trader NPC ids (the talkers on the floors). Prices are whole Metal per unit from the player's side: \"buy\" = the player pays, \"sell\" = the trader pays. \"stock\" (optional) = units the trader can sell per server run. Provisional balance. Phase 3a (2026-10-13) added Pell (capsules & cells), Auntie Rhea (food), Sam (lanterns, backpacks) and Rask (Tier-1 weapons; buys Tier-1 armour). New Battery Cells stay far above Vesko's recharge (250 vs 30 + 1 Lumenita). \"recharge\" (optional, 2026-10-13): the trader refills one empty battery cell (charge at or below empty_below) for price Metal plus reagent_quantity × reagent.",
+  "shops": {
+    "npc.dustline_scrap_buyer": {
+      "goods": [
+        {"item": "item.scrap_component", "sell": 2}
+      ]
+    },
+    "npc.dustline_trader_ammo": {
+      "goods": [
+        {"item": "item.ammunition.field_round", "buy": 3, "sell": 1},
+        {"item": "item.ammunition.hardened_round", "buy": 6, "sell": 2, "stock": 120}
+      ]
+    },
+    "npc.dustline_alchemist": {
+      "goods": [
+        {"item": "item.ammunition.spore_cartridge", "buy": 4, "sell": 1},
+        {"item": "item.ammunition.virulent_cartridge", "buy": 9, "sell": 3, "stock": 80},
+        {"item": "item.ammunition.synapse_dart", "buy": 5, "sell": 2},
+        {"item": "item.ammunition.synapse_surge", "buy": 11, "sell": 4, "stock": 60}
+      ],
+      "recharge": {"price": 30, "reagent": "item.mineral.lumenita", "reagent_quantity": 1, "empty_below": 0.05}
+    },
+    "npc.dustline_trader_cells": {
+      "goods": [
+        {"item": "item.consumable.health_capsule", "buy": 25},
+        {"item": "item.battery.provisional_relay_cell", "buy": 250, "stock": 6}
+      ]
+    },
+    "npc.dustline_trader_food": {
+      "goods": [
+        {"item": "item.food.empanada", "buy": 6, "sell": 2}
+      ]
+    },
+    "npc.dustline_trader_general": {
+      "goods": [
+        {"item": "item.light.provisional_verdant_lumen", "buy": 60, "sell": 5},
+        {"item": "item.light.storm_lantern", "buy": 180, "sell": 60},
+        {"item": "item.light.brass_lantern", "buy": 260, "sell": 85},
+        {"item": "item.backpack.provisional_drift_pack", "buy": 150, "sell": 50}
+      ]
+    },
+    "npc.dustline_weapons_merchant": {
+      "goods": [
+        {"item": "item.weapon.foundry_scrapblade", "buy": 120},
+        {"item": "item.weapon.foundry_breaker", "buy": 150},
+        {"item": "item.weapon.foundry_ironbound_mace", "buy": 160},
+        {"item": "item.weapon.foundry_bulwark", "buy": 170},
+        {"item": "item.weapon.relay_infiltrator", "buy": 110},
+        {"item": "item.weapon.relay_twin_blades", "buy": 160},
+        {"item": "item.weapon.relay_operator", "buy": 210},
+        {"item": "item.weapon.drift_scout_rifle", "buy": 180},
+        {"item": "item.weapon.drift_pathfinder", "buy": 200},
+        {"item": "item.weapon.drift_marksman", "buy": 220},
+        {"item": "item.weapon.provisional_rivet_caster", "buy": 140},
+        {"item": "item.weapon.verdant_sporecaller", "buy": 190},
+        {"item": "item.weapon.verdant_warden", "buy": 200},
+        {"item": "item.shield.sentinel", "buy": 150},
+        {"item": "item.armor.combat_helmet_k6", "sell": 35},
+        {"item": "item.armor.leather_suit_jacket", "sell": 45},
+        {"item": "item.armor.leather_suit_trousers", "sell": 40},
+        {"item": "item.armor.leather_boots", "sell": 30},
+        {"item": "item.armor.provisional_flexweave", "sell": 50},
+        {"item": "item.armor.provisional_foundry_plate", "sell": 55},
+        {"item": "item.drone.light", "buy": 300},
+        {"item": "item.drone.assault", "buy": 3500},
+        {"item": "item.drone.scan", "buy": 900},
+        {"item": "item.drone.scan_fpv", "buy": 1400},
+        {"item": "item.drone.scan_light", "buy": 2200},
+        {"item": "item.drone.kamikaze", "buy": 1200},
+        {"item": "item.drone.kamikaze_heavy", "buy": 2400}
+      ]
+    }
+  }
+}

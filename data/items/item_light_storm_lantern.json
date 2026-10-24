@@ -2,7 +2,7 @@
   "id": "item.light.storm_lantern",
   "display_name": "Storm Lantern",
   "equipment_slot": "light",
-  "description": "A sealed blue-glass lantern that keeps burning in wet tunnels. Not found in the Outpost yet.",
+  "description": "A sealed right-angle field lamp in olive drab that keeps burning in wet tunnels. Sold by Sam, Dustline's trader.",
   "visual_id": "visual.light.storm_lantern",
   "properties": {
     "armor_defense": 0,
@@ -13,6 +13,5 @@
     "light_energy_per_second": 0.18
   },
   "weight": 1.2,
-  "gear_tier": 2,
-  "planned": true
+  "gear_tier": 2
 }

@@ -1,0 +1,20 @@
+{
+  "id": "item.armor.foundry_furnace_helmet",
+  "display_name": "Furnace Helm",
+  "equipment_slot": "head",
+  "description": "Black pressed-steel helm with a breathing grille, built for the heat at the Foundry's pour floors. Tier III. Not issued yet.",
+  "visual_id": "visual.armor.foundry_furnace_helmet",
+  "gear_tier": 3,
+  "requirements": {
+    "minimum_level": 20,
+    "class_ids": [
+      "class.foundry"
+    ]
+  },
+  "properties": {
+    "armor_defense": 12,
+    "resistance_bonus": 3
+  },
+  "weight": 3.0,
+  "planned": true
+}

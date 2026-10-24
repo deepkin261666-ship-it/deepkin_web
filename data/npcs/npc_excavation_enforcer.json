@@ -1,16 +1,79 @@
 {
   "id": "npc.excavation_enforcer",
   "display_name": "Excavation Enforcer",
-  "max_health": 70,
+  "max_health": 90,
   "movement_speed": 2.4,
-  "detection_range": 9.0,
+  "detection_range": 10.0,
   "attack_range": 1.7,
   "attack_damage": 9,
   "attack_cooldown": 1.1,
-  "xp": 60,
+  "faction": "faction.castoffs",
+  "species": "Enforcer",
+  "role": "brute",
+  "archetype": "brute",
+  "tier": "normal",
+  "hunt_tier": 2,
+  "threat": 6,
+  "xp": 70,
   "coins": [
     5,
     12
+  ],
+  "habitat": "Excavation C-3 \u2014 the abandoned works below the Shallows, held for the Castoffs",
+  "lore": "PROVISIONAL. Former VDI site security who stayed when the contract ended. They kept the rig suits and the pneumatic gauntlets and now hold the abandoned works for the Castoffs, charging anyone who digs there.",
+  "verbs": [
+    "GUARD",
+    "SHOVE",
+    "SLAM",
+    "CALL"
+  ],
+  "rules": [
+    "The only Castoffs with a telegraph: the stolen rig suit hisses before the gauntlet comes down \u2014 get out of the red ring.",
+    "Back away and it shoulders into you along a short red lane.",
+    "Hit one and the other enforcers in the works come to help."
+  ],
+  "perception": {
+    "aggro_radius": 9.0,
+    "memory_seconds": 4.0,
+    "call_radius": 9.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      1.6
+    ],
+    "leash_radius": 18.0,
+    "lure": "pack",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "rush",
+      "name": "Shoulder Rush",
+      "shape": "charge",
+      "damage": 12,
+      "windup": 0.7,
+      "range": 6.0,
+      "width": 1.4,
+      "cooldown": 10.0,
+      "min_range": 3.0,
+      "trigger_range": 6.0,
+      "los": true,
+      "recovery": 0.8
+    },
+    {
+      "id": "slam",
+      "name": "Pneumatic Slam",
+      "damage": 18,
+      "windup": 0.9,
+      "radius": 2.0,
+      "reach": 1.4,
+      "cooldown": 8.0,
+      "trigger_range": 2.4,
+      "target": "position",
+      "recovery": 0.6
+    }
   ],
   "loot": [
     {
@@ -45,5 +108,13 @@
       ],
       "chance": 0.2
     }
-  ]
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/castoffs/enforcer.glb",
+    "size": 1.95,
+    "fit": "height",
+    "yaw": 180,
+    "rig": "humanoid",
+    "attack": "unarmed"
+  }
 }

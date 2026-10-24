@@ -1,0 +1,14 @@
+{
+  "id": "item.container.vdi_cache",
+  "display_name": "VDI Strata Cache",
+  "description": "A Vantage Deep Industries supply locker left on an excavation floor. Deeper floors keep better stock. What's inside is yours alone. (Provisional.)",
+  "visual_id": "visual.container.vdi_cache",
+  "container": {
+    "cells": 8
+  },
+  "fixed": true,
+  "crate_loot": [
+    {"item": "item.consumable.health_capsule", "quantity": 1}
+  ],
+  "weight": 0.0
+}

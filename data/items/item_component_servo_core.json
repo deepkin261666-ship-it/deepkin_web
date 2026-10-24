@@ -1,0 +1,10 @@
+{
+  "id": "item.component.servo_core",
+  "display_name": "Servo Core",
+  "description": "The sealed drive unit out of a Rustbound machine: motor, controller and a radio that is still listening. Salvagers pay for them; nobody admits what they are rebuilt into.",
+  "visual_id": "visual.component.servo_core",
+  "properties": {
+    "stack_size": 10
+  },
+  "weight": 1.2
+}

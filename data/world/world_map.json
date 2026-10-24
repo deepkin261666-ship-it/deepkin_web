@@ -184,12 +184,20 @@
         0.0717
       ],
       [
-        0.8323,
-        0.1251
+        0.87,
+        0.09
       ],
       [
-        0.8338,
-        0.2185
+        0.94,
+        0.17
+      ],
+      [
+        0.92,
+        0.26
+      ],
+      [
+        0.85,
+        0.27
       ],
       [
         0.7957,
@@ -200,16 +208,12 @@
         0.3503
       ],
       [
-        0.8247,
-        0.402
+        0.86,
+        0.36
       ],
       [
-        0.8338,
-        0.4637
-      ],
-      [
-        0.8841,
-        0.4804
+        0.93,
+        0.4
       ],
       [
         0.9116,
@@ -350,42 +354,9 @@
       "danger": "safe",
       "status": "playable",
       "region": "region.starting_region",
-      "cell": {
-        "seed": [
-          0.365,
-          0.455
-        ],
-        "weight": 0.0006,
-        "polygon": [
-          [
-            0.4363,
-            0.5504
-          ],
-          [
-            0.295,
-            0.5547
-          ],
-          [
-            0.2522,
-            0.5166
-          ],
-          [
-            0.2534,
-            0.4505
-          ],
-          [
-            0.3633,
-            0.3761
-          ],
-          [
-            0.4191,
-            0.3922
-          ]
-        ]
-      },
       "marker": [
-        0.365,
-        0.46
+        0.468,
+        0.392
       ],
       "summary": {
         "en": "Where every operator arrives: a fortified mining settlement dug in around an old excavation shaft. The lift on the shaft is the way on.",
@@ -411,9 +382,17 @@
         "conn.shaft3_outpost_threshold"
       ],
       "label": [
-        0.365,
-        0.488
-      ]
+        0.468,
+        0.392
+      ],
+      "stack": {
+        "parent": "zone.surface_scarp",
+        "depth": 1,
+        "marker": [
+          0.468,
+          0.392
+        ]
+      }
     },
     {
       "id": "zone.threshold",
@@ -431,8 +410,8 @@
         "parent": "zone.outpost",
         "depth": 1,
         "marker": [
-          0.447,
-          0.432
+          0.468,
+          0.392
         ]
       },
       "summary": {
@@ -481,12 +460,8 @@
             0.3422
           ],
           [
-            0.4191,
-            0.3922
-          ],
-          [
-            0.3633,
-            0.3761
+            0.3754,
+            0.4244
           ],
           [
             0.3258,
@@ -560,11 +535,11 @@
           ],
           [
             0.295,
-            0.5547
+            0.5056
           ],
           [
-            0.4363,
-            0.5504
+            0.3439,
+            0.4924
           ],
           [
             0.4814,
@@ -624,8 +599,8 @@
         "parent": "zone.excavation_c3",
         "depth": 2,
         "marker": [
-          0.385,
-          0.7
+          0.362,
+          0.668
         ]
       },
       "summary": {
@@ -667,8 +642,8 @@
         "parent": "zone.excavation_c3",
         "depth": 3,
         "marker": [
-          0.385,
-          0.735
+          0.362,
+          0.668
         ]
       },
       "summary": {
@@ -722,12 +697,12 @@
             0.5786
           ],
           [
-            0.4363,
-            0.5504
+            0.3439,
+            0.4924
           ],
           [
-            0.4191,
-            0.3922
+            0.3754,
+            0.4244
           ],
           [
             0.487,
@@ -843,7 +818,25 @@
         "conn.scarp_saltpan_sw",
         "conn.saltpan_frontier_east",
         "conn.saltpan_salt_pit"
-      ]
+      ],
+      "hunting": {
+        "factions": [
+          "faction.mutants"
+        ],
+        "tiers": [
+          2,
+          4
+        ],
+        "spawn_groups": [
+          "spawn.saltpan_hoodoo_hollow",
+          "spawn.saltpan_north_rim",
+          "spawn.saltpan_west_flats"
+        ],
+        "note": {
+          "en": "Mutants hunt the salt flats' edges (tier 2-4): the hoodoo hollow, the north rim and the south-west flats. The convoy road stays tier 1.",
+          "es": "Los mutantes cazan en los bordes del salar (tier 2-4): la hondonada de los hoodoos, el borde norte y los llanos del suroeste. La ruta del convoy sigue siendo tier 1."
+        }
+      }
     },
     {
       "id": "zone.frontier_road_east",
@@ -927,11 +920,185 @@
         "conn.saltpan_frontier_east",
         "conn.frontier_east_dustline",
         "conn.sump_frontier_east",
-        "conn.frontier_east_dragon_lair"
+        "conn.frontier_east_dragon_lair",
+        "conn.frontier_east_castoff_hideout"
       ],
       "game": {
         "file": "data/starting_region.json",
         "zone_id": "zone.frontier_road_east"
+      }
+    },
+    {
+      "id": "zone.castoff_hideout_f1",
+      "name": "Castoff Hideout · Floor 1",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 15,
+      "level": -1,
+      "level_label": "FLOOR 1",
+      "tier": 1,
+      "danger": "medium",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.frontier_road_east",
+        "depth": 1,
+        "marker": [
+          0.74,
+          0.585
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. The Castoffs' hideout under Frontier Road east, first floor: a yard of containers and tarps behind a barricade. Lookouts and raiders; the stairs at the far end go down.",
+        "es": "PROVISIONAL. El escondite de los Castoffs bajo el Frontier Road este, primer piso: un patio de contenedores y lonas detrás de una barricada. Vigías y saqueadores; la escalera del fondo baja."
+      },
+      "subtitle": {
+        "en": "The Yard",
+        "es": "El Patio"
+      },
+      "size_m": [
+        80,
+        60
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.castoff_hideout_f1"
+      },
+      "connections": [
+        "conn.frontier_east_castoff_hideout",
+        "conn.castoff_hideout_f1_f2"
+      ]
+    },
+    {
+      "id": "zone.castoff_hideout_f2",
+      "name": "Castoff Hideout · Floor 2",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 30,
+      "level": -2,
+      "level_label": "FLOOR 2",
+      "tier": 2,
+      "danger": "medium",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.frontier_road_east",
+        "depth": 2,
+        "marker": [
+          0.74,
+          0.585
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. Second floor: the workshop and the scrap hall where the Castoffs strip what they take. Raiders, lookouts and gunners.",
+        "es": "PROVISIONAL. Segundo piso: el taller y el galpón de chatarra donde los Castoffs desarman lo que se llevan. Saqueadores, vigías y tiradores."
+      },
+      "subtitle": {
+        "en": "The Works",
+        "es": "El Taller"
+      },
+      "size_m": [
+        80,
+        60
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.castoff_hideout_f2"
+      },
+      "connections": [
+        "conn.castoff_hideout_f1_f2",
+        "conn.castoff_hideout_f2_f3"
+      ]
+    },
+    {
+      "id": "zone.castoff_hideout_f3",
+      "name": "Castoff Hideout · Floor 3",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 45,
+      "level": -3,
+      "level_label": "FLOOR 3",
+      "tier": 3,
+      "danger": "high",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.frontier_road_east",
+        "depth": 3,
+        "marker": [
+          0.74,
+          0.585
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. Third floor: the barracks, the long hall with its firing line, the sleeping quarters and the armoury. Gunners, troopers in deep-salvage armour and a vanguard.",
+        "es": "PROVISIONAL. Tercer piso: las barracas, el salón largo con su línea de tiro, los dormitorios y la armería. Tiradores, soldados con blindaje de rescate profundo y un vanguardia."
+      },
+      "subtitle": {
+        "en": "The Barracks",
+        "es": "Las Barracas"
+      },
+      "size_m": [
+        80,
+        60
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.castoff_hideout_f3"
+      },
+      "connections": [
+        "conn.castoff_hideout_f2_f3",
+        "conn.castoff_hideout_f3_f4"
+      ]
+    },
+    {
+      "id": "zone.castoff_hideout_f4",
+      "name": "Castoff Hideout · Floor 4",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 60,
+      "level": -4,
+      "level_label": "FLOOR 4",
+      "tier": 3,
+      "danger": "high",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.frontier_road_east",
+        "depth": 4,
+        "marker": [
+          0.74,
+          0.585
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. Fourth floor: the Warlord's hall. His guard holds the antechamber; he holds the hall, beside a strongbox each operator can open once. A service lift climbs straight back to the road.",
+        "es": "PROVISIONAL. Cuarto piso: la sala del Warlord. Su guardia cuida la antesala; él cuida la sala, junto a un cofre que cada operador puede abrir una sola vez. Un montacargas sube directo a la ruta."
+      },
+      "subtitle": {
+        "en": "The Warlord's Hall",
+        "es": "La Sala del Warlord"
+      },
+      "size_m": [
+        80,
+        60
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.castoff_hideout_f4"
+      },
+      "connections": [
+        "conn.castoff_hideout_f3_f4"
+      ],
+      "boss": "npc.castoff_warlord",
+      "extraction": {
+        "zone": "zone.frontier_road_east",
+        "exit": "LIFT · FRONTIER ROAD",
+        "transition": 308
       }
     },
     {
@@ -1012,7 +1179,7 @@
       "level": 0,
       "tier": 2,
       "danger": "medium",
-      "status": "planned",
+      "status": "playable",
       "region": "region.frontier",
       "cell": {
         "seed": [
@@ -1052,24 +1219,33 @@
         0.43
       ],
       "summary": {
-        "en": "Hunting grounds in a drained reservoir east of the Outpost. Its edge runs along Frontier Road: a detour for hides, meat and bounties.",
-        "es": "Coto de caza en un embalse drenado al este del Outpost. Su borde corre junto a Frontier Road: un desvío por cueros, carne y recompensas."
+        "en": "PROVISIONAL. A drained reservoir gone back to marsh north of Frontier Road: dry cracked banks to the west, peat and reeds in the middle, standing water and half-sunk wrecks to the east. War drones circle a drowned VDI pump station whose open hatch leads down into the Pump Works.",
+        "es": "PROVISIONAL. Un embalse drenado que volvió a ser pantano al norte de Frontier Road: orillas secas y agrietadas al oeste, turba y juncos en el medio, agua estancada y restos semihundidos al este. Drones de guerra rondan una estación de bombeo de VDI inundada cuya escotilla abierta baja a la Pump Works."
       },
       "subtitle": {
-        "en": "Hunting area",
-        "es": "Zona de caza"
+        "en": "Wetland · robot hideout below",
+        "es": "Humedal · guarida de robots abajo"
       },
       "art_icon": true,
       "connections": [
         "conn.scarp_sump",
         "conn.sump_frontier_east",
         "conn.sump_fungal",
-        "conn.sump_verdant"
+        "conn.sump_verdant",
+        "conn.sump_hideout"
       ],
       "label": [
         0.63,
         0.455
-      ]
+      ],
+      "size_m": [
+        160,
+        124
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.the_sump"
+      }
     },
     {
       "id": "zone.verdant_reach",
@@ -1328,16 +1504,24 @@
             0.0717
           ],
           [
-            0.8323,
-            0.1251
+            0.87,
+            0.09
           ],
           [
-            0.8338,
-            0.2185
+            0.94,
+            0.17
           ],
           [
-            0.8101,
-            0.2537
+            0.92,
+            0.26
+          ],
+          [
+            0.85,
+            0.27
+          ],
+          [
+            0.8269,
+            0.2722
           ],
           [
             0.7758,
@@ -1595,12 +1779,20 @@
             0.2262
           ],
           [
-            0.3633,
-            0.3761
+            0.3754,
+            0.4244
           ],
           [
-            0.2534,
-            0.4505
+            0.3439,
+            0.4924
+          ],
+          [
+            0.295,
+            0.5056
+          ],
+          [
+            0.2829,
+            0.5019
           ],
           [
             0.1863,
@@ -1647,14 +1839,6 @@
         "weight": 0.001,
         "polygon": [
           [
-            0.2534,
-            0.4505
-          ],
-          [
-            0.2522,
-            0.5166
-          ],
-          [
             0.112,
             0.5838
           ],
@@ -1677,6 +1861,10 @@
           [
             0.1863,
             0.3336
+          ],
+          [
+            0.2829,
+            0.5019
           ]
         ]
       },
@@ -1747,12 +1935,12 @@
             0.5838
           ],
           [
-            0.2522,
-            0.5166
+            0.2829,
+            0.5019
           ],
           [
             0.295,
-            0.5547
+            0.5056
           ],
           [
             0.295,
@@ -1898,8 +2086,8 @@
         "weight": 0.0006,
         "polygon": [
           [
-            0.8101,
-            0.2537
+            0.8269,
+            0.2722
           ],
           [
             0.7957,
@@ -1910,8 +2098,8 @@
             0.3503
           ],
           [
-            0.8022,
-            0.3512
+            0.8028,
+            0.3505
           ],
           [
             0.7981,
@@ -1964,7 +2152,7 @@
       "level": 0,
       "tier": 3,
       "danger": "medium",
-      "status": "planned",
+      "status": "playable",
       "region": "region.frontier",
       "cell": {
         "seed": [
@@ -1974,20 +2162,16 @@
         "weight": 0.0008,
         "polygon": [
           [
-            0.8022,
-            0.3512
+            0.8028,
+            0.3505
           ],
           [
-            0.8247,
-            0.402
+            0.86,
+            0.36
           ],
           [
-            0.8338,
-            0.4637
-          ],
-          [
-            0.8841,
-            0.4804
+            0.93,
+            0.4
           ],
           [
             0.9116,
@@ -2016,17 +2200,70 @@
         0.43
       ],
       "summary": {
-        "en": "The drowned east, beyond Dustline's frontier gate. Stilt villages, tide channels and shallow water that hides deep holes.",
-        "es": "El este ahogado, más allá de la puerta de la frontera de Dustline. Pueblos sobre pilotes, canales de marea y agua baja que esconde pozos hondos."
+        "en": "PROVISIONAL. The drowned east past Dustline's East Gate: a causeway through standing water, a half-sunk church, a dead quay and its crane, old gateways that lead underground. One of them, the Drowned Cellar, is a Burrowborn nest; the others are sealed.",
+        "es": "PROVISIONAL. El este ahogado pasando la Puerta Este de Dustline: una calzada entre agua estancada, una iglesia medio hundida, un muelle muerto con su grúa y portales viejos que bajan bajo tierra. Uno de ellos, el Sótano Ahogado, es un nido de Burrowborn; los otros están sellados."
       },
       "art_icon": true,
       "connections": [
         "conn.dustline_floodlands",
-        "conn.fungal_floodlands"
+        "conn.fungal_floodlands",
+        "conn.floodlands_cellar"
       ],
       "label": [
         0.87,
         0.455
+      ],
+      "subtitle": {
+        "en": "Flooded lowlands · first map east",
+        "es": "Tierras bajas inundadas · primer mapa al este"
+      },
+      "size_m": [
+        140,
+        76
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.floodlands"
+      }
+    },
+    {
+      "id": "zone.floodlands_cellar",
+      "name": "The Drowned Cellar",
+      "kind": "dungeon",
+      "biome": "wetlands",
+      "layer": "underground",
+      "depth_m": 12,
+      "level": -1,
+      "tier": 2,
+      "danger": "medium",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.floodlands",
+        "depth": 1,
+        "marker": [
+          0.885,
+          0.415
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. A flooded cellar under a ruined gateway in the Floodlands: a Burrowborn nest of Crawlers with a Ravager in the back room. A small hunting spot; they come back a minute or two later.",
+        "es": "PROVISIONAL. Un sótano inundado bajo un portal en ruinas de los Floodlands: un nido de Burrowborn con Crawlers y un Ravager en el cuarto del fondo. Un coto de caza chico; vuelven a aparecer un minuto o dos después."
+      },
+      "subtitle": {
+        "en": "Hunting spot · Burrowborn nest",
+        "es": "Coto de caza · nido de Burrowborn"
+      },
+      "size_m": [
+        44,
+        26
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.floodlands_cellar"
+      },
+      "connections": [
+        "conn.floodlands_cellar"
       ]
     },
     {
@@ -2045,8 +2282,8 @@
         "parent": "zone.frontier_road_east",
         "depth": 1,
         "marker": [
-          0.675,
-          0.575
+          0.695,
+          0.57
         ]
       },
       "summary": {
@@ -2156,6 +2393,173 @@
       "label": [
         0.69,
         0.71
+      ]
+    },
+    {
+      "id": "zone.robot_hideout_f1",
+      "name": "The Pump Works · Intake Hall",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 30,
+      "level": -1,
+      "level_label": "FLOOR 1",
+      "tier": 3,
+      "danger": "high",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.the_sump",
+        "depth": 1,
+        "marker": [
+          0.62,
+          0.4
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. The landing under the drowned pump station's hatch, the intake hall's settling tanks and the miners' patrol; war drones in the side bay.",
+        "es": "PROVISIONAL. El descanso bajo la escotilla de la estación de bombeo inundada, los tanques de decantación del salón de toma y la patrulla de los mineros; drones de guerra en la bahía lateral."
+      },
+      "subtitle": {
+        "en": "Robot hideout · floor 1",
+        "es": "Guarida de robots · piso 1"
+      },
+      "size_m": [
+        84,
+        68
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.robot_hideout_f1"
+      },
+      "connections": [
+        "conn.sump_hideout",
+        "conn.hideout_f1_f2"
+      ]
+    },
+    {
+      "id": "zone.robot_hideout_f2",
+      "name": "The Pump Works · Relay Gallery",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 60,
+      "level": -2,
+      "level_label": "FLOOR 2",
+      "tier": 3,
+      "danger": "high",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.the_sump",
+        "depth": 2,
+        "marker": [
+          0.62,
+          0.4
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. A long gallery of relay racks: two sentry turrets, spike traps along the floor, war drones circling the relay room.",
+        "es": "PROVISIONAL. Una galería larga de racks de relés: dos torretas centinela, trampas de púas en el piso, drones de guerra rondando la sala de relés."
+      },
+      "subtitle": {
+        "en": "Robot hideout · floor 2",
+        "es": "Guarida de robots · piso 2"
+      },
+      "size_m": [
+        84,
+        68
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.robot_hideout_f2"
+      },
+      "connections": [
+        "conn.hideout_f1_f2",
+        "conn.hideout_f2_f3"
+      ]
+    },
+    {
+      "id": "zone.robot_hideout_f3",
+      "name": "The Pump Works · Assembly Line",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 90,
+      "level": -3,
+      "level_label": "FLOOR 3",
+      "tier": 4,
+      "danger": "high",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.the_sump",
+        "depth": 3,
+        "marker": [
+          0.62,
+          0.4
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. Two conveyor lines split the hall into lanes: Haze Skirmishers, a Pelter shelling from the back, turrets and traps.",
+        "es": "PROVISIONAL. Dos cintas transportadoras parten el salón en carriles: Haze Skirmishers, un Pelter bombardeando desde el fondo, torretas y trampas."
+      },
+      "subtitle": {
+        "en": "Robot hideout · floor 3",
+        "es": "Guarida de robots · piso 3"
+      },
+      "size_m": [
+        84,
+        68
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.robot_hideout_f3"
+      },
+      "connections": [
+        "conn.hideout_f2_f3",
+        "conn.hideout_f3_f4"
+      ]
+    },
+    {
+      "id": "zone.robot_hideout_f4",
+      "name": "The Pump Works · Switchyard",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 120,
+      "level": -4,
+      "level_label": "FLOOR 4",
+      "tier": 4,
+      "danger": "deadly",
+      "status": "playable",
+      "region": "region.frontier",
+      "stack": {
+        "parent": "zone.the_sump",
+        "depth": 4,
+        "marker": [
+          0.62,
+          0.4
+        ]
+      },
+      "summary": {
+        "en": "PROVISIONAL. The core and its breakers, the Chopper on guard. Every 30 s the grid drops for a few seconds: turrets and traps go dark, the Chopper does not. Its locker opens once per operator.",
+        "es": "PROVISIONAL. El núcleo y sus disyuntores, el Chopper de guardia. Cada 30 s la red se cae unos segundos: torretas y trampas se apagan, el Chopper no. Su armario se abre una vez por operador."
+      },
+      "subtitle": {
+        "en": "Robot hideout · floor 4",
+        "es": "Guarida de robots · piso 4"
+      },
+      "size_m": [
+        84,
+        68
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.robot_hideout_f4"
+      },
+      "connections": [
+        "conn.hideout_f3_f4"
       ]
     }
   ],
@@ -2325,17 +2729,19 @@
     {
       "id": "conn.sump_frontier_east",
       "kind": "road",
-      "status": "planned",
+      "status": "playable",
       "ends": [
         {
           "zone": "zone.the_sump",
-          "exit": "SOUTH · FRONTIER ROAD",
-          "edge": "SE"
+          "exit": "SOUTH-EAST · FRONTIER ROAD",
+          "edge": "SE",
+          "transition": 501
         },
         {
           "zone": "zone.frontier_road_east",
-          "exit": "NORTH · SUMP EDGE",
-          "edge": "NW"
+          "exit": "NORTH-WEST · THE SUMP",
+          "edge": "NW",
+          "transition": 500
         }
       ],
       "exit_at": [
@@ -2392,22 +2798,45 @@
     {
       "id": "conn.dustline_floodlands",
       "kind": "road",
-      "status": "planned",
+      "status": "playable",
       "ends": [
         {
           "zone": "zone.dustline",
           "exit": "FRONTIER EXIT · EAST",
-          "edge": "E"
+          "edge": "E",
+          "transition": 650
         },
         {
           "zone": "zone.floodlands",
           "exit": "WEST · DUSTLINE",
-          "edge": "W"
+          "edge": "W",
+          "transition": 651
         }
       ],
       "exit_at": [
         0.8026,
         0.4319
+      ]
+    },
+    {
+      "id": "conn.floodlands_cellar",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.floodlands",
+          "exit": "STAIRS DOWN · THE DROWNED CELLAR",
+          "edge": "RUIN",
+          "edge_fixed": true,
+          "transition": 652
+        },
+        {
+          "zone": "zone.floodlands_cellar",
+          "exit": "STAIRS UP · THE FLOODLANDS",
+          "edge": "CLIMB",
+          "edge_fixed": true,
+          "transition": 653
+        }
       ]
     },
     {
@@ -2469,8 +2898,8 @@
         }
       ],
       "exit_at": [
-        0.8001,
-        0.3539
+        0.8004,
+        0.3535
       ]
     },
     {
@@ -2670,7 +3099,7 @@
         {
           "zone": "zone.old_metro",
           "exit": "EAST LINE · THE SHALLOWS",
-          "edge": "NE"
+          "edge": "E"
         },
         {
           "zone": "zone.shallows",
@@ -2679,8 +3108,8 @@
         }
       ],
       "exit_at": [
-        0.3445,
-        0.3012
+        0.3506,
+        0.3253
       ]
     },
     {
@@ -2712,7 +3141,7 @@
         {
           "zone": "zone.the_crags",
           "exit": "NE · OLD TUNNELS",
-          "edge": "NE"
+          "edge": "E"
         },
         {
           "zone": "zone.old_metro",
@@ -2721,8 +3150,8 @@
         }
       ],
       "exit_at": [
-        0.2199,
-        0.392
+        0.2346,
+        0.4177
       ]
     },
     {
@@ -2742,8 +3171,8 @@
         }
       ],
       "exit_at": [
-        0.1821,
-        0.5502
+        0.1975,
+        0.5428
       ]
     },
     {
@@ -2912,6 +3341,174 @@
           "edge": "UP",
           "edge_fixed": true,
           "transition": 252
+        }
+      ]
+    },
+    {
+      "id": "conn.frontier_east_castoff_hideout",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.frontier_road_east",
+          "exit": "STAIRS DOWN · CASTOFF HIDEOUT",
+          "edge": "PIT",
+          "edge_fixed": true,
+          "transition": 300
+        },
+        {
+          "zone": "zone.castoff_hideout_f1",
+          "exit": "STAIRS UP · FRONTIER ROAD",
+          "edge": "CLIMB",
+          "edge_fixed": true,
+          "transition": 301
+        }
+      ]
+    },
+    {
+      "id": "conn.castoff_hideout_f1_f2",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.castoff_hideout_f1",
+          "exit": "STAIRS DOWN · FLOOR 2",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 302
+        },
+        {
+          "zone": "zone.castoff_hideout_f2",
+          "exit": "STAIRS UP · FLOOR 1",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 303
+        }
+      ]
+    },
+    {
+      "id": "conn.castoff_hideout_f2_f3",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.castoff_hideout_f2",
+          "exit": "STAIRS DOWN · FLOOR 3",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 304
+        },
+        {
+          "zone": "zone.castoff_hideout_f3",
+          "exit": "STAIRS UP · FLOOR 2",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 305
+        }
+      ]
+    },
+    {
+      "id": "conn.castoff_hideout_f3_f4",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.castoff_hideout_f3",
+          "exit": "STAIRS DOWN · FLOOR 4",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 306
+        },
+        {
+          "zone": "zone.castoff_hideout_f4",
+          "exit": "STAIRS UP · FLOOR 3",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 307
+        }
+      ]
+    },
+    {
+      "id": "conn.sump_hideout",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.the_sump",
+          "exit": "STAIRS DOWN · THE PUMP WORKS",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 502
+        },
+        {
+          "zone": "zone.robot_hideout_f1",
+          "exit": "STAIRS UP · THE SUMP",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 503
+        }
+      ]
+    },
+    {
+      "id": "conn.hideout_f1_f2",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.robot_hideout_f1",
+          "exit": "STAIRS DOWN · FLOOR 2",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 504
+        },
+        {
+          "zone": "zone.robot_hideout_f2",
+          "exit": "STAIRS UP · FLOOR 1",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 505
+        }
+      ]
+    },
+    {
+      "id": "conn.hideout_f2_f3",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.robot_hideout_f2",
+          "exit": "STAIRS DOWN · FLOOR 3",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 506
+        },
+        {
+          "zone": "zone.robot_hideout_f3",
+          "exit": "STAIRS UP · FLOOR 2",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 507
+        }
+      ]
+    },
+    {
+      "id": "conn.hideout_f3_f4",
+      "kind": "shaft",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.robot_hideout_f3",
+          "exit": "STAIRS DOWN · FLOOR 4",
+          "edge": "DOWN",
+          "edge_fixed": true,
+          "transition": 508
+        },
+        {
+          "zone": "zone.robot_hideout_f4",
+          "exit": "STAIRS UP · FLOOR 3",
+          "edge": "UP",
+          "edge_fixed": true,
+          "transition": 509
         }
       ]
     }

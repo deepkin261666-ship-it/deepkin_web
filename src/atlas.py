@@ -11,6 +11,7 @@ import math
 import os
 
 from i18n import L
+import worldmap as WMAP
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORLD = json.load(open(os.path.join(ROOT, "data", "world", "world_map.json")))
@@ -61,6 +62,16 @@ T = {
     "north": L("N", "N"),
     "gate_fuel": L("GATE FUEL", "GATE FUEL"),
     "bank": L("BANK", "BANCO"),
+    # 2026-10-23
+    "floors": L("{n} FLOORS", "{n} PISOS"),
+    "i_shop": L("Traders ×{n}", "Comerciantes ×{n}"), "i_bike": L("Bike shop · crane", "Taller de motos · grúa"),
+    "i_vdi": L("VDI post", "Puesto VDI"), "i_house": L("Your house (Unit 7)", "Tu casa (Unit 7)"),
+    "i_excavation": L("VDI excavation site", "Claro de excavación VDI"),
+    "bore": L("VDI BORE", "PERFORACIÓN VDI"),
+    "bore_sub": L("PLAYER-MADE", "LA HACE UN JUGADOR"),
+    "bore_note": L("Excavation floors are player-made: a VDI drillship called out on open surface ground bores −1 … −15, generated per call-out — not fixed zones.",
+                   "Los pisos de excavación los hace un jugador: una perforadora VDI llamada en terreno abierto de superficie baja de −1 a −15, generados en cada llamada; no son zonas fijas."),
+    "l_bore": L("VDI excavation · player-made, generated per call-out", "Excavación VDI · la hace un jugador, se genera en cada llamada"),
 }
 
 
@@ -142,6 +153,33 @@ for _p in PASS:
         PASS_BY[_cid] = _p
 
 
+# Pilas de pisos (2026-10-23): las guaridas de cuatro pisos (Castoff Hideout, The Pump Works) van en la planta como una
+# sola placa con su cantidad de pisos; el corte y la clave muestran cada piso. Un grupo = mismos padre y prefijo del
+# nombre, 3 pisos o mas (C-3 F2/F3 siguen con placa propia).
+def _stack_groups():
+    by = {}
+    for z in WORLD["zones"]:
+        if z.get("stack") and z["status"] == "playable":
+            by.setdefault((z["stack"]["parent"], z["name"].split(" · ")[0]), []).append(z["id"])
+    out = {}
+    for (_, prefix), ids in by.items():
+        if len(ids) >= 3:
+            ids = sorted(ids, key=lambda i: ZONES[i]["stack"]["depth"])
+            for i in ids:
+                out[i] = {"head": ids[0], "floors": ids, "name": prefix}
+    return out
+
+
+GROUP = _stack_groups()
+
+
+def same_group(a, b):
+    return a in GROUP and b in GROUP and GROUP[a]["head"] == GROUP[b]["head"]
+
+
+SITES = WMAP.sites(REGION)
+
+
 # --- Glifos (24x24, trazo) --------------------------------------------------------------------------------------
 GLYPH = {
     "tunnel": '<path d="M4 20V11a8 8 0 0 1 16 0v9"/><path d="M9 20l1-6h4l1 6M8 17h8"/>',
@@ -159,10 +197,27 @@ GLYPH = {
     "fuel": '<rect x="4" y="4" width="10" height="17" rx="1"/><path d="M6 8h6M14 9h2l3 3v6a2 2 0 0 1-4 0v-4h-1"/>',
     "bank": '<rect x="3" y="5" width="18" height="12" rx="1"/><path d="M7 21h10M12 17v4M6 9h3M6 12h7"/>',
     "hub": '<path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+    # Fases 3-7 (2026-10-23): tiendas, taller de motos, puesto VDI, casa, excavacion VDI (perforadora llamada por un jugador).
+    "shop": '<path d="M3 9h18l-2-5H5ZM3 9c0 2 4 2 4.5 0 .5 2 4.5 2 4.5 0 0 2 4 2 4.5 0 .5 2 4.5 2 4.5 0M5 11v9h14v-9M10 20v-5h4v5"/>',
+    "bike": '<circle cx="5.5" cy="16" r="3.5"/><circle cx="18.5" cy="16" r="3.5"/><path d="M5.5 16 9 9h6l3.5 7M9 9 7.5 6H5M15 9l-1.5-3h3M12 16l3-7"/>',
+    "vdi": '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    "house": '<path d="M3 11 12 4l9 7M5 9.5V20h14V9.5M10 20v-6h4v6"/>',
+    "excavation": '<rect x="6.5" y="2" width="11" height="12" rx="2"/><path d="M6.5 6h11M6.5 10h11M9 14l3 8 3-8M10.5 17h3"/>',
 }
 ZONE_ICON = {"zone.dustline": "city", "zone.outpost": "outpost", "zone.surface_scarp": "hunt", "zone.surface_saltpan": "route",
              "zone.frontier_road_east": "route", "zone.shallows": "hunt", "zone.threshold": "cave", "zone.excavation_c3": "dungeon",
              "zone.excavation_c3_f2": "dungeon", "zone.excavation_c3_f3": "dungeon", "zone.dragon_lair": "hunt"}
+# Mapas nuevos (2026-10-23): el icono sale del tipo de mapa del dato.
+KIND_GLYPH = {"city": "city", "settlement": "city", "outpost": "outpost", "wild": "hunt", "dungeon": "dungeon", "route": "route"}
+
+
+def zone_icon(zid):
+    return ZONE_ICON.get(zid) or KIND_GLYPH.get(ZONES[zid]["kind"], "cave")
+
+
+def hunting(zid):
+    """Coto de caza (2026-10-23): un bloque "hunting" en el mapa, o un mapa salvaje / "hunting spot" con grupos de aparicion."""
+    return WMAP.is_hunting(ZONES[zid], REGION)
 
 
 def glyph(name, x, y, size=16, color=None, sw=1.8, bg=True):
@@ -206,6 +261,7 @@ class Plan:
         ws = [self.warp(u * IW, v * IH) for u, v in border]
         xs, ys = [w[0] for w in ws], [w[1] for w in ws]
         self.k = min(fw / (max(xs) - min(xs)), fh / (max(ys) - min(ys)))
+        self.used_h = (max(ys) - min(ys)) * self.k  # alto que ocupa la ventana en el marco
         self.ox = fx + fw / 2 - (max(xs) + min(xs)) / 2 * self.k
         self.oy = fy + fh / 2 - (max(ys) + min(ys)) / 2 * self.k
 
@@ -265,10 +321,12 @@ BASE = {"surface": "#1f1c16", "underground": "#141b26"}
 
 
 def anchor_uv(zid, layout):
+    if zid in GROUP and GROUP[zid]["head"] != zid:
+        zid = GROUP[zid]["head"]
     if zid in layout["pos"]:
         return layout["pos"][zid]
     z = ZONES[zid]
-    return z.get("marker") or z.get("stack", {}).get("marker") or z["cell"]["seed"]
+    return z.get("stack", {}).get("marker") or z.get("marker") or z["cell"]["seed"]
 
 
 def plan_svg(P, lang, layout):
@@ -407,6 +465,8 @@ def stroke_for(p):
 def passage_lines(P, lang, layout):
     o = []
     for p in PASS:
+        if same_group(p["a"], p["b"]):
+            continue
         d, _, _ = passage_geom(P, p, layout)
         if p["ta"] in ("road", "gate"):
             o.append(f'<path d="{d}" fill="none" stroke="#0b0d0c" stroke-width="6.5"/>')
@@ -424,6 +484,8 @@ def passage_badges(P, layout):
     o = []
     r = layout["badge_r"]
     for p in PASS:
+        if same_group(p["a"], p["b"]) or (p.get("one_way") and p["a"] in GROUP):
+            continue  # escaleras entre pisos de una guarida y su salida de un solo sentido: en el corte y en la clave
         d, mx, my = passage_geom(P, p, layout)
         dx, dy = layout["badge_off"].get(p["id"], (0, 0))
         x, y = mx + dx * r, my + dy * r
@@ -456,19 +518,32 @@ def routes(P, lang, layout):
 
 
 def stacks(P, lang, layout):
-    """Niveles apilados: una placa desplazada con su sombra, unida al mapa padre."""
+    """Niveles apilados: una placa con su sombra en el punto del dato (el marcador apilado), unida al mapa padre. Los pisos
+    que el dato pone en el mismo punto (pozo de Shaft 3: Outpost y Threshold; C-3 F2/F3; una guarida) son una sola pila de
+    placas, una sombra por piso (2026-10-24: ninguna placa se corre a mano)."""
     o = []
+    piles = {}
     for z in WORLD["zones"]:
         if not z.get("stack") or z["status"] != "playable":
             continue
-        x, y = P.p(anchor_uv(z["id"], layout))
-        px, py = P.p(anchor_uv(z["stack"]["parent"], layout))
-        o.append(f'<path d="M{px:.1f},{py:.1f}L{x:.1f},{y:.1f}" stroke="#7b8fb8" stroke-width="1" stroke-dasharray="3 3"/>')
+        if z["id"] in GROUP and GROUP[z["id"]]["head"] != z["id"]:
+            continue
+        u, v = anchor_uv(z["id"], layout)
+        piles.setdefault((round(u, 3), round(v, 3)), []).append(z["id"])
+    for (u, v), ids in piles.items():
+        ids.sort(key=lambda i: ZONES[i].get("depth_m", 0))
+        x, y = P.p((u, v))
+        for zid in ids:
+            px, py = P.p(anchor_uv(ZONES[zid]["stack"]["parent"], layout))
+            if math.hypot(px - x, py - y) > 2:
+                o.append(f'<path d="M{px:.1f},{py:.1f}L{x:.1f},{y:.1f}" stroke="#7b8fb8" stroke-width="1" stroke-dasharray="3 3"/>')
         s = layout["plate"]
-        for k_, op in ((2, .5), (1, .8)):
+        nf = sum(len(GROUP[i]["floors"]) if i in GROUP else 1 for i in ids)
+        nf = max(nf, 2)
+        for k_, op in [(i, .35 + .5 * (nf - i) / nf) for i in range(nf, 0, -1)]:
             o.append(f'<rect x="{x - s + k_ * 3:.1f}" y="{y - s * .7 + k_ * 3:.1f}" width="{2 * s}" height="{1.4 * s}" rx="2" fill="{C["cave"]}" stroke="#7b8fb8" stroke-opacity="{op * .5}"/>')
         o.append(f'<rect x="{x - s:.1f}" y="{y - s * .7:.1f}" width="{2 * s}" height="{1.4 * s}" rx="2" fill="{C["cave2"]}" stroke="#9fb3d8" stroke-width="1.3"/>')
-        o.append(glyph(ZONE_ICON.get(z["id"], "cave"), x, y, s * 1.05, "#cfdcf5", 1.7, False))
+        o.append(glyph(zone_icon(ids[0]), x, y, s * 1.05, "#cfdcf5", 1.7, False))
     return "".join(o)
 
 
@@ -485,7 +560,7 @@ def zone_marks(P, lang, layout):
             col = "#9fb3d8" if under else C["warm"]
             o.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r + 4:.1f}" fill="{col}" fill-opacity=".12"/>')
             o.append(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{C["bg"]}" stroke="{col}" stroke-width="1.8"/>')
-            o.append(glyph(ZONE_ICON.get(zid, "route"), x, y, r * 1.15, col, 1.8, False))
+            o.append(glyph(zone_icon(zid), x, y, r * 1.15, col, 1.8, False))
         lab = layout["labels"].get(zid)
         if not lab:
             continue
@@ -493,13 +568,22 @@ def zone_marks(P, lang, layout):
         if len(lab) > 3 and lab[3]:  # linea guia
             o.append(f'<path d="M{x:.1f},{y:.1f}L{lx:.1f},{ly - layout["fs_zone"] * .35:.1f}" stroke="{C["muted"]}" stroke-width=".8"/>')
         fs = layout["fs_zone"]
-        name = z["name"].upper()
+        name = layout.get("plan_name", {}).get(zid, z["name"]).upper()
         col = "#cfdcf5" if under else C["text"]
-        o.append(text(lx, ly, name, fs, col, anc, 600, MONO, .07))
         depth = z.get("depth_m", 0)
         sub = (z.get("level_label", "") + " · " if z.get("level_label") else "") + (f"−{depth} m" if depth else ("SURFACE" if lang == "en" else "SUPERFICIE"))
         if zid == "zone.excavation_c3_f2" or zid == "zone.excavation_c3_f3":
             sub = z["subtitle"][lang].upper() + " · −" + str(depth) + " m"
+        if zid in GROUP:
+            fl = GROUP[zid]["floors"]
+            name = GROUP[zid]["name"].upper()
+            sub = tr("floors", lang).format(n=len(fl)) + f" · −{ZONES[fl[0]]['depth_m']}…{ZONES[fl[-1]]['depth_m']} m"
+        elif z.get("stack") and z.get("subtitle") and not z.get("level_label") and zid not in ("zone.dragon_lair", "zone.threshold"):
+            sub = f"−{depth} m"
+        parts = name.split("\n")
+        for i_, part in enumerate(parts):
+            o.append(text(lx, ly + i_ * fs * 1.1, part, fs, col, anc, 600, MONO, .07))
+        ly += (len(parts) - 1) * fs * 1.1
         o.append(text(lx, ly + fs * 1.2, sub, fs * .74, "#8ea2c8" if under else C["amber"], anc, 500, MONO, .1))
     return "".join(o)
 
@@ -525,16 +609,48 @@ def services(P, lang, layout):
         o.append(glyph("fuel", x, y, sz, C["danger"], 1.8, True))
         lab = layout["fuel_label"]
         o.append(text(x + lab[0], y + lab[1], st["name"], layout["fs_zone"] * .72, C["danger"], lab[2], 600, MONO, .1))
+    # Lugares del dato (2026-10-23): fila de iconos junto a su mapa (tiendas con su cantidad, motos, VDI, casa) y el claro de
+    # excavaciones VDI; el coto de caza es una marca chica junto al mapa.
+    for zid, (ox, oy) in layout.get("site_off", {}).items():
+        kinds = []
+        for k in ("house", "shop", "bike", "vdi", "excavation"):
+            n_ = sum(1 for st in SITES if st["zone"] == zid and st["kind"] == k)
+            if n_:
+                kinds.append((k, n_))
+        x, y = P.p(anchor_uv(zid, layout))
+        x, y = x + ox, y + oy
+        for i, (k, n_) in enumerate(kinds):
+            gx = x + i * sz * 1.75
+            o.append(glyph(k, gx, y, sz, SITE_COLOR[k], 1.7, True))
+            if n_ > 1:
+                o.append(badge(n_, gx + sz * .62, y - sz * .62, sz * .42, SITE_COLOR[k], sz * .5))
+    for zid in [z["id"] for z in WORLD["zones"] if z["status"] == "playable" and hunting(z["id"])]:
+        ox, oy = layout.get("hunt_off", {}).get(zid, (layout["mark_r"] * 1.15, layout["mark_r"] * 1.05))
+        x, y = P.p(anchor_uv(zid, layout))
+        if zone_icon(zid) == "hunt" and zid not in layout.get("hunt_off", {}):
+            continue  # el propio icono del mapa ya es la mira
+        o.append(glyph("hunt", x + ox, y + oy, sz * .8, C["danger"], 1.8, True))
     return "".join(o)
+
+
+SITE_COLOR = {"shop": "#e2c88f", "bike": "#6fb3ac", "vdi": "#d39a4b", "house": "#00ff41", "excavation": "#d39a4b"}
 
 
 # --- Corte de profundidades ----------------------------------------------------------------------------------------
 # Columnas del corte (2026-10-12): de oeste a este como en la planta; el pozo del elevador Shaft 3 entre el Outpost y la
 # columna Scarp/Threshold (2026-10-13); The Cinder Deep cuelga del acantilado oeste de
 # Frontier Road (entre la Saltpan y la ruta), The Shallows va a la derecha porque solo la unen tuneles a −120 m.
-SEC_X = {"zone.outpost": .08, "elevator.shaft3": .175, "zone.surface_scarp": .27, "zone.threshold": .27, "zone.surface_saltpan": .46, "zone.shallows": .745,
-         "zone.excavation_c3": .46, "zone.excavation_c3_f2": .46, "zone.excavation_c3_f3": .46, "zone.frontier_road_east": .67,
-         "zone.dragon_lair": .575, "zone.dustline": .84}
+# 2026-10-23: entran The Sump con The Pump Works debajo, la guarida Castoff bajo Frontier Road, The Floodlands con The
+# Drowned Cellar y, a la derecha, la perforacion VDI (pisos hechos por jugadores, no zonas fijas). The Shallows pasa a la
+# columna de C-3 (sus tuneles a −120/−140 m), The Cinder Deep cuelga debajo de Frontier Road.
+# 2026-10-24: The Outpost esta apilado bajo la Scarp (pozo de Shaft 3): Scarp, Outpost y Threshold son una sola columna
+# con el pozo del elevador al costado.
+SEC_X = {"zone.outpost": .20, "elevator.shaft3": .125, "zone.surface_scarp": .20, "zone.threshold": .20, "zone.surface_saltpan": .36, "zone.shallows": .36,
+         "zone.excavation_c3": .36, "zone.excavation_c3_f2": .36, "zone.excavation_c3_f3": .36,
+         "zone.the_sump": .51, "zone.robot_hideout_f1": .51, "zone.robot_hideout_f2": .51, "zone.robot_hideout_f3": .51, "zone.robot_hideout_f4": .51,
+         "zone.frontier_road_east": .67, "zone.dragon_lair": .685,
+         "zone.castoff_hideout_f1": .775, "zone.castoff_hideout_f2": .775, "zone.castoff_hideout_f3": .775, "zone.castoff_hideout_f4": .775,
+         "zone.dustline": .83, "zone.floodlands": .96, "zone.floodlands_cellar": .96, "bore": .905}
 
 
 def section_svg(x0, y0, w, h, lang, L, live=False):
@@ -562,7 +678,7 @@ def section_svg(x0, y0, w, h, lang, L, live=False):
         yb = Y(d0)
         o.append(f'<path d="M{x0},{yb:.1f}h{w}" stroke="{C["amber"] if d0 == 0 else C["line2"]}" stroke-width="{1.6 if d0 == 0 else 1}"'
                  f'{"" if d0 == 0 else " stroke-dasharray=" + chr(34) + "6 5" + chr(34)}/>')
-    o.append(text(x0 + 46, top - 8, tr("surface", lang), fsb, C["amber"], "start", 600, MONO, .12, False))
+    o.append(text(x0 + 46, top - L["node_h"] / 2 - 8, tr("surface", lang), fsb, C["amber"], "start", 600, MONO, .12, False))
     # Ruler
     for d in (0, 60, 90, 120, 140, 200, 340, 400, 520):
         yy = Y(d)
@@ -581,6 +697,24 @@ def section_svg(x0, y0, w, h, lang, L, live=False):
     for zid in (k for k in SX if k in ZONES):
         z = ZONES[zid]
         nodes[zid] = (X(zid), Y(z.get("depth_m", 0)))
+    # Pisos poco profundos en la misma columna (la guarida a −15 m, el sotano a −12 m): se empujan hacia abajo hasta no
+    # pisarse; la placa sigue diciendo su profundidad real.
+    nh = L["node_h"]
+    # Superficie escalonada (2026-10-23): seis mapas de superficie no entran en una fila; los de "sec_lift" suben un renglon.
+    for zid in L.get("sec_lift", ()):
+        if zid in nodes:
+            nodes[zid] = (nodes[zid][0], nodes[zid][1] - nh - 6)
+    cols = {}
+    for zid, (x, y) in nodes.items():
+        cols.setdefault(round(x), []).append(zid)
+    for ids in cols.values():
+        ids.sort(key=lambda i: nodes[i][1])
+        for a, b in zip(ids, ids[1:]):
+            if nodes[b][1] < nodes[a][1] + nh + 6:
+                nodes[b] = (nodes[b][0], nodes[a][1] + nh + 6)
+    # Perforacion VDI (2026-10-23): un pozo fantasma con pisos −1 … −15, sin zona fija.
+    if "bore" in SX:
+        o.append(bore_svg(X("bore"), Y(165), Y(540), lang, L))
     # Conexiones
     for p in PASS:
         a, b = p["a"], p["b"]
@@ -610,8 +744,8 @@ def section_svg(x0, y0, w, h, lang, L, live=False):
         off = L["sec_off"].get(p["id"], 0)
         o.append(f'<g class="at-pass" data-conn="{e(p["id"])}" data-a="{a}" data-b="{b}">')
         if p.get("one_way"):
-            ax += 34
-            bx += 34
+            ax += L.get("sec_oneway_dx", {}).get(p["id"], 34)
+            bx = ax  # sube derecho hasta el nivel de llegada
             o.append(f'<path d="M{ax:.1f},{ay:.1f}L{bx:.1f},{by:.1f}" stroke="{col}" stroke-width="1.8" stroke-dasharray="2 4" stroke-linecap="round"/>')
             o.append(f'<path d="M{bx - 6:.1f},{by + 12:.1f}L{bx:.1f},{by + 2:.1f}L{bx + 6:.1f},{by + 12:.1f}" fill="none" stroke="{col}" stroke-width="2"/>')
         else:
@@ -645,7 +779,7 @@ def section_svg(x0, y0, w, h, lang, L, live=False):
         z = ZONES[zid]
         under = z["layer"] == "underground"
         col = "#9fb3d8" if under else C["warm"]
-        ww = nw
+        ww = max(nw, tw(L["short"].get(zid, z["name"].replace("The ", "")).upper(), fs, .04) + 12)
         sub = (z.get("level_label") + " · " if z.get("level_label") else "") + (f"−{z['depth_m']} m" if z.get("depth_m") else "0 m")
         lv = zlevel(zid)
         if tw(sub, fs * .78, .06) > ww - 8:  # placa angosta: solo la profundidad
@@ -668,7 +802,13 @@ def section_svg(x0, y0, w, h, lang, L, live=False):
         if "_sec" not in p:
             continue
         x, y = p["_sec"]
-        dx, dy = L["sec_badge"].get(p["id"], (0, 0))
+        if p["id"] in L["sec_badge"]:
+            dx, dy = L["sec_badge"][p["id"]]
+        elif same_group(p["a"], p["b"]):
+            # Escaleras entre pisos de una guarida: la insignia a la izquierda de la columna, no entre las placas.
+            dx, dy = -(max(L["node_w"], tw(L["short"].get(p["a"], zname(p["a"])).upper(), L["fs_node"], .04) + 12) / 2 + r * 2.8), 0
+        else:
+            dx, dy = 0, 0
         x, y = x + dx, y + dy
         col = TYPE_COLOR.get(p["ta"], C["soft"])
         zs = f' data-zones="{" ".join(p["floors"])}"' if p.get("floors") else ""
@@ -677,11 +817,30 @@ def section_svg(x0, y0, w, h, lang, L, live=False):
         o.append(glyph(p["ta"], x - r * .55, y, r * 1.2, col, 1.7, False))
         o.append(text(x + r * .62, y + r * .4, str(p["n"]), r * 1.05, col, "middle", 600, MONO, 0, False))
         if p["locked"]:
-            o.append(text(x - r * 1.9, y + r * .4, "■ " + tr("locked", lang), r * .95, C["danger"], "end", 500, MONO, .02))
+            o.append(text(x, y + r * 3, "■ " + tr("locked", lang), r * .95, C["danger"], "middle", 500, MONO, .02))
         if p.get("one_way"):
             o.append(text(x + r * 1.9, y + r * .4, "↑ " + tr("one_way", lang), r * .95, C["amber"], "start", 500, MONO, .02))
         o.append("</g>")
     o.append(frame(x0, y0, w, h, tr("section", lang), L, grid=False))
+    return "".join(o)
+
+
+def bore_svg(x, y0, y1, lang, L):
+    """Pozo de una excavacion VDI: carcasa punteada, pisos genericos y la nota "lo hace un jugador"."""
+    fs = L["fs_node"]
+    col = C["amber"]
+    o = [f'<g class="at-bore" opacity=".85">',
+         f'<path d="M{x - 9:.1f},{y0:.1f}V{y1:.1f}M{x + 9:.1f},{y0:.1f}V{y1:.1f}" stroke="{col}" stroke-width="1.2" stroke-dasharray="5 4" fill="none"/>']
+    n = 6
+    for i in range(n):
+        yy = y0 + 26 + (y1 - y0 - 40) * i / (n - 1)
+        lab = "−15" if i == n - 1 else ("…" if i == n - 2 else f"−{i + 1}")
+        o.append(f'<rect x="{x - 15:.1f}" y="{yy - 5:.1f}" width="30" height="10" rx="2" fill="{C["bg"]}" stroke="{col}" stroke-width="1" stroke-dasharray="2 2"/>')
+        o.append(text(x, yy + fs * .3, lab, fs * .72, col, "middle", 600, MONO, 0, False))
+    o.append(glyph("excavation", x, y0 - fs * 3.2, fs * 1.3, col, 1.7, True))
+    o.append(text(x, y0 - fs * 1.2, tr("bore", lang), fs * .8, col, "middle", 600, MONO, .06))
+    o.append(text(x, y0 - fs * .1, tr("bore_sub", lang), fs * .66, C["soft"], "middle", 500, MONO, .06))
+    o.append("</g>")
     return "".join(o)
 
 
@@ -743,7 +902,9 @@ def legend_svg(x0, y0, w, lang, L, cols=3):
     fs = L["fs_key"]
     items = [("city", C["warm"], "i_city"), ("outpost", C["warm"], "i_outpost"), ("hunt", C["warm"], "i_hunt"), ("route", C["warm"], "i_route"),
              ("cave", "#9fb3d8", "i_cave"), ("dungeon", "#9fb3d8", "i_dungeon"), ("fuel", C["danger"], "i_fuel"), ("bank", C["green"], "i_bank"),
-             ("hub", C["green"], "i_hub")]
+             ("hub", C["green"], "i_hub"), ("house", SITE_COLOR["house"], "i_house"), ("shop", SITE_COLOR["shop"], "i_shop"),
+             ("bike", SITE_COLOR["bike"], "i_bike"), ("vdi", SITE_COLOR["vdi"], "i_vdi"), ("excavation", SITE_COLOR["excavation"], "i_excavation")]
+    n_shops = sum(1 for st in SITES if st["kind"] == "shop" and st["zone"] == "zone.dustline")
     lines = [("road", "t_road"), ("tunnel", "t_tunnel"), ("elevator", "t_elevator"), ("lift", "t_lift"), ("stairs", "t_stairs"), ("gate", "t_gate")]
     o = [text(x0, y0, tr("legend", lang), L["fs_title"], C["amber"], "start", 600, MONO, .14, False)]
     y = y0 + L["fs_title"] * 1.4
@@ -753,7 +914,7 @@ def legend_svg(x0, y0, w, lang, L, cols=3):
         cx = x0 + (i % cols) * colw
         cy = y + (i // cols) * lh
         o.append(glyph(g_, cx + fs * .8, cy, fs * 1.15, col, 1.8, True))
-        o.append(text(cx + fs * 2.1, cy + fs * .36, tr(key, lang), fs, C["soft"], "start", 400, MONO, .02, False))
+        o.append(text(cx + fs * 2.1, cy + fs * .36, tr(key, lang).format(n=n_shops), fs, C["soft"], "start", 400, MONO, .02, False))
     y += math.ceil(len(items) / cols) * lh + fs * .4
     for i, (k, key) in enumerate(lines):
         cx = x0 + (i % cols) * colw
@@ -762,7 +923,8 @@ def legend_svg(x0, y0, w, lang, L, cols=3):
         o.append(f'<path d="M{cx:.1f},{cy:.1f}h{fs * 2.6:.1f}" fill="none" {stroke_for(p)}/>')
         o.append(text(cx + fs * 3.2, cy + fs * .36, tr(key, lang), fs, TYPE_COLOR[k], "start", 500, MONO, .02, False))
     y += math.ceil(len(lines) / cols) * lh + fs * .4
-    extra = [("surf", "l_surface"), ("under", "l_under"), ("stack", "l_stack"), ("lvl", "l_level"), ("plan", "l_planned"), ("route", "route_short"), ("cinder", "cinder_route")]
+    extra = [("surf", "l_surface"), ("under", "l_under"), ("stack", "l_stack"), ("lvl", "l_level"), ("plan", "l_planned"), ("route", "route_short"), ("cinder", "cinder_route"),
+             ("bore", "l_bore")]
     for i, (k, key) in enumerate(extra):
         cx = x0 + (i % cols) * colw
         cy = y + (i // cols) * lh
@@ -777,6 +939,9 @@ def legend_svg(x0, y0, w, lang, L, cols=3):
             sw = level_tag(cx + fs * 1.3, cy, -2, fs * 1.2)
         elif k == "plan":
             sw = f'<rect x="{cx:.1f}" y="{cy - fs * .6:.1f}" width="{fs * 2.6:.1f}" height="{fs * 1.2:.1f}" fill="url(#hatch)" stroke="#3a3f3a" stroke-dasharray="4 4"/>'
+        elif k == "bore":
+            sw = (f'<path d="M{cx + fs * .9:.1f},{cy - fs * .7:.1f}v{fs * 1.4:.1f}M{cx + fs * 1.7:.1f},{cy - fs * .7:.1f}v{fs * 1.4:.1f}" stroke="{C["amber"]}" stroke-width="1.2" stroke-dasharray="3 2"/>'
+                  f'<rect x="{cx + fs * .55:.1f}" y="{cy - fs * .25:.1f}" width="{fs * 1.5:.1f}" height="{fs * .5:.1f}" rx="1" fill="{C["bg"]}" stroke="{C["amber"]}" stroke-dasharray="2 2"/>')
         elif k == "route":
             sw = f'<path d="M{cx:.1f},{cy:.1f}h{fs * 2.6:.1f}" stroke="{C["amber"]}" stroke-width="7" stroke-opacity=".3"/><path d="M{cx:.1f},{cy:.1f}h{fs * 2.6:.1f}" stroke="{C["amber"]}" stroke-width="2.2"/>'
         else:
@@ -785,6 +950,19 @@ def legend_svg(x0, y0, w, lang, L, cols=3):
         o.append(text(cx + fs * 3.2, cy + fs * .36, tr(key, lang), fs, C["soft"], "start", 400, MONO, .02, False))
     y += math.ceil(len(extra) / cols) * lh
     o.append(text(x0, y + fs * .6, tr("ride", lang), fs * .9, C["muted"], "start", 400, MONO, .02, False))
+    # Nota de excavaciones (2026-10-23), partida en renglones al ancho de la lamina.
+    per = max(20, int(w / (fs * .9 * .64)))
+    words, line, lines = tr("bore_note", lang).split(), "", []
+    for wd in words:
+        if len(line) + len(wd) + 1 > per:
+            lines.append(line)
+            line = wd
+        else:
+            line = (line + " " + wd).strip()
+    lines.append(line)
+    for i, ln in enumerate(lines):
+        y += fs * 1.3
+        o.append(text(x0, y + fs * .6, ln, fs * .9, C["amber"], "start", 400, MONO, .02, False))
     return "".join(o), y + fs * 1.2
 
 
@@ -832,42 +1010,53 @@ LENS = (0.60, 0.52, 520, 1.3)
 def common_layout():
     return {
         # The Cinder Deep usa el marcador apilado del dato (pozo de escaleras en el acantilado oeste de Frontier Road).
-        "pos": {"zone.threshold": (0.43, 0.505), "zone.excavation_c3_f2": (0.405, 0.705), "zone.excavation_c3_f3": (0.405, 0.755)},
+        # 2026-10-24: ninguna marca se corre a mano; cada mapa va en el punto del dato (marcador, marcador apilado) por la misma
+        # proyeccion que el mapa interactivo. Solo las etiquetas se acomodan (con linea guia si hace falta).
+        "pos": {},
         "via": {"conn.threshold_shallows": (0.445, 0.36), "conn.shallows_c3": (0.315, 0.50), "conn.frontier_east_dragon_lair": None,
-                "conn.c3_f2": None, "conn.c3_f2_f3": None, "extraction.zone.excavation_c3_f3": (0.35, 0.73)},
-        # Pozo del elevador Shaft 3 en la planta (esquema): entre el Outpost, la placa del Threshold y la Scarp.
-        "elevator_at": {"elevator.shaft3": (0.452, 0.478)},
+                "conn.c3_f2": None, "conn.c3_f2_f3": None, "extraction.zone.excavation_c3_f3": None},
+        # Pozo del elevador Shaft 3: el mismo punto que en el mapa interactivo (el castillete pintado en la Scarp).
+        "elevator_at": {k: v for k, v in WMAP.VLINK_AT.items() if k.startswith("elevator.")},
         "short": {"zone.excavation_c3": "C-3 F1", "zone.excavation_c3_f2": "C-3 F2", "zone.excavation_c3_f3": "C-3 F3",
                   "zone.frontier_road_east": "Frontier Rd", "zone.dragon_lair": "Cinder Deep", "zone.surface_scarp": "Scarp",
-                  "zone.surface_saltpan": "Saltpan"},
+                  "zone.surface_saltpan": "Saltpan", "zone.floodlands_cellar": "Cellar",
+                  **{f"zone.robot_hideout_f{i}": f"Pump F{i}" for i in range(1, 5)},
+                  **{f"zone.castoff_hideout_f{i}": f"Castoff F{i}" for i in range(1, 5)}},
         "city_at": (0.73, 0.43), "city_size": (0.085, 0.07),
         "fuel_at": (0.712, 0.484),
-        "svc_off": {"zone.outpost": (-34, 42), "zone.dustline": (-6, -40)},
+        "svc_off": {"zone.outpost": (-34, 42), "zone.dustline": (-50, -40)},
+        "site_off": {"zone.dustline": (-4, -40), "zone.frontier_road_east": (40, -30)},
+        "sec_lift": ("zone.the_sump", "zone.dustline"),
+        "plan_name": {"zone.floodlands_cellar": "Drowned Cellar"},
+        "sec_oneway_dx": {"extraction.zone.castoff_hideout_f4": 58},
     }
 
 
 def wide(lang, layout_only=False, section=True):
-    win = (0.22, 0.22, 0.88, 0.82)
+    win = (0.22, 0.22, 0.97, 0.82)
     L = common_layout()
     L.update({"id": "w", "fs_zone": 15, "fs_planned": 11.5, "fs_grid": 11, "fs_title": 14, "fs_band": 11, "fs_node": 11.5, "fs_key": 12.5,
               "mark_r": 13, "plate": 15, "badge_r": 8, "step_r": 11, "svc": 13,
-              "labels": {"zone.outpost": (0, -28, "middle"), "zone.shallows": (0, -26, "middle"), "zone.excavation_c3": (18, -8, "start"),
+              "labels": {"zone.outpost": (-26, -4, "end"), "zone.shallows": (0, -34, "middle"), "zone.excavation_c3": (18, -8, "start"),
                          "zone.surface_scarp": (22, -26, "start"), "zone.surface_saltpan": (-4, 34, "middle"),
-                         "zone.frontier_road_east": (26, 12, "start"), "zone.dustline": (26, 34, "start"),
-                         "zone.threshold": (18, 6, "start"), "zone.dragon_lair": (0, 34, "middle"),
-                         "zone.excavation_c3_f2": (26, 5, "start"), "zone.excavation_c3_f3": (26, 5, "start")},
-              "step_off": {"zone.outpost": (-24, 16), "zone.threshold": (-22, -16), "zone.surface_scarp": (-26, -18),
-                           "zone.surface_saltpan": (-24, 12), "zone.frontier_road_east": (-16, -28), "zone.dustline": (-30, -8)},
-              "badge_off": {"elevator.shaft3": (0, 0), "conn.scarp_saltpan_ne": (1.6, -1.6),
-                            "conn.scarp_saltpan_sw": (-1.4, 1.6), "conn.frontier_east_dragon_lair": (2.0, 0),
-                            "conn.c3_f2": (1.8, 0), "conn.c3_f2_f3": (1.8, 0), "extraction.zone.excavation_c3_f3": (-1.6, 0),
-                            "conn.saltpan_frontier_east": (0, 1.8), "conn.frontier_east_dustline": (2.0, 0.4), "conn.threshold_shallows": (-1.2, 0), "conn.shallows_c3": (-1.8, 0)},
-              "fuel_label": (-14, 4, "end"),
-              "sec_top": 84, "sec_k1": 4.1, "node_w": 82, "node_h": 36,
+                         "zone.frontier_road_east": (26, -6, "start"), "zone.dustline": (26, 34, "start"),
+                         "zone.threshold": (26, 14, "start"), "zone.dragon_lair": (-30, 32, "middle"),
+                         "zone.excavation_c3_f2": (26, 4, "start"), "zone.excavation_c3_f3": (26, 38, "start"),
+                         "zone.the_sump": (0, 34, "middle"), "zone.floodlands": (-20, 40, "middle"), "zone.robot_hideout_f1": (0, -34, "middle"),
+                         "zone.castoff_hideout_f1": (24, 5, "start"), "zone.floodlands_cellar": (-10, -34, "middle")},
+              "step_off": {"zone.outpost": (-14, -30), "zone.threshold": (14, -30), "zone.surface_scarp": (-26, -18),
+                           "zone.surface_saltpan": (-26, 4), "zone.frontier_road_east": (-16, -28), "zone.dustline": (-30, -8)},
+              "badge_off": {"elevator.shaft3": (0, 2.9), "conn.scarp_saltpan_ne": (1.6, -1.6),
+                            "conn.scarp_saltpan_sw": (-1.4, 1.6), "conn.frontier_east_dragon_lair": (-2.6, -0.2), "conn.dustline_floodlands": (0, -1.4), "conn.sump_hideout": (-2.6, 1.0), "conn.frontier_east_castoff_hideout": (1.8, -0.6), "conn.floodlands_cellar": (3.8, 3.2),
+                            "conn.c3_f2": (-3.4, -1.6), "conn.c3_f2_f3": (-3.4, 0), "extraction.zone.excavation_c3_f3": (-3.4, 4.9),
+                            "conn.saltpan_frontier_east": (0, 1.8), "conn.frontier_east_dustline": (2.0, 0.4), "conn.threshold_shallows": (-1.2, 0), "conn.shallows_c3": (-1.8, 0),
+                            "conn.sump_frontier_east": (-1.2, 1.4)},
+              "fuel_label": (-14, 4, "end"), "svc_off": {"zone.outpost": (-40, 46), "zone.dustline": (-50, -40)},
+              "sec_top": 84, "sec_k1": 4.1, "node_w": 54, "node_h": 36,
               "sec_off": {"conn.scarp_saltpan_ne": -6, "conn.scarp_saltpan_sw": 6},
-              "sec_badge": {"elevator.shaft3": (0, 0), "conn.scarp_saltpan_ne": (0, -16), "conn.scarp_saltpan_sw": (0, 18), "conn.saltpan_frontier_east": (0, -16),
-                            "conn.frontier_east_dustline": (0, -16), "conn.frontier_east_dragon_lair": (16, 0), "conn.threshold_shallows": (0, -16),
-                            "conn.shallows_c3": (12, 8), "conn.c3_f2": (-18, 0), "conn.c3_f2_f3": (-18, 0),
+              "sec_badge": {"elevator.shaft3": (0, 0), "conn.scarp_saltpan_ne": (0, -16), "conn.scarp_saltpan_sw": (0, 18), "conn.saltpan_frontier_east": (-30, 18), "conn.floodlands_cellar": (-46, -4),
+                            "conn.frontier_east_dustline": (0, -16), "conn.frontier_east_dragon_lair": (-20, 0), "conn.threshold_shallows": (0, -16),
+                            "conn.shallows_c3": (-58, 0), "conn.c3_f2": (-18, 0), "conn.c3_f2_f3": (-18, 0),
                             "extraction.zone.excavation_c3_f3": (0, -30)}})
     if layout_only:
         return L
@@ -920,33 +1109,44 @@ def tall(lang, layout_only=False, section=True):
     W_ = 640
     # Telefono (2026-10-12): ventana mas cerrada sobre el corredor y tipos mas chicos; las etiquetas del corredor
     # Scarp-Threshold-Saltpan-Frontier-Dustline se reparten arriba/abajo para no pisarse.
-    win = (0.27, 0.26, 0.88, 0.81)
+    win = (0.30, 0.25, 0.955, 0.76)
     L = common_layout()
     L.update({"id": "t", "fs_zone": 14.5, "fs_planned": 11, "fs_grid": 12, "fs_title": 16, "fs_band": 12, "fs_node": 12, "fs_key": 16,
               "mark_r": 13, "plate": 14, "badge_r": 9, "step_r": 10.5, "svc": 13,
-              "labels": {"zone.outpost": (0, -44, "middle"), "zone.shallows": (16, -26, "middle"), "zone.excavation_c3": (18, -8, "start"),
-                         "zone.surface_scarp": (6, -32, "middle"), "zone.surface_saltpan": (0, 34, "middle"),
-                         "zone.frontier_road_east": (26, 18, "start"), "zone.dustline": (24, 34, "start"),
-                         "zone.threshold": (-6, 36, "middle"), "zone.dragon_lair": (0, 32, "middle"),
-                         "zone.excavation_c3_f2": (24, 5, "start"), "zone.excavation_c3_f3": (24, 5, "start")},
-              "step_off": {"zone.outpost": (-26, 14), "zone.threshold": (-24, -14), "zone.surface_scarp": (-28, -8),
-                           "zone.surface_saltpan": (-24, 12), "zone.frontier_road_east": (-26, -22), "zone.dustline": (26, -26)},
-              "badge_off": {"elevator.shaft3": (0, 0), "conn.scarp_saltpan_ne": (1.4, -1.8),
-                            "conn.scarp_saltpan_sw": (-1.6, 1.4), "conn.frontier_east_dragon_lair": (2.0, 0),
-                            "conn.c3_f2": (1.8, 0), "conn.c3_f2_f3": (1.8, 0), "extraction.zone.excavation_c3_f3": (-1.6, 0),
-                            "conn.saltpan_frontier_east": (0, -1.8), "conn.frontier_east_dustline": (2.0, 0.4), "conn.threshold_shallows": (-1.2, 0), "conn.shallows_c3": (-1.8, 0)},
+              "labels": {"zone.outpost": (-22, -2, "end", True), "zone.shallows": (-10, -35, "middle"), "zone.excavation_c3": (18, -8, "start"),
+                         "zone.surface_scarp": (-20, 12, "end"), "zone.surface_saltpan": (0, 34, "middle"),
+                         "zone.frontier_road_east": (30, 14, "start"), "zone.dustline": (24, 48, "start"),
+                         "zone.threshold": (-26, 40, "end", True), "zone.dragon_lair": (-40, 34, "middle"),
+                         "zone.excavation_c3_f2": (26, 22, "start"), "zone.excavation_c3_f3": (26, 56, "start", True),
+                         "zone.the_sump": (0, 34, "middle"), "zone.floodlands": (-44, -32, "middle"), "zone.robot_hideout_f1": (-20, -30, "middle"),
+                         "zone.castoff_hideout_f1": (24, 5, "start"), "zone.floodlands_cellar": (0, 32, "middle")},
+              "step_off": {"zone.outpost": (20, -26), "zone.threshold": (44, -14), "zone.surface_scarp": (-6, -30),
+                           "zone.surface_saltpan": (-26, 6), "zone.frontier_road_east": (20, -24), "zone.dustline": (-28, 10)},
+              "badge_off": {"elevator.shaft3": (3.4, 1.4), "conn.sump_hideout": (-3.0, 2.2), "conn.dustline_floodlands": (0, 0.6), "conn.floodlands_cellar": (4.0, -2.4), "conn.scarp_saltpan_ne": (1.4, -1.8),
+                            "conn.scarp_saltpan_sw": (-1.6, 1.4), "conn.frontier_east_dragon_lair": (-2.8, -0.8),
+                            "conn.c3_f2": (-3.4, -2.0), "conn.c3_f2_f3": (-3.4, 0.4), "extraction.zone.excavation_c3_f3": (-3.4, 4.6),
+                            "conn.saltpan_frontier_east": (0, -1.8), "conn.frontier_east_dustline": (2.4, 1.2), "conn.threshold_shallows": (-0.2, -1.2), "conn.shallows_c3": (0.6, 0),
+                            "conn.sump_frontier_east": (1.4, -1.6)},
               "fuel_label": (-14, 4, "end"),
-              "sec_top": 84, "sec_k1": 3.3, "node_w": 88, "node_h": 36,
+              "sec_top": 84, "sec_k1": 3.3, "node_w": 56, "node_h": 36,
               "sec_off": {"conn.scarp_saltpan_ne": -6, "conn.scarp_saltpan_sw": 6},
-              "sec_badge": {"elevator.shaft3": (0, 0), "conn.scarp_saltpan_ne": (0, -16), "conn.scarp_saltpan_sw": (0, 18), "conn.saltpan_frontier_east": (0, -16),
-                            "conn.frontier_east_dustline": (0, -16), "conn.frontier_east_dragon_lair": (16, 0), "conn.threshold_shallows": (0, -16),
-                            "conn.shallows_c3": (12, 8), "conn.c3_f2": (-18, 0), "conn.c3_f2_f3": (-18, 0),
+              "sec_badge": {"elevator.shaft3": (0, 0), "conn.scarp_saltpan_ne": (0, -16), "conn.scarp_saltpan_sw": (0, 18), "conn.saltpan_frontier_east": (-30, 18), "conn.floodlands_cellar": (-46, -4),
+                            "conn.frontier_east_dustline": (0, -16), "conn.frontier_east_dragon_lair": (-20, 0), "conn.threshold_shallows": (0, -16),
+                            "conn.shallows_c3": (-58, 0), "conn.c3_f2": (-18, 0), "conn.c3_f2_f3": (-18, 0),
                             "extraction.zone.excavation_c3_f3": (0, -30)}})
-    L["pos"].update({"zone.excavation_c3_f2": (0.44, 0.868), "zone.excavation_c3_f3": (0.44, 0.958), "zone.dragon_lair": (0.668, 0.592)})
+    L["labels"]["zone.floodlands_cellar"] = (12, 42, "middle")
+    L["plan_name"] = dict(L["plan_name"], **{"zone.floodlands_cellar": "Drowned\nCellar"})
+    L["fuel_label"] = (0, -16, "middle")
+    L["svc_off"] = dict(L["svc_off"], **{"zone.outpost": (34, 40)})
+    L["plan_name"] = dict(L["plan_name"], **{"zone.outpost": "Outpost", "zone.threshold": "Threshold"})
+    L["site_off"] = dict(L["site_off"], **{"zone.frontier_road_east": (24, -46)})
     if layout_only:
         return L
     pf = (12, 128, W_ - 24, 780)
-    P = Plan(*pf, *win, lens=(0.60, 0.52, 440, 1.4))
+    lens = (0.60, 0.52, 440, 1.4)
+    # 2026-10-24: el marco toma el alto que la ventana ocupa de verdad (la ventana es mas ancha que alta).
+    pf = (pf[0], pf[1], pf[2], min(pf[3], round(Plan(*pf, *win, lens=lens).used_h) + 24))
+    P = Plan(*pf, *win, lens=lens)
     sec_y = pf[1] + pf[3] + 40
     sec_h = 760 if section else 0
     key_y = sec_y + sec_h + (46 if section else 6)
@@ -973,14 +1173,15 @@ def section_inline(lang):
     """Dos SVG del corte para incrustar en la pagina Mundo (ancho de escritorio y alto de telefono), con data-zone en cada
     placa y data-a/data-b en cada pasaje. Los ids de <defs> llevan prefijo para no chocar con el mapa interactivo."""
     out = {}
-    for variant, (W_, H_, L) in {"w": (1180, 600, None), "t": (616, 700, None)}.items():
+    for variant, (W_, H_, L) in {"w": (1180, 700, None), "t": (616, 760, None)}.items():
         base = wide if variant == "w" else tall
         L = base(lang, layout_only=True)
         if variant == "w":
-            L.update({"sec_top": 66, "sec_k1": 2.15, "node_w": 124, "node_h": 38, "fs_node": 13.5, "fs_band": 11.5, "badge_r": 8.5,
-                      "sec_badge": dict(L["sec_badge"], **{"conn.frontier_east_dragon_lair": (-18, 0), "conn.shallows_c3": (10, 10)})})
+            L.update({"sec_top": 66, "sec_k1": 2.5, "node_w": 96, "node_h": 34, "fs_node": 13.5, "fs_band": 11.5, "badge_r": 8.5,
+                      "sec_badge": dict(L["sec_badge"], **{"conn.frontier_east_dragon_lair": (-18, 0), "conn.shallows_c3": (-74, 0),
+                                                         "extraction.zone.excavation_c3_f3": (0, 66), "conn.saltpan_frontier_east": (-70, 18)})})
         else:
-            L.update({"sec_top": 76, "sec_k1": 3.0})
+            L.update({"sec_top": 76, "sec_k1": 3.0, "sec_badge": dict(L["sec_badge"], **{"extraction.zone.excavation_c3_f3": (0, 62)})})
         svg = section_svg(0, 0, W_, H_, lang, L, live=True)
         defs = DEFS
         for i in INLINE_IDS:

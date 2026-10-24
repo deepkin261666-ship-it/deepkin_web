@@ -1,0 +1,12 @@
+{
+  "comment": "The Dustline house agent (2026-10-15, Phase 6, docs/INTERIORS.md \"The Dustline house\"). \"property\": houses and house upgrades from data/houses/houses.json, paid in carried coins (TradeCommand BUY_PROPERTY) and recorded in the buyer's house record; nothing enters the cargo. Provisional balance (decision 7: house 10 000, terminal upgrade 5 000).",
+  "shops": {
+    "npc.dustline_house_agent": {
+      "goods": [],
+      "property": [
+        {"id": "house.dustline", "buy": 10000},
+        {"id": "house.dustline.terminal", "buy": 5000}
+      ]
+    }
+  }
+}

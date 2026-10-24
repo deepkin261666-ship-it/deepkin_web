@@ -1,0 +1,12 @@
+{
+  "id": "item.ammunition.synapse_dart",
+  "display_name": "Synapse Dart",
+  "description": "A living dart for Synapse Carbines. It wounds an enemy and mends an operator: aim it at an ally to heal them.",
+  "ammo_family": "synapse",
+  "properties": {
+    "ammo_multiplier": 1.0,
+    "ally_heal": 8,
+    "stack_size": 100
+  },
+  "weight": 0.02
+}

@@ -1,0 +1,127 @@
+{
+  "id": "npc.rustbound_skirmisher",
+  "display_name": "Haze Skirmisher",
+  "max_health": 320,
+  "movement_speed": 2.2,
+  "detection_range": 13.0,
+  "attack_range": 2.2,
+  "attack_damage": 14,
+  "attack_cooldown": 1.6,
+  "faction": "faction.rustbound",
+  "species": "Haze Skirmisher",
+  "role": "skirmisher",
+  "archetype": "ranged",
+  "tier": "elite",
+  "threat": 12,
+  "xp": 280,
+  "coins": [
+    24,
+    55
+  ],
+  "habitat": "The Pump Works, the Robot hideout under the Sump (floor 3)",
+  "lore": "A light combat mech from a VDI security contract. Plasma caster on one arm, a rotary cutter on the other. Provisional lore.",
+  "verbs": [
+    "STRIDE",
+    "PLASMA",
+    "SWEEP",
+    "HOLD THE LINE"
+  ],
+  "rules": [
+    "At range it charges its plasma caster along a long glowing line: sidestep it, or break line of sight.",
+    "Close in, the rotary cutter sweeps a wide arc in front of it.",
+    "It does not leave its hall."
+  ],
+  "perception": {
+    "aggro_radius": 10.0,
+    "memory_seconds": 6.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      2.0,
+      7.0
+    ],
+    "leash_radius": 18.0,
+    "lure": "territorial",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "plasma",
+      "name": "Plasma Caster",
+      "shape": "line",
+      "damage": 18,
+      "windup": 0.9,
+      "range": 12.0,
+      "width": 1.2,
+      "cooldown": 5.0,
+      "min_range": 3.0,
+      "trigger_range": 12.0,
+      "los": true,
+      "recovery": 0.5
+    },
+    {
+      "id": "cutter",
+      "name": "Rotary Cutter",
+      "shape": "cone",
+      "damage": 16,
+      "windup": 0.7,
+      "radius": 4.0,
+      "half_angle": 55.0,
+      "cooldown": 6.0,
+      "trigger_range": 3.4,
+      "recovery": 0.6
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/rustbound/skirmisher.glb",
+    "size": 2.5,
+    "fit": "height",
+    "gait": "stomp",
+    "mouth": [
+      0.6,
+      1.6,
+      -0.8
+    ],
+    "yaw": 0,
+    "tint": "ffffff",
+    "metallic": 0.35,
+    "roughness": 0.55
+  },
+  "body_radius": 0.7,
+  "loot": [
+    {
+      "item": "item.scrap_component",
+      "quantity": [
+        2,
+        3
+      ],
+      "chance": 0.7
+    },
+    {
+      "item": "item.ammunition.hardened_round",
+      "quantity": [
+        3,
+        8
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.15
+    },
+    {
+      "item": "item.component.servo_core",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.12
+    }
+  ]
+}

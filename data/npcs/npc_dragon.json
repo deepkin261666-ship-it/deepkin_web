@@ -3,7 +3,7 @@
   "display_name": "Dragon",
   "max_health": 280,
   "movement_speed": 3.4,
-  "detection_range": 12.0,
+  "detection_range": 18.0,
   "attack_range": 2.4,
   "attack_damage": 6,
   "attack_cooldown": 1.5,
@@ -12,6 +12,7 @@
   "role": "skirmisher",
   "archetype": "predator",
   "tier": "normal",
+  "hunt_tier": 4,
   "threat": 8,
   "xp": 220,
   "coins": [
@@ -36,8 +37,8 @@
     "Leave it alone and it stops to lick its wounds: keep hitting it and the healing never comes."
   ],
   "perception": {
-    "aggro_radius": 9.0,
-    "memory_seconds": 6.0,
+    "aggro_radius": 14.0,
+    "memory_seconds": 8.0,
     "call_radius": 0.0
   },
   "movement": {
@@ -45,7 +46,7 @@
       0.0,
       2.2
     ],
-    "leash_radius": 20.0,
+    "leash_radius": 28.0,
     "lure": "predator",
     "retreat_health": 0.0,
     "retreat_seconds": 0.0

@@ -1,0 +1,106 @@
+{
+  "id": "npc.rustbound_drone",
+  "display_name": "War Drone",
+  "max_health": 90,
+  "movement_speed": 3.2,
+  "detection_range": 13.0,
+  "attack_range": 1.5,
+  "attack_damage": 5,
+  "attack_cooldown": 1.2,
+  "faction": "faction.rustbound",
+  "species": "War Drone",
+  "role": "ranged",
+  "archetype": "ranged",
+  "tier": "normal",
+  "threat": 5,
+  "xp": 100,
+  "coins": [
+    8,
+    18
+  ],
+  "habitat": "The Sump (around the drowned pump station) and the Pump Works floor 2",
+  "lore": "A gun drone on a patrol loop its controller stopped updating years ago. It keeps its distance and fires bursts. Provisional lore.",
+  "verbs": [
+    "HOVER",
+    "KEEP DISTANCE",
+    "BURST",
+    "PATROL"
+  ],
+  "rules": [
+    "It hangs back and fires a burst along a glowing line: step off the line or put a wall between you.",
+    "It needs a clear line to shoot: pillars and crates block it.",
+    "Fragile: close the distance and it goes down fast."
+  ],
+  "perception": {
+    "aggro_radius": 11.0,
+    "memory_seconds": 6.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      5.0,
+      9.0
+    ],
+    "leash_radius": 22.0,
+    "lure": "predator",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "burst",
+      "name": "Burst",
+      "shape": "line",
+      "damage": 12,
+      "windup": 0.8,
+      "range": 11.0,
+      "width": 0.8,
+      "cooldown": 3.2,
+      "min_range": 2.5,
+      "trigger_range": 11.0,
+      "los": true,
+      "recovery": 0.3
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/rustbound/drone.glb",
+    "size": 1.1,
+    "gait": "hover",
+    "hover": 1.5,
+    "mouth": [
+      0.0,
+      0.0,
+      -0.6
+    ],
+    "yaw": 0,
+    "tint": "ffffff",
+    "metallic": 0.35,
+    "roughness": 0.55
+  },
+  "loot": [
+    {
+      "item": "item.scrap_component",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.5
+    },
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        4,
+        10
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.component.servo_core",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.05
+    }
+  ]
+}

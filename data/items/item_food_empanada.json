@@ -1,0 +1,13 @@
+{
+  "id": "item.food.empanada",
+  "display_name": "Empanada",
+  "category": "food",
+  "description": "A baked half-moon of dough around spiced meat, still warm from Auntie Rhea's oven. Eat it to restore 60 health over 20 seconds; one meal at a time. Nobody asks what the meat was.",
+  "visual_id": "visual.food.empanada",
+  "properties": {
+    "heal_amount": 60,
+    "heal_seconds": 20.0,
+    "stack_size": 10
+  },
+  "weight": 0.25
+}

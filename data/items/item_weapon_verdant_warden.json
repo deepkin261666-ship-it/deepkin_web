@@ -2,7 +2,7 @@
   "id": "item.weapon.verdant_warden",
   "display_name": "Synapse Carbine",
   "equipment_slot": "primary_weapon",
-  "description": "A bio-mechanical carbine grown around living tissue; fires charged spores from range while the Warden keeps the team standing.",
+  "description": "A bio-mechanical carbine grown around living tissue; fires synapse darts that wound enemies and mend allies, keeping the team standing.",
   "visual_id": "visual.weapon.verdant_warden",
   "weapon_type": "ranged",
   "weapon_family": "skill.vitalism",
@@ -17,6 +17,6 @@
     "illumination_radius": 0.0,
     "attack_interval": 1.0
   },
-  "ammo_item_id": "item.ammunition.field_round",
+  "ammo_item_id": "item.ammunition.synapse_dart",
   "weight": 3.5
 }

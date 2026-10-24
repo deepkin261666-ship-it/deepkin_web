@@ -16,6 +16,13 @@ import worldmap as WM
 from i18n import ATTRS, CLASSES as CLASS_TXT, FACTION as FACTION_TXT, FAMILIES, FAMILY_DESC, ITEM_EN_FALLBACK, ITEM_ES, SLOTS, L
 from i18n import MOBS as MOB_TXT
 from wiki_i18n import (ABILITY_SHAPE, BILLBOARDS, CATS, FACTION_ES, LURE, MOB_ES, MOB_SHOTS, OWN_SERVICE, POSE, QUEST_ES, ROLES, SERVICE_STALL, SIGN_DISTRICT, W)
+from wiki_es_p8 import FACTION_ES_P8, ITEM_ES_P8, MOB_ES_P8, QUEST_ES_P8
+
+# Fase 8 (2026-10-23): textos en español del contenido nuevo (src/wiki_es_p8.py).
+ITEM_ES.update(ITEM_ES_P8)
+MOB_ES.update(MOB_ES_P8)
+FACTION_ES.update(FACTION_ES_P8)
+QUEST_ES.update(QUEST_ES_P8)
 
 
 def role_name(r, lang):
@@ -230,7 +237,9 @@ def rides_through(tr):
         return True
     if "vehicles" in tr:
         return bool(tr["vehicles"])
-    return tr.get("presentation") not in ("stairs", "ladder", "rope")
+    # Puertas (casas, 2026-10-23): fuera de la lista de pasajes para vehiculos, igual que en el juego.
+    pr = tr.get("presentation") or ""
+    return pr == "" or pr in ("tunnel", "lift", "gate", "elevator")
 
 
 def _aliases():
@@ -681,6 +690,9 @@ def item_page(it, lang):
             else:
                 lis.append(f'{img(cid, "wk-ticon", 40)}{lk(cid)}' + (f" ×{n(q, lang)}" if q > 1 else ""))
         body += sec("contents", t("contents", lang), f'<p>{e(t("crate_note", lang))}</p>' + ul(lis, "wk-list wk-items"))
+    # Comercio y ejecuciones (Fase 8, 2026-10-23: wiki_mech.py)
+    import wiki_mech as MX
+    body += MX.item_trade_section(it, lang) + MX.execution_section(it, lang)
     # Para que sirve
     body += sec("used-for", t("used_for", lang), ul(used_for(it, lang)))
     # Mencionado por
@@ -697,7 +709,7 @@ def item_page(it, lang):
         extra.append(f'<a href="currency.html">{e(t("m_currency", lang))}</a>')
     if iid == G.DEATH.get("REMAINS_ITEM_ID") or cat == "backpack":
         extra.append(f'<a href="death.html">{e(t("m_death", lang))}</a>')
-    body += seealso(lang, same + extra)
+    body += seealso(lang, same + extra + MX.item_mech_links(it, lang))
     trail = [(t("items", lang), "items.html"), (CATS[cat][lang], f"items.html#cat-{cat}"), (it["display_name"], None)]
     kicker = e(CATS[cat][lang]) + (" · " + e(SLOTS[slot][lang]) if slot in SLOTS else "") + tag_status(it.get("planned"), lang)
     return article(lang, trail, kicker, it["display_name"], "", box, body, secs_toc(body))
@@ -715,7 +727,10 @@ def used_for(it, lang):
     cat = item_cat(iid)
     out = []
     if cat == "ammunition":
-        ws = [w for w in ITEMS.values() if w.get("weapon_type") == "ranged"]
+        # Familias de municion (2026-10-13): cada arma dispara solo la familia de su ammo_item_id.
+        fam = it.get("ammo_family", "rounds")
+        ws = [w for w in ITEMS.values() if w.get("weapon_type") == "ranged" and w.get("ammo_item_id") in ITEMS
+              and ITEMS[w["ammo_item_id"]].get("ammo_family", "rounds") == fam]
         out.append(t("ammo_used", lang) + " " + ", ".join(lk(w["id"]) for w in ws))
     if cat == "battery":
         out.append(t("battery_used", lang, cost=n(G.COMBAT.get("ABILITY_ENERGY_COST", 15), lang), dash=n(G.COMBAT.get("DASH_ENERGY_COST", 6), lang))
@@ -1002,6 +1017,8 @@ def faction_page(f, lang):
             for m in members) + "</div>")
     elif f.get("status") == "planned":
         body += f'<p class="wk-note">{e(t("faction_planned", lang))}</p>'
+    import wiki_mech as MX
+    body += MX.faction_planned_section(fid, lang)  # droides planeados (2026-10-23)
     body += seealso(lang, [lk(o) for o in FACTIONS if o != fid] + [f'<a href="creatures.html">{e(t("creatures", lang))}</a>'])
     return article(lang, [(t("creatures", lang), "creatures.html"), (t("factions", lang), "creatures.html#factions"), (f["name"], None)],
                    e(t("faction", lang)) + tag_status(f.get("status") == "planned", lang), f["name"], "", box, body, secs_toc(body))
@@ -1087,6 +1104,8 @@ def person_page(p, lang):
                 if not (s == "service.depot" and any("computers.html" in x for x in services))]
     if svc:
         body += sec("services", t("services", lang), ul(svc) + (f'<p class="wk-note">{e(t("services_note", lang))}</p>' if p.get("zone") == city.get("zone") else ""))
+    import wiki_mech as MX
+    body += MX.person_trade_section(p, lang)  # lo que vende y compra (data/shops, 2026-10-23)
     # Menciona
     ment = sorted({u_ for x in lines for u_ in mentions(x)} - {url})
     if ment:
@@ -1602,43 +1621,7 @@ def page_classes(lang):
     return mech_article(lang, "classes", t("classes_lead", lang), body)
 
 
-def page_vehicles(lang):
-    body = ""
-    box = ""
-    for v in VEHICLES:
-        rows = [(t("seats", lang), n(v["seats"], lang)), (t("max_speed", lang), n(v["max_speed"], lang) + " m/s"),
-                (t("accel", lang), n(v["acceleration"], lang) + " m/s²"), (t("decel", lang), n(v["deceleration"], lang) + " m/s²"),
-                (t("turn", lang), n(v["turn_rate"], lang) + " rad/s"), (t("fuel", lang), f'{n(v["starting_fuel"], lang)} / {n(v["max_fuel"], lang)}'),
-                (t("fuel_per_m", lang), n(v["fuel_per_meter"], lang)), (t("range_start", lang), "≈ " + n(v["starting_fuel"] / v["fuel_per_meter"], lang) + " m"),
-                (t("range_full", lang), "≈ " + n(v["max_fuel"] / v["fuel_per_meter"], lang) + " m"),
-                (t("low_fuel", lang), pct(v["low_fuel_fraction"], lang)), (t("durability", lang), n(v["max_durability"], lang)),
-                (t("mount_range", lang), n(v["mount_range"], lang) + " m"), ("ID", f'<code>{e(v["id"])}</code>')]
-        box = infobox(v["display_name"], '<img class="wk-icon" src="../../assets/img/concept/machine_mule.jpg" alt="" loading="lazy">', rows)
-        lis = [t("v_get", lang), t("v_controls", lang, r=n(v["mount_range"], lang)), t("v_fuel", lang, f=n(v["fuel_per_meter"], lang), m=n(1 / v["fuel_per_meter"], lang)),
-               t("v_empty", lang, low=pct(v["low_fuel_fraction"], lang)), t("v_rules", lang), t("v_owner", lang)]
-        body += sec("rules", t("v_rules_t", lang), ul([e(x) for x in lis]))
-        can = ITEMS.get("item.fuel.gas_can", {})
-        cap = can.get("properties", {}).get("fuel_capacity", 20)
-        body += sec("refuel", t("refuel_t", lang), f'<p>{e(t("v_refuel", lang))}</p>'
-                    + ul([f'{lk(st["zone_id"])}: <b>{e(st["name"])}</b> · {n(st["price_per_litre"], lang)} Metal/L · '
-                          f'{e(t("fill_cost", lang))} ≈ {n(math.ceil(v["max_fuel"] * st["price_per_litre"]), lang)} Metal' for st in FUEL_STATIONS]
-                         + [f'{lk("item.fuel.gas_can")}: {n(cap, lang)} L ≈ {n(cap / v["fuel_per_meter"], lang)} m']) 
-                    + f'<p><a class="btn" href="fuel.html">{e(t("m_fuel", lang))}</a></p>')
-        kinds = {}
-        for tr in REGION.get("transitions", []):
-            if tr.get("from_zone") not in ZONES or ZONES[tr["from_zone"]]["status"] != "playable":
-                continue
-            kinds.setdefault(tr.get("presentation") or "road", []).append(tr["label"])
-        # Elevadores de varias paradas (2026-10-13): sus paradas no estan en "transitions" (el juego las expande al cargar).
-        for el in REGION.get("elevators", []):
-            kinds.setdefault("elevator", []).extend(f["label"] for f in el["floors"])
-        prow = [[e(t("pr_" + k, lang)), e(t("ride_yes", lang)) if rides_through({"presentation": k} if k != "road" else None) else e(t("ride_no", lang)),
-                 " ".join(f'<span class="wk-sign">{e(x)}</span>' for x in labels[:4])] for k, labels in sorted(kinds.items())]
-        body += sec("passages", t("v_passages_t", lang), f'<p>{e(t("v_zone", lang))}</p><p>{e(t("v_pass_lead", lang))}</p>'
-                    + table([(t("passage", lang), "text"), (t("with_bike", lang), "text"), (t("examples", lang), "text")], prow, sortable=False, cls="wrap-cells"))
-        body += sec("planned", t("soon", lang), ul([e(x) for x in W["v_planned"][lang]]))
-    body += seealso(lang, [f'<a href="fuel.html">{e(t("m_fuel", lang))}</a>', lk("item.fuel.gas_can"), f'<a href="../world.html#machines">{e(t("excavators", lang))}</a>', lk("zone.frontier_road_east")])
-    return mech_article(lang, "vehicles", t("vehicles_lead", lang), body, box)
+# page_vehicles vive en wiki_mech.py desde 2026-10-23 (dos motos, el taller, la grua y el baul).
 
 
 def page_currency(lang):
@@ -1796,6 +1779,7 @@ def search_index(lang):
 # =================================================================================================================
 def build(page):
     """page = build.page; escribe en/wiki y es/wiki. Devuelve la cantidad de paginas por idioma."""
+    import wiki_mech as MX  # Fase 8 (2026-10-23): registra las mecanicas nuevas en MECH y W antes de la portada
     count = 0
     for lang in ("en", "es"):
         os.makedirs(os.path.join(ROOT, lang, "wiki"), exist_ok=True)
@@ -1822,7 +1806,8 @@ def build(page):
         for q in QUESTS:
             out[S.quest(q["id"])[5:-5]] = (q["title"].title(), quest_page(q, lang), None)
         builders = {"experience": page_experience, "death": page_death, "skills": page_skills, "classes": page_classes,
-                    "vehicles": page_vehicles, "currency": page_currency, "fuel": page_fuel, "computers": page_computers}
+                    "currency": page_currency, "fuel": page_fuel, "computers": page_computers}
+        builders.update(MX.BUILDERS)  # vehiculos, grupo, drones, casas, excavaciones, contratos, comercio, comida, registros, municion, baterias
         for k, fn in builders.items():
             out[k] = (t(MECH[k], lang), fn(lang), None)
         for slug, (title, body, desc) in out.items():

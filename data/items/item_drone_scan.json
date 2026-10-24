@@ -1,0 +1,30 @@
+{
+  "id": "item.drone.scan",
+  "display_name": "Mule Scan Drone",
+  "category": "drone",
+  "description": "A heavy, cheap survey quad with a bulky sensor pod. Launch it and stand still at its laptop: you fly it with your movement keys and the camera follows it up to 30 m away, while its radar (18 m around it) marks terrain, ore and hostiles for you and your party. Moving or getting hit drops the link and it flies home. Draws 0.5 energy a second from your worn cell, 90 seconds a flight. Needs Tech 2. Relay Nine stock; Rask sells it in Dustline.",
+  "visual_id": "visual.drone.scan",
+  "gear_tier": 1,
+  "requirements": {
+    "minimum_skills": {
+      "skill.tech": 2
+    }
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "drone": {
+    "function": "scan",
+    "energy_per_second": 0.5,
+    "duration": 90,
+    "hover_height": 4.0,
+    "follow_offset": [
+      1.0,
+      1.0
+    ],
+    "speed": 5.0,
+    "control_range": 30.0,
+    "scan_radius": 18.0
+  },
+  "weight": 3.6
+}

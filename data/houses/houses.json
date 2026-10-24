@@ -1,0 +1,21 @@
+{
+  "comment": "Player houses (2026-10-15, Phase 6, docs/INTERIORS.md \"The Dustline house\"). A house is a private first-person interior: \"zone\" is the instanced interior zone (floor key \"interior\" with \"instance\": \"owner\"), \"door\" the passage in the city that only its owner may take. \"upgrades\": what the house agent installs (prices in data/shops, \"property\"). \"mounts\": wall slots where the owner hangs items from the cargo (position = the slot centre in metres local to the zone's anchor, yaw = degrees the slot faces into the room, 0 = toward +Z); mounted items stay the owner's and come back with TAKE.",
+  "houses": {
+    "house.dustline": {
+      "name": "Dustline Container Apartment",
+      "zone": "zone.dustline_house",
+      "door": 760,
+      "upgrades": {
+        "house.dustline.terminal": {"name": "261.6.66 Terminal", "computer": "computer.house.dustline"}
+      },
+      "mounts": [
+        {"id": "mount.dustline.left_a", "label": "Rack · left wall", "position": [-2.3, 1.55, 0.2], "yaw": 90.0},
+        {"id": "mount.dustline.left_b", "label": "Rack · over the desk", "position": [-2.3, 1.55, -1.6], "yaw": 90.0},
+        {"id": "mount.dustline.end_a", "label": "Hook · end wall left", "position": [-1.55, 1.55, -3.93], "yaw": 0.0},
+        {"id": "mount.dustline.end_b", "label": "Hook · end wall right", "position": [1.55, 1.55, -3.93], "yaw": 0.0},
+        {"id": "mount.dustline.back_a", "label": "Shelf · by the bed", "position": [1.0, 1.55, 3.28], "yaw": 180.0},
+        {"id": "mount.dustline.back_b", "label": "Shelf · by the light", "position": [2.1, 1.55, 3.28], "yaw": 180.0}
+      ]
+    }
+  }
+}

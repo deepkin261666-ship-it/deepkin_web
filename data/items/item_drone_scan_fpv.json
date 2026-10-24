@@ -1,0 +1,30 @@
+{
+  "id": "item.drone.scan_fpv",
+  "display_name": "Wren Scan Drone",
+  "category": "drone",
+  "description": "A quick racing-frame quad refitted with a survey sensor. Launch it and stand still at its laptop: you fly it with your movement keys and the camera follows it up to 40 m away, while its radar (24 m around it) marks terrain, ore and hostiles for you and your party. Moving or getting hit drops the link and it flies home. Draws 0.45 energy a second from your worn cell, two minutes a flight. Needs Tech 3. Relay Nine stock; Rask sells it in Dustline.",
+  "visual_id": "visual.drone.scan_fpv",
+  "gear_tier": 1,
+  "requirements": {
+    "minimum_skills": {
+      "skill.tech": 3
+    }
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "drone": {
+    "function": "scan",
+    "energy_per_second": 0.45,
+    "duration": 120,
+    "hover_height": 4.5,
+    "follow_offset": [
+      1.0,
+      1.0
+    ],
+    "speed": 8.0,
+    "control_range": 40.0,
+    "scan_radius": 24.0
+  },
+  "weight": 1.5
+}

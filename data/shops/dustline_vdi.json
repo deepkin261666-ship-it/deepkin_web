@@ -1,0 +1,10 @@
+{
+  "comment": "The VDI agent (2026-10-15, Phase 7, docs/EXCAVATIONS.md): Vantage Deep Industries sells the Expedition Service in every city (Dustline first). Price per decision 7 (provisional). The first one is free through the tutorial contract (data/quests/quest_vdi_expedition.json).",
+  "shops": {
+    "npc.dustline_vdi_agent": {
+      "goods": [
+        {"item": "item.service.expedition_service", "buy": 10000}
+      ]
+    }
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "comment": "Ambient talk for Dustline and Frontier Road east (2026-10-09). Keys are the stable ids on the floors' workers (tools/author_dustline.py); E opens one random line per conversation. Dustline's voice: everything has a price, nobody is what they seem. Services (trade, repair, contracts, lodging) are not implemented yet: lines point at them in-world without promising mechanics. Lore stays provisional: docs/design/DUSTLINE.md.",
+  "comment": "Ambient talk for Dustline and Frontier Road east (2026-10-09). Keys are the stable ids on the floors' workers (tools/author_dustline.py); E opens one random line per conversation. Dustline's voice: everything has a price, nobody is what they seem. Trade is live for the traders in data/shops/dustline.json (Phase 3a, 2026-10-13); other services (repair, lodging) are not implemented yet: lines point at them in-world without promising mechanics. Lore stays provisional: docs/design/DUSTLINE.md.",
   "speakers": {
     "npc.dustline_gate_guard": {
       "name": "VOSS  ·  GATE GUARD",
@@ -25,7 +25,7 @@
       "name": "OLD TALLOW  ·  CARAVAN MASTER",
       "lines": [
         "Saltpan, the Scarp, back down to the Outpost. That's the only route I'd sell you a seat on today.",
-        "The Floodlands road washed out. East Gate stays shut until somebody pays to dig it clear.",
+        "East Gate's open again. Somebody paid to dig the Floodlands road clear. Nobody says who, and nobody says why.",
         "Escorts earn more than haulers and die more often. The board in the market has both kinds of work.",
         "A caravan is a promise with wheels. Most of them break somewhere between here and the shaft.",
         "Every map on that board is wrong somewhere. Mine are wrong in fewer places. That's why they cost more."
@@ -43,10 +43,11 @@
     "npc.dustline_trader_food": {
       "name": "AUNTIE RHEA  ·  FOOD & WATER",
       "lines": [
-        "Water's clean, mostly. Rations are dry, always. Price depends on how thirsty you look.",
+        "Empanadas, hot from the drum oven. Six Metal. Eat one and sit a while — it works slower than a capsule and costs a quarter.",
         "Shelves fill up when the caravans come in. Come back with coin and I'll have something worth it.",
         "You came up from the Outpost? Then you've never eaten anything that grew in daylight. Neither have I.",
         "Haggle all you like, dear. I've been doing this longer than you've been breathing dust.",
+        "One at a time. Your stomach doesn't care how much coin you carry.",
         "Everything has a price. Bread just happens to be one most people can afford."
       ]
     },
@@ -73,18 +74,19 @@
     "npc.dustline_trader_general": {
       "name": "SAM  ·  BUYS ANYTHING",
       "lines": [
-        "I buy what you dragged up and sell it to the next fool who needs it. Margins are the whole religion.",
+        "Lanterns and packs. Simple, Storm, Brass — the deeper you go, the more light you'll wish you'd bought.",
+        "A Storm Lantern keeps burning in the wet. A Brass throws wide. Both drink your cell faster than the cheap one.",
         "Bring me salvage, relics, ore — I'll name a number. You'll hate it. You'll take it.",
         "Scrap goes to Nell down the Row; she pays by weight. I pay by how badly someone else wants it.",
-        "Everybody in Dustline is a trader. Some of us just admit it.",
-        "Prices change when the caravans arrive. Sell before they do."
+        "I buy them back too. For less. Margins are the whole religion.",
+        "Everybody in Dustline is a trader. Some of us just admit it."
       ]
     },
     "npc.dustline_board_keeper": {
       "name": "LISTER  ·  CONTRACT BOARD",
       "lines": [
         "Hauls, bounties, escorts. Read the board, pick a paper, don't come back empty-handed.",
-        "No contracts posted for newcomers yet. The Exchange decides who's worth paying.",
+        "Contracts pay in crypto, on a drive. Coin clinks; drives don't. The Exchange decides who's worth paying.",
         "Somebody wants a crate brought back from the Saltpan convoy. Somebody else wants it to stay lost.",
         "Bounty on the raiders by the salt works. Pays in coin, not in thanks.",
         "I don't write the jobs. I just pin them up and take a cut. Everyone takes a cut."
@@ -123,9 +125,9 @@
     "npc.dustline_east_guard": {
       "name": "EAST GATE GUARD",
       "lines": [
-        "Gate's shut. Floodlands road washed out and nobody's paid to clear it.",
-        "Past this gate it's water, mud and things that like both. Be glad it's closed.",
-        "When it opens, it'll cost you. Everything opens for a price.",
+        "Gate's open. The road runs out to the cliff and the doors at the end of it. Past those it's the Floodlands.",
+        "Past those doors it's water, mud and things that like both. Don't come back here wet and complaining.",
+        "Leaving's free. Coming back with something the Exchange wants, that costs. Everything has a price.",
         "Caravans bound east wait in the Yard. They've been waiting a while."
       ]
     },
@@ -179,14 +181,48 @@
     "npc.dustline_weapons_merchant": {
       "name": "RASK  ·  WEAPONS MERCHANT",
       "services": [
-        "weapons (coming soon)"
+        "weapons (Tier I)",
+        "buys armour (Tier I)",
+        "drones (not yet)"
       ],
       "lines": [
-        "Rifles, blades, a launcher if you ask nicely. Not today, though. Today I'm only showing.",
-        "Stock's still on the road behind me. When it lands, you'll want to be first in line — and carrying coin.",
-        "Everything in this car shoots, cuts or burns. Everything has a price. Mine's just higher.",
+        "Every first-tier piece on the frontier, cut, blunt or loaded. Pick one. Everything has a price. Mine's just higher.",
+        "I sell weapons. I don't buy them back — I buy armour. Leather, plate, helmets. A dead man's jacket still keeps out the wind.",
+        "Twin Blades, fresh off the caravan. Two hands, two edges, no patience.",
         "Don't touch the railgun. You can't afford to look at it twice.",
-        "Come back when the Exchange lets me open the back of this thing. Weapons, soon. Talk is free."
+        "Drones are still on the road behind me. When they land, you'll want to be first in line — and carrying coin."
+      ]
+    },
+    "npc.dustline_alchemist": {
+      "name": "VESKO  ·  ALCHEMIST",
+      "lines": [
+        "Spores for the ones you want slow, darts for the friends you want standing. Same price either way: more than you hoped.",
+        "Don't sniff the green ones. The green ones sniff back.",
+        "A Virulent Cartridge keeps working after you've stopped. That's what you're paying for.",
+        "The Surge stitches your crew up when you hit the thing hurting them. Aim is part of the medicine.",
+        "Car tyres. Wood wheels cracked on the salt. The cart and I have both had parts replaced.",
+        "Bring me a dead cell and a shard of Lumenita. Thirty Metal and the light goes back in. Don't ask how."
+      ]
+    },
+    "npc.dustline_trader_cells": {
+      "name": "PELL  ·  CAPSULES & CELLS",
+      "lines": [
+        "Capsules for the body, cells for the lamp. Both run out at the worst moment. That's why I'm in business.",
+        "A new cell is two hundred and fifty. Vesko will fill a dead one for thirty and a shard of Lumenita. I know. Buy from me when you can't find the shard.",
+        "Six fresh cells a haul, no more. The caravans carry water first and light second.",
+        "Crack a capsule against the skin, not the teeth. You'd be surprised.",
+        "I don't buy back. Whatever you bring me has already been someone's last hope."
+      ]
+    },
+    "npc.dustline_bike_dealer": {
+      "name": "OKSANA  ·  BIKE SHOP",
+      "lines": [
+        "Two wheels or two wheels with boxes. Both cost more than walking. Walking costs more than you think.",
+        "The cargo bike's slower and thirstier. It also brings home what you went out for.",
+        "Ran dry out past the gate? My crane hauls it back. Thirty in the hundred of what it's worth, coins on the counter.",
+        "I don't take the bank's word for anything. Coins, here, in my hand.",
+        "That one on the wall? First bike I ever fixed. It doesn't run. Neither did I, back then.",
+        "Every bike I sell comes back on the hook sooner or later. I make money both ways."
       ]
     }
   }

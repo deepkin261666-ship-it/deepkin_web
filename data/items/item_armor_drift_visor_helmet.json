@@ -1,0 +1,20 @@
+{
+  "id": "item.armor.drift_visor_helmet",
+  "display_name": "Pathfinder Visor",
+  "equipment_slot": "head",
+  "description": "A long-range scout helmet with a gold heads-up visor, scuffed from a hundred surface runs. Tier III. Not issued yet.",
+  "visual_id": "visual.armor.drift_visor_helmet",
+  "gear_tier": 3,
+  "requirements": {
+    "minimum_level": 20,
+    "class_ids": [
+      "class.drift"
+    ]
+  },
+  "properties": {
+    "armor_defense": 10,
+    "resistance_bonus": 4
+  },
+  "weight": 2.4,
+  "planned": true
+}

@@ -6,6 +6,7 @@
   "role": "skirmisher",
   "archetype": "skirmisher",
   "tier": "normal",
+  "hunt_tier": 1,
   "max_health": 30,
   "movement_speed": 2.0,
   "detection_range": 8.0,

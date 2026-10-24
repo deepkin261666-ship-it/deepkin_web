@@ -1,0 +1,39 @@
+{
+  "id": "quest.vdi_expedition",
+  "version": 1,
+  "title": "WHERE THE WORLD ENDS",
+  "giver": "npc.dustline_vdi_agent",
+  "offer": {
+    "text": "Operator. Vantage Deep Industries extends a trial contract: one Expedition Service, no charge. Use it on open ground and a VDI drillship comes down for you. Terms: you report the result.",
+    "accept": "I'll take the trial.",
+    "decline": "Not now."
+  },
+  "reward": {
+    "xp": 150
+  },
+  "steps": [
+    {
+      "id": "issue",
+      "objective": "Collect the trial Expedition Service from the VDI agent",
+      "goal": {"type": "talk_to", "target": "npc.dustline_vdi_agent"},
+      "highlight": {"npc": "npc.dustline_vdi_agent"},
+      "lines": "Issuing one Expedition Service. It is a tablet; keep it in your cargo. It is spent when the ship is called.",
+      "grant": {"items": [{"item": "item.service.expedition_service", "quantity": 1}]},
+      "reply": "Hand it over."
+    },
+    {
+      "id": "call_out",
+      "objective": "Call the drillship at the VDI survey clearing on Frontier Road, south of Dustline",
+      "goal": {"type": "call_out", "target": "zone.frontier_road_east"},
+      "lines": "Leave by the Frontier Gate and walk south onto Frontier Road. VDI keeps a survey clearing off the bay by the Dustline gate, past the Castoff stair pit; the board marks it. Any open ground off the road would do, away from gates, wrecks and stair pits. Use the Expedition Service there (double-click it, or put it on a hotkey). The ship lands thirteen metres ahead of you. Do not stand under it."
+    },
+    {
+      "id": "report",
+      "objective": "Report the call-out to the VDI agent in Dustline",
+      "goal": {"type": "talk_to", "target": "npc.dustline_vdi_agent"},
+      "highlight": {"npc": "npc.dustline_vdi_agent"},
+      "lines": "Call-out logged. The ship is yours while it stands: its door opens to the control room, the terminal by the door runs the bore. Load batteries and gas cans before you go deep. Further Expedition Services: ten thousand Metal, at this unit.",
+      "reply": "It's down. It's mine."
+    }
+  ]
+}

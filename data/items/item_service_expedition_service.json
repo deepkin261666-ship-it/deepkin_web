@@ -1,0 +1,12 @@
+{
+  "id": "item.service.expedition_service",
+  "display_name": "Expedition Service",
+  "category": "excavation",
+  "description": "A Vantage Deep Industries field tablet with one paid excavation on it. Use it on open ground of a wild map (not on a road, in a settlement or near a passage) and a VDI drillship comes down from the sky a few seconds later, thirteen metres ahead of you. You are its Owner: walk through its door, run the VDI Excavation software at the terminal, load batteries and gas cans into its reserves and take it down, floor by floor. \"We go where the world ends.\" Spent when the ship is called.",
+  "visual_id": "visual.service.expedition_service",
+  "gear_tier": 1,
+  "properties": {
+    "stack_size": 1
+  },
+  "weight": 0.6
+}

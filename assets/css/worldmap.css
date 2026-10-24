@@ -104,6 +104,7 @@
 /* Pasajes verticales (en ambos niveles) e iconos de elevador/pozo dentro de un nivel */
 .wm-vl { cursor: pointer; }
 .wm-vl.same { pointer-events: none; }
+.wm-vl-tie { fill: none; stroke: rgba(159, 179, 216, .6); stroke-width: 1.2; stroke-dasharray: 2 2; pointer-events: none; }
 .wm-vl .wm-vl-bg { fill: rgba(11, 13, 12, .94); stroke: var(--relay); stroke-width: 1.5; transition: stroke .2s, fill .2s; }
 .wm-vl .wm-glyph { fill: none; stroke: #cfdcf5; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .wm-vl.k-lift .wm-vl-bg, .wm-vl.k-elevator .wm-vl-bg, .wm-vl.k-extract .wm-vl-bg { stroke: var(--amber); }

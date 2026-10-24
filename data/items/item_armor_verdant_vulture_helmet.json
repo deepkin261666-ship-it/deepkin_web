@@ -1,0 +1,20 @@
+{
+  "id": "item.armor.verdant_vulture_helmet",
+  "display_name": "Vulture Helm",
+  "equipment_slot": "head",
+  "description": "A winged flight helm with a green visor and an oxygen line, for Verdant spotters who work above the canopy. Tier IV. Not issued yet.",
+  "visual_id": "visual.armor.verdant_vulture_helmet",
+  "gear_tier": 4,
+  "requirements": {
+    "minimum_level": 35,
+    "class_ids": [
+      "class.verdant"
+    ]
+  },
+  "properties": {
+    "armor_defense": 12,
+    "resistance_bonus": 8
+  },
+  "weight": 2.6,
+  "planned": true
+}

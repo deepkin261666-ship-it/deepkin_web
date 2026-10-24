@@ -2,7 +2,7 @@
   "id": "item.weapon.relay_operator",
   "display_name": "Relay Carbine",
   "equipment_slot": "primary_weapon",
-  "description": "A two-handed carbine for steady, precise fire from mid range. Relay tech weapons come later.",
+  "description": "A two-handed relay carbine for steady fire from mid range. It loads no rounds: every shot draws 1.5 energy from the worn battery cell.",
   "visual_id": "visual.weapon.relay_operator",
   "weapon_type": "ranged",
   "weapon_family": "skill.tech",
@@ -16,8 +16,8 @@
     "attack_range": 8.0,
     "battery_capacity": 0,
     "illumination_radius": 0.0,
-    "attack_interval": 0.8
+    "attack_interval": 0.8,
+    "energy_per_shot": 1.5
   },
-  "ammo_item_id": "item.ammunition.field_round",
   "weight": 3.0
 }

@@ -8,6 +8,7 @@
 # o un poligono alrededor del marcador apilado) sobre la roca. Los pasajes verticales (pozo, escaleras, elevador)
 # se marcan en las capas que unen (un elevador de varias paradas es un solo pozo con una marca por piso), en el mismo punto del plano; tocarlos cambia de nivel. Toda la geometria de
 # presentacion propia de esta pagina (puntos de pozos, desvios de tuneles, radios de camaras) vive aca, no en el dato.
+import glob
 import html
 import json
 import math
@@ -110,8 +111,8 @@ T = {
     "l_fuel": L("Gas station", "Estación de servicio"),
     "district": L("District", "Distrito"), "gate": L("Gate", "Puerta"), "landmark": L("Landmark", "Punto de referencia"),
     "city_kicker": L("Dustline · district plan", "Dustline · plano de distritos"),
-    "city_lead": L("One compact map: in through the Frontier Gate on the south wall; the East Gate is built but closed. Tap a district.",
-                   "Un solo mapa compacto: se entra por la Puerta de la Frontera, en el muro sur; la Puerta Este está construida pero cerrada. Tocá un distrito."),
+    "city_lead": L("One compact map: in through the Frontier Gate; the East Gate opens on the Floodlands road. Tap a district; the small icons are the traders, the bike shop, the VDI post and your house.",
+                   "Un solo mapa compacto: se entra por la Puerta de la Frontera; la Puerta Este sale al camino de las Floodlands. Tocá un distrito; los íconos chicos son los comerciantes, el taller de motos, el puesto VDI y tu casa."),
     "art_note": L("Base layer: prototype map art, not final. Zone borders, levels and passages come from the game's world graph.",
                   "Capa base: arte del mapa prototipo, no definitivo. Los bordes de zona, los niveles y los pasajes salen del grafo del mundo del juego."),
     "hint": L("Tap a zone · PgDn goes down", "Tocá una zona · AvPág baja"),
@@ -126,6 +127,14 @@ T = {
     "fuel": L("gas station", "estación de servicio"),
     "arrives": L("arrives here from", "llega acá desde"),
     "stops": L("stops", "paradas"),
+    # 2026-10-23
+    "l_sites": L("Places", "Lugares"),
+    "l_bore": L("excavation floors are player-made: a VDI drillship called out on open surface ground bores −1 … −15, generated per call-out, not fixed zones",
+                "los pisos de excavación los hace un jugador: una perforadora VDI llamada en terreno abierto de superficie baja de −1 a −15, generados en cada llamada; no son zonas fijas"),
+    "l_bore_short": L("VDI excavation · player-made floors, generated per call-out", "Excavación VDI · pisos que hace un jugador, generados en cada llamada"),
+    "l_hunt": L("Hunting ground", "Coto de caza"),
+    "l_shop": L("Trader", "Comerciante"), "l_bike": L("Bike shop · crane", "Taller de motos · grúa"),
+    "l_vdi": L("VDI post · Expedition Service", "Puesto VDI · Expedition Service"), "l_house": L("Your house (Unit 7)", "Tu casa (Unit 7)"),
 }
 
 KIND_ICON = {  # 24x24, trazos
@@ -147,18 +156,39 @@ PASS_ICON = {
     "shaft": '<circle cx="12" cy="12" r="9" stroke-dasharray="3 2.5"/><path d="M12 7v10M8.5 13.5 12 17l3.5-3.5"/>',
     "fuel": '<path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M5 21h10M7 7h6v4H7zM15 9h2a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V9l-2.5-2.5"/>',
     "gate": '<path d="M4 20V9l8-5 8 5v11M9 20v-7h6v7M3 20h18"/>',
+    # Lugares (2026-10-23): tiendas, taller de motos, puesto VDI, casa, excavacion VDI, coto de caza.
+    "shop": '<path d="M3 9h18l-2-5H5ZM3 9c0 2 4 2 4.5 0 .5 2 4.5 2 4.5 0 0 2 4 2 4.5 0 .5 2 4.5 2 4.5 0M5 11v9h14v-9M10 20v-5h4v5"/>',
+    "bike": '<circle cx="5.5" cy="16" r="3.5"/><circle cx="18.5" cy="16" r="3.5"/><path d="M5.5 16 9 9h6l3.5 7M9 9 7.5 6H5M15 9l-1.5-3h3M12 16l3-7"/>',
+    "vdi": '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/>',
+    "house": '<path d="M3 11 12 4l9 7M5 9.5V20h14V9.5M10 20v-6h4v6"/>',
+    "excavation": '<rect x="6.5" y="2" width="11" height="12" rx="2"/><path d="M6.5 6h11M6.5 10h11M9 14l3 8 3-8M10.5 17h3"/>',
+    "hunt": '<path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="5"/>',
 }
+SITE_COLOR = {"shop": "#e2c88f", "bike": "#6fb3ac", "vdi": "#d39a4b", "house": "#00ff41", "excavation": "#d39a4b", "hunt": "#d9614f"}
 # Geometria de presentacion de esta pagina (coordenadas 0..1 del arte): punto de cada pasaje vertical cuando el dato
 # no lo fija (sin exit_at y sin apilado directo), desvios de tuneles del mismo nivel y radios de camara (px) de los
 # mapas apilados. El dato del juego no cambia por esto.
 # El elevador del Pozo 3 (2026-10-13) toma el punto del crater de Shaft 3 en el arte, el de la vieja escalera Threshold-Scarp.
-VLINK_AT = {"elevator.shaft3": (0.468, 0.392), "extraction.zone.excavation_c3_f3": (0.355, 0.715)}
+# Punto del pozo del elevador Shaft 3: el castillete pintado en la Scarp (el dato no trae punto para un elevador). Ningun
+# otro pasaje se fija aca (2026-10-24): todos salen del dato (exit_at, marcador apilado), igual en cada nivel que unen.
+VLINK_AT = {"elevator.shaft3": (0.468, 0.392)}
+# Un pasaje vertical que cae sobre la marca de un mapa de ese nivel (pisos apilados: el pozo baja justo debajo de la
+# entrada) se dibuja al costado de la marca, en px de pantalla (no en el plano): el punto del dato no se mueve.
+PASS_SLOTS = [(28, 0), (-28, 0), (24, -26), (-24, -26)]
+# Rotulos bajo tierra (2026-10-24): cada mapa prueba debajo (o su `label` del dato), a la derecha, a la izquierda y arriba,
+# y se queda con el primer lugar que no pisa otra marca, un pasaje u otro rotulo de su nivel, medido con el zoom de
+# entrada en escritorio (LABEL_U px del plano por px de pantalla). Las marcas no se mueven.
+LABEL_U = 1.45
 # Entradas pintadas en el arte (2026-10-12, pintura sin rotulos): el pozo de C-3 se ve en la superficie pero el mapa
 # vive bajo tierra; una marca chica "↓ nivel" sobre el pozo baja a esa capa. Shaft 3 ya es el elevador.
 ENTRANCES = {"zone.excavation_c3": "left"}  # lado del rotulo
 VIA = {"conn.threshold_shallows": (0.445, 0.36), "conn.shallows_c3": (0.325, 0.49),
        "conn.old_metro_shallows": None, "conn.abyss_c3_f3": (0.325, 0.80)}
-CHAMBER_R = {"zone.threshold": 30, "zone.dragon_lair": 44, "zone.excavation_c3_f2": 52, "zone.excavation_c3_f3": 48}
+# The Cinder Deep (2026-10-24): 22 deja su camara dentro de Frontier Road east, fuera de la celda de The Salt Pit.
+CHAMBER_R = {"zone.threshold": 30, "zone.dragon_lair": 22, "zone.excavation_c3_f2": 52, "zone.excavation_c3_f3": 48,
+             # 2026-10-23: el sotano inundado es chico; las guaridas de cuatro pisos, una camara por nivel.
+             "zone.floodlands_cellar": 30, **{f"zone.castoff_hideout_f{i}": 36 for i in range(1, 5)},
+             **{f"zone.robot_hideout_f{i}": 40 for i in range(1, 5)}}
 CHAMBER_SHRINK = 0.6
 UNDER_FILL = {-1: .10, -2: .14, -3: .18, -4: .21}
 
@@ -195,6 +225,68 @@ def _region():
     return json.load(open(p)) if os.path.exists(p) else {"transitions": [], "floors": [], "elevators": []}
 
 
+# --- Lugares de servicio (Fases 3-7, 2026-10-23) ---------------------------------------------------------------
+# Todo sale del dato: tiendas (data/shops/*.json: el dueño y su posicion en el piso), taller de motos (la tienda que vende
+# vehiculos), puesto VDI (la que vende el Expedition Service), la casa (la puerta con "house" en las transiciones) y el
+# claro de excavaciones VDI (el cartel "VDI SURVEY CLEARING"). Posiciones locales del piso (x, z en metros).
+SITE_KIND = {"shop": L("Trader", "Comerciante"), "bike": L("Bike shop · crane", "Taller de motos · grúa"),
+             "vdi": L("VDI post · Expedition Service", "Puesto VDI · Expedition Service"), "house": L("Your house · container home", "Tu casa · contenedor"),
+             "excavation": L("VDI excavation clearing · call-outs", "Claro de excavaciones VDI · llamadas")}
+SITE_KIND_HUNT = L("Hunting ground", "Coto de caza")
+
+
+def is_hunting(z, region=None):
+    """Coto de caza: un bloque "hunting" en el mapa, o un mapa salvaje / "hunting spot" con grupos de aparicion."""
+    if z.get("hunting"):
+        return True
+    region = region or _region()
+    spawns = any(g.get("zone_id") == z["id"] for g in region.get("spawn_groups", []))
+    return spawns and (z["kind"] == "wild" or "hunting" in (z.get("subtitle") or {}).get("en", "").lower())
+
+
+def site_mark(kind, tip, extra=""):
+    """Icono de un lugar en px de pantalla (dentro de un grupo wm-sc): disco, glifo del color del lugar y su tooltip."""
+    col = SITE_COLOR[kind]
+    return (f'<g class="wm-site k-{kind}" data-tip="{e(tip)}"{extra}><circle class="wm-hit" r="13"/>'
+            f'<circle r="10.5" fill="rgba(11,13,12,.94)" stroke="{col}" stroke-width="1.4"/>'
+            f'<g style="fill:none;stroke:{col};stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round">{glyph(kind, 13, PASS_ICON, "wm-sg")}</g></g>')
+
+
+def sites(region=None):
+    region = region or _region()
+    shops = {}
+    for f in sorted(glob.glob(os.path.join(ROOT, "data", "shops", "*.json"))):
+        shops.update(json.load(open(f)).get("shops", {}))
+    speakers = {}
+    for f in sorted(glob.glob(os.path.join(ROOT, "data", "dialog", "*.json"))):
+        speakers.update(json.load(open(f)).get("speakers", {}))
+    people = {w["id"]: (f["zone_id"], w["position"]) for f in region["floors"] for w in f.get("workers", []) + f.get("npcs", [])}
+    out = []
+    for sid, sh in shops.items():
+        if sid not in people or sh.get("property"):
+            continue  # el agente de casas no es una tienda: la casa se marca en su puerta
+        goods = [g["item"] for g in sh.get("goods", [])]
+        kind = "bike" if sh.get("vehicles") else ("vdi" if "item.service.expedition_service" in goods else "shop")
+        raw = speakers.get(sid, {}).get("name", sid)
+        name = " · ".join(" ".join(w if w in ("VDI",) else w[:1] + w[1:].lower() for w in part.split()) for part in raw.split("·") if part.strip())
+        zid, pos = people[sid]
+        out.append({"kind": kind, "zone": zid, "pos": pos, "id": sid, "name": name})
+    anchors = {f["zone_id"]: f.get("anchor", [0, 0, 0]) for f in region["floors"]}
+    for t in region.get("transitions", []):
+        if t.get("house") and t["from_zone"] in anchors:
+            a = anchors[t["from_zone"]]
+            out.append({"kind": "house", "zone": t["from_zone"], "pos": [t["position"][0] - a[0], t["position"][2] - a[2]], "id": t["house"], "name": t["label"]})
+    for f in region["floors"]:
+        for sg in f.get("signs", []):
+            if sg["text"].startswith("VDI SURVEY CLEARING"):
+                out.append({"kind": "excavation", "zone": f["zone_id"], "pos": [sg["position"][0], sg["position"][2]], "id": "vdi.clearing." + f["zone_id"],
+                            "name": sg["text"].split("\n")[0]})
+    return out
+
+
+SITES_ALL = sites()
+
+
 # --- Continente, por niveles ---------------------------------------------------------------------
 class World:
     """Vista del grafo preparada para dibujar: niveles, anclas, camaras, pasajes verticales."""
@@ -225,7 +317,8 @@ class World:
         return z.get("level", 0 if z["layer"] == "surface" else -1)
 
     def anchor(self, z):
-        p = z.get("marker") or (z["stack"]["marker"] if z.get("stack") else z["cell"]["seed"])
+        # Un mapa apilado va en su marcador apilado (bajo la entrada), aunque traiga un `marker` suelto de antes.
+        p = (z["stack"]["marker"] if z.get("stack") else None) or z.get("marker") or z["cell"]["seed"]
         return p[0] * self.W, p[1] * self.H
 
     def px(self, uv):
@@ -434,6 +527,29 @@ def layer_svg(w, lv, lang):
         out.append(f'<path class="wm-journey-glow" d="{jd}"/><path class="wm-journey" d="{jd}"/>')
     # Pasajes verticales que tocan este nivel: marcados en ambos niveles en el mismo punto; tocar cambia de nivel.
     vls, stubs = [], []
+    badges_here = [w.anchor(z) for z in zs]
+    slot_used = {}
+    pass_pts = []
+    icons = []  # pasajes dibujados en este nivel (px del plano), para los rotulos
+    boxes = []  # otras cajas ocupadas (rotulos de pasajes), px del plano
+
+    def slot(x, y, first=0):
+        """Desvio en px de pantalla si (x, y) cae sobre la marca de un mapa de este nivel; si no, ninguno. `first`: lado
+        preferido (el elevador, a la izquierda: su rotulo corre hacia afuera)."""
+        hit = next((i for i, (bx, by) in enumerate(badges_here) if math.hypot(bx - x, by - y) < 16), None)
+        if hit is None:
+            # Dos pasajes en el mismo punto sin marca (p. ej. el pozo de C-3 y la llegada de la extraccion): el primero
+            # queda en el punto, los siguientes al costado.
+            pt = next((i for i, (px_, py_) in enumerate(pass_pts) if math.hypot(px_ - x, py_ - y) < 16), None)
+            if pt is None:
+                pass_pts.append((x, y))
+                return 0, 0
+            n = slot_used.get(("p", pt), 0)
+            slot_used[("p", pt)] = n + 1
+            return PASS_SLOTS[(n + first) % len(PASS_SLOTS)]
+        n = slot_used.get(hit, 0)
+        slot_used[hit] = n + 1
+        return PASS_SLOTS[(n + first) % len(PASS_SLOTS)]
     for src, c in w.vertical():
         for i, end in enumerate(c["ends"]):
             if w.level(end["zone"]) != lv:
@@ -458,9 +574,13 @@ def layer_svg(w, lv, lang):
                 label = (f'<text class="wm-vl-label" x="-18" y="4" text-anchor="end">{e(txt)}</text>' if down
                          else f'<text class="wm-vl-label" x="18" y="4">{e(txt)}</text>')
             arrow = '<path class="wm-vl-arrow" d="M0-3v6M-2.2 1 0 3.2 2.2 1"/>' if down else '<path class="wm-vl-arrow" d="M0 3v-6M-2.2-1 0-3.2 2.2-1"/>'
-            vls.append(sc(f'wm-vl k-{k} s-{c["status"]} dir-{"down" if down else "up"}{" is-journey" if journey else ""}', x, y,
-                          f'<circle class="wm-hit" r="18"/><rect class="wm-vl-bg" x="-12" y="-12" width="24" height="24" rx="4"/>{glyph(k, 15, PASS_ICON)}'
-                          f'<g transform="translate(10,-10)"><circle class="wm-vl-dot" r="5.5"/>{arrow}</g>{label}',
+            ox, oy = slot(x, y)
+            icons.append((x + ox * LABEL_U, y + oy * LABEL_U))
+            icon = (f'<circle class="wm-hit" r="18"/><rect class="wm-vl-bg" x="-12" y="-12" width="24" height="24" rx="4"/>{glyph(k, 15, PASS_ICON)}'
+                    f'<g transform="translate(10,-10)"><circle class="wm-vl-dot" r="5.5"/>{arrow}</g>{label}')
+            if ox or oy:
+                icon = f'<path class="wm-vl-tie" d="M0,0L{ox * .55:.1f},{oy * .55:.1f}"/><g transform="translate({ox},{oy})">{icon}</g>'
+            vls.append(sc(f'wm-vl k-{k} s-{c["status"]} dir-{"down" if down else "up"}{" is-journey" if journey else ""}', x, y, icon,
                           f' data-vlink="{c["id"]}" data-from="{end["zone"]}" data-to="{other["zone"]}" data-to-level="{to_lv}" data-tip="{e(tip)}"'))
             ax, ay = w.anchor(w.zones[end["zone"]])
             if math.hypot(ax - x, ay - y) > 16:
@@ -499,9 +619,17 @@ def layer_svg(w, lv, lang):
                            f'data-tip="{e(name.upper())} · {e(stop_txt(f))}"><circle class="wm-hit" cx="22" cy="{fy:.1f}" r="6"/>'
                            f'<circle class="wm-el-stop" cx="22" cy="{fy:.1f}" r="3.2"/></g>')
         label = f'<text class="wm-vl-label" x="-18" y="4" text-anchor="end">{e(name.upper())}</text>' if journey else ""
+        icon = (f'<circle class="wm-hit" r="18"/><rect class="wm-vl-bg" x="-12" y="-12" width="24" height="24" rx="4"/>{glyph("elevator", 15, PASS_ICON)}'
+                f'{"".join(col)}{label}')
+        ox, oy = slot(x, y, first=1)
+        icons.append((x + ox * LABEL_U, y + oy * LABEL_U))
+        if journey:  # rotulo del elevador, a la izquierda del icono
+            ix, iy = x + ox * LABEL_U, y + oy * LABEL_U
+            boxes.append((ix - (20 + len(name) * 7.2) * LABEL_U, iy - 8 * LABEL_U, ix - 16 * LABEL_U, iy + 6 * LABEL_U))
+        if ox or oy:
+            icon = f'<path class="wm-vl-tie" d="M0,0L{ox * .55:.1f},{oy * .55:.1f}"/><g transform="translate({ox},{oy})">{icon}</g>'
         vls.append(sc(f'wm-vl wm-elevator k-elevator s-{el["status"]} dir-{"down" if to_lv < lv else "up"}{" is-journey" if journey else ""}', x, y,
-                      f'<circle class="wm-hit" r="18"/><rect class="wm-vl-bg" x="-12" y="-12" width="24" height="24" rx="4"/>{glyph("elevator", 15, PASS_ICON)}'
-                      f'{"".join(col)}{label}',
+                      icon,
                       f' data-vlink="{el["id"]}" data-conn="{cid}" data-from="{floors[here]["zone"]}" data-to="{nxt["zone"]}" data-to-level="{to_lv}" data-tip="{e(tip)}"'))
         ax, ay = w.anchor(w.zones[floors[here]["zone"]])
         if math.hypot(ax - x, ay - y) > 16:
@@ -520,8 +648,49 @@ def layer_svg(w, lv, lang):
                 fx, fy = gx + (ax - gx) * .3, gy + (ay - gy) * .3
                 tip = f'{st["name"]} · {L_(T["fuel"], lang)} · {st["price_per_litre"]} Metal/L'
                 extras.append(sc("wm-fuel", fx, fy, f'<circle class="wm-hit" r="14"/><circle class="wm-vl-bg" r="10"/>{glyph("fuel", 13, PASS_ICON)}', f' data-tip="{e(tip)}" data-id="{zid}"'))
+    # Lugares (2026-10-23): el claro de excavaciones VDI junto a su mapa y la mira de los cotos de caza.
+    region = _region()
+    for z in zs:
+        if z["status"] != "playable":
+            continue
+        x, y = w.anchor(z)
+        if is_hunting(z, region):
+            note = L_(z["hunting"]["note"], lang) if z.get("hunting", {}).get("note") else L_(SITE_KIND_HUNT, lang)
+            extras.append(sc("wm-sites", x, y, f'<g transform="translate(-21,-15)">{site_mark("hunt", note)}</g>'))
+        for st in [t for t in SITES_ALL if t["zone"] == z["id"] and t["kind"] == "excavation"]:
+            extras.append(sc("wm-sites", x, y, f'<g transform="translate(22,-16)">{site_mark("excavation", L_(SITE_KIND["excavation"], lang) + " · " + L_(T["l_bore"], lang))}</g>'))
     # Marcas propias y de arte, etiquetas, pasos del viaje
     marks, badges = [], []
+    placed = []  # cajas (x0, y0, x1, y1) en px del plano: marcas, pasajes y rotulos ya puestos
+    U = LABEL_U
+    for z in zs:
+        ax_, ay_ = w.anchor(z)
+        placed.append((ax_ - 11 * U, ay_ - 11 * U, ax_ + 11 * U, ay_ + 11 * U))
+    placed += [(ix - 12 * U, iy - 12 * U, ix + 12 * U, iy + 12 * U) for ix, iy in icons] + boxes
+    for z in zs:  # pasos del viaje (insignia a 13,-15 de la marca)
+        if z["id"] in w.steps:
+            ax_, ay_ = w.anchor(z)
+            placed.append((ax_ + 4 * U, ay_ - 24 * U, ax_ + 22 * U, ay_ - 6 * U))
+
+    def place_label(z, x, y, r, sub, lab):
+        """(x, y, text-anchor) del rotulo en unidades de la marca: el primer lugar libre (ver LABEL_U)."""
+        wd = max(len(z["name"]) * 7.6, len(sub) * 6.9)  # dos renglones: nombre, y debajo piso y profundidad
+        cands = []
+        if lab and math.hypot(lab[0] * W - x, lab[1] * H - y) >= 18:
+            cands.append(((lab[0] * W - x) / U, (lab[1] * H - y) / U + 4, "middle"))
+        cands += [(0, r + 15, "middle"), (r + 7, 0, "start"), (-(r + 7), 0, "end"), (0, -(r + 19), "middle")]
+
+        def box(c):
+            cx, cy, a = c
+            x0 = cx - wd / 2 if a == "middle" else (cx if a == "start" else cx - wd)
+            return (x + x0 * U, y + (cy - 10) * U, x + (x0 + wd) * U, y + (cy + 15) * U)
+
+        def hits(b):
+            return sum(max(0, min(b[2], q[2]) - max(b[0], q[0])) * max(0, min(b[3], q[3]) - max(b[1], q[1])) for q in placed
+                       if not (abs((q[0] + q[2]) / 2 - x) < 1 and abs((q[1] + q[3]) / 2 - y) < 1))
+        best = min(cands, key=lambda c: (hits(box(c)) > 0, cands.index(c) if hits(box(c)) == 0 else hits(box(c))))
+        placed.append(box(best))
+        return best
     for z in zs:
         x, y = w.anchor(z)
         step = w.steps.get(z["id"])
@@ -531,7 +700,7 @@ def layer_svg(w, lv, lang):
         r = 10 if under else 11
         shape = f'<circle class="wm-badge" r="{r}"/>'
         ico = glyph(z["kind"], 14)
-        lab = z.get("label")
+        lab = None if z.get("stack") else z.get("label")  # un mapa apilado lleva el rotulo junto a su marca
         if lab and math.hypot(lab[0] * W - x, lab[1] * H - y) >= 18:
             lx, ly = lab[0] * W - x, lab[1] * H - y
             label = f'<text class="wm-label" x="{lx:.1f}" y="{ly + 4:.1f}" text-anchor="middle">{e(z["name"])}</text>'
@@ -540,7 +709,9 @@ def layer_svg(w, lv, lang):
         if under:
             dep = z.get("depth_m", 0)
             sub = (z.get("level_label", "") + " · " if z.get("level_label") else "") + f"−{dep} m"
-            label = label.replace("</text>", f'<tspan class="wm-depth" dx="5">{e(sub)}</tspan></text>')
+            lx, ly, anchor = place_label(z, x, y, r, sub, lab)
+            label = (f'<text class="wm-label" x="{lx:.1f}" y="{ly:.1f}" text-anchor="{anchor}">{e(z["name"])}'
+                     f'<tspan class="wm-depth" x="{lx:.1f}" dy="12">{e(sub)}</tspan></text>')
         marks.append(sc(f'wm-mark own s-{z["status"]}{" under" if under else ""}', x, y, f'<circle class="wm-hit" r="{r + 9}"/>{shape}{ico}{label}', f' data-id="{z["id"]}"'))
     out.append(f'<g class="wm-pips">{"".join(pips)}</g><g class="wm-vlinks">{"".join(midicons)}{"".join(vls)}{"".join(extras)}</g>'
                f'<g class="wm-marks">{"".join(marks)}</g><g class="wm-badges">{"".join(badges)}</g>')
@@ -611,6 +782,67 @@ def blocks(d, streets, rnd):
     return "".join(out)
 
 
+# Lugares en el plano de Dustline (2026-10-23). El plano es estilizado y no coincide punto por punto con la ciudad
+# construida (world_map.json "dustline.plan.note"), asi que cada lugar va al distrito o puerta cuyo cartel/paso esta mas
+# cerca de su posicion en el piso, en una fila debajo del rotulo de ese distrito.
+DISTRICT_SIGNS = {"CENTRAL MARKET": "district.central_market", "THE EXCHANGE": "district.the_exchange", "CARAVAN YARD": "district.caravan_yard",
+                  "SCRAPPER'S ROW": "district.scrappers_row", "LOWER WARRENS": "district.lower_warrens"}
+BILLBOARD_SUBS = {"your goods are safe with us"}
+
+
+def city_anchors(data):
+    """[(id, (x, z) local, (u, v) del plano, es_puerta)] para los distritos y las puertas de Dustline."""
+    city = data["dustline"]
+    region = _region()
+    out = []
+    st = os.path.join(ROOT, "data", "world", "sets", "dustline.json")
+    signs = json.load(open(st)).get("signs", []) if os.path.exists(st) else []
+    labels = {d["id"]: d["label"] for d in city["districts"]}
+    for sg in signs:
+        did = DISTRICT_SIGNS.get(sg["text"].split("\n")[0])
+        if did and sg.get("sub") not in BILLBOARD_SUBS and did in labels:
+            out.append((did, (sg["p"][0], sg["p"][2]), tuple(labels[did]), False))
+    fl = next((f for f in region["floors"] if f["zone_id"] == city["zone"]), {})
+    ax, _, az = fl.get("anchor", [0, 0, 0])
+    conns = {c["id"]: c for c in data["connections"]}
+    for g in city["entrances"]:
+        c = conns.get(g["connection"])
+        if not c:
+            continue
+        other = next(x["zone"] for x in c["ends"] if x["zone"] != city["zone"])
+        t = next((t for t in region["transitions"] if t["from_zone"] == city["zone"] and t["to_zone"] == other), None)
+        if t:
+            out.append((g["id"], (t["position"][0] - ax, t["position"][2] - az), tuple(g["position"]), True))
+    return out
+
+
+def city_sites(data, lang):
+    city = data["dustline"]
+    anchors = city_anchors(data)
+    if not anchors:
+        return ""
+    rows = {}
+    for st in SITES_ALL:
+        if st["zone"] != city["zone"]:
+            continue
+        best = min(anchors, key=lambda a: math.hypot(a[1][0] - st["pos"][0], a[1][1] - st["pos"][1]))
+        rows.setdefault(best[0], (best, []))[1].append(st)
+    out = []
+    order = {"house": 0, "shop": 1, "bike": 2, "vdi": 3}
+    for aid, (a, sts) in rows.items():
+        sts.sort(key=lambda t: (order.get(t["kind"], 9), t["name"]))
+        u, v = a[2]
+        n = len(sts)
+        gap = 25
+        y0 = 58 if a[3] else 52  # debajo del rotulo del distrito (o de la puerta)
+        extra = f' data-id="{aid}"'
+        icons = "".join(f'<g transform="translate({(i - (n - 1) / 2) * gap:.1f},{y0})">'
+                        f'{site_mark(t["kind"], t["name"] + " · " + L_(SITE_KIND[t["kind"]], lang), extra)}</g>'
+                        for i, t in enumerate(sts))
+        out.append(sc("wm-sites", u * CW, v * CH, icons))
+    return "".join(out)
+
+
 def city_svg(data, lang):
     city = data["dustline"]
     rnd = random.Random(7)
@@ -669,7 +901,7 @@ def city_svg(data, lang):
             '<line x1="0" y1="0" x2="0" y2="14" class="dl-hatch"/></pattern>'
             '<radialGradient id="dl-amber"><stop offset="0" stop-color="#d39a4b" stop-opacity=".55"/><stop offset="1" stop-color="#d39a4b" stop-opacity="0"/></radialGradient></defs>'
             f'<rect class="dl-ground" width="{CW}" height="{CH}"/><rect width="{CW}" height="{CH}" fill="url(#dl-hatch)"/>{roads}'
-            f'<polygon class="dl-wall" points="{wall}"/>{dist}{street_paths}{extras}{gates}{lms}{road_labels}{compass}</svg>')
+            f'<polygon class="dl-wall" points="{wall}"/>{dist}{street_paths}{extras}{gates}{lms}{road_labels}{compass}{city_sites(data, lang)}</svg>')
 
 
 # --- Datos para el JS y HTML de la seccion ------------------------------------------------------
@@ -687,6 +919,17 @@ def zone_services(zid, region, hubs, lang):
         out.append(L_(L("261.6.66 terminal: bank & depot", "Terminal 261.6.66: banco y depósito"), lang))
     for st in fl.get("fuel_stations", []):
         out.append(f'{st["name"]} · ' + L_(L("gas station, {p} Metal/L, gas can {c}", "estación de servicio, {p} Metal/L, bidón {c}"), lang).format(p=st["price_per_litre"], c=st["can_price"]))
+    # Lugares del dato (2026-10-23): tiendas, motos, VDI, casa, claro de excavaciones; y el coto de caza.
+    here = [t for t in SITES_ALL if t["zone"] == zid]
+    shops = [t["name"] for t in here if t["kind"] == "shop"]
+    if shops:
+        out.append(L_(L("Traders ({n}): ", "Comerciantes ({n}): "), lang).format(n=len(shops)) + ", ".join(shops))
+    for t in here:
+        if t["kind"] != "shop":
+            out.append(f'{L_(SITE_KIND[t["kind"]], lang)} · {t["name"]}')
+    z = next((z for z in load()["zones"] if z["id"] == zid), None)
+    if z and is_hunting(z, region):
+        out.append(L_(z["hunting"]["note"], lang) if z.get("hunting", {}).get("note") else L_(SITE_KIND_HUNT, lang))
     return out
 
 
@@ -762,7 +1005,11 @@ def legend(data, lang, view):
                      for d in data["dustline"]["districts"])
         return (f'<div class="wm-legend" data-for="city"><div><p class="kicker">{e(L_(T["district"], lang))}</p><ul>{sw}</ul></div>'
                 f'<div><p class="kicker">{e(L_(T["lines"], lang))}</p><ul><li><i class="ln ln-gate"></i>{e(L_(T["gate"], lang))}</li>'
-                f'<li><i class="ln ln-lm"></i>{e(L_(T["landmark"], lang))}</li><li><i class="ln ln-sight"></i>{"Sightline to the Exchange" if lang == "en" else "Línea de vista al Exchange"}</li></ul></div></div>')
+                f'<li><i class="ln ln-lm"></i>{e(L_(T["landmark"], lang))}</li><li><i class="ln ln-sight"></i>{"Sightline to the Exchange" if lang == "en" else "Línea de vista al Exchange"}</li></ul></div>'
+                f'<div><p class="kicker">{e(L_(T["l_sites"], lang))}</p><ul>'
+                + "".join(f'<li><span style="color:{SITE_COLOR[k]};display:inline-flex">{icon_svg(k, "wm-ico", PASS_ICON)}</span>{e(L_(T[key], lang))}</li>'
+                          for k, key in (("house", "l_house"), ("shop", "l_shop"), ("bike", "l_bike"), ("vdi", "l_vdi")))
+                + '</ul></div></div>')
     kinds = "".join(f'<li>{icon_svg(k)}{e(L_(KIND[k], lang))}</li>' for k in KIND)
     biomes = "".join(f'<li><i class="sw" style="background:{BIOME_COLOR[b]}"></i>{e(L_(BIOME[b], lang))}</li>' for b in BIOME)
     danger = "".join(f'<li><i class="dg dg-{i}"></i>{e(L_(DANGER[k], lang))}</li>' for i, k in enumerate(DANGER_ORDER))
@@ -779,11 +1026,14 @@ def legend(data, lang, view):
                 f'<li><i class="ln ln-ghost-below"></i>{e(L_(T["l_ghost_below"], lang))}</li>'
                 f'<li><i class="ln ln-ghost-above"></i>{e(L_(T["l_ghost_above"], lang))}</li>'
                 f'<li><i class="ln ln-switch">↕</i>{e(L_(T["l_switch"], lang))}</li>')
+    places = "".join(f'<li><span style="color:{SITE_COLOR[k]};display:inline-flex">{icon_svg(k, "wm-ico", PASS_ICON)}</span>{e(L_(T[key], lang))}</li>'
+                     for k, key in (("hunt", "l_hunt"), ("excavation", "l_bore_short"), ("house", "l_house"), ("shop", "l_shop"), ("bike", "l_bike"), ("vdi", "l_vdi")))
     return (f'<div class="wm-legend" data-for="map"><div><p class="kicker">{e(L_(T["kinds"], lang))}</p><ul>{kinds}</ul></div>'
             f'<div><p class="kicker">{e(L_(T["biomes"], lang))}</p><ul>{biomes}</ul></div>'
             f'<div><p class="kicker">{e(L_(T["danger"], lang))}</p><ul>{danger}</ul></div>'
             f'<div><p class="kicker">{e(L_(T["lines"], lang))}</p><ul>{lines}</ul></div>'
-            f'<div><p class="kicker">{e(L_(T["passages"], lang))}</p><ul>{passages}</ul></div></div>')
+            f'<div><p class="kicker">{e(L_(T["passages"], lang))}</p><ul>{passages}</ul></div>'
+            f'<div><p class="kicker">{e(L_(T["l_sites"], lang))}</p><ul>{places}</ul></div></div>')
 
 
 def journey_html(data, lang):

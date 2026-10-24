@@ -1,0 +1,137 @@
+{
+  "id": "npc.castoff_trooper",
+  "display_name": "Castoff Trooper",
+  "faction": "faction.castoffs",
+  "species": "Trooper",
+  "role": "controller",
+  "archetype": "ranged",
+  "tier": "normal",
+  "hunt_tier": 3,
+  "max_health": 180,
+  "movement_speed": 2.4,
+  "detection_range": 14.0,
+  "attack_range": 8.0,
+  "attack_damage": 8,
+  "attack_cooldown": 1.2,
+  "xp": 170,
+  "coins": [
+    10,
+    22
+  ],
+  "threat": 9,
+  "perception": {
+    "aggro_radius": 13.0,
+    "memory_seconds": 6.0,
+    "call_radius": 12.0
+  },
+  "movement": {
+    "preferred_range": [
+      4.5,
+      8.0
+    ],
+    "leash_radius": 24.0,
+    "lure": "pack"
+  },
+  "abilities": [
+    {
+      "id": "rifle_butt",
+      "name": "Rifle Butt",
+      "shape": "cone",
+      "damage": 14,
+      "windup": 0.45,
+      "radius": 2.2,
+      "half_angle": 55.0,
+      "trigger_range": 2.0,
+      "cooldown": 4.0,
+      "recovery": 0.4
+    },
+    {
+      "id": "frag_charge",
+      "name": "Frag Charge",
+      "shape": "circle",
+      "damage": 22,
+      "windup": 1.2,
+      "radius": 2.4,
+      "reach": 6.0,
+      "min_range": 4.0,
+      "trigger_range": 7.5,
+      "cooldown": 10.0,
+      "recovery": 0.6
+    },
+    {
+      "id": "burst",
+      "name": "Burst",
+      "shape": "line",
+      "damage": 20,
+      "windup": 0.95,
+      "range": 13.0,
+      "width": 0.8,
+      "min_range": 3.0,
+      "trigger_range": 13.0,
+      "los": true,
+      "cooldown": 6.5,
+      "recovery": 0.5,
+      "fx": "firearm"
+    }
+  ],
+  "verbs": [
+    "LOB",
+    "BURST",
+    "BASH",
+    "CALL"
+  ],
+  "rules": [
+    "He lobs a frag charge where you stand: a red ring fills on the ground — be out of it when it does.",
+    "At range he bursts along a marked line like the gunners; too close and he swings the rifle butt in a short arc.",
+    "Kit salvaged from somewhere much richer than the Outpost: harder to put down than he looks."
+  ],
+  "habitat": "The Castoff hideout under Frontier Road east: the lower floors.",
+  "lore": "PROVISIONAL. Wears armour nobody in the Frontier makes. The Castoffs say the Warlord brought a crate of it up from somewhere deep and handed it out to the ones he trusted.",
+  "visual": {
+    "model": "res://assets/game/mobs/castoffs/trooper.glb",
+    "size": 1.9,
+    "fit": "height",
+    "yaw": 180,
+    "rig": "humanoid",
+    "attack": "firearm",
+    "mouth": [
+      0.3,
+      1.1,
+      -0.75
+    ]
+  },
+  "loot": [
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        12,
+        24
+      ],
+      "chance": 0.4
+    },
+    {
+      "item": "item.ammunition.hardened_round",
+      "quantity": [
+        5,
+        12
+      ],
+      "chance": 0.35
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.2
+    },
+    {
+      "item": "item.battery.provisional_relay_cell",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.08
+    }
+  ]
+}

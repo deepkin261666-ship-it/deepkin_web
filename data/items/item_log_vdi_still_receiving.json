@@ -1,0 +1,16 @@
+{
+  "id": "item.log.vdi_still_receiving",
+  "display_name": "VDI Telemetry · Pump Works 7",
+  "description": "A maintenance tablet wired into the Switchyard's mainframe. The log is still being written. Provisional lore.",
+  "visual_id": "visual.log.tablet",
+  "category": "log",
+  "log": {
+    "title": "VANTAGE DEEP INDUSTRIES — PUMP WORKS 7 · AUTOMATED TELEMETRY",
+    "text": "STATION: Pump Works 7 (drowned)\nCREW ON SITE: 0 (since evacuation)\nUNITS ON SITE: 31 active · 4 under repair · 12 decommissioned\n\n[cycle 41,882] Instruction received. Source: 261.6.66.\n[cycle 41,882] Instruction: CONTINUE.\n[cycle 41,883] Intake flooded. Pumps reassigned to: perimeter.\n[cycle 41,890] Unidentified personnel on Sump boardwalk. Classified: OBSTRUCTION.\n[cycle 41,890] Instruction received. Source: 261.6.66. Instruction: CLEAR OBSTRUCTION.\n[cycle 41,902] Grid load exceeds supply. Scheduling rolling outages, Switchyard.\n[cycle 41,903] Foreman unit CHOPPER: query to source — \"what are we digging toward\".\n[cycle 41,903] Query discarded.\n[cycle 41,904] Instruction received. Source: 261.6.66. Instruction: CONTINUE.\n\nNo one has signed this log in eleven years. It is still receiving.",
+    "text_es": "ESTACIÓN: Pump Works 7 (inundada)\nPERSONAL EN SITIO: 0 (desde la evacuación)\nUNIDADES EN SITIO: 31 activas · 4 en reparación · 12 dadas de baja\n\n[ciclo 41.882] Instrucción recibida. Origen: 261.6.66.\n[ciclo 41.882] Instrucción: CONTINUAR.\n[ciclo 41.883] Toma de agua inundada. Bombas reasignadas a: perímetro.\n[ciclo 41.890] Personal no identificado en la pasarela del Sump. Clasificado: OBSTRUCCIÓN.\n[ciclo 41.890] Instrucción recibida. Origen: 261.6.66. Instrucción: DESPEJAR OBSTRUCCIÓN.\n[ciclo 41.902] La carga de la red supera el suministro. Programando cortes rotativos, Switchyard.\n[ciclo 41.903] Unidad capataz CHOPPER: consulta al origen — \"¿hacia qué estamos cavando?\".\n[ciclo 41.903] Consulta descartada.\n[ciclo 41.904] Instrucción recibida. Origen: 261.6.66. Instrucción: CONTINUAR.\n\nNadie firma este registro hace once años. Sigue recibiendo."
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "weight": 0.3
+}

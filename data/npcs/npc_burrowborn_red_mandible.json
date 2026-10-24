@@ -1,0 +1,126 @@
+{
+  "id": "npc.burrowborn_red_mandible",
+  "display_name": "Red Mandible",
+  "max_health": 70,
+  "movement_speed": 3.0,
+  "detection_range": 9.0,
+  "attack_range": 1.5,
+  "attack_damage": 7,
+  "attack_cooldown": 1.1,
+  "faction": "faction.burrowborn",
+  "species": "Red Mandible",
+  "role": "skirmisher",
+  "archetype": "skirmisher",
+  "tier": "normal",
+  "hunt_tier": 2,
+  "threat": 4,
+  "xp": 45,
+  "coins": [
+    3,
+    8
+  ],
+  "body_radius": 0.55,
+  "habitat": "The Shallows' south bay and the dark end of Excavation C-3's first chamber",
+  "lore": "PROVISIONAL. A Burrowborn hunter with a rust-red carapace and a pair of pincers that close like a rock drill's jaws. It strikes, backs off and comes in again.",
+  "verbs": [
+    "STALK",
+    "PINCER",
+    "LUNGE",
+    "BACK OFF"
+  ],
+  "rules": [
+    "Its pincers open before they close: when the red arc lights up in front of it, step aside.",
+    "From a few metres away it lunges along a red lane, then skitters back to strike again.",
+    "It guards its corner of the cave and gives up past it."
+  ],
+  "perception": {
+    "aggro_radius": 6.0,
+    "memory_seconds": 5.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      1.4
+    ],
+    "leash_radius": 14.0,
+    "lure": "territorial",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "lunge",
+      "name": "Skitter Lunge",
+      "shape": "charge",
+      "damage": 10,
+      "windup": 0.6,
+      "range": 5.0,
+      "width": 1.4,
+      "cooldown": 8.0,
+      "min_range": 2.5,
+      "trigger_range": 5.0,
+      "los": true,
+      "recovery": 0.5,
+      "retreat": 1.0
+    },
+    {
+      "id": "pincer",
+      "name": "Pincer",
+      "shape": "bite",
+      "damage": 14,
+      "windup": 0.6,
+      "reach": 1.9,
+      "half_angle": 45.0,
+      "cooldown": 5.0,
+      "trigger_range": 1.9,
+      "recovery": 0.4
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.ore.limonite",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.ore.hematite",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.12
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.08
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/burrowborn/red_mandible.glb",
+    "size": 1.6,
+    "gait": "skitter",
+    "yaw": 90,
+    "tint": "c08a7a",
+    "gait_legs": {
+      "height": 0.45,
+      "stride": 0.12,
+      "lift": 0.06,
+      "pattern": "tripod",
+      "cycle": 0.6
+    },
+    "glow": {
+      "color": "ff6a4a",
+      "energy": 0.6,
+      "range": 2.6,
+      "height": 0.5
+    }
+  }
+}

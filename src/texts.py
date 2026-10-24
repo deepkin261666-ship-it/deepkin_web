@@ -98,8 +98,8 @@ SURFACE = [
                  "La excavación de superficie C-7: el equipo de perforación sobre la veta de magnetita, bajo los acantilados de arenisca."),
         "lead": L("A salt flat under sandstone cliffs. “The convoy never reached the shaft.”",
                   "Un salar bajo acantilados de arenisca. «El convoy nunca llegó al pozo.»"),
-        "body": L("A wrecked convoy lies along the old road, still holding scrap and a relic fragment. East is a ruined salt works; south, surface dig C-7, a magnetite seam waiting for a drill. Three scavengers think it is all theirs.",
-                  "Un convoy destruido yace sobre la vieja ruta, todavía con chatarra y un fragmento de reliquia. Al este, unas salinas en ruinas; al sur, la excavación de superficie C-7, una veta de magnetita esperando un taladro. Tres carroñeros creen que todo es suyo."),
+        "body": L("A wrecked convoy lies along the old road, still holding scrap and a relic fragment. East is a ruined salt works; south, surface dig C-7, a magnetite seam waiting for a drill. The Mutants hold the flats' edges: Brood and Acid Spitters on the north rim, Zombine Miners and a Ripper on the west flats, a Tribal Bug in the hoodoo hollow. They keep off the convoy road.",
+                  "Un convoy destruido yace sobre la vieja ruta, todavía con chatarra y un fragmento de reliquia. Al este, unas salinas en ruinas; al sur, la excavación de superficie C-7, una veta de magnetita esperando un taladro. Los Mutantes son dueños de los bordes del salar: Brood y Acid Spitters en el borde norte, Zombine Miners y un Ripper en las llanuras del oeste, un Tribal Bug en la hondonada de las columnas. No se meten en la ruta del convoy."),
     },
 ]
 
@@ -113,8 +113,8 @@ EAST = [
                  ("shots/world_frontier_cleft", L("The cleft off the road: stairs down to The Cinder Deep.", "La grieta junto a la ruta: escaleras que bajan a The Cinder Deep."))],
         "lead": L("East of The Saltpan the old road runs on through a long dry valley of relay pylons and wrecks.",
                   "Al este de The Saltpan la vieja ruta sigue por un valle seco y largo, con torres de relé y chatarra."),
-        "body": L("A wrecked convoy still blocks half the road; past it, a waystation keeps water, shade and news for the caravans. In a cleft on the north side, stairs drop into The Cinder Deep. Where the road bends north to Dustline's gate, GATE FUEL sells fuel and gas cans, paid from your bank account.",
-                  "Un convoy destruido todavía bloquea media ruta; más adelante, una parada guarda agua, sombra y noticias para las caravanas. En una grieta del lado norte, unas escaleras bajan a The Cinder Deep. Donde la ruta dobla al norte hacia la puerta de Dustline, GATE FUEL vende combustible y bidones que se pagan con tu cuenta del banco."),
+        "body": L("A wrecked convoy still blocks half the road; past it, a waystation keeps water, shade and news for the caravans. In a cleft on the north side, stairs drop into The Cinder Deep; south of the road, past the ambush wrecks, a stair pit under a tarp (KEEP OUT · castoff ground) leads down to the Castoff hideout, and a floodgate in the north-west dam opens on the Sump. Where the road bends north to Dustline's gate, GATE FUEL sells fuel and gas cans, paid from your bank account; off the bay by the gate a board marks the VDI survey clearing, where drillships are called down.",
+                  "Un convoy destruido todavía bloquea media ruta; más adelante, una parada guarda agua, sombra y noticias para las caravanas. En una grieta del lado norte, unas escaleras bajan a The Cinder Deep; al sur de la ruta, pasando los restos de la emboscada, un pozo con escalera bajo una lona (KEEP OUT · castoff ground) baja al escondite de los Castoffs, y una compuerta en el dique del noroeste da al Sump. Donde la ruta dobla al norte hacia la puerta de Dustline, GATE FUEL vende combustible y bidones que se pagan con tu cuenta del banco; junto a la bahía de la puerta, un cartel marca el claro de exploración de VDI, donde se llaman los buques perforadores."),
     },
     {
         "id": "dustline", "name": "Dustline", "kind": L("Trading city", "Ciudad del comercio"), "img": "shots/world_dustline_gate",
@@ -127,8 +127,8 @@ EAST = [
                                                  "El Patio de Caravanas, donde Rask muestra armas desde la caja de su camioneta."))],
         "lead": L("The trading city. Neutral ground where every civilisation buys, sells and hires.",
                   "La ciudad del comercio. Terreno neutral donde todas las civilizaciones compran, venden y contratan."),
-        "body": L("Through the gate and the cargo inspection, the Gate Road runs up to the Central Market and the Exchange, whose 261.6.66 terminal holds your bank account and your depot. West is the Caravan Yard, east Scrapper's Row; the Lower Warrens are closed by order of the Exchange.",
-                  "Pasando la puerta y la inspección de carga, la Gate Road sube hasta el Mercado Central y The Exchange, cuya terminal 261.6.66 guarda tu cuenta del banco y tu depósito. Al oeste está el Patio de Caravanas, al este Scrapper's Row; los Lower Warrens están cerrados por orden del Exchange."),
+        "body": L("Through the gate and the cargo inspection, the Gate Road runs up to the Central Market, where every stall now trades, and the Exchange, whose 261.6.66 terminal holds your bank account and your depot. West is the Caravan Yard with Oksana's bike shop, east Scrapper's Row and the container homes; the East Gate opens on the Floodlands, and caravans camp on the outskirts outside the walls. A VDI agent sells drillship call-outs in the street. The Lower Warrens are still closed by order of the Exchange.",
+                  "Pasando la puerta y la inspección de carga, la Gate Road sube hasta el Mercado Central, donde ahora todos los puestos comercian, y The Exchange, cuya terminal 261.6.66 guarda tu cuenta del banco y tu depósito. Al oeste está el Patio de Caravanas con el taller de motos de Oksana, al este Scrapper's Row y las casas contenedor; la East Gate da a los Floodlands, y las caravanas acampan en las afueras, fuera de los muros. En la calle, un agente de VDI vende llamados de buques perforadores. Los Lower Warrens siguen cerrados por orden del Exchange."),
     },
     {
         "id": "cinder", "name": "The Cinder Deep", "kind": L("Hunting ground · −90 m", "Coto de caza · −90 m"), "img": "shots/world_cinder_nest",
@@ -137,6 +137,50 @@ EAST = [
                   "Bajo la grieta de Frontier Road: galerías de un pueblo antiguo tragadas por el basalto. Acá cazan los Wyrms."),
         "body": L("Four Dragons hunt the ash hall and the bridge gallery; a Greater Dragon keeps the nest. Come down the stairs, hunt, take the loot and climb back out: they return a minute or two later.",
                   "Cuatro Dragones cazan en el salón de ceniza y la galería del puente; un Gran Dragón cuida el nido. Bajá las escaleras, cazá, juntá el botín y volvé a subir: reaparecen un minuto o dos después."),
+    },
+    # Fases 1-7 del juego (2026-10-23): el escondite de los Castoffs, el Sump y la Pump Works, los Floodlands y las afueras.
+    {
+        "id": "castoff-hideout", "name": "The Castoff Hideout", "kind": L("Dungeon · 4 floors · −15 to −60 m", "Mazmorra · 4 pisos · −15 a −60 m"), "img": "shots/world_castoff_hideout",
+        "cap": L("Down the stair pit off Frontier Road: containers, tarps and bulb strings where the Castoffs who kept their guns live.",
+                 "Bajando el pozo junto a Frontier Road: contenedores, lonas y guirnaldas de lamparitas donde viven los Castoffs que se quedaron con sus armas."),
+        "lead": L("Four floors under Frontier Road east, every one meaner than the last, and the Warlord at the bottom.",
+                  "Cuatro pisos bajo Frontier Road este, cada uno peor que el anterior, y el Warlord al fondo."),
+        "body": L("The Yard, the Works, the Barracks and the Warlord's Hall: lookouts and raiders first, then gunners, troopers and a vanguard. Every floor starts on a lit landing no Castoff can see. The Warlord holds the hall from a broken dais beside his truck; his strongbox opens once for each operator, and the contract board in Dustline pays for his head. A service lift takes you back up to the road.",
+                  "The Yard, The Works, The Barracks y The Warlord's Hall: primero vigías y saqueadores, después tiradores, soldados y un vanguardia. Cada piso empieza en un descanso iluminado que ningún Castoff ve. El Warlord domina el salón desde una tarima rota junto a su camión; su cofre se abre una vez por operador, y el tablero de contratos de Dustline paga por su cabeza. Un montacargas de servicio te devuelve a la ruta."),
+    },
+    {
+        "id": "sump", "name": "The Sump", "kind": L("Surface · wetland", "Superficie · humedal"), "img": "shots/world_sump",
+        "cap": L("Reeds, duckboards and standing water: the Sump, through the floodgate north of Frontier Road.",
+                 "Juncos, pasarelas y agua estancada: el Sump, pasando la compuerta al norte de Frontier Road."),
+        "lead": L("A basin north of the road that turns from cracked mud to peat and reeds to standing water.",
+                  "Una cuenca al norte de la ruta que pasa de barro agrietado a turba y juncos y después a agua estancada."),
+        "body": L("Scavengers keep a lean-to on the dry west side; duckboards carry the old road over the peat past a sluice weir. In the north-east a drowned VDI pump station sinks into the water, and beside its open bunker hatch a railed stair pit (PUMP WORKS 7) goes down. Two War Drones patrol the water behind it.",
+                  "Unos carroñeros tienen un refugio en el lado seco del oeste; las pasarelas llevan la vieja ruta sobre la turba, pasando una compuerta de esclusa. Al noreste, una estación de bombeo de VDI se hunde en el agua, y junto a su escotilla abierta un pozo con baranda (PUMP WORKS 7) baja. Dos War Drones patrullan el agua detrás."),
+    },
+    {
+        "id": "pump-works", "name": "The Pump Works", "kind": L("Dungeon · 4 floors · −30 to −120 m", "Mazmorra · 4 pisos · −30 a −120 m"), "img": "shots/world_pump_works",
+        "cap": L("Metal decks, cabinets and cables under the Sump: the Rustbound's floors.", "Pisos de chapa, gabinetes y cables bajo el Sump: los pisos de los Rustbound."),
+        "lead": L("Under the Sump, VDI's machines still receive instructions. Nobody sends them.",
+                  "Bajo el Sump, las máquinas de VDI todavía reciben instrucciones. Nadie las manda."),
+        "body": L("The Intake Hall, the Relay Gallery, the Assembly Line and the Switchyard: Miner Units on patrol, War Drones, Sentry Turrets, Haze Skirmishers and a Pelter, with spike traps on every floor. In the Switchyard the grid blacks out every 30 seconds: lights, turrets and traps go dark while the Chopper keeps hunting, so bring a lantern. Its cache holds a telemetry log that is still being written.",
+                  "The Intake Hall, The Relay Gallery, The Assembly Line y The Switchyard: Miner Units de patrulla, War Drones, Sentry Turrets, Haze Skirmishers y un Pelter, con trampas de púas en todos los pisos. En el Switchyard la red se corta cada 30 segundos: luces, torretas y trampas se apagan mientras el Chopper sigue cazando, así que llevá linterna. Su cofre guarda un registro de telemetría que todavía se está escribiendo."),
+    },
+    {
+        "id": "floodlands", "name": "The Floodlands", "kind": L("Surface · east of Dustline", "Superficie · al este de Dustline"), "img": "shots/world_floodlands",
+        "cap": L("Arriving in the Floodlands: Dustline's west gate behind you, the causeway ahead (church · quay · the cellar ruin).",
+                 "Llegando a los Floodlands: la puerta oeste de Dustline a tu espalda y la calzada adelante (iglesia · muelle · la ruina del sótano)."),
+        "lead": L("Through Dustline's East Gate, a gravel causeway runs between standing water.",
+                  "Pasando la East Gate de Dustline, una calzada de ripio corre entre agua estancada."),
+        "body": L("North, a half-sunk church on its island, reached by boardwalks, and the remains of a bunker; south, a marsh with a drowned van. East are the drowned quay with its dock crane and the cellar ruin, where a railed stair pit drops into the Drowned Cellar: a flooded hall with brick piers, four Crawlers and a Ravager in the back room. Two more gateways stand SEALED, not yet surveyed.",
+                  "Al norte, una iglesia medio hundida en su isla, a la que se llega por pasarelas, y los restos de un búnker; al sur, un pantano con una camioneta ahogada. Al este están el muelle inundado con su grúa y la ruina del sótano, donde un pozo con baranda baja al Drowned Cellar: un salón inundado con pilares de ladrillo, cuatro Crawlers y un Ravager en el cuarto del fondo. Otras dos portadas están SEALED, todavía sin explorar."),
+    },
+    {
+        "id": "outskirts", "name": "Dustline outskirts", "kind": L("Camp outside the walls", "Campamento fuera de los muros"), "img": "shots/world_dustline_outskirts",
+        "cap": L("The caravan camp round the south-west corner of Dustline's walls.", "El campamento de caravanas en la esquina sudoeste de los muros de Dustline."),
+        "lead": L("Travellers who will not pay to sleep inside camp outside the walls.",
+                  "Los viajeros que no quieren pagar para dormir adentro acampan fuera de los muros."),
+        "body": L("A bus-house, a caravan and an RV round the family fire: Mama Zuri buys ore, the only ore buyer in Dustline, and sells rounds; Odo Ferrant, the tinker, sells gas cans and Servo Cores. Round the wall's corner stand the west tents and the guards' tents by the road.",
+                  "Una casa-colectivo, una casa rodante y un motorhome alrededor del fuego de la familia: Mama Zuri compra mineral, la única que lo compra en Dustline, y vende balas; Odo Ferrant, el hojalatero, vende bidones y Servo Cores. Doblando la esquina del muro están las carpas del oeste y las carpas de los guardias junto al camino."),
     },
 ]
 
@@ -167,8 +211,10 @@ CONTROLS = [
     ("E", L("Pick up loot · use a terminal or pump computer", "Recoger botín · usar una terminal o la computadora del surtidor")),
     ("G", L("Use passage / lift · get on and off the bike · ride through", "Usar pasaje / elevador · subir y bajar de la moto · cruzar montado")),
     ("I", L("Loadout & inventory", "Equipo e inventario")),
+    ("M · N", L("Map and status tablets (when you own them)", "Tablets de mapa y de estado (si las tenés)")),
+    ("RMB tap", L("On another operator: follow or invite to party", "Sobre otro operador: seguirlo o invitarlo al grupo")),
     ("K", L("Skills", "Habilidades")),
-    ("1–7", L("Quick slots", "Accesos rápidos")),
+    ("1–9", L("Quick slots: capsules, food, drones", "Accesos rápidos: cápsulas, comida, drones")),
     ("Wheel", L("Zoom camera", "Zoom de cámara")),
 ]
 
@@ -181,6 +227,6 @@ FIRST_STEPS = [
                                                "Hay dos puntos de perforación junto al pozo. Mantené F en uno y mirá cómo cede la roca.")),
     (L("Take the lift", "Tomá el elevador"), L("Press G at the Shaft 3 elevator. The Threshold is quiet; The Shallows are not.",
                                               "Presioná G en el elevador del Pozo 3. The Threshold es tranquila; The Shallows no.")),
-    (L("Watch your battery", "Cuidá tu batería"), L("Your lantern drains energy and nothing recharges it out there. Light it when you need to see, turn it off when you don't.",
-                                                   "La linterna consume energía y allá abajo nada la recarga. Prendela cuando necesites ver y apagala cuando no.")),
+    (L("Watch your battery", "Cuidá tu batería"), L("Your lantern drains energy. Carry the spare cells from the Gear Crate: they refill the worn one between fights, and the Alchemist in Dustline recharges an empty cell. Light it when you need to see, turn it off when you don't.",
+                                                   "La linterna consume energía. Llevá las celdas de repuesto del Gear Crate: recargan la puesta entre peleas, y el Alquimista de Dustline recarga una celda vacía. Prendela cuando necesites ver y apagala cuando no.")),
 ]

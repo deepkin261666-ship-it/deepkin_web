@@ -1,0 +1,27 @@
+{
+  "id": "item.drone.assault",
+  "display_name": "Kestrel Assault Drone",
+  "category": "drone",
+  "description": "A quad with a short carbine slung under its frame. Deployed, it flies beside you for up to 45 seconds and fires at whatever you are fighting, loading Field or Hardened rounds from your cargo (24 a flight at most) and drawing 0.6 energy a second from your worn cell. Needs Tech 3. Elites and bosses shrug off most of its fire. Relay Nine stock; Rask sells it in Dustline.",
+  "visual_id": "visual.drone.assault",
+  "gear_tier": 1,
+  "requirements": {
+    "minimum_skills": {"skill.tech": 3}
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "drone": {
+    "function": "assault",
+    "energy_per_second": 0.6,
+    "duration": 45,
+    "hover_height": 1.6,
+    "follow_offset": [-1.0, 1.0],
+    "damage": 6,
+    "attack_interval": 1.4,
+    "range": 9.0,
+    "max_damage": 9,
+    "rounds_per_deploy": 24
+  },
+  "weight": 2.4
+}

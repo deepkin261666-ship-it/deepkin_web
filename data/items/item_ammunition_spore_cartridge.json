@@ -1,0 +1,13 @@
+{
+  "id": "item.ammunition.spore_cartridge",
+  "display_name": "Spore Cartridge",
+  "description": "A sealed spore charge for Spore Projectors. Hits lighter than a round, then poisons the target for a few seconds.",
+  "ammo_family": "spores",
+  "properties": {
+    "ammo_multiplier": 0.8,
+    "poison_per_second": 2,
+    "poison_seconds": 4.0,
+    "stack_size": 100
+  },
+  "weight": 0.03
+}

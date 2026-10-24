@@ -2,7 +2,7 @@
   "id": "item.shield.sentinel",
   "display_name": "Sentinel Shield",
   "equipment_slot": "secondary_weapon",
-  "description": "A riveted round shield for the off hand. Pairs with any one-handed weapon; two-handed weapons cannot use it.",
+  "description": "A tall ballistic shield with a view slit and a flash board, stencilled 261. Off hand only: pairs with any one-handed weapon; two-handed weapons cannot use it.",
   "visual_id": "visual.shield.sentinel",
   "weapon_family": "skill.shielding",
   "hands": 1,

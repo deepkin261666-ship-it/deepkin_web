@@ -1,0 +1,20 @@
+{
+  "id": "item.armor.verdant_hornet_helmet",
+  "display_name": "Hornet Helmet",
+  "equipment_slot": "head",
+  "description": "A hex-plated shell grown over a rebreather, the Verdant canopy crews' climbing helmet. Tier III. Not issued yet.",
+  "visual_id": "visual.armor.verdant_hornet_helmet",
+  "gear_tier": 3,
+  "requirements": {
+    "minimum_level": 20,
+    "class_ids": [
+      "class.verdant"
+    ]
+  },
+  "properties": {
+    "armor_defense": 9,
+    "resistance_bonus": 6
+  },
+  "weight": 2.3,
+  "planned": true
+}

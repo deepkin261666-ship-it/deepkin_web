@@ -1,0 +1,139 @@
+{
+  "id": "npc.castoff_vanguard",
+  "display_name": "Castoff Vanguard",
+  "faction": "faction.castoffs",
+  "species": "Vanguard",
+  "role": "brute",
+  "archetype": "brute",
+  "tier": "elite",
+  "hunt_tier": 3,
+  "max_health": 300,
+  "movement_speed": 2.5,
+  "detection_range": 13.0,
+  "attack_range": 1.9,
+  "attack_damage": 11,
+  "attack_cooldown": 1.5,
+  "xp": 260,
+  "coins": [
+    15,
+    35
+  ],
+  "threat": 12,
+  "body_radius": 0.5,
+  "perception": {
+    "aggro_radius": 12.0,
+    "memory_seconds": 7.0,
+    "call_radius": 12.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      1.8
+    ],
+    "leash_radius": 22.0,
+    "lure": "pack"
+  },
+  "abilities": [
+    {
+      "id": "shoulder_charge",
+      "name": "Shoulder Charge",
+      "shape": "charge",
+      "damage": 20,
+      "windup": 0.9,
+      "range": 8.0,
+      "width": 1.6,
+      "min_range": 3.5,
+      "trigger_range": 8.0,
+      "cooldown": 9.0,
+      "recovery": 1.0
+    },
+    {
+      "id": "ground_slam",
+      "name": "Ground Slam",
+      "shape": "circle",
+      "damage": 24,
+      "windup": 1.0,
+      "radius": 2.6,
+      "reach": 1.6,
+      "trigger_range": 2.8,
+      "cooldown": 8.0,
+      "recovery": 0.9
+    },
+    {
+      "id": "mace_sweep",
+      "name": "Mace Sweep",
+      "shape": "cone",
+      "damage": 16,
+      "windup": 0.6,
+      "radius": 3.0,
+      "half_angle": 75.0,
+      "trigger_range": 2.6,
+      "cooldown": 5.0,
+      "recovery": 0.5
+    }
+  ],
+  "verbs": [
+    "CHARGE",
+    "SWEEP",
+    "SLAM",
+    "HOLD THE LINE"
+  ],
+  "rules": [
+    "The hideout's door-breaker: from range he charges along a red lane, stopped by walls and by the first operator in it.",
+    "Up close he sweeps the mace in a wide arc and slams a red ring in front of him: get behind him between swings.",
+    "Every blow leaves him standing still for a moment — that is when to hit back."
+  ],
+  "habitat": "The Castoff hideout under Frontier Road east: floors three and four, guarding the Warlord's door.",
+  "lore": "PROVISIONAL. Plate from the same deep crate as the troopers, worn by the ones who earned the Warlord's trust the hard way.",
+  "visual": {
+    "model": "res://assets/game/mobs/castoffs/vanguard.glb",
+    "size": 1.95,
+    "fit": "height",
+    "yaw": 180,
+    "rig": "humanoid",
+    "attack": "melee",
+    "weapon": {
+      "item": "item.weapon.foundry_ironbound_mace",
+      "length": 0.9
+    },
+    "mouth": [
+      0.0,
+      1.3,
+      -0.6
+    ]
+  },
+  "loot": [
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        10,
+        20
+      ],
+      "chance": 0.4
+    },
+    {
+      "item": "item.ammunition.hardened_round",
+      "quantity": [
+        6,
+        14
+      ],
+      "chance": 0.35
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.mineral.lumenita",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.15
+    }
+  ]
+}

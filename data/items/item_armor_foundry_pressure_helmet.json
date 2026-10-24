@@ -1,0 +1,20 @@
+{
+  "id": "item.armor.foundry_pressure_helmet",
+  "display_name": "Pressure Helm",
+  "equipment_slot": "head",
+  "description": "A sealed deep-pressure helm with a hose-fed mask; the Foundry's answer to the lower galleries. Tier IV. Not issued yet.",
+  "visual_id": "visual.armor.foundry_pressure_helmet",
+  "gear_tier": 4,
+  "requirements": {
+    "minimum_level": 35,
+    "class_ids": [
+      "class.foundry"
+    ]
+  },
+  "properties": {
+    "armor_defense": 15,
+    "resistance_bonus": 5
+  },
+  "weight": 3.2,
+  "planned": true
+}

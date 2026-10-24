@@ -1,0 +1,23 @@
+{
+  "id": "item.drone.kamikaze_heavy",
+  "display_name": "Hammerhead Strike Drone",
+  "category": "drone",
+  "description": "A heavier single-use FPV quad carrying twice the charge. Launch it and stand still at its tablet: you fly it in first person (movement keys; up to 55 m away) until it hits something or you detonate it (Space or its key again). The blast hurts every hostile within 4.5 m (75 at the centre, less at the edge; elites and bosses shrug off most of it). The drone is spent. Draws 1 energy a second while it flies, 45 seconds at most. Relay Nine stock; Rask sells it in Dustline.",
+  "visual_id": "visual.drone.kamikaze_heavy",
+  "gear_tier": 1,
+  "properties": {
+    "stack_size": 4
+  },
+  "drone": {
+    "function": "kamikaze",
+    "energy_per_second": 1.0,
+    "duration": 45,
+    "hover_height": 1.4,
+    "speed": 12.0,
+    "control_range": 55.0,
+    "blast_radius": 4.5,
+    "damage": 75,
+    "max_damage": 80
+  },
+  "weight": 1.8
+}

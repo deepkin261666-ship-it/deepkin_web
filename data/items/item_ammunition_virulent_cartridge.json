@@ -1,0 +1,13 @@
+{
+  "id": "item.ammunition.virulent_cartridge",
+  "display_name": "Virulent Cartridge",
+  "description": "A concentrated spore strain for Spore Projectors: a harder poison that lasts longer. Rarer than spore cartridges.",
+  "ammo_family": "spores",
+  "properties": {
+    "ammo_multiplier": 0.9,
+    "poison_per_second": 3,
+    "poison_seconds": 6.0,
+    "stack_size": 100
+  },
+  "weight": 0.035
+}

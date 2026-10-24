@@ -3,7 +3,7 @@
   "display_name": "Greater Dragon",
   "max_health": 560,
   "movement_speed": 2.4,
-  "detection_range": 13.0,
+  "detection_range": 16.0,
   "attack_range": 3.2,
   "attack_damage": 10,
   "attack_cooldown": 1.8,
@@ -12,6 +12,7 @@
   "role": "brute",
   "archetype": "territorial",
   "tier": "normal",
+  "hunt_tier": 4,
   "threat": 18,
   "xp": 520,
   "coins": [
@@ -36,8 +37,8 @@
     "Slow, tough and patient: it heals if you give it room, so keep a steady pressure on it."
   ],
   "perception": {
-    "aggro_radius": 8.0,
-    "memory_seconds": 4.0,
+    "aggro_radius": 12.0,
+    "memory_seconds": 8.0,
     "call_radius": 0.0
   },
   "movement": {
@@ -45,7 +46,7 @@
       0.0,
       3.0
     ],
-    "leash_radius": 14.0,
+    "leash_radius": 18.0,
     "lure": "territorial",
     "retreat_health": 0.0,
     "retreat_seconds": 0.0

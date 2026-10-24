@@ -1,0 +1,125 @@
+{
+  "comment": "Ambient talk for the Dustline outskirts camp (2026-10-13, NEXT_SESSION 3f): the travellers, the caravan family, the tinker and the camp guards outside the Frontier Gate. Keys are the worker ids placed by tools/author_dustline.py (outskirts_camp block). \"lines_es\" is the Spanish (rioplatense voseo) copy for the wiki; the game shows \"lines\" only. Lore provisional: docs/design/DUSTLINE.md.",
+  "speakers": {
+    "npc.dustline_camp_matriarch": {
+      "name": "MAMA ZURI  ·  CARAVAN FAMILY",
+      "lines": [
+        "Inside the walls they tax the air you breathe. Out here you only pay me, and I'm cheaper.",
+        "Bring me ore. Hematite, limonite, lodestone — the forges in there buy it from me, not from you.",
+        "Six wheels, four children, one stove. We've crossed the Saltpan eleven times. The Exchange still calls us visitors.",
+        "Rounds, yes, I sell rounds. A family on the road sleeps better armed."
+      ],
+      "lines_es": [
+        "Adentro de las murallas te cobran hasta el aire que respirás. Acá afuera me pagás a mí nomás, y salgo más barata.",
+        "Traeme mineral. Hematita, limonita, magnetita: las forjas de adentro me lo compran a mí, no a vos.",
+        "Seis ruedas, cuatro pibes, una cocina. Cruzamos el Saltpan once veces. La Exchange igual nos dice visitas.",
+        "Balas, sí, vendo balas. Una familia en la ruta duerme mejor armada."
+      ]
+    },
+    "npc.dustline_camp_driver": {
+      "name": "TOMAS  ·  CARAVAN FAMILY",
+      "lines": [
+        "The bus runs on whatever burns. Last week that was a chair.",
+        "Mama says we leave when the price of fuel drops. Mama has said that for a month.",
+        "Don't park near the laundry. Ilka throws rocks, and she doesn't miss.",
+        "The road east floods every spring. We wait it out here, where the dust at least stays dry."
+      ],
+      "lines_es": [
+        "El bondi anda con lo que se queme. La semana pasada fue una silla.",
+        "La vieja dice que nos vamos cuando baje la nafta. Hace un mes que dice lo mismo.",
+        "No estaciones cerca de la ropa tendida. Ilka tira piedras y no le erra nunca.",
+        "La ruta del este se inunda cada primavera. Esperamos acá, donde por lo menos el polvo está seco."
+      ]
+    },
+    "npc.dustline_camp_laundress": {
+      "name": "ILKA  ·  CARAVAN FAMILY",
+      "lines": [
+        "Wash it, hang it, it's brown again by noon. That's Dustline for you.",
+        "My brother thinks the guards at the gate are friendly. My brother is new.",
+        "If you're going inside, buy the water at the market. Ours is for washing. Mostly.",
+        "Every caravan that comes back is a little shorter than the one that left. You learn to count wheels."
+      ],
+      "lines_es": [
+        "La lavás, la colgás, y al mediodía ya está marrón de nuevo. Así es Dustline.",
+        "Mi hermano cree que los guardias del portón son buena gente. Mi hermano es nuevo.",
+        "Si vas a entrar, comprá el agua en el mercado. La nuestra es para lavar. Más o menos.",
+        "Cada caravana que vuelve viene un poco más corta que la que salió. Aprendés a contar ruedas."
+      ]
+    },
+    "npc.dustline_camp_tinker": {
+      "name": "ODO FERRANT  ·  TINKER",
+      "lines": [
+        "Gas cans, servo cores, whatever fell off a convoy. I don't ask where it fell from.",
+        "The Row won't let me in with a bench. Out here I don't need their permission, just their customers.",
+        "Bring me ferrous samples. I melt them down into things that almost work.",
+        "A can costs more here than at the gate pump. The pump is down the road, past the raiders. Your call."
+      ],
+      "lines_es": [
+        "Bidones, servomotores, lo que se haya caído de un convoy. No pregunto de dónde se cayó.",
+        "En el Row no me dejan entrar con el banco de trabajo. Acá afuera no necesito su permiso, nomás a sus clientes.",
+        "Traeme muestras ferrosas. Las fundo y hago cosas que casi funcionan.",
+        "Un bidón acá sale más caro que en el surtidor del portón. El surtidor queda ruta abajo, pasando a los saqueadores. Vos sabrás."
+      ]
+    },
+    "npc.dustline_camp_traveller": {
+      "name": "LENKA  ·  TRAVELLER",
+      "lines": [
+        "Three days waiting for an escort to the Scarp. The fire's warm, the company's cheap.",
+        "They wanted twenty Metal to sleep inside. I have a blanket and a knife. That's free.",
+        "Someone at the fire swears the Floodlands have church bells. Under the water.",
+        "If you see a red caravan on the road, tell them Lenka's still here. Or don't. They owe me money."
+      ],
+      "lines_es": [
+        "Tres días esperando escolta para el Scarp. El fuego calienta y la compañía sale barata.",
+        "Querían veinte de Metal para dormir adentro. Tengo una frazada y un cuchillo. Eso es gratis.",
+        "Uno del fogón jura que en las Floodlands suenan campanas de iglesia. Abajo del agua.",
+        "Si ves una caravana roja en la ruta, deciles que Lenka sigue acá. O no. Me deben plata."
+      ]
+    },
+    "npc.dustline_camp_pilgrim": {
+      "name": "OSKAR  ·  PILGRIM",
+      "lines": [
+        "I walked from the Outpost. My boots did not. These are someone else's.",
+        "The deeper you go, the more they pay. The more they pay, the fewer come back to collect.",
+        "Sit a while. Nobody out here asks what you're carrying.",
+        "I came to see the city. Turns out the city charges for that too."
+      ],
+      "lines_es": [
+        "Vine caminando desde el Outpost. Mis botas no. Estas son de otro.",
+        "Cuanto más bajás, más te pagan. Cuanto más te pagan, menos vuelven a cobrar.",
+        "Sentate un rato. Acá afuera nadie te pregunta qué llevás.",
+        "Vine a ver la ciudad. Resulta que eso también lo cobran."
+      ]
+    },
+    "npc.dustline_camp_guard_road": {
+      "name": "BRENN  ·  CAMP GUARD",
+      "lines": [
+        "The Exchange guards the gate. We guard the people the gate won't let in.",
+        "Keep the road clear. Caravans don't brake for tents.",
+        "Raiders come to the camp first. Easier pickings than the wall. That's why I'm here.",
+        "Nobody pays me. The families feed me. Fair trade, by Dustline standards."
+      ],
+      "lines_es": [
+        "La Exchange cuida el portón. Nosotros cuidamos a los que el portón no deja pasar.",
+        "Dejá la ruta libre. Las caravanas no frenan por una carpa.",
+        "Los saqueadores vienen primero al campamento. Es más fácil que la muralla. Por eso estoy acá.",
+        "Nadie me paga. Las familias me dan de comer. Un trato justo, para lo que es Dustline."
+      ]
+    },
+    "npc.dustline_camp_guard_west": {
+      "name": "SAL  ·  CAMP GUARD",
+      "lines": [
+        "The west tents are the quiet ones. Keep them that way.",
+        "That wall has eyes. They watch us more than they watch the desert.",
+        "Fires out by midnight. Smoke brings questions from the tower.",
+        "If something comes over the dunes, run for the gate. They'll open it. Eventually."
+      ],
+      "lines_es": [
+        "Las carpas del oeste son las tranquilas. Que sigan así.",
+        "Esa muralla tiene ojos. Nos miran más a nosotros que al desierto.",
+        "Los fuegos se apagan a la medianoche. El humo trae preguntas desde la torre.",
+        "Si algo aparece por las dunas, corré al portón. Te van a abrir. En algún momento."
+      ]
+    }
+  }
+}

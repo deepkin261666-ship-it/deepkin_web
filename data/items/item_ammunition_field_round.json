@@ -1,7 +1,8 @@
 {
   "id": "item.ammunition.field_round",
   "display_name": "Field Round",
-  "description": "Standard field round. Any ranged weapon fires it; the first ammunition stack in your cargo is the one loaded.",
+  "description": "Standard field round. Firearms and precision weapons fire it; the first ammunition stack in your cargo is the one loaded.",
+  "ammo_family": "rounds",
   "properties": {
     "ammo_multiplier": 1.0,
     "stack_size": 100

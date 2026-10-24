@@ -1,0 +1,20 @@
+{
+  "comment": "The Dustline house agent (2026-10-15, Phase 6, docs/INTERIORS.md). Sells the container apartment and its 261.6.66 terminal through the trade window (data/shops/dustline_houses.json). Lore provisional.",
+  "speakers": {
+    "npc.dustline_house_agent": {
+      "name": "IRINA VOSS  ·  CONTAINER HOMES",
+      "lines": [
+        "Unit seven. Four walls, a lock that answers to you and nobody else. Ten thousand, and the Exchange never asks where you sleep.",
+        "Hang your trophies on the walls. What you leave in there stays yours, even when the deep takes everything else.",
+        "Five thousand more and I wire you a 261.6.66 line. Bank and depot from your own desk. No queue at the Exchange.",
+        "Everything has a price. Privacy is the only thing in this city worth paying twice for."
+      ],
+      "lines_es": [
+        "La unidad siete. Cuatro paredes y una cerradura que te responde a vos y a nadie más. Diez mil, y la Exchange nunca pregunta dónde dormís.",
+        "Colgá tus trofeos en las paredes. Lo que dejes ahí adentro sigue siendo tuyo, aunque el fondo se lleve todo lo demás.",
+        "Con cinco mil más te conecto una línea 261.6.66. Banco y depósito desde tu propio escritorio, sin hacer fila en la Exchange.",
+        "Todo tiene un precio. La privacidad es lo único en esta ciudad que vale la pena pagar dos veces."
+      ]
+    }
+  }
+}

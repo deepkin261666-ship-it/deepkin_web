@@ -1,0 +1,11 @@
+{
+  "id": "item.contract.drive_800",
+  "display_name": "Contract Drive",
+  "description": "A scuffed USB stick with a wax seal over the port: an employer's payment in crypto, 800 Metal. Insert it at the BANK app of any 261.6.66 terminal (INSERT DRIVE) to credit your account; the drive is wiped and kept by the bank.",
+  "visual_id": "visual.item.contract_drive",
+  "properties": {
+    "drive_value": 800,
+    "stack_size": 10
+  },
+  "weight": 0.02
+}

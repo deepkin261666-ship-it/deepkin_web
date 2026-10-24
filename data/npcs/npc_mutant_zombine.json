@@ -1,0 +1,125 @@
+{
+  "id": "npc.mutant_zombine",
+  "display_name": "Zombine Miner",
+  "max_health": 120,
+  "movement_speed": 1.9,
+  "detection_range": 16.5,
+  "attack_range": 1.7,
+  "attack_damage": 10,
+  "attack_cooldown": 1.6,
+  "faction": "faction.mutants",
+  "species": "Zombine Miner",
+  "role": "brute",
+  "archetype": "brute",
+  "tier": "normal",
+  "hunt_tier": 3,
+  "threat": 6,
+  "xp": 95,
+  "coins": [
+    6,
+    14
+  ],
+  "habitat": "The Saltpan \u2014 the west flats, away from the road",
+  "lore": "PROVISIONAL. A VDI shift that went down a shaft and came back up. The helmet lamp still works; the man under it does not. It never lets go of the pick.",
+  "verbs": [
+    "SHAMBLE",
+    "GRAB",
+    "SWING",
+    "FOLLOW"
+  ],
+  "rules": [
+    "Slow, but it never stops following: it remembers where you went.",
+    "It reaches out before it grabs \u2014 the red arc \u2014 and the grab hurts. Step back out of reach.",
+    "The pick comes down in a red ring: don't stand in it."
+  ],
+  "perception": {
+    "aggro_radius": 13.5,
+    "memory_seconds": 9,
+    "call_radius": 8.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      1.6
+    ],
+    "leash_radius": 28,
+    "lure": "predator",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "grab",
+      "name": "Grab",
+      "shape": "bite",
+      "damage": 16,
+      "windup": 0.8,
+      "reach": 1.9,
+      "half_angle": 40.0,
+      "cooldown": 7.0,
+      "trigger_range": 1.9,
+      "recovery": 1.0
+    },
+    {
+      "id": "pick",
+      "name": "Pick Swing",
+      "damage": 20,
+      "windup": 1.0,
+      "radius": 1.8,
+      "reach": 1.4,
+      "cooldown": 9.0,
+      "trigger_range": 2.4,
+      "target": "position",
+      "recovery": 0.8
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.ore.magnetite",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        5,
+        12
+      ],
+      "chance": 0.25
+    },
+    {
+      "item": "item.battery.provisional_relay_cell",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.06
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.15
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/mutants/zombine_miner.glb",
+    "size": 1.85,
+    "fit": "height",
+    "yaw": 180,
+    "gait": "shamble",
+    "roughness": 0.8,
+    "gait_legs": {
+      "height": 0.42,
+      "stride": 0.2,
+      "lift": 0.05,
+      "pattern": "biped",
+      "cycle": 1.3
+    }
+  }
+}

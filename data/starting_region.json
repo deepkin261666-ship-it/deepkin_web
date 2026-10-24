@@ -968,6 +968,7 @@
      "body": {
       "model": "characters/dustline/street_medic",
       "height": 1.74,
+      "yaw": 180,
       "idle": true
      }
     },
@@ -2633,20 +2634,6 @@
       "width": 3.4
      },
      {
-      "name": "portal_0",
-      "points": [
-       [
-        -23.7,
-        0.0
-       ],
-       [
-        -25.7,
-        0.0
-       ]
-      ],
-      "width": 4.78
-     },
-     {
       "name": "deep_c3_seal",
       "points": [
        [
@@ -2659,6 +2646,20 @@
        ]
       ],
       "width": 3.4
+     },
+     {
+      "name": "portal_0",
+      "points": [
+       [
+        -23.7,
+        0.0
+       ],
+       [
+        -25.7,
+        0.0
+       ]
+      ],
+      "width": 4.78
      }
     ],
     "wet": [
@@ -3436,6 +3437,20 @@
        ]
       ],
       "width": 5.88
+     },
+     {
+      "name": "portal_1",
+      "points": [
+       [
+        37.13,
+        -37.13
+       ],
+       [
+        38.55,
+        -38.55
+       ]
+      ],
+      "width": 5.88
      }
     ],
     "wet": [],
@@ -4143,6 +4158,20 @@
       "width": 7.0
      },
      {
+      "name": "portal_0",
+      "points": [
+       [
+        -44.0,
+        -6.0
+       ],
+       [
+        -46.0,
+        -6.0
+       ]
+      ],
+      "width": 5.88
+     },
+     {
       "name": "east_road",
       "points": [
        [
@@ -4349,8 +4378,7 @@
       2.6,
       -8.6
      ],
-     "text": "EAST · FRONTIER ROAD\nto Dustline",
-     "lettered": true
+     "text": "EAST · FRONTIER ROAD\nto Dustline"
     }
    ],
    "drill_sites": [
@@ -4960,6 +4988,18 @@
        22.0
       ],
       "rotation": 45
+     },
+     {
+      "name": "vdi_clearing",
+      "center": [
+       50.0,
+       27.0
+      ],
+      "radius": [
+       14.0,
+       12.0
+      ],
+      "rotation": 20.0
      }
     ],
     "passages": [
@@ -5003,6 +5043,54 @@
        ]
       ],
       "width": 15.0
+     },
+     {
+      "name": "vdi_clearing",
+      "points": [
+       [
+        41.0,
+        -8.0
+       ],
+       [
+        46.0,
+        8.0
+       ],
+       [
+        50.0,
+        20.0
+       ]
+      ],
+      "width": 7.0
+     },
+     {
+      "name": "sump_gate",
+      "points": [
+       [
+        14.0,
+        -30.0
+       ],
+       [
+        -14.0,
+        -44.0
+       ],
+       [
+        -44.0,
+        -56.0
+       ],
+       [
+        -62.0,
+        -62.0
+       ],
+       [
+        -70.0,
+        -70.0
+       ],
+       [
+        -84.0,
+        -84.0
+       ]
+      ],
+      "width": 13.0
      }
     ],
     "wet": [],
@@ -5051,6 +5139,32 @@
        ]
       ],
       "width": 5.0
+     },
+     {
+      "name": "sump_gate",
+      "points": [
+       [
+        14.0,
+        -30.0
+       ],
+       [
+        -14.0,
+        -44.0
+       ],
+       [
+        -44.0,
+        -56.0
+       ],
+       [
+        -62.0,
+        -62.0
+       ],
+       [
+        -70.0,
+        -70.0
+       ]
+      ],
+      "width": 3.6
      }
     ],
     "props": [
@@ -5115,12 +5229,33 @@
        4.6000000000000005
       ],
       "rotation": 45
+     },
+     {
+      "name": "deep_castoff_hideout",
+      "center": [
+       40.66,
+       -18.74
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 225
      }
     ]
    },
    "pieces": [],
    "lights": [],
-   "signs": [],
+   "signs": [
+    {
+     "position": [
+      45.5,
+      2.4,
+      6.0
+     ],
+     "text": "VDI SURVEY CLEARING\nopen ground · drillship call-outs"
+    }
+   ],
    "drill_sites": [],
    "workers": [
     {
@@ -5157,6 +5292,9 @@
      "price_per_litre": 2,
      "can_price": 25
     }
+   ],
+   "extra_sets": [
+    "res://data/world/sets/sump_floodgate.json"
    ]
   },
   {
@@ -5304,6 +5442,20 @@
        ]
       ],
       "width": 22.0
+     },
+     {
+      "name": "east_gate",
+      "points": [
+       [
+        61.87,
+        -40.56
+       ],
+       [
+        61.87,
+        -53.06
+       ]
+      ],
+      "width": 9.0
      }
     ],
     "wet": [],
@@ -5414,6 +5566,28 @@
        ]
       ],
       "width": 3.0
+     },
+     {
+      "name": "east_gate",
+      "points": [
+       [
+        51.27,
+        -33.59
+       ],
+       [
+        57.98,
+        -38.18
+       ],
+       [
+        61.87,
+        -42.55
+       ],
+       [
+        61.87,
+        -49.55
+       ]
+      ],
+      "width": 4.5
      }
     ],
     "props": []
@@ -5441,7 +5615,10 @@
      ],
      "rotation": 158.2,
      "pose": "idle",
-     "class": "class.relay"
+     "class": "class.relay",
+     "wander": {
+      "radius": 2.5
+     }
     },
     {
      "id": "npc.dustline_caravan_master",
@@ -5451,7 +5628,10 @@
      ],
      "rotation": -89.1,
      "pose": "idle",
-     "class": "class.drift"
+     "class": "class.drift",
+     "wander": {
+      "radius": 3.0
+     }
     },
     {
      "id": "npc.dustline_caravaneer",
@@ -5461,7 +5641,10 @@
      ],
      "rotation": -49.2,
      "pose": "carry",
-     "class": "class.verdant"
+     "class": "class.verdant",
+     "wander": {
+      "radius": 4.0
+     }
     },
     {
      "id": "npc.dustline_trader_food",
@@ -5471,9 +5654,7 @@
      ],
      "rotation": -90.2,
      "pose": "idle",
-     "class": "class.verdant",
-     "model": "characters/dustline/old_man",
-     "height": 1.7
+     "class": "class.verdant"
     },
     {
      "id": "npc.dustline_trader_ammo",
@@ -5524,12 +5705,15 @@
     {
      "id": "npc.dustline_exchange_clerk",
      "position": [
-      -6.43,
-      -4.45
+      -1.7,
+      -5.09
      ],
-     "rotation": -90.5,
+     "rotation": -90.6,
      "pose": "idle",
-     "class": "class.relay"
+     "class": "class.relay",
+     "wander": {
+      "radius": 2.5
+     }
     },
     {
      "id": "npc.dustline_smith",
@@ -5556,10 +5740,10 @@
     {
      "id": "npc.dustline_east_guard",
      "position": [
-      49.57,
-      -31.89
+      53.46,
+      -29.13
      ],
-     "rotation": 132.9,
+     "rotation": 7.6,
      "pose": "idle",
      "class": "class.foundry"
     },
@@ -5583,7 +5767,10 @@
      "pose": "idle",
      "class": "class.verdant",
      "model": "characters/dustline/ps2_drifter",
-     "height": 1.74
+     "height": 1.74,
+     "wander": {
+      "radius": 4.5
+     }
     },
     {
      "id": "npc.dustline_townsfolk_b",
@@ -5593,7 +5780,10 @@
      ],
      "rotation": 54.9,
      "pose": "carry",
-     "class": "class.drift"
+     "class": "class.drift",
+     "wander": {
+      "radius": 5.0
+     }
     },
     {
      "id": "npc.dustline_weapons_merchant",
@@ -5606,16 +5796,211 @@
      "class": "class.drift",
      "model": "-",
      "tag_height": 1.75
+    },
+    {
+     "id": "npc.dustline_alchemist",
+     "position": [
+      16.69,
+      -0.57
+     ],
+     "rotation": -90.4,
+     "pose": "idle",
+     "class": "class.verdant",
+     "model": "characters/dustline/old_man",
+     "height": 1.66
+    },
+    {
+     "id": "npc.dustline_bike_dealer",
+     "position": [
+      -1.2,
+      31.47
+     ],
+     "rotation": -89.0,
+     "pose": "idle",
+     "class": "class.drift",
+     "model": "characters/dustline/ps2_drifter",
+     "height": 1.72
+    },
+    {
+     "id": "npc.dustline_trader_cells",
+     "position": [
+      -5.02,
+      13.79
+     ],
+     "rotation": -45.0,
+     "pose": "idle",
+     "class": "class.relay"
+    },
+    {
+     "id": "npc.dustline_camp_matriarch",
+     "position": [
+      5.09,
+      68.73
+     ],
+     "rotation": -87.4,
+     "pose": "idle",
+     "class": "class.drift",
+     "model": "characters/dustline/street_medic",
+     "height": 1.66
+    },
+    {
+     "id": "npc.dustline_camp_tinker",
+     "position": [
+      13.15,
+      55.01
+     ],
+     "rotation": -88.0,
+     "pose": "idle",
+     "class": "class.foundry",
+     "model": "characters/dustline/old_man",
+     "height": 1.7
+    },
+    {
+     "id": "npc.dustline_camp_driver",
+     "position": [
+      4.24,
+      63.64
+     ],
+     "rotation": -111.1,
+     "pose": "idle",
+     "class": "class.drift",
+     "model": "characters/dustline/ps2_drifter",
+     "height": 1.76,
+     "wander": {
+      "radius": 3.0
+     }
+    },
+    {
+     "id": "npc.dustline_camp_laundress",
+     "position": [
+      15.7,
+      64.63
+     ],
+     "rotation": 45.0,
+     "pose": "idle",
+     "class": "class.verdant",
+     "wander": {
+      "radius": 2.5
+     }
+    },
+    {
+     "id": "npc.dustline_camp_traveller",
+     "position": [
+      7.35,
+      67.32
+     ],
+     "rotation": -8.7,
+     "pose": "idle",
+     "class": "class.verdant",
+     "wander": {
+      "radius": 3.0
+     }
+    },
+    {
+     "id": "npc.dustline_camp_pilgrim",
+     "position": [
+      10.18,
+      64.77
+     ],
+     "rotation": 94.9,
+     "pose": "idle",
+     "class": "class.relay",
+     "model": "characters/dustline/ps2_drifter",
+     "height": 1.72,
+     "wander": {
+      "radius": 3.5
+     }
+    },
+    {
+     "id": "npc.dustline_camp_guard_road",
+     "position": [
+      29.13,
+      45.25
+     ],
+     "rotation": -47.1,
+     "pose": "idle",
+     "class": "class.foundry"
+    },
+    {
+     "id": "npc.dustline_camp_guard_west",
+     "position": [
+      -1.7,
+      68.17
+     ],
+     "rotation": -87.5,
+     "pose": "idle",
+     "class": "class.foundry"
+    },
+    {
+     "id": "npc.dustline_house_agent",
+     "position": [
+      50.35,
+      -22.63
+     ],
+     "rotation": -91.4,
+     "pose": "idle",
+     "class": "class.relay",
+     "model": "characters/dustline/street_medic",
+     "height": 1.72
+    },
+    {
+     "id": "npc.dustline_vdi_agent",
+     "position": [
+      -4.1,
+      21.92
+     ],
+     "rotation": -89.4,
+     "pose": "idle",
+     "class": "class.relay",
+     "model": "characters/dustline/vdi_agent",
+     "height": 0.7,
+     "hover": 1.45,
+     "tag_height": 2.6
     }
    ],
    "computers": [
     {
      "id": "computer.dustline.exchange_depot",
      "position": [
-      -8.2,
-      -2.55
+      -8.24,
+      -2.51
      ],
      "rotation": 45
+    },
+    {
+     "id": "computer.dustline.exchange_terminal_2",
+     "position": [
+      -6.33,
+      -4.42
+     ],
+     "rotation": 45
+    },
+    {
+     "id": "computer.dustline.exchange_terminal_3",
+     "position": [
+      -4.42,
+      -6.33
+     ],
+     "rotation": 45
+    },
+    {
+     "id": "computer.dustline.exchange_terminal_4",
+     "position": [
+      -2.51,
+      -8.24
+     ],
+     "rotation": 45
+    }
+   ],
+   "vehicle_bays": [
+    {
+     "id": "bay.dustline.bike_shop",
+     "position": [
+      4.24,
+      23.48
+     ],
+     "rotation": -90.0,
+     "spots": 3
     }
    ]
   },
@@ -6370,6 +6755,2076 @@
    ],
    "drill_sites": [],
    "links": "res://data/world/sets/links_excavation_c3_f3.json"
+  },
+  {
+   "zone_id": "zone.castoff_hideout_f1",
+   "name": "Castoff Hideout · The Yard",
+   "anchor": [
+    -700.0,
+    0.0,
+    300.0
+   ],
+   "bounds": [
+    -50,
+    50,
+    -50,
+    50
+   ],
+   "arrival": [
+    -716.9,
+    0.0,
+    334.02
+   ],
+   "set": "res://data/world/sets/castoff_hideout_f1.json",
+   "atmosphere": {
+    "ambient_color": "a8988a",
+    "ambient_energy": 0.62,
+    "fog_color": "17120e",
+    "fog_density": 0.003,
+    "exposure": 1.1
+   },
+   "cavern": {
+    "seed": 3000,
+    "material": "res://assets/game/materials/geology/geology_c3.tres",
+    "cell": 0.5,
+    "wall_height": 6.5,
+    "near_wall_height": 1.4,
+    "smooth": 3.0,
+    "warp": 1.4,
+    "chambers": [
+     {
+      "center": [
+       -14.14,
+       33.94
+      ],
+      "radius": [
+       6.0,
+       7.5
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -1.41,
+       7.07
+      ],
+      "radius": [
+       13.0,
+       20.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -4.95,
+       -16.26
+      ],
+      "radius": [
+       5.5,
+       9.0
+      ],
+      "rotation": 50.0
+     },
+     {
+      "center": [
+       24.04,
+       -14.14
+      ],
+      "radius": [
+       7.0,
+       8.0
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -14.14,
+        33.94
+       ],
+       [
+        -11.31,
+        25.46
+       ],
+       [
+        -8.49,
+        19.8
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "points": [
+       [
+        -1.41,
+        -7.07
+       ],
+       [
+        -3.54,
+        -13.44
+       ]
+      ],
+      "width": 4.5
+     },
+     {
+      "points": [
+       [
+        12.73,
+        -4.24
+       ],
+       [
+        19.8,
+        -9.9
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "name": "deep_hideout_up",
+      "points": [
+       [
+        -18.53,
+        32.39
+       ],
+       [
+        -22.56,
+        28.36
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [],
+    "props": [],
+    "holes": [
+     {
+      "name": "deep_hideout_down",
+      "center": [
+       23.69,
+       -15.91
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": []
+  },
+  {
+   "zone_id": "zone.castoff_hideout_f2",
+   "name": "Castoff Hideout · The Works",
+   "anchor": [
+    -700.0,
+    0.0,
+    420.0
+   ],
+   "bounds": [
+    -50,
+    50,
+    -50,
+    50
+   ],
+   "arrival": [
+    -716.9,
+    0.0,
+    454.02
+   ],
+   "set": "res://data/world/sets/castoff_hideout_f2.json",
+   "atmosphere": {
+    "ambient_color": "a8988a",
+    "ambient_energy": 0.62,
+    "fog_color": "17120e",
+    "fog_density": 0.003,
+    "exposure": 1.1
+   },
+   "cavern": {
+    "seed": 3001,
+    "material": "res://assets/game/materials/geology/geology_c3.tres",
+    "cell": 0.5,
+    "wall_height": 6.5,
+    "near_wall_height": 1.4,
+    "smooth": 3.0,
+    "warp": 1.4,
+    "chambers": [
+     {
+      "center": [
+       -14.14,
+       33.94
+      ],
+      "radius": [
+       6.0,
+       7.5
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -2.83,
+       11.31
+      ],
+      "radius": [
+       11.0,
+       15.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       7.07,
+       -15.56
+      ],
+      "radius": [
+       10.0,
+       14.0
+      ],
+      "rotation": 35.0
+     },
+     {
+      "center": [
+       28.28,
+       -19.8
+      ],
+      "radius": [
+       6.0,
+       7.0
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -14.14,
+        33.94
+       ],
+       [
+        -12.73,
+        26.87
+       ],
+       [
+        -9.9,
+        21.21
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "points": [
+       [
+        2.12,
+        2.12
+       ],
+       [
+        4.24,
+        -7.07
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "points": [
+       [
+        16.97,
+        -16.97
+       ],
+       [
+        24.75,
+        -19.09
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "name": "deep_hideout_up",
+      "points": [
+       [
+        -18.53,
+        32.39
+       ],
+       [
+        -22.56,
+        28.36
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [],
+    "props": [],
+    "holes": [
+     {
+      "name": "deep_hideout_down",
+      "center": [
+       27.93,
+       -21.57
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": []
+  },
+  {
+   "zone_id": "zone.castoff_hideout_f3",
+   "name": "Castoff Hideout · The Barracks",
+   "anchor": [
+    -700.0,
+    0.0,
+    540.0
+   ],
+   "bounds": [
+    -50,
+    50,
+    -50,
+    50
+   ],
+   "arrival": [
+    -716.9,
+    0.0,
+    574.02
+   ],
+   "set": "res://data/world/sets/castoff_hideout_f3.json",
+   "atmosphere": {
+    "ambient_color": "a8988a",
+    "ambient_energy": 0.62,
+    "fog_color": "17120e",
+    "fog_density": 0.003,
+    "exposure": 1.1
+   },
+   "cavern": {
+    "seed": 3002,
+    "material": "res://assets/game/materials/geology/geology_c3.tres",
+    "cell": 0.5,
+    "wall_height": 6.5,
+    "near_wall_height": 1.4,
+    "smooth": 3.0,
+    "warp": 1.4,
+    "chambers": [
+     {
+      "center": [
+       -14.14,
+       33.94
+      ],
+      "radius": [
+       6.0,
+       7.5
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       0.0,
+       5.66
+      ],
+      "radius": [
+       9.0,
+       24.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -7.07,
+       -12.73
+      ],
+      "radius": [
+       6.0,
+       10.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       20.51,
+       3.54
+      ],
+      "radius": [
+       5.0,
+       8.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       19.09,
+       -24.75
+      ],
+      "radius": [
+       7.0,
+       8.0
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -14.14,
+        33.94
+       ],
+       [
+        -13.44,
+        26.16
+       ],
+       [
+        -12.73,
+        21.21
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "points": [
+       [
+        0.0,
+        -2.83
+       ],
+       [
+        -3.54,
+        -9.19
+       ]
+      ],
+      "width": 4.5
+     },
+     {
+      "points": [
+       [
+        12.73,
+        -1.41
+       ],
+       [
+        17.68,
+        0.71
+       ]
+      ],
+      "width": 4.0
+     },
+     {
+      "points": [
+       [
+        14.14,
+        -11.31
+       ],
+       [
+        16.26,
+        -19.09
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "name": "deep_hideout_up",
+      "points": [
+       [
+        -18.53,
+        32.39
+       ],
+       [
+        -22.56,
+        28.36
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [],
+    "props": [],
+    "holes": [
+     {
+      "name": "deep_hideout_down",
+      "center": [
+       18.74,
+       -26.52
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": []
+  },
+  {
+   "zone_id": "zone.castoff_hideout_f4",
+   "name": "Castoff Hideout · The Warlord's Hall",
+   "anchor": [
+    -700.0,
+    0.0,
+    660.0
+   ],
+   "bounds": [
+    -50,
+    50,
+    -50,
+    50
+   ],
+   "arrival": [
+    -716.9,
+    0.0,
+    694.02
+   ],
+   "set": "res://data/world/sets/castoff_hideout_f4.json",
+   "atmosphere": {
+    "ambient_color": "a8988a",
+    "ambient_energy": 0.62,
+    "fog_color": "17120e",
+    "fog_density": 0.003,
+    "exposure": 1.1
+   },
+   "cavern": {
+    "seed": 3003,
+    "material": "res://assets/game/materials/geology/geology_c3.tres",
+    "cell": 0.5,
+    "wall_height": 6.5,
+    "near_wall_height": 1.4,
+    "smooth": 3.0,
+    "warp": 1.4,
+    "chambers": [
+     {
+      "center": [
+       -14.14,
+       33.94
+      ],
+      "radius": [
+       6.0,
+       7.5
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -2.83,
+       14.14
+      ],
+      "radius": [
+       8.0,
+       11.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       9.19,
+       -12.02
+      ],
+      "radius": [
+       13.0,
+       17.0
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -14.14,
+        33.94
+       ],
+       [
+        -11.31,
+        25.46
+       ],
+       [
+        -7.78,
+        20.51
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "points": [
+       [
+        1.41,
+        7.07
+       ],
+       [
+        3.54,
+        0.71
+       ]
+      ],
+      "width": 5.5
+     },
+     {
+      "name": "deep_hideout_up",
+      "points": [
+       [
+        -18.53,
+        32.39
+       ],
+       [
+        -22.56,
+        28.36
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [],
+    "props": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": []
+  },
+  {
+   "zone_id": "zone.the_sump",
+   "name": "The Sump",
+   "anchor": [
+    -520.0,
+    0.0,
+    560.0
+   ],
+   "bounds": [
+    -80,
+    80,
+    -62,
+    62
+   ],
+   "arrival": [
+    -461.5,
+    0.0,
+    600.5
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "d8dcc4",
+    "sun_energy": 0.6,
+    "sun_pitch": -34.0,
+    "sun_yaw": -35.0,
+    "fog_color": "8a8f7c",
+    "fog_density": 0.006,
+    "ambient_energy": 0.46,
+    "sky_top": "56625e",
+    "sky_horizon": "9aa08a",
+    "exposure": 0.92
+   },
+   "set": "res://data/world/sets/the_sump.json",
+   "cavern": {
+    "seed": 1501,
+    "cell": 0.75,
+    "material": "res://assets/game/materials/sump/geology_sump.tres",
+    "wall_height": 6.5,
+    "near_wall_height": 2.2,
+    "smooth": 4.0,
+    "warp": 2.6,
+    "chambers": [
+     {
+      "center": [
+       -50.0,
+       0.0
+      ],
+      "radius": [
+       24.0,
+       34.0
+      ],
+      "rotation": 8
+     },
+     {
+      "center": [
+       -8.0,
+       4.0
+      ],
+      "radius": [
+       28.0,
+       30.0
+      ],
+      "rotation": -6
+     },
+     {
+      "center": [
+       40.0,
+       -8.0
+      ],
+      "radius": [
+       30.0,
+       30.0
+      ],
+      "rotation": 10
+     }
+    ],
+    "passages": [
+     {
+      "name": "sump_road",
+      "points": [
+       [
+        -62.0,
+        12.0
+       ],
+       [
+        -30.0,
+        10.0
+       ],
+       [
+        -8.0,
+        8.0
+       ],
+       [
+        22.0,
+        6.0
+       ],
+       [
+        42.0,
+        12.0
+       ],
+       [
+        56.0,
+        34.0
+       ],
+       [
+        66.0,
+        48.0
+       ],
+       [
+        79.0,
+        61.0
+       ]
+      ],
+      "width": 14.0
+     },
+     {
+      "points": [
+       [
+        -50.0,
+        -20.0
+       ],
+       [
+        -10.0,
+        -16.0
+       ],
+       [
+        30.0,
+        -24.0
+       ]
+      ],
+      "width": 14.0
+     }
+    ],
+    "wet": [
+     {
+      "center": [
+       30.0,
+       -2.0
+      ],
+      "radius": [
+       16.0,
+       12.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       50.0,
+       -26.0
+      ],
+      "radius": [
+       14.0,
+       10.0
+      ],
+      "rotation": 20
+     },
+     {
+      "center": [
+       -6.0,
+       -18.0
+      ],
+      "radius": [
+       10.0,
+       8.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        -64.0,
+        12.0
+       ],
+       [
+        -30.0,
+        10.0
+       ],
+       [
+        -8.0,
+        8.0
+       ],
+       [
+        22.0,
+        6.0
+       ],
+       [
+        42.0,
+        12.0
+       ],
+       [
+        58.0,
+        36.0
+       ]
+      ],
+      "width": 4.5
+     },
+     {
+      "points": [
+       [
+        -40.0,
+        -30.0
+       ],
+       [
+        -20.0,
+        22.0
+       ]
+      ],
+      "width": 8.0
+     }
+    ],
+    "props": [
+     {
+      "type": "boulder",
+      "position": [
+       -58.0,
+       -22.0
+      ],
+      "size": [
+       2.6,
+       1.4,
+       2.2
+      ],
+      "seed": 1502
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -28.0,
+       26.0
+      ],
+      "size": [
+       2.0,
+       1.1,
+       1.8
+      ],
+      "seed": 1503
+     },
+     {
+      "type": "boulder",
+      "position": [
+       12.0,
+       24.0
+      ],
+      "size": [
+       1.8,
+       0.9,
+       1.6
+      ],
+      "seed": 1504
+     }
+    ],
+    "holes": [
+     {
+      "name": "deep_sump_pump_works",
+      "center": [
+       37.0,
+       -18.5
+      ],
+      "size": [
+       2.8,
+       4.6
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": []
+  },
+  {
+   "zone_id": "zone.robot_hideout_f1",
+   "name": "The Pump Works · Intake Hall",
+   "anchor": [
+    -520.0,
+    0.0,
+    760.0
+   ],
+   "bounds": [
+    -42,
+    42,
+    -34,
+    34
+   ],
+   "arrival": [
+    -547.37,
+    0.0,
+    773.63
+   ],
+   "set": "res://data/world/sets/robot_hideout_f1.json",
+   "cavern": {
+    "seed": 2101,
+    "cell": 0.5,
+    "material": "res://assets/game/materials/hideout/geology_hideout.tres",
+    "wall_height": 6.0,
+    "near_wall_height": 1.4,
+    "smooth": 1.6,
+    "warp": 0.5,
+    "chambers": [
+     {
+      "center": [
+       -26.0,
+       16.0
+      ],
+      "radius": [
+       8.0,
+       7.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       0.0,
+       0.0
+      ],
+      "radius": [
+       20.0,
+       14.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       22.0,
+       -14.0
+      ],
+      "radius": [
+       9.0,
+       8.0
+      ],
+      "rotation": 15
+     },
+     {
+      "center": [
+       26.0,
+       12.0
+      ],
+      "radius": [
+       8.0,
+       7.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -22.0,
+        13.0
+       ],
+       [
+        -12.0,
+        7.0
+       ],
+       [
+        -4.0,
+        4.0
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "points": [
+       [
+        14.0,
+        -6.0
+       ],
+       [
+        22.0,
+        -14.0
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "points": [
+       [
+        14.0,
+        6.0
+       ],
+       [
+        26.0,
+        12.0
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "name": "deep_hideout_up_1",
+      "points": [
+       [
+        -29.0,
+        12.0
+       ],
+       [
+        -33.35,
+        7.65
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -22.0,
+        13.0
+       ],
+       [
+        0.0,
+        2.0
+       ],
+       [
+        26.0,
+        12.0
+       ]
+      ],
+      "width": 3.2
+     },
+     {
+      "points": [
+       [
+        0.0,
+        0.0
+       ],
+       [
+        22.0,
+        -14.0
+       ]
+      ],
+      "width": 2.6
+     }
+    ],
+    "holes": [
+     {
+      "name": "deep_hideout_down_1",
+      "center": [
+       26.0,
+       12.0
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [],
+   "atmosphere": {
+    "ambient_color": "8e9aa4",
+    "ambient_energy": 0.46,
+    "exposure": 1.0
+   }
+  },
+  {
+   "zone_id": "zone.robot_hideout_f2",
+   "name": "The Pump Works · Relay Gallery",
+   "anchor": [
+    -520.0,
+    0.0,
+    880.0
+   ],
+   "bounds": [
+    -42,
+    42,
+    -34,
+    34
+   ],
+   "arrival": [
+    -547.37,
+    0.0,
+    893.63
+   ],
+   "set": "res://data/world/sets/robot_hideout_f2.json",
+   "cavern": {
+    "seed": 2102,
+    "cell": 0.5,
+    "material": "res://assets/game/materials/hideout/geology_hideout.tres",
+    "wall_height": 6.0,
+    "near_wall_height": 1.4,
+    "smooth": 1.6,
+    "warp": 0.5,
+    "chambers": [
+     {
+      "center": [
+       -26.0,
+       16.0
+      ],
+      "radius": [
+       8.0,
+       7.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       0.0,
+       -14.0
+      ],
+      "radius": [
+       10.0,
+       7.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       27.0,
+       -4.0
+      ],
+      "radius": [
+       10.0,
+       11.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       2.0,
+       0.0
+      ],
+      "radius": [
+       8.0,
+       5.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -22.0,
+        12.0
+       ],
+       [
+        -10.0,
+        4.0
+       ],
+       [
+        10.0,
+        -2.0
+       ],
+       [
+        24.0,
+        -4.0
+       ]
+      ],
+      "width": 8.0
+     },
+     {
+      "points": [
+       [
+        0.0,
+        -2.0
+       ],
+       [
+        0.0,
+        -12.0
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "name": "deep_hideout_up_2",
+      "points": [
+       [
+        -29.0,
+        12.0
+       ],
+       [
+        -33.35,
+        7.65
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -22.0,
+        12.0
+       ],
+       [
+        -10.0,
+        4.0
+       ],
+       [
+        10.0,
+        -2.0
+       ],
+       [
+        28.0,
+        -2.0
+       ]
+      ],
+      "width": 3.0
+     }
+    ],
+    "holes": [
+     {
+      "name": "deep_hideout_down_2",
+      "center": [
+       28.0,
+       -10.0
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [],
+   "atmosphere": {
+    "ambient_color": "8e9aa4",
+    "ambient_energy": 0.46,
+    "exposure": 1.0
+   }
+  },
+  {
+   "zone_id": "zone.robot_hideout_f3",
+   "name": "The Pump Works · Assembly Line",
+   "anchor": [
+    -520.0,
+    0.0,
+    1000.0
+   ],
+   "bounds": [
+    -42,
+    42,
+    -34,
+    34
+   ],
+   "arrival": [
+    -547.37,
+    0.0,
+    1013.63
+   ],
+   "set": "res://data/world/sets/robot_hideout_f3.json",
+   "cavern": {
+    "seed": 2103,
+    "cell": 0.5,
+    "material": "res://assets/game/materials/hideout/geology_hideout.tres",
+    "wall_height": 6.0,
+    "near_wall_height": 1.4,
+    "smooth": 1.6,
+    "warp": 0.5,
+    "chambers": [
+     {
+      "center": [
+       -26.0,
+       16.0
+      ],
+      "radius": [
+       8.0,
+       7.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       2.0,
+       -2.0
+      ],
+      "radius": [
+       22.0,
+       14.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       27.0,
+       10.0
+      ],
+      "radius": [
+       8.0,
+       7.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -22.0,
+        13.0
+       ],
+       [
+        -14.0,
+        6.0
+       ]
+      ],
+      "width": 7.0
+     },
+     {
+      "points": [
+       [
+        18.0,
+        4.0
+       ],
+       [
+        27.0,
+        10.0
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "name": "deep_hideout_up_3",
+      "points": [
+       [
+        -29.0,
+        12.0
+       ],
+       [
+        -33.35,
+        7.65
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -22.0,
+        13.0
+       ],
+       [
+        -10.0,
+        6.0
+       ],
+       [
+        16.0,
+        6.0
+       ],
+       [
+        27.0,
+        10.0
+       ]
+      ],
+      "width": 3.0
+     },
+     {
+      "points": [
+       [
+        -12.0,
+        -6.0
+       ],
+       [
+        18.0,
+        -6.0
+       ]
+      ],
+      "width": 3.0
+     }
+    ],
+    "holes": [
+     {
+      "name": "deep_hideout_down_3",
+      "center": [
+       27.0,
+       10.0
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [],
+   "atmosphere": {
+    "ambient_color": "8e9aa4",
+    "ambient_energy": 0.46,
+    "exposure": 1.0
+   }
+  },
+  {
+   "zone_id": "zone.robot_hideout_f4",
+   "name": "The Pump Works · Switchyard",
+   "anchor": [
+    -520.0,
+    0.0,
+    1120.0
+   ],
+   "bounds": [
+    -42,
+    42,
+    -34,
+    34
+   ],
+   "arrival": [
+    -547.37,
+    0.0,
+    1133.63
+   ],
+   "set": "res://data/world/sets/robot_hideout_f4.json",
+   "cavern": {
+    "seed": 2104,
+    "cell": 0.5,
+    "material": "res://assets/game/materials/hideout/geology_hideout.tres",
+    "wall_height": 6.0,
+    "near_wall_height": 1.4,
+    "smooth": 1.6,
+    "warp": 0.5,
+    "chambers": [
+     {
+      "center": [
+       -26.0,
+       16.0
+      ],
+      "radius": [
+       8.0,
+       7.0
+      ],
+      "rotation": 0
+     },
+     {
+      "center": [
+       4.0,
+       -4.0
+      ],
+      "radius": [
+       19.0,
+       16.0
+      ],
+      "rotation": 0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -22.0,
+        13.0
+       ],
+       [
+        -12.0,
+        4.0
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "name": "deep_hideout_up_4",
+      "points": [
+       [
+        -29.0,
+        12.0
+       ],
+       [
+        -33.35,
+        7.65
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -22.0,
+        13.0
+       ],
+       [
+        -8.0,
+        2.0
+       ],
+       [
+        4.0,
+        -4.0
+       ]
+      ],
+      "width": 3.0
+     },
+     {
+      "points": [
+       [
+        -10.0,
+        -10.0
+       ],
+       [
+        18.0,
+        -10.0
+       ]
+      ],
+      "width": 2.4
+     }
+    ],
+    "holes": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [],
+   "atmosphere": {
+    "ambient_color": "8e9aa4",
+    "ambient_energy": 0.46,
+    "exposure": 1.0
+   }
+  },
+  {
+   "zone_id": "zone.dustline_house",
+   "name": "Container Apartment",
+   "anchor": [
+    -900.0,
+    0.0,
+    1400.0
+   ],
+   "bounds": [
+    -4,
+    4,
+    -5,
+    5
+   ],
+   "arrival": [
+    -900.0,
+    0.0,
+    1397.0
+   ],
+   "interior": {
+    "view": "first_person",
+    "eye_height": 1.62,
+    "yaw": 180.0,
+    "fov": 72.0,
+    "no_combat": true,
+    "instance": "owner"
+   },
+   "atmosphere": {
+    "ambient_color": "8c9aa8",
+    "ambient_energy": 0.45,
+    "fog_color": "0c1014",
+    "fog_density": 0.0,
+    "exposure": 0.85
+   },
+   "set": "res://data/world/sets/dustline_house.json",
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [],
+   "computers": [
+    {
+     "id": "computer.house.dustline",
+     "position": [
+      -1.5,
+      -1.6
+     ],
+     "rotation": 90,
+     "style": "house_desk"
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.floodlands",
+   "name": "The Floodlands",
+   "anchor": [
+    650.0,
+    0.0,
+    800.0
+   ],
+   "bounds": [
+    -83,
+    71,
+    -74,
+    80
+   ],
+   "arrival": [
+    607.33,
+    0.0,
+    844.55
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "d8d4b8",
+    "sun_energy": 0.55,
+    "sun_pitch": -40.0,
+    "sun_yaw": -30.0,
+    "fog_color": "6f7a6c",
+    "fog_density": 0.006,
+    "ambient_energy": 0.34,
+    "sky_top": "4e5c62",
+    "sky_horizon": "8c9480",
+    "exposure": 0.85
+   },
+   "set": "res://data/world/sets/floodlands.json",
+   "cavern": {
+    "seed": 650,
+    "cell": 1.0,
+    "material": "res://assets/game/materials/floodlands/geology_floodlands.tres",
+    "wall_height": 6.0,
+    "near_wall_height": 1.8,
+    "smooth": 4.0,
+    "warp": 2.6,
+    "chambers": [
+     {
+      "center": [
+       -35.36,
+       35.36
+      ],
+      "radius": [
+       10.0,
+       10.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -16.97,
+       16.97
+      ],
+      "radius": [
+       20.0,
+       26.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -18.38,
+       -9.9
+      ],
+      "radius": [
+       16.0,
+       12.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       9.9,
+       -9.9
+      ],
+      "radius": [
+       20.0,
+       26.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       18.38,
+       -35.36
+      ],
+      "radius": [
+       10.0,
+       9.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       38.18,
+       -32.53
+      ],
+      "radius": [
+       9.0,
+       16.0
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -39.6,
+        39.6
+       ],
+       [
+        -33.23,
+        34.65
+       ],
+       [
+        -21.92,
+        26.16
+       ],
+       [
+        -9.9,
+        15.56
+       ],
+       [
+        0.0,
+        2.83
+       ],
+       [
+        13.44,
+        -6.36
+       ],
+       [
+        24.04,
+        -18.38
+       ],
+       [
+        32.53,
+        -29.7
+       ],
+       [
+        41.01,
+        -35.36
+       ]
+      ],
+      "width": 14.0
+     },
+     {
+      "points": [
+       [
+        -36.67,
+        44.55
+       ],
+       [
+        -49.17,
+        44.55
+       ]
+      ],
+      "width": 9.0,
+      "name": "west_gate"
+     },
+     {
+      "points": [
+       [
+        -7.07,
+        4.24
+       ],
+       [
+        -16.97,
+        -5.66
+       ]
+      ],
+      "width": 8.0
+     },
+     {
+      "points": [
+       [
+        16.97,
+        -19.8
+       ],
+       [
+        21.21,
+        -32.53
+       ]
+      ],
+      "width": 9.0
+     }
+    ],
+    "wet": [
+     {
+      "center": [
+       -32.53,
+       4.24
+      ],
+      "radius": [
+       24.0,
+       10.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -10.61,
+       -24.75
+      ],
+      "radius": [
+       22.0,
+       8.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -2.12,
+       28.99
+      ],
+      "radius": [
+       24.0,
+       9.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       24.04,
+       4.24
+      ],
+      "radius": [
+       14.0,
+       7.0
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        -45.66,
+        44.55
+       ],
+       [
+        -38.66,
+        44.55
+       ],
+       [
+        -33.59,
+        34.29
+       ],
+       [
+        -22.27,
+        25.81
+       ],
+       [
+        -10.25,
+        15.2
+       ],
+       [
+        0.0,
+        2.83
+       ],
+       [
+        13.08,
+        -6.72
+       ],
+       [
+        23.69,
+        -18.74
+       ],
+       [
+        22.63,
+        -31.11
+       ],
+       [
+        20.51,
+        -33.23
+       ]
+      ],
+      "width": 4.5
+     },
+     {
+      "points": [
+       [
+        23.69,
+        -18.74
+       ],
+       [
+        32.53,
+        -29.7
+       ],
+       [
+        39.6,
+        -33.94
+       ]
+      ],
+      "width": 3.5
+     }
+    ],
+    "props": [],
+    "holes": [
+     {
+      "name": "deep_floodlands_cellar",
+      "center": [
+       19.37,
+       -34.37
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "links": "res://data/world/sets/links_floodlands.json",
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": []
+  },
+  {
+   "zone_id": "zone.floodlands_cellar",
+   "name": "The Drowned Cellar",
+   "anchor": [
+    650.0,
+    0.0,
+    930.0
+   ],
+   "bounds": [
+    -34,
+    34,
+    -34,
+    34
+   ],
+   "arrival": [
+    644.56,
+    0.0,
+    947.19
+   ],
+   "set": "res://data/world/sets/floodlands_cellar.json",
+   "cavern": {
+    "seed": 651,
+    "cell": 0.5,
+    "material": "res://assets/game/materials/geology/geology_shallows.tres",
+    "wall_height": 4.6,
+    "near_wall_height": 1.4,
+    "smooth": 3.0,
+    "warp": 1.4,
+    "chambers": [
+     {
+      "center": [
+       -3.54,
+       14.85
+      ],
+      "radius": [
+       6.0,
+       5.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       1.41,
+       -1.41
+      ],
+      "radius": [
+       14.0,
+       9.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       8.49,
+       -16.97
+      ],
+      "radius": [
+       7.0,
+       6.0
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -3.54,
+        13.44
+       ],
+       [
+        -0.71,
+        4.95
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "points": [
+       [
+        6.36,
+        -10.61
+       ],
+       [
+        7.78,
+        -14.85
+       ]
+      ],
+      "width": 5.0
+     },
+     {
+      "name": "deep_floodlands_cellar_up",
+      "points": [
+       [
+        -7.07,
+        15.56
+       ],
+       [
+        -11.1,
+        11.53
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [
+     {
+      "center": [
+       1.41,
+       -1.41
+      ],
+      "radius": [
+       14.0,
+       9.0
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "worn": [],
+    "props": []
+   },
+   "links": "res://data/world/sets/links_floodlands_cellar.json",
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": []
   }
  ],
  "transitions": [
@@ -6491,7 +8946,13 @@
     0.0,
     335.0
    ],
-   "label": "NE CANYON · THE SALTPAN"
+   "label": "NE CANYON · THE SALTPAN",
+   "presentation": "tunnel",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
   },
   {
    "entity_id": 126,
@@ -6507,7 +8968,13 @@
     0.0,
     188.0
    ],
-   "label": "WEST CANYON · THE SCARP"
+   "label": "WEST CANYON · THE SCARP",
+   "presentation": "tunnel",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
   },
   {
    "entity_id": 127,
@@ -6545,7 +9012,13 @@
     0.0,
     250.0
    ],
-   "label": "SOUTH CANYON · THE SCARP"
+   "label": "SOUTH CANYON · THE SCARP",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
   },
   {
    "entity_id": 230,
@@ -6587,92 +9060,6 @@
    "arrival_rotation": -2.356,
    "label": "STAIRS UP · FRONTIER ROAD",
    "presentation": "stairs",
-   "label_offset": [
-    0.0,
-    2.6,
-    0.0
-   ]
-  },
-  {
-   "entity_id": 160,
-   "from_zone": "zone.surface_saltpan",
-   "position": [
-    45.0,
-    0.0,
-    336.0
-   ],
-   "to_zone": "zone.frontier_road_east",
-   "arrival": [
-    -45.96,
-    0.0,
-    607.38
-   ],
-   "arrival_rotation": -0.785,
-   "label": "EAST · FRONTIER ROAD"
-  },
-  {
-   "entity_id": 161,
-   "from_zone": "zone.frontier_road_east",
-   "position": [
-    -49.85,
-    0.0,
-    611.27
-   ],
-   "to_zone": "zone.surface_saltpan",
-   "arrival": [
-    41.0,
-    0.0,
-    336.6
-   ],
-   "arrival_rotation": 1.571,
-   "label": "WEST · THE SALTPAN",
-   "presentation": "gate",
-   "label_offset": [
-    0.0,
-    2.6,
-    0.0
-   ]
-  },
-  {
-   "entity_id": 162,
-   "from_zone": "zone.frontier_road_east",
-   "position": [
-    19.8,
-    0.0,
-    494.95
-   ],
-   "to_zone": "zone.dustline",
-   "arrival": [
-    33.59,
-    0.0,
-    833.59
-   ],
-   "arrival_rotation": 0.785,
-   "label": "DUSTLINE GATE",
-   "presentation": "gate",
-   "label_offset": [
-    0.0,
-    3.2,
-    0.0
-   ]
-  },
-  {
-   "entity_id": 163,
-   "from_zone": "zone.dustline",
-   "position": [
-    37.83,
-    0.0,
-    837.83
-   ],
-   "to_zone": "zone.frontier_road_east",
-   "arrival": [
-    23.69,
-    0.0,
-    498.84
-   ],
-   "arrival_rotation": -2.431,
-   "label": "FRONTIER ROAD · WEST",
-   "presentation": "gate",
    "label_offset": [
     0.0,
     2.6,
@@ -6790,6 +9177,674 @@
    "label_offset": [
     0.0,
     3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 300,
+   "from_zone": "zone.frontier_road_east",
+   "position": [
+    38.61,
+    0.0,
+    539.21
+   ],
+   "to_zone": "zone.castoff_hideout_f1",
+   "arrival": [
+    -716.9,
+    0.0,
+    334.02
+   ],
+   "arrival_rotation": 2.356,
+   "label": "STAIRS DOWN · CASTOFF HIDEOUT",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 301,
+   "from_zone": "zone.castoff_hideout_f1",
+   "position": [
+    -717.89,
+    0.0,
+    333.03
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    38.26,
+    0.0,
+    538.86
+   ],
+   "arrival_rotation": -0.785,
+   "label": "STAIRS UP · FRONTIER ROAD",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 308,
+   "from_zone": "zone.castoff_hideout_f4",
+   "position": [
+    -683.03,
+    0.0,
+    640.2
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    38.26,
+    0.0,
+    538.86
+   ],
+   "arrival_rotation": -0.785,
+   "label": "LIFT · FRONTIER ROAD",
+   "presentation": "lift",
+   "label_offset": [
+    0.0,
+    3.0,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 302,
+   "from_zone": "zone.castoff_hideout_f1",
+   "position": [
+    -674.26,
+    0.0,
+    286.14
+   ],
+   "to_zone": "zone.castoff_hideout_f2",
+   "arrival": [
+    -716.9,
+    0.0,
+    454.02
+   ],
+   "arrival_rotation": 2.356,
+   "label": "STAIRS DOWN · FLOOR 2",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 303,
+   "from_zone": "zone.castoff_hideout_f2",
+   "position": [
+    -717.89,
+    0.0,
+    453.03
+   ],
+   "to_zone": "zone.castoff_hideout_f1",
+   "arrival": [
+    -672.78,
+    0.0,
+    285.36
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · FLOOR 1",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 304,
+   "from_zone": "zone.castoff_hideout_f2",
+   "position": [
+    -670.02,
+    0.0,
+    400.48
+   ],
+   "to_zone": "zone.castoff_hideout_f3",
+   "arrival": [
+    -716.9,
+    0.0,
+    574.02
+   ],
+   "arrival_rotation": 2.356,
+   "label": "STAIRS DOWN · FLOOR 3",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 305,
+   "from_zone": "zone.castoff_hideout_f3",
+   "position": [
+    -717.89,
+    0.0,
+    573.03
+   ],
+   "to_zone": "zone.castoff_hideout_f2",
+   "arrival": [
+    -668.54,
+    0.0,
+    399.7
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · FLOOR 2",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 306,
+   "from_zone": "zone.castoff_hideout_f3",
+   "position": [
+    -679.21,
+    0.0,
+    515.53
+   ],
+   "to_zone": "zone.castoff_hideout_f4",
+   "arrival": [
+    -716.9,
+    0.0,
+    694.02
+   ],
+   "arrival_rotation": 2.356,
+   "label": "STAIRS DOWN · FLOOR 4",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 307,
+   "from_zone": "zone.castoff_hideout_f4",
+   "position": [
+    -717.89,
+    0.0,
+    693.03
+   ],
+   "to_zone": "zone.castoff_hideout_f3",
+   "arrival": [
+    -677.73,
+    0.0,
+    514.75
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · FLOOR 3",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 500,
+   "from_zone": "zone.frontier_road_east",
+   "position": [
+    -64.3,
+    0.0,
+    495.7
+   ],
+   "to_zone": "zone.the_sump",
+   "arrival": [
+    -461.5,
+    0.0,
+    600.5
+   ],
+   "arrival_rotation": 0.785,
+   "label": "NORTH-WEST · THE SUMP",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 501,
+   "from_zone": "zone.the_sump",
+   "position": [
+    -457.56,
+    0.0,
+    604.44
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    -62.18,
+    0.0,
+    497.82
+   ],
+   "arrival_rotation": -2.356,
+   "label": "SOUTH-EAST · FRONTIER ROAD",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 502,
+   "from_zone": "zone.the_sump",
+   "position": [
+    -480.95,
+    0.0,
+    543.55
+   ],
+   "to_zone": "zone.robot_hideout_f1",
+   "arrival": [
+    -547.37,
+    0.0,
+    773.63
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS DOWN · THE PUMP WORKS",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 503,
+   "from_zone": "zone.robot_hideout_f1",
+   "position": [
+    -548.36,
+    0.0,
+    772.64
+   ],
+   "to_zone": "zone.the_sump",
+   "arrival": [
+    -479.47,
+    0.0,
+    542.77
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · THE SUMP",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 504,
+   "from_zone": "zone.robot_hideout_f1",
+   "position": [
+    -491.95,
+    0.0,
+    774.05
+   ],
+   "to_zone": "zone.robot_hideout_f2",
+   "arrival": [
+    -547.37,
+    0.0,
+    893.63
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS DOWN · FLOOR 2",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 505,
+   "from_zone": "zone.robot_hideout_f2",
+   "position": [
+    -548.36,
+    0.0,
+    892.64
+   ],
+   "to_zone": "zone.robot_hideout_f1",
+   "arrival": [
+    -490.47,
+    0.0,
+    773.27
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · FLOOR 1",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 506,
+   "from_zone": "zone.robot_hideout_f2",
+   "position": [
+    -489.95,
+    0.0,
+    872.05
+   ],
+   "to_zone": "zone.robot_hideout_f3",
+   "arrival": [
+    -547.37,
+    0.0,
+    1013.63
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS DOWN · FLOOR 3",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 507,
+   "from_zone": "zone.robot_hideout_f3",
+   "position": [
+    -548.36,
+    0.0,
+    1012.64
+   ],
+   "to_zone": "zone.robot_hideout_f2",
+   "arrival": [
+    -488.47,
+    0.0,
+    871.27
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · FLOOR 2",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 508,
+   "from_zone": "zone.robot_hideout_f3",
+   "position": [
+    -490.95,
+    0.0,
+    1012.05
+   ],
+   "to_zone": "zone.robot_hideout_f4",
+   "arrival": [
+    -547.37,
+    0.0,
+    1133.63
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS DOWN · FLOOR 4",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 509,
+   "from_zone": "zone.robot_hideout_f4",
+   "position": [
+    -548.36,
+    0.0,
+    1132.64
+   ],
+   "to_zone": "zone.robot_hideout_f3",
+   "arrival": [
+    -489.47,
+    0.0,
+    1011.27
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · FLOOR 3",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 160,
+   "from_zone": "zone.surface_saltpan",
+   "position": [
+    45.0,
+    0.0,
+    336.0
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    -45.96,
+    0.0,
+    607.38
+   ],
+   "arrival_rotation": -0.785,
+   "label": "EAST · FRONTIER ROAD",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 161,
+   "from_zone": "zone.frontier_road_east",
+   "position": [
+    -49.85,
+    0.0,
+    611.27
+   ],
+   "to_zone": "zone.surface_saltpan",
+   "arrival": [
+    41.0,
+    0.0,
+    336.6
+   ],
+   "arrival_rotation": 1.571,
+   "label": "WEST · THE SALTPAN",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 162,
+   "from_zone": "zone.frontier_road_east",
+   "position": [
+    19.8,
+    0.0,
+    494.95
+   ],
+   "to_zone": "zone.dustline",
+   "arrival": [
+    33.59,
+    0.0,
+    833.59
+   ],
+   "arrival_rotation": 0.785,
+   "label": "DUSTLINE GATE",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 163,
+   "from_zone": "zone.dustline",
+   "position": [
+    37.83,
+    0.0,
+    837.83
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    23.69,
+    0.0,
+    498.84
+   ],
+   "arrival_rotation": -2.431,
+   "label": "FRONTIER ROAD · WEST",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 760,
+   "from_zone": "zone.dustline",
+   "position": [
+    51.37,
+    0.0,
+    775.0
+   ],
+   "to_zone": "zone.dustline_house",
+   "arrival": [
+    -900.0,
+    0.0,
+    1397.0
+   ],
+   "arrival_rotation": 3.142,
+   "label": "UNIT 7 · HOME",
+   "presentation": "door",
+   "house": "house.dustline",
+   "label_offset": [
+    0.0,
+    2.75,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 761,
+   "from_zone": "zone.dustline_house",
+   "position": [
+    -900.0,
+    0.0,
+    1396.22
+   ],
+   "to_zone": "zone.dustline",
+   "arrival": [
+    52.47,
+    0.0,
+    776.1
+   ],
+   "arrival_rotation": -2.356,
+   "label": "EXIT · DUSTLINE",
+   "presentation": "door",
+   "label_offset": [
+    0.0,
+    2.6,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 650,
+   "from_zone": "zone.dustline",
+   "position": [
+    61.87,
+    0.0,
+    748.24
+   ],
+   "to_zone": "zone.floodlands",
+   "arrival": [
+    607.33,
+    0.0,
+    844.55
+   ],
+   "arrival_rotation": -1.571,
+   "label": "EAST GATE · THE FLOODLANDS",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 651,
+   "from_zone": "zone.floodlands",
+   "position": [
+    602.13,
+    0.0,
+    844.55
+   ],
+   "to_zone": "zone.dustline",
+   "arrival": [
+    61.87,
+    0.0,
+    753.44
+   ],
+   "arrival_rotation": -3.142,
+   "label": "WEST · DUSTLINE",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 652,
+   "from_zone": "zone.floodlands",
+   "position": [
+    671.42,
+    0.0,
+    767.68
+   ],
+   "to_zone": "zone.floodlands_cellar",
+   "arrival": [
+    644.56,
+    0.0,
+    947.19
+   ],
+   "arrival_rotation": -0.272,
+   "label": "STAIRS DOWN · THE DROWNED CELLAR",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.4,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 653,
+   "from_zone": "zone.floodlands_cellar",
+   "position": [
+    643.57,
+    0.0,
+    946.2
+   ],
+   "to_zone": "zone.floodlands",
+   "arrival": [
+    672.9,
+    0.0,
+    766.9
+   ],
+   "arrival_rotation": -2.356,
+   "label": "STAIRS UP · THE FLOODLANDS",
+   "presentation": "stairs",
+   "label_offset": [
+    0.0,
+    2.6,
     0.0
    ]
   }
@@ -6968,7 +10023,8 @@
     2.5,
     1.7,
     2.0
-   ]
+   ],
+   "claim": "claim.outpost_supply_crate"
   },
   {
    "entity_id": 147,
@@ -6980,64 +10036,8 @@
     0.16,
     101.48
    ],
-   "quantity": 1
-  },
-  {
-   "entity_id": 164,
-   "entity_type": 2,
-   "content_id": "npc.scavenger",
-   "zone_id": "zone.frontier_road_east",
-   "position": [
-    21.21,
-    0.0,
-    537.37
-   ]
-  },
-  {
-   "entity_id": 165,
-   "entity_type": 2,
-   "content_id": "npc.scavenger",
-   "zone_id": "zone.frontier_road_east",
-   "position": [
-    29.34,
-    0.0,
-    537.02
-   ]
-  },
-  {
-   "entity_id": 166,
-   "entity_type": 2,
-   "content_id": "npc.scavenger",
-   "zone_id": "zone.frontier_road_east",
-   "position": [
-    27.22,
-    0.0,
-    529.24
-   ]
-  },
-  {
-   "entity_id": 168,
-   "entity_type": 4,
-   "content_id": "item.scrap_component",
-   "zone_id": "zone.frontier_road_east",
-   "position": [
-    -24.4,
-    0.0,
-    588.64
-   ],
-   "quantity": 2
-  },
-  {
-   "entity_id": 169,
-   "entity_type": 4,
-   "content_id": "item.scrap_component",
-   "zone_id": "zone.frontier_road_east",
-   "position": [
-    27.93,
-    0.0,
-    540.55
-   ],
-   "quantity": 3
+   "quantity": 1,
+   "claim": "claim.outpost_gear_crate"
   },
   {
    "entity_id": 32,
@@ -7140,6 +10140,142 @@
    "crate_loot": [
     "item.log.vdi_low_sun_memo"
    ]
+  },
+  {
+   "entity_id": 310,
+   "entity_type": 4,
+   "content_id": "item.container.warlord_strongbox",
+   "zone_id": "zone.castoff_hideout_f4",
+   "position": [
+    -689.04,
+    0.32,
+    634.9
+   ],
+   "quantity": 1,
+   "collider": [
+    1.2,
+    0.9,
+    0.8
+   ],
+   "claim": "claim.castoff_warlord_strongbox"
+  },
+  {
+   "entity_id": 520,
+   "entity_type": 4,
+   "content_id": "item.container.rustbound_cache",
+   "zone_id": "zone.robot_hideout_f4",
+   "position": [
+    -510.0,
+    0.0,
+    1106.0
+   ],
+   "quantity": 1,
+   "claim": "claim.robot_hideout_boss_cache"
+  },
+  {
+   "entity_id": 164,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    21.21,
+    0.0,
+    537.37
+   ]
+  },
+  {
+   "entity_id": 165,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    29.34,
+    0.0,
+    537.02
+   ]
+  },
+  {
+   "entity_id": 166,
+   "entity_type": 2,
+   "content_id": "npc.scavenger",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    27.22,
+    0.0,
+    529.24
+   ]
+  },
+  {
+   "entity_id": 168,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    -24.4,
+    0.0,
+    588.64
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 169,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    27.93,
+    0.0,
+    540.55
+   ],
+   "quantity": 3
+  },
+  {
+   "entity_id": 880,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    45.54,
+    0.0,
+    505.69
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 881,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.frontier_road_east",
+   "position": [
+    46.53,
+    0.0,
+    497.35
+   ],
+   "quantity": 3
+  },
+  {
+   "entity_id": 660,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.floodlands",
+   "position": [
+    657.0,
+    0.0,
+    773.77
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 661,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.floodlands",
+   "position": [
+    649.65,
+    0.0,
+    822.98
+   ],
+   "quantity": 3
   }
  ],
  "hazards": [
@@ -7324,6 +10460,1064 @@
     210.0
    ],
    "safe_radius": 14.0
+  },
+  {
+   "id": "spawn.saltpan_hoodoo_hollow",
+   "zone_id": "zone.surface_saltpan",
+   "center": [
+    -19.0,
+    311.0
+   ],
+   "radius": 0.0,
+   "members": [
+    {
+     "content_id": "npc.mutant_tribal_bug",
+     "count": 1
+    }
+   ],
+   "threat_budget": 12,
+   "respawn_seconds": [
+    180.0,
+    260.0
+   ],
+   "safe_radius": 16.0
+  },
+  {
+   "id": "spawn.saltpan_north_rim",
+   "zone_id": "zone.surface_saltpan",
+   "center": [
+    -3.0,
+    318.0
+   ],
+   "radius": 3.0,
+   "points": [
+    [
+     -6.0,
+     316.5
+    ],
+    [
+     0.5,
+     317.5
+    ],
+    [
+     -3.0,
+     320.0
+    ],
+    [
+     -1.5,
+     315.5
+    ],
+    [
+     -4.5,
+     319.5
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.mutant_spitter",
+     "count": 2
+    },
+    {
+     "content_id": "npc.mutant_brood",
+     "count": 3
+    }
+   ],
+   "threat_budget": 21,
+   "respawn_seconds": [
+    60.0,
+    110.0
+   ],
+   "safe_radius": 14.0
+  },
+  {
+   "id": "spawn.saltpan_west_flats",
+   "zone_id": "zone.surface_saltpan",
+   "center": [
+    -24.0,
+    357.0
+   ],
+   "radius": 2.5,
+   "points": [
+    [
+     -26.0,
+     355.5
+    ],
+    [
+     -21.5,
+     358.5
+    ],
+    [
+     -24.0,
+     359.5
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.mutant_zombine",
+     "count": 2
+    },
+    {
+     "content_id": "npc.mutant_ripper",
+     "count": 1
+    }
+   ],
+   "threat_budget": 19,
+   "respawn_seconds": [
+    90.0,
+    150.0
+   ],
+   "safe_radius": 14.0
+  },
+  {
+   "id": "spawn.shallows_red_mandible",
+   "zone_id": "zone.shallows",
+   "center": [
+    54.0,
+    111.5
+   ],
+   "radius": 0.0,
+   "members": [
+    {
+     "content_id": "npc.burrowborn_red_mandible",
+     "count": 1
+    }
+   ],
+   "threat_budget": 4,
+   "respawn_seconds": [
+    60.0,
+    100.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.c3_red_mandible",
+   "zone_id": "zone.excavation_c3",
+   "center": [
+    110.5,
+    105.5
+   ],
+   "radius": 0.0,
+   "members": [
+    {
+     "content_id": "npc.burrowborn_red_mandible",
+     "count": 1
+    }
+   ],
+   "threat_budget": 4,
+   "respawn_seconds": [
+    60.0,
+    100.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.castoff_hideout_f1_yard",
+   "zone_id": "zone.castoff_hideout_f1",
+   "center": [
+    -705.66,
+    302.83
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -705.66,
+     302.83
+    ],
+    [
+     -691.51,
+     300.0
+    ],
+    [
+     -700.0,
+     300.0
+    ],
+    [
+     -700.0,
+     314.14
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_lookout",
+     "count": 2
+    },
+    {
+     "content_id": "npc.castoff_raider",
+     "count": 2
+    }
+   ],
+   "threat_budget": 14,
+   "respawn_seconds": [
+    45.0,
+    75.0
+   ],
+   "safe_radius": 10.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.castoff_hideout_f1_bunks",
+   "zone_id": "zone.castoff_hideout_f1",
+   "center": [
+    -705.66,
+    285.86
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -705.66,
+     285.86
+    ],
+    [
+     -703.18,
+     281.26
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_raider",
+     "count": 1
+    },
+    {
+     "content_id": "npc.castoff_lookout",
+     "count": 1
+    }
+   ],
+   "threat_budget": 7,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 10.0,
+   "max_alive": 2
+  },
+  {
+   "id": "spawn.castoff_hideout_f2_workshop",
+   "zone_id": "zone.castoff_hideout_f2",
+   "center": [
+    -702.83,
+    428.49
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -702.83,
+     428.49
+    ],
+    [
+     -703.54,
+     436.26
+    ],
+    [
+     -705.66,
+     420.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_raider",
+     "count": 1
+    },
+    {
+     "content_id": "npc.castoff_lookout",
+     "count": 1
+    },
+    {
+     "content_id": "npc.castoff_gunner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 13,
+   "respawn_seconds": [
+    50.0,
+    80.0
+   ],
+   "safe_radius": 10.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.castoff_hideout_f2_scrap_hall",
+   "zone_id": "zone.castoff_hideout_f2",
+   "center": [
+    -692.93,
+    404.44
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -692.93,
+     404.44
+    ],
+    [
+     -694.34,
+     408.69
+    ],
+    [
+     -687.27,
+     404.44
+    ],
+    [
+     -695.05,
+     399.49
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_gunner",
+     "count": 1
+    },
+    {
+     "content_id": "npc.castoff_raider",
+     "count": 2
+    },
+    {
+     "content_id": "npc.castoff_lookout",
+     "count": 1
+    }
+   ],
+   "threat_budget": 17,
+   "respawn_seconds": [
+    50.0,
+    80.0
+   ],
+   "safe_radius": 10.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.castoff_hideout_f3_hall",
+   "zone_id": "zone.castoff_hideout_f3",
+   "center": [
+    -704.24,
+    547.07
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -704.24,
+     547.07
+    ],
+    [
+     -695.05,
+     539.29
+    ],
+    [
+     -697.17,
+     545.66
+    ],
+    [
+     -690.1,
+     532.93
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_gunner",
+     "count": 2
+    },
+    {
+     "content_id": "npc.castoff_trooper",
+     "count": 1
+    },
+    {
+     "content_id": "npc.castoff_raider",
+     "count": 1
+    }
+   ],
+   "threat_budget": 25,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 11.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.castoff_hideout_f3_quarters",
+   "zone_id": "zone.castoff_hideout_f3",
+   "center": [
+    -707.78,
+    529.39
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -707.78,
+     529.39
+    ],
+    [
+     -704.95,
+     525.15
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_trooper",
+     "count": 1
+    },
+    {
+     "content_id": "npc.castoff_gunner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 15,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 11.0,
+   "max_alive": 2
+  },
+  {
+   "id": "spawn.castoff_hideout_f3_armoury",
+   "zone_id": "zone.castoff_hideout_f3",
+   "center": [
+    -680.2,
+    542.83
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -680.2,
+     542.83
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_vanguard",
+     "count": 1
+    }
+   ],
+   "threat_budget": 12,
+   "respawn_seconds": [
+    120.0,
+    180.0
+   ],
+   "safe_radius": 12.0,
+   "max_alive": 1
+  },
+  {
+   "id": "spawn.castoff_hideout_f4_antechamber",
+   "zone_id": "zone.castoff_hideout_f4",
+   "center": [
+    -702.83,
+    671.31
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -702.83,
+     671.31
+    ],
+    [
+     -697.17,
+     671.31
+    ],
+    [
+     -700.71,
+     676.26
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_trooper",
+     "count": 2
+    },
+    {
+     "content_id": "npc.castoff_vanguard",
+     "count": 1
+    }
+   ],
+   "threat_budget": 30,
+   "respawn_seconds": [
+    75.0,
+    110.0
+   ],
+   "safe_radius": 11.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.castoff_hideout_f4_hall_guard",
+   "zone_id": "zone.castoff_hideout_f4",
+   "center": [
+    -691.51,
+    654.34
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -691.51,
+     654.34
+    ],
+    [
+     -697.17,
+     643.03
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_gunner",
+     "count": 1
+    },
+    {
+     "content_id": "npc.castoff_trooper",
+     "count": 1
+    }
+   ],
+   "threat_budget": 15,
+   "respawn_seconds": [
+    75.0,
+    110.0
+   ],
+   "safe_radius": 12.0,
+   "max_alive": 2
+  },
+  {
+   "id": "spawn.castoff_hideout_f4_warlord",
+   "zone_id": "zone.castoff_hideout_f4",
+   "center": [
+    -690.1,
+    644.44
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -690.1,
+     644.44
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_warlord",
+     "count": 1
+    }
+   ],
+   "threat_budget": 30,
+   "respawn_seconds": [
+    300.0,
+    420.0
+   ],
+   "safe_radius": 16.0,
+   "max_alive": 1
+  },
+  {
+   "id": "spawn.sump_drones",
+   "zone_id": "zone.the_sump",
+   "center": [
+    -460.0,
+    532.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -460.0,
+     532.0
+    ],
+    [
+     -460.0,
+     542.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_drone",
+     "count": 2
+    }
+   ],
+   "threat_budget": 10,
+   "respawn_seconds": [
+    70.0,
+    100.0
+   ],
+   "safe_radius": 14.0,
+   "patrol": [
+    [
+     -464.0,
+     524.0
+    ],
+    [
+     -450.0,
+     532.0
+    ],
+    [
+     -452.0,
+     548.0
+    ],
+    [
+     -463.0,
+     539.0
+    ]
+   ]
+  },
+  {
+   "id": "spawn.sump_scavengers",
+   "zone_id": "zone.the_sump",
+   "center": [
+    -574.0,
+    554.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -574.0,
+     554.0
+    ],
+    [
+     -570.0,
+     564.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.scavenger",
+     "count": 2
+    }
+   ],
+   "threat_budget": 6,
+   "respawn_seconds": [
+    45.0,
+    75.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.hideout_f1_miners",
+   "zone_id": "zone.robot_hideout_f1",
+   "center": [
+    -526.0,
+    764.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -526.0,
+     764.0
+    ],
+    [
+     -510.0,
+     764.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_miner",
+     "count": 2
+    }
+   ],
+   "threat_budget": 18,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 10.0,
+   "patrol": [
+    [
+     -530.0,
+     763.0
+    ],
+    [
+     -510.0,
+     763.0
+    ],
+    [
+     -510.0,
+     752.0
+    ],
+    [
+     -530.0,
+     752.0
+    ]
+   ]
+  },
+  {
+   "id": "spawn.hideout_f1_drones",
+   "zone_id": "zone.robot_hideout_f1",
+   "center": [
+    -499.0,
+    745.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -499.0,
+     745.0
+    ],
+    [
+     -495.0,
+     748.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_drone",
+     "count": 2
+    }
+   ],
+   "threat_budget": 10,
+   "respawn_seconds": [
+    50.0,
+    80.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.hideout_f2_turrets",
+   "zone_id": "zone.robot_hideout_f2",
+   "center": [
+    -516.0,
+    883.5
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -516.0,
+     883.5
+    ],
+    [
+     -507.0,
+     873.5
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_turret",
+     "count": 2
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    90.0,
+    120.0
+   ],
+   "safe_radius": 8.0
+  },
+  {
+   "id": "spawn.hideout_f2_drones",
+   "zone_id": "zone.robot_hideout_f2",
+   "center": [
+    -524.0,
+    866.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -524.0,
+     866.0
+    ],
+    [
+     -516.0,
+     866.0
+    ],
+    [
+     -520.0,
+     864.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_drone",
+     "count": 3
+    }
+   ],
+   "threat_budget": 15,
+   "respawn_seconds": [
+    50.0,
+    80.0
+   ],
+   "safe_radius": 10.0,
+   "patrol": [
+    [
+     -526.0,
+     867.0
+    ],
+    [
+     -514.0,
+     867.0
+    ],
+    [
+     -514.0,
+     864.0
+    ],
+    [
+     -526.0,
+     864.0
+    ]
+   ]
+  },
+  {
+   "id": "spawn.hideout_f2_miner",
+   "zone_id": "zone.robot_hideout_f2",
+   "center": [
+    -497.0,
+    884.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -497.0,
+     884.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_miner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.hideout_f3_skirmishers",
+   "zone_id": "zone.robot_hideout_f3",
+   "center": [
+    -526.0,
+    995.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -526.0,
+     995.0
+    ],
+    [
+     -508.0,
+     1002.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_skirmisher",
+     "count": 2
+    }
+   ],
+   "threat_budget": 24,
+   "respawn_seconds": [
+    80.0,
+    110.0
+   ],
+   "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.hideout_f3_pelter",
+   "zone_id": "zone.robot_hideout_f3",
+   "center": [
+    -506.0,
+    988.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -506.0,
+     988.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_pelter",
+     "count": 1
+    }
+   ],
+   "threat_budget": 14,
+   "respawn_seconds": [
+    100.0,
+    140.0
+   ],
+   "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.hideout_f3_turrets",
+   "zone_id": "zone.robot_hideout_f3",
+   "center": [
+    -535.0,
+    990.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -535.0,
+     990.0
+    ],
+    [
+     -504.0,
+     997.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_turret",
+     "count": 2
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    90.0,
+    120.0
+   ],
+   "safe_radius": 8.0
+  },
+  {
+   "id": "spawn.hideout_f3_miner",
+   "zone_id": "zone.robot_hideout_f3",
+   "center": [
+    -518.0,
+    987.5
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -518.0,
+     987.5
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_miner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 10.0,
+   "patrol": [
+    [
+     -532.0,
+     987.5
+    ],
+    [
+     -504.0,
+     987.5
+    ]
+   ]
+  },
+  {
+   "id": "spawn.hideout_f4_boss",
+   "zone_id": "zone.robot_hideout_f4",
+   "center": [
+    -516.0,
+    1114.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -516.0,
+     1114.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_chopper",
+     "count": 1
+    }
+   ],
+   "threat_budget": 40,
+   "respawn_seconds": [
+    600.0,
+    900.0
+   ],
+   "safe_radius": 16.0
+  },
+  {
+   "id": "spawn.hideout_f4_turrets",
+   "zone_id": "zone.robot_hideout_f4",
+   "center": [
+    -532.0,
+    1106.0
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     -532.0,
+     1106.0
+    ],
+    [
+     -500.0,
+     1106.0
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_turret",
+     "count": 2
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    120.0,
+    160.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.floodlands_cellar_crawlers",
+   "zone_id": "zone.floodlands_cellar",
+   "center": [
+    652.83,
+    928.59
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     652.83,
+     928.59
+    ],
+    [
+     652.12,
+     923.64
+    ],
+    [
+     647.17,
+     927.17
+    ],
+    [
+     657.42,
+     924.7
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.burrowborn_crawler",
+     "count": 4
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    35.0,
+    60.0
+   ],
+   "safe_radius": 9.0
+  },
+  {
+   "id": "spawn.floodlands_cellar_ravager",
+   "zone_id": "zone.floodlands_cellar",
+   "center": [
+    658.84,
+    911.97
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     658.84,
+     911.97
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.burrowborn_ravager",
+     "count": 1
+    }
+   ],
+   "threat_budget": 10,
+   "respawn_seconds": [
+    120.0,
+    180.0
+   ],
+   "safe_radius": 12.0
   }
  ],
  "elevators": [
@@ -7395,6 +11589,245 @@
       -1.4
      ]
     }
+   ]
+  }
+ ],
+ "traps": [
+  {
+   "entity_id": 530,
+   "zone_id": "zone.robot_hideout_f1",
+   "position": [
+    -533.0,
+    0.0,
+    768.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 18,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 531,
+   "zone_id": "zone.robot_hideout_f1",
+   "position": [
+    -504.0,
+    0.0,
+    768.5
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 18,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 532,
+   "zone_id": "zone.robot_hideout_f2",
+   "position": [
+    -529.0,
+    0.0,
+    883.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 18,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 533,
+   "zone_id": "zone.robot_hideout_f2",
+   "position": [
+    -521.0,
+    0.0,
+    880.5
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 18,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 534,
+   "zone_id": "zone.robot_hideout_f2",
+   "position": [
+    -511.0,
+    0.0,
+    878.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 18,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 535,
+   "zone_id": "zone.robot_hideout_f2",
+   "position": [
+    -503.0,
+    0.0,
+    875.5
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 18,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 536,
+   "zone_id": "zone.robot_hideout_f3",
+   "position": [
+    -530.0,
+    0.0,
+    1005.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 18,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 537,
+   "zone_id": "zone.robot_hideout_f3",
+   "position": [
+    -514.0,
+    0.0,
+    1004.5
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 18,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 538,
+   "zone_id": "zone.robot_hideout_f3",
+   "position": [
+    -506.0,
+    0.0,
+    995.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 20,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 539,
+   "zone_id": "zone.robot_hideout_f4",
+   "position": [
+    -526.0,
+    0.0,
+    1114.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 22,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 540,
+   "zone_id": "zone.robot_hideout_f4",
+   "position": [
+    -506.0,
+    0.0,
+    1114.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 22,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 541,
+   "zone_id": "zone.robot_hideout_f4",
+   "position": [
+    -522.0,
+    0.0,
+    1126.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 22,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  },
+  {
+   "entity_id": 542,
+   "zone_id": "zone.robot_hideout_f4",
+   "position": [
+    -510.0,
+    0.0,
+    1126.0
+   ],
+   "radius": 1.25,
+   "windup": 0.6,
+   "damage": 22,
+   "slow": 0.5,
+   "slow_seconds": 1.6,
+   "up": 1.0,
+   "rearm": 3.5
+  }
+ ],
+ "power_grids": [
+  {
+   "entity_id": 570,
+   "zone_id": "zone.robot_hideout_f4",
+   "position": [
+    -516.0,
+    0.0,
+    1107.0
+   ],
+   "period": 30.0,
+   "dark": 6.0,
+   "warn": 1.5,
+   "offset": 0.0,
+   "emergency": [
+    [
+     -540.0,
+     1134.0
+    ],
+    [
+     -516.0,
+     1108.0
+    ],
+    [
+     -500.0,
+     1122.0
+    ]
    ]
   }
  ]

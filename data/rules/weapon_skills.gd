@@ -24,9 +24,9 @@ const DESCRIPTIONS := {
 	"skill.blades": "Knives and daggers. Ambush: +4 damage after moving 2 m since your last hit.",
 	"skill.firearms": "Shotguns, carbines and rifles. Steady fire at mid range.",
 	"skill.precision": "Precision rifles. +3 damage on targets 6 m or more away.",
-	"skill.spores": "Spore projectors. With one in hand, Bloom poisons enemies instead of healing.",
-	"skill.vitalism": "Living weapons that grow with their bearer.",
-	"skill.tech": "Energy weapons and field electronics.",
+	"skill.spores": "Spore projectors. Fire spore cartridges that poison what they hit; with one in hand, Bloom poisons enemies instead of healing.",
+	"skill.vitalism": "Living weapons that fire synapse darts: they wound enemies and heal the operators they strike.",
+	"skill.tech": "Energy weapons and field electronics. Relay weapons load no rounds: each shot draws energy from the worn cell.",
 	"skill.shielding": "Shields. Trains when you are hit with a shield up; 8% less damage, up to 40%.",
 }
 ## Planned uses beyond combat (presentation only; nothing reads these yet).

@@ -1,0 +1,218 @@
+{
+ "comment": "Excavation floor templates (Phase 7, 2026-10-15; docs/design/EXCAVATIONS.md 'Floor generator'). Read by shared/gameplay/excavation_floor_generator.gd. Room-local metres (x, z; 'p' is [x, h, z]); yaws 'r' in degrees. Set entries ('k' = CitySet layout key) are copied into the floor's inline set; 'k': 'rock' entries become cavern props. Balance and lore PROVISIONAL.",
+ "id": "excavation_theme.dry_rock_vdi",
+ "default": true,
+ "areas": ["zone.surface_scarp", "zone.surface_saltpan", "zone.frontier_road_east", "zone.salt_pit"],
+ "floor_names": ["Upper Workings", "Haulage Level", "Deep Cut", "Old Face", "Blind Drift", "Sump Level"],
+ "geology": "res://assets/game/materials/geology/geology_c3.tres",
+ "cavern": {"cell": 0.5, "wall_height": 6.5, "near_wall_height": 1.4, "smooth": 2.2, "warp": 1.3},
+ "atmosphere_lit": {"ambient_color": "a8988a", "ambient_energy": 0.55, "fog_color": "17120e", "fog_density": 0.003, "exposure": 1.05},
+ "atmosphere_dark": {"ambient_color": "5a6a72", "ambient_energy": 0.16, "fog_color": "06090a", "fog_density": 0.0045, "exposure": 0.95},
+ "cell": 24.0,
+ "margin": 4.0,
+ "grid": [
+  {"min_depth": 1, "cols": 3, "rows": 2, "rooms": 5},
+  {"min_depth": 2, "cols": 3, "rows": 3, "rooms": 7},
+  {"min_depth": 3, "cols": 4, "rows": 3, "rooms": 9}
+ ],
+ "loop_chance": 0.3,
+ "passage_width": [4.6, 6.0],
+ "jitter": 2.5,
+ "spawn_clear_radius": 18.0,
+ "lamp": {
+  "model": "excavation/wall_lamp",
+  "dead_model": "excavation/wall_lamp_rusty",
+  "scale": 1.0,
+  "height": 2.7,
+  "light": {"color": "ffb867", "energy": 3.2, "range": 11.0},
+  "fill": {"color": "b8a890", "energy": 1.1, "height": 6.5, "range_scale": 1.6},
+  "emergency": {"color": "c8402a", "energy": 0.9, "range": 6.5, "every": 3}
+ },
+ "frame": {"every": 7.0, "post": [0.22, 3.4, 0.22], "beam_height": 3.3, "m": "panel", "c": "8a7a62", "cable_color": "ffc56e"},
+ "ship_bay": {
+  "chambers": [{"c": [3.0, 3.0], "r": [12.5, 12.5], "a": 0}],
+  "lamps": [{"p": [13.5, 2.0]}, {"p": [2.0, 13.5]}],
+  "dressing": [
+  ]
+ },
+ "rooms": [
+  {
+   "id": "drill_gallery", "weight": 3, "min_depth": 1,
+   "chambers": [{"c": [0, 0], "r": [9.5, 6.0], "a": 20}, {"c": [4.0, 3.5], "r": [5.0, 4.5], "a": 0}],
+   "dressing": [
+    {"k": "props", "m": "world/mining_drill", "p": [-3.5, 0.0, -2.2], "r": 20, "s": 0.85},
+    {"k": "props", "m": "outpost/generator", "p": [4.0, 0.0, -2.8], "r": 200, "s": 0.9},
+    {"k": "sparks", "p": [4.0, 1.2, -2.8]},
+    {"k": "cables", "a": [-6.0, 3.2, 1.5], "b": [5.0, 3.0, 4.0], "sag": 0.5, "bulbs": 0}
+   ],
+   "clusters": [{"at": [6.5, 4.0], "pick": ["barrels", "ammo_stack", "rubble"]}, {"at": [-6.5, 3.0], "pick": ["rubble", "spool"]}],
+   "pockets": [{"p": [-7.5, -1.0], "r": 70}, {"p": [7.0, 7.0], "r": 230}, {"p": [0.5, -5.5], "r": 0}],
+   "spawns": [[0.0, 2.0], [-4.0, 2.5], [3.0, -1.0]],
+   "lamps": [{"p": [-6.5, -3.5], "r": 30}, {"p": [6.0, 0.5], "r": 250}]
+  },
+  {
+   "id": "haulage_yard", "weight": 3, "min_depth": 1,
+   "chambers": [{"c": [0, 0], "r": [8.5, 8.0], "a": 0}, {"c": [-3.0, -4.5], "r": [5.0, 4.0], "a": 0}],
+   "dressing": [
+    {"k": "containers", "p": [-2.5, 0.0, -4.5], "r": 90, "l": 20, "c": "6b3a2a", "rust": 0.85},
+    {"k": "props", "m": "outpost/cargo_pod", "p": [3.5, 0.0, -3.0], "r": 15, "s": 1.0},
+    {"k": "props", "m": "dustline/tanker_wagon", "p": [-4.5, 0.0, 4.0], "r": 0, "s": 0.8},
+    {"k": "cables", "a": [-5.0, 3.4, 0.0], "b": [5.0, 3.4, 1.0], "sag": 0.6, "bulbs": 0}
+   ],
+   "clusters": [{"at": [4.5, 4.0], "pick": ["barrels", "crates", "spool"]}, {"at": [5.5, -6.0], "pick": ["rubble", "barrels"]}],
+   "pockets": [{"p": [-7.0, 0.5], "r": 90}, {"p": [6.5, 6.5], "r": 225}],
+   "spawns": [[0.0, 0.0], [3.0, 2.5], [-2.0, 2.0]],
+   "lamps": [{"p": [0.5, -6.5], "r": 0}, {"p": [-6.0, 5.0], "r": 120}]
+  },
+  {
+   "id": "pump_station", "weight": 2, "min_depth": 1,
+   "chambers": [{"c": [0, 0], "r": [7.5, 7.5], "a": 0}, {"c": [3.0, -3.0], "r": [6.0, 4.0], "a": -30}],
+   "dressing": [
+    {"k": "props", "m": "world/industrial_pipes", "node": "ind_pipe_large_01_long_01", "p": [-5.5, 0.0, -1.0], "r": 90, "s": 1.0},
+    {"k": "props", "m": "world/industrial_pipes", "node": "ind_pipe_large_01_valve_01", "p": [-5.5, 0.0, 3.0], "r": 90, "s": 1.0},
+    {"k": "props", "m": "hideout/power_supply", "p": [4.5, 0.0, -4.0], "r": 300, "s": 1.4},
+    {"k": "props", "m": "hideout/circuit_box", "p": [1.0, 0.0, -6.0], "r": 0, "s": 1.0},
+    {"k": "smoke", "p": [-5.5, 1.0, 1.0]},
+    {"k": "cables", "a": [-4.5, 3.0, -4.0], "b": [4.0, 3.0, -3.0], "sag": 0.4, "bulbs": 0}
+   ],
+   "clusters": [{"at": [4.0, 4.0], "pick": ["barrels", "generator", "rubble"]}],
+   "pockets": [{"p": [-1.0, 6.5], "r": 180}, {"p": [7.5, -1.0], "r": 270}],
+   "spawns": [[0.0, 1.0], [2.5, -2.0]],
+   "lamps": [{"p": [-3.0, -5.5], "r": 330}, {"p": [5.5, 2.5], "r": 260}]
+  },
+  {
+   "id": "collapsed_stope", "weight": 2, "min_depth": 1,
+   "chambers": [{"c": [0, 0], "r": [8.0, 6.5], "a": -25}, {"c": [-4.0, 4.0], "r": [4.5, 4.0], "a": 0}, {"c": [4.5, -3.5], "r": [4.5, 3.5], "a": 10}],
+   "dressing": [
+    {"k": "rock", "type": "column", "p": [1.5, 0.0, 1.5], "height": 7.0, "radius": 1.1},
+    {"k": "rock", "type": "boulder", "p": [-2.5, 0.0, -2.0], "size": [1.8, 1.2, 1.5]},
+    {"k": "rock", "type": "boulder", "p": [5.0, 0.0, 1.5], "size": [1.4, 1.0, 1.2]},
+    {"k": "boxes", "p": [-1.0, 0.0, 3.5], "s": [0.2, 2.6, 0.2], "r": 15, "x": 18, "m": "panel", "c": "7a6a52", "solid": false},
+    {"k": "boxes", "p": [0.4, 0.0, 3.2], "s": [3.2, 0.18, 0.2], "r": 15, "x": 0, "z": 24, "m": "panel", "c": "7a6a52", "solid": false}
+   ],
+   "clusters": [{"at": [-4.5, 5.0], "pick": ["rubble", "spool"]}, {"at": [5.0, -4.5], "pick": ["rubble", "barrels"]}],
+   "pockets": [{"p": [-7.0, 2.5], "r": 80}, {"p": [7.5, -4.0], "r": 260}, {"p": [2.0, -6.0], "r": 10}],
+   "spawns": [[-1.0, 0.5], [3.5, -2.0], [-4.0, 3.5]],
+   "lamps": [{"p": [-5.5, -2.0], "r": 60}]
+  },
+  {
+   "id": "survey_camp", "weight": 2, "min_depth": 1,
+   "chambers": [{"c": [0, 0], "r": [8.0, 7.0], "a": 15}],
+   "dressing": [
+    {"k": "boxes", "p": [-2.0, 2.6, -1.0], "s": [4.0, 0.04, 3.2], "r": 15, "x": -6, "m": "tarp_6b5a44", "solid": false},
+    {"k": "boxes", "p": [-3.9, 0.0, -2.4], "s": [0.09, 2.6, 0.09], "r": 15, "m": "oxide", "solid": false},
+    {"k": "boxes", "p": [-0.2, 0.0, -2.4], "s": [0.09, 2.6, 0.09], "r": 15, "m": "oxide", "solid": false},
+    {"k": "boxes", "p": [-3.9, 0.0, 0.4], "s": [0.09, 2.6, 0.09], "r": 15, "m": "oxide", "solid": false},
+    {"k": "boxes", "p": [-0.2, 0.0, 0.4], "s": [0.09, 2.6, 0.09], "r": 15, "m": "oxide", "solid": false},
+    {"k": "props", "m": "dustline/type30_console", "p": [-2.5, 0.0, -1.5], "r": 30, "s": 0.9},
+    {"k": "props", "m": "surface/barrel_stove", "p": [2.0, 0.0, 1.5], "r": 0, "s": 1.0},
+    {"k": "lights", "p": [2.0, 1.0, 1.5], "color": "ff8a3a", "energy": 1.4, "range": 6.0},
+    {"k": "smoke", "p": [2.0, 1.2, 1.5]}
+   ],
+   "clusters": [{"at": [4.5, -3.0], "pick": ["crates", "ammo_stack"]}, {"at": [-5.0, 3.5], "pick": ["barrels", "spool"]}],
+   "pockets": [{"p": [6.5, 3.5], "r": 240}, {"p": [-6.5, -3.0], "r": 60}],
+   "spawns": [[1.0, -1.0], [-1.5, 3.0]],
+   "lamps": [{"p": [3.0, -5.0], "r": 350}]
+  },
+  {
+   "id": "ore_face", "weight": 2, "min_depth": 2,
+   "chambers": [{"c": [0, 0], "r": [9.0, 5.5], "a": -40}, {"c": [-2.0, 3.0], "r": [5.0, 4.5], "a": 0}],
+   "dressing": [
+    {"k": "props", "m": "outpost/work_reflector", "p": [-3.0, 0.0, 2.5], "r": 300, "s": 1.0, "solid": false},
+    {"k": "props", "m": "outpost/excavator_arm", "p": [3.5, 0.0, 2.5], "r": 130, "s": 0.45}
+   ],
+   "clusters": [{"at": [-6.0, 4.0], "pick": ["rubble", "barrels"]}],
+   "pockets": [{"p": [-6.0, -4.0], "r": 50}, {"p": [6.5, 3.5], "r": 230}, {"p": [5.0, -4.5], "r": 310}, {"p": [-5.5, 6.0], "r": 140}],
+   "spawns": [[0.0, 0.0], [2.0, -2.0], [-2.0, 2.5]],
+   "lamps": [{"p": [0.0, -4.0], "r": 320}]
+  }
+ ],
+ "reward_rooms": [
+  {
+   "id": "vdi_strongroom", "weight": 1, "min_depth": 1,
+   "chambers": [{"c": [0, 0], "r": [7.5, 7.0], "a": 0}],
+   "dressing": [
+    {"k": "props", "m": "hideout/mainframe", "p": [-4.0, 0.0, -3.5], "r": 45, "s": 0.9},
+    {"k": "props", "m": "outpost/monitor_bay", "p": [-1.0, 0.0, -5.0], "r": 15, "s": 1.0},
+    {"k": "lights", "p": [-3.0, 1.6, -3.0], "color": "5fb8b0", "energy": 0.9, "range": 5.0},
+    {"k": "floor_sign", "p": [4.5, 2.4, -4.0], "text": "VDI · STRATA CACHE\nproperty of vantage deep industries"}
+   ],
+   "clusters": [{"at": [4.0, 3.5], "pick": ["crates", "ammo_stack"]}],
+   "pockets": [{"p": [6.5, -1.0], "r": 270}],
+   "spawns": [[1.0, 2.5], [-2.0, 1.5], [2.5, -1.5]],
+   "crate": {"p": [0.5, -2.0], "r": 15},
+   "lamps": [{"p": [-5.5, 1.5], "r": 90}, {"p": [5.0, -3.0], "r": 300}]
+  }
+ ],
+ "clusters": {
+  "barrels": [
+   {"k": "props", "m": "surface/barrel_01", "p": [0.0, 0.0, 0.0], "r": 0, "s": 1.0},
+   {"k": "props", "m": "surface/barrel_03", "p": [0.9, 0.0, 0.4], "r": 40, "s": 1.0},
+   {"k": "props", "m": "surface/propane_tank", "p": [-0.9, 0.0, -0.5], "r": 70, "s": 1.0}
+  ],
+  "crates": [
+   {"k": "props", "m": "ammo/ammo_crate_old", "p": [0.0, 0.0, 0.0], "r": 10, "s": 1.0},
+   {"k": "props", "m": "ammo/ammo_crate_old", "p": [0.2, 0.62, 0.1], "r": 35, "s": 0.9, "solid": false},
+   {"k": "props", "m": "surface/industrial_pastic_container", "p": [1.2, 0.0, -0.6], "r": 0, "s": 1.0}
+  ],
+  "ammo_stack": [
+   {"k": "props", "m": "ammo/ammo_crate_open", "p": [0.0, 0.0, 0.0], "r": 20, "s": 0.9, "solid": false},
+   {"k": "props", "m": "ammo/ammo_box_9mm", "p": [0.8, 0.0, 0.5], "r": 60, "s": 1.0, "solid": false}
+  ],
+  "rubble": [
+   {"k": "rock", "type": "boulder", "p": [0.0, 0.0, 0.0], "size": [1.4, 0.9, 1.2]},
+   {"k": "rock", "type": "boulder", "p": [1.1, 0.0, 0.7], "size": [0.8, 0.5, 0.7]},
+   {"k": "rock", "type": "stalagmite", "p": [-0.9, 0.0, 0.6], "height": 1.3, "radius": 0.35}
+  ],
+  "spool": [
+   {"k": "cylinders", "p": [0.0, 0.75, 0.0], "r": 30, "roll": 90, "radius": 0.75, "h": 0.5, "m": "oxide", "solid": true},
+   {"k": "props", "m": "surface/old_tyre", "p": [1.0, 0.0, 0.3], "r": 0, "s": 1.0, "solid": false}
+  ],
+  "generator": [
+   {"k": "props", "m": "outpost/generator", "p": [0.0, 0.0, 0.0], "r": 30, "s": 0.9},
+   {"k": "sparks", "p": [0.0, 1.2, 0.0]}
+  ]
+ },
+ "mobs": [
+  {"content_id": "npc.burrowborn_crawler", "min_tier": 1, "max_tier": 3, "weight": 3},
+  {"content_id": "npc.mutant_brood", "min_tier": 1, "max_tier": 3, "weight": 3},
+  {"content_id": "npc.burrowborn_red_mandible", "min_tier": 1, "max_tier": 5, "weight": 3},
+  {"content_id": "npc.rustbound_drone", "min_tier": 2, "max_tier": 6, "weight": 2},
+  {"content_id": "npc.mutant_zombine", "min_tier": 2, "max_tier": 6, "weight": 3},
+  {"content_id": "npc.mutant_spitter", "min_tier": 2, "max_tier": 6, "weight": 2},
+  {"content_id": "npc.excavation_enforcer", "min_tier": 2, "max_tier": 6, "weight": 2},
+  {"content_id": "npc.mutant_ripper", "min_tier": 3, "max_tier": 9, "weight": 3},
+  {"content_id": "npc.rustbound_miner", "min_tier": 3, "max_tier": 9, "weight": 3},
+  {"content_id": "npc.burrowborn_ravager", "min_tier": 4, "max_tier": 9, "weight": 2},
+  {"content_id": "npc.mutant_tribal_bug", "min_tier": 4, "max_tier": 9, "weight": 2},
+  {"content_id": "npc.rustbound_skirmisher", "min_tier": 5, "max_tier": 9, "weight": 2},
+  {"content_id": "npc.rustbound_pelter", "min_tier": 6, "max_tier": 9, "weight": 1}
+ ],
+ "room_budget": {"base": 4, "per_tier": 4},
+ "respawn_seconds": [120.0, 180.0],
+ "spawn_safe_radius": 10.0,
+ "resources": [
+  {"material": "material.ore_limonite", "item": "item.ore.limonite", "min_tier": 1, "max_tier": 3, "weight": 4, "size": [1.8, 1.4, 1.0]},
+  {"material": "material.ore_hematite", "item": "item.ore.hematite", "min_tier": 1, "max_tier": 6, "weight": 3, "size": [2.0, 1.5, 1.0]},
+  {"material": "material.ore_magnetite", "item": "item.ore.magnetite", "min_tier": 2, "max_tier": 9, "weight": 3, "size": [2.2, 1.7, 1.1]},
+  {"material": "material.lumenita", "item": "item.mineral.lumenita", "min_tier": 3, "max_tier": 9, "weight": 2, "size": [1.6, 1.5, 1.0], "glow": "5fb8b0"},
+  {"material": "material.reinforced_relic", "item": "item.relic_fragment", "min_tier": 5, "max_tier": 9, "weight": 1, "size": [1.6, 1.4, 1.0]}
+ ],
+ "resources_per_floor": {"base": 3, "per_depth": 1, "max": 9},
+ "rewards": {
+  "container": "item.container.vdi_cache",
+  "collider": [1.4, 1.0, 1.0],
+  "loot": [
+   {"min_tier": 1, "item": "item.consumable.health_capsule", "quantity": [1, 2], "per_tier": 0.5, "chance": 1.0},
+   {"min_tier": 1, "item": "item.ammunition.field_round", "quantity": [15, 25], "per_tier": 8, "chance": 1.0},
+   {"min_tier": 1, "item": "item.scrap_component", "quantity": [2, 4], "per_tier": 0.5, "chance": 0.7},
+   {"min_tier": 2, "item": "item.battery.provisional_relay_cell", "quantity": [1, 1], "chance": 0.5},
+   {"min_tier": 2, "item": "item.ore.magnetite", "quantity": [2, 3], "per_tier": 0.5, "chance": 0.6},
+   {"min_tier": 3, "item": "item.ammunition.hardened_round", "quantity": [8, 14], "per_tier": 4, "chance": 0.8},
+   {"min_tier": 3, "item": "item.mineral.lumenita", "quantity": [1, 2], "per_tier": 0.34, "chance": 0.7},
+   {"min_tier": 4, "item": "item.component.servo_core", "quantity": [1, 1], "chance": 0.4},
+   {"min_tier": 4, "item": "item.relic_fragment", "quantity": [1, 1], "chance": 0.35},
+   {"min_tier": 6, "item": "item.relic_fragment", "quantity": [1, 2], "chance": 0.6}
+  ]
+ }
+}

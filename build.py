@@ -28,6 +28,10 @@ import worldmap as WM  # noqa: E402
 import atlas as AT  # noqa: E402
 import lore as LO  # noqa: E402
 from wiki_i18n import MOB_ES, MOB_SHOTS  # noqa: E402
+from wiki_es_p8 import ITEM_ES_P8, MOB_ES_P8  # noqa: E402
+
+ITEM_ES.update(ITEM_ES_P8)  # Fase 8 (2026-10-23): textos en español del contenido nuevo, tambien para Arsenal/Equipo/Bestiario
+MOB_ES.update(MOB_ES_P8)
 
 LANGS = ("en", "es")
 GAME_REPO = os.path.join(os.path.dirname(ROOT), "deepkin")
@@ -109,6 +113,8 @@ def load():
 
 CLASSES_DATA, ITEMS, NPCS, MATS, FACTIONS = load()
 ROLE_ES = {"swarm": "Enjambre", "brute": "Bruto", "skirmisher": "Hostigador"}
+from wiki_i18n import ROLES as _ROLES  # noqa: E402  roles nuevos (Fases 2-3, 2026-10-23): a distancia, controlador, jefe...
+ROLE_ES.update({k: v["es"] for k, v in _ROLES.items() if k not in ROLE_ES})
 
 
 def merge_mob_texts():
@@ -837,7 +843,8 @@ def gear_card(i, lang):
                     "Ammunition (if it shoots)" if lang == "en" else "Munición (si dispara)")
                 lis += f'<li class="mini"><span class="mini-ph">?</span><span>{e(label)}</span></li>'
             elif cid in ITEMS:
-                lis += f'<li class="mini">{icon(cid, alt=ITEMS[cid]["display_name"])}<span>{e(ITEMS[cid]["display_name"])}</span></li>'
+                mini = icon(cid, alt=ITEMS[cid]["display_name"]) if os.path.exists(os.path.join(ROOT, "assets/img/icons", cid + ".png")) else '<span class="icon icon-ph"></span>'
+                lis += f'<li class="mini">{mini}<span>{e(ITEMS[cid]["display_name"])}</span></li>'
         contents = f'<p class="kicker">{u("contents", lang)}</p><ul class="minis">{lis}</ul>'
     return f"""<article class="gcard{' soon' if i.get('planned') else ''}" id="{e(i['id'])}">{icon(i['id'], alt=i['display_name']) if os.path.exists(os.path.join(ROOT, 'assets/img/icons', i['id'] + '.png')) else '<span class="icon icon-ph"></span>'}
 <div><p class="kicker">{e(slot)} {status_tag(i, lang)}</p><h3><a href="{SL.item(i['id'])}">{e(i['display_name'])}</a></h3><p>{e(item_desc(i, lang))}</p><dl class="kv">{kv_html}</dl>{contents}</div></article>"""
@@ -854,15 +861,24 @@ def page_gear(lang):
          else "Tu luz es la diferencia entre leer una caverna y adivinarla. Las luces más potentes vacían la batería más rápido.",
          lambda i: i.get("equipment_slot") == "light"),
         ("power", "Power & carry" if lang == "en" else "Energía y carga",
-         "The battery feeds your light and abilities. Nothing recharges it on an expedition." if lang == "en"
-         else "La batería alimenta tu luz y tus habilidades. Nada la recarga durante una expedición.",
+         "The battery feeds your light, drones, energy weapons and abilities. Spare cells refill it between fights; the Alchemist recharges an empty one." if lang == "en"
+         else "La batería alimenta tu luz, tus drones, las armas de energía y tus habilidades. Las celdas de repuesto la recargan entre peleas; el Alquimista recarga una vacía.",
          lambda i: i.get("equipment_slot") in ("battery", "backpack")),
         ("tools", "Tools" if lang == "en" else "Herramientas",
          "The drill goes in the tool slot. Hold F at a drill site." if lang == "en" else "El taladro va en la ranura de herramienta. Mantené F en un punto de perforación.",
          lambda i: i.get("equipment_slot") == "tool_special"),
-        ("crates", "Newcomer crates" if lang == "en" else "Cajones de recién llegado",
-         "Every new operator takes their first kit from two personal crates in the Outpost." if lang == "en"
-         else "Todo operador nuevo toma su primer equipo de dos cajones personales en el Outpost.",
+        # Drones y equipo de campo (Fases 2-7, 2026-10-23).
+        ("drones", "Drones",
+         "Launch them from the cargo: a lamp, a gun, a scout you pilot or a bomb you fly in. They draw from your battery." if lang == "en"
+         else "Se lanzan desde el inventario: una lámpara, un arma, un explorador que pilotás o una bomba que volás. Sacan energía de tu batería.",
+         lambda i: i["id"].startswith("item.drone.")),
+        ("field", "Field kit" if lang == "en" else "Equipo de campo",
+         "Food and capsules, fuel, tablets to read, contract drives and the VDI service: what else rides in your cargo." if lang == "en"
+         else "Comida y cápsulas, combustible, tablets para leer, drives de contratos y el servicio de VDI: lo demás que va en tu inventario.",
+         lambda i: i["id"].split(".")[1] in ("food", "consumable", "fuel", "log", "contract", "service") if i["id"].count(".") == 2 else False),
+        ("crates", "Crates & cases" if lang == "en" else "Cajones y estuches",
+         "Your first kit comes from two personal crates in the Outpost; Document Cases hold Reading Logs and boss crates open once per operator." if lang == "en"
+         else "Tu primer equipo sale de dos cajones personales en el Outpost; los Document Cases guardan registros y los cofres de jefes se abren una vez por operador.",
          lambda i: i["id"].startswith("item.container")),
     ]
     slot_order = {"head": 0, "chest": 1, "legs": 2, "boots": 3}
@@ -890,13 +906,14 @@ def page_gear(lang):
 
 def page_resources(lang):
     ores = [i for i in ITEMS.values() if i["id"].startswith(("item.ore", "item.mineral"))]
-    loot = [ITEMS[k] for k in ("item.ferrous_sample", "item.relic_fragment", "item.scrap_component") if k in ITEMS]
+    loot = [ITEMS[k] for k in ("item.ferrous_sample", "item.relic_fragment", "item.scrap_component", "item.component.servo_core") if k in ITEMS]
     cur = sorted([i for i in ITEMS.values() if i["id"].startswith("item.currency")], key=lambda i: i["properties"]["currency_value"])
 
     def rcard(i):
         found = FOUND_IN.get(i["id"])
         f = f'<p class="found"><span>{u("found_in", lang)}</span>{e(found[lang])}</p>' if found else ""
-        return (f'<article class="gcard" id="{e(i["id"])}">{icon(i["id"], alt=i["display_name"])}<div><p class="kicker">{status_tag(i, lang)}</p>'
+        art = icon(i["id"], alt=i["display_name"]) if os.path.exists(os.path.join(ROOT, "assets/img/icons", i["id"] + ".png")) else '<span class="icon icon-ph"></span>'
+        return (f'<article class="gcard" id="{e(i["id"])}">{art}<div><p class="kicker">{status_tag(i, lang)}</p>'
                 f'<h3><a href="{SL.item(i["id"])}">{e(i["display_name"])}</a></h3><p>{e(item_desc(i, lang))}</p>{f}</div></article>')
 
     coins = ""
@@ -922,9 +939,9 @@ def page_resources(lang):
                                else "La roca más dura con poca eficacia de perforación tarda más. Esfuerzo = durabilidad ÷ eficacia.")
                + f"""<div class="tablewrap"><table class="data"><thead><tr><th>{'Material' if lang == 'en' else 'Material'}</th><th>{u('hardness', lang)}</th>
 <th>{u('durability', lang)}</th><th>{u('drill_eff', lang)}</th><th>{u('effort', lang)}</th></tr></thead><tbody>{mrows}</tbody></table></div>"""
-               + section_title("currency", u("planned", lang), "Currency" if lang == "en" else "Moneda",
-                               "Three coins, one stamp. Trading is coming; here is what you will be counting." if lang == "en"
-                               else "Tres monedas, un sello. El comercio está en camino; esto es lo que vas a contar.")
+               + section_title("currency", "Economy" if lang == "en" else "Economía", "Currency" if lang == "en" else "Moneda",
+                               "Three coins, one stamp. Traders take the coins you carry; the bank keeps the rest." if lang == "en"
+                               else "Tres monedas, un sello. Los comerciantes cobran con las monedas que llevás; el banco guarda el resto.")
                + f'<div class="coins">{coins}</div>')
     entries = [("ores", "Ores" if lang == "en" else "Minerales"), ("finds", "Finds" if lang == "en" else "Hallazgos"),
                ("rock", "Geology" if lang == "en" else "Geología"), ("currency", "Currency" if lang == "en" else "Moneda")]
@@ -1018,18 +1035,25 @@ def page_bestiary(lang):
   </div>
 </article>"""
 
-    order = ["npc.burrowborn_crawler", "npc.burrowborn_ravager", "npc.scavenger", "npc.excavation_enforcer", "npc.dragon", "npc.greater_dragon"]
+    # Todas las criaturas del juego por faccion (2026-10-23): Burrowborn, Castoffs, Mutantes, Rustbound, Wyrms; en cada
+    # faccion, de menor a mayor tier (el orden de los datos desempata).
     by_id = {n["id"]: n for n in NPCS}
-    burrow = "".join(mob(by_id[i]) for i in order[:2] if i in by_id)
-    human = "".join(mob(by_id[i]) for i in order[2:4] if i in by_id)
-    wyrms = "".join(mob(by_id[i]) for i in order[4:] if i in by_id and i in MOBS)
+
+    def of(fid):
+        ms = [n for n in NPCS if n.get("faction") == fid and n["id"] in MOBS and MOBS[n["id"]].get("lore")]
+        return "".join(mob(n) for n in sorted(ms, key=lambda n: (n.get("tier", 0), n.get("max_health", 0))))
+    burrow = of("faction.burrowborn")
+    human = of("faction.castoffs")
+    mutants = of("faction.mutants")
+    rust = of("faction.rustbound")
+    wyrms = of("faction.wyrms")
     # Capturas de los dragones en The Cinder Deep (2026-10-10): reposo y aviso de la ola de fuego.
     wyrm_shots = '<div class="wyrm-shots">' + "".join(
         f'<figure><a href="../assets/img/{b}.webp"><img src="../assets/img/{b}_800.webp" srcset="../assets/img/{b}_800.webp 800w, ../assets/img/{b}.webp 1600w" '
         f'sizes="(max-width: 680px) 100vw, 50vw" alt="{e(c[lang])}" width="800" height="450" loading="lazy" decoding="async"></a><figcaption>{e(c[lang])}</figcaption></figure>'
         for mid in ("npc.dragon", "npc.greater_dragon") for b, c in MOB_SHOTS.get(mid, [])) + "</div>"
     rumours = ""
-    for fid in ("faction.rustbound", "faction.architects", "faction.hollow"):
+    for fid in [f["id"] for f in FACTIONS if f.get("status") == "planned" and f["id"] in FACTION]:
         f = fac[fid]
         rumours += (f'<article class="rumour"><p class="kicker">{e(FACTION[fid]["identity"][lang])}</p><h3>{e(f["name"])}</h3>'
                     f'<p>{e(FACTION[fid]["rumour"][lang])}</p><span class="tag tag-soon">{u("planned", lang)}</span></article>')
@@ -1037,6 +1061,12 @@ def page_bestiary(lang):
                + section_title("humans", "Faction" if lang == "en" else "Facción", "People" if lang == "en" else "Gente",
                                "Not everything down here is an animal." if lang == "en" else "No todo lo que hay acá abajo es un animal.")
                + f'<div class="mobs">{human}</div>'
+               + section_title("mutants", "Faction" if lang == "en" else "Facción", fac["faction.mutants"]["name"] if "faction.mutants" in fac else "The Mutants",
+                               "The Saltpan's edges belong to something that used to be people." if lang == "en" else "Los bordes del Saltpan son de algo que antes era gente.")
+               + f'<div class="mobs">{mutants}</div>'
+               + section_title("rustbound", "Faction" if lang == "en" else "Facción", fac["faction.rustbound"]["name"],
+                               "Under the Sump, VDI's machines still receive instructions." if lang == "en" else "Bajo el Sump, las máquinas de VDI todavía reciben instrucciones.")
+               + f'<div class="mobs">{rust}</div>'
                + section_title("wyrms", "Faction" if lang == "en" else "Facción", "The Wyrms",
                                "Below Frontier Road east, something keeps a nest." if lang == "en" else "Bajo Frontier Road este, algo cuida un nido.")
                + wyrm_shots
@@ -1044,7 +1074,8 @@ def page_bestiary(lang):
                + section_title("rumours", "Field reports" if lang == "en" else "Informes de campo", "Rumours from below" if lang == "en" else "Rumores de abajo",
                                "Operators come back with stories. Some of them are true." if lang == "en" else "Los operadores vuelven con historias. Algunas son ciertas.")
                + f'<div class="rumours">{rumours}</div>')
-    entries = [("burrowborn", "Burrowborn"), ("humans", "People" if lang == "en" else "Gente"), ("wyrms", "Wyrms"),
+    entries = [("burrowborn", "Burrowborn"), ("humans", "People" if lang == "en" else "Gente"), ("mutants", "Mutants" if lang == "en" else "Mutantes"),
+               ("rustbound", "Rustbound"), ("wyrms", "Wyrms"),
                ("rumours", "Rumours" if lang == "en" else "Rumores")]
     body = wiki_header(lang, "Bestiary" if lang == "en" else "Bestiario", "What hunts below" if lang == "en" else "Lo que caza abajo",
                        "Know what you are fighting before it knows you are there." if lang == "en" else "Conocé contra qué peleás antes de que sepa que estás ahí.",
@@ -1138,8 +1169,11 @@ def page_world(lang):
     # El camino al este (2026-10-10): Frontier Road, Dustline y The Cinder Deep, con capturas actuales.
     east = ""
     for r in TX.EAST:
-        east += f"""<article class="region region-wide" id="{r['id']}">
-  <figure>{shot(r['img'], r['cap'][lang])}<figcaption>{e(r['cap'][lang])}</figcaption></figure>
+        # Tarjetas sin captura todavia (2026-10-23): solo el texto, a todo el ancho.
+        has_shot = os.path.exists(os.path.join(ROOT, "assets", "img", r["img"] + ".webp"))
+        fig = f"<figure>{shot(r['img'], r['cap'][lang])}<figcaption>{e(r['cap'][lang])}</figcaption></figure>" if has_shot else ""
+        east += f"""<article class="region region-wide" id="{r['id']}"{'' if has_shot else ' style="grid-template-columns: 1fr"'}>
+  {fig}
   <div class="region-body"><p class="kicker">{e(r['kind'][lang])}</p><h3>{e(r['name'])}</h3><p class="region-lead">{e(r['lead'][lang])}</p><p>{e(r['body'][lang])}</p></div>
   {shot_strip(r.get('more'), lang)}
 </article>"""
@@ -1354,7 +1388,9 @@ SYNC_FILES = {
     "shared/gameplay/combat_skills.gd": "rules/combat_skills.gd",
     "server/death_penalty.gd": "rules/death_penalty.gd",
 }
-SYNC_DIRS = {"data/world/sets": "world/sets", "data/dialog": "dialog", "data/quests": "quests"}
+# Tiendas, casas y plantillas de excavacion (Fases 3-7, 2026-10-23): los lee el wiki (comercio, casas, excavaciones).
+SYNC_DIRS = {"data/world/sets": "world/sets", "data/dialog": "dialog", "data/quests": "quests",
+             "data/shops": "shops", "data/houses": "houses", "data/excavation": "excavation"}
 # Constantes sueltas de archivos grandes del juego: (archivo, nombre) -> se guardan en data/rules/constants.json.
 SYNC_CONSTANTS = [
     ("server/server_world.gd", "SCRAP_COMPONENT_ID"), ("server/server_world.gd", "COIN_ITEM_ID"),
@@ -1364,6 +1400,21 @@ SYNC_CONSTANTS = [
     # Banco y combustible (2026-10-11): tope del saldo y alcances del surtidor.
     ("shared/gameplay/bank_rules.gd", "MAX_BALANCE"), ("world/fuel_station.gd", "COMPUTER_REACH"),
     ("world/fuel_station.gd", "PUMP_REACH"),
+    # Fases 2-7 (2026-10-23): grupos, drones, regeneracion de bateria, ejecuciones, vehiculos y excavaciones (wiki_mech.py).
+    ("shared/gameplay/party_rules.gd", "MAX_MEMBERS"), ("shared/gameplay/party_rules.gd", "SHARE_RANGE"),
+    ("shared/gameplay/party_rules.gd", "INVITE_SECONDS"), ("shared/gameplay/party_rules.gd", "INVITE_RANGE"),
+    ("shared/gameplay/drone_rules.gd", "MAX_PER_OWNER"), ("shared/gameplay/drone_rules.gd", "MIN_LAUNCH_SECONDS"),
+    ("shared/gameplay/drone_rules.gd", "ASSAULT_HARD_DAMAGE_CAP"), ("shared/gameplay/drone_rules.gd", "ASSAULT_TIER_FACTOR"),
+    ("shared/gameplay/drone_rules.gd", "KAMIKAZE_HARD_DAMAGE_CAP"), ("shared/gameplay/drone_rules.gd", "KAMIKAZE_TIER_FACTOR"),
+    ("shared/gameplay/drone_rules.gd", "BLAST_EDGE_FACTOR"), ("shared/gameplay/drone_rules.gd", "TARGET_MEMORY"),
+    ("shared/gameplay/battery_regen.gd", "RATE"), ("shared/gameplay/execution_rules.gd", "EXECUTE_HEALTH_RATIO"),
+    ("shared/gameplay/vehicle_rules.gd", "MAX_OWNED"),
+    ("shared/gameplay/excavation_rules.gd", "CALL_OUT_AHEAD"), ("shared/gameplay/excavation_rules.gd", "SITE_SPACING"),
+    ("shared/gameplay/excavation_rules.gd", "DROP_SECONDS"), ("shared/gameplay/excavation_rules.gd", "TRANSIT_SECONDS"),
+    ("shared/gameplay/excavation_rules.gd", "MAX_ROSTER"), ("shared/gameplay/excavation_rules.gd", "ENERGY_MAX"),
+    ("shared/gameplay/excavation_rules.gd", "FUEL_MAX"), ("shared/gameplay/excavation_rules.gd", "START_ENERGY"),
+    ("shared/gameplay/excavation_rules.gd", "START_FUEL"), ("shared/gameplay/excavation_rules.gd", "ENERGY_PER_DEPTH"),
+    ("shared/gameplay/excavation_rules.gd", "FUEL_PER_DEPTH"), ("shared/gameplay/excavation_rules.gd", "MAX_FLOORS"),
 ]
 
 
@@ -1387,7 +1438,7 @@ def sync():
         m = re.search(r"^const " + name + r"\s*:?=\s*(.+)$", text, re.M)
         if m:
             raw = m.group(1).strip()
-            consts[name] = json.loads(raw) if raw.startswith('"') else (float(raw) if "." in raw else int(raw))
+            consts[name] = json.loads(raw) if raw[:1] in ('"', "{", "[") else (float(raw) if "." in raw else int(raw))
     # Municion del cajon de equipo: la cantidad la fija _seed_crate (server_world.gd).
     sw = open(os.path.join(GAME_REPO, "server/server_world.gd")).read()
     m = re.search(r'"\$starting_ammo":\s*\n.*?\n\s*quantity = (\d+)', sw)

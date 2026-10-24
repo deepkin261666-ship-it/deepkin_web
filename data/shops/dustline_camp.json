@@ -1,0 +1,20 @@
+{
+  "comment": "Dustline outskirts camp traders (2026-10-13, NEXT_SESSION 3f; docs/design/DUSTLINE.md \"Outskirts camp\"). Same format as dustline.json (ShopCatalog). Camp prices are a little above the city's: travellers pay for not walking in. Provisional balance.",
+  "shops": {
+    "npc.dustline_camp_tinker": {
+      "goods": [
+        {"item": "item.fuel.gas_can", "buy": 32, "sell": 10, "stock": 6},
+        {"item": "item.component.servo_core", "buy": 45, "sell": 15, "stock": 4},
+        {"item": "item.ferrous_sample", "sell": 4}
+      ]
+    },
+    "npc.dustline_camp_matriarch": {
+      "goods": [
+        {"item": "item.ore.hematite", "sell": 3},
+        {"item": "item.ore.limonite", "sell": 3},
+        {"item": "item.ore.magnetite", "sell": 5},
+        {"item": "item.ammunition.field_round", "buy": 4, "sell": 1, "stock": 60}
+      ]
+    }
+  }
+}

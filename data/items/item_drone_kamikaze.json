@@ -1,0 +1,23 @@
+{
+  "id": "item.drone.kamikaze",
+  "display_name": "Hornet Strike Drone",
+  "category": "drone",
+  "description": "A single-use FPV quad with a shaped charge strapped under it. Launch it and stand still at its tablet: you fly it in first person (movement keys; up to 45 m away) until it hits something or you detonate it (Space or its key again). The blast hurts every hostile within 3.5 m (45 at the centre, less at the edge; elites and bosses shrug off most of it). The drone is spent. Draws 0.8 energy a second while it flies, 40 seconds at most. Relay Nine stock; Rask sells it in Dustline.",
+  "visual_id": "visual.drone.kamikaze",
+  "gear_tier": 1,
+  "properties": {
+    "stack_size": 4
+  },
+  "drone": {
+    "function": "kamikaze",
+    "energy_per_second": 0.8,
+    "duration": 40,
+    "hover_height": 1.4,
+    "speed": 11.0,
+    "control_range": 45.0,
+    "blast_radius": 3.5,
+    "damage": 45,
+    "max_damage": 50
+  },
+  "weight": 1.2
+}

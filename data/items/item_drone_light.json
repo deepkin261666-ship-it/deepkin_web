@@ -1,0 +1,22 @@
+{
+  "id": "item.drone.light",
+  "display_name": "Firefly Light Drone",
+  "category": "drone",
+  "description": "A palm-sized quad with a floodlamp under its belly. Deployed, it hovers over your shoulder and lights the ground around you for up to three minutes, drawing 0.25 energy a second from your worn cell. Press its key again to call it back. Relay Nine stock; Rask sells a few in Dustline.",
+  "visual_id": "visual.drone.light",
+  "gear_tier": 1,
+  "properties": {
+    "stack_size": 1
+  },
+  "drone": {
+    "function": "light",
+    "energy_per_second": 0.25,
+    "duration": 180,
+    "hover_height": 2.3,
+    "follow_offset": [-1.1, 0.8],
+    "light_radius": 10.0,
+    "light_energy": 3.0,
+    "light_color": "ffe6bf"
+  },
+  "weight": 0.9
+}

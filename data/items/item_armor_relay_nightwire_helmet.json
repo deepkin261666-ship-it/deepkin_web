@@ -1,0 +1,20 @@
+{
+  "id": "item.armor.relay_nightwire_helmet",
+  "display_name": "Nightwire Helm",
+  "equipment_slot": "head",
+  "description": "A Relay infiltration helm in shadow camouflage; faint cyan seams light the wearer's way in the dark. Tier IV. Not issued yet.",
+  "visual_id": "visual.armor.relay_nightwire_helmet",
+  "gear_tier": 4,
+  "requirements": {
+    "minimum_level": 35,
+    "class_ids": [
+      "class.relay"
+    ]
+  },
+  "properties": {
+    "armor_defense": 12,
+    "resistance_bonus": 7
+  },
+  "weight": 2.4,
+  "planned": true
+}

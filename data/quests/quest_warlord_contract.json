@@ -1,0 +1,31 @@
+{
+  "id": "quest.contract_warlord",
+  "version": 1,
+  "title": "CUT THE HEAD OFF THE HIDEOUT",
+  "giver": "npc.dustline_board_keeper",
+  "offer": {
+    "text": "There's a paper on the board nobody's touched. The Castoffs under Frontier Road east answer to one man, the Warlord, four floors down. Somebody wants him gone and is paying 800 for it. You look like you've got nothing better to do.",
+    "accept": "I'll take the paper.",
+    "decline": "Not today."
+  },
+  "reward": {
+    "xp": 300
+  },
+  "steps": [
+    {
+      "id": "kill",
+      "objective": "Kill the Warlord, floor 4 of the Castoff hideout",
+      "goal": {"type": "kill", "target": "npc.castoff_warlord"},
+      "lines": "The way in is a stair pit south of Frontier Road east, past the wrecks. Four floors, every one meaner than the last; he holds the hall at the bottom. Kill him once, come back, and I'll see you paid."
+    },
+    {
+      "id": "redeem",
+      "objective": "Collect your payment from Lister at the contract board",
+      "goal": {"type": "talk_to", "target": "npc.dustline_board_keeper"},
+      "highlight": {"npc": "npc.dustline_board_keeper"},
+      "lines": "Word got here before you did. The hideout's lost its head. Your employer doesn't pay in coin; nobody who hires through this board does. Crypto, on a drive. Plug it into the BANK app on any terminal, type INSERT DRIVE, and the network credits you. Don't lose it. A drive pays whoever slots it.",
+      "grant": {"items": [{"item": "item.contract.drive_800", "quantity": 1}]},
+      "reply": "Hand it over."
+    }
+  ]
+}

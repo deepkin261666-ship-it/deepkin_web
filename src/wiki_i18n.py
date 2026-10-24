@@ -9,11 +9,17 @@ CATS = {  # orden de las categorias de objetos
     "currency": L("Currency", "Moneda"), "ore": L("Ores", "Minerales"), "mineral": L("Minerals", "Cristales"),
     "salvage": L("Salvage", "Chatarra y hallazgos"), "container": L("Containers", "Contenedores"),
     "fuel": L("Fuel", "Combustible"), "log": L("Reading logs", "Registros"),
+    # Fases 2-7 (2026-10-23)
+    "food": L("Food", "Comida"), "drone": L("Drones", "Drones"), "component": L("Components", "Componentes"),
+    "contract": L("Contracts", "Contratos"), "service": L("Services", "Servicios"),
 }
 
 ROLES = {  # role / archetype de los mobs
     "swarm": L("Swarm", "Enjambre"), "brute": L("Brute", "Bruto"), "skirmisher": L("Skirmisher", "Hostigador"),
     "predator": L("Predator", "Depredador"), "territorial": L("Territorial", "Territorial"),
+    "ranged": L("Ranged", "A distancia"), "ranged skirmisher": L("Ranged skirmisher", "Hostigador a distancia"),
+    "controller": L("Controller", "Controlador"), "boss": L("Boss", "Jefe"), "artillery": L("Artillery", "Artillería"),
+    "turret": L("Turret", "Torreta"),
 }
 
 POSE = {"drill": L("Drilling", "Perforando"), "idle": L("Standing", "De pie"), "carry": L("Carrying cargo", "Cargando")}
@@ -79,6 +85,17 @@ ABILITY_SHAPE = {
     "bite": {"name": L("Bite", "Mordida"),
              "tip": L("{reach} m reach in a {arc}° arc in front of it. It only lands if you are still inside when the wind-up ends: step out or behind it.",
                       "{reach} m de alcance en un arco de {arc}° al frente. Sólo conecta si seguís adentro cuando termina la carga: salí o ponete detrás.")},
+    # Formas nuevas (Fases 2-3, 2026-10-23): "circle" es el golpe alrededor del propio mob; "barrage" y "shield" son
+    # reglas de datos que cualquier mob puede usar (docs/design/ROBOT_HIDEOUT.md).
+    "circle": {"name": L("Ground slam", "Golpe al suelo"),
+               "tip": L("It rears up and a {radius} m ring around it glows: step out within {windup} s.",
+                        "Se levanta y brilla un círculo de {radius} m a su alrededor: salí antes de {windup} s.")},
+    "barrage": {"name": L("Barrage", "Andanada"),
+                "tip": L("Red circles of {radius} m mark where the shells land, on a fixed pattern around the facing it locks at the start; they all hit at once after {windup} s. Stand between the circles or close in under {min} m.",
+                         "Círculos rojos de {radius} m marcan dónde caen los proyectiles, en un patrón fijo alrededor de la dirección que fija al empezar; pegan todos juntos a los {windup} s. Parate entre los círculos o acercate a menos de {min} m.")},
+    "shield": {"name": L("Shield (channel)", "Escudo (canalizado)"),
+               "tip": L("Below {below} health it locks a shield for {windup} s and takes only a fraction of the damage; when the channel ends it releases a {radius} m shockwave around itself: back off before it drops.",
+                        "Por debajo de {below} de vida traba un escudo durante {windup} s y recibe sólo una parte del daño; cuando termina suelta una onda de {radius} m a su alrededor: alejate antes de que caiga.")},
     "heal": {"name": L("Heal (channel)", "Curación (canalizada)"),
              "tip": L("Restores {pct} of its health ({hp} HP) when below {below}, unhit for {quiet} s and away from its target. Any hit or a stun breaks the channel.",
                       "Recupera {pct} de su vida ({hp} PV) cuando está por debajo de {below}, sin recibir golpes durante {quiet} s y lejos de su blanco. Cualquier golpe o aturdimiento corta la canalización.")},
@@ -195,7 +212,7 @@ W = {
     "m_death_d": L("What you lose, remains, respawn hubs", "Qué perdés, restos, puntos de reaparición"),
     "m_skills_d": L("Nine weapon skills, affinities, class powers", "Nueve habilidades de arma, afinidades, poderes"),
     "m_classes_d": L("The four disciplines at a glance", "Las cuatro disciplinas de un vistazo"),
-    "m_vehicles_d": L("The motorcycle: fuel, range, passages", "La moto: combustible, alcance, pasajes"),
+    "m_vehicles_d": L("Motorcycles, the cargo bike, the bike shop and the crane", "Motos, la moto de carga, el taller y la grúa"),
     "m_currency_d": L("Coins, conversion, bank commands", "Monedas, conversión, comandos del banco"),
     "m_computers_d": L("Terminals, connect 261.6.66, the depot", "Terminales, connect 261.6.66, el depósito"),
     # infobox comunes
@@ -203,7 +220,7 @@ W = {
     "skill": L("Skill", "Habilidad"), "damage": L("Damage", "Daño"), "interval": L("Attack interval", "Intervalo"), "dps": L("DPS", "DPS"),
     "range": L("Range", "Alcance"), "damage_type": L("Damage type", "Tipo de daño"), "hands": L("Hands", "Manos"),
     "one_hand": L("One-handed", "Una mano"), "two_hand": L("Two-handed", "Dos manos"), "ammo": L("Ammo", "Munición"),
-    "any_ammo": L("(fires any rounds)", "(dispara cualquier munición)"), "armor": L("Armor", "Armadura"), "resistance": L("Resistance", "Resistencia"),
+    "any_ammo": L("(or any ammunition of its family)", "(o cualquier munición de su familia)"), "armor": L("Armor", "Armadura"), "resistance": L("Resistance", "Resistencia"),
     "light_radius": L("Light radius", "Radio de luz"), "drain": L("Drain", "Consumo"), "runtime": L("Runtime on Battery Cell I", "Duración con Battery Cell I"),
     "capacity": L("Capacity", "Capacidad"), "energy": L("Energy", "Energía"), "cells": L("cells", "celdas"), "carry": L("Carry", "Carga"),
     "drill_power": L("Drill power", "Potencia de perforación"), "heals": L("Heals", "Cura"), "health": L("Health", "Vida"),
@@ -215,6 +232,7 @@ W = {
     "dt_physical": L("Physical (Armor)", "Físico (Armadura)"), "dt_fire": L("Fire (Resistance)", "Fuego (Resistencia)"),
     "dt_energy": L("Energy (Resistance)", "Energía (Resistencia)"), "dt_biological": L("Biological (Resistance)", "Biológico (Resistencia)"),
     "dt_environmental": L("Environmental (Resistance)", "Ambiental (Resistencia)"),
+    "dt_acid": L("Acid (Resistance)", "Ácido (Resistencia)"),
     # objetos
     "description": L("Description", "Descripción"), "planned_item": L("This item exists in the game's data but is not handed out or found anywhere yet.",
                                                                      "Este objeto existe en los datos del juego pero todavía no se entrega ni se encuentra en ningún lado."),
@@ -235,9 +253,9 @@ W = {
                                                           "Personal: cada operador recibe su propia copia, y se salta lo que ya llevás."),
     "your_weapon": L("Your starting weapon", "Tu arma inicial"), "your_ammo": L("Rounds, if it shoots", "Munición, si dispara"),
     "used_for": L("Used for", "Para qué sirve"),
-    "ammo_used": L("Every ranged weapon fires the first ammunition stack in your cargo:", "Toda arma a distancia dispara la primera pila de munición de tu inventario:"),
-    "battery_used": L("Your energy: lights drain it every second and class powers cost {cost} (Dash {dash}). Nothing recharges it on an expedition. Lights:",
-                      "Tu energía: las luces la consumen cada segundo y los poderes de clase cuestan {cost} (Dash {dash}). Nada la recarga en una expedición. Luces:"),
+    "ammo_used": L("Weapons of its family fire the first stack of that family in your cargo:", "Las armas de su familia disparan la primera pila de esa familia en tu inventario:"),
+    "battery_used": L("Your energy: lights, drones and energy weapons drain it and class powers cost {cost} (Dash {dash}). Spare cells in your cargo refill the worn one between fights; the Alchemist recharges an empty cell. Lights:",
+                      "Tu energía: las luces, los drones y las armas de energía la consumen y los poderes de clase cuestan {cost} (Dash {dash}). Las celdas de repuesto en tu inventario recargan la puesta entre peleas; el Alquimista recarga una celda vacía. Luces:"),
     "light_used": L("Lights the dark around you (toggle with T); drains your {battery}.", "Ilumina la oscuridad a tu alrededor (se prende con T); consume tu {battery}."),
     "drill_used": L("Goes in the tool slot; hold F at a drill site. It works on:", "Va en la ranura de herramienta; mantené F en un punto de perforación. Sirve para:"),
     "backpack_used": L("Adds {cells} cells that travel with the pack (you have {pouch} pockets without it). It always drops when you die.",
@@ -399,7 +417,8 @@ W = {
     "power": L("Class power", "Poder de clase"), "passive": L("Passive", "Pasiva"),
     "classes_lead": L("The four disciplines at a glance; open a class for its full sheet.", "Las cuatro disciplinas de un vistazo; abrí una clase para ver su ficha completa."),
     "trains_fast": L("Trains fastest", "Entrena más rápido"),
-    "vehicles_lead": L("The motorcycle is the first step of mobility: on foot, then your own machine.", "La moto es el primer paso de la movilidad: a pie, y después tu propia máquina."),
+    "vehicles_lead": L("The motorcycle is the first step of mobility: on foot, then your own machine. Oksana's bike shop in Dustline sells a second one and a cargo bike with a hold, and cranes a stranded bike home.",
+                       "La moto es el primer paso de la movilidad: a pie, y después tu propia máquina. El taller de motos de Oksana en Dustline vende otra y una moto de carga con baúl, y te rescata con la grúa una moto varada."),
     "seats": L("Seats", "Asientos"), "max_speed": L("Top speed", "Velocidad máxima"), "accel": L("Acceleration", "Aceleración"), "decel": L("Braking", "Frenado"),
     "turn": L("Turn rate", "Giro"), "fuel": L("Fuel (start / max)", "Combustible (inicio / máx.)"), "fuel_per_m": L("Fuel per metre", "Combustible por metro"),
     "range_start": L("Range on the first tank", "Alcance con el primer tanque"), "range_full": L("Range on a full tank", "Alcance con tanque lleno"),
@@ -414,7 +433,7 @@ W = {
     "v_rules": L("While riding you cannot attack, dash, use powers or drill.", "Mientras manejás no podés atacar, hacer dash, usar poderes ni perforar."),
     "v_zone": L("Passages: you can ride through tunnels, elevators, lifts and gates (G near one: RIDE THROUGH) and the bike comes with you. Stairs are on foot only: G parks the bike at their head (GET OFF · STAIRS).", "Pasajes: podés cruzar montado túneles, elevadores y puertas (G cerca de uno: RIDE THROUGH) y la moto viaja con vos. Las escaleras son sólo a pie: G estaciona la moto al borde (GET OFF · STAIRS)."),
     "v_owner": L("Only its owner can ride it, and it is only in the world while its owner is online.", "Sólo su dueño puede manejarla, y sólo está en el mundo mientras su dueño está conectado."),
-    "v_planned": L(["More fuel stations, fuel production and transport", "Upgrades: tank, engine, frame, storage, scanner, lights", "Cargo, passengers and crew platforms", "Damage, wear and repair", "Garages, and vehicles that stay in the world while you are offline"], ["Más estaciones, producción y transporte de combustible", "Mejoras: tanque, motor, chasis, almacenamiento, escáner, luces", "Carga, pasajeros y plataformas de equipo", "Daño, desgaste y reparación", "Garajes, y vehículos que se quedan en el mundo mientras no estás"]),
+    "v_planned": L(["More fuel stations, fuel production and transport", "Upgrades: tank, engine, frame, storage, scanner, lights", "Passengers and crew platforms", "Damage, wear and repair", "Garages, and vehicles that stay in the world while you are offline"], ["Más estaciones, producción y transporte de combustible", "Mejoras: tanque, motor, chasis, almacenamiento, escáner, luces", "Pasajeros y plataformas de equipo", "Daño, desgaste y reparación", "Garajes, y vehículos que se quedan en el mundo mientras no estás"]),
     "excavators": L("Excavators (concept)", "Excavadoras (concepto)"),
     "currency_lead": L("DEEPKIN money: creatures drop Metal Coins; the bank keeps your balance safe and pays out in Metal, Lumen Coins and Shards.", "El dinero de DEEPKIN: las criaturas sueltan Metal Coins; el banco guarda tu saldo a salvo y paga en Metal, Lumen Coins y Shards."),
     "coins_t": L("Denominations", "Denominaciones"), "full_stack": L("Full stack", "Pila llena"),
@@ -494,7 +513,7 @@ W = {
     "v_pass_lead": L("What each kind of passage allows with the bike (the server checks the same rule):", "Qué permite cada tipo de pasaje con la moto (el servidor aplica la misma regla):"),
     "ride_yes": L("Ride through", "Se cruza montado"), "ride_no": L("On foot only", "Sólo a pie"),
     "passage": L("Passage", "Pasaje"), "with_bike": L("With the bike", "Con la moto"), "examples": L("Examples", "Ejemplos"),
-    "pr_road": L("open road", "camino abierto"),
+    "pr_road": L("open road", "camino abierto"), "pr_door": L("door", "puerta de casa"),
     "pump_computer": L("Pump computer", "Computadora del surtidor"), "fuel_station": L("Gas station", "Estación de servicio"),
     "bank_booth": L("Depot & bank terminal", "Terminal de depósito y banco"),
     "one_way": L("one way", "sólo ida"), "locked_until": L("locked until the Deep Seal is drilled through", "cerrado hasta perforar el Sello Profundo"),

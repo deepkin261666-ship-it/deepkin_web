@@ -1,0 +1,127 @@
+{
+  "id": "npc.mutant_spitter",
+  "display_name": "Acid Spitter",
+  "max_health": 95,
+  "movement_speed": 2.4,
+  "detection_range": 17.0,
+  "attack_range": 1.6,
+  "attack_damage": 7,
+  "attack_cooldown": 1.4,
+  "faction": "faction.mutants",
+  "species": "Acid Spitter",
+  "role": "ranged",
+  "archetype": "ranged",
+  "tier": "normal",
+  "hunt_tier": 3,
+  "threat": 6,
+  "xp": 110,
+  "coins": [
+    7,
+    16
+  ],
+  "habitat": "The Saltpan \u2014 the north rim above the flats",
+  "lore": "PROVISIONAL. Its head split open around a second mouth that spits what its stomach makes of the salt. Whatever it hits smokes.",
+  "verbs": [
+    "KEEP AWAY",
+    "SPIT",
+    "SPRAY",
+    "BACK OFF"
+  ],
+  "rules": [
+    "It keeps its distance and spits acid along a green line: the line glows before the spit \u2014 sidestep it or put rock between you.",
+    "Get close and it sprays a green fan of acid, then backs off to spit again.",
+    "Acid is biological damage: Resistance protects, Armour does not."
+  ],
+  "perception": {
+    "aggro_radius": 14.0,
+    "memory_seconds": 8,
+    "call_radius": 10.0
+  },
+  "movement": {
+    "preferred_range": [
+      5.0,
+      9.0
+    ],
+    "leash_radius": 28,
+    "lure": "intelligent",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "spray",
+      "name": "Acid Spray",
+      "shape": "cone",
+      "damage": 12,
+      "damage_type": "acid",
+      "windup": 0.9,
+      "radius": 4.0,
+      "half_angle": 35.0,
+      "cooldown": 8.0,
+      "trigger_range": 3.5,
+      "recovery": 0.5,
+      "retreat": 1.5
+    },
+    {
+      "id": "spit",
+      "name": "Acid Spit",
+      "shape": "line",
+      "damage": 14,
+      "damage_type": "acid",
+      "windup": 0.8,
+      "range": 11.0,
+      "width": 0.9,
+      "cooldown": 3.5,
+      "min_range": 3.0,
+      "trigger_range": 10.0,
+      "los": true,
+      "recovery": 0.3
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.ammunition.field_round",
+      "quantity": [
+        5,
+        12
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.ore.limonite",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.15
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/mutants/mutant_soldier.glb",
+    "size": 1.95,
+    "fit": "height",
+    "yaw": 180,
+    "gait": "shamble",
+    "roughness": 0.7,
+    "gait_legs": {
+      "height": 0.45,
+      "stride": 0.18,
+      "lift": 0.05,
+      "pattern": "biped",
+      "cycle": 1.2
+    },
+    "mouth": [
+      0.0,
+      1.65,
+      -0.3
+    ]
+  }
+}
