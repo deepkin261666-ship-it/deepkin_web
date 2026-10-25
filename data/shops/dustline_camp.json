@@ -1,9 +1,10 @@
 {
-  "comment": "Dustline outskirts camp traders (2026-10-13, NEXT_SESSION 3f; docs/design/DUSTLINE.md \"Outskirts camp\"). Same format as dustline.json (ShopCatalog). Camp prices are a little above the city's: travellers pay for not walking in. Provisional balance.",
+  "comment": "Dustline outskirts camp traders (2026-10-13, NEXT_SESSION 3f; docs/design/DUSTLINE.md \"Outskirts camp\"). Same format as dustline.json (ShopCatalog). Camp prices are a little above the city's: travellers pay for not walking in. 2026-10-24: the tinker sells the junk Rattler Saw beside the gas cans that run it. Provisional balance.",
   "shops": {
     "npc.dustline_camp_tinker": {
       "goods": [
         {"item": "item.fuel.gas_can", "buy": 32, "sell": 10, "stock": 6},
+        {"item": "item.weapon.foundry_rattler_saw", "buy": 110, "stock": 3},
         {"item": "item.component.servo_core", "buy": 45, "sell": 15, "stock": 4},
         {"item": "item.ferrous_sample", "sell": 4}
       ]

@@ -95,6 +95,7 @@
         1
       ],
       "chance": 0.12
-    }
+    },
+    {"item": "item.weapon.foundry_rattler_saw", "quantity": [1, 1], "chance": 0.03}
   ]
 }

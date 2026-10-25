@@ -2,7 +2,7 @@
   "id": "item.weapon.foundry_bulwark",
   "display_name": "Breaker Hammer",
   "equipment_slot": "primary_weapon",
-  "description": "A two-handed industrial hammer: slow, heavy blows that stagger and control.",
+  "description": "A two-handed industrial hammer: slow, heavy blows. Each one staggers (the struck enemy's next attack comes 0.45 s later) and crushes elites and bosses for 20% more damage.",
   "visual_id": "visual.weapon.foundry_bulwark",
   "weapon_type": "melee",
   "weapon_family": "skill.blunt",
@@ -11,8 +11,10 @@
   "properties": {
     "armor_defense": 0,
     "capacity_modifier": 0,
-    "base_damage": 24,
+    "base_damage": 28,
     "attack_range": 2.6,
+    "stagger_bonus": 0.15,
+    "armored_damage_bonus": 0.2,
     "battery_capacity": 0,
     "illumination_radius": 0.0,
     "attack_interval": 1.4

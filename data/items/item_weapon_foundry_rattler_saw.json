@@ -1,0 +1,18 @@
+{
+  "id": "item.weapon.foundry_rattler_saw",
+  "display_name": "Rattler Saw",
+  "equipment_slot": "primary_weapon",
+  "description": "A one-handed junk chainsaw, taped and wired together from scrap. Light enough to keep a shield up. Runs on gas: every cut burns 0.1 L from the first gas can in your cargo that holds enough; a running chain bites at full Heat from the first cut.",
+  "visual_id": "visual.weapon.foundry_rattler_saw",
+  "weapon_type": "melee",
+  "weapon_family": "skill.edge",
+  "hands": 1,
+  "weight": 4.5,
+  "gear_tier": 1,
+  "properties": {
+    "base_damage": 10,
+    "attack_range": 2.2,
+    "attack_interval": 0.6,
+    "fuel_per_attack": 0.1
+  }
+}

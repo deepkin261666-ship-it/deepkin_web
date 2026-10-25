@@ -5,36 +5,36 @@
   {
    "spawn_id": "spawn.outpost_a",
    "position": [
-    -137.13,
+    -137.1,
     0.0,
-    104.87
+    117.6
    ],
    "rotation": 0.785
   },
   {
    "spawn_id": "spawn.outpost_b",
    "position": [
-    -137.7,
+    -138.1,
     0.0,
-    106.28
+    117.1
    ],
    "rotation": 0.785
   },
   {
    "spawn_id": "spawn.outpost_c",
    "position": [
-    -135.72,
+    -136.1,
     0.0,
-    104.3
+    117.1
    ],
    "rotation": 0.785
   },
   {
    "spawn_id": "spawn.outpost_d",
    "position": [
-    -136.28,
+    -137.1,
     0.0,
-    105.72
+    116.4
    ],
    "rotation": 0.785
   }
@@ -55,9 +55,9 @@
     30.0
    ],
    "arrival": [
-    -137.13,
+    -137.1,
     0.0,
-    104.87
+    117.6
    ],
    "cavern": {
     "seed": 211,
@@ -119,6 +119,18 @@
        8.0
       ],
       "rotation": 30
+     },
+     {
+      "name": "cable_station",
+      "center": [
+       10.5,
+       22.5
+      ],
+      "radius": [
+       7.5,
+       6.5
+      ],
+      "rotation": 0
      }
     ],
     "passages": [],
@@ -216,6 +228,24 @@
        ]
       ],
       "width": 2.4
+     },
+     {
+      "name": "cable_station_path",
+      "points": [
+       [
+        12.8,
+        18.6
+       ],
+       [
+        13.5,
+        12.0
+       ],
+       [
+        14.85,
+        6.85
+       ]
+      ],
+      "width": 2.6
      }
     ],
     "props": [
@@ -976,10 +1006,10 @@
      "id": "npc.outpost_miner_north",
      "name": "HALE  ·  MINER",
      "position": [
-      12.05,
-      20.92
+      22.4,
+      14.4
      ],
-     "rotation": 30,
+     "rotation": 0,
      "dialog": {
       "start": "line",
       "nodes": {
@@ -1309,17 +1339,6 @@
      "solid": true
     },
     {
-     "model": "outpost/old_computer",
-     "position": [
-      8.77,
-      0.0,
-      16.04
-     ],
-     "rotation": -45,
-     "scale": 1.0,
-     "solid": false
-    },
-    {
      "model": "outpost/radio",
      "position": [
       22.34,
@@ -1467,16 +1486,6 @@
      }
     }
    ],
-   "computers": [
-    {
-     "id": "computer.outpost.landing_booth",
-     "position": [
-      8.84,
-      12.15
-     ],
-     "rotation": 45
-    }
-   ],
    "set": "res://data/world/sets/outpost.json",
    "links": "res://data/world/sets/links_outpost.json",
    "work_lights": [
@@ -1499,7 +1508,11 @@
      "angle": 38.0,
      "color": "fff1d6"
     }
-   ]
+   ],
+   "extra_sets": [
+    "res://data/world/sets/outpost_arrival.json"
+   ],
+   "arrival_hint": "Talk to old Brannock"
   },
   {
    "zone_id": "zone.threshold",
@@ -2548,7 +2561,7 @@
   },
   {
    "zone_id": "zone.excavation_c3",
-   "name": "Excavation C-3",
+   "name": "The Deep Survey",
    "anchor": [
     120.0,
     0.0,
@@ -3158,7 +3171,7 @@
       2.4,
       2.2
      ],
-     "text": "EXCAVATION C-3\nauthorised personnel",
+     "text": "THE DEEP SURVEY\nauthorised personnel",
      "lettered": true
     },
     {
@@ -4188,6 +4201,28 @@
        ]
       ],
       "width": 7.5
+     },
+     {
+      "name": "salt_pit",
+      "points": [
+       [
+        -11.31,
+        16.97
+       ],
+       [
+        -25.46,
+        25.46
+       ],
+       [
+        -34.05,
+        34.01
+       ],
+       [
+        -46.56,
+        34.01
+       ]
+      ],
+      "width": 9.0
      }
     ],
     "wet": [],
@@ -4263,6 +4298,28 @@
        ]
       ],
       "width": 3.6
+     },
+     {
+      "name": "salt_pit",
+      "points": [
+       [
+        -6.36,
+        10.61
+       ],
+       [
+        -25.46,
+        25.46
+       ],
+       [
+        -36.05,
+        34.01
+       ],
+       [
+        -43.05,
+        34.01
+       ]
+      ],
+      "width": 3.8
      }
     ],
     "props": [
@@ -4901,7 +4958,10 @@
     "rings": 4,
     "light_color": "ffcf7a"
    },
-   "set": "res://data/world/sets/surface_saltpan.json"
+   "set": "res://data/world/sets/surface_saltpan.json",
+   "extra_sets": [
+    "res://data/world/sets/salt_pit_saltpan_gate.json"
+   ]
   },
   {
    "zone_id": "zone.frontier_road_east",
@@ -5091,6 +5151,24 @@
        ]
       ],
       "width": 13.0
+     },
+     {
+      "name": "salt_pit",
+      "points": [
+       [
+        38.18,
+        -35.36
+       ],
+       [
+        47.38,
+        -27.58
+       ],
+       [
+        60.1,
+        -16.26
+       ]
+      ],
+      "width": 9.0
      }
     ],
     "wet": [],
@@ -5165,6 +5243,24 @@
        ]
       ],
       "width": 3.6
+     },
+     {
+      "name": "salt_pit",
+      "points": [
+       [
+        38.18,
+        -35.36
+       ],
+       [
+        47.38,
+        -27.58
+       ],
+       [
+        56.78,
+        -19.3
+       ]
+      ],
+      "width": 3.8
      }
     ],
     "props": [
@@ -5294,7 +5390,8 @@
     }
    ],
    "extra_sets": [
-    "res://data/world/sets/sump_floodgate.json"
+    "res://data/world/sets/sump_floodgate.json",
+    "res://data/world/sets/salt_pit_frontier_track.json"
    ]
   },
   {
@@ -5956,6 +6053,26 @@
      "height": 0.7,
      "hover": 1.45,
      "tag_height": 2.6
+    },
+    {
+     "id": "npc.dustline_alley_lounger",
+     "position": [
+      -17.68,
+      44.69
+     ],
+     "rotation": -80.3,
+     "pose": "idle",
+     "class": "class.drift"
+    },
+    {
+     "id": "npc.dustline_stove_keeper",
+     "position": [
+      49.71,
+      5.3
+     ],
+     "rotation": 161.8,
+     "pose": "idle",
+     "class": "class.drift"
     }
    ],
    "computers": [
@@ -6315,235 +6432,904 @@
     0.0
    ],
    "bounds": [
-    -15.0,
-    15.0,
-    -12.0,
-    12.0
+    -27,
+    24,
+    -29,
+    26
    ],
    "arrival": [
-    130.0,
+    111.62,
     0.0,
-    9.0
+    11.31
    ],
-   "pieces": [
-    {
-     "name": "stratum_wall_west",
-     "position": [
-      -14.5,
-      1.8,
-      0.0
-     ],
-     "size": [
-      1.0,
-      3.6,
-      24.0
-     ],
-     "material": "basalt",
-     "solid": true
-    },
-    {
-     "name": "stratum_wall_east",
-     "position": [
-      14.5,
-      1.8,
-      0.0
-     ],
-     "size": [
-      1.0,
-      3.6,
-      24.0
-     ],
-     "material": "weathered_rock",
-     "solid": true
-    },
-    {
-     "name": "stratum_wall_north",
-     "position": [
-      0.0,
-      1.8,
-      -11.5
-     ],
-     "size": [
-      30.0,
-      3.6,
-      1.0
-     ],
-     "material": "basalt",
-     "solid": true
-    },
-    {
-     "name": "stratum_wall_south",
-     "position": [
-      0.0,
-      1.8,
-      11.5
-     ],
-     "size": [
-      30.0,
-      3.6,
-      1.0
-     ],
-     "material": "basalt",
-     "solid": true
-    },
-    {
-     "name": "stratum_pillar_a",
-     "position": [
-      -7.0,
-      1.4,
-      1.0
-     ],
-     "size": [
-      1.5,
-      2.8,
-      1.5
-     ],
-     "material": "basalt",
-     "solid": true
-    },
-    {
-     "name": "stratum_pillar_b",
-     "position": [
-      -1.5,
-      1.4,
-      -2.0
-     ],
-     "size": [
-      1.3,
-      2.8,
-      1.3
-     ],
-     "material": "weathered_rock",
-     "solid": true
-    },
-    {
-     "name": "stratum_pillar_c",
-     "position": [
-      4.5,
-      1.4,
-      3.0
-     ],
-     "size": [
-      1.6,
-      2.8,
-      1.6
-     ],
-     "material": "basalt",
-     "solid": true
-    },
-    {
-     "name": "stratum_shear_a",
-     "position": [
-      9.0,
-      0.7,
-      -3.0
-     ],
-     "size": [
-      3.5,
-      1.4,
-      1.0
-     ],
-     "material": "weathered_rock",
-     "solid": true
-    },
-    {
-     "name": "stratum_support_a",
-     "position": [
-      -11.0,
-      1.5,
-      -6.0
-     ],
-     "size": [
-      0.28,
-      3.0,
-      0.28
-     ],
-     "material": "industrial_metal",
-     "solid": true
-    },
-    {
-     "name": "stratum_support_b",
-     "position": [
-      11.0,
-      1.5,
-      -6.0
-     ],
-     "size": [
-      0.28,
-      3.0,
-      0.28
-     ],
-     "material": "industrial_metal",
-     "solid": true
-    },
-    {
-     "name": "stratum_cable",
-     "position": [
-      0.0,
-      2.9,
-      0.0
-     ],
-     "size": [
-      0.16,
-      0.16,
-      17.0
-     ],
-     "material": "neutral",
-     "solid": false
-    }
-   ],
-   "lights": [
-    {
-     "position": [
-      -11.0,
-      2.8,
-      8.0
-     ],
-     "color": "d8a35b",
-     "energy": 0.75,
-     "range": 5.5
-    },
-    {
-     "position": [
-      10.5,
-      2.7,
-      -5.0
-     ],
-     "color": "86a59e",
-     "energy": 0.35,
-     "range": 4.5
-    }
-   ],
+   "set": "res://data/world/sets/excavation_c3_f2.json",
+   "atmosphere": {
+    "ambient_color": "6a7a82",
+    "ambient_energy": 0.44,
+    "fog_color": "0a1517",
+    "fog_density": 0.0042,
+    "exposure": 1.0
+   },
+   "cavern": {
+    "seed": 2302,
+    "cell": 0.25,
+    "material": "res://assets/game/materials/geology/geology_c3_stratum.tres",
+    "wall_height": 5.4,
+    "near_wall_height": 1.2,
+    "smooth": 2.6,
+    "warp": 1.2,
+    "chambers": [
+     {
+      "center": [
+       -16.97,
+       11.31
+      ],
+      "radius": [
+       5.5,
+       6.5
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -2.47,
+       15.2
+      ],
+      "radius": [
+       5.0,
+       8.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       0.0,
+       0.0
+      ],
+      "radius": [
+       8.0,
+       12.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       9.9,
+       4.24
+      ],
+      "radius": [
+       3.0,
+       4.5
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -9.55,
+       -6.72
+      ],
+      "radius": [
+       3.2,
+       5.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       13.79,
+       -18.03
+      ],
+      "radius": [
+       5.5,
+       6.5
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -12.73,
+        8.49
+       ],
+       [
+        -7.78,
+        4.95
+       ]
+      ],
+      "width": 4.6
+     },
+     {
+      "points": [
+       [
+        -12.73,
+        14.14
+       ],
+       [
+        -7.78,
+        14.85
+       ]
+      ],
+      "width": 4.2
+     },
+     {
+      "points": [
+       [
+        -0.71,
+        10.61
+       ],
+       [
+        -0.71,
+        6.36
+       ]
+      ],
+      "width": 4.0
+     },
+     {
+      "points": [
+       [
+        5.66,
+        1.41
+       ],
+       [
+        8.49,
+        2.83
+       ]
+      ],
+      "width": 4.0
+     },
+     {
+      "points": [
+       [
+        -4.95,
+        -3.54
+       ],
+       [
+        -7.78,
+        -4.95
+       ]
+      ],
+      "width": 4.0
+     },
+     {
+      "points": [
+       [
+        5.3,
+        -6.72
+       ],
+       [
+        10.61,
+        -14.85
+       ]
+      ],
+      "width": 4.2
+     }
+    ],
+    "wet": [
+     {
+      "center": [
+       9.9,
+       4.24
+      ],
+      "radius": [
+       2.6,
+       3.6
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "worn": [],
+    "props": [
+     {
+      "type": "model",
+      "model": "old_military_compressor",
+      "position": [
+       -21.57,
+       13.79
+      ],
+      "yaw": 125.0,
+      "scale": 1.0,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "power_box_01",
+      "position": [
+       -19.37,
+       15.41
+      ],
+      "yaw": 75.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 0.9
+     },
+     {
+      "type": "model",
+      "model": "vintage_radio_transceiver",
+      "position": [
+       -3.11,
+       11.6
+      ],
+      "yaw": 235.0,
+      "scale": 1.0,
+      "solid": false,
+      "y": 0.83
+     },
+     {
+      "type": "model",
+      "model": "portable_generator",
+      "position": [
+       2.26,
+       11.6
+      ],
+      "yaw": 275.0,
+      "scale": 1.1,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "tool_cart",
+      "position": [
+       -6.93,
+       21.35
+      ],
+      "yaw": 165.0,
+      "scale": 1.0,
+      "solid": true
+     },
+     {
+      "type": "column",
+      "position": [
+       -0.57,
+       3.68
+      ],
+      "height": 5.4,
+      "radius": 0.85,
+      "seed": 2311
+     },
+     {
+      "type": "column",
+      "position": [
+       8.34,
+       -1.84
+      ],
+      "height": 4.8,
+      "radius": 0.7,
+      "seed": 2312
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -7.78,
+       0.99
+      ],
+      "height": 1.6,
+      "radius": 0.4,
+      "seed": 2313,
+      "solid": true
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -7.78,
+       -0.14
+      ],
+      "height": 1.0,
+      "radius": 0.3,
+      "seed": 2314,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       8.77,
+       -3.96
+      ],
+      "height": 1.3,
+      "radius": 0.36,
+      "seed": 2315,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -2.97,
+       9.19
+      ],
+      "size": [
+       1.8,
+       1.1,
+       1.5
+      ],
+      "seed": 2316,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       1.98,
+       -9.9
+      ],
+      "size": [
+       1.6,
+       1.0,
+       1.4
+      ],
+      "seed": 2317,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "moon_rock_03",
+      "position": [
+       -9.62,
+       1.41
+      ],
+      "yaw": 85.0,
+      "scale": 2.6,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "lumenita_cluster",
+      "position": [
+       -12.73,
+       -4.81
+      ],
+      "yaw": 205.0,
+      "scale": 0.5,
+      "solid": false
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -7.92,
+       -10.18
+      ],
+      "height": 1.2,
+      "radius": 0.34,
+      "seed": 2318,
+      "solid": true
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       15.56,
+       -23.48
+      ],
+      "height": 1.4,
+      "radius": 0.4,
+      "seed": 2319,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -17.22,
+       6.05
+      ],
+      "size": [
+       1.0,
+       0.59,
+       0.84
+      ],
+      "seed": 23100,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -15.27,
+       6.73
+      ],
+      "size": [
+       0.86,
+       0.44,
+       0.72
+      ],
+      "seed": 23101,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -15.82,
+       16.29
+      ],
+      "size": [
+       0.74,
+       0.5,
+       0.61
+      ],
+      "seed": 23102,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -11.69,
+       10.69
+      ],
+      "size": [
+       0.82,
+       0.47,
+       0.74
+      ],
+      "seed": 23103,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -12.61,
+       7.74
+      ],
+      "size": [
+       1.01,
+       0.44,
+       0.81
+      ],
+      "seed": 23104,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -13.74,
+       7.68
+      ],
+      "size": [
+       0.78,
+       0.5,
+       0.73
+      ],
+      "seed": 23105,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -16.47,
+       15.94
+      ],
+      "size": [
+       0.4,
+       0.32,
+       0.43
+      ],
+      "seed": 23106,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -0.63,
+       18.75
+      ],
+      "size": [
+       0.44,
+       0.2,
+       0.3
+      ],
+      "seed": 23200,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       0.78,
+       9.92
+      ],
+      "size": [
+       0.54,
+       0.34,
+       0.54
+      ],
+      "seed": 23201,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       2.68,
+       12.48
+      ],
+      "size": [
+       0.7,
+       0.38,
+       0.47
+      ],
+      "seed": 23202,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -8.37,
+       16.84
+      ],
+      "size": [
+       0.81,
+       0.37,
+       0.56
+      ],
+      "seed": 23203,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       2.22,
+       15.61
+      ],
+      "size": [
+       0.68,
+       0.28,
+       0.51
+      ],
+      "seed": 23204,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -0.0,
+       18.19
+      ],
+      "size": [
+       1.1,
+       0.45,
+       0.68
+      ],
+      "seed": 23205,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -7.27,
+       -1.4
+      ],
+      "size": [
+       0.76,
+       0.38,
+       0.51
+      ],
+      "seed": 23300,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -7.06,
+       -2.0
+      ],
+      "size": [
+       0.41,
+       0.26,
+       0.36
+      ],
+      "seed": 23301,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       5.35,
+       3.45
+      ],
+      "size": [
+       0.56,
+       0.42,
+       0.51
+      ],
+      "seed": 23302,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -7.1,
+       5.69
+      ],
+      "size": [
+       0.67,
+       0.5,
+       0.64
+      ],
+      "seed": 23303,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -5.07,
+       -4.02
+      ],
+      "size": [
+       0.39,
+       0.17,
+       0.25
+      ],
+      "seed": 23304,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -3.8,
+       -4.92
+      ],
+      "size": [
+       0.51,
+       0.32,
+       0.5
+      ],
+      "seed": 23305,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       7.36,
+       -1.13
+      ],
+      "size": [
+       0.71,
+       0.47,
+       0.86
+      ],
+      "seed": 23306,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       7.67,
+       -2.64
+      ],
+      "size": [
+       0.53,
+       0.37,
+       0.6
+      ],
+      "seed": 23307,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       7.89,
+       -5.6
+      ],
+      "size": [
+       1.06,
+       0.46,
+       0.8
+      ],
+      "seed": 23308,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -1.92,
+       8.45
+      ],
+      "size": [
+       0.58,
+       0.35,
+       0.41
+      ],
+      "seed": 23309,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       8.42,
+       -1.27
+      ],
+      "size": [
+       0.45,
+       0.25,
+       0.3
+      ],
+      "seed": 23310,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       0.72,
+       7.36
+      ],
+      "size": [
+       0.67,
+       0.43,
+       0.54
+      ],
+      "seed": 23311,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -9.57,
+       -3.36
+      ],
+      "size": [
+       1.06,
+       0.51,
+       0.77
+      ],
+      "seed": 23400,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -8.07,
+       -10.46
+      ],
+      "size": [
+       0.89,
+       0.55,
+       0.98
+      ],
+      "seed": 23401,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -8.0,
+       -4.64
+      ],
+      "size": [
+       0.73,
+       0.42,
+       0.62
+      ],
+      "seed": 23402,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -8.46,
+       -4.52
+      ],
+      "size": [
+       0.47,
+       0.36,
+       0.52
+      ],
+      "seed": 23403,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       14.25,
+       -13.25
+      ],
+      "size": [
+       0.28,
+       0.16,
+       0.36
+      ],
+      "seed": 23500,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       18.02,
+       -20.29
+      ],
+      "size": [
+       0.73,
+       0.44,
+       0.86
+      ],
+      "seed": 23501,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       16.09,
+       -13.78
+      ],
+      "size": [
+       0.9,
+       0.5,
+       0.58
+      ],
+      "seed": 23502,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       18.24,
+       -19.69
+      ],
+      "size": [
+       0.84,
+       0.48,
+       0.72
+      ],
+      "seed": 23503,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       14.36,
+       -13.53
+      ],
+      "size": [
+       0.27,
+       0.22,
+       0.35
+      ],
+      "seed": 23504,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       8.95,
+       -15.79
+      ],
+      "size": [
+       0.74,
+       0.4,
+       0.8
+      ],
+      "seed": 23505,
+      "solid": true
+     }
+    ],
+    "holes": [
+     {
+      "name": "deep_c3_f2_down",
+      "center": [
+       12.45,
+       -20.08
+      ],
+      "size": [
+       2.8000000000000003,
+       4.6000000000000005
+      ],
+      "rotation": 45
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
    "drill_sites": [
     {
      "entity_id": 41,
      "content_id": "material.soft_rock",
      "position": [
-      130.0,
+      119.08,
       1.5,
-      -1.0
+      -8.1
      ],
      "size": [
       6.0,
       3.0,
       0.65
      ],
-     "rotation": 0.0
+     "rotation": 0.7854
     }
    ],
-   "links": "res://data/world/sets/links_excavation_c3_f2.json",
-   "slab_holes": [
-    {
-     "center": [
-      3.0,
-      -8.2
-     ],
-     "size": [
-      2.8,
-      4.6
-     ]
-    }
-   ]
+   "links": "res://data/world/sets/links_excavation_c3_f2.json"
   },
   {
    "zone_id": "zone.excavation_c3_f3",
@@ -6554,205 +7340,552 @@
     0.0
    ],
    "bounds": [
-    -15.0,
-    15.0,
-    -12.0,
-    12.0
+    -29,
+    30,
+    -25,
+    27
    ],
    "arrival": [
-    190.0,
+    177.77,
     0.0,
-    8.0
+    16.05
    ],
-   "pieces": [
-    {
-     "name": "relic_outer_west",
-     "position": [
-      -14.5,
-      2.0,
-      0.0
-     ],
-     "size": [
-      1.0,
-      4.0,
-      24.0
-     ],
-     "material": "relic",
-     "solid": true
-    },
-    {
-     "name": "relic_outer_east",
-     "position": [
-      14.5,
-      2.0,
-      0.0
-     ],
-     "size": [
-      1.0,
-      4.0,
-      24.0
-     ],
-     "material": "relic",
-     "solid": true
-    },
-    {
-     "name": "relic_outer_north",
-     "position": [
-      0.0,
-      2.0,
-      -11.5
-     ],
-     "size": [
-      30.0,
-      4.0,
-      1.0
-     ],
-     "material": "relic",
-     "solid": true
-    },
-    {
-     "name": "relic_outer_south",
-     "position": [
-      0.0,
-      2.0,
-      11.5
-     ],
-     "size": [
-      30.0,
-      4.0,
-      1.0
-     ],
-     "material": "relic",
-     "solid": true
-    },
-    {
-     "name": "relic_monolith_west",
-     "position": [
-      -6.0,
-      2.1,
-      -2.0
-     ],
-     "size": [
-      1.3,
-      4.2,
-      1.3
-     ],
-     "material": "relic",
-     "solid": true
-    },
-    {
-     "name": "relic_monolith_east",
-     "position": [
-      6.0,
-      2.1,
-      -2.0
-     ],
-     "size": [
-      1.3,
-      4.2,
-      1.3
-     ],
-     "material": "relic",
-     "solid": true
-    },
-    {
-     "name": "relic_crossbeam",
-     "position": [
-      0.0,
-      4.0,
-      -2.0
-     ],
-     "size": [
-      13.0,
-      0.6,
-      1.2
-     ],
-     "material": "relic",
-     "solid": false
-    },
-    {
-     "name": "relic_altar",
-     "position": [
-      0.0,
-      0.65,
-      -5.0
-     ],
-     "size": [
-      5.0,
-      1.3,
-      3.0
-     ],
-     "material": "ancient_relic",
-     "solid": true
-    },
-    {
-     "name": "relic_floor_inlay",
-     "position": [
-      0.0,
-      0.03,
-      -3.0
-     ],
-     "size": [
-      13.0,
-      0.06,
-      9.0
-     ],
-     "material": "amber",
-     "solid": false
-    },
-    {
-     "name": "relic_pipe_left",
-     "position": [
-      -11.0,
-      2.8,
-      0.0
-     ],
-     "size": [
-      0.24,
-      0.24,
-      12.0
-     ],
-     "material": "industrial_metal",
-     "solid": false
-    },
-    {
-     "name": "relic_pipe_right",
-     "position": [
-      11.0,
-      2.8,
-      0.0
-     ],
-     "size": [
-      0.24,
-      0.24,
-      12.0
-     ],
-     "material": "industrial_metal",
-     "solid": false
-    }
-   ],
-   "lights": [
-    {
-     "position": [
-      0.0,
-      3.8,
-      -2.0
-     ],
-     "color": "d8bd83",
-     "energy": 1.15,
-     "range": 10.0
-    },
-    {
-     "position": [
-      -11.0,
-      2.8,
-      7.0
-     ],
-     "color": "d8904e",
-     "energy": 0.7,
-     "range": 5.5
-    }
-   ],
+   "set": "res://data/world/sets/excavation_c3_f3.json",
+   "atmosphere": {
+    "ambient_color": "84807a",
+    "ambient_energy": 0.44,
+    "fog_color": "11130f",
+    "fog_density": 0.0038,
+    "exposure": 1.0
+   },
+   "cavern": {
+    "seed": 2303,
+    "cell": 0.25,
+    "material": "res://assets/game/materials/geology/geology_c3_relic.tres",
+    "wall_height": 6.0,
+    "near_wall_height": 1.2,
+    "smooth": 2.4,
+    "warp": 1.0,
+    "chambers": [
+     {
+      "center": [
+       -10.61,
+       16.26
+      ],
+      "radius": [
+       5.0,
+       6.5
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       -2.12,
+       3.54
+      ],
+      "radius": [
+       7.0,
+       10.0
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       3.18,
+       -13.79
+      ],
+      "radius": [
+       6.2,
+       7.6
+      ],
+      "rotation": 45.0
+     },
+     {
+      "center": [
+       20.08,
+       -11.03
+      ],
+      "radius": [
+       4.4,
+       5.5
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        -8.49,
+        12.73
+       ],
+       [
+        -6.36,
+        9.19
+       ]
+      ],
+      "width": 4.6
+     },
+     {
+      "points": [
+       [
+        2.83,
+        -4.24
+       ],
+       [
+        6.08,
+        -10.89
+       ]
+      ],
+      "width": 4.6
+     },
+     {
+      "points": [
+       [
+        6.36,
+        -0.71
+       ],
+       [
+        12.73,
+        -4.24
+       ],
+       [
+        16.55,
+        -7.5
+       ]
+      ],
+      "width": 4.4
+     },
+     {
+      "points": [
+       [
+        -14.85,
+        17.68
+       ],
+       [
+        -21.57,
+        18.03
+       ]
+      ],
+      "width": 3.6,
+      "name": "c3_f3_west_drift"
+     },
+     {
+      "name": "deep_c3_f3_up",
+      "points": [
+       [
+        -13.86,
+        14.42
+       ],
+       [
+        -17.25,
+        11.03
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "wet": [],
+    "worn": [],
+    "props": [
+     {
+      "type": "boulder",
+      "position": [
+       -21.5,
+       19.23
+      ],
+      "size": [
+       1.4,
+       1.1,
+       1.2
+      ],
+      "seed": 2330,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -21.15,
+       18.41
+      ],
+      "size": [
+       1.25,
+       1.0,
+       1.2
+      ],
+      "seed": 2331,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -20.79,
+       17.59
+      ],
+      "size": [
+       1.0999999999999999,
+       0.9000000000000001,
+       1.2
+      ],
+      "seed": 2332,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -20.43,
+       16.77
+      ],
+      "size": [
+       0.95,
+       0.8,
+       1.2
+      ],
+      "seed": 2333,
+      "solid": true
+     },
+     {
+      "type": "column",
+      "position": [
+       -6.36,
+       4.95
+      ],
+      "height": 5.6,
+      "radius": 0.9,
+      "seed": 2331
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       -10.61,
+       4.95
+      ],
+      "height": 1.5,
+      "radius": 0.4,
+      "seed": 2332,
+      "solid": true
+     },
+     {
+      "type": "stalagmite",
+      "position": [
+       0.14,
+       8.63
+      ],
+      "height": 1.2,
+      "radius": 0.34,
+      "seed": 2333,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -4.53,
+       12.45
+      ],
+      "size": [
+       1.7,
+       1.0,
+       1.4
+      ],
+      "seed": 2334,
+      "solid": true
+     },
+     {
+      "type": "model",
+      "model": "moon_rock_03",
+      "position": [
+       -5.37,
+       -2.55
+      ],
+      "yaw": 165.0,
+      "scale": 2.4,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -11.14,
+       12.0
+      ],
+      "size": [
+       0.51,
+       0.26,
+       0.41
+      ],
+      "seed": 33100,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -14.0,
+       20.93
+      ],
+      "size": [
+       0.79,
+       0.5,
+       0.74
+      ],
+      "seed": 33101,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -10.2,
+       11.29
+      ],
+      "size": [
+       0.9,
+       0.5,
+       0.58
+      ],
+      "seed": 33102,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -15.36,
+       19.33
+      ],
+      "size": [
+       0.9,
+       0.52,
+       0.72
+      ],
+      "seed": 33103,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -5.76,
+       16.22
+      ],
+      "size": [
+       0.57,
+       0.42,
+       0.76
+      ],
+      "seed": 33104,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -14.7,
+       19.98
+      ],
+      "size": [
+       0.51,
+       0.41,
+       0.46
+      ],
+      "seed": 33105,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       2.0,
+       7.57
+      ],
+      "size": [
+       0.77,
+       0.39,
+       0.49
+      ],
+      "seed": 33200,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -7.03,
+       0.9
+      ],
+      "size": [
+       0.61,
+       0.37,
+       0.72
+      ],
+      "seed": 33201,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -1.4,
+       -3.37
+      ],
+      "size": [
+       0.63,
+       0.39,
+       0.62
+      ],
+      "seed": 33202,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -8.68,
+       7.8
+      ],
+      "size": [
+       0.99,
+       0.45,
+       0.82
+      ],
+      "seed": 33203,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -8.56,
+       7.01
+      ],
+      "size": [
+       0.67,
+       0.46,
+       0.69
+      ],
+      "seed": 33204,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       0.79,
+       8.71
+      ],
+      "size": [
+       0.94,
+       0.56,
+       0.99
+      ],
+      "seed": 33205,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -7.85,
+       1.89
+      ],
+      "size": [
+       0.74,
+       0.43,
+       0.73
+      ],
+      "seed": 33206,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       4.55,
+       -1.44
+      ],
+      "size": [
+       0.38,
+       0.27,
+       0.4
+      ],
+      "seed": 33207,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -2.86,
+       -3.3
+      ],
+      "size": [
+       0.61,
+       0.25,
+       0.42
+      ],
+      "seed": 33208,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       -3.0,
+       10.29
+      ],
+      "size": [
+       0.83,
+       0.45,
+       0.92
+      ],
+      "seed": 33209,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       16.33,
+       -8.95
+      ],
+      "size": [
+       0.78,
+       0.56,
+       0.79
+      ],
+      "seed": 33300,
+      "solid": true
+     },
+     {
+      "type": "boulder",
+      "position": [
+       22.81,
+       -8.2
+      ],
+      "size": [
+       0.61,
+       0.36,
+       0.39
+      ],
+      "seed": 33301,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       23.72,
+       -13.18
+      ],
+      "size": [
+       0.57,
+       0.39,
+       0.61
+      ],
+      "seed": 33302,
+      "solid": false
+     },
+     {
+      "type": "boulder",
+      "position": [
+       22.52,
+       -8.41
+      ],
+      "size": [
+       0.77,
+       0.3,
+       0.48
+      ],
+      "seed": 33303,
+      "solid": false
+     }
+    ]
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
    "drill_sites": [],
    "links": "res://data/world/sets/links_excavation_c3_f3.json"
   },
@@ -8825,6 +9958,944 @@
    "lights": [],
    "signs": [],
    "drill_sites": []
+  },
+  {
+   "zone_id": "zone.salt_pit",
+   "name": "The Salt Pit",
+   "anchor": [
+    300.0,
+    0.0,
+    1200.0
+   ],
+   "bounds": [
+    -129,
+    131,
+    -128,
+    132
+   ],
+   "arrival": [
+    207.84,
+    0.0,
+    1233.94
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "fff0dc",
+    "sun_energy": 0.95,
+    "sun_pitch": -48.0,
+    "sun_yaw": -20.0,
+    "fog_color": "d8cfc2",
+    "fog_density": 0.0035,
+    "ambient_energy": 0.42,
+    "sky_top": "6f8aa0",
+    "sky_horizon": "e2d6c2",
+    "exposure": 0.82
+   },
+   "set": "res://data/world/sets/salt_pit.json",
+   "cavern": {
+    "seed": 900,
+    "cell": 1.0,
+    "material": "res://assets/game/materials/salt_pit/geology_salt_pit.tres",
+    "wall_height": 1.0,
+    "near_wall_height": 0.5,
+    "smooth": 3.0,
+    "warp": 0.5,
+    "chambers": [
+     {
+      "center": [
+       -46.67,
+       77.78
+      ],
+      "radius": [
+       18.0,
+       30.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       22.63,
+       65.05
+      ],
+      "radius": [
+       30.0,
+       10.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       57.98,
+       29.7
+      ],
+      "radius": [
+       22.0,
+       9.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       60.81,
+       -57.98
+      ],
+      "radius": [
+       20.0,
+       18.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -14.14,
+       -70.71
+      ],
+      "radius": [
+       13.0,
+       10.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -43.84,
+       -32.53
+      ],
+      "radius": [
+       12.0,
+       8.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -83.44,
+       29.7
+      ],
+      "radius": [
+       16.0,
+       10.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       29.7,
+       -83.44
+      ],
+      "radius": [
+       16.0,
+       10.0
+      ],
+      "rotation": -45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        49.21,
+        -49.21
+       ],
+       [
+        54.67,
+        -41.87
+       ],
+       [
+        58.02,
+        -32.91
+       ],
+       [
+        59.15,
+        -22.69
+       ],
+       [
+        58.0,
+        -11.6
+       ],
+       [
+        54.62,
+        -0.06
+       ],
+       [
+        49.15,
+        11.48
+       ],
+       [
+        41.78,
+        22.58
+       ],
+       [
+        32.81,
+        32.81
+       ],
+       [
+        22.58,
+        41.78
+       ],
+       [
+        11.48,
+        49.15
+       ],
+       [
+        -0.06,
+        54.62
+       ],
+       [
+        -11.6,
+        58.0
+       ],
+       [
+        -22.69,
+        59.15
+       ],
+       [
+        -32.91,
+        58.02
+       ],
+       [
+        -41.87,
+        54.67
+       ],
+       [
+        -49.21,
+        49.21
+       ],
+       [
+        -54.67,
+        41.87
+       ],
+       [
+        -58.02,
+        32.91
+       ],
+       [
+        -59.15,
+        22.69
+       ],
+       [
+        -58.0,
+        11.6
+       ],
+       [
+        -54.62,
+        0.06
+       ],
+       [
+        -49.15,
+        -11.48
+       ],
+       [
+        -41.78,
+        -22.58
+       ],
+       [
+        -32.81,
+        -32.81
+       ],
+       [
+        -22.58,
+        -41.78
+       ],
+       [
+        -11.48,
+        -49.15
+       ],
+       [
+        0.06,
+        -54.62
+       ],
+       [
+        11.6,
+        -58.0
+       ],
+       [
+        22.69,
+        -59.15
+       ],
+       [
+        32.91,
+        -58.02
+       ],
+       [
+        41.87,
+        -54.67
+       ],
+       [
+        49.21,
+        -49.21
+       ]
+      ],
+      "width": 15.0,
+      "name": "rim"
+     },
+     {
+      "points": [
+       [
+        -86.17,
+        33.94
+       ],
+       [
+        -98.67,
+        33.94
+       ]
+      ],
+      "width": 9.0,
+      "name": "saltpan_gate"
+     },
+     {
+      "points": [
+       [
+        32.53,
+        -87.58
+       ],
+       [
+        32.53,
+        -100.08
+       ]
+      ],
+      "width": 9.0,
+      "name": "road_gate"
+     }
+    ],
+    "wet": [
+     {
+      "center": [
+       -62.23,
+       73.54
+      ],
+      "radius": [
+       7.0,
+       7.0
+      ],
+      "rotation": 0.0
+     },
+     {
+      "center": [
+       -52.33,
+       63.64
+      ],
+      "radius": [
+       7.0,
+       7.0
+      ],
+      "rotation": 0.0
+     },
+     {
+      "center": [
+       -52.33,
+       83.44
+      ],
+      "radius": [
+       7.0,
+       7.0
+      ],
+      "rotation": 0.0
+     },
+     {
+      "center": [
+       -42.43,
+       73.54
+      ],
+      "radius": [
+       7.0,
+       7.0
+      ],
+      "rotation": 0.0
+     },
+     {
+      "center": [
+       -42.43,
+       93.34
+      ],
+      "radius": [
+       7.0,
+       7.0
+      ],
+      "rotation": 0.0
+     },
+     {
+      "center": [
+       -32.53,
+       83.44
+      ],
+      "radius": [
+       7.0,
+       7.0
+      ],
+      "rotation": 0.0
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        -95.16,
+        33.94
+       ],
+       [
+        -88.16,
+        33.94
+       ],
+       [
+        -79.2,
+        31.11
+       ],
+       [
+        -57.13,
+        30.03
+       ],
+       [
+        -47.73,
+        45.55
+       ],
+       [
+        -43.91,
+        46.03
+       ]
+      ],
+      "width": 4.5
+     },
+     {
+      "points": [
+       [
+        32.53,
+        -96.58
+       ],
+       [
+        32.53,
+        -89.58
+       ],
+       [
+        31.11,
+        -79.2
+       ],
+       [
+        25.61,
+        -57.67
+       ],
+       [
+        45.11,
+        -50.69
+       ],
+       [
+        55.15,
+        -52.33
+       ]
+      ],
+      "width": 4.5
+     }
+    ],
+    "holes": [
+     {
+      "name": "salt_pit",
+      "center": [
+       0.0,
+       0.0
+      ],
+      "radius": [
+       60.8,
+       40.53333333333333
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "props": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [
+    {
+     "entity_id": 920,
+     "content_id": "material.ore_hematite",
+     "position": [
+      281.62,
+      1.0,
+      1147.67
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.3,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 921,
+     "content_id": "material.ore_hematite",
+     "position": [
+      239.19,
+      1.0,
+      1238.18
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 1.1,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 923,
+     "content_id": "material.ore_limonite",
+     "position": [
+      264.64,
+      1.0,
+      1298.99
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.2,
+     "yield": {
+      "item_id": "item.ore.limonite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 924,
+     "content_id": "material.ore_magnetite",
+     "position": [
+      335.36,
+      1.0,
+      1257.98
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 2.4,
+     "yield": {
+      "item_id": "item.ore.magnetite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.salt_pit_terraces",
+   "name": "The Salt Pit · Terraces",
+   "anchor": [
+    300.0,
+    0.0,
+    1450.0
+   ],
+   "bounds": [
+    -70,
+    60,
+    -70,
+    60
+   ],
+   "arrival": [
+    271.26,
+    0.0,
+    1451.39
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "ffe8cc",
+    "sun_energy": 0.85,
+    "sun_pitch": -48.0,
+    "sun_yaw": -20.0,
+    "fog_color": "cdbba4",
+    "fog_density": 0.004,
+    "ambient_energy": 0.38,
+    "sky_top": "6f8aa0",
+    "sky_horizon": "dccbb2",
+    "exposure": 0.82
+   },
+   "set": "res://data/world/sets/salt_pit_terraces.json",
+   "cavern": {
+    "seed": 901,
+    "cell": 0.7,
+    "material": "res://assets/game/materials/salt_pit/geology_salt_pit.tres",
+    "wall_height": 0.8,
+    "near_wall_height": 0.4,
+    "smooth": 2.0,
+    "warp": 0.4,
+    "chambers": [
+     {
+      "center": [
+       -16.62,
+       -16.62
+      ],
+      "radius": [
+       19.0,
+       6.5
+      ],
+      "rotation": -45.0
+     }
+    ],
+    "passages": [
+     {
+      "name": "bench",
+      "points": [
+       [
+        -23.11,
+        39.73
+       ],
+       [
+        -26.69,
+        37.88
+       ],
+       [
+        -29.68,
+        35.36
+       ],
+       [
+        -32.04,
+        32.21
+       ],
+       [
+        -33.71,
+        28.5
+       ],
+       [
+        -34.66,
+        24.3
+       ],
+       [
+        -34.88,
+        19.68
+       ],
+       [
+        -34.36,
+        14.74
+       ],
+       [
+        -33.1,
+        9.58
+       ],
+       [
+        -31.13,
+        4.29
+       ],
+       [
+        -28.51,
+        -1.02
+       ],
+       [
+        -25.26,
+        -6.24
+       ],
+       [
+        -21.47,
+        -11.29
+       ],
+       [
+        -17.18,
+        -16.05
+       ],
+       [
+        -12.5,
+        -20.44
+       ],
+       [
+        -7.52,
+        -24.37
+       ],
+       [
+        -2.33,
+        -27.75
+       ],
+       [
+        2.96,
+        -30.54
+       ],
+       [
+        8.27,
+        -32.68
+       ],
+       [
+        13.46,
+        -34.11
+       ],
+       [
+        18.47,
+        -34.82
+       ],
+       [
+        23.18,
+        -34.79
+       ],
+       [
+        27.49,
+        -34.02
+       ],
+       [
+        31.33,
+        -32.52
+       ],
+       [
+        34.63,
+        -30.34
+       ],
+       [
+        37.31,
+        -27.49
+       ],
+       [
+        39.33,
+        -24.06
+       ],
+       [
+        40.64,
+        -20.09
+       ]
+      ],
+      "width": 9.0
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -33.1,
+        9.58
+       ],
+       [
+        -31.13,
+        4.29
+       ],
+       [
+        -28.51,
+        -1.02
+       ],
+       [
+        -25.26,
+        -6.24
+       ],
+       [
+        -21.47,
+        -11.29
+       ],
+       [
+        -17.18,
+        -16.05
+       ],
+       [
+        -12.5,
+        -20.44
+       ],
+       [
+        -7.52,
+        -24.37
+       ],
+       [
+        -2.33,
+        -27.75
+       ],
+       [
+        2.96,
+        -30.54
+       ],
+       [
+        8.27,
+        -32.68
+       ],
+       [
+        13.46,
+        -34.11
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "holes": [
+     {
+      "name": "pit",
+      "center": [
+       5.66,
+       5.66
+      ],
+      "radius": [
+       40.6,
+       22.33
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "props": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [
+    {
+     "entity_id": 922,
+     "content_id": "material.ore_hematite",
+     "position": [
+      263.58,
+      1.0,
+      1470.15
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.6,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.salt_pit_floor",
+   "name": "The Salt Pit · Pit Floor",
+   "anchor": [
+    300.0,
+    0.0,
+    1650.0
+   ],
+   "bounds": [
+    -32,
+    44,
+    -32,
+    44
+   ],
+   "arrival": [
+    323.76,
+    0.0,
+    1641.8
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "ffd8b0",
+    "sun_energy": 0.75,
+    "sun_pitch": -52.0,
+    "sun_yaw": -20.0,
+    "fog_color": "b89a80",
+    "fog_density": 0.006,
+    "ambient_energy": 0.34,
+    "sky_top": "6f8aa0",
+    "sky_horizon": "d2bc9e",
+    "exposure": 0.85
+   },
+   "set": "res://data/world/sets/salt_pit_floor.json",
+   "cavern": {
+    "seed": 902,
+    "cell": 0.5,
+    "material": "res://assets/game/materials/salt_pit/geology_salt_pit.tres",
+    "wall_height": 0.8,
+    "near_wall_height": 0.4,
+    "smooth": 2.0,
+    "warp": 0.4,
+    "chambers": [
+     {
+      "center": [
+       6.36,
+       6.36
+      ],
+      "radius": [
+       30.4,
+       15.4
+      ],
+      "rotation": -45.0
+     }
+    ],
+    "passages": [],
+    "wet": [
+     {
+      "center": [
+       -1.41,
+       24.04
+      ],
+      "radius": [
+       10.0,
+       6.0
+      ],
+      "rotation": -45.0
+     }
+    ],
+    "worn": [
+     {
+      "points": [
+       [
+        28.28,
+        -10.47
+       ],
+       [
+        16.97,
+        -8.49
+       ],
+       [
+        6.72,
+        -4.6
+       ],
+       [
+        -4.24,
+        4.24
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "props": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [
+    {
+     "entity_id": 925,
+     "content_id": "material.ore_hematite",
+     "position": [
+      291.94,
+      1.0,
+      1650.42
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.0,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ]
   }
  ],
  "transitions": [
@@ -8886,7 +10957,7 @@
     0.0,
     100.0
    ],
-   "label": "EXCAVATION C-3",
+   "label": "THE DEEP SURVEY",
    "presentation": "tunnel",
    "label_offset": [
     0.0,
@@ -9070,15 +11141,15 @@
    "entity_id": 24,
    "from_zone": "zone.excavation_c3_f2",
    "position": [
-    133.0,
+    144.5,
     0.0,
-    -5.3
+    -18.03
    ],
    "to_zone": "zone.excavation_c3_f3",
    "arrival": [
-    182.2,
+    177.77,
     0.0,
-    4.0
+    16.05
    ],
    "label": "STAIRS DOWN · FLOOR 3",
    "presentation": "stairs",
@@ -9092,15 +11163,15 @@
    "entity_id": 25,
    "from_zone": "zone.excavation_c3_f3",
    "position": [
-    180.8,
+    176.78,
     0.0,
-    4.0
+    15.06
    ],
    "to_zone": "zone.excavation_c3_f2",
    "arrival": [
-    134.6,
+    145.98,
     0.0,
-    -4.8
+    -18.81
    ],
    "label": "STAIRS UP · FLOOR 2",
    "presentation": "stairs",
@@ -9120,9 +11191,9 @@
    ],
    "to_zone": "zone.excavation_c3_f2",
    "arrival": [
-    121.46,
+    111.61,
     0.0,
-    -6.34
+    11.31
    ],
    "arrival_rotation": -2.356,
    "label": "DEEP SURVEY SHAFT · FLOOR 2",
@@ -9138,9 +11209,9 @@
    "entity_id": 245,
    "from_zone": "zone.excavation_c3_f2",
    "position": [
-    120.61,
+    110.76,
     0.0,
-    -7.19
+    10.46
    ],
    "to_zone": "zone.excavation_c3",
    "arrival": [
@@ -9149,7 +11220,7 @@
     96.77
    ],
    "arrival_rotation": -2.356,
-   "label": "LIFT · C-3 FLOOR 1",
+   "label": "LIFT · DEEP SURVEY FLOOR 1",
    "presentation": "lift",
    "label_offset": [
     0.0,
@@ -9161,9 +11232,9 @@
    "entity_id": 246,
    "from_zone": "zone.excavation_c3_f3",
    "position": [
-    198.91,
+    210.36,
     0.0,
-    -7.19
+    -12.17
    ],
    "to_zone": "zone.excavation_c3",
    "arrival": [
@@ -9172,7 +11243,7 @@
     103.63
    ],
    "arrival_rotation": -2.356,
-   "label": "EXTRACTION LIFT · C-3 FLOOR 1",
+   "label": "EXTRACTION LIFT · DEEP SURVEY FLOOR 1",
    "presentation": "lift",
    "label_offset": [
     0.0,
@@ -9847,6 +11918,190 @@
     2.6,
     0.0
    ]
+  },
+  {
+   "entity_id": 900,
+   "from_zone": "zone.surface_saltpan",
+   "position": [
+    -45.25,
+    0.0,
+    374.01
+   ],
+   "to_zone": "zone.salt_pit",
+   "arrival": [
+    207.84,
+    0.0,
+    1233.94
+   ],
+   "arrival_rotation": -1.571,
+   "label": "SOUTH · THE SALT PIT",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 901,
+   "from_zone": "zone.salt_pit",
+   "position": [
+    202.63,
+    0.0,
+    1233.94
+   ],
+   "to_zone": "zone.surface_saltpan",
+   "arrival": [
+    -40.05,
+    0.0,
+    374.01
+   ],
+   "arrival_rotation": -1.571,
+   "label": "NORTH · THE SALTPAN",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 902,
+   "from_zone": "zone.frontier_road_east",
+   "position": [
+    56.78,
+    0.0,
+    540.7
+   ],
+   "to_zone": "zone.salt_pit",
+   "arrival": [
+    332.53,
+    0.0,
+    1106.42
+   ],
+   "arrival_rotation": -3.142,
+   "label": "SOUTH · THE SALT PIT",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 903,
+   "from_zone": "zone.salt_pit",
+   "position": [
+    332.53,
+    0.0,
+    1101.22
+   ],
+   "to_zone": "zone.frontier_road_east",
+   "arrival": [
+    52.82,
+    0.0,
+    537.58
+   ],
+   "arrival_rotation": 0.794,
+   "label": "NORTH · FRONTIER ROAD",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 904,
+   "from_zone": "zone.salt_pit",
+   "position": [
+    256.09,
+    0.0,
+    1246.03
+   ],
+   "to_zone": "zone.salt_pit_terraces",
+   "arrival": [
+    271.26,
+    0.0,
+    1451.39
+   ],
+   "arrival_rotation": -0.571,
+   "label": "HAUL ROAD · DOWN TO THE TERRACES",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 905,
+   "from_zone": "zone.salt_pit_terraces",
+   "position": [
+    264.16,
+    0.0,
+    1451.33
+   ],
+   "to_zone": "zone.salt_pit",
+   "arrival": [
+    254.75,
+    0.0,
+    1250.91
+   ],
+   "arrival_rotation": 2.621,
+   "label": "HAUL ROAD · UP TO THE RIM",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 906,
+   "from_zone": "zone.salt_pit_terraces",
+   "position": [
+    304.7,
+    0.0,
+    1421.48
+   ],
+   "to_zone": "zone.salt_pit_floor",
+   "arrival": [
+    323.76,
+    0.0,
+    1641.8
+   ],
+   "arrival_rotation": 2.056,
+   "label": "HAUL ROAD · DOWN TO THE PIT FLOOR",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 907,
+   "from_zone": "zone.salt_pit_floor",
+   "position": [
+    328.28,
+    0.0,
+    1639.53
+   ],
+   "to_zone": "zone.salt_pit_terraces",
+   "arrival": [
+    299.65,
+    0.0,
+    1421.12
+   ],
+   "arrival_rotation": 2.217,
+   "label": "HAUL ROAD · UP TO THE TERRACES",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
   }
  ],
  "entities": [
@@ -10045,9 +12300,9 @@
    "content_id": "npc.scavenger",
    "zone_id": "zone.excavation_c3_f2",
    "position": [
-    133.0,
+    133.18,
     0.0,
-    -3.5
+    -1.06
    ]
   },
   {
@@ -10056,9 +12311,9 @@
    "content_id": "npc.scavenger",
    "zone_id": "zone.excavation_c3_f3",
    "position": [
-    194.0,
+    194.95,
     0.0,
-    -1.0
+    -7.78
    ]
   },
   {
@@ -10067,9 +12322,9 @@
    "content_id": "item.ferrous_sample",
    "zone_id": "zone.excavation_c3_f2",
    "position": [
-    135.0,
+    130.28,
     0.0,
-    1.5
+    -6.79
    ],
    "quantity": 2
   },
@@ -10079,9 +12334,9 @@
    "content_id": "item.relic_fragment",
    "zone_id": "zone.excavation_c3_f3",
    "position": [
-    186.0,
-    0.0,
-    -5.0
+    193.82,
+    1.0,
+    -13.15
    ],
    "quantity": 1
   },
@@ -10091,9 +12346,9 @@
    "content_id": "discovery.expedition_relic",
    "zone_id": "zone.excavation_c3_f3",
    "position": [
-    190.0,
+    191.7,
     0.0,
-    -5.2
+    -15.27
    ]
   },
   {
@@ -10132,9 +12387,9 @@
    "content_id": "item.container.document_case",
    "zone_id": "zone.excavation_c3_f3",
    "position": [
-    192.6,
+    190.28,
     0.12,
-    -6.2
+    -13.01
    ],
    "quantity": 1,
    "crate_loot": [
@@ -10276,6 +12531,66 @@
     822.98
    ],
    "quantity": 3
+  },
+  {
+   "entity_id": 910,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.salt_pit",
+   "position": [
+    321.92,
+    0.0,
+    1261.52
+   ],
+   "quantity": 3
+  },
+  {
+   "entity_id": 911,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.salt_pit",
+   "position": [
+    364.35,
+    0.0,
+    1146.97
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 912,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.salt_pit_terraces",
+   "position": [
+    281.62,
+    0.0,
+    1438.69
+   ],
+   "quantity": 3
+  },
+  {
+   "entity_id": 913,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.salt_pit_terraces",
+   "position": [
+    295.4,
+    0.0,
+    1422.78
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 914,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.salt_pit_floor",
+   "position": [
+    313.79,
+    0.0,
+    1639.75
+   ],
+   "quantity": 2
   }
  ],
  "hazards": [
@@ -10284,9 +12599,9 @@
    "content_id": "hazard.thermal_vent",
    "zone_id": "zone.excavation_c3_f2",
    "position": [
-    121.0,
+    139.9,
     0.0,
-    1.5
+    4.24
    ],
    "radius": 2.1,
    "damage": 4,
@@ -11518,6 +13833,331 @@
     180.0
    ],
    "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.c3_f2_millennium_bugs",
+   "zone_id": "zone.excavation_c3_f2",
+   "center": [
+    126.82,
+    -0.35
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     126.82,
+     -0.35
+    ],
+    [
+     133.54,
+     -6.36
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_millennium_bug",
+     "count": 2
+    }
+   ],
+   "threat_budget": 18,
+   "respawn_seconds": [
+    120.0,
+    180.0
+   ],
+   "safe_radius": 14.0,
+   "max_alive": 2
+  },
+  {
+   "id": "spawn.salt_pit_lookout",
+   "zone_id": "zone.salt_pit",
+   "center": [
+    255.45,
+    1175.25
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     255.45,
+     1175.25
+    ],
+    [
+     264.29,
+     1167.12
+    ],
+    [
+     254.39,
+     1165.71
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_lookout",
+     "count": 2
+    },
+    {
+     "content_id": "npc.castoff_gunner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 12,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 12.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.salt_pit_crusher_miners",
+   "zone_id": "zone.salt_pit",
+   "center": [
+    348.79,
+    1144.14
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     348.79,
+     1144.14
+    ],
+    [
+     372.83,
+     1142.72
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_miner",
+     "count": 2
+    }
+   ],
+   "threat_budget": 16,
+   "respawn_seconds": [
+    70.0,
+    100.0
+   ],
+   "safe_radius": 12.0,
+   "patrol": [
+    [
+     346.67,
+     1144.85
+    ],
+    [
+     362.23,
+     1129.29
+    ],
+    [
+     376.37,
+     1143.43
+    ],
+    [
+     360.81,
+     1158.99
+    ]
+   ]
+  },
+  {
+   "id": "spawn.salt_pit_conveyor_turret",
+   "zone_id": "zone.salt_pit",
+   "center": [
+    352.68,
+    1155.81
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     352.68,
+     1155.81
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_turret",
+     "count": 1
+    }
+   ],
+   "threat_budget": 4,
+   "respawn_seconds": [
+    90.0,
+    120.0
+   ],
+   "safe_radius": 9.0
+  },
+  {
+   "id": "spawn.salt_pit_graveyard",
+   "zone_id": "zone.salt_pit_terraces",
+   "center": [
+    285.15,
+    1435.15
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     285.15,
+     1435.15
+    ],
+    [
+     288.71,
+     1428.53
+    ],
+    [
+     280.2,
+     1433.03
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_raider",
+     "count": 2
+    },
+    {
+     "content_id": "npc.castoff_gunner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 14,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 12.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.salt_pit_bench_crawlers",
+   "zone_id": "zone.salt_pit_terraces",
+   "center": [
+    331.78,
+    1417.71
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     331.78,
+     1417.71
+    ],
+    [
+     335.32,
+     1418.61
+    ],
+    [
+     327.95,
+     1417.69
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.burrowborn_crawler",
+     "count": 3
+    }
+   ],
+   "threat_budget": 6,
+   "respawn_seconds": [
+    40.0,
+    70.0
+   ],
+   "safe_radius": 9.0
+  },
+  {
+   "id": "spawn.salt_pit_floor_crawlers",
+   "zone_id": "zone.salt_pit_floor",
+   "center": [
+    288.69,
+    1669.8
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     288.69,
+     1669.8
+    ],
+    [
+     290.1,
+     1661.31
+    ],
+    [
+     290.1,
+     1675.46
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.burrowborn_crawler",
+     "count": 3
+    }
+   ],
+   "threat_budget": 6,
+   "respawn_seconds": [
+    40.0,
+    70.0
+   ],
+   "safe_radius": 9.0
+  },
+  {
+   "id": "spawn.salt_pit_brine_scorpions",
+   "zone_id": "zone.salt_pit",
+   "center": [
+    271.72,
+    1296.17
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     271.72,
+     1296.17
+    ],
+    [
+     275.96,
+     1289.1
+    ],
+    [
+     264.64,
+     1300.41
+    ],
+    [
+     269.59,
+     1299.7
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.burrowborn_brine_scorpion",
+     "count": 4
+    }
+   ],
+   "threat_budget": 16,
+   "respawn_seconds": [
+    60.0,
+    100.0
+   ],
+   "safe_radius": 12.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.salt_pit_floor_millennium_bug",
+   "zone_id": "zone.salt_pit_floor",
+   "center": [
+    309.9,
+    1662.73
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     309.9,
+     1662.73
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_millennium_bug",
+     "count": 1
+    }
+   ],
+   "threat_budget": 9,
+   "respawn_seconds": [
+    150.0,
+    240.0
+   ],
+   "safe_radius": 16.0
   }
  ],
  "elevators": [

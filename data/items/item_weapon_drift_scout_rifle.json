@@ -12,7 +12,7 @@
   "gear_tier": 1,
   "properties": {
     "base_damage": 11,
-    "attack_range": 11.0,
+    "attack_range": 10.0,
     "attack_interval": 0.6
   }
 }

@@ -46,7 +46,7 @@
     "hunt by sensor in the dark"
    ],
    "communication": "Radio chatter and warning lights; turrets and traps share the floor's power grid.",
-   "hierarchy": "War Drone \u2192 Miner Unit / Sentry Turret \u2192 Haze Skirmisher / Pelter \u2192 Chopper (foreman)",
+   "hierarchy": "War Drone \u2192 Miner Unit / Sentry Turret / Millennium Bug \u2192 Haze Skirmisher / Pelter \u2192 Chopper (foreman)",
    "territory": "The Pump Works: a drowned VDI pump station under the Sump, four floors down.",
    "visual": "Rusted steel, exposed servos, cables, warning stripes, amber status lamps.",
    "status": "active"

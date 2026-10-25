@@ -1,0 +1,18 @@
+{
+  "id": "item.weapon.foundry_timber_saw",
+  "display_name": "Timber Saw",
+  "equipment_slot": "primary_weapon",
+  "description": "A two-handed felling chainsaw: fast, relentless cuts and the highest sustained damage a Blades user can carry. Thirsty: every cut burns 0.2 L of gas from the first gas can in your cargo that holds enough; a running chain bites at full Heat from the first cut.",
+  "visual_id": "visual.weapon.foundry_timber_saw",
+  "weapon_type": "melee",
+  "weapon_family": "skill.edge",
+  "hands": 2,
+  "weight": 7.0,
+  "gear_tier": 1,
+  "properties": {
+    "base_damage": 12,
+    "attack_range": 2.5,
+    "attack_interval": 0.6,
+    "fuel_per_attack": 0.2
+  }
+}

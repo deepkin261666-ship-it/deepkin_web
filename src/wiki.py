@@ -9,11 +9,12 @@ import math
 import os
 import re
 
+import combat_math as CM
 import gdconst as G
 import slugs as S
 import texts as TX
 import worldmap as WM
-from i18n import ATTRS, CLASSES as CLASS_TXT, FACTION as FACTION_TXT, FAMILIES, FAMILY_DESC, ITEM_EN_FALLBACK, ITEM_ES, SLOTS, L
+from i18n import ATTRS, CLASSES as CLASS_TXT, FACTION as FACTION_TXT, FAMILIES, FAMILY_DESC, ITEM_EN_FALLBACK, ITEM_ES, SLOTS, TRAITS, L
 from i18n import MOBS as MOB_TXT
 from wiki_i18n import (ABILITY_SHAPE, BILLBOARDS, CATS, FACTION_ES, LURE, MOB_ES, MOB_SHOTS, OWN_SERVICE, POSE, QUEST_ES, ROLES, SERVICE_STALL, SIGN_DISTRICT, W)
 from wiki_es_p8 import FACTION_ES_P8, ITEM_ES_P8, MOB_ES_P8, QUEST_ES_P8
@@ -259,7 +260,7 @@ def _aliases():
             out.append((e.name[4:], e.url))
         if e.kind == "faction" and e.name.startswith("The "):
             out.append((e.name[4:], e.url))
-    out += [("C-3", S.zone("zone.excavation_c3")), ("Castoff", S.faction("faction.castoffs")),
+    out += [("C-3", S.zone("zone.c3_site")), ("Castoff", S.faction("faction.castoffs")),
             ("Limonite", S.item("item.ore.limonite")), ("Hematite", S.item("item.ore.hematite")),
             ("Magnetite", S.item("item.ore.magnetite")), ("Lumenita", S.item("item.mineral.lumenita"))]
     city = WORLD.get("dustline")
@@ -530,11 +531,8 @@ def base_damage(w):
 
 
 def class_damage(c, w):
-    wtype = w.get("weapon_type", "melee")
-    attr = "might" if wtype == "melee" else "precision"
-    coef = c["combat_coefficients"].get(wtype, 1.0)
-    mult = max(0.75, min(1.25, 1 + (c["attributes"][attr] - 10) * G.RPG.get("STAT_DAMAGE_STEP", 0.015)))
-    return max(1, round(base_damage(w) * coef * mult))
+    """Golpe base sin rasgo, con la municion propia (formulas del servidor: src/combat_math.py, 2026-10-24)."""
+    return CM.hit(c, w, ITEMS)
 
 
 def stack_of(it):
@@ -563,9 +561,19 @@ def item_page(it, lang):
     if fam:
         rows.append((t("skill", lang), f'<a href="skills.html#{S.skill_anchor(fam)}">{e(FAMILIES[fam][lang])}</a>'))
     if base_damage(it):
-        itv = p.get("attack_interval", 1)
-        rows += [(t("damage", lang), n(base_damage(it), lang)), (t("interval", lang), secs(itv, lang)),
-                 (t("dps", lang), n(base_damage(it) / itv, lang, 1)), (t("range", lang), n(p.get("attack_range", 0), lang) + " m")]
+        itv = CM.interval(it)
+        rows += [(t("damage", lang), n(base_damage(it), lang)), (t("interval", lang), secs(itv, lang)), (t("range", lang), n(p.get("attack_range", 0), lang) + " m")]
+        if fam and it.get("equipment_slot") == "primary_weapon":
+            home = CM.home_class(fam, CLASSES)
+            r = CM.row(home, it, ITEMS)
+            rows += [(t("hit_os", lang), f'{r["opening"]} / {r["sustained"]}'), (t("dps_home", lang, cls=home["name"]), n(r["dps"], lang, 1))]
+            tr = CM.trait_text(it, ITEMS, lang, TRAITS)
+            if tr:
+                rows.append((t("trait", lang), e(tr)))
+            if CM.uses_fuel(it):
+                rows.append((t("feeds", lang), lk("item.fuel.gas_can") + f' <small>{e(t("per_cut_v", lang, v=n(p["fuel_per_attack"], lang)))}</small>'))
+            elif p.get("energy_per_shot"):
+                rows.append((t("feeds", lang), e(t("energy_shot_v", lang, v=n(p["energy_per_shot"], lang)))))
     if it.get("damage_type"):
         rows.append((t("damage_type", lang), e(t("dt_" + it["damage_type"], lang))))
     if it.get("hands"):
@@ -597,8 +605,12 @@ def item_page(it, lang):
         rows.append((t("use_cooldown", lang), secs(p.get("use_cooldown", 0), lang)))
     if p.get("currency_value"):
         rows.append((t("value", lang), n(p["currency_value"], lang) + " Metal"))
-    if p.get("stagger_bonus"):
-        rows.append((t("stagger", lang), "+" + pct(p["stagger_bonus"], lang)))
+    if CM.stagger_seconds(it):
+        rows.append((t("stagger", lang), secs(round(CM.stagger_seconds(it), 2), lang)))
+    if CM.crush(it):
+        rows.append((t("crush", lang), e(t("crush_v", lang, p=pct(CM.crush(it), lang)))))
+    if it.get("weapon_type") == "ranged" and p.get("spread_targets"):
+        rows.append((t("spread", lang), e(t("spread_v", lang, n=n(p["spread_targets"], lang), a=n(p.get("spread_half_angle", 15) * 2, lang), p=pct(p.get("spread_damage", 0), lang)))))
     if "weight" in it:
         rows.append((t("weight", lang), n(it["weight"], lang) + " kg"))
     else:
@@ -611,8 +623,11 @@ def item_page(it, lang):
         rows.append((t("tier", lang), f'<a href="experience.html#tiers">T{it["gear_tier"]}</a>'))
     req = it.get("requirements") or {}
     reqs = []
-    if req.get("minimum_level"):
-        reqs.append(f'{t("level", lang)} {req["minimum_level"]}')
+    tier_lv, tier_sk = CM.tier_requirement(it) if fam and it.get("equipment_slot") == "primary_weapon" else (req.get("minimum_level", 1), 1)
+    if tier_lv > 1:
+        reqs.append(f'{t("level", lang)} {tier_lv}')
+    if tier_sk > 1 and fam not in (req.get("minimum_skills") or {}):
+        reqs.append(f'{FAMILIES[fam][lang]} {tier_sk}')
     for a, v in (req.get("minimum_attributes") or {}).items():
         reqs.append(f'{ATTRS[a][lang]} {v}')
     for f, v in (req.get("minimum_skills") or {}).items():
@@ -635,13 +650,13 @@ def item_page(it, lang):
     if base_damage(it) and it.get("equipment_slot") == "primary_weapon":
         rows_c = []
         for c in CLASSES:
-            d = class_damage(c, it)
+            r = CM.row(c, it, ITEMS)
             rows_c.append([class_chip(c["id"], lang), n(c["combat_coefficients"].get(it.get("weapon_type", "melee"), 1), lang),
-                           n(d, lang), n(d / p.get("attack_interval", 1), lang, 1),
+                           f'{r["opening"]} / {r["sustained"]}', n(r["dps"], lang, 1),
                            "×" + n(c["skill_affinity"].get(fam, G.SKILLS.get("DEFAULT_AFFINITY", 0.5)), lang)])
         body += sec("by-class", t("damage_by_class", lang),
-                    f'<p>{e(t("by_class_lead", lang))} <a href="../arsenal.html#calculator">{e(t("calc", lang))}</a>.</p>'
-                    + table([(t("class", lang), "text"), (t("coef", lang), "num"), (t("damage", lang), "num"), (t("dps", lang), "num"),
+                    f'<p>{e(t("by_class_lead", lang))} <a href="../items.html#calculator">{e(t("calc", lang))}</a>.</p>'
+                    + table([(t("class", lang), "text"), (t("coef", lang), "num"), (t("hit_os", lang), "num"), (t("dps", lang), "num"),
                              (t("skill_train", lang), "num")], rows_c))
         starts = [(cl, v) for cl in CLASSES for v in cl["variants"] if v["weapon_id"] == iid]
         starters = [cl for cl in CLASSES if iid in cl.get("starter_weapons", [])]
@@ -703,8 +718,11 @@ def item_page(it, lang):
     extra = [f'<a href="items.html">{e(t("all_items", lang))}</a>']
     if fam:
         extra.append(f'<a href="skills.html#{S.skill_anchor(fam)}">{e(FAMILIES[fam][lang])}</a>')
-    if cat in ("weapon", "ammunition", "shield"):
-        extra.append(f'<a href="../arsenal.html">Arsenal</a>')
+    item_sec = {"weapon": "weapons", "ammunition": "ammunition", "shield": "shields", "armor": "armor", "light": "lights", "drone": "drones",
+                "battery": "power", "backpack": "power", "tool": "tools", "fuel": "tools", "consumable": "consumables", "food": "consumables",
+                "container": "crates"}.get(cat)
+    if item_sec:
+        extra.append(f'<a href="../items.html#{e(iid)}">{e(t("gear", lang))}</a>')
     if cat == "currency":
         extra.append(f'<a href="currency.html">{e(t("m_currency", lang))}</a>')
     if iid == G.DEATH.get("REMAINS_ITEM_ID") or cat == "backpack":
@@ -1535,7 +1553,7 @@ def page_skills(lang):
         rows.append(f'<article class="wk-skill" id="{S.skill_anchor(f)}"><h3>{e(FAMILIES[f][lang])} <small>{e(K.get("NAMES", {}).get(f, ""))}</small></h3>'
                     f'<p>{e(desc)}</p>{"<p class=wk-sub>" + e(later) + "</p>" if later else ""}'
                     f'<p class="wk-sub">{e(t("weapons", lang))}: {", ".join(ws) or "—"} · {e(t("trains_best", lang))} {class_chip(best["id"], lang)}</p></article>')
-    body = sec("families", t("families", lang), f'<p>{e(t("skills_lead2", lang, hit=K.get("XP_PER_HIT", 10), block=K.get("XP_PER_BLOCKED_HIT", 8), d=K.get("DEFAULT_AFFINITY", 0.5), max=K.get("MAX_LEVEL", 100), dmg=pct(K.get("DAMAGE_PER_SKILL_LEVEL", 0.01), lang)))}</p>' + "".join(rows))
+    body = sec("families", t("families", lang), f'<p>{e(t("skills_lead2", lang, hit=n(CM.XP_PER_ATTACK_SECOND, lang), tiers=", ".join(f"T{i_ + 1} {s_}" for i_, s_ in enumerate(CM.TIER_SKILL) if i_ > 0), block=K.get("XP_PER_BLOCKED_HIT", 8), d=K.get("DEFAULT_AFFINITY", 0.5), max=K.get("MAX_LEVEL", 100), dmg=pct(K.get("DAMAGE_PER_SKILL_LEVEL", 0.01), lang)))}</p>' + "".join(rows))
     head = [(t("skill", lang), "text")] + [(c["name"], "num") for c in CLASSES]
     arows = []
     for f in fams:
@@ -1546,7 +1564,7 @@ def page_skills(lang):
             cells.append(f'<span class="aff-v {cls}">×{n(v, lang)}</span>')
         arows.append([f'<a href="#{S.skill_anchor(f)}">{e(FAMILIES[f][lang])}</a>'] + cells)
     body += sec("affinity", t("affinity", lang), f'<p>{e(t("affinity_lead", lang))}</p>' + table(head, arows))
-    srows = [[n(lv, lang), n(G.skill_xp_for(lv), lang), n(math.ceil(G.skill_xp_for(lv) / K.get("XP_PER_HIT", 10)), lang), "+" + pct(K.get("DAMAGE_PER_SKILL_LEVEL", 0.01) * (lv - 1), lang)]
+    srows = [[n(lv, lang), n(G.skill_xp_for(lv), lang), n(math.ceil(G.skill_xp_for(lv) / CM.XP_PER_ATTACK_SECOND), lang), "+" + pct(K.get("DAMAGE_PER_SKILL_LEVEL", 0.01) * (lv - 1), lang)]
              for lv in (2, 5, 10, 20, 30, 50, 75, 100)]
     body += sec("curve", t("skill_curve", lang), table([(t("skill_level", lang), "num"), (t("total_xp", lang), "num"), (t("hits", lang), "num"), (t("damage", lang), "text")], srows, sortable=False)
                 + f'<p class="note">{e(t("shield_note", lang, base=pct(K.get("SHIELD_REDUCTION_BASE", 0.08), lang), per=pct(K.get("SHIELD_REDUCTION_PER_LEVEL", 0.002), lang, 1)))}</p>')
@@ -1561,7 +1579,7 @@ def page_skills(lang):
     body += sec("powers", t("powers", lang), f'<p>{e(t("powers_lead", lang))}</p>' + table([(t("name", lang), ""), (t("class", lang), ""), (t("key", lang), ""), (t("cooldown", lang), ""), (t("energy", lang), ""), (t("description", lang), "")], prow, sortable=False, cls="wrap-cells"))
     pas = [[class_chip(c["id"], lang), f'<b>{e(c["passive_name"])}</b>', e(c.get("passive_description", "")) if lang == "en" else e(CLASS_TXT[c["id"]]["passive_desc"]["es"])] for c in CLASSES]
     body += sec("passives", t("passives", lang), table([(t("class", lang), ""), (t("name", lang), ""), (t("description", lang), "")], pas, sortable=False, cls="wrap-cells"))
-    body += seealso(lang, [f'<a href="classes.html">{e(t("m_classes", lang))}</a>', f'<a href="../arsenal.html#calculator">{e(t("calc", lang))}</a>', f'<a href="death.html">{e(t("m_death", lang))}</a>'])
+    body += seealso(lang, [f'<a href="classes.html">{e(t("m_classes", lang))}</a>', f'<a href="../items.html#calculator">{e(t("calc", lang))}</a>', f'<a href="death.html">{e(t("m_death", lang))}</a>'])
     return mech_article(lang, "skills", t("skills_lead", lang), body)
 
 
@@ -1734,7 +1752,7 @@ def wiki_index(lang):
 <section class="wk-sec" id="categories"><h2>{e(t("categories", lang))}</h2><div class="wk-cats">{cards}</div></section>
 <section class="wk-sec" id="mechanics"><h2>{e(t("mechanics", lang))}</h2><div class="wk-cards">{mech}</div></section>
 <section class="wk-sec" id="start"><h2>{e(t("start_here", lang))}</h2><p class="wk-see">{" · ".join(x for x in start if x)}</p></section>
-<section class="wk-sec" id="guides"><h2>{e(t("guides", lang))}</h2><p class="wk-see"><a href="../manual.html">{e(t("manual", lang))}</a> · <a href="../classes.html">{e(t("full_classes", lang))}</a> · <a href="../arsenal.html">Arsenal</a> · <a href="../gear.html">{e(t("gear", lang))}</a> · <a href="../bestiary.html">{e(t("bestiary", lang))}</a> · <a href="../world.html">{e(t("world_map", lang))}</a> · <a href="../story.html">{e(t("story", lang))}</a></p></section>
+<section class="wk-sec" id="guides"><h2>{e(t("guides", lang))}</h2><p class="wk-see"><a href="../manual.html">{e(t("manual", lang))}</a> · <a href="../classes.html">{e(t("full_classes", lang))}</a> · <a href="../items.html">{e(t("gear", lang))}</a> · <a href="../bestiary.html">{e(t("bestiary", lang))}</a> · <a href="../world.html">{e(t("world_map", lang))}</a> · <a href="../story.html">{e(t("story", lang))}</a></p></section>
 </div>"""
     return body
 
@@ -1770,7 +1788,7 @@ def search_index(lang):
     if city:
         for d in city["districts"]:
             out.append({"n": d["name"][lang], "s": t("district", lang) + " · Dustline", "u": S.zone(city["zone"]) + "#" + S.district_anchor(d["id"]), "k": "zone", "i": ""})
-    for slug, label in (("story", t("story", lang)), ("manual", t("manual", lang)), ("arsenal", "Arsenal"), ("gear", t("gear", lang)),
+    for slug, label in (("story", t("story", lang)), ("manual", t("manual", lang)), ("items", t("gear", lang)),
                         ("bestiary", t("bestiary", lang)), ("world", t("world_map", lang)), ("resources", t("resources", lang))):
         out.append({"n": label, "s": t("page", lang), "u": f"{slug}.html", "k": "page", "i": ""})
     return "window.DKS=" + json.dumps(out, ensure_ascii=False, separators=(",", ":")) + ";\n"

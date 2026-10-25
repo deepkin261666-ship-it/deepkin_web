@@ -12,11 +12,11 @@
   "properties": {
     "armor_defense": 0,
     "capacity_modifier": 0,
-    "base_damage": 30,
+    "base_damage": 28,
     "attack_range": 14.0,
     "battery_capacity": 0,
     "illumination_radius": 0.0,
-    "attack_interval": 1.6
+    "attack_interval": 1.75
   },
   "weight": 5.0
 }

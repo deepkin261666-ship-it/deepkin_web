@@ -165,7 +165,8 @@ TX = {
     ]),
     "ammo_fams": L("The families", "Las familias"), "ammo_family": L("Family", "Familia"), "ammo_weapons": L("Weapons", "Armas"),
     "ammo_effect": L("Effect", "Efecto"), "ammo_mult": L("Damage", "Daño"),
-    "fam_rounds": L("Rounds", "Balas"), "fam_spores": L("Spores", "Esporas"), "fam_synapse": L("Synapse", "Sinapsis"), "fam_energy": L("Energy", "Energía"),
+    "fam_rounds": L("Rounds", "Balas"), "fam_spores": L("Spores", "Esporas"), "fam_synapse": L("Synapse", "Sinapsis"), "fam_energy": L("Energy", "Energía"), "fam_fuel": L("Gas (chainsaws)", "Combustible (motosierras)"),
+    "per_cut_l": L("{v} L per cut", "{v} L por corte"),
     "eff_poison": L("poisons {p}/s for {s} s ({tot} total)", "envenena {p}/s durante {s} s ({tot} en total)"),
     "eff_heal": L("heals an ally {h}", "cura {h} a un aliado"),
     "eff_area": L("; on an enemy hit heals every operator within {r} m of you (you too) for {h}", "; al pegarle a un enemigo cura {h} a cada operador a {r} m tuyo (a vos también)"),
@@ -334,8 +335,10 @@ TX = {
     "ex_cost": L("Cost to go down from the surface", "Costo para bajar desde la superficie"), "ex_depth": L("Depth", "Profundidad"),
     "ex_persist": L("Open excavations survive a server restart (the ship stands again on the surface, reserves and roster kept); floors are regenerated from their seed with fresh creatures and resources. Creatures, drops and remains below are lost on a restart or a close.",
                     "Las excavaciones abiertas sobreviven a un reinicio del servidor (el buque vuelve a estar en la superficie, con reservas y lista); los pisos se regeneran desde su semilla con criaturas y recursos nuevos. Las criaturas, el botín y los restos de abajo se pierden con un reinicio o al cerrar."),
-    "ex_fixed": L("Not to be confused with Excavation C-3 under the Scarp: that is an old, fixed VDI dig you reach by the Shaft 3 elevator.",
-                  "No confundir con Excavation C-3 bajo el Scarp: ésa es una excavación vieja y fija de VDI a la que se llega por el elevador del Shaft 3."),
+    "ex_fixed": L("Not to be confused with The Deep Survey: that is an old, fixed VDI survey below the Shallows, reached from the Outpost through the Threshold and the Shallows.",
+                  "No confundir con The Deep Survey: ése es un relevamiento viejo y fijo de VDI bajo The Shallows, al que se llega desde el Outpost pasando por The Threshold y The Shallows."),
+    "ex_site": L("Nor with Excavation C-3, VDI's Contract Site 3: the spiral pit in the south-west of the map, a planned fixed site (coming soon).",
+                 "Ni con Excavation C-3, el Sitio Contratado 3 de VDI: la cantera en espiral del suroeste del mapa, un sitio fijo planeado (próximamente)."),
     # contratos
     "co_lead": L("A contract is a job with a crypto payment: the employer pays on a Contract Drive that you cash at any bank terminal.",
                  "Un contrato es un trabajo con pago cripto: el empleador paga con un Contract Drive que cobrás en cualquier terminal del banco."),
@@ -560,6 +563,12 @@ def page_ammo(lang):
     if ew:
         cost = ew[0]["properties"]["energy_per_shot"]
         rows.append([e(t("fam_energy", lang)), ", ".join(lk(w["id"]) for w in ew), lk(CELL_ID), "—", e(t("per_shot_v", lang, v=n(cost, lang)))])
+    # Motosierras de La Forja (2026-10-24): queman combustible de un bidon por corte.
+    fw = sorted([w for w in ITEMS.values() if w.get("weapon_type") == "melee" and w.get("properties", {}).get("fuel_per_attack", 0) > 0 and not w.get("planned")],
+                key=lambda w: w["properties"]["fuel_per_attack"])
+    if fw and "item.fuel.gas_can" in ITEMS:
+        rows.append([e(t("fam_fuel", lang)), ", ".join(lk(w["id"]) for w in fw), lk("item.fuel.gas_can"), "—",
+                     e(" · ".join(f'{w["display_name"]} {t("per_cut_l", lang, v=n(w["properties"]["fuel_per_attack"], lang))}' for w in fw))])
     body += sec("families", t("ammo_fams", lang), table([(t("ammo_family", lang), "text"), (t("ammo_weapons", lang), "text"), (t("ammo", lang), "text"),
                                                          (t("ammo_mult", lang), "num"), (t("ammo_effect", lang), "text")], rows, sortable=False, cls="wrap-cells"))
     body += sec("spores", t("spores_t", lang), f'<p>{e(t("spores_p", lang))}</p>')
@@ -575,7 +584,7 @@ def page_ammo(lang):
     body += sec("executions", t("exec_t", lang), f'<p>{e(t("exec_p", lang, p=pct(C("EXECUTE_HEALTH_RATIO", 0.25), lang)))}</p>'
                 + '<p class="wk-see">' + " · ".join(lk(w["id"]) for w in blades) + "</p>")
     sellers = sorted({npc for a in ITEMS.values() if item_cat(a["id"]) == "ammunition" for npc, b, _s, _st in shop_rows_for(a["id"]) if b is not None})
-    body += seealso(lang, [lk(s) for s in sellers] + [mlink("trading", lang), f'<a href="skills.html">{e(t("m_skills", lang))}</a>', '<a href="../arsenal.html">Arsenal</a>'])
+    body += seealso(lang, [lk(s) for s in sellers] + [mlink("trading", lang), f'<a href="skills.html">{e(t("m_skills", lang))}</a>', f'<a href="../items.html#ammunition">{e(t("gear", lang))}</a>'])
     return mech(lang, "ammunition", "ammo_lead", body)
 
 
@@ -716,7 +725,7 @@ def page_excavations(lang):
     body += sec("reserves", t("ex_res_t", lang), f"<p>{e(txt)}</p>" + f'<h3>{e(t("ex_cost", lang))}</h3>'
                 + table([(t("ex_depth", lang), "text"), (t("energy", lang), "num"), (t("fuel", lang).split(" (")[0], "num")], crow, sortable=False)
                 + f'<p class="wk-sub">{mlink("batteries", lang)} · <a href="fuel.html">{e(t("m_fuel", lang))}</a></p>')
-    body += sec("persistence", t("mx_rules", lang), f'<p>{e(t("ex_persist", lang))}</p><p class="note">{e(t("ex_fixed", lang))} {lk("zone.excavation_c3")}</p>')
+    body += sec("persistence", t("mx_rules", lang), f'<p>{e(t("ex_persist", lang))}</p><p class="note">{e(t("ex_fixed", lang))} {lk("zone.excavation_c3")}</p><p class="note">{e(t("ex_site", lang))} {lk("zone.c3_site")}</p>')
     rows = [(t("mx_trader", lang), lk(agent)), (t("mx_price", lang), price(pr, lang)), (t("quests", lang), lk(quest) if quest else ""),
             ("Roster", n(C("MAX_ROSTER", 8), lang)), (t("ex_depth", lang), f"−1 … −{n(C('MAX_FLOORS', 15), lang)}"), ("ID", f"<code>{svc}</code>")]
     box = infobox(ITEMS.get(svc, {}).get("display_name", "Expedition Service"), K.model_viewer(svc, "Expedition Service") if K.has_model(svc) else img(svc), rows)

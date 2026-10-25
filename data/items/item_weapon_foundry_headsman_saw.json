@@ -1,0 +1,18 @@
+{
+  "id": "item.weapon.foundry_headsman_saw",
+  "display_name": "Headsman Saw",
+  "equipment_slot": "primary_weapon",
+  "description": "A two-handed long-bar chainsaw for slow, brutal bites at the longest melee reach. Each cut burns 0.5 L of gas from the first gas can in your cargo that holds enough; a running chain bites at full Heat from the first cut.",
+  "visual_id": "visual.weapon.foundry_headsman_saw",
+  "weapon_type": "melee",
+  "weapon_family": "skill.edge",
+  "hands": 2,
+  "weight": 9.0,
+  "gear_tier": 1,
+  "properties": {
+    "base_damage": 23,
+    "attack_range": 2.9,
+    "attack_interval": 1.2,
+    "fuel_per_attack": 0.5
+  }
+}

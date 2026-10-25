@@ -1,0 +1,166 @@
+{
+  "id": "npc.rustbound_millennium_bug",
+  "display_name": "Millennium Bug",
+  "max_health": 180,
+  "movement_speed": 2.4,
+  "detection_range": 14.0,
+  "attack_range": 2.2,
+  "attack_damage": 9,
+  "attack_cooldown": 1.4,
+  "faction": "faction.rustbound",
+  "species": "Millennium Bug",
+  "role": "burrower",
+  "archetype": "burrower",
+  "tier": "normal",
+  "hunt_tier": 3,
+  "threat": 9,
+  "xp": 170,
+  "coins": [
+    12,
+    28
+  ],
+  "body_radius": 0.8,
+  "habitat": "VDI dig sites: the Deep Survey's second floor (The Dark Stratum) and the Salt Pit's floor",
+  "lore": "PROVISIONAL. A VDI survey borer: a segmented drill-worm that tunnels ahead of the dig crews and lights its own way with red lamps. Its work clock rolled over in the year two thousand and read the date as nineteen hundred, so every survey on its list is a century overdue and it will not stop for anything until they are done. The miners call them millennium bugs. Anything warm that stands on its survey line is rock to be cut.",
+  "verbs": [
+    "TUNNEL",
+    "ERUPT",
+    "SHEAR",
+    "SURGE",
+    "DIG AGAIN"
+  ],
+  "rules": [
+    "Step back from it and it digs: a red ring cracks open under your feet. Move before it fills; it comes up there.",
+    "While it is under the rock your blows barely reach it: hit it when it comes up.",
+    "Close in, its head rears up and back before the shear jaws snap: a short red arc in front of it. Then it backs off to dig again.",
+    "When its lamps stutter and a blue ring fills around it, step out: the surge jams your suit for a moment."
+  ],
+  "perception": {
+    "aggro_radius": 9.0,
+    "memory_seconds": 6.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      2.0
+    ],
+    "leash_radius": 20.0,
+    "lure": "burrowing",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "tunnel_strike",
+      "name": "Tunnel Strike",
+      "shape": "burrow",
+      "damage": 22,
+      "windup": 1.6,
+      "radius": 2.4,
+      "damage_scale": 0.25,
+      "cooldown": 10.0,
+      "min_range": 4.5,
+      "trigger_range": 13.0,
+      "recovery": 1.0
+    },
+    {
+      "id": "shear_jaws",
+      "name": "Shear Jaws",
+      "shape": "bite",
+      "damage": 17,
+      "windup": 0.6,
+      "reach": 2.4,
+      "half_angle": 45.0,
+      "cooldown": 5.0,
+      "trigger_range": 2.4,
+      "recovery": 0.4,
+      "retreat": 1.2
+    },
+    {
+      "id": "fault_surge",
+      "name": "Fault Surge",
+      "shape": "circle",
+      "damage": 12,
+      "windup": 0.9,
+      "radius": 3.0,
+      "reach": 0.0,
+      "cooldown": 9.0,
+      "trigger_range": 2.6,
+      "recovery": 0.7,
+      "slow": 0.7,
+      "slow_seconds": 1.5,
+      "target": "position",
+      "fx": "tech"
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.scrap_component",
+      "quantity": [
+        1,
+        3
+      ],
+      "chance": 0.6
+    },
+    {
+      "item": "item.ore.magnetite",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.35
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.12
+    },
+    {
+      "item": "item.component.servo_core",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.08
+    },
+    {
+      "item": "item.battery.provisional_relay_cell",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.06
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/rustbound/millennium_bug.glb",
+    "size": 3.4,
+    "gait": "slither",
+    "yaw": 180,
+    "mouth": [
+      -0.4,
+      1.1,
+      -0.35
+    ],
+    "gait_body": {
+      "pattern": "worm",
+      "waves": 1.2,
+      "sway": 0.15,
+      "heave": 0.05,
+      "head": 0.22,
+      "rear": 0.6,
+      "cycle": 1.4
+    },
+    "glow": {
+      "color": "ff5a3c",
+      "energy": 0.6,
+      "range": 3.0,
+      "height": 1.0
+    },
+    "dust": "cfc6b4"
+  }
+}

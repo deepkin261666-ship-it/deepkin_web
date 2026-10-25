@@ -18,7 +18,7 @@
     10,
     25
   ],
-  "habitat": "The Shallows \u2014 the east chamber at the end of the cave, guarding the way down to Excavation C-3",
+  "habitat": "The Shallows \u2014 the east chamber at the end of the cave, guarding the way down to the Deep Survey",
   "lore": "A Crawler that never stopped growing. Its hide has mineralised into plates; the green glands still glow under them.",
   "verbs": [
     "LUMBER",
@@ -29,7 +29,7 @@
     "GUARD"
   ],
   "rules": [
-    "The end of the Shallows belongs to it: it waits in the east chamber in front of the way down to C-3.",
+    "The end of the Shallows belongs to it: it waits in the east chamber in front of the way down to the Deep Survey.",
     "Keep your distance and it charges: a red lane lights up in front of it \u2014 step off the lane.",
     "Close in, it sweeps its claws across a wide arc, and before it slams it rears up while the ground glows red: step out of the ring.",
     "It will not leave its territory: pull it to the edge and it turns back."

@@ -2,7 +2,7 @@
   "id": "item.weapon.drift_pathfinder",
   "display_name": "Frontier Shotgun",
   "equipment_slot": "primary_weapon",
-  "description": "A one-handed scattergun for close, spreading fire.",
+  "description": "A one-handed scattergun for close, spreading fire: each shot also strikes up to two more enemies in a 30° cone behind and beside the target for 60% of the hit.",
   "visual_id": "visual.weapon.drift_pathfinder",
   "weapon_type": "ranged",
   "weapon_family": "skill.firearms",
@@ -12,11 +12,14 @@
   "properties": {
     "armor_defense": 0,
     "capacity_modifier": 0,
-    "base_damage": 14,
+    "base_damage": 16,
     "attack_range": 7.0,
     "battery_capacity": 0,
     "illumination_radius": 0.0,
-    "attack_interval": 1.1
+    "attack_interval": 1.1,
+    "spread_targets": 2,
+    "spread_damage": 0.6,
+    "spread_half_angle": 15.0
   },
   "weight": 3.0
 }

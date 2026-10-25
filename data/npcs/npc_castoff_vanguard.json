@@ -134,6 +134,7 @@
         1
       ],
       "chance": 0.15
-    }
+    },
+    {"item": "item.weapon.foundry_headsman_saw", "quantity": [1, 1], "chance": 0.04}
   ]
 }

@@ -11,7 +11,7 @@
   "properties": {
     "armor_defense": 0,
     "capacity_modifier": 0,
-    "base_damage": 16,
+    "base_damage": 17,
     "attack_range": 2.4,
     "battery_capacity": 0,
     "illumination_radius": 0.0,

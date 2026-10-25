@@ -12,7 +12,7 @@
     "technology": 8
    },
    "combat_coefficients": {
-    "melee": 1.2,
+    "melee": 1.05,
     "ranged": 0.6,
     "ability": 1.0,
     "defense": 1.4
@@ -47,6 +47,7 @@
     "skill.shielding": 1.4,
     "skill.firearms": 0.6
    },
+   "starting_shield": "item.shield.sentinel",
    "starter_weapons": [
     "item.weapon.foundry_ironbound_mace",
     "item.weapon.foundry_scrapblade",
@@ -79,7 +80,7 @@
    "ability_name": "Long Shot",
    "passive_id": "passive.trailblazer",
    "passive_name": "Trailblazer",
-   "passive_description": "Hitting a target you hit in the last 4 s adds +2 damage.",
+   "passive_description": "Hitting a target you hit in the last 4 s deals 8% more damage.",
    "visual_color": "3aa8e0",
    "variants": [
     {

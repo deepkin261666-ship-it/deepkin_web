@@ -228,46 +228,16 @@
     } else { run(); }
   });
 
-  // Arsenal: filtros y orden.
-  var filters = $(".filters");
-  if (filters) {
-    var grid = $(filters.getAttribute("data-target"));
-    var cards = $$(".wcard", grid);
-    var original = cards.slice();
-    var rows = $$("#wtable tbody tr");
-    var chips = $$(".fchip", filters);
-    chips.forEach(function (chip) {
-      chip.addEventListener("click", function () {
-        chips.forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
-        chip.setAttribute("aria-pressed", "true");
-        var f = chip.getAttribute("data-filter");
-        var match = function (el) {
-          if (f === "all") return true;
-          var p = f.split(":");
-          return el.getAttribute("data-" + p[0]) === p[1];
-        };
-        cards.forEach(function (c) { c.hidden = !match(c); });
-        rows.forEach(function (r) { r.hidden = !match(r); });
-      });
-    });
-    var sel = $("[data-sort-select]", filters);
-    if (sel) sel.addEventListener("change", function () {
-      var k = sel.value;
-      var list = original.slice();
-      if (k !== "default") {
-        list.sort(function (a, b) {
-          if (k === "name") return a.dataset.name.localeCompare(b.dataset.name);
-          var av = parseFloat(a.dataset[k]), bv = parseFloat(b.dataset[k]);
-          return k === "speed" ? av - bv : bv - av;
-        });
-      }
-      list.forEach(function (c) { grid.appendChild(c); });
-    });
-  }
-
-  // Tablas ordenables.
+  // Tablas ordenables. Una celda con data-v ordena por ese valor (numeros con coma, "—" y textos con iconos);
+  // las filas de grupo (tr.grp) se ocultan mientras la tabla esta ordenada por una columna.
   $$("table.sortable").forEach(function (table) {
     var ths = $$("thead th", table);
+    var key = function (cell, num) {
+      var v = cell.hasAttribute("data-v") ? cell.getAttribute("data-v") : cell.textContent.trim();
+      if (!num) return v.toLowerCase();
+      var f = parseFloat(String(v).replace(/\s/g, "").replace(",", "."));
+      return isNaN(f) ? null : f;
+    };
     ths.forEach(function (th, idx) {
       if (!th.hasAttribute("data-sort")) return;
       th.tabIndex = 0;
@@ -275,11 +245,13 @@
         var asc = th.getAttribute("aria-sort") !== "ascending";
         ths.forEach(function (o) { o.removeAttribute("aria-sort"); });
         th.setAttribute("aria-sort", asc ? "ascending" : "descending");
+        table.classList.add("is-sorted");
         var num = th.getAttribute("data-sort") === "num";
         var body = table.tBodies[0];
-        $$("tr", body).sort(function (a, b) {
-          var x = a.cells[idx].textContent.trim(), y = b.cells[idx].textContent.trim();
-          var r = num ? parseFloat(x.replace(",", ".")) - parseFloat(y.replace(",", ".")) : x.localeCompare(y);
+        $$("tr", body).filter(function (tr) { return !tr.classList.contains("grp") && tr.cells[idx]; }).sort(function (a, b) {
+          var x = key(a.cells[idx], num), y = key(b.cells[idx], num);
+          if (x === null || y === null) return x === y ? 0 : (x === null ? 1 : -1);
+          var r = num ? x - y : x.localeCompare(y);
           return asc ? r : -r;
         }).forEach(function (tr) { body.appendChild(tr); });
       };
@@ -288,7 +260,32 @@
     });
   });
 
-  // Calculadora de daño (mismas formulas que shared/gameplay/rpg_rules.gd).
+  // Objetos: filtro rapido sobre todas las tablas (nombre, id, habilidad, ranura...). Oculta secciones sin coincidencias.
+  var iq = $("#items-q");
+  if (iq) {
+    var secs = $$("[data-isec]"), outN = $("#items-n");
+    var esI = document.documentElement.lang === "es";
+    var runQ = function () {
+      var q = iq.value.trim().toLowerCase(), total = 0;
+      secs.forEach(function (sec) {
+        var shown = 0, all = !!q && (sec.getAttribute("data-k") || "").indexOf(q) > -1;
+        $$("tbody tr", sec).forEach(function (tr) {
+          if (tr.classList.contains("grp")) { tr.hidden = !!q && !all; return; }
+          var ok = !q || all || (tr.getAttribute("data-q") || "").indexOf(q) > -1 || tr.textContent.toLowerCase().indexOf(q) > -1;
+          tr.hidden = !ok;
+          if (ok) shown++;
+        });
+        sec.hidden = !!q && !shown;
+        total += shown;
+      });
+      if (outN) outN.textContent = q ? total + (esI ? (total === 1 ? " objeto" : " objetos") : (total === 1 ? " item" : " items")) : "";
+    };
+    iq.addEventListener("input", runQ);
+    if (iq.value) runQ();
+  }
+
+  // Calculadora de daño (mismas formulas que el servidor: RpgRules.outgoing_damage y los rasgos en porcentaje de
+  // WeaponSkills; src/combat_math.py). Muestra el golpe en regimen y el DPS sostenido, veneno incluido.
   var dataEl = $("#calc-data");
   if (dataEl) {
     var D = JSON.parse(dataEl.textContent);
@@ -297,31 +294,56 @@
     var el = { cls: $("#c-class"), w: $("#c-weapon"), ammo: $("#c-ammo"), skill: $("#c-skill"), lvl: $("#c-lvl"),
       skillO: $("#c-skill-o"), lvlO: $("#c-lvl-o"), hit: $("#c-hit"), dps: $("#c-dps"), pow: $("#c-pow"), powL: $("#c-pow-l"), note: $("#c-note") };
     var byId = function (arr, id) { for (var i = 0; i < arr.length; i++) if (arr[i].id === id) return arr[i]; };
-    var statMult = function (v) { return Math.min(1.25, Math.max(0.75, 1 + (v - 10) * 0.015)); };
+    var statMult = function (v) { return Math.min(1.25, Math.max(0.75, 1 + (v - 10) * D.statStep)); };
     var powLabel = el.powL.textContent;
+    var ammoOpts = $$("option", el.ammo);
+    var lastW = null;
+    function syncAmmo(w) {
+      // Solo la municion de la familia del arma; por defecto la suya.
+      var any = false;
+      ammoOpts.forEach(function (o) {
+        var a = byId(D.ammo, o.value), ok = !!w.ammoFamily && a.family === w.ammoFamily;
+        o.hidden = !ok; o.disabled = !ok; any = any || ok;
+      });
+      el.ammo.disabled = !any;
+      if (any) el.ammo.value = w.ammoId; else el.ammo.selectedIndex = -1;
+    }
     function calc() {
       var c = byId(D.classes, el.cls.value), w = byId(D.weapons, el.w.value);
+      if (w !== lastW) { syncAmmo(w); lastW = w; }
       var skill = +el.skill.value, lvl = +el.lvl.value;
       el.skillO.textContent = skill; el.lvlO.textContent = lvl;
-      el.ammo.disabled = !w.ammo;
-      var ammo = w.ammo ? parseFloat(el.ammo.value) : 1;
+      var a = w.ammoFamily ? byId(D.ammo, el.ammo.value) : null;
+      var ammo = a ? a.mult : 1, poison = a ? a.poison : 0;
       var attr = w.type === "melee" ? "might" : "precision";
       var coef = c.coef[w.type] || 1;
-      var factor = 1 + 0.01 * (skill - 1) + 0.006 * (lvl - 1);
+      var factor = 1 + D.skillStep * (skill - 1) + D.levelStep * (lvl - 1);
       var raw = w.base * coef * statMult(c.attributes[attr]) * ammo * factor;
-      var hit = Math.max(1, Math.round(raw));
-      el.hit.textContent = hit;
-      el.dps.textContent = fmt(hit / w.interval, 1);
-      el.pow.textContent = c.powerMult > 1 ? Math.round(raw * c.powerMult) : "—";
+      var tb = c.id === "class.drift" ? D.trailblazer : 0;
+      var hitOf = function (bonus, mult) { return Math.max(1, Math.round(raw * (mult || 1) * (1 + bonus))); };
+      var sustained, avg, bonus;
+      if (w.ambush) {
+        var amb = hitOf(D.ambushPct + tb), plain = hitOf(tb);
+        sustained = amb; bonus = D.ambushPct + tb;
+        avg = D.ambushUptime * amb + (1 - D.ambushUptime) * plain;
+      } else {
+        bonus = w.trait + tb; sustained = hitOf(bonus); avg = sustained;
+      }
+      el.hit.textContent = sustained;
+      el.dps.textContent = fmt(avg / w.interval + poison, 1);
+      el.pow.textContent = c.powerMult > 1 ? hitOf(bonus, c.powerMult) : "—";
       el.powL.textContent = c.power + (c.powerMult > 1 ? " ×" + fmt(c.powerMult, 1).replace(/[.,]0$/, "") : "") + " · " + powLabel;
-      el.note.textContent = (es ? "Base " : "Base ") + w.base + " × " + (es ? "coef. " : "coef. ") + fmt(coef, 2) + " (" + (w.type === "melee" ? (es ? "cuerpo a cuerpo" : "melee") : (es ? "a distancia" : "ranged")) + ")" +
+      el.note.textContent = "Base " + w.base + " × " + "coef. " + fmt(coef, 2) + " (" + (w.type === "melee" ? (es ? "cuerpo a cuerpo" : "melee") : (es ? "a distancia" : "ranged")) + ")" +
         " × " + fmt(statMult(c.attributes[attr]), 3) + " (" + (D.attrNames[attr] || attr) + " " + c.attributes[attr] + ")" +
-        (w.ammo ? " × " + fmt(ammo, 2) + (es ? " (munición)" : " (ammo)") : "") +
-        " × " + fmt(factor, 3) + (es ? " (habilidad y nivel)" : " (skill & level)") + " · " + w.family;
+        (a ? " × " + fmt(ammo, 2) + (es ? " (munición)" : " (ammo)") : "") +
+        " × " + fmt(factor, 3) + (es ? " (habilidad y nivel)" : " (skill & level)") +
+        (bonus ? " × " + fmt(1 + bonus, 2) + (es ? " (rasgo" : " (trait") + (tb ? " + Trailblazer" : "") + ")" : "") +
+        " · " + (es ? "apertura " : "opening ") + hitOf(w.opening) +
+        (w.ambush ? (es ? " · Emboscada en la mitad de los golpes" : " · Ambush on half the hits") : "") +
+        (poison ? (es ? " · veneno " : " · poison ") + poison + "/s" : "") + " · " + w.family;
       el.hit.parentNode.style.setProperty("--c", c.color);
     }
     ["cls", "w", "ammo", "skill", "lvl"].forEach(function (k) { el[k].addEventListener("input", calc); el[k].addEventListener("change", calc); });
-    // Arma inicial segun la clase elegida, para que el primer resultado tenga sentido.
     calc();
   }
 })();

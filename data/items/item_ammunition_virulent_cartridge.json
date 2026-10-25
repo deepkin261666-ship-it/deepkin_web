@@ -5,7 +5,7 @@
   "ammo_family": "spores",
   "properties": {
     "ammo_multiplier": 0.9,
-    "poison_per_second": 3,
+    "poison_per_second": 4,
     "poison_seconds": 6.0,
     "stack_size": 100
   },

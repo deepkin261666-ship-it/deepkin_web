@@ -507,7 +507,7 @@
     },
     {
       "id": "zone.excavation_c3",
-      "name": "Excavation C-3",
+      "name": "The Deep Survey",
       "kind": "dungeon",
       "biome": "caves",
       "layer": "underground",
@@ -518,6 +518,147 @@
       "danger": "medium",
       "status": "playable",
       "region": "region.starting_region",
+      "stack": {
+        "parent": "zone.shallows",
+        "depth": 1,
+        "marker": [
+          0.43,
+          0.335
+        ]
+      },
+      "marker": [
+        0.43,
+        0.335
+      ],
+      "summary": {
+        "en": "VDI's old survey workings east of the Shallows, held by ex-VDI site guards. Floor one is open; drilling through the Deep Seal at its east end opens the survey shaft down to floors two and three.",
+        "es": "Las viejas galerías de relevamiento de VDI al este de The Shallows, custodiadas por ex guardias de VDI. El piso uno está abierto; perforar el Deep Seal en su extremo este abre el pozo de relevamiento hacia los pisos dos y tres."
+      },
+      "subtitle": {
+        "en": "3 floors",
+        "es": "3 pisos"
+      },
+      "floors": 3,
+      "size_m": [
+        52,
+        36
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.excavation_c3"
+      },
+      "connections": [
+        "conn.shallows_c3",
+        "conn.c3_f2"
+      ],
+      "label": [
+        0.43,
+        0.335
+      ]
+    },
+    {
+      "id": "zone.excavation_c3_f2",
+      "name": "The Deep Survey · Floor 2",
+      "kind": "dungeon",
+      "biome": "caves",
+      "layer": "underground",
+      "depth_m": 340,
+      "level": -3,
+      "level_label": "FLOOR 2",
+      "tier": 3,
+      "danger": "high",
+      "status": "playable",
+      "region": "region.starting_region",
+      "stack": {
+        "parent": "zone.excavation_c3",
+        "depth": 2,
+        "marker": [
+          0.43,
+          0.335
+        ]
+      },
+      "summary": {
+        "en": "Below the Deep Seal: The Dark Stratum, a basalt cavern 340 m down. The shaft's lift cage (back to floor one) stands at the shaft foot; down-screen of it the abandoned Survey Camp 4 (tents, crates, a dead generator, one lantern left on). The stratum hall beyond has a thermal vent in a side niche, a soft-rock seam to drill, a scavenger and ferrous samples; a rail drift runs east to the stair pit down to floor three.",
+        "es": "Debajo del Deep Seal: The Dark Stratum, una caverna de basalto a 340 m. La jaula del ascensor (vuelta al piso uno) está al pie del pozo; al lado, el Campamento de Relevamiento 4 abandonado (carpas, cajones, un generador muerto, un farol que quedó prendido). La sala del estrato tiene un respiradero térmico en un nicho, una veta de roca blanda para perforar, un carroñero y muestras ferrosas; un socavón con rieles lleva al este, a la escalera que baja al piso tres."
+      },
+      "subtitle": {
+        "en": "The Dark Stratum",
+        "es": "The Dark Stratum"
+      },
+      "size_m": [
+        43,
+        38
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.excavation_c3_f2"
+      },
+      "reuses": "Phase 11 The Dark Stratum (data/handcrafted_expedition.json before 2026-10-10)",
+      "connections": [
+        "conn.c3_f2",
+        "conn.c3_f2_f3"
+      ]
+    },
+    {
+      "id": "zone.excavation_c3_f3",
+      "name": "The Deep Survey · Floor 3",
+      "kind": "dungeon",
+      "biome": "anomaly",
+      "layer": "underground",
+      "depth_m": 520,
+      "level": -4,
+      "level_label": "FLOOR 3",
+      "tier": 4,
+      "danger": "high",
+      "status": "playable",
+      "region": "region.starting_region",
+      "stack": {
+        "parent": "zone.excavation_c3",
+        "depth": 3,
+        "marker": [
+          0.43,
+          0.335
+        ]
+      },
+      "summary": {
+        "en": "The bottom of the old survey: The Relic Chamber, 520 m down. From the foot of the stairs (up to floor two) the rock turns into old cut stone; past a fallen colonnade stands the Relic Vault, its front wall collapsed: the relic relay on its dais, the relic fragment on a pedestal, the survey team's last document case, a scavenger at the door. The extraction lift takes you straight up to the Deep Survey's floor one; the west drift toward the Abyss is collapsed and sealed.",
+        "es": "El fondo del viejo relevamiento: The Relic Chamber, a 520 m. Desde el pie de la escalera (sube al piso dos) la roca se vuelve piedra tallada antigua; pasando una columnata caída está la Bóveda de la Reliquia, con el frente derrumbado: el relé de reliquias en su estrado, el fragmento de reliquia sobre un pedestal, el último maletín de documentos del equipo de relevamiento y un carroñero en la puerta. El ascensor de extracción sube directo al piso uno de The Deep Survey; el socavón oeste hacia el Abismo está derrumbado y sellado."
+      },
+      "subtitle": {
+        "en": "The Relic Chamber",
+        "es": "The Relic Chamber"
+      },
+      "size_m": [
+        50,
+        36
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.excavation_c3_f3"
+      },
+      "reuses": "Phase 11 The Relic Chamber (data/handcrafted_expedition.json before 2026-10-10)",
+      "connections": [
+        "conn.c3_f2_f3",
+        "conn.abyss_c3_f3"
+      ],
+      "extraction": {
+        "zone": "zone.excavation_c3",
+        "exit": "EXTRACTION LIFT · DEEP SURVEY FLOOR 1",
+        "transition": 246
+      }
+    },
+    {
+      "id": "zone.c3_site",
+      "name": "Excavation C-3",
+      "kind": "wild",
+      "biome": "desert",
+      "layer": "surface",
+      "depth_m": 0,
+      "level": 0,
+      "tier": 3,
+      "danger": "high",
+      "status": "planned",
+      "region": "region.frontier",
       "cell": {
         "seed": [
           0.37,
@@ -552,126 +693,19 @@
         ]
       },
       "marker": [
-        0.362,
-        0.645
+        0.361,
+        0.666
       ],
       "summary": {
-        "en": "An active, guarded dig at the bottom of the shaft. Floor one is open; drilling through the Deep Seal at its east end opens the deep survey shaft down to floors two and three.",
-        "es": "Una excavación activa y custodiada al fondo del pozo. El piso uno está abierto; perforar el Deep Seal en su extremo este abre el pozo de relevamiento hacia los pisos dos y tres."
-      },
-      "subtitle": {
-        "en": "3 floors",
-        "es": "3 pisos"
-      },
-      "floors": 3,
-      "size_m": [
-        52,
-        36
-      ],
-      "game": {
-        "file": "data/starting_region.json",
-        "zone_id": "zone.excavation_c3"
+        "en": "Vantage Deep Industries' Contract Site 3: an open-cast spiral pit cut down to a bore head, its blue work lights still burning. Planned.",
+        "es": "El Sitio Contratado 3 de Vantage Deep Industries: una cantera en espiral a cielo abierto excavada hasta un cabezal de perforación, con sus luces de trabajo azules todavía encendidas. Planificado."
       },
       "art_icon": true,
-      "connections": [
-        "conn.shallows_c3",
-        "conn.c3_f2"
-      ],
+      "connections": [],
       "label": [
         0.362,
-        0.675
+        0.69
       ]
-    },
-    {
-      "id": "zone.excavation_c3_f2",
-      "name": "C-3 · Floor 2",
-      "kind": "dungeon",
-      "biome": "caves",
-      "layer": "underground",
-      "depth_m": 340,
-      "level": -3,
-      "level_label": "FLOOR 2",
-      "tier": 3,
-      "danger": "high",
-      "status": "playable",
-      "region": "region.starting_region",
-      "stack": {
-        "parent": "zone.excavation_c3",
-        "depth": 2,
-        "marker": [
-          0.362,
-          0.668
-        ]
-      },
-      "summary": {
-        "en": "Below the Deep Seal: The Dark Stratum (the Phase 11 floor two), narrow and dark, with a thermal vent, a soft-rock face to drill, a scavenger and ferrous samples. The shaft's lift cage climbs back to floor one; a stair pit drops to floor three.",
-        "es": "Debajo del Deep Seal: The Dark Stratum (el piso dos de la Fase 11), angosto y oscuro, con un respiradero térmico, una cara de roca blanda para perforar, un carroñero y muestras ferrosas. La jaula del ascensor sube al piso uno; una escalera baja al piso tres."
-      },
-      "subtitle": {
-        "en": "The Dark Stratum",
-        "es": "The Dark Stratum"
-      },
-      "size_m": [
-        30,
-        24
-      ],
-      "game": {
-        "file": "data/starting_region.json",
-        "zone_id": "zone.excavation_c3_f2"
-      },
-      "reuses": "Phase 11 The Dark Stratum (data/handcrafted_expedition.json before 2026-10-10)",
-      "connections": [
-        "conn.c3_f2",
-        "conn.c3_f2_f3"
-      ]
-    },
-    {
-      "id": "zone.excavation_c3_f3",
-      "name": "C-3 · Floor 3",
-      "kind": "dungeon",
-      "biome": "anomaly",
-      "layer": "underground",
-      "depth_m": 520,
-      "level": -4,
-      "level_label": "FLOOR 3",
-      "tier": 4,
-      "danger": "high",
-      "status": "playable",
-      "region": "region.starting_region",
-      "stack": {
-        "parent": "zone.excavation_c3",
-        "depth": 3,
-        "marker": [
-          0.362,
-          0.668
-        ]
-      },
-      "summary": {
-        "en": "The bottom of the old survey: The Relic Chamber (the Phase 11 floor three), its relic relay and a relic fragment guarded by a scavenger. Stairs climb to floor two; the extraction lift takes you straight up to C-3 floor one, beside the Threshold lift.",
-        "es": "El fondo del viejo relevamiento: The Relic Chamber (el piso tres de la Fase 11), su relé de reliquias y un fragmento de reliquia custodiado por un carroñero. Una escalera sube al piso dos; el ascensor de extracción lleva directo al piso uno de C-3, junto al ascensor del Threshold."
-      },
-      "subtitle": {
-        "en": "The Relic Chamber",
-        "es": "The Relic Chamber"
-      },
-      "size_m": [
-        30,
-        24
-      ],
-      "game": {
-        "file": "data/starting_region.json",
-        "zone_id": "zone.excavation_c3_f3"
-      },
-      "reuses": "Phase 11 The Relic Chamber (data/handcrafted_expedition.json before 2026-10-10)",
-      "connections": [
-        "conn.c3_f2_f3",
-        "conn.abyss_c3_f3"
-      ],
-      "extraction": {
-        "zone": "zone.excavation_c3",
-        "exit": "EXTRACTION LIFT · C-3 FLOOR 1",
-        "transition": 246
-      }
     },
     {
       "id": "zone.surface_scarp",
@@ -921,7 +955,8 @@
         "conn.frontier_east_dustline",
         "conn.sump_frontier_east",
         "conn.frontier_east_dragon_lair",
-        "conn.frontier_east_castoff_hideout"
+        "conn.frontier_east_castoff_hideout",
+        "conn.frontier_east_salt_pit"
       ],
       "game": {
         "file": "data/starting_region.json",
@@ -2316,7 +2351,7 @@
       "level": 0,
       "tier": 2,
       "danger": "medium",
-      "status": "planned",
+      "status": "playable",
       "region": "region.frontier",
       "cell": {
         "seed": [
@@ -2380,20 +2415,33 @@
         0.68
       ],
       "summary": {
-        "en": "An old open-cast salt and ore pit in the white flats south of Frontier Road: terraces of rust-red rock, wrecked trucks on the haul roads. Uncharted; name provisional.",
-        "es": "Una vieja cantera a cielo abierto de sal y mineral en los salares blancos al sur de Frontier Road: terrazas de roca rojiza, camiones destrozados en los caminos de acarreo. Sin cartografiar; nombre provisional."
+        "en": "PROVISIONAL. An old open-cast salt and ore pit in the white flats south of Frontier Road: terraces of rust-red rock, a haul road down to the floor 30 m below, wrecked trucks and a machine graveyard, Castoff salvage crews, Rustbound robots still working the crusher. A sealed adit on the floor leads down — not yet surveyed.",
+        "es": "PROVISIONAL. Una vieja cantera a cielo abierto de sal y mineral en los salares blancos al sur de Frontier Road: terrazas de roca rojiza, un camino de acarreo hasta el fondo 30 m más abajo, camiones destrozados y un cementerio de máquinas, cuadrillas de chatarreros Castoff, robots Rustbound que siguen trabajando la trituradora. Un socavón sellado en el fondo lleva hacia abajo — sin relevar."
       },
       "subtitle": {
-        "en": "Open-cast pit · provisional",
-        "es": "Cantera a cielo abierto · provisional"
+        "en": "Open-cast pit · 3 levels",
+        "es": "Cantera a cielo abierto · 3 niveles"
       },
       "connections": [
-        "conn.saltpan_salt_pit"
+        "conn.saltpan_salt_pit",
+        "conn.frontier_east_salt_pit"
       ],
       "label": [
         0.69,
         0.71
-      ]
+      ],
+      "size_m": [
+        214,
+        152
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.salt_pit",
+        "floors": [
+          "zone.salt_pit_terraces",
+          "zone.salt_pit_floor"
+        ]
+      }
     },
     {
       "id": "zone.robot_hideout_f1",
@@ -2592,7 +2640,7 @@
       "ends": [
         {
           "zone": "zone.shallows",
-          "exit": "EXCAVATION C-3",
+          "exit": "THE DEEP SURVEY",
           "edge": "E",
           "edge_fixed": true,
           "transition": 52
@@ -2763,7 +2811,7 @@
         },
         {
           "zone": "zone.excavation_c3_f2",
-          "exit": "LIFT · C-3 FLOOR 1",
+          "exit": "LIFT · DEEP SURVEY FLOOR 1",
           "edge": "UP",
           "edge_fixed": true,
           "transition": 245
@@ -3224,7 +3272,7 @@
       "ends": [
         {
           "zone": "zone.the_abyss",
-          "exit": "EAST · C-3 DEEP WORKINGS",
+          "exit": "EAST · THE DEEP SURVEY",
           "edge": "E",
           "edge_fixed": true
         },
@@ -3260,22 +3308,47 @@
     {
       "id": "conn.saltpan_salt_pit",
       "kind": "road",
-      "status": "planned",
+      "status": "playable",
       "ends": [
         {
           "zone": "zone.surface_saltpan",
           "exit": "SOUTH · THE SALT PIT",
-          "edge": "SW"
+          "edge": "SW",
+          "transition": 900
         },
         {
           "zone": "zone.salt_pit",
           "exit": "NORTH · THE SALTPAN",
-          "edge": "NW"
+          "edge": "NW",
+          "transition": 901
         }
       ],
       "exit_at": [
         0.5767,
         0.577
+      ]
+    },
+    {
+      "id": "conn.frontier_east_salt_pit",
+      "kind": "road",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.frontier_road_east",
+          "exit": "SOUTH · THE SALT PIT",
+          "edge": "S",
+          "transition": 902
+        },
+        {
+          "zone": "zone.salt_pit",
+          "exit": "NORTH · FRONTIER ROAD",
+          "edge": "NE",
+          "transition": 903
+        }
+      ],
+      "exit_at": [
+        0.7125,
+        0.6415
       ]
     },
     {

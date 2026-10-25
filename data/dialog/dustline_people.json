@@ -224,6 +224,26 @@
         "That one on the wall? First bike I ever fixed. It doesn't run. Neither did I, back then.",
         "Every bike I sell comes back on the hook sooner or later. I make money both ways."
       ]
+    },
+    "npc.dustline_alley_lounger": {
+      "name": "TOBE  ·  ALLEY REGULAR",
+      "lines": [
+        "This crate's taken. So's the shade. Everything here's taken, friend, that's how the Exchange likes it.",
+        "Caravans come in, caravans go out. I just count them. Nobody pays me for it, so it's honest work.",
+        "Wall keeps the wind off and the guards away. Best rent in Dustline: none.",
+        "You want the yard? Round the stacks. You want trouble? Stand there a bit longer.",
+        "Saw a man sell his own boots at the gate once. Walked back out barefoot, whistling. Everything has a price."
+      ]
+    },
+    "npc.dustline_stove_keeper": {
+      "name": "MAREK  ·  STOVE KEEPER",
+      "lines": [
+        "Fire's free. The warm costs you a story. Bad ones are worth more.",
+        "Burn scrap wood, burn old boots, burn the Exchange's notices. Burns the same.",
+        "Warrens are shut by order. Funny how the order never says until when.",
+        "Don't stand downwind of the stove unless you like breathing what we cook.",
+        "Every night someone asks if I've seen their brother. Every night I say no. Most nights it's true."
+      ]
     }
   }
 }

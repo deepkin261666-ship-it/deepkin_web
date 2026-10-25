@@ -10,8 +10,8 @@ NAV = [
     ("index", L("Home", "Inicio")),
     ("story", L("Story", "Historia")),
     ("classes", L("Classes", "Clases")),
-    ("arsenal", L("Arsenal", "Arsenal")),
-    ("gear", L("Gear", "Equipo")),
+    # Arsenal y Equipo unificados en una sola pagina de objetos con tablas (2026-10-24).
+    ("items", L("Items", "Objetos")),
     ("resources", L("Resources", "Recursos")),
     ("bestiary", L("Bestiary", "Bestiario")),
     ("world", L("World", "Mundo")),
@@ -140,16 +140,44 @@ FAMILIES = {
     "skill.spores": L("Spores", "Esporas"), "skill.vitalism": L("Vitalism", "Vitalismo"), "skill.tech": L("Tech", "Tecnología"),
     "skill.shielding": L("Shielding", "Escudos"),
 }
-FAMILY_DESC = {
-    "skill.edge": L("Swords and axes. Chained hits build Heat: +2, +4, +6 damage within 3 s.", "Espadas y hachas. Los golpes encadenados acumulan Calor: +2, +4, +6 de daño en 3 s."),
-    "skill.blunt": L("Hammers and maces. Slow, heavy blows. Later: staggering and breaking armour and rock.", "Martillos y mazas. Golpes lentos y pesados. Más adelante: desestabilizar y romper armadura y roca."),
-    "skill.blades": L("Knives and daggers. Ambush: +4 damage after moving 2 m since your last hit. Later: silent takedowns.", "Cuchillos y dagas. Emboscada: +4 de daño si te moviste 2 m desde tu último golpe. Más adelante: eliminaciones silenciosas."),
-    "skill.firearms": L("Shotguns, carbines and rifles. Steady fire at mid range.", "Escopetas, carabinas y rifles. Fuego sostenido a media distancia."),
-    "skill.precision": L("Precision rifles. +3 damage on targets 6 m or more away. Later: weak points.", "Rifles de precisión. +3 de daño a blancos a 6 m o más. Más adelante: puntos débiles."),
-    "skill.spores": L("Spore projectors. With one in hand, Bloom poisons enemies instead of healing.", "Proyectores de esporas. Con uno en la mano, Bloom envenena en vez de curar."),
-    "skill.vitalism": L("Living weapons that grow with their bearer. Later: stronger healing.", "Armas vivas que crecen con quien las lleva. Más adelante: curación más fuerte."),
-    "skill.tech": L("Energy weapons and field electronics. Later: hacking terminals, doors, turrets and drones.", "Armas de energía y electrónica de campo. Más adelante: hackear terminales, puertas, torretas y drones."),
+FAMILY_DESC = {  # rasgos en porcentaje desde el pase de balance del 2026-10-24 (WeaponSkills.DESCRIPTIONS del juego)
+    "skill.edge": L("Swords, axes and chainsaws. Heat: chained hits within 3 s deal +5 / +10 / +15% damage (a running chainsaw starts at +15%).",
+                    "Espadas, hachas y motosierras. Calor: los golpes encadenados dentro de 3 s hacen +5 / +10 / +15% de daño (una motosierra en marcha arranca en +15%)."),
+    "skill.blunt": L("Hammers and maces. Stagger: a blow delays the enemy's next attack. Crush: extra damage against elites and bosses.",
+                     "Martillos y mazas. Desestabilizar: un golpe retrasa el próximo ataque del enemigo. Aplastar: daño extra contra élites y jefes."),
+    "skill.blades": L("Knives and daggers. Ambush: +30% damage after moving 2 m since your last hit; finishing blows on wounded humanoids.",
+                      "Cuchillos y dagas. Emboscada: +30% de daño si te moviste 2 m desde tu último golpe; remates a humanoides heridos."),
+    "skill.firearms": L("Shotguns, carbines and rifles. Suppression: each consecutive hit on the same target within 2 s adds +5% damage, up to +15%.",
+                        "Escopetas, carabinas y rifles. Supresión: cada golpe seguido al mismo blanco dentro de 2 s suma +5% de daño, hasta +15%."),
+    "skill.precision": L("Precision rifles. +15% damage on targets 6 m or more away. Later: weak points.",
+                         "Rifles de precisión. +15% de daño a blancos a 6 m o más. Más adelante: puntos débiles."),
+    "skill.spores": L("Spore projectors. Spore cartridges poison what they hit; with one in hand, Bloom poisons enemies instead of healing.",
+                      "Proyectores de esporas. Los cartuchos de esporas envenenan lo que tocan; con uno en la mano, Bloom envenena en vez de curar."),
+    "skill.vitalism": L("Living weapons that fire synapse darts: they wound enemies and heal the operators they strike. Later: stronger healing.",
+                        "Armas vivas que disparan dardos sinápticos: hieren enemigos y curan a los operadores que tocan. Más adelante: curación más fuerte."),
+    "skill.tech": L("Energy weapons and field electronics. Each shot draws from the worn cell. Overcharge: +15% damage while the cell is above half.",
+                    "Armas de energía y electrónica de campo. Cada disparo gasta de la celda equipada. Sobrecarga: +15% de daño mientras la celda está por encima de la mitad."),
     "skill.shielding": L("Trained by taking hits with a shield up: 8% less damage, up to 40%. Later: active block and parry.", "Se entrena recibiendo golpes con un escudo: 8% menos daño, hasta 40%. Más adelante: bloqueo activo y parada."),
+}
+
+# Rasgos y especiales de cada arma (tablas de Objetos y fichas del wiki; numeros desde src/combat_math.py).
+TRAITS = {
+    "heat": L("Heat +{a} / {b} / {c}% on chained hits", "Calor +{a} / {b} / {c}% en golpes encadenados"),
+    "revved": L("Revved: full Heat +{c}% from the first cut", "Acelerada: Calor completo +{c}% desde el primer corte"),
+    "ambush": L("Ambush +{p}% after moving {d} m", "Emboscada +{p}% tras moverte {d} m"),
+    "executions": L("finishes wounded humanoids", "remata humanoides heridos"),
+    "precision": L("+{p}% at {d} m or more", "+{p}% a {d} m o más"),
+    "suppression": L("Suppression +{s}% per hit on one target, up to +{m}%", "Supresión +{s}% por golpe al mismo blanco, hasta +{m}%"),
+    "overcharge": L("Overcharge +{p}% while the cell is above {f}%", "Sobrecarga +{p}% con la celda por encima del {f}%"),
+    "stagger": L("Stagger {s} s", "Desestabiliza {s} s"),
+    "crush": L("Crush +{p}% vs elites and bosses", "Aplasta +{p}% contra élites y jefes"),
+    "spread": L("also hits {n} more in a {a}° cone for {p}%", "también pega a {n} más en un cono de {a}° al {p}%"),
+    "poison": L("poison {p}/s", "veneno {p}/s"),
+    "heals": L("heals allies {h}", "cura aliados {h}"),
+    "free": L("nothing", "nada"),
+    "per_shot": L("{v} per shot", "{v} por disparo"),
+    "per_cut": L("{v} L of gas per cut", "{v} L de combustible por corte"),
+    "energy_shot": L("{v} energy per shot", "{v} de energía por disparo"),
 }
 
 ATTRS = {
@@ -183,7 +211,7 @@ CLASSES = {
         "motto": L("They find. They mark. They open the way.", "Descubren. Señalan. Abren caminos."),
         "role": L("Scout · ranged", "Explorador · a distancia"),
         "power_desc": L("Your next shot within 4 s deals ×2.5 damage with 50% more range.", "Tu próximo disparo dentro de 4 s hace ×2,5 de daño con 50% más de alcance."),
-        "passive_desc": L("Hitting a target you hit in the last 4 s adds +2 damage.", "Golpear a un blanco que golpeaste en los últimos 4 s suma +2 de daño."),
+        "passive_desc": L("Hitting a target you hit in the last 4 s deals +8% damage.", "Golpear a un blanco que golpeaste en los últimos 4 s hace +8% de daño."),
     },
     "class.verdant": {
         "title": L("The Living", "Lo Vivo"),
@@ -266,9 +294,9 @@ ITEM_EN_FALLBACK = {
 
 FOUND_IN = {
     "item.ore.limonite": L("Limonite seams in The Shallows and The Scarp", "Vetas de limonita en The Shallows y The Scarp"),
-    "item.ore.hematite": L("Hematite veins in The Shallows and Excavation C-3", "Vetas de hematita en The Shallows y Excavation C-3"),
-    "item.ore.magnetite": L("Magnetite lodes in Excavation C-3 and the Saltpan dig C-7", "Filones de magnetita en Excavation C-3 y la excavación C-7 del Saltpan"),
-    "item.mineral.lumenita": L("Lumenita clusters near The Keystone and in C-3", "Cúmulos de lumenita cerca de The Keystone y en C-3"),
+    "item.ore.hematite": L("Hematite veins in The Shallows and The Deep Survey", "Vetas de hematita en The Shallows y The Deep Survey"),
+    "item.ore.magnetite": L("Magnetite lodes in The Deep Survey and the Saltpan dig C-7", "Filones de magnetita en The Deep Survey y la excavación C-7 del Saltpan"),
+    "item.mineral.lumenita": L("Lumenita clusters near The Keystone and in The Deep Survey", "Cúmulos de lumenita cerca de The Keystone y en The Deep Survey"),
     "item.ferrous_sample": L("Loose on the floor of The Shallows", "Sueltas en el suelo de The Shallows"),
     "item.relic_fragment": L("Convoy salvage in The Saltpan", "Restos del convoy en The Saltpan"),
     "item.scrap_component": L("Dropped by every creature · convoy wrecks in The Saltpan and on Frontier Road", "Lo suelta toda criatura · restos de convoyes en The Saltpan y en Frontier Road"),
@@ -310,7 +338,7 @@ FACTION = {
 MOBS = {
     "npc.burrowborn_crawler": {
         "role": L("Swarm", "Enjambre"),
-        "habitat": L("The Shallows: the nest chamber before the way down to Excavation C-3.", "The Shallows: la cámara del nido antes de la bajada a Excavation C-3."),
+        "habitat": L("The Shallows: the nest chamber before the way down to The Deep Survey.", "The Shallows: la cámara del nido antes de la bajada a The Deep Survey."),
         "lore": L("Hand-sized at birth, dog-sized at a year. Crawlers feel footsteps through stone long before they see anything.",
                   "Del tamaño de una mano al nacer, de un perro al año. Los Crawlers sienten los pasos a través de la piedra mucho antes de ver algo."),
         "rules": L(["Weak alone, dangerous in numbers: pull them one at a time or kill them fast.",
@@ -344,9 +372,9 @@ MOBS = {
     "npc.excavation_enforcer": {
         "role": L("Guard", "Guardia"),
         "faction": L("Human", "Humanos"),
-        "habitat": L("Excavation C-3 — authorised personnel only.", "Excavation C-3: sólo personal autorizado."),
-        "lore": L("Hired muscle that keeps the C-3 ore face for whoever pays. More than twice as tough as a scavenger, and they hit almost as hard.",
-                  "Matones a sueldo que cuidan el frente de mineral de C-3 para quien pague. El doble de duros que un carroñero, y pegan casi el doble."),
+        "habitat": L("The Deep Survey — authorised personnel only.", "The Deep Survey: sólo personal autorizado."),
+        "lore": L("Hired muscle that keeps the Deep Survey's ore face for whoever pays. More than twice as tough as a scavenger, and they hit almost as hard.",
+                  "Matones a sueldo que cuidan el frente de mineral de The Deep Survey para quien pague. El doble de duros que un carroñero, y pegan casi el doble."),
         "rules": L(["Fight them where you have room to back off.", "They guard the Deep Seal; clear them before you drill."],
                    ["Peleá donde tengas espacio para retroceder.", "Custodian el Deep Seal: despejalos antes de perforar."]),
     },

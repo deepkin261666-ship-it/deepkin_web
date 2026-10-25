@@ -1,0 +1,200 @@
+{
+  "id": "npc.burrowborn_pit_wyrm",
+  "display_name": "Pit Wyrm",
+  "max_health": 1300,
+  "movement_speed": 2.0,
+  "detection_range": 18.0,
+  "attack_range": 3.0,
+  "attack_damage": 15,
+  "attack_cooldown": 1.6,
+  "faction": "faction.burrowborn",
+  "species": "Pit Wyrm",
+  "role": "boss",
+  "archetype": "burrower",
+  "tier": "boss",
+  "hunt_tier": 3,
+  "threat": 32,
+  "xp": 1000,
+  "coins": [
+    120,
+    240
+  ],
+  "body_radius": 1.4,
+  "habitat": "Sealed under the Salt Pit: the old adit at the bottom of the terraces (not placed yet; the adit stays sealed)",
+  "lore": "PROVISIONAL. The thing the miners sealed the adit on. A Burrowborn worm as long as a haul truck, its hide gone grey with brine; the Brine Scorpions on the flats are its brood's leftovers. It hunts by vibration and moves through salt as if it were water.",
+  "verbs": [
+    "BURROW",
+    "EMERGE",
+    "SWEEP",
+    "SPIT",
+    "GEYSER"
+  ],
+  "rules": [
+    "Keep your distance and it dives: the ground cracks in a red ring under your feet. Move before it fills: the Wyrm comes up there.",
+    "While it is under the salt your blows barely reach it.",
+    "At range it rears and spits brine along a green line: step off the line.",
+    "Up close its body sweeps a wide red arc.",
+    "Wounded to half, it rears and slams: brine geysers burst in red rings along its aim."
+  ],
+  "perception": {
+    "aggro_radius": 12.0,
+    "memory_seconds": 10.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      2.6
+    ],
+    "leash_radius": 24.0,
+    "lure": "territorial",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "brine_geyser",
+      "name": "Brine Geyser",
+      "shape": "barrage",
+      "damage": 24,
+      "windup": 1.8,
+      "radius": 2.2,
+      "ring": [
+        4.0,
+        8.0,
+        12.0
+      ],
+      "angles": [
+        -28.0,
+        0.0,
+        28.0
+      ],
+      "below_health": 0.5,
+      "cooldown": 12.0,
+      "trigger_range": 14.0,
+      "recovery": 1.0
+    },
+    {
+      "id": "burrow",
+      "name": "Burrow",
+      "shape": "burrow",
+      "damage": 30,
+      "windup": 2.0,
+      "radius": 3.0,
+      "damage_scale": 0.1,
+      "cooldown": 15.0,
+      "min_range": 6.0,
+      "trigger_range": 18.0,
+      "recovery": 1.4
+    },
+    {
+      "id": "brine_spit",
+      "name": "Brine Spit",
+      "shape": "line",
+      "damage": 18,
+      "damage_type": "acid",
+      "windup": 0.9,
+      "range": 13.0,
+      "width": 1.2,
+      "cooldown": 6.0,
+      "min_range": 3.5,
+      "trigger_range": 13.0,
+      "los": true,
+      "recovery": 0.5
+    },
+    {
+      "id": "tail_sweep",
+      "name": "Body Sweep",
+      "shape": "cone",
+      "damage": 20,
+      "windup": 0.7,
+      "radius": 4.4,
+      "half_angle": 75.0,
+      "cooldown": 5.0,
+      "trigger_range": 4.0,
+      "recovery": 0.6
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.mineral.lumenita",
+      "quantity": [
+        2,
+        3
+      ],
+      "chance": 1.0
+    },
+    {
+      "item": "item.ore.magnetite",
+      "quantity": [
+        2,
+        4
+      ],
+      "chance": 0.6
+    },
+    {
+      "item": "item.ore.hematite",
+      "quantity": [
+        2,
+        3
+      ],
+      "chance": 0.5
+    },
+    {
+      "item": "item.relic_fragment",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.35
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.5
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/burrowborn/pit_wyrm.glb",
+    "rig": "animated",
+    "size": 7.0,
+    "yaw": 180,
+    "roughness": 0.6,
+    "mouth": [
+      0.0,
+      3.6,
+      -1.1
+    ],
+    "clips": {
+      "idle": {
+        "animation": "Idle"
+      },
+      "walk": {
+        "animation": "Walk",
+        "speed": 0.8
+      },
+      "rear": {
+        "animation": "Attack",
+        "to": 0.4,
+        "hold": true,
+        "speed": 0.6
+      },
+      "bite": {
+        "animation": "Attack"
+      },
+      "death": {
+        "animation": "Dead",
+        "hold": true
+      }
+    },
+    "glow": {
+      "color": "9dffb0",
+      "energy": 1.2,
+      "range": 7.0,
+      "height": 1.5
+    }
+  }
+}

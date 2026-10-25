@@ -19,9 +19,10 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(ROOT, "src"))
 
 from i18n import (ATTR_DESC, ATTRS, CLASSES, DASH, FACTION, FAMILIES, FAMILY_DESC, FOUND_IN, ITEM_EN_FALLBACK,  # noqa: E402
-                  ITEM_ES, MATERIAL_NAMES_ES, MOBS, NAV, SLOTS, UI, L)
+                  ITEM_ES, MATERIAL_NAMES_ES, MOBS, NAV, SLOTS, TRAITS, UI, L)
 from story import STORY  # noqa: E402
 import gdconst as GD  # noqa: E402
+import combat_math as CM  # noqa: E402
 import slugs as SL  # noqa: E402
 import texts as TX  # noqa: E402
 import worldmap as WM  # noqa: E402
@@ -55,12 +56,9 @@ def stat_mult(v):
     return clamp(1 + (v - 10) * 0.015, 0.75, 1.25)
 
 
-def class_damage(c, w, ammo=1.0, skill=1, level=1):
-    wtype = w.get("weapon_type", "melee")
-    attr = "might" if wtype == "melee" else "precision"
-    coef = c["combat_coefficients"].get(wtype, 1.0)
-    factor = 1 + 0.01 * (skill - 1) + 0.006 * (level - 1)
-    return max(1, round(base_damage(w) * coef * stat_mult(c["attributes"][attr]) * ammo * factor))
+def class_damage(c, w, ammo=None, skill=1, level=1):
+    """Golpe base (sin rasgo) con la municion propia del arma: src/combat_math.py."""
+    return CM.hit(c, w, ITEMS, 0.0, skill, level)
 
 
 def base_damage(w):
@@ -394,9 +392,9 @@ def page_index(lang):
     <dl class="ccard-stats"><div><dt>{u('hp', lang)}</dt><dd>{dv['health']}</dd></div><div><dt>{u('speed', lang)}</dt><dd>{num(dv['speed'], lang)}</dd></div><div><dt>{u('energy', lang)}</dt><dd>{dv['energy']}</dd></div></dl>
   </div>
 </a>"""
-    wlist = sorted([w for w in WEAPONS if not w.get("planned") and "provisional" not in w["id"]], key=lambda w: -base_damage(w))[:8]
+    wlist = sorted([w for w in WEAPONS if not w.get("planned") and "provisional" not in w["id"] and has_icon(w["id"])], key=lambda w: -base_damage(w))[:8]
     weapons = "".join(
-        f'<a class="wthumb reveal" href="arsenal.html#{e(w["id"])}">{icon(w["id"], alt=w["display_name"])}<span>{e(w["display_name"])}</span><b>{base_damage(w)}</b></a>'
+        f'<a class="wthumb reveal" href="items.html#{e(w["id"])}">{icon(w["id"], alt=w["display_name"])}<span>{e(w["display_name"])}</span><b>{base_damage(w)}</b></a>'
         for w in wlist)
     route = ""
     for r in TX.REGIONS:
@@ -450,7 +448,7 @@ def page_index(lang):
 <section class="wrap block split">
   <div>
     {section_title('arsenal', '03', 'Arsenal', 'Hammers, scatterguns, spore projectors and relay blades. Any class can carry any of them.' if lang == 'en' else 'Martillos, escopetas, proyectores de esporas y cuchillas de La Red. Cualquier clase puede llevar cualquiera.')}
-    <a class="btn" href="arsenal.html">{u('open_archive', lang)} {svg('arrow')}</a>
+    <a class="btn" href="items.html#weapons">{u('open_archive', lang)} {svg('arrow')}</a>
   </div>
   <div class="wthumbs">{weapons}</div>
 </section>
@@ -458,7 +456,7 @@ def page_index(lang):
 <section class="block block-dark">
   <div class="wrap split split-rev">
     <div>
-      {section_title('world', '04', 'Every layer hides a history' if lang == 'en' else 'Cada estrato esconde una historia', 'From the Outpost down the shaft, through the Shallows to the dig at C-3 — and up to an open, dangerous sky.' if lang == 'en' else 'Del Outpost por el pozo, a través de The Shallows hasta la excavación C-3… y arriba, a un cielo abierto y peligroso.')}
+      {section_title('world', '04', 'Every layer hides a history' if lang == 'en' else 'Cada estrato esconde una historia', 'From the Outpost down the shaft, through the Shallows to the Deep Survey — and up to an open, dangerous sky.' if lang == 'en' else 'Del Outpost por el pozo, a través de The Shallows hasta The Deep Survey… y arriba, a un cielo abierto y peligroso.')}
       <ol class="route">{route}</ol>
       <a class="btn" href="world.html">{u('explore', lang)} {svg('arrow')}</a>
     </div>
@@ -561,9 +559,9 @@ def class_section(c, lang):
     for v in c["variants"]:
         w = ITEMS[v["weapon_id"]]
         variants += f"""<div class="variant">
-  <a href="arsenal.html#{e(w['id'])}" class="variant-w">{icon(w['id'], alt=w['display_name'])}</a>
+  <a href="items.html#{e(w['id'])}" class="variant-w">{icon(w['id'], alt=w['display_name'])}</a>
   <div><p class="kicker">{u('starting_weapon', lang)} · {e(FAMILIES[w['weapon_family']][lang])}</p><h4>{e(w['display_name'])}</h4><p>{e(FAMILY_DESC[w['weapon_family']][lang])}</p>
-  <p class="variant-meta"><a href="arsenal.html#{e(w['id'])}">{e(w['display_name'])}</a> · {class_damage(c, w)} {u('damage', lang).lower()}</p></div>
+  <p class="variant-meta"><a href="items.html#{e(w['id'])}">{e(w['display_name'])}</a> · {class_damage(c, w)} {u('damage', lang).lower()}</p></div>
 </div>"""
     aff = ""
     for fam in sorted(FAMILIES, key=lambda f: -c["skill_affinity"].get(f, 0.5)):
@@ -571,7 +569,7 @@ def class_section(c, lang):
         hot = " hot" if val >= 1.4 else (" cold" if val < 0.9 else "")
         aff += f'<li class="aff{hot}"><span>{e(FAMILIES[fam][lang])}</span>{bar(val, 1.5, col if val >= 1 else "var(--dim)")}<b>×{num(val, lang)}</b></li>'
     starters = "".join(
-        f'<a class="mini" href="arsenal.html#{e(wid)}">{icon(wid, alt=ITEMS[wid]["display_name"])}<span>{e(ITEMS[wid]["display_name"])}</span></a>'
+        f'<a class="mini" href="items.html#{e(wid)}">{icon(wid, alt=ITEMS[wid]["display_name"])}<span>{e(ITEMS[wid]["display_name"])}</span></a>'
         for wid in c["starter_weapons"] if wid in ITEMS)
     power_mult = POWER_MULT.get(power_id)
     return f"""<section class="cls" id="{k}" style="--c:{col}">
@@ -643,7 +641,7 @@ def page_classes(lang):
             v = c["skill_affinity"].get(fam, 0.5)
             rec = v >= best[c["id"]]
             cells += f'<td class="{"rec" if rec else ("off" if v < 0.9 else "")}">{"★ " if rec else ""}×{num(v, lang)}</td>'
-        srows += (f'<tr><th><a class="mini-w" href="arsenal.html#{e(w)}">{icon(w, alt=ITEMS[w]["display_name"])}<span>{e(ITEMS[w]["display_name"])}</span></a>'
+        srows += (f'<tr><th><a class="mini-w" href="items.html#{e(w)}">{icon(w, alt=ITEMS[w]["display_name"])}<span>{e(ITEMS[w]["display_name"])}</span></a>'
                   f'<small>{e(FAMILIES[fam][lang])}</small></th>{cells}</tr>')
     steps = [("01", "Choose your discipline" if en else "Elegí tu disciplina",
               "Four cards with a playstyle fingerprint — durability, melee, ranged, mobility, tech — the class power, the passive and the skills it trains fast. Hold Tab to compare all four; D opens the full dossier."
@@ -668,96 +666,365 @@ def page_classes(lang):
     return page(lang, "classes", u("meet_classes", lang), body)
 
 
-def weapon_card(w, lang):
+# --- Objetos (2026-10-24): Arsenal y Equipo unificados en una sola pagina con tablas por categoria -----------------
+# Las categorias salen de los ids de los objetos (wiki.item_cat); una categoria nueva sin seccion propia cae en "Otros".
+# Numeros de armas: src/combat_math.py (formulas del servidor, docs/design/WEAPON_BALANCE.md del juego, seccion 8).
+ITEM_SECTIONS = [
+    ("weapons", ("weapon",)), ("shields", ("shield",)), ("armor", ("armor",)), ("ammunition", ("ammunition",)),
+    ("lights", ("light",)), ("drones", ("drone",)), ("power", ("battery", "backpack")), ("tools", ("tool", "fuel")),
+    ("consumables", ("consumable", "food")), ("crates", ("container",)),
+    ("resources", ("ore", "mineral", "salvage", "component", "currency")), ("records", ("log", "contract", "service")),
+]
+ITEM_SEC_TEXT = {
+    "weapons": (L("Weapons", "Armas"),
+                L("Any class can carry any weapon; the class sets how hard it hits and how fast it trains. Hit and DPS are for the weapon's home class (the one that trains its skill fastest) at skill 1 and level 1, sustained, with its own ammunition. Open a weapon for every class, or try the calculator below.",
+                  "Cualquier clase puede llevar cualquier arma; la clase define cuánto pega y qué tan rápido la entrena. Golpe y DPS son de la clase natural del arma (la que entrena su habilidad más rápido) con habilidad 1 y nivel 1, en régimen, con su propia munición. Abrí un arma para ver todas las clases, o probá la calculadora de abajo.")),
+    "shields": (L("Shields", "Escudos"),
+                L("Off-hand gear pairs with any one-handed weapon. Taking hits with a shield up trains Shielding: 8% less damage, up to 40%.",
+                  "El equipo de mano secundaria combina con cualquier arma de una mano. Recibir golpes con el escudo en alto entrena Escudos: 8% menos daño, hasta 40%.")),
+    "armor": (L("Armor", "Armadura"),
+              L("Head, chest, legs and boots are equipped separately. Armor reduces physical damage, resistance reduces everything else: reduction = rating ÷ (rating + 100), at most 75%.",
+                "Cabeza, torso, piernas y botas se equipan por separado. La armadura reduce el daño físico; la resistencia, todo lo demás: reducción = valor ÷ (valor + 100), como máximo 75%.")),
+    "ammunition": (L("Ammunition", "Munición"),
+                   L("A ranged weapon fires any ammunition of its family, the first stack in your cargo. Rounds feed the rifles and shotguns, spore cartridges poison, synapse darts wound enemies and heal operators. Tech weapons spend energy from the worn cell instead, and chainsaws burn gas from a can.",
+                     "Un arma a distancia dispara cualquier munición de su familia, la primera pila de tu inventario. Las balas alimentan rifles y escopetas, los cartuchos de esporas envenenan y los dardos sinápticos hieren enemigos y curan operadores. Las armas de Tecnología gastan energía de la celda equipada, y las motosierras queman combustible de un bidón.")),
+    "lights": (L("Lights", "Luces"),
+               L("Your light is the difference between reading a cavern and guessing it. Brighter lights drain your battery faster; T toggles the lantern.",
+                 "Tu luz es la diferencia entre leer una caverna y adivinarla. Las luces más potentes vacían la batería más rápido; T prende y apaga la linterna.")),
+    "drones": (L("Drones", "Drones"),
+               L("Launched from the cargo: a lamp, a gun, a scout you pilot or a bomb you fly in. They draw from your battery while they fly.",
+                 "Se lanzan desde el inventario: una lámpara, un arma, un explorador que pilotás o una bomba que volás. Sacan energía de tu batería mientras vuelan.")),
+    "power": (L("Batteries & backpacks", "Baterías y mochilas"),
+              L("The battery feeds your light, drones, energy weapons and powers. Spare cells refill it between fights; Vesko recharges an empty one. A backpack adds cells and carry, and stays with what it holds when you drop it.",
+                "La batería alimenta tu luz, tus drones, las armas de energía y tus poderes. Las celdas de repuesto la recargan entre peleas; Vesko recarga una vacía. Una mochila suma celdas y carga, y se queda con lo que tiene si la soltás.")),
+    "tools": (L("Tools & fuel", "Herramientas y combustible"),
+              L("The drill goes in the tool slot: hold F at a drill site. Gas cans fill at the pumps and feed bikes, the crane and the Foundry chainsaws.",
+                "El taladro va en la ranura de herramienta: mantené F en un punto de perforación. Los bidones se llenan en los surtidores y alimentan motos, la grúa y las motosierras de La Forja.")),
+    "consumables": (L("Consumables & food", "Consumibles y comida"),
+                    L("Capsules heal at once, food heals over time. Both stack in the cargo.",
+                      "Las cápsulas curan al instante; la comida cura con el tiempo. Las dos se apilan en el inventario.")),
+    "crates": (L("Crates & cases", "Cajones y estuches"),
+               L("Your first kit comes from personal crates in the Outpost; Document Cases hold Reading Logs, and boss strongboxes open once per operator.",
+                 "Tu primer equipo sale de cajones personales en el Outpost; los Document Cases guardan registros y los cofres de jefes se abren una vez por operador.")),
+    "resources": (L("Resources & salvage", "Recursos y chatarra"),
+                  L("Ore, crystal, salvage and coin: what you dig, find and carry home. Everything you haul weighs something.",
+                    "Mineral, cristal, chatarra y moneda: lo que excavás, encontrás y llevás a casa. Todo lo que acarreás pesa algo.")),
+    "records": (L("Logs, contracts & services", "Registros, contratos y servicios"),
+                L("Tablets to read, contract drives to cash in and the VDI excavation service.",
+                  "Tablets para leer, drives de contratos para cobrar y el servicio de excavación de VDI.")),
+    "other": (L("Other items", "Otros objetos"), L("", "")),
+}
+
+
+def _wk():
+    import wiki as WK  # noqa: E402  (tarde: el wiki carga sus propios datos al importarse)
+    import wiki_mech as MX  # noqa: E402
+    return WK, MX
+
+
+def has_icon(iid):
+    return os.path.exists(os.path.join(ROOT, "assets/img/icons", iid + ".png"))
+
+
+def td(html_, v=None, numeric=False):
+    dv = f' data-v="{e(v)}"' if v is not None else ""
+    return f'<td{" class=" + chr(34) + "n" + chr(34) if numeric else ""}{dv}>{html_}</td>'
+
+
+def name_td(i, lang):
+    art = icon(i["id"], "ticon", "") if has_icon(i["id"]) else '<span class="ticon icon-ph" aria-hidden="true"></span>'
+    return (f'<td class="tn" data-v="{e(i["display_name"].lower())}"><span class="tn-in">{art}<span class="tn-t">'
+            f'<a href="{SL.item(i["id"])}">{e(i["display_name"])}</a>{status_tag(i, lang)}</span></span></td>')
+
+
+def pct_txt(ch, lang):
+    return num(round(ch * 100, 1), lang) + "%"
+
+
+def where_to_get(i, lang, limit=3):
+    """Tiendas (con precio), cajones, lugares, perforacion y criaturas que lo sueltan; enlazados al wiki."""
+    if i.get("planned"):
+        return "—"
+    WK, MX = _wk()
+    iid = i["id"]
+    out = []
+    for b, npc in sorted(((b, npc) for npc, b, _s, _st in MX.shop_rows_for(iid) if b is not None), key=lambda x: x[0]):
+        out.append(f'{WK.lk(npc, here="")} <small>{num(b, lang)} Metal</small>')
+    for kind, a, _q, extra in WK.FOUND.get(iid, []):
+        lab = WK.lk(a, here="")
+        if kind == "crate" and isinstance(extra, tuple):
+            lab += f' <small>{"start" if lang == "en" else "inicio"}</small>'
+        out.append(lab)
+    for m, ch, _a, _b in sorted(WK.DROPPED.get(iid, []), key=lambda x: -x[1]):
+        out.append(f'{WK.lk(m, here="")} <small>{pct_txt(ch, lang)}</small>')
+    seen, uniq = set(), []
+    for x in out:
+        if x not in seen:
+            seen.add(x)
+            uniq.append(x)
+    if not uniq:
+        return "—"
+    s = ", ".join(uniq[:limit])
+    if len(uniq) > limit:
+        s += f' <a class="more" href="{SL.item(iid)}" title="{"More sources" if lang == "en" else "Más fuentes"}">+{len(uniq) - limit}</a>'
+    return s
+
+
+def tier_td(i, lang):
+    tier = int(i.get("gear_tier", 1) or 1)
+    if i.get("weapon_family") and i.get("equipment_slot") == "primary_weapon":
+        lv, sk = CM.tier_requirement(i)
+    else:
+        req = i.get("requirements") or {}
+        lv = max(GEAR_TIER_LEVELS[min(tier, len(GEAR_TIER_LEVELS)) - 1], req.get("minimum_level", 1))
+        sk = None
+    bits = [f"T{tier}", f'{"Lv" if lang == "en" else "Nv"} {lv}']
+    req = i.get("requirements") or {}
+    for f, v in (req.get("minimum_skills") or {}).items():
+        if f != i.get("weapon_family"):
+            bits.append(f"{FAMILIES.get(f, {}).get(lang, f)} {v}")
+    if sk and sk > 1:
+        bits.append(f'{FAMILIES[i["weapon_family"]][lang]} {sk}')
+    return td(" · ".join(bits), tier * 1000 + lv)
+
+
+def weight_td(i, lang):
+    w = i.get("weight", 0)
+    return td(num(w, lang) if w else "—", w, True)
+
+
+def item_row(i, cells, q=""):
+    hay = " ".join([i["display_name"], i["id"], q]).lower()
+    return f'<tr id="{e(i["id"])}" data-q="{e(hay)}">{"".join(cells)}</tr>'
+
+
+def group_row(label, cols):
+    return f'<tr class="grp"><th colspan="{cols}" scope="rowgroup">{label}</th></tr>'
+
+
+def itable(tid, head, body):
+    th = "".join(f'<th scope="col" data-sort="{k}">{e(h)}</th>' for h, k in head)
+    return (f'<div class="tablewrap itable"><table class="data sortable" id="{tid}"><thead><tr>{th}</tr></thead>'
+            f'<tbody>{body}</tbody></table></div>')
+
+
+def upkeep_html(w, lang):
+    WK, _MX = _wk()
     p = w.get("properties", {})
-    dmg, rng, itv = base_damage(w), p.get("attack_range", 0), p.get("attack_interval", 1)
-    dps = dmg / itv if itv else 0
-    fam = w.get("weapon_family", "")
-    wtype = w.get("weapon_type", "melee")
-    by_class = ""
-    best = max(CLASSES_DATA, key=lambda c: class_damage(c, w))
-    mx = max(class_damage(c, w) for c in CLASSES_DATA)
-    for c in CLASSES_DATA:
-        d = class_damage(c, w)
-        by_class += f'<li style="--c:{class_color(c["id"])}"><span>{e(c["name"])}</span>{bar(d, mx * 1.05, class_color(c["id"]))}<b>{d}</b></li>'
-    doctrine = ""
-    if w["id"] in STARTING_OF:
-        doctrine = f'<p class="wc-doc">{class_chip(STARTING_OF[w["id"]], lang)} {u("starting_weapon", lang)}</p>'
-    ammo = u("field_round", lang) if w.get("ammo_item_id") else u("none", lang)
-    hands = u("two_hand", lang) if w.get("hands") == 2 else u("one_hand", lang)
-    dtype = w.get("damage_type")
-    dtype_html = f' · <span class="dtype dtype-{dtype}">{e(dtype)}</span>' if dtype else ""
-    return f"""<article class="wcard" id="{e(w['id'])}" data-type="{wtype}" data-family="{e(fam)}" data-name="{e(w['display_name'])}"
-  data-damage="{dmg}" data-dps="{dps:.2f}" data-range="{rng}" data-speed="{itv}" data-weight="{w.get('weight', 0)}">
-  <div class="wc-icon">{icon(w['id'], alt=w['display_name'])}</div>
-  <div class="wc-main">
-    <p class="kicker">{e(u(wtype, lang))} · {e(FAMILIES.get(fam, {}).get(lang, fam))}{dtype_html} {status_tag(w, lang)}</p>
-    <h3><a href="{SL.item(w['id'])}">{e(w['display_name'])}</a></h3>
-    <p class="wc-desc">{e(item_desc(w, lang))}</p>
-    {doctrine}
-  </div>
-  <dl class="wc-stats">
-    <div><dt>{u('damage', lang)}</dt><dd>{dmg}</dd></div>
-    <div><dt>{u('dps', lang)}</dt><dd>{num(dps, lang, 1)}</dd></div>
-    <div><dt>{u('range', lang)}</dt><dd>{num(rng, lang)}<small>m</small></dd></div>
-    <div><dt>{u('interval', lang)}</dt><dd>{num(itv, lang)}<small>s</small></dd></div>
-    <div><dt>{u('hands', lang)}</dt><dd class="sm">{e(hands)}</dd></div>
-    <div><dt>{u('weight', lang)}</dt><dd>{num(w.get('weight', 0), lang)}<small>kg</small></dd></div>
-    <div><dt>{u('ammo', lang)}</dt><dd class="sm">{e(ammo)}</dd></div>
-    <div><dt>{u('tier', lang)}</dt><dd>T{w.get('gear_tier', 1)}</dd></div>
-  </dl>
-  <details class="wc-class"><summary>{u('damage_by_class', lang)} · <span>{u('best_with', lang)} {e(best['name'])}</span></summary><ul class="byclass">{by_class}</ul></details>
-</article>"""
+    if CM.uses_fuel(w):
+        return WK.lk("item.fuel.gas_can", here="") + " <small>" + e(TRAITS["per_cut"][lang].format(v=num(p["fuel_per_attack"], lang))) + "</small>", p["fuel_per_attack"]
+    if p.get("energy_per_shot"):
+        return e(TRAITS["energy_shot"][lang].format(v=num(p["energy_per_shot"], lang))), p["energy_per_shot"]
+    if w.get("ammo_item_id"):
+        return WK.lk(w["ammo_item_id"], here=""), 1
+    return "—", 0
 
 
-def page_arsenal(lang):
-    ws = sorted(WEAPONS, key=lambda w: (w.get("weapon_type") != "melee", -base_damage(w)))
-    fams = sorted({w.get("weapon_family") for w in ws}, key=lambda f: list(FAMILIES).index(f))
-    chips = f'<button class="fchip" aria-pressed="true" data-filter="all">{u("all", lang)}</button>'
-    chips += f'<button class="fchip" aria-pressed="false" data-filter="type:melee">{u("melee", lang)}</button>'
-    chips += f'<button class="fchip" aria-pressed="false" data-filter="type:ranged">{u("ranged", lang)}</button><span class="fsep"></span>'
-    chips += "".join(f'<button class="fchip" aria-pressed="false" data-filter="family:{f}">{e(FAMILIES[f][lang])}</button>' for f in fams)
-    sorts = "".join(f'<option value="{k}">{e(lbl)}</option>' for k, lbl in [
-        ("default", "—"), ("damage", u("damage", lang)), ("dps", u("dps", lang)), ("range", u("range", lang)),
-        ("speed", u("interval", lang)), ("weight", u("weight", lang)), ("name", u("name", lang))])
-    cards = "".join(weapon_card(w, lang) for w in ws)
-    rows = ""
+def sec_weapons(lang):
+    en = lang == "en"
+    fams = list(FAMILIES)
+    ws = sorted(WEAPONS, key=lambda w: (fams.index(w["weapon_family"]) if w.get("weapon_family") in fams else 99, bool(w.get("planned")),
+                                        -CM.row(CM.home_class(w["weapon_family"], CLASSES_DATA), w, ITEMS)["dps"]))
+    head = [(u("weapon", lang), "text"), ("Skill" if en else "Habilidad", "text"), (u("hands", lang), "num"), (u("damage", lang), "num"),
+            (u("interval", lang) + " (s)", "num"), ("Reach (m)" if en else "Alcance (m)", "num"),
+            ("Hit · opening / sustained" if en else "Golpe · apertura / régimen", "num"), ("DPS · home class" if en else "DPS · clase natural", "num"),
+            ("Feeds on" if en else "Consume", "text"), ("Trait & specials" if en else "Rasgo y especiales", "text"),
+            ("Tier · requires" if en else "Rango · requiere", "num"), (u("weight", lang) + " (kg)", "num"), ("Where to get" if en else "Dónde conseguirla", "text")]
+    body, last = "", None
     for w in ws:
-        p = w.get("properties", {})
-        itv = p.get("attack_interval", 1)
-        rows += (f'<tr data-type="{w.get("weapon_type")}" data-family="{e(w.get("weapon_family", ""))}"><td class="tn"><span class="tn-in">{icon(w["id"], "ticon", w["display_name"])}<a href="#{e(w["id"])}">{e(w["display_name"])}</a></span></td>'
-                 f'<td>{e(u(w.get("weapon_type", "melee"), lang))}</td><td>{e(FAMILIES[w["weapon_family"]][lang])}</td>'
-                 f'<td class="n">{base_damage(w)}</td><td class="n">{num(base_damage(w) / itv, lang, 1)}</td><td class="n">{num(p.get("attack_range", 0), lang)}</td>'
-                 f'<td class="n">{num(itv, lang)}</td><td>{w.get("hands", 1)}</td><td class="n">{num(w.get("weight", 0), lang)}</td></tr>')
-    table = f"""<div class="tablewrap"><table class="data sortable" id="wtable"><thead><tr>
-<th data-sort="text">{u('weapon', lang)}</th><th data-sort="text">{'Type' if lang == 'en' else 'Tipo'}</th><th data-sort="text">{u('family', lang)}</th>
-<th data-sort="num">{u('damage', lang)}</th><th data-sort="num">{u('dps', lang)}</th><th data-sort="num">{u('range', lang)} (m)</th>
-<th data-sort="num">{u('interval', lang)} (s)</th><th data-sort="num">{u('hands', lang)}</th><th data-sort="num">{u('weight', lang)} (kg)</th></tr></thead><tbody>{rows}</tbody></table></div>"""
+        fam = w["weapon_family"]
+        home = CM.home_class(fam, CLASSES_DATA)
+        if fam != last:
+            body += group_row(f'<a href="wiki/skills.html#{SL.skill_anchor(fam)}">{e(FAMILIES[fam][lang])}</a>'
+                              f'<span class="grp-sub">{"home" if en else "clase natural"}: {class_chip(home["id"], lang)}</span>', len(head))
+            last = fam
+        r = CM.row(home, w, ITEMS)
+        p = w["properties"]
+        up, upv = upkeep_html(w, lang)
+        cells = [name_td(w, lang),
+                 td(f'<a href="wiki/skills.html#{SL.skill_anchor(fam)}">{e(FAMILIES[fam][lang])}</a>', FAMILIES[fam][lang]),
+                 td(f'{w.get("hands", 1)}H', w.get("hands", 1), True),
+                 td(num(CM.base(w), lang), CM.base(w), True), td(num(r["interval"], lang), r["interval"], True),
+                 td(num(p.get("attack_range", 0), lang), p.get("attack_range", 0), True),
+                 td(f'{r["opening"]} / {r["sustained"]}', r["sustained"], True),
+                 td(f'<span class="dps" style="--c:{class_color(home["id"])}">{num(r["dps"], lang, 1)}</span>', round(r["dps"], 2), True),
+                 td(up, upv), td(e(CM.trait_text(w, ITEMS, lang, TRAITS)) or "—"), tier_td(w, lang), weight_td(w, lang), td(where_to_get(w, lang))]
+        body += item_row(w, cells, f'{FAMILIES[fam]["en"]} {FAMILIES[fam]["es"]} {home["name"]} {u(w.get("weapon_type", "melee"), lang)}')
+    traits = "".join(f'<li><b>{e(FAMILIES[f][lang])}</b><span>{e(FAMILY_DESC[f][lang])}</span></li>'
+                     for f in fams if any(w.get("weapon_family") == f for w in WEAPONS))
+    tb = num(round(CM.TRAILBLAZER * 100), lang)
+    notes = (f'<details class="panel traitbox"><summary>{"How the numbers work" if en else "Cómo se calculan los números"}</summary>'
+             f'<p class="eq">{"hit = base × class coefficient × attribute bonus × skill & level bonus × ammo × (1 + trait %)" if en else "golpe = base × coeficiente de clase × bono de atributo × bono de habilidad y nivel × munición × (1 + rasgo %)"}</p>'
+             f'<p>{"Opening is the first hit; sustained is the steady state (Heat and Suppression at their cap, Range at 6 m+, Overcharge with the cell above half). Ambush counts on half the hits; the Drift adds Trailblazer +" + tb + "% on the same target; spore poison is added per second. Crush only applies to elites and bosses, so it is left out of DPS." if en else "Apertura es el primer golpe; régimen es el estado estable (Calor y Supresión al máximo, Alcance a 6 m o más, Sobrecarga con la celda sobre la mitad). La Emboscada cuenta en la mitad de los golpes; La Deriva suma Trailblazer +" + tb + "% al mismo blanco; el veneno de esporas se suma por segundo. Aplastar sólo aplica a élites y jefes, así que no entra en el DPS."}</p>'
+             f'<p>{"Every weapon trains its skill at the same rate per second of fighting: " if en else "Toda arma entrena su habilidad al mismo ritmo por segundo de pelea: "}{num(CM.XP_PER_ATTACK_SECOND, lang)} XP/s × {"class affinity" if en else "afinidad de clase"}. '
+             f'{"Tier 2 and up also ask for your skill: " if en else "Desde el rango 2 también piden tu habilidad: "}'
+             f'{", ".join(f"T{t_ + 1} {s}" for t_, s in enumerate(CM.TIER_SKILL) if t_ > 0)}.</p>'
+             f'<ul class="fams">{traits}</ul></details>')
+    return notes + itable("t-weapons", head, body)
 
-    off = [i for i in ITEMS.values() if i.get("equipment_slot") == "secondary_weapon"]
-    off_html = "".join(gear_card(i, lang) for i in off)
-    ammo = [i for i in ITEMS.values() if i["id"].startswith("item.ammunition")]
-    ammo_html = ""
-    for a in ammo:
-        pr = a["properties"]
-        ammo_html += f"""<article class="gcard">{icon(a['id'], alt=a['display_name'])}<div><p class="kicker">{u('ammo', lang)} {status_tag(a, lang)}</p><h3><a href="{SL.item(a['id'])}">{e(a['display_name'])}</a></h3><p>{e(item_desc(a, lang))}</p>
-<dl class="kv"><div><dt>{u('damage', lang)}</dt><dd>×{num(pr['ammo_multiplier'], lang)}</dd></div><div><dt>{u('stack', lang)}</dt><dd>{pr['stack_size']}</dd></div><div><dt>{u('weight', lang)}</dt><dd>{num(a['weight'], lang)} kg</dd></div></dl></div></article>"""
 
+def simple_section(cat_items, lang, anchor, head, cells_fn, group=None):
+    body, last = "", None
+    for i in cat_items:
+        if group:
+            g = group(i)
+            if g != last:
+                body += group_row(e(g), len(head))
+                last = g
+        cells, q = cells_fn(i)
+        body += item_row(i, cells, q)
+    return itable("t-" + anchor, head, body)
+
+
+def sec_generic(anchor, its, lang):
+    """Tablas de las demas categorias: columnas propias por seccion."""
+    WK, MX = _wk()
+    en = lang == "en"
+    name_h, wt_h, where_h = (u("name", lang), "text"), (u("weight", lang) + " (kg)", "num"), ("Where to get" if en else "Dónde conseguirlo", "text")
+    tier_h = ("Tier · requires" if en else "Rango · requiere", "num")
+    cap = ITEMS.get("item.battery.provisional_relay_cell", {}).get("properties", {}).get("battery_capacity", 100)
+    slot_order = {"head": 0, "chest": 1, "legs": 2, "boots": 3, "arms": 4}
+    if anchor in ("armor", "shields"):
+        its = sorted(its, key=lambda i: (slot_order.get(i.get("equipment_slot"), 9), bool(i.get("planned")), -i.get("properties", {}).get("armor_defense", 0), i["display_name"]))
+
+        def cells(i):
+            p = i.get("properties", {})
+            slot = SLOTS.get(i.get("equipment_slot"), {}).get(lang, "—")
+            return [name_td(i, lang), td(e(slot), slot_order.get(i.get("equipment_slot"), 9)), td("+" + num(p.get("armor_defense", 0), lang), p.get("armor_defense", 0), True),
+                    td("+" + num(p.get("resistance_bonus", 0), lang), p.get("resistance_bonus", 0), True), tier_td(i, lang), weight_td(i, lang), td(where_to_get(i, lang))], slot
+        head = [name_h, (u("slot", lang), "text"), (u("armor", lang), "num"), (u("resistance", lang), "num"), tier_h, wt_h, where_h]
+        grp = (lambda i: SLOTS.get(i.get("equipment_slot"), {}).get(lang, "—")) if anchor == "armor" else None
+        return simple_section(its, lang, anchor, head, cells, grp)
+    if anchor == "ammunition":
+        its = sorted(its, key=lambda a: (a.get("ammo_family", "rounds"), a.get("properties", {}).get("ammo_multiplier", 1), a["display_name"]))
+        ranged = [w for w in WEAPONS if w.get("weapon_type") == "ranged" and not w.get("planned")]
+
+        def cells(a):
+            p = a.get("properties", {})
+            fam = a.get("ammo_family", "rounds")
+            fired = ", ".join(WK.lk(w["id"], here="") for w in ranged if MX.weapon_family(w) == fam) or "—"
+            return [name_td(a, lang), td(e(MX.t("fam_" + fam, lang))),
+                    td("×" + num(p.get("ammo_multiplier", 1), lang), p.get("ammo_multiplier", 1), True), td(e(MX.ammo_effect(a, lang))),
+                    td(fired), td(num(p.get("stack_size", 1), lang), p.get("stack_size", 1), True), weight_td(a, lang), td(where_to_get(a, lang))], fam
+        head = [name_h, ("Family" if en else "Familia", "text"), (u("damage", lang), "num"), ("Effect" if en else "Efecto", "text"),
+                ("Fired by" if en else "La disparan", "text"), (u("stack", lang), "num"), wt_h, where_h]
+        return simple_section(its, lang, anchor, head, cells)
+    if anchor == "lights":
+        its = sorted(its, key=lambda i: (bool(i.get("planned")), i.get("properties", {}).get("illumination_radius", 0)))
+
+        def cells(i):
+            p = i.get("properties", {})
+            dr = p.get("light_energy_per_second", 0)
+            mins = cap / dr / 60 if dr else 0
+            return [name_td(i, lang), td(num(p.get("illumination_radius", 0), lang), p.get("illumination_radius", 0), True),
+                    td(num(dr, lang) + "/s", dr, True), td("≈ " + num(mins, lang, 1) + " min" if dr else "—", round(mins, 2), True),
+                    tier_td(i, lang), weight_td(i, lang), td(where_to_get(i, lang))], ""
+        head = [name_h, (u("light_radius", lang) + " (m)", "num"), (u("drain", lang), "num"), (u("runtime", lang), "num"), tier_h, wt_h, where_h]
+        return simple_section(its, lang, anchor, head, cells)
+    if anchor == "drones":
+        order = {"light": 0, "assault": 1, "scan": 2, "kamikaze": 3}
+        its = sorted(its, key=lambda i: (order.get(i.get("drone", {}).get("function"), 9), i.get("drone", {}).get("energy_per_second", 0)))
+
+        def cells(i):
+            d = i.get("drone", {})
+            fn = d.get("function", "")
+            dur = d.get("duration", 0)
+            tech = (i.get("requirements") or {}).get("minimum_skills", {}).get("skill.tech")
+            return [name_td(i, lang), td(e(MX.t("fn_" + fn, lang)), order.get(fn, 9)), td(num(tech, lang) if tech else "—", tech or 0, True),
+                    td(num(d.get("energy_per_second", 0), lang) + " E/s", d.get("energy_per_second", 0), True),
+                    td(f"{int(dur // 60)}:{int(dur % 60):02d}", dur, True), td(e(MX.drone_stats(d, lang))), weight_td(i, lang), td(where_to_get(i, lang))], fn
+        head = [name_h, ("Function" if en else "Función", "text"), ("Tech skill" if en else "Tecnología", "num"), (u("drain", lang), "num"),
+                ("Flight" if en else "Vuelo", "num"), ("Stats" if en else "Datos", "text"), wt_h, where_h]
+        return simple_section(its, lang, anchor, head, cells)
+    if anchor == "power":
+        def cells(i):
+            p = i.get("properties", {})
+            if i.get("container"):
+                capv, capt = i["container"]["cells"], f'{i["container"]["cells"]} {u("cells", lang)}'
+            else:
+                capv, capt = p.get("battery_capacity", 0), f'{p.get("battery_capacity", 0)} {u("energy", lang).lower()}'
+            cb = p.get("carry_bonus", 0)
+            slot = SLOTS.get(i.get("equipment_slot"), {}).get(lang, "—")
+            return [name_td(i, lang), td(e(slot)), td(capt, capv, True), td("+" + num(cb, lang) + " kg" if cb else "—", cb, True),
+                    weight_td(i, lang), td(where_to_get(i, lang))], slot
+        head = [name_h, (u("slot", lang), "text"), (u("capacity", lang), "num"), (u("carry", lang), "num"), wt_h, where_h]
+        return simple_section(sorted(its, key=lambda i: (i.get("equipment_slot", ""), i["display_name"])), lang, anchor, head, cells)
+    if anchor == "tools":
+        def cells(i):
+            p = i.get("properties", {})
+            if p.get("drill_power"):
+                use, v = ("Drill power ×" if en else "Potencia ×") + num(p["drill_power"], lang), p["drill_power"]
+            elif p.get("fuel_capacity"):
+                use, v = num(p["fuel_capacity"], lang) + (" L of gas" if en else " L de combustible"), p["fuel_capacity"]
+            else:
+                use, v = "—", 0
+            slot = SLOTS.get(i.get("equipment_slot"), {}).get(lang, "Cargo" if en else "Inventario")
+            return [name_td(i, lang), td(e(slot)), td(e(use), v, True), weight_td(i, lang), td(where_to_get(i, lang))], ""
+        head = [name_h, (u("slot", lang), "text"), ("Use" if en else "Uso", "num"), wt_h, where_h]
+        return simple_section(its, lang, anchor, head, cells)
+    if anchor == "consumables":
+        def cells(i):
+            p = i.get("properties", {})
+            h = p.get("heal_amount", 0)
+            how = (("over " if en else "en ") + num(p["heal_seconds"], lang) + " s") if p.get("heal_seconds") else (
+                ("at once · " if en else "al instante · ") + num(p.get("use_cooldown", 0), lang) + (" s cooldown" if en else " s de espera"))
+            return [name_td(i, lang), td("+" + num(h, lang) + " " + u("hp", lang), h, True), td(e(how)),
+                    td(num(p.get("stack_size", 1), lang), p.get("stack_size", 1), True), weight_td(i, lang), td(where_to_get(i, lang))], ""
+        head = [name_h, ("Heals" if en else "Cura", "num"), ("How" if en else "Cómo", "text"), (u("stack", lang), "num"), wt_h, where_h]
+        return simple_section(its, lang, anchor, head, cells)
+    if anchor == "crates":
+        def cells(i):
+            cl = i.get("container", {}).get("cells", 0)
+            kind = ("Fixed in place" if en else "Fijo en su lugar") if i.get("fixed") else ("Portable" if en else "Se puede llevar")
+            return [name_td(i, lang), td(f'{cl} {u("cells", lang)}', cl, True), td(e(kind)), td(where_to_get(i, lang))], ""
+        head = [name_h, (u("capacity", lang), "num"), ("Kind" if en else "Tipo", "text"), ("Where" if en else "Dónde", "text")]
+        return simple_section(sorted(its, key=lambda i: i["display_name"]), lang, anchor, head, cells)
+    # Recursos, registros y cualquier categoria nueva: nombre, tipo, dato clave, peso, fuentes.
+    order = list(WK.CATS)
+
+    def cells(i):
+        cat = WK.item_cat(i["id"])
+        p = i.get("properties", {})
+        if p.get("currency_value"):
+            key, v = num(p["currency_value"], lang) + " Metal", p["currency_value"]
+        elif p.get("drive_value"):
+            key, v = num(p["drive_value"], lang) + " Metal", p["drive_value"]
+        elif i.get("log"):
+            key, v = e(i["log"].get("title", "")), 0
+        else:
+            key, v = WK.key_stat(i, lang), 0
+        return [name_td(i, lang), td(e(WK.CATS.get(cat, {}).get(lang, cat)), order.index(cat) if cat in order else 99), td(key, v),
+                weight_td(i, lang), td(where_to_get(i, lang))], WK.CATS.get(cat, {}).get(lang, cat)
+    head = [name_h, ("Kind" if en else "Tipo", "text"), ("Value / note" if en else "Valor / nota", "text"), wt_h, where_h]
+    its = sorted(its, key=lambda i: (order.index(WK.item_cat(i["id"])) if WK.item_cat(i["id"]) in order else 99, i.get("properties", {}).get("currency_value", 0), i["display_name"]))
+    return simple_section(its, lang, anchor, head, cells)
+
+
+def calculator(lang):
+    WK, MX = _wk()
+    ws = sorted(WEAPONS, key=lambda w: (list(FAMILIES).index(w["weapon_family"]) if w.get("weapon_family") in FAMILIES else 99, w["display_name"]))
+    ammo = sorted([a for a in ITEMS.values() if WK.item_cat(a["id"]) == "ammunition"], key=lambda a: (a.get("ammo_family", "rounds"), a["display_name"]))
     calc_data = {
         "classes": [{"id": c["id"], "name": c["name"], "color": class_color(c["id"]), "attributes": c["attributes"],
                      "coef": c["combat_coefficients"], "power": c["ability_name"], "powerMult": POWER_MULT.get(c["ability_id"], 1)}
                     for c in CLASSES_DATA],
-        "weapons": [{"id": w["id"], "name": w["display_name"], "type": w.get("weapon_type"), "base": base_damage(w),
-                     "interval": w["properties"].get("attack_interval", 1), "ammo": bool(w.get("ammo_item_id")),
+        "weapons": [{"id": w["id"], "name": w["display_name"], "type": w.get("weapon_type"), "base": CM.base(w), "interval": CM.interval(w),
+                     "ammoFamily": MX.weapon_family(w) if w.get("ammo_item_id") else None, "ammoId": w.get("ammo_item_id"),
+                     "trait": CM.trait_percent(w, "sustained"), "opening": CM.trait_percent(w, "opening"),
+                     "ambush": w.get("weapon_family") == "skill.blades",
                      "family": FAMILIES[w["weapon_family"]][lang]} for w in ws],
-        "ammo": [{"name": a["display_name"], "mult": a["properties"]["ammo_multiplier"]} for a in ammo],
+        "ammo": [{"id": a["id"], "name": a["display_name"], "family": a.get("ammo_family", "rounds"), "mult": a["properties"]["ammo_multiplier"],
+                  "poison": a["properties"].get("poison_per_second", 0)} for a in ammo],
+        "trailblazer": CM.TRAILBLAZER, "ambushPct": CM.AMBUSH, "ambushUptime": CM.AMBUSH_UPTIME,
+        "skillStep": CM.k("DAMAGE_PER_SKILL_LEVEL", 0.01), "levelStep": CM.k("DAMAGE_PER_CHARACTER_LEVEL", 0.006),
+        "statStep": GD.RPG.get("STAT_DAMAGE_STEP", 0.015),
         "lang": lang,
         "attrNames": {a: ATTRS[a][lang] for a in ATTRS},
     }
     cls_opts = "".join(f'<option value="{c["id"]}">{e(c["name"])}</option>' for c in CLASSES_DATA)
     w_opts = "".join(f'<option value="{w["id"]}">{e(w["display_name"])}</option>' for w in ws)
-    ammo_opts = "".join(f'<option value="{a["properties"]["ammo_multiplier"]}">{e(a["display_name"])}</option>' for a in ammo)
-    calc = f"""{section_title('calculator', 'Tool' if lang == 'en' else 'Herramienta', u('calc_title', lang), u('calc_lead', lang))}
+    ammo_opts = "".join(f'<option value="{a["id"]}">{e(a["display_name"])}</option>' for a in ammo)
+    return f"""{section_title('calculator', 'Tool' if lang == 'en' else 'Herramienta', u('calc_title', lang), u('calc_lead', lang))}
 <div class="calc panel" id="calc">
   <div class="calc-in">
     <label>{u('class', lang)}<select id="c-class">{cls_opts}</select></label>
@@ -775,133 +1042,74 @@ def page_arsenal(lang):
 </div>
 <script type="application/json" id="calc-data">{json.dumps(calc_data, ensure_ascii=False)}</script>"""
 
-    entries = [("weapons", u("weapon", lang) + ("s" if lang == "en" else "s")), ("compare-table", u("table", lang)),
-               ("offhand", SLOTS["secondary_weapon"][lang]), ("ammunition", u("ammo", lang)), ("calculator", u("calc_title", lang))]
-    content = f"""{section_title('weapons', 'Primary weapons' if lang == 'en' else 'Armas principales', 'Weapons' if lang == 'en' else 'Armas',
-                    'Base numbers before class scaling. Open “damage by class” on any card to see what each discipline actually deals.' if lang == 'en'
-                    else 'Números base antes de la escala de clase. Abrí «daño por clase» en cualquier ficha para ver cuánto hace cada disciplina.')}
-<div class="filters" data-target="#wgrid">
-  <div class="fchips">{chips}</div>
-  <label class="fsort">{u('sort_by', lang)} <select data-sort-select>{sorts}</select></label>
-</div>
-<div class="wgrid" id="wgrid">{cards}</div>
-{section_title('compare-table', u('table', lang), 'Side by side' if lang == 'en' else 'Lado a lado', 'Tap or click a column to sort.' if lang == 'en' else 'Tocá o hacé clic en una columna para ordenar.')}
-{table}
-{section_title('offhand', SLOTS['secondary_weapon'][lang], 'Shields' if lang == 'en' else 'Escudos', 'Off-hand gear pairs with any one-handed weapon. Blocking hits trains Shielding.' if lang == 'en' else 'El equipo de mano secundaria combina con cualquier arma de una mano. Bloquear golpes entrena Escudos.')}
-<div class="ggrid">{off_html}</div>
-{section_title('ammunition', u('ammo', lang), 'Rounds' if lang == 'en' else 'Munición', 'Every ranged weapon fires the first ammunition stack in your cargo.' if lang == 'en' else 'Toda arma a distancia dispara la primera pila de munición de tu inventario.')}
-<div class="ggrid">{ammo_html}</div>
-{calc}"""
-    body = wiki_header(lang, "Arsenal", "Weapons of the deep" if lang == "en" else "Armas de las profundidades",
-                       "Every weapon in the current build, with real numbers. No class locks: carry what fits your fight." if lang == "en"
-                       else "Todas las armas de la versión actual, con números reales. Sin bloqueos de clase: llevá lo que sirva para tu pelea.",
-                       "shots/phase13_10-armory.jpg")
-    body += wiki(lang, entries, content)
-    return page(lang, "arsenal", "Arsenal", body)
 
-
-def gear_card(i, lang):
-    p = i.get("properties", {})
-    kv = []
-    if "armor_defense" in p and i.get("equipment_slot") not in ("light", "battery", "backpack"):
-        kv.append((u("armor", lang), f'+{p["armor_defense"]}'))
-    if p.get("resistance_bonus") is not None and i.get("equipment_slot") not in ("light", "battery", "backpack"):
-        kv.append((u("resistance", lang), f'+{p.get("resistance_bonus", 0)}'))
-    if p.get("illumination_radius"):
-        kv.append((u("light_radius", lang), f'{num(p["illumination_radius"], lang)} m'))
-    if p.get("light_energy_per_second"):
-        kv.append((u("drain", lang), f'{num(p["light_energy_per_second"], lang)}/s'))
-        mins = 100 / p["light_energy_per_second"] / 60
-        kv.append((u("runtime", lang), f'≈ {num(mins, lang, 1)} min'))
-    if p.get("battery_capacity"):
-        kv.append((u("capacity", lang), f'{p["battery_capacity"]} {u("energy", lang).lower()}'))
-    if i.get("container"):
-        kv.append((u("capacity", lang), f'{i["container"]["cells"]} {u("cells", lang)}'))
-    if p.get("carry_bonus"):
-        kv.append((u("carry", lang), f'+{num(p["carry_bonus"], lang)} kg'))
-    if p.get("drill_power"):
-        kv.append(("Drill power" if lang == "en" else "Potencia", f'×{num(p["drill_power"], lang)}'))
-    if i.get("hands"):
-        kv.append((u("hands", lang), str(i["hands"])))
-    if i.get("weight"):
-        kv.append((u("weight", lang), f'{num(i["weight"], lang)} kg'))
-    if i.get("gear_tier"):
-        kv.append((u("tier", lang), f'T{i["gear_tier"]}'))
-    req = i.get("requirements")
-    if req:
-        kv.append((u("requires", lang), f'{u("level", lang)} {req.get("minimum_level", 1)}'))
-    kv_html = "".join(f"<div><dt>{e(a)}</dt><dd>{e(b)}</dd></div>" for a, b in kv)
-    slot = SLOTS.get(i.get("equipment_slot"), {}).get(lang, "")
-    contents = ""
-    if i.get("crate_loot"):
-        lis = ""
-        for entry in i["crate_loot"]:
-            # Una entrada es un id o {"item": id, "quantity": n} (2026-10-09, capsulas de vida).
-            cid = entry["item"] if isinstance(entry, dict) else entry
-            if cid.startswith("$"):
-                label = ("Your starting weapon" if lang == "en" else "Tu arma inicial") if cid == "$starting_weapon" else (
-                    "Ammunition (if it shoots)" if lang == "en" else "Munición (si dispara)")
-                lis += f'<li class="mini"><span class="mini-ph">?</span><span>{e(label)}</span></li>'
-            elif cid in ITEMS:
-                mini = icon(cid, alt=ITEMS[cid]["display_name"]) if os.path.exists(os.path.join(ROOT, "assets/img/icons", cid + ".png")) else '<span class="icon icon-ph"></span>'
-                lis += f'<li class="mini">{mini}<span>{e(ITEMS[cid]["display_name"])}</span></li>'
-        contents = f'<p class="kicker">{u("contents", lang)}</p><ul class="minis">{lis}</ul>'
-    return f"""<article class="gcard{' soon' if i.get('planned') else ''}" id="{e(i['id'])}">{icon(i['id'], alt=i['display_name']) if os.path.exists(os.path.join(ROOT, 'assets/img/icons', i['id'] + '.png')) else '<span class="icon icon-ph"></span>'}
-<div><p class="kicker">{e(slot)} {status_tag(i, lang)}</p><h3><a href="{SL.item(i['id'])}">{e(i['display_name'])}</a></h3><p>{e(item_desc(i, lang))}</p><dl class="kv">{kv_html}</dl>{contents}</div></article>"""
-
-
-def page_gear(lang):
-    groups = [
-        ("armor", "Armor" if lang == "en" else "Armadura",
-         "Head, chest, legs and boots are equipped separately. Armor reduces physical damage, resistance reduces everything else." if lang == "en"
-         else "Cabeza, torso, piernas y botas se equipan por separado. La armadura reduce el daño físico; la resistencia, todo lo demás.",
-         lambda i: i.get("equipment_slot") in ("head", "chest", "legs", "boots")),
-        ("lights", "Lights" if lang == "en" else "Luces",
-         "Your light is the difference between reading a cavern and guessing it. Brighter lights drain your battery faster." if lang == "en"
-         else "Tu luz es la diferencia entre leer una caverna y adivinarla. Las luces más potentes vacían la batería más rápido.",
-         lambda i: i.get("equipment_slot") == "light"),
-        ("power", "Power & carry" if lang == "en" else "Energía y carga",
-         "The battery feeds your light, drones, energy weapons and abilities. Spare cells refill it between fights; the Alchemist recharges an empty one." if lang == "en"
-         else "La batería alimenta tu luz, tus drones, las armas de energía y tus habilidades. Las celdas de repuesto la recargan entre peleas; el Alquimista recarga una vacía.",
-         lambda i: i.get("equipment_slot") in ("battery", "backpack")),
-        ("tools", "Tools" if lang == "en" else "Herramientas",
-         "The drill goes in the tool slot. Hold F at a drill site." if lang == "en" else "El taladro va en la ranura de herramienta. Mantené F en un punto de perforación.",
-         lambda i: i.get("equipment_slot") == "tool_special"),
-        # Drones y equipo de campo (Fases 2-7, 2026-10-23).
-        ("drones", "Drones",
-         "Launch them from the cargo: a lamp, a gun, a scout you pilot or a bomb you fly in. They draw from your battery." if lang == "en"
-         else "Se lanzan desde el inventario: una lámpara, un arma, un explorador que pilotás o una bomba que volás. Sacan energía de tu batería.",
-         lambda i: i["id"].startswith("item.drone.")),
-        ("field", "Field kit" if lang == "en" else "Equipo de campo",
-         "Food and capsules, fuel, tablets to read, contract drives and the VDI service: what else rides in your cargo." if lang == "en"
-         else "Comida y cápsulas, combustible, tablets para leer, drives de contratos y el servicio de VDI: lo demás que va en tu inventario.",
-         lambda i: i["id"].split(".")[1] in ("food", "consumable", "fuel", "log", "contract", "service") if i["id"].count(".") == 2 else False),
-        ("crates", "Crates & cases" if lang == "en" else "Cajones y estuches",
-         "Your first kit comes from two personal crates in the Outpost; Document Cases hold Reading Logs and boss crates open once per operator." if lang == "en"
-         else "Tu primer equipo sale de dos cajones personales en el Outpost; los Document Cases guardan registros y los cofres de jefes se abren una vez por operador.",
-         lambda i: i["id"].startswith("item.container")),
-    ]
-    slot_order = {"head": 0, "chest": 1, "legs": 2, "boots": 3}
-    content = ""
-    entries = []
-    for anchor, title, lead, pred in groups:
-        its = sorted([i for i in ITEMS.values() if pred(i)],
-                     key=lambda i: (bool(i.get("planned")), slot_order.get(i.get("equipment_slot"), 9), i["display_name"]))
-        entries.append((anchor, title))
-        content += section_title(anchor, ("Gear" if lang == "en" else "Equipo"), title, lead)
-        content += f'<div class="ggrid">{"".join(gear_card(i, lang) for i in its)}</div>'
+def page_items(lang):
+    WK, _MX = _wk()
+    en = lang == "en"
+    by_cat = {}
+    for i in ITEMS.values():
+        by_cat.setdefault(WK.item_cat(i["id"]), []).append(i)
+    covered = {c for _a, cats in ITEM_SECTIONS for c in cats}
+    sections = list(ITEM_SECTIONS) + [("other", tuple(sorted(c for c in by_cat if c not in covered)))]
+    content, entries = "", [("slots", "Loadout" if en else "Tu equipo")]
+    for anchor, cats in sections:
+        its = [i for c in cats for i in by_cat.get(c, [])]
+        if not its:
+            continue
+        title, lead = ITEM_SEC_TEXT[anchor]
+        entries.append((anchor, title[lang]))
+        kicker = f'{len(its)} {"items" if en else "objetos"}'
+        keys = " ".join([title["en"], title["es"]] + [WK.CATS[c][x] for c in cats if c in WK.CATS for x in ("en", "es")]).lower()
+        content += f'<section class="isec" data-isec data-k="{e(keys)}">{section_title(anchor, kicker, title[lang], lead[lang])}'
+        content += sec_weapons(lang) if anchor == "weapons" else sec_generic(anchor, its, lang)
+        content += '</section>'
+    entries.append(("calculator", u("calc_title", lang)))
+    content += calculator(lang)
     slots = ["head", "chest", "legs", "boots", "primary_weapon", "secondary_weapon", "tool_special", "backpack", "battery", "light"]
     slot_html = "".join(f"<li>{e(SLOTS[s][lang])}</li>" for s in slots)
-    intro = f"""<div class="panel slots"><h3>{'Your loadout' if lang == 'en' else 'Tu equipo'}</h3>
-<p>{'Ten slots you fill from the inventory (I), plus two modification slots that are coming later. Your class never locks gear: only level and attribute requirements do.' if lang == 'en'
-     else 'Diez ranuras que llenás desde el inventario (I), más dos de modificación que llegan después. Tu clase nunca bloquea equipo: sólo el nivel y los requisitos de atributos.'}</p>
-<ul class="slotlist">{slot_html}</ul></div>"""
-    body = wiki_header(lang, "Gear" if lang == "en" else "Equipo", "Armor, light & tools" if lang == "en" else "Armadura, luz y herramientas",
-                       "Everything you wear and carry below. Civilization + Weapon + Armor + Battery + Light = Build." if lang == "en"
-                       else "Todo lo que vestís y llevás abajo. Civilización + Arma + Armadura + Batería + Luz = Build.",
-                       "shots/inventory_loadout.jpg")
-    body += wiki(lang, [("slots", "Loadout" if lang == "en" else "Equipo")] + entries, f'<div id="slots">{intro}</div>' + content)
-    return page(lang, "gear", "Gear" if lang == "en" else "Equipo", body)
+    intro = f"""<div id="slots" class="panel slots"><h3>{'Your loadout' if en else 'Tu equipo'}</h3>
+<p>{'Ten slots you fill from the inventory (I). Your class never locks gear: only level, attribute and skill requirements do. Civilization + Weapon + Armor + Battery + Light = Build.' if en
+     else 'Diez ranuras que llenás desde el inventario (I). Tu clase nunca bloquea equipo: sólo los requisitos de nivel, atributo y habilidad. Civilización + Arma + Armadura + Batería + Luz = Build.'}</p>
+<ul class="slotlist">{slot_html}</ul></div>
+<div class="ifilter" role="search"><label>{svg('search')}<span class="sr">{'Filter items' if en else 'Filtrar objetos'}</span>
+<input type="search" id="items-q" placeholder="{'Filter by name, skill, slot…' if en else 'Filtrá por nombre, habilidad, ranura…'}" autocomplete="off" spellcheck="false"></label>
+<output id="items-n" aria-live="polite"></output></div>
+<p class="note">{'Tap or click a column to sort. Wide tables scroll sideways.' if en else 'Tocá o hacé clic en una columna para ordenar. Las tablas anchas se desplazan de costado.'}</p>"""
+    body = wiki_header(lang, "Items" if en else "Objetos", "Everything you carry below" if en else "Todo lo que llevás abajo",
+                       "Weapons, armor, ammunition, light, drones and the rest of your kit, with real numbers from the current build." if en
+                       else "Armas, armadura, munición, luz, drones y el resto de tu equipo, con números reales de la versión actual.",
+                       "shots/phase13_10-armory.jpg")
+    body += wiki(lang, entries, intro + content)
+    return page(lang, "items", "Items" if en else "Objetos", body)
+
+
+# Las paginas viejas (Arsenal, Equipo) redirigen a su seccion en Objetos; las anclas por id de objeto se conservan.
+OLD_PAGES = {
+    "arsenal": ("weapons", {"weapons": "weapons", "compare-table": "weapons", "offhand": "shields", "ammunition": "ammunition", "calculator": "calculator"}),
+    "gear": ("armor", {"slots": "slots", "armor": "armor", "lights": "lights", "power": "power", "tools": "tools", "drones": "drones",
+                       "field": "consumables", "crates": "crates"}),
+}
+
+
+def redirect_page(lang, slug):
+    default, mapping = OLD_PAGES[slug]
+    title = "Items" if lang == "en" else "Objetos"
+    msg = "This page moved to" if lang == "en" else "Esta página se mudó a"
+    return f"""<!doctype html>
+<html lang="{lang}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{title} · DEEPKIN</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="items.html">
+<script>(function(){{var m={json.dumps(mapping)},h=decodeURIComponent(location.hash.slice(1));location.replace("items.html#"+(m[h]||h||"{default}"));}})();</script>
+<meta http-equiv="refresh" content="0; url=items.html#{default}">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body class="gate"><main class="gate-in"><p>{msg} <a href="items.html#{default}">{title}</a>.</p></main></body>
+</html>
+"""
 
 
 def page_resources(lang):
@@ -1108,9 +1316,9 @@ def atlas_section(lang):
     base = f"../assets/img/world/atlas_{lang}"
     en = lang == "en"
     alt = ("Field atlas: plan of the playable region with every map, passage and service, a depth cross-section from the surface "
-           "to C-3 floor 3 (520 m), the recommended route from the Outpost to Dustline and the stairs down to the Cinder Deep."
+           "to the Deep Survey's floor 3 (520 m), the recommended route from the Outpost to Dustline and the stairs down to the Cinder Deep."
            if en else "Atlas de campo: planta de la región jugable con cada mapa, pasaje y servicio, un corte de profundidad desde la "
-           "superficie hasta el piso 3 de C-3 (520 m), la ruta recomendada del Outpost a Dustline y la escalera a The Cinder Deep.")
+           "superficie hasta el piso 3 de The Deep Survey (520 m), la ruta recomendada del Outpost a Dustline y la escalera a The Cinder Deep.")
     hint = ("Ctrl / ⌘ + scroll, double-click or pinch to zoom · drag to move" if en
             else "Ctrl / ⌘ + rueda, doble clic o pellizco para hacer zoom · arrastrá para moverte")
     ctrl = (f'<div class="atlas-ctrl"><button type="button" data-azoom="in" aria-label="{"Zoom in" if en else "Acercar"}">+</button>'
@@ -1187,7 +1395,7 @@ def page_world(lang):
                        for img, n, cid, d in TX.MACHINES)
     content = (lore_section(lang)
                + section_title("route", "The way down" if lang == "en" else "El camino hacia abajo", "The starting region" if lang == "en" else "La región inicial",
-                             "The Outpost → shaft lift → The Threshold → The Shallows → Excavation C-3.")
+                             "The Outpost → shaft lift → The Threshold → The Shallows → The Deep Survey.")
                + f'<div class="regions">{route}</div>'
                + section_title("surface", "Open sky" if lang == "en" else "Cielo abierto", "The surface" if lang == "en" else "La superficie",
                                "The surface was never completely abandoned. A shaft on The Scarp drops straight to The Threshold." if lang == "en"
@@ -1233,7 +1441,9 @@ def page_manual(lang):
     xp_rows = "".join(f'<tr><td>{lv}</td><td class="n">{num(xp_to_next(lv), lang)}</td><td class="n">{num(GD.total_xp(lv + 1), lang)}</td></tr>'
                       for lv in (1, 2, 5, 10, 15, 20, 30, 40, 60, 100))
     mob_xp = {n["id"]: n.get("xp", 0) for n in NPCS}
-    skill_rows = "".join(f'<tr><td>{lv}</td><td class="n">{num(skill_xp_for(lv), lang)}</td><td class="n">{num(skill_xp_for(lv) / 10, lang, 0)}</td><td class="n">+{lv - 1}%</td></tr>'
+    xps = num(CM.XP_PER_ATTACK_SECOND, lang)
+    fc = CLASS_BY_ID["class.foundry"]["combat_coefficients"]
+    skill_rows = "".join(f'<tr><td>{lv}</td><td class="n">{num(skill_xp_for(lv), lang)}</td><td class="n">{num(skill_xp_for(lv) / CM.XP_PER_ATTACK_SECOND, lang, 0)}</td><td class="n">+{lv - 1}%</td></tr>'
                          for lv in (2, 5, 10, 25, 50, 75, 100))
     fam_list = "".join(f'<li><b>{e(FAMILIES[f][lang])}</b><span>{e(FAMILY_DESC[f][lang])}</span></li>' for f in FAMILIES)
     en = lang == "en"
@@ -1263,10 +1473,10 @@ def page_manual(lang):
 <div class="cls-grid">
   <div class="panel formula">
     <p class="kicker">{'Your hit' if en else 'Tu golpe'}</p>
-    <p class="eq">{'weapon base × class coefficient × attribute bonus × skill bonus × ammo' if en else 'base del arma × coeficiente de clase × bono de atributo × bono de habilidad × munición'}</p>
-    <p>{'Each class has a melee, ranged, ability and defense coefficient. Foundry swings at ×1.2 but shoots at ×0.6; Drift is the reverse.' if en
-        else 'Cada clase tiene un coeficiente cuerpo a cuerpo, a distancia, de habilidad y de defensa. La Forja golpea a ×1,2 pero dispara a ×0,6; La Deriva, al revés.'}</p>
-    <a class="textlink" href="arsenal.html#calculator">{u('calc_title', lang)} {svg('arrow')}</a>
+    <p class="eq">{'weapon base × class coefficient × attribute bonus × skill bonus × ammo × (1 + trait %)' if en else 'base del arma × coeficiente de clase × bono de atributo × bono de habilidad × munición × (1 + rasgo %)'}</p>
+    <p>{f'Each class has a melee, ranged, ability and defense coefficient. Foundry swings at ×{num(fc["melee"], lang)} but shoots at ×{num(fc["ranged"], lang)}; Drift is the reverse. Each weapon skill adds its trait as a percentage (Heat, Ambush, Range, Suppression, Overcharge, Crush).' if en
+        else f'Cada clase tiene un coeficiente cuerpo a cuerpo, a distancia, de habilidad y de defensa. La Forja golpea a ×{num(fc["melee"], lang)} pero dispara a ×{num(fc["ranged"], lang)}; La Deriva, al revés. Cada habilidad de arma suma su rasgo como porcentaje (Calor, Emboscada, Alcance, Supresión, Sobrecarga, Aplastar).'}</p>
+    <a class="textlink" href="items.html#calculator">{u('calc_title', lang)} {svg('arrow')}</a>
   </div>
   <div class="panel formula">
     <p class="kicker">{'Their hit' if en else 'Su golpe'}</p>
@@ -1283,9 +1493,9 @@ def page_manual(lang):
 <div class="cls-grid">
   <div class="panel"><ul class="fams">{fam_list}</ul></div>
   <div class="panel">
-    <p>{'10 skill XP per hit, 8 per hit blocked with a shield. Your class affinity multiplies it (×1.5 for its specialties, ×0.5 for families it has no feel for). Each skill level adds +1% damage with that family, up to level 100.' if en
-        else '10 XP de habilidad por golpe, 8 por golpe bloqueado con escudo. La afinidad de tu clase lo multiplica (×1,5 en sus especialidades, ×0,5 en las familias que no domina). Cada nivel suma +1% de daño con esa familia, hasta el nivel 100.'}</p>
-    <div class="tablewrap"><table class="data compact"><thead><tr><th>{'Skill' if en else 'Nivel'}</th><th>{'Total XP' if en else 'XP total'}</th><th>{'Hits (×1)' if en else 'Golpes (×1)'}</th><th>{u('damage', lang)}</th></tr></thead><tbody>{skill_rows}</tbody></table></div>
+    <p>{f'Skills train by time, not by hits: every weapon earns {xps} skill XP per second of attacking (a slow hammer blow is worth more than a quick knife cut), 8 per hit blocked with a shield. Your class affinity multiplies it (×1.5 for its specialties, ×0.5 for families it has no feel for). Each skill level adds +1% damage with that family, up to level 100.' if en
+        else f'Las habilidades se entrenan por tiempo, no por golpes: toda arma da {xps} XP de habilidad por segundo de ataque (un golpe lento de martillo vale más que un corte rápido de cuchillo), 8 por golpe bloqueado con escudo. La afinidad de tu clase lo multiplica (×1,5 en sus especialidades, ×0,5 en las familias que no domina). Cada nivel suma +1% de daño con esa familia, hasta el nivel 100.'}</p>
+    <div class="tablewrap"><table class="data compact"><thead><tr><th>{'Skill' if en else 'Nivel'}</th><th>{'Total XP' if en else 'XP total'}</th><th>{'Seconds of attacking (×1)' if en else 'Segundos de ataque (×1)'}</th><th>{u('damage', lang)}</th></tr></thead><tbody>{skill_rows}</tbody></table></div>
     <p class="note">{'Shielding: 8% damage reduction with a shield, +0.2% per level, up to 40%.' if en else 'Escudos: 8% de reducción con escudo, +0,2% por nivel, hasta 40%.'}</p>
   </div>
 </div>
@@ -1308,7 +1518,7 @@ def page_manual(lang):
       else 'Tu batería define tu energía. La linterna la consume cada segundo que está encendida, y las habilidades también gastan. No hay recarga durante una expedición: cuando llega a cero, la luz se apaga.'}</p>
       <p>{'Toggle the lantern with T. Unequipping the battery empties your energy; equipping it again does not refill it.' if en else 'Prendé o apagá la linterna con T. Quitar la batería vacía tu energía; volver a equiparla no la recarga.'}</p></div>
   <div class="panel"><p class="eq">{'Simple Lantern: 9 m radius · 0.15/s · ≈ 11 min on Battery Cell I' if en else 'Simple Lantern: radio 9 m · 0,15/s · ≈ 11 min con Battery Cell I'}</p>
-      <a class="textlink" href="gear.html#lights">{'Compare lights' if en else 'Comparar luces'} {svg('arrow')}</a></div>
+      <a class="textlink" href="items.html#lights">{'Compare lights' if en else 'Comparar luces'} {svg('arrow')}</a></div>
 </div>
 
 {section_title('drilling', 'Excavation' if en else 'Excavación', 'Drilling' if en else 'Perforación')}
@@ -1386,6 +1596,8 @@ SYNC_FILES = {
     "shared/gameplay/rpg_rules.gd": "rules/rpg_rules.gd",
     "shared/gameplay/weapon_skills.gd": "rules/weapon_skills.gd",
     "shared/gameplay/combat_skills.gd": "rules/combat_skills.gd",
+    # Rasgos en porcentaje, Trailblazer e intervalo por defecto (pase de balance 2026-10-24, src/combat_math.py).
+    "shared/gameplay/combat_system.gd": "rules/combat_system.gd",
     "server/death_penalty.gd": "rules/death_penalty.gd",
 }
 # Tiendas, casas y plantillas de excavacion (Fases 3-7, 2026-10-23): los lee el wiki (comercio, casas, excavaciones).
@@ -1458,13 +1670,16 @@ def main():
         global CLASSES_DATA, ITEMS, NPCS, MATS, FACTIONS
         CLASSES_DATA, ITEMS, NPCS, MATS, FACTIONS = load()
     ATLAS_SIZES.update(AT.write_all())
-    builders = {"index": page_index, "story": page_story, "classes": page_classes, "arsenal": page_arsenal, "gear": page_gear,
+    builders = {"index": page_index, "story": page_story, "classes": page_classes, "items": page_items,
                 "resources": page_resources, "bestiary": page_bestiary, "world": page_world, "manual": page_manual}
     for lang in LANGS:
         os.makedirs(os.path.join(ROOT, lang), exist_ok=True)
         for slug, fn in builders.items():
             with open(os.path.join(ROOT, lang, slug + ".html"), "w") as fh:
                 fh.write(fn(lang))
+        for old in OLD_PAGES:
+            with open(os.path.join(ROOT, lang, old + ".html"), "w") as fh:
+                fh.write(redirect_page(lang, old))
     with open(os.path.join(ROOT, "index.html"), "w") as fh:
         fh.write(root_index())
     import wiki as WK

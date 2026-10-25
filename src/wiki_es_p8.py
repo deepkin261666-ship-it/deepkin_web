@@ -37,7 +37,7 @@ ITEM_ES_P8 = {
     # Registros de lectura
     "item.log.castoff_ledger": "Una tablet rajada que un campamento Castoff usaba como libro de cuentas: lo que se llevaron y lo que les costó. Lore provisorio.",
     "item.log.castoff_warlord_orders": "Una tablet de campo VDI rayada, sacada del cofre del Warlord: sus órdenes permanentes para el escondite y una nota que nunca mandó. Lore provisorio.",
-    "item.log.vdi_low_sun_memo": "Una tablet sellada de VDI de los pisos profundos de Excavation C-3. Clasificada, y todavía encendida. Lore provisorio.",
+    "item.log.vdi_low_sun_memo": "Una tablet sellada de VDI de los pisos profundos de The Deep Survey. Clasificada, y todavía encendida. Lore provisorio.",
     "item.log.vdi_shift_log": "Una tablet de campo de Vantage Deep Industries que todavía guarda las notas del turno noche de un capataz del Shaft 3. Lore provisorio.",
     "item.log.vdi_still_receiving": "Una tablet de mantenimiento cableada al mainframe del Switchyard. El registro todavía se está escribiendo. Lore provisorio.",
     # Armas
@@ -47,7 +47,7 @@ ITEM_ES_P8 = {
 MOB_ES_P8 = {
     "npc.burrowborn_red_mandible": {
         "lore": "Un cazador Burrowborn de caparazón rojo óxido y un par de pinzas que se cierran como las mandíbulas de una perforadora. Pega, retrocede y vuelve a entrar.",
-        "habitat": "La bahía sur de The Shallows y el fondo oscuro de la primera cámara de Excavation C-3.",
+        "habitat": "La bahía sur de The Shallows y el fondo oscuro de la primera cámara de The Deep Survey.",
         "rules": ["Las pinzas se abren antes de cerrarse: cuando se enciende el arco rojo frente a él, correte a un costado.",
                   "Desde unos metros se lanza por un carril rojo y después se escabulle hacia atrás para volver a atacar.",
                   "Cuida su rincón de la cueva y más allá abandona."],

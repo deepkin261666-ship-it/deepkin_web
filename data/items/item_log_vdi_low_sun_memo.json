@@ -1,7 +1,7 @@
 {
   "id": "item.log.vdi_low_sun_memo",
   "display_name": "VDI Memo · Project LOW SUN",
-  "description": "A sealed VDI tablet from the deep floors of Excavation C-3. Classified, and still powered. Provisional lore.",
+  "description": "A sealed VDI tablet from the deep floors of the Deep Survey. Classified, and still powered. Provisional lore.",
   "visual_id": "visual.log.tablet",
   "category": "log",
   "log": {

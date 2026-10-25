@@ -1,5 +1,5 @@
 {
-  "comment": "NPC trading (2026-10-13, docs/ECONOMY.md \"Trading\"). Keys are trader NPC ids (the talkers on the floors). Prices are whole Metal per unit from the player's side: \"buy\" = the player pays, \"sell\" = the trader pays. \"stock\" (optional) = units the trader can sell per server run. Provisional balance. Phase 3a (2026-10-13) added Pell (capsules & cells), Auntie Rhea (food), Sam (lanterns, backpacks) and Rask (Tier-1 weapons; buys Tier-1 armour). New Battery Cells stay far above Vesko's recharge (250 vs 30 + 1 Lumenita). \"recharge\" (optional, 2026-10-13): the trader refills one empty battery cell (charge at or below empty_below) for price Metal plus reagent_quantity × reagent.",
+  "comment": "NPC trading (2026-10-13, docs/ECONOMY.md \"Trading\"). Keys are trader NPC ids (the talkers on the floors). Prices are whole Metal per unit from the player's side: \"buy\" = the player pays, \"sell\" = the trader pays. \"stock\" (optional) = units the trader can sell per server run. Provisional balance. Phase 3a (2026-10-13) added Pell (capsules & cells), Auntie Rhea (food), Sam (lanterns, backpacks) and Rask (Tier-1 weapons; buys Tier-1 armour). 2026-10-24: Rask also stocks the Rattler, Timber and Headsman chainsaws and gas cans to run them (docs/design/WEAPON_BALANCE.md). New Battery Cells stay far above Vesko's recharge (250 vs 30 + 1 Lumenita). \"recharge\" (optional, 2026-10-13): the trader refills one empty battery cell (charge at or below empty_below) for price Metal plus reagent_quantity × reagent.",
   "shops": {
     "npc.dustline_scrap_buyer": {
       "goods": [
@@ -44,8 +44,12 @@
       "goods": [
         {"item": "item.weapon.foundry_scrapblade", "buy": 120},
         {"item": "item.weapon.foundry_breaker", "buy": 150},
-        {"item": "item.weapon.foundry_ironbound_mace", "buy": 160},
+        {"item": "item.weapon.foundry_ironbound_mace", "buy": 130},
         {"item": "item.weapon.foundry_bulwark", "buy": 170},
+        {"item": "item.weapon.foundry_rattler_saw", "buy": 100, "stock": 4},
+        {"item": "item.weapon.foundry_timber_saw", "buy": 210, "stock": 4},
+        {"item": "item.weapon.foundry_headsman_saw", "buy": 250, "stock": 2},
+        {"item": "item.fuel.gas_can", "buy": 30, "sell": 10, "stock": 6},
         {"item": "item.weapon.relay_infiltrator", "buy": 110},
         {"item": "item.weapon.relay_twin_blades", "buy": 160},
         {"item": "item.weapon.relay_operator", "buy": 210},

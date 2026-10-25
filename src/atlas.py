@@ -43,7 +43,7 @@ T = {
     "route": L("RECOMMENDED ROUTE · OUTPOST → DUSTLINE", "RUTA RECOMENDADA · OUTPOST → DUSTLINE"),
     "route_short": L("Recommended route", "Ruta recomendada"),
     "cinder_route": L("To the Cinder Deep", "Hacia The Cinder Deep"),
-    "c3_route": L("Into C-3", "Hacia C-3"),
+    "c3_route": L("Into the Deep Survey", "Hacia The Deep Survey"),
     "start": L("START", "INICIO"), "first_city": L("FIRST CITY", "PRIMERA CIUDAD"),
     "locked": L("LOCKED · drill the Deep Seal", "CERRADO · perforá el Sello Profundo"),
     "one_way": L("one way", "sólo ida"),
@@ -154,13 +154,14 @@ for _p in PASS:
 
 
 # Pilas de pisos (2026-10-23): las guaridas de cuatro pisos (Castoff Hideout, The Pump Works) van en la planta como una
-# sola placa con su cantidad de pisos; el corte y la clave muestran cada piso. Un grupo = mismos padre y prefijo del
-# nombre, 3 pisos o mas (C-3 F2/F3 siguen con placa propia).
+# sola placa con su cantidad de pisos; el corte y la clave muestran cada piso. Un grupo = mismo punto apilado y prefijo
+# del nombre, 3 pisos o mas (2026-10-24: tambien The Deep Survey, cuyos pisos 2-3 cuelgan del piso 1 y no del padre).
 def _stack_groups():
     by = {}
     for z in WORLD["zones"]:
         if z.get("stack") and z["status"] == "playable":
-            by.setdefault((z["stack"]["parent"], z["name"].split(" · ")[0]), []).append(z["id"])
+            pt = tuple(round(c, 3) for c in z["stack"]["marker"])
+            by.setdefault((pt, z["name"].split(" · ")[0]), []).append(z["id"])
     out = {}
     for (_, prefix), ids in by.items():
         if len(ids) >= 3:
@@ -386,6 +387,10 @@ def plan_svg(P, lang, layout):
         if not (fx + 30 < x < fx + fw - 30 and fy + 20 < y < fy + fh - 20):
             continue
         fs = layout["fs_planned"]
+        # Fuera de la franja de la cuadricula (letras arriba, numeros a la izquierda): el rotulo entero entra en el marco.
+        hw = max(tw(z["name"].upper(), fs, .08), tw(tr("uncharted", lang), fs * .78, .18)) / 2
+        x = min(max(x, fx + 26 + hw), fx + fw - 12 - hw)
+        y = max(y, fy + 26 + fs * .8)
         g.append(text(x, y, z["name"].upper(), fs, "#6d6a60", "middle", 500, MONO, .08))
         g.append(text(x, y + fs * 1.25, tr("uncharted", lang), fs * .78, "#545149", "middle", 400, MONO, .18))
     g.append(passage_lines(P, lang, layout))
@@ -1017,7 +1022,7 @@ def common_layout():
                 "conn.c3_f2": None, "conn.c3_f2_f3": None, "extraction.zone.excavation_c3_f3": None},
         # Pozo del elevador Shaft 3: el mismo punto que en el mapa interactivo (el castillete pintado en la Scarp).
         "elevator_at": {k: v for k, v in WMAP.VLINK_AT.items() if k.startswith("elevator.")},
-        "short": {"zone.excavation_c3": "C-3 F1", "zone.excavation_c3_f2": "C-3 F2", "zone.excavation_c3_f3": "C-3 F3",
+        "short": {"zone.excavation_c3": "Survey F1", "zone.excavation_c3_f2": "Survey F2", "zone.excavation_c3_f3": "Survey F3",
                   "zone.frontier_road_east": "Frontier Rd", "zone.dragon_lair": "Cinder Deep", "zone.surface_scarp": "Scarp",
                   "zone.surface_saltpan": "Saltpan", "zone.floodlands_cellar": "Cellar",
                   **{f"zone.robot_hideout_f{i}": f"Pump F{i}" for i in range(1, 5)},
@@ -1037,11 +1042,10 @@ def wide(lang, layout_only=False, section=True):
     L = common_layout()
     L.update({"id": "w", "fs_zone": 15, "fs_planned": 11.5, "fs_grid": 11, "fs_title": 14, "fs_band": 11, "fs_node": 11.5, "fs_key": 12.5,
               "mark_r": 13, "plate": 15, "badge_r": 8, "step_r": 11, "svc": 13,
-              "labels": {"zone.outpost": (-26, -4, "end"), "zone.shallows": (0, -34, "middle"), "zone.excavation_c3": (18, -8, "start"),
+              "labels": {"zone.outpost": (-26, -4, "end"), "zone.shallows": (0, -34, "middle"), "zone.excavation_c3": (26, -8, "start"),
                          "zone.surface_scarp": (22, -26, "start"), "zone.surface_saltpan": (-4, 34, "middle"),
                          "zone.frontier_road_east": (26, -6, "start"), "zone.dustline": (26, 34, "start"),
                          "zone.threshold": (26, 14, "start"), "zone.dragon_lair": (-30, 32, "middle"),
-                         "zone.excavation_c3_f2": (26, 4, "start"), "zone.excavation_c3_f3": (26, 38, "start"),
                          "zone.the_sump": (0, 34, "middle"), "zone.floodlands": (-20, 40, "middle"), "zone.robot_hideout_f1": (0, -34, "middle"),
                          "zone.castoff_hideout_f1": (24, 5, "start"), "zone.floodlands_cellar": (-10, -34, "middle")},
               "step_off": {"zone.outpost": (-14, -30), "zone.threshold": (14, -30), "zone.surface_scarp": (-26, -18),
@@ -1055,7 +1059,7 @@ def wide(lang, layout_only=False, section=True):
               "sec_top": 84, "sec_k1": 4.1, "node_w": 54, "node_h": 36,
               "sec_off": {"conn.scarp_saltpan_ne": -6, "conn.scarp_saltpan_sw": 6},
               "sec_badge": {"elevator.shaft3": (0, 0), "conn.scarp_saltpan_ne": (0, -16), "conn.scarp_saltpan_sw": (0, 18), "conn.saltpan_frontier_east": (-30, 18), "conn.floodlands_cellar": (-46, -4),
-                            "conn.frontier_east_dustline": (0, -16), "conn.frontier_east_dragon_lair": (-20, 0), "conn.threshold_shallows": (0, -16),
+                            "conn.frontier_east_dustline": (0, -16), "conn.frontier_east_dragon_lair": (-20, 0), "conn.threshold_shallows": (0, -34),
                             "conn.shallows_c3": (-58, 0), "conn.c3_f2": (-18, 0), "conn.c3_f2_f3": (-18, 0),
                             "extraction.zone.excavation_c3_f3": (0, -30)}})
     if layout_only:
@@ -1113,11 +1117,10 @@ def tall(lang, layout_only=False, section=True):
     L = common_layout()
     L.update({"id": "t", "fs_zone": 14.5, "fs_planned": 11, "fs_grid": 12, "fs_title": 16, "fs_band": 12, "fs_node": 12, "fs_key": 16,
               "mark_r": 13, "plate": 14, "badge_r": 9, "step_r": 10.5, "svc": 13,
-              "labels": {"zone.outpost": (-22, -2, "end", True), "zone.shallows": (-10, -35, "middle"), "zone.excavation_c3": (18, -8, "start"),
+              "labels": {"zone.outpost": (-22, -2, "end", True), "zone.shallows": (-10, -35, "middle"), "zone.excavation_c3": (24, -24, "start"),
                          "zone.surface_scarp": (-20, 12, "end"), "zone.surface_saltpan": (0, 34, "middle"),
                          "zone.frontier_road_east": (30, 14, "start"), "zone.dustline": (24, 48, "start"),
                          "zone.threshold": (-26, 40, "end", True), "zone.dragon_lair": (-40, 34, "middle"),
-                         "zone.excavation_c3_f2": (26, 22, "start"), "zone.excavation_c3_f3": (26, 56, "start", True),
                          "zone.the_sump": (0, 34, "middle"), "zone.floodlands": (-44, -32, "middle"), "zone.robot_hideout_f1": (-20, -30, "middle"),
                          "zone.castoff_hideout_f1": (24, 5, "start"), "zone.floodlands_cellar": (0, 32, "middle")},
               "step_off": {"zone.outpost": (20, -26), "zone.threshold": (44, -14), "zone.surface_scarp": (-6, -30),
@@ -1126,12 +1129,12 @@ def tall(lang, layout_only=False, section=True):
                             "conn.scarp_saltpan_sw": (-1.6, 1.4), "conn.frontier_east_dragon_lair": (-2.8, -0.8),
                             "conn.c3_f2": (-3.4, -2.0), "conn.c3_f2_f3": (-3.4, 0.4), "extraction.zone.excavation_c3_f3": (-3.4, 4.6),
                             "conn.saltpan_frontier_east": (0, -1.8), "conn.frontier_east_dustline": (2.4, 1.2), "conn.threshold_shallows": (-0.2, -1.2), "conn.shallows_c3": (0.6, 0),
-                            "conn.sump_frontier_east": (1.4, -1.6)},
+                            "conn.sump_frontier_east": (1.4, -1.6), "conn.saltpan_salt_pit": (-2.2, 1.6)},
               "fuel_label": (-14, 4, "end"),
               "sec_top": 84, "sec_k1": 3.3, "node_w": 56, "node_h": 36,
               "sec_off": {"conn.scarp_saltpan_ne": -6, "conn.scarp_saltpan_sw": 6},
               "sec_badge": {"elevator.shaft3": (0, 0), "conn.scarp_saltpan_ne": (0, -16), "conn.scarp_saltpan_sw": (0, 18), "conn.saltpan_frontier_east": (-30, 18), "conn.floodlands_cellar": (-46, -4),
-                            "conn.frontier_east_dustline": (0, -16), "conn.frontier_east_dragon_lair": (-20, 0), "conn.threshold_shallows": (0, -16),
+                            "conn.frontier_east_dustline": (0, -16), "conn.frontier_east_dragon_lair": (-20, 0), "conn.threshold_shallows": (0, -34),
                             "conn.shallows_c3": (-58, 0), "conn.c3_f2": (-18, 0), "conn.c3_f2_f3": (-18, 0),
                             "extraction.zone.excavation_c3_f3": (0, -30)}})
     L["labels"]["zone.floodlands_cellar"] = (12, 42, "middle")

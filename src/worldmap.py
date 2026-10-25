@@ -179,6 +179,9 @@ PASS_SLOTS = [(28, 0), (-28, 0), (24, -26), (-24, -26)]
 # y se queda con el primer lugar que no pisa otra marca, un pasaje u otro rotulo de su nivel, medido con el zoom de
 # entrada en escritorio (LABEL_U px del plano por px de pantalla). Las marcas no se mueven.
 LABEL_U = 1.45
+# 2026-10-24: en un telefono de 375 px las marcas se ven mas grandes respecto del plano (0.6 de escala sobre un visor de
+# 341 px: 0.6 * 1312 / 341 px del plano por px de pantalla); el rotulo busca un lugar libre en las dos escalas.
+LABEL_U_PHONE = 2.31
 # Entradas pintadas en el arte (2026-10-12, pintura sin rotulos): el pozo de C-3 se ve en la superficie pero el mapa
 # vive bajo tierra; una marca chica "↓ nivel" sobre el pozo baja a esa capa. Shaft 3 ya es el elevador.
 ENTRANCES = {"zone.excavation_c3": "left"}  # lado del rotulo
@@ -530,8 +533,8 @@ def layer_svg(w, lv, lang):
     badges_here = [w.anchor(z) for z in zs]
     slot_used = {}
     pass_pts = []
-    icons = []  # pasajes dibujados en este nivel (px del plano), para los rotulos
-    boxes = []  # otras cajas ocupadas (rotulos de pasajes), px del plano
+    icons = []  # pasajes dibujados en este nivel: (x, y del punto en px del plano, ox, oy en px de pantalla)
+    boxes = []  # otras cajas ocupadas (rotulos de pasajes): (x, y, x0, y0, x1, y1), caja en px de pantalla desde el punto
 
     def slot(x, y, first=0):
         """Desvio en px de pantalla si (x, y) cae sobre la marca de un mapa de este nivel; si no, ninguno. `first`: lado
@@ -575,7 +578,7 @@ def layer_svg(w, lv, lang):
                          else f'<text class="wm-vl-label" x="18" y="4">{e(txt)}</text>')
             arrow = '<path class="wm-vl-arrow" d="M0-3v6M-2.2 1 0 3.2 2.2 1"/>' if down else '<path class="wm-vl-arrow" d="M0 3v-6M-2.2-1 0-3.2 2.2-1"/>'
             ox, oy = slot(x, y)
-            icons.append((x + ox * LABEL_U, y + oy * LABEL_U))
+            icons.append((x, y, ox, oy))
             icon = (f'<circle class="wm-hit" r="18"/><rect class="wm-vl-bg" x="-12" y="-12" width="24" height="24" rx="4"/>{glyph(k, 15, PASS_ICON)}'
                     f'<g transform="translate(10,-10)"><circle class="wm-vl-dot" r="5.5"/>{arrow}</g>{label}')
             if ox or oy:
@@ -622,10 +625,9 @@ def layer_svg(w, lv, lang):
         icon = (f'<circle class="wm-hit" r="18"/><rect class="wm-vl-bg" x="-12" y="-12" width="24" height="24" rx="4"/>{glyph("elevator", 15, PASS_ICON)}'
                 f'{"".join(col)}{label}')
         ox, oy = slot(x, y, first=1)
-        icons.append((x + ox * LABEL_U, y + oy * LABEL_U))
+        icons.append((x, y, ox, oy))
         if journey:  # rotulo del elevador, a la izquierda del icono
-            ix, iy = x + ox * LABEL_U, y + oy * LABEL_U
-            boxes.append((ix - (20 + len(name) * 7.2) * LABEL_U, iy - 8 * LABEL_U, ix - 16 * LABEL_U, iy + 6 * LABEL_U))
+            boxes.append((x, y, ox - (20 + len(name) * 7.2), oy - 8, ox - 16, oy + 6))
         if ox or oy:
             icon = f'<path class="wm-vl-tie" d="M0,0L{ox * .55:.1f},{oy * .55:.1f}"/><g transform="translate({ox},{oy})">{icon}</g>'
         vls.append(sc(f'wm-vl wm-elevator k-elevator s-{el["status"]} dir-{"down" if to_lv < lv else "up"}{" is-journey" if journey else ""}', x, y,
@@ -661,34 +663,48 @@ def layer_svg(w, lv, lang):
             extras.append(sc("wm-sites", x, y, f'<g transform="translate(22,-16)">{site_mark("excavation", L_(SITE_KIND["excavation"], lang) + " · " + L_(T["l_bore"], lang))}</g>'))
     # Marcas propias y de arte, etiquetas, pasos del viaje
     marks, badges = [], []
-    placed = []  # cajas (x0, y0, x1, y1) en px del plano: marcas, pasajes y rotulos ya puestos
-    U = LABEL_U
+    # Cajas ocupadas (x, y, x0, y0, x1, y1): punto en px del plano y caja en px de pantalla desde el punto; en el plano
+    # miden U veces eso (LABEL_U en escritorio, LABEL_U_PHONE en un telefono).
+    placed = []
     for z in zs:
         ax_, ay_ = w.anchor(z)
-        placed.append((ax_ - 11 * U, ay_ - 11 * U, ax_ + 11 * U, ay_ + 11 * U))
-    placed += [(ix - 12 * U, iy - 12 * U, ix + 12 * U, iy + 12 * U) for ix, iy in icons] + boxes
+        placed.append((ax_, ay_, -11, -11, 11, 11))
+    placed += [(ix, iy, ox - 12, oy - 12, ox + 12, oy + 12) for ix, iy, ox, oy in icons] + boxes
     for z in zs:  # pasos del viaje (insignia a 13,-15 de la marca)
         if z["id"] in w.steps:
             ax_, ay_ = w.anchor(z)
-            placed.append((ax_ + 4 * U, ay_ - 24 * U, ax_ + 22 * U, ay_ - 6 * U))
+            placed.append((ax_, ay_, 4, -24, 22, -6))
 
     def place_label(z, x, y, r, sub, lab):
         """(x, y, text-anchor) del rotulo en unidades de la marca: el primer lugar libre (ver LABEL_U)."""
         wd = max(len(z["name"]) * 7.6, len(sub) * 6.9)  # dos renglones: nombre, y debajo piso y profundidad
         cands = []
         if lab and math.hypot(lab[0] * W - x, lab[1] * H - y) >= 18:
-            cands.append(((lab[0] * W - x) / U, (lab[1] * H - y) / U + 4, "middle"))
+            cands.append(((lab[0] * W - x) / LABEL_U, (lab[1] * H - y) / LABEL_U + 4, "middle"))
         cands += [(0, r + 15, "middle"), (r + 7, 0, "start"), (-(r + 7), 0, "end"), (0, -(r + 19), "middle")]
+        # Mas afuera (pasando la columna de pasajes al costado de la marca), por si los cuatro lados estan ocupados.
+        cands += [(r + 33, 0, "start"), (-(r + 33), 0, "end"), (0, r + 41, "middle"), (0, -(r + 45), "middle")]
 
         def box(c):
             cx, cy, a = c
             x0 = cx - wd / 2 if a == "middle" else (cx if a == "start" else cx - wd)
-            return (x + x0 * U, y + (cy - 10) * U, x + (x0 + wd) * U, y + (cy + 15) * U)
+            return (x, y, x0, cy - 10, x0 + wd, cy + 15)
 
-        def hits(b):
-            return sum(max(0, min(b[2], q[2]) - max(b[0], q[0])) * max(0, min(b[3], q[3]) - max(b[1], q[1])) for q in placed
-                       if not (abs((q[0] + q[2]) / 2 - x) < 1 and abs((q[1] + q[3]) / 2 - y) < 1))
-        best = min(cands, key=lambda c: (hits(box(c)) > 0, cands.index(c) if hits(box(c)) == 0 else hits(box(c))))
+        def px(q, U):
+            return (q[0] + q[2] * U, q[1] + q[3] * U, q[0] + q[4] * U, q[1] + q[5] * U)
+
+        def hits(b, U):
+            b = px(b, U)
+            out_ = (max(0, -b[0]) + max(0, b[2] - W)) * (b[3] - b[1]) + (max(0, -b[1]) + max(0, b[3] - H)) * (b[2] - b[0])  # fuera del mapa
+            return out_ + sum(max(0, min(b[2], q[2]) - max(b[0], q[0])) * max(0, min(b[3], q[3]) - max(b[1], q[1]))
+                       for q in (px(q_, U) for q_ in placed if not (q_[0] == x and q_[1] == y and q_[2:] == (-11, -11, 11, 11))))
+
+        # Primero un lugar libre en escritorio y en telefono (en orden); si no hay, el que menos pisa sumando las dos
+        # escalas en px de pantalla.
+        def key(c):
+            hd, hp = hits(box(c), LABEL_U), hits(box(c), LABEL_U_PHONE)
+            return (hd + hp > 0, hd / LABEL_U ** 2 + hp / LABEL_U_PHONE ** 2, cands.index(c))
+        best = min(cands, key=key)
         placed.append(box(best))
         return best
     for z in zs:

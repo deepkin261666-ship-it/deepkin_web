@@ -241,6 +241,9 @@ static func meets_requirements(
 	var class_requirements: Array = item.requirements.get("class_ids", [])
 	if not class_requirements.is_empty() and not class_requirements.has(class_id):
 		return false
+	# A Tier-2+ weapon needs its own skill at the tier's level even if its data forgot it (2026-10-24).
+	if not item.weapon_type.is_empty() and WeaponSkills.is_family(item.weapon_family) and WeaponSkills.level_of(skills, item.weapon_family) < WeaponSkills.tier_skill_minimum(item.gear_tier):
+		return false
 	var required_skills: Variant = item.requirements.get("minimum_skills", {})
 	if required_skills is Dictionary:
 		for family in required_skills:

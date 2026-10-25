@@ -1,0 +1,132 @@
+{
+  "id": "npc.burrowborn_brine_scorpion",
+  "display_name": "Brine Scorpion",
+  "max_health": 65,
+  "movement_speed": 3.1,
+  "detection_range": 11.0,
+  "attack_range": 1.5,
+  "attack_damage": 6,
+  "attack_cooldown": 1.2,
+  "faction": "faction.burrowborn",
+  "species": "Brine Scorpion",
+  "role": "skirmisher",
+  "archetype": "skirmisher",
+  "tier": "normal",
+  "hunt_tier": 2,
+  "threat": 4,
+  "xp": 45,
+  "coins": [
+    3,
+    8
+  ],
+  "body_radius": 0.55,
+  "habitat": "The Salt Pit's white flats around the brine ponds (packs of two to four)",
+  "lore": "PROVISIONAL. A Burrowborn that came up the Salt Pit's old adit and stayed in the light: its plates have crusted white with salt. It feels footsteps through the flats long before it sees you, and it never hunts alone.",
+  "verbs": [
+    "SKITTER",
+    "SPRAY",
+    "STING",
+    "CALL"
+  ],
+  "rules": [
+    "Before it sprays, a blue fan lights up in front of it: step out of it, or the salt slows you for two seconds.",
+    "Close in, its tail curls before it stings: a short red arc.",
+    "Hit one and the rest of the pack comes running."
+  ],
+  "perception": {
+    "aggro_radius": 8.0,
+    "memory_seconds": 5.0,
+    "call_radius": 9.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      1.4
+    ],
+    "leash_radius": 18.0,
+    "lure": "pack",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0
+  },
+  "abilities": [
+    {
+      "id": "salt_spray",
+      "name": "Salt Spray",
+      "shape": "cone",
+      "damage": 7,
+      "windup": 0.75,
+      "radius": 4.0,
+      "half_angle": 32.0,
+      "cooldown": 9.0,
+      "trigger_range": 3.8,
+      "recovery": 0.4,
+      "slow": 0.6,
+      "slow_seconds": 2.0,
+      "fx": "salt"
+    },
+    {
+      "id": "tail_sting",
+      "name": "Tail Sting",
+      "shape": "bite",
+      "damage": 12,
+      "windup": 0.55,
+      "reach": 1.9,
+      "half_angle": 40.0,
+      "cooldown": 5.0,
+      "trigger_range": 1.9,
+      "recovery": 0.4
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.ore.limonite",
+      "quantity": [
+        1,
+        2
+      ],
+      "chance": 0.25
+    },
+    {
+      "item": "item.ore.magnetite",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.12
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.08
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/burrowborn/brine_scorpion.glb",
+    "size": 1.7,
+    "gait": "skitter",
+    "yaw": 0,
+    "tint": "d9d2c4",
+    "roughness": 0.78,
+    "mouth": [
+      0.0,
+      0.45,
+      -0.75
+    ],
+    "gait_legs": {
+      "height": 0.32,
+      "stride": 0.1,
+      "lift": 0.05,
+      "pattern": "tripod",
+      "cycle": 0.5
+    },
+    "glow": {
+      "color": "9dffb0",
+      "energy": 0.35,
+      "range": 2.0,
+      "height": 0.4
+    }
+  }
+}
