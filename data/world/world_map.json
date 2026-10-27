@@ -656,39 +656,43 @@
       "depth_m": 0,
       "level": 0,
       "tier": 3,
-      "danger": "high",
-      "status": "planned",
+      "danger": "medium",
+      "status": "playable",
       "region": "region.frontier",
       "cell": {
         "seed": [
-          0.37,
-          0.65
+          0.345,
+          0.655
         ],
-        "weight": 0.0006,
+        "weight": 0.006,
         "polygon": [
           [
-            0.5208,
-            0.8788
+            0.5188,
+            0.8742
           ],
           [
-            0.295,
-            0.7098
+            0.2585,
+            0.7234
           ],
           [
-            0.295,
-            0.5056
+            0.2657,
+            0.5102
           ],
           [
-            0.3439,
-            0.4924
+            0.2787,
+            0.4945
           ],
           [
-            0.4814,
-            0.5786
+            0.3484,
+            0.4826
           ],
           [
-            0.4949,
-            0.6096
+            0.4797,
+            0.5813
+          ],
+          [
+            0.4918,
+            0.6109
           ]
         ]
       },
@@ -697,15 +701,50 @@
         0.666
       ],
       "summary": {
-        "en": "Vantage Deep Industries' Contract Site 3: an open-cast spiral pit cut down to a bore head, its blue work lights still burning. Planned.",
-        "es": "El Sitio Contratado 3 de Vantage Deep Industries: una cantera en espiral a cielo abierto excavada hasta un cabezal de perforación, con sus luces de trabajo azules todavía encendidas. Planificado."
+        "en": "PROVISIONAL. Vantage Deep Industries' Contract Site 3: an open-cast spiral cut sixty metres down to a bore head, its blue work lights still burning on a grid that never shut down. Castoff salvage crews camp on the rim, Rustbound machines keep the substation, Mutants climb out of the bowl. The spiral haul road runs down to the Upper Benches (an abandoned VDI shift camp, a stalled convoy), the Lower Benches (survey borers, the first Lumenita, a Mutant den) and the Rig: Bore 1, still drilling on its schedule and guarded by Rustbound elites and turrets. Throw Breaker 3 at the rim substation and the whole pit goes dark: the turrets and the bore stop, the machines keep hunting. The Ruins gate on the west rim is sealed.",
+        "es": "PROVISIONAL. El Sitio Contratado 3 de Vantage Deep Industries: una espiral a cielo abierto excavada sesenta metros hasta un cabezal de perforación, con sus luces de trabajo azules todavía encendidas en una red que nunca se apagó. Cuadrillas de chatarreros Castoff acampan en el borde, máquinas Rustbound custodian la subestación, los mutantes trepan desde el fondo. El camino de acarreo en espiral baja a las Bancadas Superiores (un campamento de turno abandonado de VDI, un convoy varado), a las Bancadas Inferiores (perforadoras de prospección, la primera Lumenita, una guarida mutante) y a la Plataforma: el Pozo 1, que sigue perforando según su horario, custodiado por élites Rustbound y torretas. Bajá el Interruptor 3 en la subestación del borde y todo el pozo queda a oscuras: las torretas y la perforadora se detienen, las máquinas siguen cazando. La puerta a las Ruinas en el borde oeste está sellada."
       },
       "art_icon": true,
-      "connections": [],
+      "connections": [
+        "conn.scarp_c3_site",
+        "conn.c3_site_salt_pit",
+        "conn.c3_site_ruins"
+      ],
       "label": [
-        0.362,
-        0.69
-      ]
+        0.365,
+        0.59
+      ],
+      "subtitle": {
+        "en": "Open-cast spiral · 4 levels",
+        "es": "Espiral a cielo abierto · 4 niveles"
+      },
+      "size_m": [
+        250,
+        215
+      ],
+      "game": {
+        "file": "data/starting_region.json",
+        "zone_id": "zone.c3_site",
+        "floors": [
+          "zone.c3_site_upper",
+          "zone.c3_site_lower",
+          "zone.c3_site_rig"
+        ],
+        "floor_gauge": {
+          "zone.c3_site_upper": {
+            "name": "EXCAVATION C-3 · UPPER BENCHES",
+            "pit_m": 22
+          },
+          "zone.c3_site_lower": {
+            "name": "EXCAVATION C-3 · LOWER BENCHES",
+            "pit_m": 45
+          },
+          "zone.c3_site_rig": {
+            "name": "EXCAVATION C-3 · THE RIG",
+            "pit_m": 60
+          }
+        }
+      }
     },
     {
       "id": "zone.surface_scarp",
@@ -727,12 +766,12 @@
         "weight": 0.0,
         "polygon": [
           [
-            0.4814,
-            0.5786
+            0.4797,
+            0.5813
           ],
           [
-            0.3439,
-            0.4924
+            0.3484,
+            0.4826
           ],
           [
             0.3754,
@@ -778,7 +817,8 @@
         "conn.scarp_saltpan_sw",
         "conn.scarp_sump",
         "conn.shaft3_scarp_outpost",
-        "conn.shaft3_scarp_threshold"
+        "conn.shaft3_scarp_threshold",
+        "conn.scarp_c3_site"
       ]
     },
     {
@@ -801,12 +841,12 @@
         "weight": 0.0,
         "polygon": [
           [
-            0.4949,
-            0.6096
+            0.4918,
+            0.6109
           ],
           [
-            0.4814,
-            0.5786
+            0.4797,
+            0.5813
           ],
           [
             0.5548,
@@ -1818,16 +1858,12 @@
             0.4244
           ],
           [
-            0.3439,
-            0.4924
+            0.3484,
+            0.4826
           ],
           [
-            0.295,
-            0.5056
-          ],
-          [
-            0.2829,
-            0.5019
+            0.2787,
+            0.4945
           ],
           [
             0.1863,
@@ -1874,6 +1910,14 @@
         "weight": 0.001,
         "polygon": [
           [
+            0.2787,
+            0.4945
+          ],
+          [
+            0.2657,
+            0.5102
+          ],
+          [
             0.112,
             0.5838
           ],
@@ -1896,10 +1940,6 @@
           [
             0.1863,
             0.3336
-          ],
-          [
-            0.2829,
-            0.5019
           ]
         ]
       },
@@ -1970,16 +2010,12 @@
             0.5838
           ],
           [
-            0.2829,
-            0.5019
+            0.2657,
+            0.5102
           ],
           [
-            0.295,
-            0.5056
-          ],
-          [
-            0.295,
-            0.7098
+            0.2585,
+            0.7234
           ]
         ]
       },
@@ -1995,7 +2031,8 @@
       "connections": [
         "conn.crags_ruins",
         "conn.outpost_ruins",
-        "conn.ruins_abyss"
+        "conn.ruins_abyss",
+        "conn.c3_site_ruins"
       ],
       "label": [
         0.21,
@@ -2070,12 +2107,12 @@
             0.7706
           ],
           [
-            0.295,
-            0.7098
+            0.2585,
+            0.7234
           ],
           [
-            0.5208,
-            0.8788
+            0.5188,
+            0.8742
           ]
         ]
       },
@@ -2235,8 +2272,8 @@
         0.43
       ],
       "summary": {
-        "en": "PROVISIONAL. The drowned east past Dustline's East Gate: a causeway through standing water, a half-sunk church, a dead quay and its crane, old gateways that lead underground. One of them, the Drowned Cellar, is a Burrowborn nest; the others are sealed.",
-        "es": "PROVISIONAL. El este ahogado pasando la Puerta Este de Dustline: una calzada entre agua estancada, una iglesia medio hundida, un muelle muerto con su grúa y portales viejos que bajan bajo tierra. Uno de ellos, el Sótano Ahogado, es un nido de Burrowborn; los otros están sellados."
+        "en": "PROVISIONAL. The drowned east past Dustline's East Gate: a causeway through standing water, a half-sunk church, a dead quay and its crane, old gateways that lead underground. One of them, the Drowned Cellar, is a Burrowborn nest; the others are sealed. Two Sluice Maws, rooted VDI flood intakes, guard the quay and the south marsh.",
+        "es": "PROVISIONAL. El este ahogado pasando la Puerta Este de Dustline: una calzada entre agua estancada, una iglesia medio hundida, un muelle muerto con su grúa y portales viejos que bajan bajo tierra. Uno de ellos, el Sótano Ahogado, es un nido de Burrowborn; los otros están sellados. Dos Fauces de Esclusa, tomas de agua de VDI ancladas, guardan el muelle y el pantano del sur."
       },
       "art_icon": true,
       "connections": [
@@ -2259,6 +2296,23 @@
       "game": {
         "file": "data/starting_region.json",
         "zone_id": "zone.floodlands"
+      },
+      "hunting": {
+        "factions": [
+          "faction.rustbound"
+        ],
+        "tiers": [
+          3,
+          3
+        ],
+        "spawn_groups": [
+          "spawn.floodlands_quay_maw",
+          "spawn.floodlands_marsh_maw"
+        ],
+        "note": {
+          "en": "Two Sluice Maws, anchored VDI flood intakes (tier 3, heavy), guard the drowned quay and the south marsh. They never move: the causeway road stays out of their reach.",
+          "es": "Dos Fauces de Esclusa, tomas de agua de VDI ancladas (tier 3, pesadas), guardan el muelle ahogado y el pantano del sur. Nunca se mueven: la calzada queda fuera de su alcance."
+        }
       }
     },
     {
@@ -2397,12 +2451,12 @@
             0.8806
           ],
           [
-            0.5208,
-            0.8788
+            0.5188,
+            0.8742
           ],
           [
-            0.4949,
-            0.6096
+            0.4918,
+            0.6109
           ],
           [
             0.6585,
@@ -2424,7 +2478,8 @@
       },
       "connections": [
         "conn.saltpan_salt_pit",
-        "conn.frontier_east_salt_pit"
+        "conn.frontier_east_salt_pit",
+        "conn.c3_site_salt_pit"
       ],
       "label": [
         0.69,
@@ -2676,8 +2731,8 @@
       ],
       "route": "route.frontier_road",
       "exit_at": [
-        0.5303,
-        0.5005
+        0.5298,
+        0.5013
       ]
     },
     {
@@ -2701,8 +2756,8 @@
         }
       ],
       "exit_at": [
-        0.5058,
-        0.5395
+        0.5047,
+        0.5413
       ]
     },
     {
@@ -3198,8 +3253,8 @@
         }
       ],
       "exit_at": [
-        0.2346,
-        0.4177
+        0.2325,
+        0.4141
       ]
     },
     {
@@ -3219,8 +3274,8 @@
         }
       ],
       "exit_at": [
-        0.1975,
-        0.5428
+        0.1888,
+        0.547
       ]
     },
     {
@@ -3261,8 +3316,8 @@
         }
       ],
       "exit_at": [
-        0.2138,
-        0.7402
+        0.1956,
+        0.747
       ]
     },
     {
@@ -3324,8 +3379,8 @@
         }
       ],
       "exit_at": [
-        0.5767,
-        0.577
+        0.5751,
+        0.5776
       ]
     },
     {
@@ -3349,6 +3404,73 @@
       "exit_at": [
         0.7125,
         0.6415
+      ]
+    },
+    {
+      "id": "conn.scarp_c3_site",
+      "kind": "road",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.surface_scarp",
+          "exit": "SOUTH-WEST TRAIL · EXCAVATION C-3",
+          "edge": "SW",
+          "transition": 400
+        },
+        {
+          "zone": "zone.c3_site",
+          "exit": "NORTH · THE SCARP",
+          "edge": "NE",
+          "transition": 401
+        }
+      ],
+      "exit_at": [
+        0.414,
+        0.532
+      ]
+    },
+    {
+      "id": "conn.c3_site_salt_pit",
+      "kind": "road",
+      "status": "playable",
+      "ends": [
+        {
+          "zone": "zone.c3_site",
+          "exit": "EAST · THE SALT PIT",
+          "edge": "SE",
+          "transition": 403
+        },
+        {
+          "zone": "zone.salt_pit",
+          "exit": "WEST · EXCAVATION C-3",
+          "edge": "W",
+          "transition": 402
+        }
+      ],
+      "exit_at": [
+        0.5053,
+        0.7426
+      ]
+    },
+    {
+      "id": "conn.c3_site_ruins",
+      "kind": "road",
+      "status": "planned",
+      "ends": [
+        {
+          "zone": "zone.c3_site",
+          "exit": "WEST · ANCIENT RUINS (SEALED)",
+          "edge": "NW"
+        },
+        {
+          "zone": "zone.ancient_ruins",
+          "exit": "EAST · EXCAVATION C-3",
+          "edge": "NE"
+        }
+      ],
+      "exit_at": [
+        0.2621,
+        0.6168
       ]
     },
     {

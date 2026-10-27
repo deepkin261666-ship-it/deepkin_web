@@ -173,6 +173,40 @@ MOB_ES_P8 = {
                   "Funciona con la energía del piso: en un apagón se apaga y deja de disparar; ése es el momento de avanzar.",
                   "Matala desde atrás de una cobertura, o corré hacia ella entre descarga y descarga."],
     },
+    # Criaturas nuevas del juego (2026-10-24 a 2026-10-26): el Salt Pit, The Deep Survey y los Floodlands.
+    "npc.burrowborn_brine_scorpion": {
+        "lore": "Un Burrowborn que subió por el viejo socavón del Salt Pit y se quedó en la luz: la sal le encostró las placas de blanco. Siente los pasos a través de la salina mucho antes de verte, y nunca caza solo.",
+        "habitat": "Las planicies blancas del Salt Pit, alrededor de las piletas de salmuera (manadas de dos a cuatro).",
+        "rules": ["Antes de rociar se enciende un abanico azul frente a él: salí de ahí, o la sal te frena dos segundos.",
+                  "De cerca, curva la cola antes de picar: un arco rojo corto.",
+                  "Pegale a uno y el resto de la manada viene corriendo."],
+    },
+    "npc.burrowborn_pit_wyrm": {
+        "lore": "La cosa por la que los mineros sellaron el socavón. Un gusano Burrowborn largo como un camión minero, con el cuero gris de salmuera; los Brine Scorpions de las planicies son lo que quedó de su cría. Caza por vibración y se mueve en la sal como si fuera agua.",
+        "habitat": "Sellado bajo el Salt Pit: el viejo socavón al pie de las terrazas (todavía no aparece; el socavón sigue sellado).",
+        "rules": ["Si te alejás, se sumerge: el suelo se raja en un anillo rojo bajo tus pies. Movete antes de que se llene: el Wyrm sale por ahí.",
+                  "Mientras está bajo la sal, tus golpes apenas lo alcanzan.",
+                  "A distancia se yergue y escupe salmuera por una línea verde: salí de la línea.",
+                  "De cerca, el cuerpo barre un arco rojo amplio.",
+                  "Herido a la mitad, se yergue y golpea: géiseres de salmuera revientan en anillos rojos siguiendo su mira."],
+    },
+    "npc.rustbound_millennium_bug": {
+        "lore": "Una perforadora de relevamiento de VDI: un gusano taladro segmentado que cava delante de las cuadrillas y se ilumina el camino con lámparas rojas. Su reloj de trabajo dio la vuelta en el año dos mil y leyó la fecha como mil novecientos, así que cada relevamiento de su lista tiene un siglo de atraso y no para por nada hasta terminarlos. Los mineros les dicen millennium bugs. Cualquier cosa tibia parada en su línea de relevamiento es roca para cortar.",
+        "habitat": "Obras de VDI: el segundo piso de The Deep Survey (The Dark Stratum) y el fondo del Salt Pit.",
+        "rules": ["Si te alejás, cava: un anillo rojo se abre bajo tus pies. Movete antes de que se llene; sale por ahí.",
+                  "Mientras está bajo la roca tus golpes apenas lo alcanzan: pegale cuando sale.",
+                  "De cerca, levanta la cabeza y la echa atrás antes de cerrar las mandíbulas cortadoras: un arco rojo corto frente a él. Después retrocede para volver a cavar.",
+                  "Cuando le titilan las lámparas y un anillo azul se llena a su alrededor, salí: la descarga te traba el traje un momento."],
+    },
+    "npc.rustbound_sluice_maw": {
+        "lore": "Cuando el este se inundó, las obras hidráulicas de VDI abulonaron Sluice Maws a lo largo de los muelles: una cabeza de toma sobre un tallo hidráulico que atrapa lo que flote en el canal (troncos, tambores, algún cuerpo) y lo manda a las bombas para que nada las trabe. Las bombas pararon hace mucho; las bocas nunca recibieron la orden. La maleza y el óxido les cubrieron las placas, y todavía limpian el agua de todo lo que se mueve.",
+        "habitat": "Los Floodlands: el muelle inundado y el pantano del sur, plantado en el agua baja.",
+        "rules": ["Nunca se mueve. Más allá del alcance de su tentáculo (unos 12 m) sólo puede mirarte.",
+                  "Una línea azul sobre el agua es su tentáculo: lo lanza y atrapa al que alcanza (45 % de velocidad durante 2,5 s). Salí de la línea.",
+                  "De cerca, al frente, abre las fauces sobre un arco rojo: correte a un costado antes de que se cierren.",
+                  "Un abanico verde: escupe savia por la garganta (ácido; la Resistencia ayuda).",
+                  "Si te pegás a su tallo se sacude: un anillo rojo se llena a su alrededor. Salí."],
+    },
 }
 
 FACTION_ES_P8 = {
@@ -202,7 +236,7 @@ FACTION_ES_P8 = {
         "traits": ["patrullan rutas fijas", "se apoyan en torretas y trampas",
                    "más pesados, lentos y pegadores que los Castoffs", "cazan por sensor en la oscuridad"],
         "communication": "Charla de radio y luces de alerta; las torretas y las trampas comparten la red eléctrica del piso.",
-        "hierarchy": "War Drone → Miner Unit / Sentry Turret → Haze Skirmisher / Pelter → Chopper (capataz)",
+        "hierarchy": "War Drone → Miner Unit / Sentry Turret / Millennium Bug → Haze Skirmisher / Pelter → Chopper (capataz)",
         "territory": "The Pump Works: una estación de bombeo de VDI inundada bajo The Sump, cuatro pisos hacia abajo.",
         "visual": "Acero oxidado, servos a la vista, cables, franjas de advertencia, lámparas de estado ámbar.",
     },

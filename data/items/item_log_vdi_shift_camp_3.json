@@ -1,0 +1,16 @@
+{
+  "id": "item.log.vdi_shift_camp_3",
+  "display_name": "VDI Shift Roster · Shift Camp 3",
+  "description": "A Vantage Deep Industries crew tablet from the bench camp on Excavation C-3's upper benches: the last roll calls of the bench crew. Provisional lore.",
+  "visual_id": "visual.log.tablet",
+  "category": "log",
+  "log": {
+    "title": "VANTAGE DEEP INDUSTRIES · CONTRACT SITE 3 · SHIFT CAMP 3 · ROSTER",
+    "text": "Bench crew 3, rotation B. Supervisor M. Ferreyra.\n\nRoll call, day 1. Fourteen present. Convoy 7 up the spiral at 06:00 with ore for the rim. Bore 1 turning on schedule: thirty seconds in every hundred and fifty. You learn to count it in your teeth.\n\nRoll call, day 40. Fourteen present. Two of the lamp crew asked why the lights on bench 7 stay on when nobody works bench 7. I told them the grid is not ours. The grid is head office's.\n\nRoll call, day 77. Fourteen present. Cores from 1,100 m come up warm. The borers on bench 6 have started cutting lines nobody surveyed. The survey office says the lines are on the plan. I asked to see the plan.\n\nRoll call, day 93. Thirteen present. Ochoa went down in the bore cage to look at the head. The cage came back without him. Head office says the cage is sealed by order and that the order is valid.\n\nRoll call, day 94. Fourteen present. I counted twice. Fourteen. Ochoa is not one of them.\n\nRoll call, day 95. All present. I have stopped counting. If you read this, Breaker 3 on the rim drops the pit for one cycle. The machines do not care. The lights do.",
+    "text_es": "Cuadrilla de bancada 3, rotación B. Supervisora M. Ferreyra.\n\nLista, día 1. Catorce presentes. El Convoy 7 sube la espiral a las 06:00 con mineral para el borde. El Pozo 1 gira según el horario: treinta segundos de cada ciento cincuenta. Uno aprende a contarlo con los dientes.\n\nLista, día 40. Catorce presentes. Dos de la cuadrilla de luces preguntaron por qué las luces de la bancada 7 siguen prendidas si nadie trabaja en la bancada 7. Les dije que la red no es nuestra. La red es de casa central.\n\nLista, día 77. Catorce presentes. Los testigos de 1.100 m suben tibios. Las perforadoras de la bancada 6 empezaron a cortar líneas que nadie relevó. La oficina de relevamiento dice que las líneas están en el plano. Pedí ver el plano.\n\nLista, día 93. Trece presentes. Ochoa bajó en la jaula del pozo a mirar el cabezal. La jaula volvió sin él. Casa central dice que la jaula está sellada por orden y que la orden es válida.\n\nLista, día 94. Catorce presentes. Conté dos veces. Catorce. Ochoa no es uno de ellos.\n\nLista, día 95. Todos presentes. Dejé de contar. Si leés esto: el Interruptor 3 del borde apaga el pozo durante un ciclo. A las máquinas no les importa. A las luces sí."
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "weight": 0.3
+}

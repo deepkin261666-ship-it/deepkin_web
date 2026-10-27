@@ -20,6 +20,7 @@ ROLES = {  # role / archetype de los mobs
     "ranged": L("Ranged", "A distancia"), "ranged skirmisher": L("Ranged skirmisher", "Hostigador a distancia"),
     "controller": L("Controller", "Controlador"), "boss": L("Boss", "Jefe"), "artillery": L("Artillery", "Artillería"),
     "turret": L("Turret", "Torreta"),
+    "burrower": L("Burrower", "Excavador"), "heavy": L("Heavy", "Pesado"),
 }
 
 POSE = {"drill": L("Drilling", "Perforando"), "idle": L("Standing", "De pie"), "carry": L("Carrying cargo", "Cargando")}
@@ -307,6 +308,7 @@ W = {
                    "Peleá cerca de pilares, columnas o ruinas: su cono necesita línea libre, así que la piedra es cobertura."),
     "tac_pressure": L("Keep hitting it: the heal only starts when it is left alone, and any hit breaks it.",
                       "Seguí pegándole: la curación sólo empieza cuando lo dejan tranquilo, y cualquier golpe la corta."),
+    "b_anchored": L("Rooted: it never leaves its spot. Out of its reach it can only watch you.", "Plantado: nunca se mueve de su lugar. Fuera de su alcance sólo puede mirarte."),
     "tac_leash": L("If it goes badly, run: it gives up {leash} m from home.", "Si sale mal, corré: abandona a {leash} m de su lugar."),
     "loot": L("Loot", "Botín"), "loot_note": L("Rolled once per death and dropped around the body. Anyone can pick it up.",
                                               "Se sortea una vez por muerte y cae alrededor del cuerpo. Cualquiera puede recogerlo."),
@@ -337,8 +339,8 @@ W = {
     "lines_note": L("One random line each time you press E (never the same twice in a row).", "Una línea al azar cada vez que apretás E (nunca la misma dos veces seguidas). Se muestran en inglés, como en el juego."),
     "conversation": L("Conversation", "Conversación"), "ends": L("(ends the talk)", "(termina la charla)"), "start": L("first", "inicio"),
     "reward_xp": L("{xp} XP reward", "recompensa de {xp} XP"), "services": L("Services", "Servicios"),
-    "services_note": L("Dustline's trade, repair, contracts and lodging are not in the game yet: the people point at them without promising mechanics.",
-                       "El comercio, la reparación, los contratos y el alojamiento de Dustline todavía no están en el juego: la gente los nombra sin prometer mecánicas."),
+    "services_note": L("Trading at every stall (SELL ALL included), the contract board, the bank and the depot work today; repair, crafting, caravan departures and lodging are not in the game yet: the people point at them without promising mechanics.",
+                       "El comercio en cada puesto (SELL ALL incluido), el tablero de contratos, el banco y el depósito ya funcionan; la reparación, la fabricación, las salidas de caravanas y el alojamiento todavía no están en el juego: la gente los nombra sin prometer mecánicas."),
     "svc_depot": L("Depot computer", "Computadora del depósito"), "mentions": L("Talks about", "Habla de"),
     "people_lead": L("{n} people you can talk to, by zone.", "{n} personas con las que podés hablar, por zona."),
     # zonas
@@ -457,8 +459,8 @@ W = {
     "c_login": L("At the prompt, type <code>connect {addr}</code> exactly. <code>help</code> lists commands, <code>exit</code> or Esc closes.",
                  "En el prompt escribí exactamente <code>connect {addr}</code>. <code>help</code> lista los comandos, <code>exit</code> o Esc cierra."),
     "c_menu": L("Menu: DEPOT, BANK, MARKET, CONTRACTS, MAIL / NEWS (market, contracts and mail are offline for now), LOGOUT.", "Menú: DEPOT, BANK, MARKET, CONTRACTS, MAIL / NEWS (mercado, contratos y correo están fuera de línea por ahora), LOGOUT."),
-    "c_depot": L("The depot holds {cells} cells. Double-click, Enter or T moves a stack between your cargo and the depot; drag to a specific cell.",
-                 "El depósito tiene {cells} celdas. Doble clic, Enter o T mueve una pila entre tu carga y el depósito; arrastrá para elegir la celda."),
+    "c_depot": L("The depot holds {cells} cells. Double-click, Enter or T moves a stack between your cargo and the depot; drag to a specific cell. [ SORT ] over either side (or O for the side under the cursor) merges partial stacks and orders that side: coins, weapons, armour, ammunition, batteries and fuel, food, drones, materials, then logs. Bags keep their cell. The same SORT sits over the CARGO grid of your loadout screen.",
+                 "El depósito tiene {cells} celdas. Doble clic, Enter o T mueve una pila entre tu carga y el depósito; arrastrá para elegir la celda. [ SORT ] sobre cualquiera de los dos lados (u O para el lado bajo el cursor) junta las pilas incompletas y ordena ese lado: monedas, armas, armadura, munición, baterías y combustible, comida, drones, materiales y al final los registros. Las bolsas no se mueven de su celda. El mismo SORT está sobre la grilla CARGO de tu pantalla de equipo."),
     "c_shared": L("One depot per character, shared by every terminal: what you leave at the Outpost is waiting in Dustline.",
                   "Un depósito por personaje, compartido por todas las terminales: lo que dejás en el Outpost te espera en Dustline."),
     # Banco, combustible, clases (2026-10-11)

@@ -27,7 +27,7 @@ const DESCRIPTIONS := {
 	"skill.spores": "Spore projectors. Fire spore cartridges that poison what they hit; with one in hand, Bloom poisons enemies instead of healing.",
 	"skill.vitalism": "Living weapons that fire synapse darts: they wound enemies and heal the operators they strike.",
 	"skill.tech": "Energy weapons and field electronics. Each shot draws energy from the worn cell. Overcharge: +15% damage while the cell is above half.",
-	"skill.shielding": "Shields. Trains when you are hit with a shield up; 8% less damage, up to 40%.",
+	"skill.shielding": "Shields. Always up while equipped (no need to raise it): 8% less damage, up to 40%; trains on every hit it blocks.",
 }
 ## Planned uses beyond combat (presentation only; nothing reads these yet).
 const LATER := {

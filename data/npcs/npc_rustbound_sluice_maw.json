@@ -1,0 +1,192 @@
+{
+  "id": "npc.rustbound_sluice_maw",
+  "display_name": "Sluice Maw",
+  "max_health": 360,
+  "movement_speed": 0.5,
+  "detection_range": 14.0,
+  "attack_range": 3.0,
+  "attack_damage": 11,
+  "attack_cooldown": 1.8,
+  "faction": "faction.rustbound",
+  "species": "Sluice Maw",
+  "role": "heavy",
+  "archetype": "controller",
+  "tier": "elite",
+  "hunt_tier": 3,
+  "threat": 13,
+  "xp": 320,
+  "coins": [
+    20,
+    45
+  ],
+  "body_radius": 1.1,
+  "habitat": "The Floodlands: the drowned quay and the south marsh, rooted in the shallows",
+  "lore": "PROVISIONAL. When the east drowned, VDI's floodworks bolted Sluice Maws along the quays: an intake head on a hydraulic stalk that clamps whatever drifts into the channel - timber, drums, the odd body - and feeds it to the pumps so nothing jams them. The pumps stopped long ago; the maws never got the instruction. Weed and rust grew over the plating, and they still clear the water of anything that moves.",
+  "verbs": [
+    "ROOT",
+    "LASH",
+    "SNAP",
+    "SPRAY",
+    "THRASH"
+  ],
+  "rules": [
+    "It never moves. Past its tendril's reach (about 12 m) it can only watch you.",
+    "A blue line along the water is its tendril: it lashes out and snares whoever it catches (45 % speed for 2.5 s). Step off the line.",
+    "Close in front, its jaws gape over a red arc: step to its side before they snap shut.",
+    "A green fan: it spits sap from its throat (acid; Resistance helps).",
+    "Hug its stalk and it thrashes: a red ring fills all around it. Step out."
+  ],
+  "perception": {
+    "aggro_radius": 12.5,
+    "memory_seconds": 4.0,
+    "call_radius": 0.0
+  },
+  "movement": {
+    "preferred_range": [
+      0.0,
+      12.0
+    ],
+    "leash_radius": 0.0,
+    "lure": "territorial",
+    "retreat_health": 0.0,
+    "retreat_seconds": 0.0,
+    "anchored": true
+  },
+  "abilities": [
+    {
+      "id": "snap",
+      "name": "Snap",
+      "shape": "bite",
+      "damage": 28,
+      "windup": 0.85,
+      "reach": 3.4,
+      "half_angle": 50.0,
+      "cooldown": 4.5,
+      "trigger_range": 3.4,
+      "recovery": 0.5
+    },
+    {
+      "id": "tendril_lash",
+      "name": "Tendril Lash",
+      "shape": "line",
+      "damage": 14,
+      "windup": 1.0,
+      "range": 12.0,
+      "width": 1.4,
+      "cooldown": 9.0,
+      "min_range": 3.5,
+      "trigger_range": 12.0,
+      "los": true,
+      "recovery": 0.4,
+      "slow": 0.45,
+      "slow_seconds": 2.5
+    },
+    {
+      "id": "sap_spray",
+      "name": "Sap Spray",
+      "shape": "cone",
+      "damage": 18,
+      "damage_type": "acid",
+      "windup": 1.0,
+      "radius": 6.5,
+      "half_angle": 35.0,
+      "cooldown": 8.0,
+      "min_range": 2.0,
+      "trigger_range": 6.5,
+      "los": true,
+      "recovery": 0.4
+    },
+    {
+      "id": "thrash",
+      "name": "Thrash",
+      "shape": "circle",
+      "damage": 16,
+      "windup": 1.1,
+      "radius": 3.4,
+      "reach": 0.0,
+      "cooldown": 10.0,
+      "trigger_range": 3.0,
+      "recovery": 0.8,
+      "target": "position"
+    }
+  ],
+  "loot": [
+    {
+      "item": "item.scrap_component",
+      "quantity": [
+        2,
+        4
+      ],
+      "chance": 0.7
+    },
+    {
+      "item": "item.ammunition.spore_cartridge",
+      "quantity": [
+        5,
+        12
+      ],
+      "chance": 0.3
+    },
+    {
+      "item": "item.consumable.health_capsule",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.25
+    },
+    {
+      "item": "item.component.servo_core",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.18
+    },
+    {
+      "item": "item.battery.provisional_relay_cell",
+      "quantity": [
+        1,
+        1
+      ],
+      "chance": 0.08
+    }
+  ],
+  "visual": {
+    "model": "res://assets/game/mobs/rustbound/sluice_maw.glb",
+    "rig": "animated",
+    "size": 3.2,
+    "fit": "height",
+    "yaw": 90,
+    "clips": {
+      "idle": {
+        "animation": "PixCap Animation",
+        "from": 22.3,
+        "to": 36.0
+      },
+      "bite": {
+        "animation": "PixCap Animation",
+        "from": 10.0,
+        "to": 12.3
+      },
+      "roar": {
+        "animation": "PixCap Animation",
+        "from": 36.6,
+        "to": 39.0
+      },
+      "rear": {
+        "animation": "PixCap Animation",
+        "from": 2.6,
+        "to": 4.2
+      }
+    },
+    "mouth": [
+      0.0,
+      2.7,
+      -0.7
+    ],
+    "roughness": 0.5,
+    "tint": "d0ccc0",
+    "albedo_boost": 1.8
+  }
+}
