@@ -1,0 +1,16 @@
+{
+  "id": "item.log.vdi_bore_1_report",
+  "display_name": "VDI Bore Report · Bore 1",
+  "description": "The last bore report from Bore 1's control cab on the floor of Excavation C-3, kept in the cab's cache. Provisional lore.",
+  "visual_id": "visual.log.tablet",
+  "category": "log",
+  "log": {
+    "title": "VANTAGE DEEP INDUSTRIES · CONTRACT SITE 3 · BORE 1 · REPORT 412",
+    "text": "Bore engineer on shift: (none). Report compiled by unit.\n\nDepth 1,140 m. Bearing straight down. Priority BLACK.\n\nCore 411: a void of 0.4 m at 1,136 m. The head turned in air for nine seconds, then bit again. Nothing in the core box.\n\nCore 412: a Lumenita seam at 1,140 m. The core box gives light. The light does not fade when the box is closed.\n\nThe bore cage made one run down with two crew to inspect the head. The cage returned. The interlock sealed it on order 7/3/9. The order names no sender. The order is valid.\n\nSurvey status: overdue by one hundred years. The survey will be completed. The schedule is kept: thirty seconds in every hundred and fifty, as the plan says.\n\nWe go where the world ends.",
+    "text_es": "Ingeniero de perforación de turno: (ninguno). Informe compilado por unidad.\n\nProfundidad 1.140 m. Rumbo derecho para abajo. Prioridad NEGRA.\n\nTestigo 411: un vacío de 0,4 m a 1.136 m. El cabezal giró en el aire nueve segundos y después volvió a morder. Nada en la caja de testigos.\n\nTestigo 412: una veta de Lumenita a 1.140 m. La caja de testigos da luz. La luz no se apaga cuando la caja se cierra.\n\nLa jaula del pozo hizo un viaje hacia abajo con dos operarios para revisar el cabezal. La jaula volvió. El enclavamiento la selló por la orden 7/3/9. La orden no nombra remitente. La orden es válida.\n\nEstado del relevamiento: atrasado cien años. El relevamiento se completará. El horario se cumple: treinta segundos de cada ciento cincuenta, como dice el plano.\n\nLlegamos donde termina el mundo."
+  },
+  "properties": {
+    "stack_size": 1
+  },
+  "weight": 0.3
+}

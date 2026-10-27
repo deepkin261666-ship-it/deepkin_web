@@ -1249,7 +1249,9 @@ def page_bestiary(lang):
 
     def of(fid):
         ms = [n for n in NPCS if n.get("faction") == fid and n["id"] in MOBS and MOBS[n["id"]].get("lore")]
-        return "".join(mob(n) for n in sorted(ms, key=lambda n: (n.get("tier", 0), n.get("max_health", 0))))
+        # El tier del dato es texto (normal / elite / boss): se ordena por rango, no alfabeticamente (2026-10-27).
+        rank = {"normal": 0, "elite": 1, "boss": 2}
+        return "".join(mob(n) for n in sorted(ms, key=lambda n: (rank.get(n.get("tier"), 0), n.get("max_health", 0))))
     burrow = of("faction.burrowborn")
     human = of("faction.castoffs")
     mutants = of("faction.mutants")
@@ -1373,6 +1375,7 @@ def page_world(lang):
         surface += f"""<article class="region region-wide" id="{r['id']}">
   <figure>{shot(r['img'], r['cap'][lang])}<figcaption>{e(r['cap'][lang])}</figcaption></figure>
   <div class="region-body"><p class="kicker">{e(r['kind'][lang])}</p><h3>{e(r['name'])}</h3><p class="region-lead">{e(r['lead'][lang])}</p><p>{e(r['body'][lang])}</p></div>
+  {shot_strip(r.get('more'), lang)}
 </article>"""
     # El camino al este (2026-10-10): Frontier Road, Dustline y The Cinder Deep, con capturas actuales.
     east = ""

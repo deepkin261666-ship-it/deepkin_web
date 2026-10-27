@@ -18,11 +18,21 @@ python3 build.py          # rebuild en/, es/ and index.html from data/ + src/
 python3 build.py --sync   # first copy fresh game data + icons from ../deepkin
 ```
 
+To sync from a clean commit while the game's working tree has uncommitted edits, point the sync at a scratch worktree:
+
+```bash
+git -C ../deepkin worktree add --detach /tmp/dk_sync <commit>
+python3 -c "import sys; sys.argv=['build.py','--sync']; sys.path.insert(0,'.'); import build; build.GAME_REPO='/tmp/dk_sync'; build.main()"
+git -C ../deepkin worktree remove --force /tmp/dk_sync
+```
+
 - `data/` — snapshot of the game repo: `data/entities/*` (classes, items, npcs, materials, factions, discoveries, vehicles), `starting_region.json`, `world/` (world map, sets, banners, respawn hubs), `dialog/`, `quests/`, and `rules/` (the `.gd` rule files plus `constants.json`; `src/gdconst.py` reads their constants). Retired items are skipped; `planned` items show as *Coming soon*.
 - `src/wiki.py`, `src/wiki_i18n.py` — wiki pages and their EN/ES strings (never numbers).
 - `assets/models/<item id>.glb` — small 3D item models (≤ 1 MB, 2026-10-13) written by the game's `tools/export_web_models.gd`; an item page with a model shows it in `<model-viewer>` (pinned 3.5.0, lazy; the icon is the poster and the fallback).
 - `data/shops/`, `data/houses/`, `data/excavation/` — trader goods and prices, house data and excavation templates (synced); shop data feeds the trading page, item "Bought and sold by" tables and the traders' pages.
 - `src/i18n.py` — UI strings, class/creature copy and Spanish item descriptions.
+- Creatures: English lore, habitat and tactics come from `data/npcs/*.json`; a creature appears in the bestiary only once it has Spanish text (`MOB_ES` in `src/wiki_i18n.py` / `MOB_ES_P8` in `src/wiki_es_p8.py`, voseo). Portraits are `assets/img/mobs/<npc id>.webp` (320 px), rendered from the game with a copy of its `tools/render_mob_icons.gd` resized to 320 px (2026-10-27: every mob has one); without one the page falls back to the icon or a letter.
+- Dustline services (`LIVE_SERVICES` in `src/wiki.py`): trading, the contract board, the bank and the depot are marked as working; repair, crafting, caravans and lodging stay *Coming soon*. A person with a shop (`data/shops/`) shows its goods instead of the service list in their dialog data.
 - `src/atlas.py` — the World page's illustrated field atlas (`assets/img/world/atlas_<lang>.svg`, phone variant `_m.svg`): plan + depth cross-section + passage key, generated from `world_map.json` and the transitions in `starting_region.json`. Every mark in the plan sits at its data point (marker, `stack.marker`, the Shaft 3 well from `worldmap.VLINK_AT`) through the same projection as the live map; only labels and passage badges are laid out per sheet (2026-10-24). Floors that share one point (the Outpost and the Threshold under the Shaft 3 well) are one pile of plates; floors stacked on one point under one name, three or more (The Deep Survey floors 1–3, Castoff Hideout, The Pump Works), are one stacked plate with one label in the plan and one plate per floor in the cross-section; places come from the data (`worldmap.sites()`: traders in `data/shops/`, the bike shop, the VDI post, the house door, the VDI excavation clearing; hunting grounds from a zone's `hunting` block or a wild/hunting-spot zone with spawn groups). VDI excavation floors are drawn as a ghost bore marked player-made (generated per call-out, not fixed zones). The interactive map shows the same places (hunting and excavation on the continent, traders/bike shop/VDI/house in the Dustline plan, each placed by the district or gate nearest to it in the built city). `src/lore.py` — the World page lore layer (EN/ES).
 - `src/story.py` — the story (Spanish original from `DEEPKIN_Historia_ES.html`, plus English translation).
 - `src/texts.py` — world regions, controls, first steps, home page copy.

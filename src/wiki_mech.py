@@ -88,7 +88,9 @@ TX = {
     "tr_lead": L("Every trader in DEEPKIN uses the same counter: talk to them, pick BUY or SELL and the trade window opens. You pay with the coins you carry, never with the bank.",
                  "Todos los comerciantes de DEEPKIN usan el mismo mostrador: hablales, elegí BUY o SELL y se abre la ventana de comercio. Pagás con las monedas que llevás encima, nunca con el banco."),
     "tr_rules": L([
-        "Talk to a trader (E) and choose BUY or SELL. BUY lists what they sell with price and stock; SELL lists what you carry that they buy. − / + set the quantity (Shift ×10).",
+        "Talk to a trader (E) and choose BUY or SELL. BUY lists what they sell with price and stock; SELL lists what you carry that they buy. − / + set the quantity (Shift ×10) and MAX jumps to the most you can take.",
+        "A BUY never goes past what you can actually take: the coins you carry, the stock left, the room in your cells and your carry limit. The status line says what stops one more (NOT ENOUGH METAL, NO MORE ROOM, TOO HEAVY, THAT'S ALL THE STOCK).",
+        "SELL ALL (on the SELL tab) sells every unit of every good that trader buys from your top-level cargo in one trade, at their prices. A first press lists the goods and the total; CONFIRM sells. Kit stays: bags, Reading Logs, contract drives, capsules and food, batteries and gas cans, drones, Expedition Services and the ammunition your equipped weapon fires are never sold this way (a single SELL still can).",
         "You must stand within 3.5 m of the trader, in the same zone. Walk away and the window closes.",
         "Purchases are paid in carried coins only: the pouch and your worn backpack. Coins in a spare bag or in the bank do not count; withdraw at a 261.6.66 terminal first.",
         "Change comes back in the largest coins. A trade that would not fit your cells or carry limit is refused and nothing moves.",
@@ -96,7 +98,9 @@ TX = {
         "A trader never buys something back for more than they sell it. Limited stock is per server run and resets when the server restarts.",
         "The server keeps its own copy of every price: the window only shows them.",
     ], [
-        "Hablale a un comerciante (E) y elegí BUY o SELL. BUY lista lo que vende con precio y stock; SELL lista lo que llevás que él compra. − / + cambian la cantidad (Shift ×10).",
+        "Hablale a un comerciante (E) y elegí BUY o SELL. BUY lista lo que vende con precio y stock; SELL lista lo que llevás que él compra. − / + cambian la cantidad (Shift ×10) y MAX salta a lo máximo que podés llevarte.",
+        "Una compra nunca pasa de lo que de verdad podés llevarte: las monedas que tenés encima, el stock que queda, el lugar en tus celdas y tu límite de carga. La línea de estado dice qué te frena (NOT ENOUGH METAL, NO MORE ROOM, TOO HEAVY, THAT'S ALL THE STOCK).",
+        "SELL ALL (en la pestaña SELL) vende de una sola vez todas las unidades de todo lo que ese comerciante compra y está en las celdas de primer nivel de tu carga, a sus precios. El primer toque lista la mercadería y el total; CONFIRM vende. El equipo se queda: bolsas, Reading Logs, pendrives de contrato, cápsulas y comida, baterías y bidones, drones, Expedition Services y la munición que dispara tu arma equipada nunca se venden así (con un SELL suelto sí).",
         "Tenés que estar a menos de 3,5 m del comerciante, en la misma zona. Si te alejás, la ventana se cierra.",
         "Las compras se pagan sólo con monedas encima: la bolsa y tu mochila puesta. Las monedas de una bolsa de repuesto o del banco no cuentan; sacalas antes en una terminal 261.6.66.",
         "El vuelto vuelve en las monedas más grandes. Si la compra no entra en tus celdas o en tu límite de carga, se rechaza y no se mueve nada.",

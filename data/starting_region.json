@@ -3464,6 +3464,24 @@
        ]
       ],
       "width": 5.88
+     },
+     {
+      "name": "c3_site",
+      "points": [
+       [
+        -28.0,
+        0.0
+       ],
+       [
+        -28.99,
+        -4.0
+       ],
+       [
+        -43.5,
+        -4.0
+       ]
+      ],
+      "width": 9.0
      }
     ],
     "wet": [],
@@ -3538,6 +3556,28 @@
        ]
       ],
       "width": 2.2
+     },
+     {
+      "name": "c3_site",
+      "points": [
+       [
+        -12.73,
+        -1.41
+       ],
+       [
+        -28.0,
+        0.0
+       ],
+       [
+        -32.99,
+        -4.0
+       ],
+       [
+        -39.99,
+        -4.0
+       ]
+      ],
+      "width": 3.6
      }
     ],
     "props": [
@@ -4059,7 +4099,10 @@
      "ledge_drop": 0.6
     }
    },
-   "links": "res://data/world/sets/links_surface_scarp.json"
+   "links": "res://data/world/sets/links_surface_scarp.json",
+   "extra_sets": [
+    "res://data/world/sets/c3_site_scarp_trail.json"
+   ]
   },
   {
    "zone_id": "zone.surface_saltpan",
@@ -10256,6 +10299,136 @@
       ],
       "width": 9.0,
       "name": "road_gate"
+     },
+     {
+      "points": [
+       [
+        -95.16,
+        33.94
+       ],
+       [
+        -88.16,
+        33.94
+       ],
+       [
+        -79.2,
+        31.11
+       ],
+       [
+        -57.13,
+        30.03
+       ],
+       [
+        -56.35,
+        38.26
+       ]
+      ],
+      "width": 9.0,
+      "name": "saltpan_road"
+     },
+     {
+      "points": [
+       [
+        32.53,
+        -96.58
+       ],
+       [
+        32.53,
+        -89.58
+       ],
+       [
+        31.11,
+        -79.2
+       ],
+       [
+        25.61,
+        -57.67
+       ],
+       [
+        33.34,
+        -57.92
+       ]
+      ],
+      "width": 9.0,
+      "name": "frontier_road"
+     },
+     {
+      "points": [
+       [
+        -43.84,
+        -32.53
+       ],
+       [
+        -39.34,
+        -25.64
+       ]
+      ],
+      "width": 7.0,
+      "name": "lookout_path"
+     },
+     {
+      "points": [
+       [
+        -14.14,
+        -70.71
+       ],
+       [
+        -7.91,
+        -51.06
+       ]
+      ],
+      "width": 7.0,
+      "name": "mast_path"
+     },
+     {
+      "points": [
+       [
+        24.04,
+        60.81
+       ],
+       [
+        16.0,
+        46.41
+       ]
+      ],
+      "width": 8.0,
+      "name": "flats_path"
+     },
+     {
+      "points": [
+       [
+        53.74,
+        31.11
+       ],
+       [
+        44.43,
+        18.95
+       ]
+      ],
+      "width": 8.0,
+      "name": "flats_east_path"
+     },
+     {
+      "name": "c3_site",
+      "points": [
+       [
+        -53.74,
+        45.25
+       ],
+       [
+        -60.81,
+        57.98
+       ],
+       [
+        -70.61,
+        60.81
+       ],
+       [
+        -83.11,
+        60.81
+       ]
+      ],
+      "width": 9.0
      }
     ],
     "wet": [
@@ -10384,6 +10557,28 @@
        ]
       ],
       "width": 4.5
+     },
+     {
+      "name": "c3_site",
+      "points": [
+       [
+        -53.74,
+        45.25
+       ],
+       [
+        -60.81,
+        57.98
+       ],
+       [
+        -72.61,
+        60.81
+       ],
+       [
+        -79.61,
+        60.81
+       ]
+      ],
+      "width": 3.6
      }
     ],
     "holes": [
@@ -10498,6 +10693,9 @@
       ]
      }
     }
+   ],
+   "extra_sets": [
+    "res://data/world/sets/c3_site_salt_pit_gate.json"
    ]
   },
   {
@@ -10886,6 +11084,2381 @@
       1.4
      ],
      "rotation": 0.0,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.c3_site",
+   "name": "Excavation C-3",
+   "anchor": [
+    1000.0,
+    0.0,
+    1250.0
+   ],
+   "bounds": [
+    -170,
+    160,
+    -170,
+    160
+   ],
+   "arrival": [
+    978.79,
+    0.0,
+    1139.45
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "8095c8",
+    "sun_energy": 0.24,
+    "sun_pitch": -24.0,
+    "sun_yaw": -30.0,
+    "fog_color": "121a2c",
+    "fog_density": 0.0026,
+    "ambient_color": "6680b4",
+    "ambient_energy": 0.85,
+    "sky_top": "04070e",
+    "sky_horizon": "1a2438",
+    "ground_color": "080b12",
+    "exposure": 1.0,
+    "glow_intensity": 0.8,
+    "glow_bloom": 0.04,
+    "glow_threshold": 1.0
+   },
+   "set": "res://data/world/sets/c3_site.json",
+   "cavern": {
+    "seed": 1000,
+    "cell": 1.0,
+    "material": "res://assets/game/materials/c3_site/geology_c3_site.tres",
+    "wall_height": 3.5,
+    "near_wall_height": 0.9,
+    "smooth": 3.0,
+    "warp": 1.2,
+    "chambers": [
+     {
+      "center": [
+       -24.04,
+       -97.58
+      ],
+      "radius": [
+       26.0,
+       16.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -94.75,
+       -32.53
+      ],
+      "radius": [
+       28.0,
+       17.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       79.2,
+       -73.54
+      ],
+      "radius": [
+       20.0,
+       24.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       38.18,
+       86.27
+      ],
+      "radius": [
+       24.0,
+       13.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -62.23,
+       79.2
+      ],
+      "radius": [
+       17.0,
+       24.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       103.24,
+       -24.04
+      ],
+      "radius": [
+       20.0,
+       14.0
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       106.07,
+       -49.5
+      ],
+      "radius": [
+       14.0,
+       10.0
+      ],
+      "rotation": -45.0
+     }
+    ],
+    "passages": [
+     {
+      "points": [
+       [
+        65.05,
+        -65.05
+       ],
+       [
+        73.16,
+        -55.35
+       ],
+       [
+        79.46,
+        -44.28
+       ],
+       [
+        83.81,
+        -32.12
+       ],
+       [
+        86.09,
+        -19.17
+       ],
+       [
+        86.25,
+        -5.75
+       ],
+       [
+        84.29,
+        7.81
+       ],
+       [
+        80.25,
+        21.18
+       ],
+       [
+        74.24,
+        34.03
+       ],
+       [
+        66.4,
+        46.04
+       ],
+       [
+        56.92,
+        56.92
+       ],
+       [
+        46.04,
+        66.4
+       ],
+       [
+        34.03,
+        74.24
+       ],
+       [
+        21.18,
+        80.25
+       ],
+       [
+        7.81,
+        84.29
+       ],
+       [
+        -5.75,
+        86.25
+       ],
+       [
+        -19.17,
+        86.09
+       ],
+       [
+        -32.12,
+        83.81
+       ],
+       [
+        -44.28,
+        79.46
+       ],
+       [
+        -55.35,
+        73.16
+       ],
+       [
+        -65.05,
+        65.05
+       ],
+       [
+        -73.16,
+        55.35
+       ],
+       [
+        -79.46,
+        44.28
+       ],
+       [
+        -83.81,
+        32.12
+       ],
+       [
+        -86.09,
+        19.17
+       ],
+       [
+        -86.25,
+        5.75
+       ],
+       [
+        -84.29,
+        -7.81
+       ],
+       [
+        -80.25,
+        -21.18
+       ],
+       [
+        -74.24,
+        -34.03
+       ],
+       [
+        -66.4,
+        -46.04
+       ],
+       [
+        -56.92,
+        -56.92
+       ],
+       [
+        -46.04,
+        -66.4
+       ],
+       [
+        -34.03,
+        -74.24
+       ],
+       [
+        -21.18,
+        -80.25
+       ],
+       [
+        -7.81,
+        -84.29
+       ],
+       [
+        5.75,
+        -86.25
+       ],
+       [
+        19.17,
+        -86.09
+       ],
+       [
+        32.12,
+        -83.81
+       ],
+       [
+        44.28,
+        -79.46
+       ],
+       [
+        55.35,
+        -73.16
+       ],
+       [
+        65.05,
+        -65.05
+       ]
+      ],
+      "width": 22.0,
+      "name": "rim"
+     },
+     {
+      "points": [
+       [
+        -21.21,
+        -100.55
+       ],
+       [
+        -21.21,
+        -117.05
+       ]
+      ],
+      "width": 10.0,
+      "name": "main_gate"
+     },
+     {
+      "points": [
+       [
+        83.44,
+        -35.36
+       ],
+       [
+        98.99,
+        -42.43
+       ],
+       [
+        115.97,
+        -53.74
+       ],
+       [
+        123.04,
+        -57.98
+       ]
+      ],
+      "width": 11.0,
+      "name": "haul_road_east"
+     },
+     {
+      "points": [
+       [
+        -79.2,
+        50.91
+       ],
+       [
+        -90.41,
+        52.33
+       ],
+       [
+        -99.41,
+        52.33
+       ]
+      ],
+      "width": 9.0,
+      "name": "ruins_gate"
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -21.21,
+        -113.55
+       ],
+       [
+        -21.21,
+        -104.55
+       ],
+       [
+        -19.8,
+        -87.68
+       ],
+       [
+        -16.22,
+        -79.15
+       ],
+       [
+        -55.07,
+        -55.07
+       ],
+       [
+        -72.45,
+        -29.88
+       ],
+       [
+        -74.2,
+        -12.37
+       ]
+      ],
+      "width": 4.5
+     },
+     {
+      "points": [
+       [
+        -16.22,
+        -79.15
+       ],
+       [
+        27.27,
+        -82.96
+       ],
+       [
+        64.35,
+        -64.35
+       ],
+       [
+        82.11,
+        -34.52
+       ],
+       [
+        96.17,
+        -42.43
+       ],
+       [
+        109.6,
+        -51.62
+       ],
+       [
+        115.97,
+        -53.74
+       ]
+      ],
+      "width": 4.5
+     },
+     {
+      "points": [
+       [
+        -22.63,
+        -96.17
+       ],
+       [
+        -82.02,
+        -39.6
+       ],
+       [
+        -94.75,
+        -32.53
+       ]
+      ],
+      "width": 3.2
+     }
+    ],
+    "holes": [
+     {
+      "name": "c3_pit",
+      "center": [
+       0.0,
+       0.0
+      ],
+      "radius": [
+       80.8,
+       70.7
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "props": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [
+    {
+     "entity_id": 430,
+     "content_id": "material.ore_hematite",
+     "position": [
+      954.75,
+      1.0,
+      1162.32
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.3,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 431,
+     "content_id": "material.ore_hematite",
+     "position": [
+      1097.58,
+      1.0,
+      1183.53
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 1.1,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 432,
+     "content_id": "material.ore_limonite",
+     "position": [
+      1033.94,
+      1.0,
+      1348.99
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.2,
+     "yield": {
+      "item_id": "item.ore.limonite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 433,
+     "content_id": "material.reinforced_relic",
+     "position": [
+      934.95,
+      1.0,
+      1340.51
+     ],
+     "size": [
+      1.6,
+      1.4,
+      1.0
+     ],
+     "rotation": 0.9,
+     "yield": {
+      "item_id": "item.relic_fragment",
+      "quantity": 1,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.c3_site_upper",
+   "name": "Excavation C-3 · Upper Benches",
+   "anchor": [
+    1000.0,
+    0.0,
+    1600.0
+   ],
+   "bounds": [
+    -100,
+    103,
+    -101,
+    102
+   ],
+   "arrival": [
+    998.41,
+    0.0,
+    1543.08
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "8095c8",
+    "sun_energy": 0.2,
+    "sun_pitch": -24.0,
+    "sun_yaw": -30.0,
+    "fog_color": "10182a",
+    "fog_density": 0.0032,
+    "ambient_color": "6680b4",
+    "ambient_energy": 0.8,
+    "sky_top": "04070e",
+    "sky_horizon": "1a2438",
+    "ground_color": "080b12",
+    "exposure": 1.0,
+    "glow_intensity": 0.8,
+    "glow_bloom": 0.04,
+    "glow_threshold": 1.0
+   },
+   "set": "res://data/world/sets/c3_site_upper.json",
+   "cavern": {
+    "seed": 1003,
+    "cell": 0.8,
+    "material": "res://assets/game/materials/c3_site/geology_c3_site.tres",
+    "wall_height": 0.8,
+    "near_wall_height": 0.4,
+    "smooth": 2.0,
+    "warp": 0.4,
+    "chambers": [
+     {
+      "center": [
+       -47.7,
+       -19.77
+      ],
+      "radius": [
+       8.53,
+       8.53
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -44.58,
+       41.47
+      ],
+      "radius": [
+       7.96,
+       7.96
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -1.24,
+       -56.16
+      ],
+      "radius": [
+       7.49,
+       7.49
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       37.65,
+       -51.34
+      ],
+      "radius": [
+       6.12,
+       6.12
+      ],
+      "rotation": -45.0
+     }
+    ],
+    "passages": [
+     {
+      "name": "bench",
+      "points": [
+       [
+        48.3,
+        -43.35
+       ],
+       [
+        54.31,
+        -35.98
+       ]
+      ],
+      "width": 10.11
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        54.31,
+        -35.98
+       ],
+       [
+        58.79,
+        -27.48
+       ]
+      ],
+      "width": 9.17
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        58.79,
+        -27.48
+       ],
+       [
+        61.6,
+        -18.11
+       ]
+      ],
+      "width": 8.24
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        61.6,
+        -18.11
+       ],
+       [
+        62.64,
+        -8.15
+       ]
+      ],
+      "width": 7.38
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        62.64,
+        -8.15
+       ],
+       [
+        61.91,
+        2.09
+       ]
+      ],
+      "width": 6.65
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        61.91,
+        2.09
+       ],
+       [
+        59.4,
+        12.3
+       ]
+      ],
+      "width": 6.17
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        59.4,
+        12.3
+       ],
+       [
+        55.2,
+        22.17
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        55.2,
+        22.17
+       ],
+       [
+        49.43,
+        31.42
+       ]
+      ],
+      "width": 6.0
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        49.43,
+        31.42
+       ],
+       [
+        42.28,
+        39.74
+       ]
+      ],
+      "width": 6.2
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        42.28,
+        39.74
+       ],
+       [
+        33.96,
+        46.89
+       ]
+      ],
+      "width": 6.75
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        33.96,
+        46.89
+       ],
+       [
+        24.72,
+        52.65
+       ]
+      ],
+      "width": 7.58
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        24.72,
+        52.65
+       ],
+       [
+        14.85,
+        56.85
+       ]
+      ],
+      "width": 8.59
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        14.85,
+        56.85
+       ],
+       [
+        4.63,
+        59.36
+       ]
+      ],
+      "width": 9.69
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        4.63,
+        59.36
+       ],
+       [
+        -5.61,
+        60.1
+       ]
+      ],
+      "width": 10.83
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -5.61,
+        60.1
+       ],
+       [
+        -15.56,
+        59.05
+       ]
+      ],
+      "width": 11.95
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -15.56,
+        59.05
+       ],
+       [
+        -24.93,
+        56.24
+       ]
+      ],
+      "width": 13.0
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -24.93,
+        56.24
+       ],
+       [
+        -33.43,
+        51.76
+       ]
+      ],
+      "width": 13.97
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -33.43,
+        51.76
+       ],
+       [
+        -40.8,
+        45.75
+       ]
+      ],
+      "width": 14.82
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -40.8,
+        45.75
+       ],
+       [
+        -46.81,
+        38.38
+       ]
+      ],
+      "width": 15.55
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -46.81,
+        38.38
+       ],
+       [
+        -51.29,
+        29.88
+       ]
+      ],
+      "width": 16.14
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -51.29,
+        29.88
+       ],
+       [
+        -54.1,
+        20.51
+       ]
+      ],
+      "width": 16.6
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -54.1,
+        20.51
+       ],
+       [
+        -55.15,
+        10.56
+       ]
+      ],
+      "width": 16.93
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -55.15,
+        10.56
+       ],
+       [
+        -54.41,
+        0.32
+       ]
+      ],
+      "width": 17.13
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -54.41,
+        0.32
+       ],
+       [
+        -51.9,
+        -9.9
+       ]
+      ],
+      "width": 17.18
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -51.9,
+        -9.9
+       ],
+       [
+        -47.7,
+        -19.77
+       ]
+      ],
+      "width": 17.06
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -47.7,
+        -19.77
+       ],
+       [
+        -41.94,
+        -29.01
+       ]
+      ],
+      "width": 16.85
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -41.94,
+        -29.01
+       ],
+       [
+        -34.79,
+        -37.34
+       ]
+      ],
+      "width": 16.56
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -34.79,
+        -37.34
+       ],
+       [
+        -26.47,
+        -44.48
+       ]
+      ],
+      "width": 16.2
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -26.47,
+        -44.48
+       ],
+       [
+        -17.23,
+        -50.25
+       ]
+      ],
+      "width": 15.78
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -17.23,
+        -50.25
+       ],
+       [
+        -7.35,
+        -54.45
+       ]
+      ],
+      "width": 15.3
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -7.35,
+        -54.45
+       ],
+       [
+        2.86,
+        -56.96
+       ]
+      ],
+      "width": 14.75
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        2.86,
+        -56.96
+       ],
+       [
+        13.1,
+        -57.69
+       ]
+      ],
+      "width": 14.14
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        13.1,
+        -57.69
+       ],
+       [
+        23.06,
+        -56.65
+       ]
+      ],
+      "width": 13.46
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        23.06,
+        -56.65
+       ],
+       [
+        32.43,
+        -53.84
+       ]
+      ],
+      "width": 12.71
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        32.43,
+        -53.84
+       ],
+       [
+        40.93,
+        -49.36
+       ]
+      ],
+      "width": 11.9
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        40.93,
+        -49.36
+       ],
+       [
+        48.3,
+        -43.35
+       ]
+      ],
+      "width": 11.03
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        3.17,
+        -62.13
+       ],
+       [
+        -1.59,
+        -56.92
+       ],
+       [
+        -7.35,
+        -54.45
+       ],
+       [
+        0.81,
+        -56.6
+       ],
+       [
+        9.02,
+        -57.62
+       ],
+       [
+        17.14,
+        -57.49
+       ],
+       [
+        24.99,
+        -56.23
+       ],
+       [
+        32.43,
+        -53.84
+       ],
+       [
+        39.31,
+        -50.38
+       ],
+       [
+        41.58,
+        -44.66
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "holes": [
+     {
+      "name": "pit",
+      "center": [
+       6.36,
+       2.12
+      ],
+      "radius": [
+       56.6,
+       48.51428571428571
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "props": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [
+    {
+     "entity_id": 434,
+     "content_id": "material.ore_magnetite",
+     "position": [
+      938.34,
+      1.0,
+      1603.86
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 1.553,
+     "yield": {
+      "item_id": "item.ore.magnetite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 435,
+     "content_id": "material.ore_magnetite",
+     "position": [
+      981.08,
+      1.0,
+      1543.72
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.401,
+     "yield": {
+      "item_id": "item.ore.magnetite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 436,
+     "content_id": "material.ore_hematite",
+     "position": [
+      1062.69,
+      1.0,
+      1573.75
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 5.079,
+     "yield": {
+      "item_id": "item.ore.hematite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.c3_site_lower",
+   "name": "Excavation C-3 · Lower Benches",
+   "anchor": [
+    1000.0,
+    0.0,
+    1900.0
+   ],
+   "bounds": [
+    -62,
+    77,
+    -67,
+    71
+   ],
+   "arrival": [
+    1040.05,
+    0.0,
+    1918.19
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "8095c8",
+    "sun_energy": 0.16,
+    "sun_pitch": -24.0,
+    "sun_yaw": -30.0,
+    "fog_color": "0e1626",
+    "fog_density": 0.0038,
+    "ambient_color": "6680b4",
+    "ambient_energy": 0.76,
+    "sky_top": "04070e",
+    "sky_horizon": "1a2438",
+    "ground_color": "080b12",
+    "exposure": 1.0,
+    "glow_intensity": 0.8,
+    "glow_bloom": 0.04,
+    "glow_threshold": 1.0
+   },
+   "set": "res://data/world/sets/c3_site_lower.json",
+   "cavern": {
+    "seed": 1006,
+    "cell": 0.8,
+    "material": "res://assets/game/materials/c3_site/geology_c3_site.tres",
+    "wall_height": 0.8,
+    "near_wall_height": 0.4,
+    "smooth": 2.0,
+    "warp": 0.4,
+    "chambers": [
+     {
+      "center": [
+       -28.32,
+       8.17
+      ],
+      "radius": [
+       6.01,
+       6.01
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -22.67,
+       -11.05
+      ],
+      "radius": [
+       5.9,
+       5.9
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       27.74,
+       -32.17
+      ],
+      "radius": [
+       4.7,
+       4.7
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       -20.41,
+       30.75
+      ],
+      "radius": [
+       5.62,
+       5.62
+      ],
+      "rotation": -45.0
+     },
+     {
+      "center": [
+       40.05,
+       18.19
+      ],
+      "radius": [
+       2.61,
+       2.61
+      ],
+      "rotation": -45.0
+     }
+    ],
+    "passages": [
+     {
+      "name": "bench",
+      "points": [
+       [
+        37.69,
+        -25.67
+       ],
+       [
+        41.42,
+        -21.06
+       ]
+      ],
+      "width": 7.92
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        41.42,
+        -21.06
+       ],
+       [
+        44.19,
+        -15.72
+       ]
+      ],
+      "width": 7.35
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        44.19,
+        -15.72
+       ],
+       [
+        45.87,
+        -9.81
+       ]
+      ],
+      "width": 6.77
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        45.87,
+        -9.81
+       ],
+       [
+        46.44,
+        -3.51
+       ]
+      ],
+      "width": 6.22
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        46.44,
+        -3.51
+       ],
+       [
+        45.88,
+        2.98
+       ]
+      ],
+      "width": 5.74
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        45.88,
+        2.98
+       ],
+       [
+        44.19,
+        9.47
+       ]
+      ],
+      "width": 5.39
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        44.19,
+        9.47
+       ],
+       [
+        41.44,
+        15.77
+       ]
+      ],
+      "width": 5.22
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        41.44,
+        15.77
+       ],
+       [
+        37.7,
+        21.67
+       ]
+      ],
+      "width": 5.22
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        37.7,
+        21.67
+       ],
+       [
+        33.09,
+        27.01
+       ]
+      ],
+      "width": 5.27
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        33.09,
+        27.01
+       ],
+       [
+        27.75,
+        31.61
+       ]
+      ],
+      "width": 5.54
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        27.75,
+        31.61
+       ],
+       [
+        21.85,
+        35.36
+       ]
+      ],
+      "width": 6.01
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        21.85,
+        35.36
+       ],
+       [
+        15.55,
+        38.11
+       ]
+      ],
+      "width": 6.62
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        15.55,
+        38.11
+       ],
+       [
+        9.07,
+        39.8
+       ]
+      ],
+      "width": 7.32
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        9.07,
+        39.8
+       ],
+       [
+        2.57,
+        40.35
+       ]
+      ],
+      "width": 8.07
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        2.57,
+        40.35
+       ],
+       [
+        -3.73,
+        39.79
+       ]
+      ],
+      "width": 8.81
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -3.73,
+        39.79
+       ],
+       [
+        -9.64,
+        38.11
+       ]
+      ],
+      "width": 9.51
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -9.64,
+        38.11
+       ],
+       [
+        -14.98,
+        35.34
+       ]
+      ],
+      "width": 10.14
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -14.98,
+        35.34
+       ],
+       [
+        -19.59,
+        31.61
+       ]
+      ],
+      "width": 10.7
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -19.59,
+        31.61
+       ],
+       [
+        -23.32,
+        27.0
+       ]
+      ],
+      "width": 11.16
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -23.32,
+        27.0
+       ],
+       [
+        -26.09,
+        21.66
+       ]
+      ],
+      "width": 11.52
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -26.09,
+        21.66
+       ],
+       [
+        -27.77,
+        15.75
+       ]
+      ],
+      "width": 11.78
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -27.77,
+        15.75
+       ],
+       [
+        -28.33,
+        9.45
+       ]
+      ],
+      "width": 11.94
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -28.33,
+        9.45
+       ],
+       [
+        -27.78,
+        2.96
+       ]
+      ],
+      "width": 12.02
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -27.78,
+        2.96
+       ],
+       [
+        -26.09,
+        -3.53
+       ]
+      ],
+      "width": 11.95
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -26.09,
+        -3.53
+       ],
+       [
+        -23.33,
+        -9.83
+       ]
+      ],
+      "width": 11.83
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -23.33,
+        -9.83
+       ],
+       [
+        -19.59,
+        -15.73
+       ]
+      ],
+      "width": 11.67
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -19.59,
+        -15.73
+       ],
+       [
+        -14.99,
+        -21.07
+       ]
+      ],
+      "width": 11.48
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -14.99,
+        -21.07
+       ],
+       [
+        -9.65,
+        -25.68
+       ]
+      ],
+      "width": 11.26
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -9.65,
+        -25.68
+       ],
+       [
+        -3.75,
+        -29.42
+       ]
+      ],
+      "width": 11.02
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        -3.75,
+        -29.42
+       ],
+       [
+        2.55,
+        -32.17
+       ]
+      ],
+      "width": 10.76
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        2.55,
+        -32.17
+       ],
+       [
+        9.04,
+        -33.86
+       ]
+      ],
+      "width": 10.47
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        9.04,
+        -33.86
+       ],
+       [
+        15.54,
+        -34.41
+       ]
+      ],
+      "width": 10.16
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        15.54,
+        -34.41
+       ],
+       [
+        21.83,
+        -33.85
+       ]
+      ],
+      "width": 9.8
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        21.83,
+        -33.85
+       ],
+       [
+        27.74,
+        -32.17
+       ]
+      ],
+      "width": 9.4
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        27.74,
+        -32.17
+       ],
+       [
+        33.08,
+        -29.4
+       ]
+      ],
+      "width": 8.96
+     },
+     {
+      "name": "bench",
+      "points": [
+       [
+        33.08,
+        -29.4
+       ],
+       [
+        37.69,
+        -25.67
+       ]
+      ],
+      "width": 8.46
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        37.44,
+        23.37
+       ],
+       [
+        40.05,
+        18.19
+       ],
+       [
+        41.44,
+        15.77
+       ],
+       [
+        44.19,
+        9.47
+       ],
+       [
+        45.88,
+        2.98
+       ],
+       [
+        46.44,
+        -3.51
+       ],
+       [
+        45.87,
+        -9.81
+       ],
+       [
+        44.19,
+        -15.72
+       ],
+       [
+        41.42,
+        -21.06
+       ],
+       [
+        37.69,
+        -25.67
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "holes": [
+     {
+      "name": "pit",
+      "center": [
+       10.61,
+       3.54
+      ],
+      "radius": [
+       35.6,
+       29.497142857142858
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "props": []
+   },
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [
+    {
+     "entity_id": 440,
+     "content_id": "material.lumenita",
+     "position": [
+      968.31,
+      1.0,
+      1898.1
+     ],
+     "size": [
+      1.6,
+      1.5,
+      1.2
+     ],
+     "rotation": 1.379,
+     "yield": {
+      "item_id": "item.mineral.lumenita",
+      "quantity": 1,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 441,
+     "content_id": "material.lumenita",
+     "position": [
+      979.21,
+      1.0,
+      1878.24
+     ],
+     "size": [
+      1.6,
+      1.5,
+      1.2
+     ],
+     "rotation": 0.855,
+     "yield": {
+      "item_id": "item.mineral.lumenita",
+      "quantity": 1,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 442,
+     "content_id": "material.ore_limonite",
+     "position": [
+      1009.28,
+      1.0,
+      1862.0
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 0.052,
+     "yield": {
+      "item_id": "item.ore.limonite",
+      "quantity": 2,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 443,
+     "content_id": "material.soft_rock",
+     "position": [
+      968.02,
+      1.0,
+      1919.16
+     ],
+     "size": [
+      4.0,
+      2.4,
+      0.8
+     ],
+     "rotation": 1.902
+    }
+   ]
+  },
+  {
+   "zone_id": "zone.c3_site_rig",
+   "name": "Excavation C-3 · The Rig",
+   "anchor": [
+    1000.0,
+    0.0,
+    2150.0
+   ],
+   "bounds": [
+    -37,
+    59,
+    -44,
+    52
+   ],
+   "arrival": [
+    991.43,
+    0.0,
+    2156.64
+   ],
+   "surface": true,
+   "atmosphere": {
+    "sun_color": "8095c8",
+    "sun_energy": 0.14,
+    "sun_pitch": -24.0,
+    "sun_yaw": -30.0,
+    "fog_color": "0d1424",
+    "fog_density": 0.0042,
+    "ambient_color": "6680b4",
+    "ambient_energy": 0.74,
+    "sky_top": "04070e",
+    "sky_horizon": "1a2438",
+    "ground_color": "080b12",
+    "exposure": 1.0,
+    "glow_intensity": 0.8,
+    "glow_bloom": 0.04,
+    "glow_threshold": 1.0
+   },
+   "set": "res://data/world/sets/c3_site_rig.json",
+   "cavern": {
+    "seed": 1009,
+    "cell": 0.8,
+    "material": "res://assets/game/materials/c3_site/geology_c3_site.tres",
+    "wall_height": 0.8,
+    "near_wall_height": 0.4,
+    "smooth": 2.0,
+    "warp": 0.4,
+    "chambers": [
+     {
+      "center": [
+       11.17,
+       3.68
+      ],
+      "radius": [
+       28.6,
+       23.6
+      ],
+      "rotation": -45.0
+     }
+    ],
+    "passages": [
+     {
+      "name": "ramp_foot",
+      "points": [
+       [
+        -8.57,
+        6.64
+       ],
+       [
+        -13.76,
+        10.78
+       ]
+      ],
+      "width": 5.0
+     }
+    ],
+    "wet": [],
+    "worn": [
+     {
+      "points": [
+       [
+        -13.76,
+        10.78
+       ],
+       [
+        -8.57,
+        6.64
+       ],
+       [
+        2.55,
+        10.18
+       ],
+       [
+        3.96,
+        1.7
+       ]
+      ],
+      "width": 4.0
+     }
+    ],
+    "holes": [
+     {
+      "name": "ramp_c",
+      "center": [
+       2.52,
+       29.15
+      ],
+      "radius": [
+       3.63,
+       3.63
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       0.04,
+       28.55
+      ],
+      "radius": [
+       3.7,
+       3.7
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       -2.32,
+       27.68
+      ],
+      "radius": [
+       3.75,
+       3.75
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       -4.53,
+       26.54
+      ],
+      "radius": [
+       3.8,
+       3.8
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       -6.56,
+       25.16
+      ],
+      "radius": [
+       3.84,
+       3.84
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       -8.4,
+       23.53
+      ],
+      "radius": [
+       3.86,
+       3.86
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       -10.03,
+       21.69
+      ],
+      "radius": [
+       3.88,
+       3.88
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       -11.41,
+       19.66
+      ],
+      "radius": [
+       3.88,
+       3.88
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       -12.54,
+       17.45
+      ],
+      "radius": [
+       3.87,
+       3.87
+      ],
+      "rotation": 45.0
+     },
+     {
+      "name": "ramp_c",
+      "center": [
+       -13.42,
+       15.09
+      ],
+      "radius": [
+       3.86,
+       3.86
+      ],
+      "rotation": 45.0
+     }
+    ],
+    "props": []
+   },
+   "computers": [
+    {
+     "id": "computer.c3_site.bore_1_cab",
+     "position": [
+      13.93,
+      -3.75
+     ],
+     "rotation": -16.1,
+     "archive": "res://data/world/terminals/c3_site_bore_1.json"
+    }
+   ],
+   "pieces": [],
+   "lights": [],
+   "signs": [],
+   "drill_sites": [
+    {
+     "entity_id": 444,
+     "content_id": "material.basalt",
+     "position": [
+      1019.52,
+      1.0,
+      2169.37
+     ],
+     "size": [
+      3.0,
+      1.6,
+      1.2
+     ],
+     "rotation": 0.785
+    },
+    {
+     "entity_id": 445,
+     "content_id": "material.lumenita",
+     "position": [
+      1006.88,
+      1.0,
+      2130.01
+     ],
+     "size": [
+      1.6,
+      1.5,
+      1.2
+     ],
+     "rotation": 0.262,
+     "yield": {
+      "item_id": "item.mineral.lumenita",
+      "quantity": 1,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 446,
+     "content_id": "material.lumenita",
+     "position": [
+      1034.9,
+      1.0,
+      2140.99
+     ],
+     "size": [
+      1.6,
+      1.5,
+      1.2
+     ],
+     "rotation": 5.149,
+     "yield": {
+      "item_id": "item.mineral.lumenita",
+      "quantity": 1,
+      "offset": [
+       0.0,
+       1.6
+      ]
+     }
+    },
+    {
+     "entity_id": 447,
+     "content_id": "material.ore_hematite",
+     "position": [
+      989.37,
+      1.0,
+      2145.13
+     ],
+     "size": [
+      2.6,
+      2.0,
+      1.4
+     ],
+     "rotation": 1.134,
      "yield": {
       "item_id": "item.ore.hematite",
       "quantity": 2,
@@ -12102,6 +14675,236 @@
     2.8,
     0.0
    ]
+  },
+  {
+   "entity_id": 400,
+   "from_zone": "zone.surface_scarp",
+   "position": [
+    -42.2,
+    0.0,
+    216.0
+   ],
+   "to_zone": "zone.c3_site",
+   "arrival": [
+    978.79,
+    0.0,
+    1139.45
+   ],
+   "arrival_rotation": -3.142,
+   "label": "SOUTH-WEST TRAIL · EXCAVATION C-3",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 401,
+   "from_zone": "zone.c3_site",
+   "position": [
+    978.79,
+    0.0,
+    1134.25
+   ],
+   "to_zone": "zone.surface_scarp",
+   "arrival": [
+    -37.0,
+    0.0,
+    216.0
+   ],
+   "arrival_rotation": -1.571,
+   "label": "NORTH · THE SCARP",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 402,
+   "from_zone": "zone.salt_pit",
+   "position": [
+    218.19,
+    0.0,
+    1260.81
+   ],
+   "to_zone": "zone.c3_site",
+   "arrival": [
+    1109.6,
+    0.0,
+    1198.38
+   ],
+   "arrival_rotation": 2.337,
+   "label": "WEST · EXCAVATION C-3",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 403,
+   "from_zone": "zone.c3_site",
+   "position": [
+    1115.97,
+    0.0,
+    1196.26
+   ],
+   "to_zone": "zone.salt_pit",
+   "arrival": [
+    223.39,
+    0.0,
+    1260.81
+   ],
+   "arrival_rotation": -1.571,
+   "label": "EAST · THE SALT PIT",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 404,
+   "from_zone": "zone.c3_site",
+   "position": [
+    925.8,
+    0.0,
+    1237.63
+   ],
+   "to_zone": "zone.c3_site_upper",
+   "arrival": [
+    998.41,
+    0.0,
+    1543.08
+   ],
+   "arrival_rotation": 1.974,
+   "label": "HAUL ROAD · DOWN TO THE UPPER BENCHES",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    3.2,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 405,
+   "from_zone": "zone.c3_site_upper",
+   "position": [
+    1003.17,
+    0.0,
+    1537.87
+   ],
+   "to_zone": "zone.c3_site",
+   "arrival": [
+    920.62,
+    0.0,
+    1241.19
+   ],
+   "arrival_rotation": 0.574,
+   "label": "HAUL ROAD · UP TO THE RIM",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 406,
+   "from_zone": "zone.c3_site_upper",
+   "position": [
+    1041.58,
+    0.0,
+    1555.34
+   ],
+   "to_zone": "zone.c3_site_lower",
+   "arrival": [
+    1040.05,
+    0.0,
+    1918.19
+   ],
+   "arrival_rotation": -0.367,
+   "label": "HAUL ROAD · DOWN TO THE LOWER BENCHES",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 407,
+   "from_zone": "zone.c3_site_lower",
+   "position": [
+    1037.44,
+    0.0,
+    1923.37
+   ],
+   "to_zone": "zone.c3_site_upper",
+   "arrival": [
+    1037.48,
+    0.0,
+    1549.75
+   ],
+   "arrival_rotation": 1.274,
+   "label": "HAUL ROAD · UP TO THE UPPER BENCHES",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 408,
+   "from_zone": "zone.c3_site_lower",
+   "position": [
+    998.7,
+    0.0,
+    1938.16
+   ],
+   "to_zone": "zone.c3_site_rig",
+   "arrival": [
+    991.43,
+    0.0,
+    2156.64
+   ],
+   "arrival_rotation": -1.433,
+   "label": "HAUL ROAD · DOWN TO THE RIG",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
+  },
+  {
+   "entity_id": 409,
+   "from_zone": "zone.c3_site_rig",
+   "position": [
+    986.24,
+    0.0,
+    2160.78
+   ],
+   "to_zone": "zone.c3_site_lower",
+   "arrival": [
+    1002.16,
+    0.0,
+    1939.89
+   ],
+   "arrival_rotation": -1.438,
+   "label": "HAUL ROAD · UP TO THE LOWER BENCHES",
+   "presentation": "gate",
+   "label_offset": [
+    0.0,
+    2.8,
+    0.0
+   ]
   }
  ],
  "entities": [
@@ -12352,51 +15155,6 @@
    ]
   },
   {
-   "entity_id": 170,
-   "entity_type": 4,
-   "content_id": "item.container.document_case",
-   "zone_id": "zone.surface_scarp",
-   "position": [
-    1.8,
-    0.12,
-    224.6
-   ],
-   "quantity": 1,
-   "crate_loot": [
-    "item.log.vdi_shift_log"
-   ]
-  },
-  {
-   "entity_id": 171,
-   "entity_type": 4,
-   "content_id": "item.container.document_case",
-   "zone_id": "zone.surface_scarp",
-   "position": [
-    -11.6,
-    0.12,
-    227.4
-   ],
-   "quantity": 1,
-   "crate_loot": [
-    "item.log.castoff_ledger"
-   ]
-  },
-  {
-   "entity_id": 172,
-   "entity_type": 4,
-   "content_id": "item.container.document_case",
-   "zone_id": "zone.excavation_c3_f3",
-   "position": [
-    190.28,
-    0.12,
-    -13.01
-   ],
-   "quantity": 1,
-   "crate_loot": [
-    "item.log.vdi_low_sun_memo"
-   ]
-  },
-  {
    "entity_id": 310,
    "entity_type": 4,
    "content_id": "item.container.warlord_strongbox",
@@ -12591,6 +15349,192 @@
     1639.75
    ],
    "quantity": 2
+  },
+  {
+   "entity_id": 420,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.c3_site",
+   "position": [
+    902.42,
+    0.0,
+    1231.62
+   ],
+   "quantity": 3
+  },
+  {
+   "entity_id": 421,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.c3_site",
+   "position": [
+    913.73,
+    0.0,
+    1206.16
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 422,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.c3_site",
+   "position": [
+    915.9,
+    0.0,
+    1236.21
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 423,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.c3_site_upper",
+   "position": [
+    962.21,
+    0.0,
+    1642.21
+   ],
+   "quantity": 3
+  },
+  {
+   "entity_id": 424,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.c3_site_upper",
+   "position": [
+    953.84,
+    0.0,
+    1630.48
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 425,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.c3_site_lower",
+   "position": [
+    1031.35,
+    0.0,
+    1868.12
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 426,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.c3_site_rig",
+   "position": [
+    1021.99,
+    0.0,
+    2163.36
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 427,
+   "entity_type": 4,
+   "content_id": "item.scrap_component",
+   "zone_id": "zone.c3_site_rig",
+   "position": [
+    996.54,
+    0.0,
+    2154.88
+   ],
+   "quantity": 2
+  },
+  {
+   "entity_id": 450,
+   "entity_type": 4,
+   "content_id": "item.container.vdi_cache",
+   "zone_id": "zone.c3_site_rig",
+   "position": [
+    1015.2,
+    0.0,
+    2141.59
+   ],
+   "quantity": 1,
+   "claim": "claim.c3_site_bore_cache",
+   "requires_group_cleared": "spawn.c3_site_rig_guard",
+   "sealed_label": "SEALED · THE BORE 1 GUARD IS STILL ACTIVE",
+   "crate_loot": [
+    "item.log.vdi_bore_1_report",
+    {
+     "item": "item.mineral.lumenita",
+     "quantity": 2
+    },
+    {
+     "item": "item.component.servo_core",
+     "quantity": 1
+    },
+    {
+     "item": "item.consumable.health_capsule",
+     "quantity": 2
+    }
+   ]
+  },
+  {
+   "entity_id": 170,
+   "entity_type": 4,
+   "content_id": "item.container.document_case",
+   "zone_id": "zone.surface_scarp",
+   "position": [
+    1.8,
+    0.12,
+    224.6
+   ],
+   "quantity": 1,
+   "crate_loot": [
+    "item.log.vdi_shift_log"
+   ]
+  },
+  {
+   "entity_id": 171,
+   "entity_type": 4,
+   "content_id": "item.container.document_case",
+   "zone_id": "zone.surface_scarp",
+   "position": [
+    -11.6,
+    0.12,
+    227.4
+   ],
+   "quantity": 1,
+   "crate_loot": [
+    "item.log.castoff_ledger"
+   ]
+  },
+  {
+   "entity_id": 172,
+   "entity_type": 4,
+   "content_id": "item.container.document_case",
+   "zone_id": "zone.excavation_c3_f3",
+   "position": [
+    190.28,
+    0.12,
+    -13.01
+   ],
+   "quantity": 1,
+   "crate_loot": [
+    "item.log.vdi_low_sun_memo"
+   ]
+  },
+  {
+   "entity_id": 173,
+   "entity_type": 4,
+   "content_id": "item.container.document_case",
+   "zone_id": "zone.c3_site_upper",
+   "position": [
+    955.32,
+    0.12,
+    1575.28
+   ],
+   "quantity": 1,
+   "crate_loot": [
+    "item.log.vdi_shift_camp_3"
+   ]
   }
  ],
  "hazards": [
@@ -13835,6 +16779,62 @@
    "safe_radius": 12.0
   },
   {
+   "id": "spawn.floodlands_quay_maw",
+   "zone_id": "zone.floodlands",
+   "center": [
+    649.29,
+    776.67
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     649.29,
+     776.67
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_sluice_maw",
+     "count": 1
+    }
+   ],
+   "threat_budget": 14,
+   "respawn_seconds": [
+    240.0,
+    360.0
+   ],
+   "safe_radius": 18.0,
+   "max_alive": 1
+  },
+  {
+   "id": "spawn.floodlands_marsh_maw",
+   "zone_id": "zone.floodlands",
+   "center": [
+    644.34,
+    831.11
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     644.34,
+     831.11
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_sluice_maw",
+     "count": 1
+    }
+   ],
+   "threat_budget": 14,
+   "respawn_seconds": [
+    240.0,
+    360.0
+   ],
+   "safe_radius": 18.0,
+   "max_alive": 1
+  },
+  {
    "id": "spawn.c3_f2_millennium_bugs",
    "zone_id": "zone.excavation_c3_f2",
    "center": [
@@ -14158,6 +17158,482 @@
     240.0
    ],
    "safe_radius": 16.0
+  },
+  {
+   "id": "spawn.c3_site_rim_camp",
+   "zone_id": "zone.c3_site",
+   "center": [
+    905.25,
+    1225.96
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     905.25,
+     1225.96
+    ],
+    [
+     909.49,
+     1210.4
+    ],
+    [
+     895.35,
+     1230.2
+    ],
+    [
+     913.73,
+     1220.3
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_raider",
+     "count": 2
+    },
+    {
+     "content_id": "npc.castoff_lookout",
+     "count": 1
+    },
+    {
+     "content_id": "npc.castoff_gunner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 17,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 12.0,
+   "max_alive": 3
+  },
+  {
+   "id": "spawn.c3_site_substation_miners",
+   "zone_id": "zone.c3_site",
+   "center": [
+    1079.2,
+    1187.77
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     1079.2,
+     1187.77
+    ],
+    [
+     1082.02,
+     1170.8
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_miner",
+     "count": 2
+    }
+   ],
+   "threat_budget": 16,
+   "respawn_seconds": [
+    70.0,
+    100.0
+   ],
+   "safe_radius": 12.0,
+   "patrol": [
+    [
+     1067.88,
+     1179.29
+    ],
+    [
+     1070.71,
+     1165.15
+    ],
+    [
+     1086.27,
+     1177.88
+    ],
+    [
+     1082.02,
+     1190.6
+    ]
+   ]
+  },
+  {
+   "id": "spawn.c3_site_substation_turret",
+   "zone_id": "zone.c3_site",
+   "center": [
+    1090.51,
+    1167.98
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     1090.51,
+     1167.98
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_turret",
+     "count": 1
+    }
+   ],
+   "threat_budget": 4,
+   "respawn_seconds": [
+    90.0,
+    120.0
+   ],
+   "safe_radius": 9.0
+  },
+  {
+   "id": "spawn.c3_site_south_broods",
+   "zone_id": "zone.c3_site",
+   "center": [
+    1032.53,
+    1339.1
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     1032.53,
+     1339.1
+    ],
+    [
+     1042.43,
+     1337.68
+    ],
+    [
+     1031.82,
+     1346.87
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.mutant_brood",
+     "count": 3
+    }
+   ],
+   "threat_budget": 9,
+   "respawn_seconds": [
+    50.0,
+    80.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.c3_site_shift_camp",
+   "zone_id": "zone.c3_site_upper",
+   "center": [
+    949.58,
+    1586.1
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     949.58,
+     1586.1
+    ],
+    [
+     956.1,
+     1577.23
+    ],
+    [
+     956.46,
+     1570.07
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.mutant_zombine",
+     "count": 2
+    },
+    {
+     "content_id": "npc.mutant_spitter",
+     "count": 1
+    }
+   ],
+   "threat_budget": 18,
+   "respawn_seconds": [
+    70.0,
+    110.0
+   ],
+   "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.c3_site_convoy",
+   "zone_id": "zone.c3_site_upper",
+   "center": [
+    946.56,
+    1623.4
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     946.56,
+     1623.4
+    ],
+    [
+     943.54,
+     1617.72
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.castoff_raider",
+     "count": 2
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    60.0,
+    90.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.c3_site_borers",
+   "zone_id": "zone.c3_site_lower",
+   "center": [
+    971.68,
+    1908.17
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     971.68,
+     1908.17
+    ],
+    [
+     977.33,
+     1888.95
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_millennium_bug",
+     "count": 2
+    }
+   ],
+   "threat_budget": 18,
+   "respawn_seconds": [
+    120.0,
+    180.0
+   ],
+   "safe_radius": 16.0
+  },
+  {
+   "id": "spawn.c3_site_conveyor_turret",
+   "zone_id": "zone.c3_site_lower",
+   "center": [
+    1025.26,
+    1868.7
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     1025.26,
+     1868.7
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_turret",
+     "count": 1
+    }
+   ],
+   "threat_budget": 4,
+   "respawn_seconds": [
+    90.0,
+    120.0
+   ],
+   "safe_radius": 9.0
+  },
+  {
+   "id": "spawn.c3_site_conveyor_miner",
+   "zone_id": "zone.c3_site_lower",
+   "center": [
+    1016.81,
+    1865.61
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     1016.81,
+     1865.61
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_miner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    70.0,
+    100.0
+   ],
+   "safe_radius": 12.0,
+   "patrol": [
+    [
+     1012.95,
+     1865.67
+    ],
+    [
+     1029.71,
+     1869.87
+    ],
+    [
+     1034.07,
+     1871.26
+    ]
+   ]
+  },
+  {
+   "id": "spawn.c3_site_west_den",
+   "zone_id": "zone.c3_site_lower",
+   "center": [
+    979.59,
+    1930.75
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     979.59,
+     1930.75
+    ],
+    [
+     983.2,
+     1932.5
+    ],
+    [
+     975.47,
+     1927.53
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.mutant_ripper",
+     "count": 1
+    },
+    {
+     "content_id": "npc.mutant_spitter",
+     "count": 2
+    }
+   ],
+   "threat_budget": 19,
+   "respawn_seconds": [
+    70.0,
+    110.0
+   ],
+   "safe_radius": 12.0
+  },
+  {
+   "id": "spawn.c3_site_rig_guard",
+   "zone_id": "zone.c3_site_rig",
+   "center": [
+    1018.46,
+    2141.44
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     1018.46,
+     2141.44
+    ],
+    [
+     1026.23,
+     2147.81
+    ],
+    [
+     1024.47,
+     2160.89
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_skirmisher",
+     "count": 1
+    },
+    {
+     "content_id": "npc.rustbound_pelter",
+     "count": 1
+    },
+    {
+     "content_id": "npc.rustbound_miner",
+     "count": 1
+    }
+   ],
+   "threat_budget": 34,
+   "respawn_seconds": [
+    150.0,
+    210.0
+   ],
+   "safe_radius": 16.0
+  },
+  {
+   "id": "spawn.c3_site_rig_turrets",
+   "zone_id": "zone.c3_site_rig",
+   "center": [
+    1011.74,
+    2138.26
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     1011.74,
+     2138.26
+    ],
+    [
+     1027.29,
+     2153.82
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.rustbound_turret",
+     "count": 2
+    }
+   ],
+   "threat_budget": 8,
+   "respawn_seconds": [
+    120.0,
+    160.0
+   ],
+   "safe_radius": 10.0
+  },
+  {
+   "id": "spawn.c3_site_floor_crawlers",
+   "zone_id": "zone.c3_site_rig",
+   "center": [
+    1028.0,
+    2150.28
+   ],
+   "radius": 0.0,
+   "points": [
+    [
+     1028.0,
+     2150.28
+    ],
+    [
+     1028.0,
+     2144.63
+    ],
+    [
+     1028.71,
+     2155.23
+    ]
+   ],
+   "members": [
+    {
+     "content_id": "npc.burrowborn_crawler",
+     "count": 3
+    }
+   ],
+   "threat_budget": 6,
+   "respawn_seconds": [
+    50.0,
+    80.0
+   ],
+   "safe_radius": 10.0
   }
  ],
  "elevators": [
@@ -14469,6 +17945,170 @@
      1122.0
     ]
    ]
+  },
+  {
+   "entity_id": 452,
+   "zone_id": "zone.c3_site",
+   "position": [
+    1011.74,
+    0.0,
+    1253.82
+   ],
+   "network": "network.c3_site",
+   "pit": {
+    "center": [
+     1000.0,
+     1250.0
+    ],
+    "radius": 90.0,
+    "sweep": 12.0
+   },
+   "rig_y": -60.0,
+   "emergency": [
+    [
+     1082.31,
+     1190.89,
+     3.2
+    ],
+    [
+     1079.2,
+     1176.46,
+     3.2
+    ],
+    [
+     973.13,
+     1155.25,
+     3.2
+    ]
+   ]
+  },
+  {
+   "entity_id": 453,
+   "zone_id": "zone.c3_site_upper",
+   "position": [
+    1011.74,
+    0.0,
+    1603.82
+   ],
+   "network": "network.c3_site",
+   "pit": {
+    "center": [
+     1000.0,
+     1600.0
+    ],
+    "radius": 90.0,
+    "sweep": 12.0
+   },
+   "rig_y": -37.5,
+   "emergency": [
+    [
+     1003.17,
+     1537.87,
+     3.2
+    ],
+    [
+     951.44,
+     1579.88,
+     3.2
+    ]
+   ]
+  },
+  {
+   "entity_id": 454,
+   "zone_id": "zone.c3_site_lower",
+   "position": [
+    1011.74,
+    0.0,
+    1903.82
+   ],
+   "network": "network.c3_site",
+   "pit": {
+    "center": [
+     1000.0,
+     1900.0
+    ],
+    "radius": 90.0,
+    "sweep": 12.0
+   },
+   "rig_y": -15.0,
+   "emergency": [
+    [
+     1037.44,
+     1923.37,
+     3.2
+    ],
+    [
+     998.7,
+     1938.16,
+     3.2
+    ]
+   ]
+  },
+  {
+   "entity_id": 455,
+   "zone_id": "zone.c3_site_rig",
+   "position": [
+    1011.74,
+    0.0,
+    2153.82
+   ],
+   "network": "network.c3_site",
+   "pit": {
+    "center": [
+     1000.0,
+     2150.0
+    ],
+    "radius": 90.0,
+    "sweep": 12.0
+   },
+   "rig_y": 0.0,
+   "emergency": [
+    [
+     991.43,
+     2156.64,
+     3.2
+    ],
+    [
+     1012.09,
+     2143.57,
+     3.2
+    ],
+    [
+     1019.16,
+     2167.61,
+     3.2
+    ]
+   ],
+   "bore": {
+    "period": 150.0,
+    "warn": 6.0,
+    "run": 30.0,
+    "offset": 0.0,
+    "radius": 11.0,
+    "every": 4.0,
+    "damage": 14,
+    "slow": 1.0
+   }
+  }
+ ],
+ "breakers": [
+  {
+   "entity_id": 451,
+   "zone_id": "zone.c3_site",
+   "position": [
+    1082.31,
+    0.0,
+    1190.89
+   ],
+   "network": "network.c3_site",
+   "lamp": [
+    -0.67,
+    2.35,
+    -0.67
+   ],
+   "hold": 3.0,
+   "dark": 150.0,
+   "cooldown": 240.0
   }
  ]
 }

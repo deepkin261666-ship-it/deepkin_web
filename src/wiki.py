@@ -125,11 +125,26 @@ def split_name(raw):
     parts = [p.strip() for p in raw.split("·")]
 
     def tc(s):
-        return " ".join(w if w in ("&",) else (w[:1] + w[1:].lower()) for w in s.split()).replace("Ms.", "Ms.")
+        # Siglas que el juego escribe en mayusculas (VDI, 2026-10-27): "VDI FIELD UNIT" -> "VDI Field Unit".
+        return " ".join(w if w in ("&", "VDI") else (w[:1] + w[1:].lower()) for w in s.split()).replace("Ms.", "Ms.")
     name = tc(parts[0]) if parts else raw
     name = re.sub(r"-([a-z])", lambda m: "-" + m.group(1).upper(), name)
     role = tc(parts[1]) if len(parts) > 1 else ""
     return name, role
+
+
+# Servicios de distrito que ya funcionan en el juego (2026-10-27): comercio en cada puesto (SELL ALL incluido), el tablero
+# de contratos de Lister, el banco y el deposito de The Exchange. El resto (reparacion, caravanas, cuartos...) sigue planeado.
+LIVE_SERVICES = {"service.vendor_consumables": "trading.html", "service.salvage_buyer": "trading.html",
+                 "service.contract_board": "contracts.html", "service.currency_exchange": "currency.html#bank",
+                 "service.depot": "computers.html"}
+
+
+def service_tag(s, lang):
+    label = WM.SERVICES[s][lang] if s in WM.SERVICES else s
+    if s in LIVE_SERVICES:
+        return f'<a href="{LIVE_SERVICES[s]}">{e(label)}</a> <span class="tag tag-live">{e(t("works", lang))}</span>'
+    return f'{e(label)} <span class="tag tag-soon">{e(t("soon", lang))}</span>'
 
 
 def zone_signs(zone_id):
@@ -417,7 +432,8 @@ def pct(v, lang, d=0):
 def lk(cid, lang=None, label=None, here="wiki/"):
     en = REG.get(cid)
     if not en:
-        return e(label or cid)
+        # Objeto retirado que un comerciante todavia compra (Rask, 2026-10-27): su nombre, sin enlace ni id crudo.
+        return e(label or ALL_ITEMS.get(cid, {}).get("display_name") or cid)
     return f'<a href="{rel(en.url, here)}">{e(label or en.name)}</a>'
 
 
@@ -911,7 +927,10 @@ def mob_page(m, lang):
         beh.append(t("b_aggro", lang, a=n(per["aggro_radius"], lang), d=n(m["detection_range"], lang), mem=n(per.get("memory_seconds", 0), lang)))
     else:
         beh.append(t("b_detect", lang, d=n(m["detection_range"], lang)))
-    if mov.get("lure") in LURE:
+    if mov.get("anchored"):
+        # Plantado (torretas, Sluice Maw; 2026-10-27): nunca se mueve, asi que no hay "correa" que contar.
+        beh.append(t("b_anchored", lang))
+    elif mov.get("lure") in LURE:
         beh.append(LURE[mov["lure"]]["text"][lang].format(leash=n(mov.get("leash_radius", 0), lang), call=n(per.get("call_radius", 0), lang)))
     if per.get("call_radius"):
         beh.append(t("b_call", lang, r=n(per["call_radius"], lang)))
@@ -941,7 +960,7 @@ def mob_page(m, lang):
         tactics.append(e(t("tac_cover", lang)))
     if any(a.get("shape") == "heal" for a in m.get("abilities", [])):
         tactics.append(e(t("tac_pressure", lang)))
-    if mov.get("lure") == "territorial":
+    if mov.get("lure") == "territorial" and not mov.get("anchored"):
         tactics.append(e(t("tac_leash", lang, leash=n(mov.get("leash_radius", 0), lang))))
     body += sec("tactics", t("how_to_fight", lang), ul(tactics))
     # Botin
@@ -1112,14 +1131,16 @@ def person_page(p, lang):
     # Servicios
     svc = list(services)
     # Servicios propios del dialogo (2026-10-10, Rask: "weapons (coming soon)").
-    for own in p.get("own_services", []):
+    # Quien comercia (data/shops) ya muestra su mercaderia en "Comercio": su lista del dialogo puede estar atrasada
+    # (Rask todavia dice "drones (not yet)" y los vende desde 2026-10-23), asi que se omite (2026-10-27).
+    import wiki_mech as _MX
+    for own in ([] if p["id"] in _MX.SHOPS else p.get("own_services", [])):
         key = own.replace("(coming soon)", "").strip()
-        label = OWN_SERVICE.get(key, {}).get(lang, key.capitalize())
+        label = OWN_SERVICE.get(key, {}).get(lang, key[:1].upper() + key[1:])
         svc.append(f'{e(label)} <span class="tag tag-soon">{e(t("soon", lang))}</span>' if "coming soon" in own else e(label))
     if p.get("zone") == city.get("zone") and district and district.startswith("district."):
         d = next(x for x in city["districts"] if x["id"] == district)
-        svc += [f'{e(WM.SERVICES[s][lang] if s in WM.SERVICES else s)} <span class="tag tag-soon">{e(t("soon", lang))}</span>' for s in d["services"]
-                if not (s == "service.depot" and any("computers.html" in x for x in services))]
+        svc += [service_tag(s, lang) for s in d["services"] if not (s == "service.depot" and any("computers.html" in x for x in services))]
     if svc:
         body += sec("services", t("services", lang), ul(svc) + (f'<p class="wk-note">{e(t("services_note", lang))}</p>' if p.get("zone") == city.get("zone") else ""))
     import wiki_mech as MX
@@ -1332,8 +1353,7 @@ def districts_html(city, lang, L_):
             _, _, d = person_place(p)
             by_d.setdefault(d, []).append(p)
     for d in city["districts"] + city["entrances"]:
-        svc = [f'{e(WM.SERVICES[s][lang])} <span class="tag tag-soon">{e(t("soon", lang))}</span>' if s != "service.depot" else
-               f'<a href="computers.html">{e(WM.SERVICES[s][lang])}</a> <span class="tag tag-live">{e(t("works", lang))}</span>' for s in d.get("services", [])]
+        svc = [service_tag(s, lang) for s in d.get("services", [])]
         lms = [lm for lm in city["landmarks"] if lm["id"] in d.get("landmarks", []) or lm.get("district") == d["id"]]
         lm_html = "".join(f'<p class="wk-lm"><b>{e(lm["name"][lang])}</b> — {L_(lm["note"][lang])}</p>' for lm in lms)
         ppl = ", ".join(f'<a href="{rel(S.person(p["id"]))}">{e(p["name"])}</a>' for p in sorted(by_d.get(d["id"], []), key=lambda x: x["name"]))
